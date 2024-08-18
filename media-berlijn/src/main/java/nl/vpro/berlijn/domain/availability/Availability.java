@@ -13,10 +13,18 @@ import nl.vpro.domain.media.MediaType;
     "type", //
     "metadata" // just contains things we're not interested in
 })
+
 public record Availability(
     String version, // assert 1.0?
     Instant timestamp,
-    AvailabilityContents contents) implements MediaIdentifiable, AssertValidatable {
+    AvailabilityContents contents,
+
+    /**
+     * How is this different from {@link #contents()}{@link AvailabilityContents#prid()}?
+     * @since 8.2
+     */
+    String mid
+    ) implements MediaIdentifiable, AssertValidatable {
 
     @Override
     public void assertValid() {
