@@ -8,5 +8,13 @@ public enum GeoIp {
     /**
      * @since 8.2
      */
-    Europa
+    Europa,
+
+    /**
+     *
+     * World?
+     *
+     * @since 8.2
+     */
+    WR
 }
