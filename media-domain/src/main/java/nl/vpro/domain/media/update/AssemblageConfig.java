@@ -176,6 +176,11 @@ public class AssemblageConfig implements Serializable {
     UnaryOperator<String> multilineCleaner =  null;
 
 
+    @lombok.Builder.Default
+    Predicate<MemberRef> createTemporaryGroups = alwaysFalse();
+
+
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
@@ -242,6 +247,7 @@ public class AssemblageConfig implements Serializable {
             implicitUndelete,
             cleaner,
             multilineCleaner,
+            createTemporaryGroups,
             logger);
     }
 
