@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.berlijn.domain.Parser;
 import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 
 @Log4j2
@@ -26,9 +27,11 @@ class AvailabilityTest {
 
     @ParameterizedTest
     @MethodSource("messages")
-    void json(byte[] json) throws IOException {
+    void json(byte[] json) {
 
         Availability availability = parser.parseAvailability(json);
+
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(parser.getMapper(), availability, new String(json, StandardCharsets.UTF_8));
 
         log.debug("{}", availability);
 
@@ -47,11 +50,17 @@ class AvailabilityTest {
             {"type":
             "update","version":"1.0","metadata":{},"timestamp":"2024-08-16T14:41:46.549Z","contents":{"restrictionsTimestamp":"2024-08-16T14:40:21.000Z","created":"2023-12-28T00:00:08.000Z","predictionEndTimestamp":"2024-01-21T00:00:09.000Z","predictionStartTimestamp":"2023-12-28T00:00:08.000Z","prid":"POW_00289104","revoke":null,"source":"postkantoor","notify":false,
             "platform":"npo-svod","revokedTimestamp":null,"lastUpdated":"2024-08-16T14:41:46.549Z","predictionCurrentlyIncluded":1,"ageRestriction":null,"availabilityPeriods":[{"stop":"2024-09-13T14:25:52.000Z","start":"2024-08-16T14:25:52.000Z","geoIpRestriction":"EU","drm":true}],"predictionStopped":false}}
-            """
+            """,
+        """
+        {"version":"1.0","timestamp":1723975903.576000000,"contents":{"restrictionsTimestamp":1723975599.000000000,"notifyTimestamp":null,"lastUpdated":1723975903.576000000,"created":1722124811.000000000,"ageRestriction":null,"prid":"POW_05753710","availabilityPeriods":[{"geoip":null,"encryption":null,"stop":1755511502.000000000,"start":1723975502.000000000,"geoIpRestriction":"EU","drm":true}],"platform":"npo-svod","predictionCurrentlyIncluded":true,"predictionStartTimestamp":1722124811.000000000,"predictionEndTimestamp":null,"predictionUpdatedTimestamp":null,"predictionStopped":false,"source":"postkantoor","restrictions":null,"revoked":null,"revokedTimestamp":null,"date":null,"revoke":null,"notify":false} }
+        """
+
     }
     )
     void moreJson(String json) throws IOException {
+
         Availability availability = parser.parseAvailability(json.getBytes(StandardCharsets.UTF_8));
+
 
         log.debug("{}", availability);
     }

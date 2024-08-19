@@ -4,6 +4,7 @@ package nl.vpro.berlijn.domain.availability;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
 import nl.vpro.domain.media.MediaIdentifiable;
@@ -11,19 +12,18 @@ import nl.vpro.domain.media.MediaType;
 
 @JsonIgnoreProperties({
     "type", //
-    "metadata" // just contains things we're not interested in
-})
+    "metadata",// just contains things we're not interested in
 
+
+    // come in via MediaIdentifiable
+    "mid", "mediaType", "crids", "id"
+
+})
+@JsonSerialize
 public record Availability(
     String version, // assert 1.0?
     Instant timestamp,
-    AvailabilityContents contents,
-
-    /**
-     * How is this different from {@link #contents()}{@link AvailabilityContents#prid()}?
-     * @since 8.2
-     */
-    String mid
+    AvailabilityContents contents
     ) implements MediaIdentifiable, AssertValidatable {
 
     @Override

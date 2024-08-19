@@ -4,12 +4,20 @@ import java.time.Instant;
 
 import org.apache.logging.log4j.LogManager;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
 import nl.vpro.domain.media.MediaIdentifiable;
 import nl.vpro.domain.media.MediaType;
 
+@JsonIgnoreProperties({
+
+    // come in via MediaIdentifiable
+    "mid", "mediaType", "crids", "id"
+
+})
 public record ProductMetadata  (
     Type type,
     String version,
@@ -21,6 +29,7 @@ public record ProductMetadata  (
 
 
     @Override
+    @JsonIgnore
     public String getMid() {
         return contents.prid();
     }
