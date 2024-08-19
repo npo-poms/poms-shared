@@ -4,6 +4,7 @@ package nl.vpro.berlijn.domain.availability;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
 import nl.vpro.domain.media.MediaIdentifiable;
@@ -11,7 +12,12 @@ import nl.vpro.domain.media.MediaType;
 
 @JsonIgnoreProperties({
     "type", //
-    "metadata" // just contains things we're not insterested in
+    "metadata",// just contains things we're not interested in
+
+
+    // come in via MediaIdentifiable
+    "mid", "mediaType", "crids", "id"
+
 })
 
 public record Availability(

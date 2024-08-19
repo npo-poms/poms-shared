@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import jakarta.inject.Singleton;
@@ -41,9 +42,15 @@ public class Parser {
     private final ObjectMapper mapper = new ObjectMapper();
     {
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        mapper.registerModule(new JavaTimeModule());
+        JavaTimeModule timeModule = new JavaTimeModule();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+
+        mapper.setDateFormat(dateFormat);
+
+        mapper.registerModule(timeModule);
         mapper.setAnnotationIntrospector(new JacksonAnnotationIntrospector());
         mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
         instance = this;
         log.info("Created {}", this);
     }
