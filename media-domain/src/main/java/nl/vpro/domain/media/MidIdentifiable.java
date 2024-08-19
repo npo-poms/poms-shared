@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.domain.Identifiable;
 
 /**
@@ -28,6 +30,7 @@ public interface MidIdentifiable extends Identifiable<Long> {
      * e.g. if there is no {@code mid} filled in yet, or if the object is a {@link Segment} (which is correlated with its parent instead)
      * @see #getCorrelation()
      */
+    @JsonIgnore
     default String getCorrelationId() {
         return getCorrelation().id;
     }
@@ -35,6 +38,7 @@ public interface MidIdentifiable extends Identifiable<Long> {
     /**
 
      */
+    @JsonIgnore
     default MediaIdentifiable.Correlation getCorrelation() {
         String mid = getMid();
         if (mid != null) {
