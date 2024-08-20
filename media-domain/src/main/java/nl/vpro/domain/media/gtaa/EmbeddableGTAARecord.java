@@ -16,7 +16,6 @@ import jakarta.persistence.*;
  *
  * @since 5.11
  */
-@Embeddable
 @MappedSuperclass
 @ToString
 public abstract class EmbeddableGTAARecord implements Serializable, Cloneable {
