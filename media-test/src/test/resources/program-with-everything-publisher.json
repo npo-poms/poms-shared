@@ -12,22 +12,22 @@
   "urn" : "urn:vpro:media:program:12",
   "embeddable" : true,
   "episodeOf" : [ {
-    "midRef" : "VPROWON_30004",
+    "midRef" : "VPROWON_20009",
     "type" : "SEASON",
     "index" : 1,
     "highlighted" : false,
     "memberOf" : [ {
-      "midRef" : "VPROWON_30001",
+      "midRef" : "VPROWON_20006",
       "type" : "SERIES",
       "index" : 1
     }, {
-      "midRef" : "VPROWON_30003",
+      "midRef" : "VPROWON_20008",
       "type" : "SEGMENT",
       "segmentOf" : {
-        "midRef" : "VPROWON_30002",
+        "midRef" : "VPROWON_20007",
         "type" : "CLIP",
         "memberOf" : [ {
-          "midRef" : "VPROWON_30001",
+          "midRef" : "VPROWON_20006",
           "type" : "SERIES",
           "index" : 10
         } ]
@@ -290,13 +290,13 @@
     "urnRef" : "urn:vpro:media:segment:301",
     "type" : "SEGMENT"
   }, {
-    "midRef" : "VPROWON_30001",
+    "midRef" : "VPROWON_20006",
     "type" : "SERIES"
   }, {
-    "midRef" : "VPROWON_30003",
+    "midRef" : "VPROWON_20008",
     "type" : "SEGMENT"
   }, {
-    "midRef" : "VPROWON_30004",
+    "midRef" : "VPROWON_20009",
     "type" : "SEASON"
   } ],
   "memberOf" : [ {
@@ -828,28 +828,25 @@
     "duration" : 100000,
     "awards" : [ "In 2003 bekroond met een Gouden Kalf", "Winnaar IDFA scenarioprijs 2008.", "De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.", "De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn." ],
     "descendantOf" : [ {
-      "midRef" : "VPROWON_DG_30005",
+      "midRef" : "VPROWON_DG_30001",
+      "type" : "SERIES"
+    }, {
+      "midRef" : "VPROWON_DG_30002",
+      "type" : "SEGMENT"
+    }, {
+      "midRef" : "VPROWON_DG_30003",
       "urnRef" : "urn:vpro:media:group:100",
       "type" : "SERIES"
     }, {
-      "midRef" : "VPROWON_DG_30006",
+      "midRef" : "VPROWON_DG_30004",
       "urnRef" : "urn:vpro:media:group:200",
       "type" : "SEASON"
     }, {
-      "midRef" : "VPROWON_DG_30007",
-      "type" : "SERIES"
-    }, {
-      "midRef" : "VPROWON_DG_30008",
-      "type" : "SEGMENT"
-    }, {
-      "midRef" : "VPROWON_DG_30009",
-      "type" : "SEASON"
-    }, {
-      "midRef" : "VPROWON_DG_30010",
+      "midRef" : "VPROWON_DG_30005",
       "urnRef" : "urn:vpro:media:program:12",
       "type" : "BROADCAST"
     }, {
-      "midRef" : "VPROWON_DG_30011",
+      "midRef" : "VPROWON_DG_30006",
       "urnRef" : "urn:vpro:media:segment:301",
       "type" : "SEGMENT"
     } ],
@@ -1098,20 +1095,20 @@
         "index" : 3
       } ],
       "episodeOf" : [ {
-        "midRef" : "VPROWON_30004",
+        "midRef" : "VPROWON_20009",
         "type" : "SEASON",
         "memberOf" : [ {
-          "midRef" : "VPROWON_30001",
+          "midRef" : "VPROWON_20006",
           "type" : "SERIES",
           "index" : 1
         }, {
-          "midRef" : "VPROWON_30003",
+          "midRef" : "VPROWON_20008",
           "type" : "SEGMENT",
           "segmentOf" : {
-            "midRef" : "VPROWON_30002",
+            "midRef" : "VPROWON_20007",
             "type" : "CLIP",
             "memberOf" : [ {
-              "midRef" : "VPROWON_30001",
+              "midRef" : "VPROWON_20006",
               "type" : "SERIES",
               "index" : 10
             } ]

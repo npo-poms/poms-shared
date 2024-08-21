@@ -1143,9 +1143,11 @@ public interface MediaTestDataBuilder<
             }
             return this;
         }
+
         protected ProgramTestDataBuilder withFixedSegmentMids(AtomicLong mids) {
             for (Segment segment : mediaObject.getSegments()) {
-                MediaTestDataBuilder.segment(segment).withMids(mids);
+                MediaTestDataBuilder.segment(segment)
+                    .withMids(mids);
             }
             return this;
         }
