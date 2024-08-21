@@ -125,9 +125,9 @@
   <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_20002" type="SERIES"/>
   <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_20003" type="SEASON"/>
   <descendantOf urnRef="urn:vpro:media:segment:301" midRef="VPROWON_20005" type="SEGMENT"/>
-  <descendantOf midRef="VPROWON_30001" type="SERIES"/>
-  <descendantOf midRef="VPROWON_30003" type="SEGMENT"/>
-  <descendantOf midRef="VPROWON_30004" type="SEASON"/>
+  <descendantOf midRef="VPROWON_20006" type="SERIES"/>
+  <descendantOf midRef="VPROWON_20008" type="SEGMENT"/>
+  <descendantOf midRef="VPROWON_20009" type="SEASON"/>
   <memberOf highlighted="false" midRef="VPROWON_20003" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
     <memberOf midRef="VPROWON_20002" type="SERIES" index="1"/>
   </memberOf>
@@ -263,11 +263,11 @@
       <poProgID>VPROWON_20001</poProgID>
     </scheduleEvent>
   </scheduleEvents>
-  <episodeOf highlighted="false" midRef="VPROWON_30004" index="1" type="SEASON">
-    <memberOf midRef="VPROWON_30001" type="SERIES" index="1"/>
-    <memberOf midRef="VPROWON_30003" type="SEGMENT" index="2">
-      <segmentOf midRef="VPROWON_30002" type="CLIP">
-        <memberOf midRef="VPROWON_30001" type="SERIES" index="10"/>
+  <episodeOf highlighted="false" midRef="VPROWON_20009" index="1" type="SEASON">
+    <memberOf midRef="VPROWON_20006" type="SERIES" index="1"/>
+    <memberOf midRef="VPROWON_20008" type="SEGMENT" index="2">
+      <segmentOf midRef="VPROWON_20007" type="CLIP">
+        <memberOf midRef="VPROWON_20006" type="SERIES" index="10"/>
       </segmentOf>
     </memberOf>
   </episodeOf>
@@ -396,13 +396,12 @@
       <award>Winnaar IDFA scenarioprijs 2008.</award>
       <award>De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.</award>
       <award>De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.</award>
-      <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_DG_30005" type="SERIES"/>
-      <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_DG_30006" type="SEASON"/>
-      <descendantOf midRef="VPROWON_DG_30007" type="SERIES"/>
-      <descendantOf midRef="VPROWON_DG_30008" type="SEGMENT"/>
-      <descendantOf midRef="VPROWON_DG_30009" type="SEASON"/>
-      <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_DG_30010" type="BROADCAST"/>
-      <descendantOf urnRef="urn:vpro:media:segment:301" midRef="VPROWON_DG_30011" type="SEGMENT"/>
+      <descendantOf midRef="VPROWON_DG_30001" type="SERIES"/>
+      <descendantOf midRef="VPROWON_DG_30002" type="SEGMENT"/>
+      <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_DG_30003" type="SERIES"/>
+      <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_DG_30004" type="SEASON"/>
+      <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_DG_30005" type="BROADCAST"/>
+      <descendantOf urnRef="urn:vpro:media:segment:301" midRef="VPROWON_DG_30006" type="SEGMENT"/>
       <memberOf highlighted="false" midRef="VPROWON_20010" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
         <memberOf midRef="VPROWON_20009" type="SERIES" index="1"/>
       </memberOf>
@@ -516,11 +515,11 @@
             <memberOf midRef="VPROWON_20002" type="SERIES" index="10"/>
           </segmentOf>
         </memberOf>
-        <episodeOf midRef="VPROWON_30004" type="SEASON" index="1">
-          <memberOf midRef="VPROWON_30001" type="SERIES" index="1"/>
-          <memberOf midRef="VPROWON_30003" type="SEGMENT" index="2">
-            <segmentOf midRef="VPROWON_30002" type="CLIP">
-              <memberOf midRef="VPROWON_30001" type="SERIES" index="10"/>
+        <episodeOf midRef="VPROWON_20009" type="SEASON" index="1">
+          <memberOf midRef="VPROWON_20006" type="SERIES" index="1"/>
+          <memberOf midRef="VPROWON_20008" type="SEGMENT" index="2">
+            <segmentOf midRef="VPROWON_20007" type="CLIP">
+              <memberOf midRef="VPROWON_20006" type="SERIES" index="10"/>
             </segmentOf>
           </memberOf>
         </episodeOf>
