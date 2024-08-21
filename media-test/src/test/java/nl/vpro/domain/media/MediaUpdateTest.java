@@ -12,7 +12,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
-import org.meeuw.i18n.languages.ISO_639_1_Code;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
@@ -25,6 +24,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
 
 /**
  *
@@ -57,11 +57,11 @@ public class MediaUpdateTest {
             .build();
 
 
-        assertThat(withEverything.getLanguages()).contains(UsedLanguage.dubbed(ISO_639_1_Code.nl));
+        assertThat(withEverything.getLanguages()).contains(UsedLanguage.dubbed(nl));
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
         update.setVersion(Version.of(5, 12));
         log.info("{}", update.getVersion());
-        assertThat(update.getLanguages()).contains(UsedLanguage.dubbed(ISO_639_1_Code.nl));
+        assertThat(update.getLanguages()).contains(UsedLanguage.dubbed(nl));
 
 
 
