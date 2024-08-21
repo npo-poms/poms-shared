@@ -727,7 +727,7 @@ public interface MediaTestDataBuilder<
     }
 
     default T withRelations(boolean ids) {
-        return withRelations(new AtomicLong(0));
+        return withRelations(ids ? new AtomicLong(0) : null);
     }
     default T withRelations(AtomicLong ids) {
         return relations(
@@ -958,17 +958,17 @@ public interface MediaTestDataBuilder<
             super(program);
         }
         @Override
-        public ProgramTestDataBuilder withEverything() {
-            AtomicLong mids = new AtomicLong(30000L);
+        public ProgramTestDataBuilder withEverything(AtomicLong ids, AtomicLong mids) {
+            AtomicLong segmentMids = mids == null ? null : new AtomicLong(30000L);
             return MediaTestDataBuilder.super
-                .withEverything()
+                .withEverything(ids, mids)
                 .withScheduleEvents()
                 .withType()
                 .withEpisodeOfIfAllowed(null, null, mids)
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
-                .withFixedSegmentMids(mids);
+                .withFixedSegmentMids(segmentMids);
         }
 
         @Override
@@ -1143,9 +1143,9 @@ public interface MediaTestDataBuilder<
             }
             return this;
         }
-        protected ProgramTestDataBuilder withFixedSegmentMids(AtomicLong id) {
+        protected ProgramTestDataBuilder withFixedSegmentMids(AtomicLong mids) {
             for (Segment segment : mediaObject.getSegments()) {
-                MediaTestDataBuilder.segment(segment).withMids(id);
+                MediaTestDataBuilder.segment(segment).withMids(mids);
             }
             return this;
         }
@@ -1207,8 +1207,8 @@ public interface MediaTestDataBuilder<
         }
 
         @Override
-        public GroupTestDataBuilder withEverything() {
-            return MediaTestDataBuilder.super.withEverything()
+        public GroupTestDataBuilder withEverything(AtomicLong ids, AtomicLong mids)  {
+            return MediaTestDataBuilder.super.withEverything(ids, mids)
                 .withType()
                 .withPoSeriesID()
                 ;
@@ -1246,8 +1246,8 @@ public interface MediaTestDataBuilder<
         }
 
         @Override
-        public SegmentTestDataBuilder withEverything() {
-            return MediaTestDataBuilder.super.withEverything()
+        public SegmentTestDataBuilder withEverything(AtomicLong ids, AtomicLong mids) {
+            return MediaTestDataBuilder.super.withEverything(ids, mids)
                 .withStart();
 
         }
