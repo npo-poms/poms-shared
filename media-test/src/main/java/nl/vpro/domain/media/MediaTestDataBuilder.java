@@ -723,9 +723,12 @@ public interface MediaTestDataBuilder<
 
 
     default T withRelations() {
-        return withRelations(new AtomicLong(0));
+        return withRelations(true);
     }
 
+    default T withRelations(boolean ids) {
+        return withRelations(new AtomicLong(0));
+    }
     default T withRelations(AtomicLong ids) {
         return relations(
             new Relation(ids == null ? null : ids.incrementAndGet(), VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
@@ -876,11 +879,9 @@ public interface MediaTestDataBuilder<
         return withEverything(true);
     }
 
-
     default T withEverything(boolean ids) {
         return withEverything(ids ? new AtomicLong(1) : null, new AtomicLong(20000L));
     }
-
 
 
     default T withEverything(AtomicLong ids, AtomicLong mids) {
@@ -918,7 +919,7 @@ public interface MediaTestDataBuilder<
                 .withPublishStop()
                 .withFixedPublishStop()
                 .withFixedPublishStart()
-                .withRelations(ids)
+                .withRelations(ids != null)
                 .withReleaseYear()
                 .withSource()
                 .withSubtitles()
@@ -932,8 +933,6 @@ public interface MediaTestDataBuilder<
                 .withIds(ids)
                 .correctPredictions()
             ;
-
-
         return result;
 
 
@@ -963,7 +962,6 @@ public interface MediaTestDataBuilder<
             AtomicLong mids = new AtomicLong(30000L);
             return MediaTestDataBuilder.super
                 .withEverything()
-                .id(null)
                 .withScheduleEvents()
                 .withType()
                 .withEpisodeOfIfAllowed(null, null, mids)
