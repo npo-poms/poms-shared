@@ -167,7 +167,7 @@ public interface MediaTestDataBuilder<
     /**
      * Created an object with all required fields filled. This is used in tests which want a complete and valid object, but don't have an actual persistence layer.
      * <p>
-     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database, so you should persist objects like this. Use {@link #dbConstrained()} then.
+     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database, so you should persist objects like this. Use {@link #dbConstrained()} then. Note that Hibernate >= 6.6 will not even accept entities with the id prefilled (this was sometimes done in testcases, which are changed to use {@link #dbConstrained()}
      */
     default T constrained() {
         return constrainedNew()
