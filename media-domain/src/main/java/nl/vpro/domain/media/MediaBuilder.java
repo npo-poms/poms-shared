@@ -115,11 +115,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     String getMid();
 
 
+    /**
+     * Sets id. If you want to remove an id use {@link #withoutId()}, or {@link #nullableId(Long)}
+     */
     @SuppressWarnings("unchecked")
-    default B id(Long id) {
+    default B id(long id) {
         mediaObject().setId(id);
         return (B)this;
     }
+
 
     default B nullableId(Long id) {
         mediaObject().setId(id);
