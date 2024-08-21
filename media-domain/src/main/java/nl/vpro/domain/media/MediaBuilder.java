@@ -116,7 +116,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     @SuppressWarnings("unchecked")
-    default B id(long id) {
+    default B id(Long id) {
         mediaObject().setId(id);
         return (B)this;
     }

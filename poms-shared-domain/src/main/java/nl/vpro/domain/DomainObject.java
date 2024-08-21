@@ -63,7 +63,7 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     /**
      * Under normal operation this should not be used!
      * <p/>
-     * While testing it sometimes comes in handy to be able to set an Id to simulate
+     * While testing, it sometimes comes in handy to be able to set an id to simulate
      * a persisted object.
      */
     public DomainObject setId(Long id) {

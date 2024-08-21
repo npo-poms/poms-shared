@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
@@ -720,12 +721,17 @@ public interface MediaTestDataBuilder<
 
     List<RelationDefinition> RELATION_DEFINITIONS = Collections.unmodifiableList(Arrays.asList(VPRO_LABEL, AVRO_THESAURUS, VPRO_ARTIST, EO_KOOR));
 
+
     default T withRelations() {
+        return withRelations(new AtomicLong(0));
+    }
+
+    default T withRelations(AtomicLong ids) {
         return relations(
-            new Relation(1L, VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
-            new Relation(2L, AVRO_THESAURUS, null, "synoniem"),
-            new Relation(3L, VPRO_ARTIST, null, "Marco Borsato"),
-            new Relation(4L, EO_KOOR, null, "Ulfts Mannenkoor"));
+            new Relation(ids == null ? null : ids.incrementAndGet(), VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
+            new Relation(ids == null ? null : ids.incrementAndGet(), AVRO_THESAURUS, null, "synoniem"),
+            new Relation(ids == null ? null : ids.incrementAndGet(), VPRO_ARTIST, null, "Marco Borsato"),
+            new Relation(ids == null ? null : ids.incrementAndGet(), EO_KOOR, null, "Ulfts Mannenkoor"));
     }
 
     default T withImages() {
@@ -840,33 +846,41 @@ public interface MediaTestDataBuilder<
         return withIds(new AtomicLong(1));
     }
 
-    default T withIds(AtomicLong id) {
+    default T withIds(@Nullable AtomicLong id) {
 
-        for (Image image : mediaObject().getImages()) {
-            if (image.getId() == null) {
-                image.setId(id.incrementAndGet());
+        if (id != null) {
+            for (Image image : mediaObject().getImages()) {
+                if (image.getId() == null) {
+                    image.setId(id.incrementAndGet());
+                }
             }
-        }
-        for (Location location : mediaObject().getLocations()) {
-            if (location.getId() == null) {
-                location.setId(id.incrementAndGet());
+            for (Location location : mediaObject().getLocations()) {
+                if (location.getId() == null) {
+                    location.setId(id.incrementAndGet());
+                }
             }
-        }
       /*  for (MemberRef ref : mediaObject().getMemberOf()) {
 
         }
         for (DescendantRef ref : mediaObject().getDescendantOf()) {
 
         }*/
-        if (mediaObject().getId() == null) {
-            id(id.incrementAndGet());
+            if (mediaObject().getId() == null) {
+                id(id.incrementAndGet());
+            }
         }
         return (T) this;
     }
 
     default T withEverything() {
-        return withEverything(new AtomicLong(1), new AtomicLong(20000L));
+        return withEverything(true);
     }
+
+
+    default T withEverything(boolean ids) {
+        return withEverything(ids ? new AtomicLong(1) : null, new AtomicLong(20000L));
+    }
+
 
 
     default T withEverything(AtomicLong ids, AtomicLong mids) {
@@ -904,7 +918,7 @@ public interface MediaTestDataBuilder<
                 .withPublishStop()
                 .withFixedPublishStop()
                 .withFixedPublishStart()
-                .withRelations()
+                .withRelations(ids)
                 .withReleaseYear()
                 .withSource()
                 .withSubtitles()
@@ -949,6 +963,7 @@ public interface MediaTestDataBuilder<
             AtomicLong mids = new AtomicLong(30000L);
             return MediaTestDataBuilder.super
                 .withEverything()
+                .id(null)
                 .withScheduleEvents()
                 .withType()
                 .withEpisodeOfIfAllowed(null, null, mids)
