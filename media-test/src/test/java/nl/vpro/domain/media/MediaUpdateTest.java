@@ -27,10 +27,9 @@ import nl.vpro.util.Version;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- *
- * Created a program 'with everything' then makes an 'update' object of it. Checks the XML, and marshall it back to an update object.
+ * Creates a program 'with everything' then makes an 'update' object of it. Checks the XML, and marshall it back to an update object.
  * <p>
- * Then take that, make a simple {@link MediaObject} of it and check _its_ XML.
+ * Then take that, make a simple {@link MediaObject} of it and check <em>its</em> XML.
  *
  * @author Michiel Meeuwissen
  * @since 5.8
