@@ -176,11 +176,20 @@ public interface MediaTestDataBuilder<
             ;
     }
 
+
     /**
-     * Creates an object that can be inserted into the database without further adue
+     * @deprecated Use {@link #validDbConstraint()}
      */
     default T constrainedDb() {
-        T t =  constrained()
+        return validDbConstraint();
+    }
+    /**
+     * Creates an object that can be inserted into the database without further adue
+     * This is like {@link #dbConstrained()}, but also fills all other non-null fields.
+     */
+    default T validDbConstraint() {
+
+        T t =  dbConstrained()
             .withFixedDates()
             .withCreatedBy()
             .withLastModifiedBy()
