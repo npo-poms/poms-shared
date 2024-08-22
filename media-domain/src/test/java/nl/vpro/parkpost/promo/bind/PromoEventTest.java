@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
+@SuppressWarnings("deprecation")
 public class PromoEventTest {
 
     @Test
