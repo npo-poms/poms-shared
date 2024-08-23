@@ -51,7 +51,7 @@ class BindincBroadcasterServiceTest {
     public void testToString(WireMockRuntimeInfo wiremock) {
         assertThat(bs.toString()).isEqualTo(
             """
-                BindincBroadcasterService[http://localhost:%d/broadcasters/(/mis,whatson)]  67 broadcasters (overriding: [VER, SBS9, BNNVARA, SBS6, AVROTROS, OMROP FRYSLAN, KRO-NCRV, NET5])""".formatted(wiremock.getHttpPort()));
+                BindincBroadcasterService[http://localhost:%s/broadcasters/(/mis,whatson)]  67 broadcasters (overriding: [VIAPLAY, VER, SBS9, BNNVARA, SBS6, AVROTROS, OMROP FRYSLAN, KRO-NCRV, NET5])""".formatted(wiremock.getHttpPort()));
 
     }
 
