@@ -3,8 +3,7 @@ package nl.vpro.media.tva.bindinc;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import jakarta.inject.Inject;
@@ -24,10 +23,14 @@ public class BindincBroadcasterService extends BroadcasterServiceImpl {
 
 
     private final Set<String> warned = new CopyOnWriteArraySet<>();
-    private final Properties bindincOverride = new Properties();
+    private final Map<String, String> bindincOverride = new TreeMap<>();
     {
         try {
-            bindincOverride.load(BindincBroadcasterService.class.getResourceAsStream("/bindinc.broadcasters.properties"));
+            Properties properties = new Properties();
+            properties.load(BindincBroadcasterService.class.getResourceAsStream("/bindinc.broadcasters.properties"));
+            properties.entrySet().forEach(e -> {
+                bindincOverride.put((String) e.getKey(), (String) e.getValue());
+            });
         } catch (IOException ioException) {
             throw new RuntimeException(ioException);
         }
@@ -42,7 +45,7 @@ public class BindincBroadcasterService extends BroadcasterServiceImpl {
     public Broadcaster find(String id) {
         Broadcaster f = super.find(id);
         if (f == null) {
-            String bindinc = bindincOverride.getProperty(id);
+            String bindinc = bindincOverride.get(id);
             if (bindinc != null) {
                 Broadcaster b;
                 if (bindinc.startsWith(":")) {
