@@ -40,7 +40,8 @@ public interface TrackableObject extends Trackable, Embargo {
         if(isMerged() ||
             Workflow.FOR_DELETION == workflow ||
             Workflow.DELETED == workflow ||
-            Workflow.IGNORE == workflow
+            Workflow.IGNORE == workflow ||
+            Workflow.TEMPORARY == workflow
         ) {
             // These kind of objects are explicitly not publishable.
             return false;
