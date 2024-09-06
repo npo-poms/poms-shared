@@ -54,7 +54,9 @@ public record ProductMetadataContents(
     List<Credits> castAndCrew,
     ContentRating contentRating,
 
-    String season
+    String season,
+
+    String guci
 ) {
 
 
