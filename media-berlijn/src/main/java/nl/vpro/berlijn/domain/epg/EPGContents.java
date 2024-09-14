@@ -17,6 +17,7 @@ import nl.vpro.util.Ranges;
     "ttl" // 'ignore that'
 })
 @Log4j2
+@lombok.Builder
 public record EPGContents(
     LocalDate date,
     Instant lastUpdated,
