@@ -15,6 +15,7 @@ import nl.vpro.berlijn.domain.AssertValidatable;
 @JsonIgnoreProperties({
     "firstTransmissionDate" // contains mess. We don't use it any way for now. See https://publiekeomroep.atlassian.net/browse/VPPM-1167
 })
+@lombok.Builder
 public record EPGEntry(
     long duration,
     Instant guideStartTime,
