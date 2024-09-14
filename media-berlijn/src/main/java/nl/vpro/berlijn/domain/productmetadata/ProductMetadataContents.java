@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({
     "s3FilePath"
 })
+@lombok.Builder
 public record ProductMetadataContents(
     int version,
     ContentType contentType,

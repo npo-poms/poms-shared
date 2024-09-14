@@ -46,7 +46,10 @@ public record AvailabilityContents(
     /**
      * What's this?
      */
-    JsonNode revoke
+    JsonNode revoke,
+
+    List<String> broadcasters,
+    Boolean isStreamable
 
 
 ) implements AssertValidatable {
