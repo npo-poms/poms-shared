@@ -19,6 +19,11 @@ public interface NEPUploadService {
         boolean replaces
         ) throws IOException;
 
+    /**
+     * Upload streamingly.
+     *
+     * See MSE-5800, this doesn't work with sshj anymore.
+     */
      long upload(
         @NonNull SimpleLogger logger,
         @NonNull String nepFile,
