@@ -13,6 +13,7 @@ import nl.vpro.berlijn.domain.AssertValidatable;
 @JsonIgnoreProperties({
     "s3FilePath"
 })
+@lombok.Builder
 public record AvailabilityContents(
     Instant restrictionsTimestamp,
     Instant notifyTimestamp,
