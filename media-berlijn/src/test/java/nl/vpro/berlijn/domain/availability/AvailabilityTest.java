@@ -2,7 +2,6 @@ package nl.vpro.berlijn.domain.availability;
 
 import lombok.extern.log4j.Log4j2;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
@@ -23,6 +22,9 @@ class AvailabilityTest {
     }
 
     static Parser parser = Parser.getInstance();
+    {
+        parser.setLenient(false);
+    }
 
     @ParameterizedTest
     @MethodSource("messages")
@@ -52,11 +54,14 @@ class AvailabilityTest {
             """,
         """
         {"version":"1.0","timestamp":1723975903.576000000,"contents":{"restrictionsTimestamp":1723975599.000000000,"notifyTimestamp":null,"lastUpdated":1723975903.576000000,"created":1722124811.000000000,"ageRestriction":null,"prid":"POW_05753710","availabilityPeriods":[{"geoip":null,"encryption":null,"stop":1755511502.000000000,"start":1723975502.000000000,"geoIpRestriction":"EU","drm":true}],"platform":"npo-svod","predictionCurrentlyIncluded":true,"predictionStartTimestamp":1722124811.000000000,"predictionEndTimestamp":null,"predictionUpdatedTimestamp":null,"predictionStopped":false,"source":"postkantoor","restrictions":null,"revoked":null,"revokedTimestamp":null,"date":null,"revoke":null,"notify":false} }
+        """,
+        """
+        {"type":"update","version":"1.0","metadata":{},"timestamp":"2024-09-15T09:36:45.781Z","contents":{"restrictionsTimestamp":"2024-09-15T09:36:37.000Z","created":"2024-08-25T00:00:07.000Z","predictionStartTimestamp":"2024-08-25T00:00:07.000Z","prid":"VPWON_1358139","revoke":null,"broadcasters":["EO"],"source":"postkantoor","notify":false,"platform":"npo-fvod","revokedTimestamp":null,"lastUpdated":"2024-09-15T09:36:45.781Z","predictionCurrentlyIncluded":1,"ageRestriction":null,"availabilityPeriods":[{"stop":"2100-12-31T23:59:00.000Z","start":"2000-01-01T00:00:00.000Z","geoIpRestriction":"WR","drm":true,"isStreamable":true}],"predictionStopped":false}}
         """
 
     }
     )
-    void moreJson(String json) throws IOException {
+    void moreJson(String json) {
 
         Availability availability = parser.parseAvailability(json.getBytes(StandardCharsets.UTF_8));
 
