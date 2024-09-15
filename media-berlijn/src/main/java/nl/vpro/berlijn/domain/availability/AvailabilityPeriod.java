@@ -12,7 +12,10 @@ public record AvailabilityPeriod(
     Instant start,
 
 
-    //  suddenly new August 2024
+    //  new August 2024
     GeoIp geoIpRestriction,
-    Boolean drm) {
+    Boolean drm,
+    // new September 2024
+    Boolean isStreamable
+    ) {
 }
