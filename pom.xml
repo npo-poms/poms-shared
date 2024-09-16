@@ -141,21 +141,6 @@
   </dependencies>
 
   <profiles>
-    <profile>
-      <id>vpro-nexus</id>
-      <distributionManagement>
-        <repository>
-          <id>nexus</id>
-          <name>Nexus releases</name>
-          <url>https://nexus.vpro.nl/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-          <id>nexus</id>
-          <name>Nexus snapshots</name>
-          <url>https://nexus.vpro.nl/content/repositories/snapshots</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
 
   </profiles>
 
