@@ -46,6 +46,7 @@ public enum Platform implements Displayable {
      */
     PLUSVOD(true, "Nlziet/NPO Plus", true, VIDEO),
 
+
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
      *  Zie <a href="https://jira.vpro.nl/browse/MSE-2742">MSE-2742</a> Blijkbaar nooit gebruikt.
@@ -57,7 +58,17 @@ public enum Platform implements Displayable {
         public boolean display() {
             return false;
         }
-    };
+    },
+    /**
+     * @since 8.3
+     */
+    TVVOD_BE(true, "Distributeurs België", true, VIDEO),
+
+    /**
+     * @since 8.3
+     */
+    TEST(true, "TEST", true, VIDEO),
+    ;
 
     /**
      * Audible on internet. For now this just is {@link #INTERNETVOD}, assuming that even if some object has both audio and video, it should make no difference for the availability on a certain platform.
