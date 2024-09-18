@@ -1,20 +1,30 @@
 package nl.vpro.berlijn.domain.availability;
 
+import lombok.Getter;
+
+import nl.vpro.domain.media.Region;
+
 public enum GeoIp {
-    EU,
-    NLAll,
-    NLBES,
-    NL,
+    EU(Region.EU),
+    NLAll(Region.NLALL),
+    NLBES(Region.NLBES),
+    NL(Region.NL),
     /**
      * @since 8.2
      */
-    Europa,
+    Europa(Region.EUROPE),
 
     /**
      *
-     * World?
-     *
      * @since 8.2
      */
-    WR
+    WR(Region.UNIVERSE);
+
+    @Getter
+    private final Region pomsRegion;
+
+    GeoIp(Region pomsRegion) {
+        this.pomsRegion = pomsRegion;
+
+    }
 }
