@@ -38,6 +38,10 @@ public class PortalRestriction extends Restriction<PortalRestriction> {
 
     public static class Builder extends RestrictionBuilder<Builder> {
 
+        @Override
+        public Builder self() {
+            return this;
+        }
     }
     @ManyToOne(optional = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

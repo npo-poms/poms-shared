@@ -239,6 +239,11 @@ public class Image extends PublishableObject<Image>
         public Builder creationDate(Instant instant) {
             return creationInstant(instant);
         }
+
+        @Override
+        public Builder self() {
+            return this;
+        }
     }
 
     @lombok.Builder(builderClassName = "Builder", toBuilder = true)

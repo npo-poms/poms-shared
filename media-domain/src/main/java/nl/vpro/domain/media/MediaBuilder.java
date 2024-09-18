@@ -978,7 +978,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             } catch (CloneNotSupportedException e) {
                 throw new RuntimeException(e);
             }
+        }
 
+        @Override
+        public T self() {
+            return (T) this;
         }
     }
 
