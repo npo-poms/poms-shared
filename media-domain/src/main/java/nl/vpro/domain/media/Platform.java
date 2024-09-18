@@ -62,7 +62,7 @@ public enum Platform implements Displayable {
     /**
      * @since 8.3
      */
-    TVVOD_BE(true, "Distributeurs België", true, VIDEO),
+    TVVODHD(true, "Distributeurs België", true, VIDEO),
 
     /**
      * @since 8.3

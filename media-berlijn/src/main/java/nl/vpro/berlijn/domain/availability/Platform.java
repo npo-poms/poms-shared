@@ -21,7 +21,7 @@ public enum Platform {
     distri_nl(nl.vpro.domain.media.Platform.TVVOD),
 
     @JsonProperty("distri-be")
-    distri_be(nl.vpro.domain.media.Platform.TVVOD_BE),
+    distri_be(nl.vpro.domain.media.Platform.TVVODHD),
 
     hergebruik(null),
 
