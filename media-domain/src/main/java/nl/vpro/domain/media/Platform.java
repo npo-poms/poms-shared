@@ -62,12 +62,22 @@ public enum Platform implements Displayable {
     /**
      * @since 8.3
      */
-    TVVODHD(true, "Distributeurs België", true, VIDEO),
+    TVVODHD(true, "Distributeurs België", true, VIDEO) {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
     /**
      * @since 8.3
      */
-    TEST(true, "TEST", true, VIDEO),
+    TEST(true, "TEST", true, VIDEO) {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    }
     ;
 
     /**
