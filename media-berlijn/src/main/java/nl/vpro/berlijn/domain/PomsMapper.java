@@ -216,8 +216,6 @@ public class PomsMapper {
         table.setSchedule(schedule);
 
         for (EPGEntry entry : epg.entries()) {
-
-
             ScheduleEvent event = map(channel, guideDate, entry);
             if (event == null) {
                 continue;
@@ -228,13 +226,17 @@ public class PomsMapper {
 
 
                 var programByMid = table.find(entry.prid()).orElse(null);
-                var crid = "crid://npo/programmagegevens/" + entry.crid();
+                var crid = entry.crid() == null ? null : "crid://npo/programmagegevens/" + entry.crid();
                 if (programByMid == null) {
                     Program program = new Program(entry.prid());
-                    program.addCrid(crid);
+                    if (crid != null) {
+                        program.addCrid(crid);
+                    }
                     table.add(program);
                 } else {
-                    programByMid.addCrid(crid);
+                    if (crid != null) {
+                        programByMid.addCrid(crid);
+                    }
                 }
             } catch (AssertionError ae) {
                 log.error(ae);
