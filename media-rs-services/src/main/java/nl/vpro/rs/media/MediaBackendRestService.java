@@ -1,12 +1,6 @@
 package nl.vpro.rs.media;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +9,18 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.*;
+
 import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
+import org.meeuw.i18n.languages.validation.Language;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
@@ -33,7 +36,6 @@ import nl.vpro.poms.shared.Headers;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.api.rs.subtitles.Constants.*;
-import org.meeuw.i18n.languages.validation.Language;
 
 /**
  * @author Michiel Meeuwissen
@@ -257,7 +259,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoSegments entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
-        @QueryParam(MAX) @DefaultValue("20") final Integer max,
+        @QueryParam(MAX) @DefaultValue("20") @Max(240) final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final Pager.Direction order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
