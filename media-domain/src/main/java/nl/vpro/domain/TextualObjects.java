@@ -267,7 +267,7 @@ public class TextualObjects {
      * Returns the value for a certain {@link TextualType} and {@link OwnerType}. This implements a fall back mechanism.
      * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
      * <p>
-     * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
+     * Furthermore, if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
      */
     public static <OT extends OwnedText> Optional<OT> expand(
         @NonNull Collection<OT> titles,
