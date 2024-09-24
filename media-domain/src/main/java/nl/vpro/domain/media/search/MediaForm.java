@@ -315,11 +315,15 @@ public class MediaForm {
         Boolean noMembers,
         Boolean noCredits,
         OwnerType forOwner,
-        Collection<String> ids
+        Collection<String> ids,
+        List<Channel> channels
         ) {
 
         if(pager == null) {
             pager = MediaPager.builder().build();
+        }
+        if (pager.getMax() == null) {
+            pager.setMax(50);
         }
 
         this.pager = pager;

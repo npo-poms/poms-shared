@@ -67,19 +67,20 @@ public class MediaFormTest {
             .lastPublishedRange(InstantRange.builder().start(InstantRange.Value.of(LocalDateTime.of(2017, 9, 29, 16, 35).atZone(Schedule.ZONE_ID).toInstant())).build())
             .build();
         JAXBTestUtil.roundTripAndSimilar(form, """
-            <s:mediaForm xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:s="urn:vpro:media:search:2012" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-                <s:pager>
-                    <s:offset>0</s:offset>
-                    <s:order>ASC</s:order>
-                </s:pager>
-                <s:locationsCount>
-                    <s:start>0</s:start>
-                    <s:stop inclusive="false">0</s:stop>
-                </s:locationsCount>
-                <s:lastPublishedRange>
-                    <s:start>2017-09-29T16:35:00+02:00</s:start>
-                </s:lastPublishedRange>
-            </s:mediaForm>""");
+            <?xml version="1.0" encoding="UTF-8"?><s:mediaForm xmlns:s="urn:vpro:media:search:2012" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                            <s:pager>
+                              <s:offset>0</s:offset>
+                              <s:max>50</s:max>
+                              <s:order>ASC</s:order>
+                            </s:pager>
+                            <s:locationsCount>
+                              <s:start>0</s:start>
+                              <s:stop inclusive="false">0</s:stop>
+                            </s:locationsCount>
+                            <s:lastPublishedRange>
+                              <s:start>2017-09-29T16:35:00+02:00</s:start>
+                            </s:lastPublishedRange>
+                          </s:mediaForm>""");
     }
 
 

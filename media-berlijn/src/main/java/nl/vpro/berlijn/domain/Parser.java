@@ -39,8 +39,14 @@ public class Parser {
     }
 
     @Getter
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = createMapper();
     {
+        instance = this;
+        log.info("Created {}", this);
+    }
+
+    public  static ObjectMapper createMapper() {
+        ObjectMapper mapper = new ObjectMapper();
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         JavaTimeModule timeModule = new JavaTimeModule();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
@@ -50,10 +56,9 @@ public class Parser {
         mapper.registerModule(timeModule);
         mapper.setAnnotationIntrospector(new JacksonAnnotationIntrospector());
         mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
-        instance = this;
-        log.info("Created {}", this);
+        return mapper;
     }
+
 
     private Parser() {
 

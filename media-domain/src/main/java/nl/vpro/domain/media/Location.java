@@ -232,6 +232,10 @@ public class Location extends PublishableObject<Location>
     public static class Builder implements EmbargoBuilder<Builder> {
 
 
+        @Override
+        public Builder self() {
+            return this;
+        }
     }
     /**
      * Unset some default values, to ensure that round tripping will result same object

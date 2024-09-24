@@ -1001,6 +1001,8 @@
       <xs:enumeration value="TVVOD"/>
       <xs:enumeration value="PLUSVOD"/>
       <xs:enumeration value="NPOPLUSVOD"/>
+      <xs:enumeration value="TVVODHD"/>
+      <xs:enumeration value="TEST"/>
     </xs:restriction>
   </xs:simpleType>
 

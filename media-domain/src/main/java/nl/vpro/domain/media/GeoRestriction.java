@@ -32,6 +32,11 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
 
     public static class Builder extends RestrictionBuilder<Builder> {
 
+
+        @Override
+        public Builder self() {
+            return this;
+        }
     }
 
     @Column(nullable=false)
