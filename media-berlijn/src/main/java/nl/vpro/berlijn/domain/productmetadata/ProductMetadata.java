@@ -74,9 +74,9 @@ public record ProductMetadata  (
             var relations = contents.relations();
             if (relations != null) {
                 // wtf already, but any way
-                assert relations.seasons() == null;
-                assert PridHolder.isEmpty(relations.series());
-                assert PridHolder.isEmpty(relations.season());
+                assert relations.seasons() == null : "Incoming %s has seasons: %s".formatted(contents, relations.seasons());
+                assert PridHolder.isEmpty(relations.series()) : "Incoming %s has series: %s".formatted(contents, relations.series());
+                assert PridHolder.isEmpty(relations.season()) :  "Incoming %s has series: %s".formatted(contents, relations.season());
             }
         }
         if (contents.contentType() == ContentType.episode) {
