@@ -1,6 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Lombok;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +14,8 @@ import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.util.locker.ObjectLocker;
+
+import static nl.vpro.util.ExceptionUtils.sneakyThrow;
 
 
 /**
@@ -55,7 +56,7 @@ public abstract class MediaObjectLockerAspect  {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
-                throw Lombok.sneakyThrow(t);
+                throw sneakyThrow(t);
             }
 
         });
@@ -75,7 +76,7 @@ public abstract class MediaObjectLockerAspect  {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
-                throw Lombok.sneakyThrow(t);
+                throw sneakyThrow(t);
             }
 
         });
@@ -87,7 +88,7 @@ public abstract class MediaObjectLockerAspect  {
         try {
             return joinPoint.proceed(joinPoint.getArgs());
         } catch(Throwable t) {
-            throw Lombok.sneakyThrow(t);
+            throw sneakyThrow(t);
         }
     }
 
