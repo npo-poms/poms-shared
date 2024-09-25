@@ -61,7 +61,10 @@ public record ProductMetadata  (
 
     public boolean looksLikeRadio() {
         return contents.mediaType() == nl.vpro.berlijn.domain.productmetadata.MediaType.audio ||
-            contents.contentType() == ContentType.season && PridHolder.isEmpty(contents.relations().series()) // heuristic to recognized rcrs?
+            (
+            contents.contentType() == ContentType.season &&
+                (contents.relations() == null || PridHolder.isEmpty(contents.relations().series()))
+            ) // heuristic to recognized rcrs?
             ;
     }
 
