@@ -167,10 +167,14 @@ public class PomsMapper {
         mo.setDescription(unhtml(synopsis.longText()), OWNER, TextualType.MAIN);
         mo.setDescription(unhtml(synopsis.shortText()), OWNER, TextualType.SHORT);
         mo.setDescription(unhtml(synopsis.brief()), OWNER, TextualType.KICKER);
+        mo.setDescription(unhtml(synopsis.mediumText()), OWNER, TextualType.MEDIUM);
     }
+
     private void deleteSynopsisFromDescription(TextualObject<?, ?, ?> mo) {
         mo.removeDescription(OWNER, TextualType.MAIN);
         mo.removeDescription(OWNER, TextualType.SHORT);
+        mo.removeDescription(OWNER, TextualType.MEDIUM);
+
         //mo.removeDescription(OWNER, TextualType.KICKER);// not incoming, so not destroying? Was that the reason to comment this out?
     }
 
