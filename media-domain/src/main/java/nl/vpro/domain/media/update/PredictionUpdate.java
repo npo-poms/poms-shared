@@ -35,7 +35,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "prediction")
 @lombok.Builder
 @lombok.AllArgsConstructor
-public class PredictionUpdate implements Comparable<PredictionUpdate>, MutableEmbargo {
+public class PredictionUpdate implements Comparable<PredictionUpdate>, MutableEmbargo<PredictionUpdate> {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
