@@ -190,6 +190,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             AccessApi streamApi = new AccessApi();
             streamApi.getApiClient().addDefaultHeader(HttpHeaders.AUTHORIZATION, authenticator.get());
             streamApi.getApiClient().setHttpClient(getHttpClient());
+            streamApi.getApiClient().setBasePath(baseUrl);
             accessApi = streamApi;
         }
         return accessApi;
