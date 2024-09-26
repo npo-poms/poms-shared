@@ -42,6 +42,12 @@ public enum TextualType {
      */
     LONG,
 
+    /**
+     * A medium description
+     * @since 8.3
+     */
+    MEDIUM,
+
     SHORT,
 
     /**
