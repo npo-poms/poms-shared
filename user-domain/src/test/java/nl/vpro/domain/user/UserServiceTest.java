@@ -75,7 +75,7 @@ class UserServiceTest {
         }
 
         @Override
-        public Optional<User> currentUser() {
+        public Optional<User> currentUser(boolean mayCreate) {
             return Optional.empty();
         }
 
