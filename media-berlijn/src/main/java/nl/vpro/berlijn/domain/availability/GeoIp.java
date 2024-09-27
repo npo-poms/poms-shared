@@ -2,6 +2,9 @@ package nl.vpro.berlijn.domain.availability;
 
 import lombok.Getter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.media.Region;
 
 public enum GeoIp {
@@ -25,6 +28,13 @@ public enum GeoIp {
 
     GeoIp(Region pomsRegion) {
         this.pomsRegion = pomsRegion;
+    }
 
+    @NonNull
+    public static GeoIp ofNullable(@Nullable GeoIp geoIp) {
+        if (geoIp == null) {
+            return WR;
+        }
+        return geoIp;
     }
 }
