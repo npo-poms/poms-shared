@@ -138,7 +138,12 @@ public interface UserService<T extends User> {
      */
     void delete(T object);
 
-    Optional<T> currentUser();
+    default Optional<T> currentUser() {
+        return currentUser(false);
+    }
+
+    Optional<T> currentUser(boolean mayCreate);
+
 
     Optional<T> authenticate(String principalId);
 
