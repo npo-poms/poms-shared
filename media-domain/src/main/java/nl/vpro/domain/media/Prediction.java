@@ -595,9 +595,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             if (range != null) {
                 if (range.hasLowerBound()) {
                     publishStart(range.lowerEndpoint());
+                } else {
+                    publishStart(null);
                 }
                 if (range.hasUpperBound()) {
                     publishStop(range.upperEndpoint());
+                } else {
+                    publishStop(null);
                 }
             }
             return this;

@@ -42,7 +42,7 @@ public record AvailabilityPeriod(
         return transmissionId;
     }
 
-    public static Range<Instant> span(GeoIp geoIp, Collection<AvailabilityPeriod> periods) {
+    public static Optional<Range<Instant>> span(GeoIp geoIp, Collection<AvailabilityPeriod> periods) {
 
         final var effectiveGeoIp  = ofNullable(geoIp);
         return Optional.ofNullable(Optional.ofNullable(periods).stream()
@@ -50,6 +50,6 @@ public record AvailabilityPeriod(
             .filter(ap -> ofNullable(ap.geoIpRestriction()) == effectiveGeoIp)
             .map(AvailabilityPeriod::range)
             .reduce(null, (r1, r2) -> r1 == null ? r2 : r1.span(r2))
-            ).orElse(ALWAYS);
+        );
     }
 }
