@@ -18,7 +18,7 @@ public enum GeoIp {
      *
      * @since 8.2
      */
-    WR(Region.UNIVERSE);
+    WR(Region.WR);
 
     @Getter
     private final Region pomsRegion;
