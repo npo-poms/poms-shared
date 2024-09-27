@@ -61,6 +61,9 @@ public class PomsMapper {
     public MediaObject createIfEmpty(@Nullable MediaObject m, ProductMetadata productMetadata) {
         var mid = productMetadata.getMid();
         var type = productMetadata.getMediaType();
+        if (type == null) {
+            throw new IllegalStateException();
+        }
         if (m == null) {
             m = type.getMediaInstance();
             m.setMid(mid);

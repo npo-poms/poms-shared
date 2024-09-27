@@ -347,6 +347,7 @@ public class MediaForm {
         this.noCredits = noCredits;
         this.forOwner = forOwner;
         this.ids = ids;
+        this.channels = channels;
 
     }
 
