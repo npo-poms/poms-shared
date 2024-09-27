@@ -13,4 +13,12 @@ public record ProductRelations(
     PridHolder season,
     List<String> seasons
 ) {
+
+    public static ProductRelations series(String mid) {
+        return new ProductRelations(new PridHolder(mid), null, null);
+    }
+
+    public static ProductRelations season(String mid) {
+        return new ProductRelations(null, new PridHolder(mid), null);
+    }
 }
