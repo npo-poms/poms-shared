@@ -1097,10 +1097,10 @@
         </xs:annotation>
       </xs:enumeration>
 
-      <xs:enumeration value="UNIVERSE">
+      <xs:enumeration value="WR">
         <xs:annotation>
           <xs:documentation>
-            New in 7.7. Explicitly no geo-restriction
+            New in 7.7. Explicitly no geo-restriction. Was renamed from UNIVERSE in 8.3
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
