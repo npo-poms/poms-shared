@@ -94,7 +94,7 @@ public enum Region implements Displayable, org.meeuw.i18n.regions.Region {
      * @since 7.6
      */
     @XmlDocumentation("No georestriction")
-    UNIVERSE("Overal te zien") {
+    WR("Overal te zien") {
         @Override
         public boolean display() {
             return false;
