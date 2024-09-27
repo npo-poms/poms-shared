@@ -1,57 +1,48 @@
 package nl.vpro.berlijn.domain.availability;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
+import nl.vpro.berlijn.validation.IntegerValues;
 
+
+/**
+ *
+ * See https://publiekeomroep.atlassian.net/wiki/spaces/MS/pages/2964521011/Media+Availability+service#Datamodel
+ */
 @JsonIgnoreProperties({
-    "s3FilePath"
+    "s3FilePath",
+
+    // all these fields are sometimes present, but are all meaningless, they shouldn't exist any more
+    "restrictions",
+    "restrictionsTimestamp",
+    "predictionStartTimestamp",
+    "notify",
+    "revokedTimestamp",
+    "predictionCurrentlyIncluded",
+    "predictionEndTimestamp",
+    "predictionStopped",
+    "notifyTimestamp",
+    "predictionUpdatedTimestamp",
+    "revoked",
+    "date"
+
 })
 @lombok.Builder
 public record AvailabilityContents(
-    Instant restrictionsTimestamp,
-    Instant notifyTimestamp,
-    Instant lastUpdated,
-    Instant created,
-
-    Integer ageRestriction,
-
-    String prid,
-
-    /**
-     * On two levels?
-     */
-    List<AvailabilityPeriod> availabilityPeriods,
-
-
-    Platform platform,
-    Boolean predictionCurrentlyIncluded,
-    Instant predictionStartTimestamp,
-    Instant predictionEndTimestamp,
-    Instant predictionUpdatedTimestamp,
-    @JsonProperty("notify")
-    Boolean isNotify,
-    Boolean predictionStopped,
-    Source source,
-    Restrictions restrictions,
-    Boolean revoked,
-    Instant revokedTimestamp,
-    LocalDate date,
-
-    /**
-     * What's this?
-     */
-    JsonNode revoke,
-
-    List<String> broadcasters,
-    Boolean isStreamable
-
+     String prid,
+     Platform platform,
+     Instant created,
+     Instant lastUpdated,
+     @IntegerValues({16, 18})
+     Integer ageRestriction,
+     List<String> broadcasters,
+     List<AvailabilityPeriod> availabilityPeriods,
+     Revoke revoke,
+     Source source
 
 ) implements AssertValidatable {
     @Override
