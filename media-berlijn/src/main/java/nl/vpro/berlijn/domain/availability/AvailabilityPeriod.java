@@ -1,25 +1,25 @@
 package nl.vpro.berlijn.domain.availability;
 
 import java.time.Instant;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Range;
 
 import nl.vpro.util.Ranges;
+@JsonIgnoreProperties({
+    // used to exist?
+    "geoip",
+    "encryption"
+})
 
 public record AvailabilityPeriod(
-    List<GeoIp> geoip,
-
-    Encryption[] encryption,
-
-    Instant stop,
-    Instant start,
-
-
-    //  new August 2024
+    String transmissionId,
+    String onDemandTransmissionId,
+    String publicationId,
     GeoIp geoIpRestriction,
     Boolean drm,
-    // new September 2024
+    Instant start,
+    Instant stop,
     Boolean isStreamable
     ) {
 
