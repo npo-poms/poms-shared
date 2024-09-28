@@ -18,7 +18,7 @@ public enum GeoIp {
     Europa(Region.EUROPE),
 
     /**
-     *
+     * No georestriction. See {@link Region#WR}
      * @since 8.2
      */
     WR(Region.WR);
@@ -30,6 +30,9 @@ public enum GeoIp {
         this.pomsRegion = pomsRegion;
     }
 
+    /**
+     * Not specifying the {@link GeoIp}, leaving it {@code null}, is equivalent to {@link #WR}
+     */
     @NonNull
     public static GeoIp ofNullable(@Nullable GeoIp geoIp) {
         if (geoIp == null) {
