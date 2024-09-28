@@ -235,6 +235,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.authority = authority;
     }
 
+    public void copyFrom(Prediction source) {
+        this.platform = source.platform;
+        this.publishStart = source.publishStart;
+        this.publishStop = source.publishStop;
+        this.state = source.state;
+        this.plannedAvailability = source.plannedAvailability;
+        this.encryption = source.encryption;
+        this.authority = source.authority;
+    }
+
     /**
      *
      */
