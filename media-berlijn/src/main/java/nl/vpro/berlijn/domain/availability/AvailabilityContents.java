@@ -11,7 +11,10 @@ import nl.vpro.berlijn.validation.IntegerValues;
 
 /**
  *
- * See https://publiekeomroep.atlassian.net/wiki/spaces/MS/pages/2964521011/Media+Availability+service#Datamodel
+ * See <a href="https://publiekeomroep.atlassian.net/wiki/spaces/MS/pages/2964521011/Media+Availability+service#Datamodel">datamodel</a>
+ *
+ * @param predictionStartTimestamp This I think is data from the voorspel-feed (I saw in code of MDS).
+ *
  */
 @JsonIgnoreProperties({
     "s3FilePath",
@@ -19,11 +22,9 @@ import nl.vpro.berlijn.validation.IntegerValues;
     // all these fields are sometimes present, but are all meaningless, they shouldn't exist any more
     "restrictions",
     "restrictionsTimestamp",
-    "predictionStartTimestamp",
     "notify",
     "revokedTimestamp",
     "predictionCurrentlyIncluded",
-    "predictionEndTimestamp",
     "predictionStopped",
     "notifyTimestamp",
     "predictionUpdatedTimestamp",
@@ -42,7 +43,10 @@ public record AvailabilityContents(
      List<String> broadcasters,
      List<AvailabilityPeriod> availabilityPeriods,
      Revoke revoke,
-     Source source
+     Source source,
+     Instant  predictionStartTimestamp,
+     Instant  predictionEndTimestamp
+
 
 ) implements AssertValidatable {
     @Override
