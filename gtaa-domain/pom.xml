@@ -5,7 +5,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>8.2.3-SNAPSHOT</version>
+    <version>8.2.3</version>
   </parent>
   <artifactId>gtaa-domain</artifactId>
   <name>gtaa-domain</name>
