@@ -2,7 +2,6 @@ package nl.vpro.berlijn.domain;
 
 import lombok.extern.log4j.Log4j2;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -48,7 +47,7 @@ class PomsMapperTest {
 
     @ParameterizedTest
     @MethodSource("epg")
-    void mapEpg(byte[] json) throws IOException {
+    void mapEpg(byte[] json) {
 
         EPG epg = parser.parseEpg(json);
 
