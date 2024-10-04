@@ -138,8 +138,17 @@ public class AssemblageConfig implements Serializable {
     @lombok.Builder.Default
     Predicate<String> cridsForDelete = alwaysFalse();
 
+    /**
+     * Whether the class of the object may be changed (e.g. from {@link Segment} to {@link Program})
+     */
     @lombok.Builder.Default
-    Steal updateType = Steal.NO;
+    BiPredicate<MediaObject, MediaObject> updateType = Steal.NO;
+
+    /**
+     * Whether the {@link MediaObject#getMediaType() mediatatype} of the object may be changed
+     */
+    @lombok.Builder.Default
+    BiPredicate<MediaObject, MediaObject> updateMediaType = Steal.YES;
 
     /**
      * TODO
@@ -239,6 +248,7 @@ public class AssemblageConfig implements Serializable {
             segmentsForDeletion,
             cridsForDelete,
             updateType,
+            updateMediaType,
             followMerges,
             requireIncomingMid,
             markForDeleteOnly,
@@ -385,15 +395,21 @@ public class AssemblageConfig implements Serializable {
         }
     }
 
+    /**
+     * A {@link BiPredicate}
+     */
+
     public enum Steal implements BiPredicate<MediaObject, MediaObject> {
         YES((incoming, toUpdate) -> true),
         IF_DELETED((incoming, toUpdate) ->  Workflow.PUBLISHED_AS_DELETED.contains(toUpdate.getWorkflow())),
-        NO((incoming, toUpdate) -> true),
+        NO((incoming, toUpdate) -> false),
 
         /**
          * Only if the incoming object is new. We matched on crid.
          */
-        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming != null && incoming.getMid() == null)
+        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming != null && incoming.getMid() == null),
+
+
         ;
 
         private final BiPredicate<MediaObject, MediaObject> impl;
