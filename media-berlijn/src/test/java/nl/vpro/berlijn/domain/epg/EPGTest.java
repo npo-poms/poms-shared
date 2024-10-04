@@ -13,7 +13,7 @@ import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 
 
 @Log4j2
-class EPGTest {
+public class EPGTest {
 
 
     public static Stream<byte[]> epg() {

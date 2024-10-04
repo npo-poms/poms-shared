@@ -308,6 +308,7 @@ public class AssemblageConfig implements Serializable {
             .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
             .updateType(Steal.YES)
+            .updateMediaType(Steal.YES)
             .followMerges(true)
             .requireIncomingMid(MidRequire.YES)
             .deleteBroadcasters(alwaysTrue())
@@ -370,7 +371,7 @@ public class AssemblageConfig implements Serializable {
             return owner(null);
         }
 
-        public Builder stealAllCrids(Steal steal) {
+        public Builder stealAllCrids(BiPredicate<MediaObject, MediaObject> steal) {
             return stealCrids(TriSteal.of(steal));
         }
 
@@ -430,7 +431,7 @@ public class AssemblageConfig implements Serializable {
 
 
     public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
-        static <S> TriSteal<S> of(Steal s) {
+        static <S> TriSteal<S> of(BiPredicate<MediaObject, MediaObject> s) {
             return new TriStealImpl<>(Predicates.ignoreArg3(s));
         }
     }
