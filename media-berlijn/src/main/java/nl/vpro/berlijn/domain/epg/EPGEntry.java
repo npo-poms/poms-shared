@@ -13,13 +13,13 @@ import nl.vpro.berlijn.domain.AssertValidatable;
  * @param guideStartTime What's the different with {@link #startTime}
  */
 @JsonIgnoreProperties({
-    "firstTransmissionDate" // contains mess. We don't use it any way for now. See https://publiekeomroep.atlassian.net/browse/VPPM-1167
+
 })
 @lombok.Builder
 public record EPGEntry(
     long duration,
     Instant guideStartTime,
-    //Instant firstTransmissionDate, // wtf "firstTransmissionDate":"25-05-2021"
+    String firstTransmissionDate, // wtf "firstTransmissionDate":"25-05-2021"
     boolean isLive,
     boolean isRerun,
     String crid,

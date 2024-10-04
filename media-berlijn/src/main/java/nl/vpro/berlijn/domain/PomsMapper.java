@@ -198,7 +198,7 @@ public class PomsMapper {
             .start(entry.guideStartTime())// startTime?
             .duration(Duration.ofSeconds(entry.duration()))
             .midRef(entry.prid())
-            .repeat(entry.isRerun() ? Repeat.rerun() : null)
+            .repeat(entry.isRerun() ? Repeat.rerun(entry.firstTransmissionDate()) : null)
             .guci(entry.guci())
             .effectiveStart(entry.startTime())
             .build();
