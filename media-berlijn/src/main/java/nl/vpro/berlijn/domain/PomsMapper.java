@@ -166,17 +166,17 @@ public class PomsMapper {
         );
     }
 
-    private void synopsisToDescription(Synopsis synopsis, TextualObject<?, ?, ?> mo) {
-        mo.setDescription(unhtml(synopsis.longText()), OWNER, TextualType.MAIN);
-        mo.setDescription(unhtml(synopsis.shortText()), OWNER, TextualType.SHORT);
-        mo.setDescription(unhtml(synopsis.brief()), OWNER, TextualType.KICKER);
-        mo.setDescription(unhtml(synopsis.mediumText()), OWNER, TextualType.MEDIUM);
+    private void synopsisToDescription(Synopsis synopsis, TextualObject<?, ?, ?> textualObject) {
+        textualObject.setDescription(unhtml(synopsis.longText()), OWNER, TextualType.MAIN);
+        textualObject.setDescription(unhtml(synopsis.shortText()), OWNER, TextualType.SHORT);
+        textualObject.setDescription(unhtml(synopsis.brief()), OWNER, TextualType.KICKER);
+        textualObject.setDescription(unhtml(synopsis.mediumText()), OWNER, TextualType.MEDIUM);
     }
 
-    private void deleteSynopsisFromDescription(TextualObject<?, ?, ?> mo) {
-        mo.removeDescription(OWNER, TextualType.MAIN);
-        mo.removeDescription(OWNER, TextualType.SHORT);
-        mo.removeDescription(OWNER, TextualType.MEDIUM);
+    private void deleteSynopsisFromDescription(TextualObject<?, ?, ?> textualObject) {
+        textualObject.removeDescription(OWNER, TextualType.MAIN);
+        textualObject.removeDescription(OWNER, TextualType.SHORT);
+        textualObject.removeDescription(OWNER, TextualType.MEDIUM);
 
         //mo.removeDescription(OWNER, TextualType.KICKER);// not incoming, so not destroying? Was that the reason to comment this out?
     }
@@ -202,10 +202,13 @@ public class PomsMapper {
             .guci(entry.guci())
             .effectiveStart(entry.startTime())
             .build();
-        Optional.ofNullable(entry.productOverride()).ifPresent(p -> {
+        Optional.ofNullable(entry.productOverride()).ifPresentOrElse(p -> {
             // TODO, it seems that all these fields are _always_ overridden?
             // https://publiekeomroep.atlassian.net/browse/VPPM-2246
             optionalSynopsisToDescription(ofNullable(p.synopsis()), event);
+            },
+            () -> {
+                log.debug("No synopisis overide for {}", entry);
             }
         );
         return event;

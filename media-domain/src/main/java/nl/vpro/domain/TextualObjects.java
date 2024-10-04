@@ -669,4 +669,31 @@ public class TextualObjects {
         }
     }
 
+    public static <IT extends OwnedText, ID extends OwnedText, ITO extends TextualObject<IT, ID, ITO>,
+        RT extends OwnedText, RD extends OwnedText, RTO extends TextualObject<RT, RD, RTO>
+        > void removeSuperfluousOverrides(
+        ITO incomingText,
+        RTO reference
+    )  {
+        for (IT title : incomingText.getTitles()) {
+            getOptional(reference.getTitles(), title.getOwner(), title.getType()).ifPresent(t -> {
+                if (t.equals(title.get())) {
+                    title.set(null);
+                }
+            });
+        }
+        for (ID description : incomingText.getDescriptions()) {
+            getOptional(reference.getDescriptions(), description.getOwner(), description.getType()).ifPresent(t -> {
+                if (t.equals(description.get())) {
+                    description.set(null);
+                }
+            });
+        }
+        incomingText.getTitles().removeIf(t -> t.get() == null);
+        incomingText.getDescriptions().removeIf(d -> d.get() == null);
+
+
+    }
+
+
 }
