@@ -395,15 +395,21 @@ public class AssemblageConfig implements Serializable {
         }
     }
 
+    /**
+     * A {@link BiPredicate}
+     */
+
     public enum Steal implements BiPredicate<MediaObject, MediaObject> {
         YES((incoming, toUpdate) -> true),
         IF_DELETED((incoming, toUpdate) ->  Workflow.PUBLISHED_AS_DELETED.contains(toUpdate.getWorkflow())),
-        NO((incoming, toUpdate) -> true),
+        NO((incoming, toUpdate) -> false),
 
         /**
          * Only if the incoming object is new. We matched on crid.
          */
-        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming != null && incoming.getMid() == null)
+        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming != null && incoming.getMid() == null),
+
+
         ;
 
         private final BiPredicate<MediaObject, MediaObject> impl;
