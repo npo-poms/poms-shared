@@ -181,6 +181,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
+    @SortNatural
     protected Set<@Valid @NotNull ScheduleEventTitle> titles = new TreeSet<>();
 
 
@@ -188,6 +189,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
+    @SortNatural
     protected Set<@Valid @NotNull ScheduleEventDescription> descriptions = new TreeSet<>();
 
     public ScheduleEvent() {
