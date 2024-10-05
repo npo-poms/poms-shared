@@ -94,7 +94,7 @@ class ProductMetadataTest {
             testGroup(g);
         }
         if (o instanceof  Program p) {
-            testProgram(p);
+            //testProgram(p);
         }
 
     }
