@@ -248,8 +248,8 @@ public class MediaObjects {
         copy(from, to);
         if (to.getClass().isAssignableFrom(from.getClass())) {
             to.setMediaType(from.getMediaType());
-            if (to instanceof Program) {
-                copyFullProgram((Program) from,  (Program) to);
+            if (to instanceof Program toProgram) {
+                copyFullProgram((Program) from,  toProgram);
             }
         }
         to.setMemberOf(from.getMemberOf());

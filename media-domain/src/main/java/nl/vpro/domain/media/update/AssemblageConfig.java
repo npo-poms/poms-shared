@@ -142,7 +142,12 @@ public class AssemblageConfig implements Serializable {
      * Whether the class of the object may be changed (e.g. from {@link Segment} to {@link Program})
      */
     @lombok.Builder.Default
-    BiPredicate<MediaObject, MediaObject> updateType = Steal.NO;
+    BiPredicate<MediaObject, MediaObject> castExisting
+        = Steal.NO;
+
+    @lombok.Builder.Default
+    BiPredicate<MediaObject, MediaObject> castIncoming
+        = Steal.NO;
 
     /**
      * Whether the {@link MediaObject#getMediaType() mediatatype} of the object may be changed
@@ -247,7 +252,8 @@ public class AssemblageConfig implements Serializable {
             stealSegments,
             segmentsForDeletion,
             cridsForDelete,
-            updateType,
+            castExisting,
+            castIncoming,
             updateMediaType,
             followMerges,
             requireIncomingMid,
@@ -307,7 +313,8 @@ public class AssemblageConfig implements Serializable {
             .stealMids(Steal.YES)
             .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
-            .updateType(Steal.YES)
+            .castExisting(Steal.YES)
+            .castIncoming(Steal.NO)
             .updateMediaType(Steal.YES)
             .followMerges(true)
             .requireIncomingMid(MidRequire.YES)

@@ -46,7 +46,7 @@ class ProductMetadataTest {
             .map(KafkaDumpReader.Record::bytes)
             .map(parser::parseProductMetadata)
             .sorted(PomsMapper.randomOrder(random))
-            .limit(1000)
+           // .limit(1000)
             ;
 
     }
@@ -109,13 +109,13 @@ class ProductMetadataTest {
     }
 
     void testProgram(Program program) {
-      /*  assertThat(program.getSubTitle())
+        assertThat(program.getSubTitle())
             .withFailMessage("Program %s has no episode title", program)
             .isNotNull();
 
         assertThat(program.getMainTitle())
             .withFailMessage("Program %s has no main title", program)
-            .isNotNull();*/
+            .isNotNull();
     }
 
 }
