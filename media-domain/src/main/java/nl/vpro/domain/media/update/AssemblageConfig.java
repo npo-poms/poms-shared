@@ -146,8 +146,7 @@ public class AssemblageConfig implements Serializable {
         = Steal.NO;
 
     @lombok.Builder.Default
-    BiPredicate<MediaObject, MediaObject> castIncoming
-        = Steal.NO;
+    Predicate<MediaObject> castIncoming = Predicates.alwaysFalse();
 
     /**
      * Whether the {@link MediaObject#getMediaType() mediatatype} of the object may be changed
@@ -314,7 +313,7 @@ public class AssemblageConfig implements Serializable {
             .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
             .castExisting(Steal.YES)
-            .castIncoming(Steal.NO)
+            .castIncoming(Predicates.alwaysFalse())
             .updateMediaType(Steal.YES)
             .followMerges(true)
             .requireIncomingMid(MidRequire.YES)

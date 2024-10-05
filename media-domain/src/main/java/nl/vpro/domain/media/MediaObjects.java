@@ -254,6 +254,11 @@ public class MediaObjects {
         }
         to.setMemberOf(from.getMemberOf());
         to.setCrids(from.getCrids());
+        if (from instanceof Segment fromSegment && to instanceof Segment toSegment) {
+            toSegment.setParent(fromSegment.getParent());
+            toSegment.setMidRef(fromSegment.getMidRef());
+            toSegment.setStart(fromSegment.getStart());
+        }
 
 
     }
