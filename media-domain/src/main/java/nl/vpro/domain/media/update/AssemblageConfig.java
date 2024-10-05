@@ -142,7 +142,11 @@ public class AssemblageConfig implements Serializable {
      * Whether the class of the object may be changed (e.g. from {@link Segment} to {@link Program})
      */
     @lombok.Builder.Default
-    BiPredicate<MediaObject, MediaObject> updateType = Steal.NO;
+    BiPredicate<MediaObject, MediaObject> castExisting
+        = Steal.NO;
+
+    @lombok.Builder.Default
+    Predicate<MediaObject> castIncoming = Predicates.alwaysFalse();
 
     /**
      * Whether the {@link MediaObject#getMediaType() mediatatype} of the object may be changed
@@ -247,7 +251,8 @@ public class AssemblageConfig implements Serializable {
             stealSegments,
             segmentsForDeletion,
             cridsForDelete,
-            updateType,
+            castExisting,
+            castIncoming,
             updateMediaType,
             followMerges,
             requireIncomingMid,
@@ -307,7 +312,9 @@ public class AssemblageConfig implements Serializable {
             .stealMids(Steal.YES)
             .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
-            .updateType(Steal.YES)
+            .castExisting(Steal.YES)
+            .castIncoming(Predicates.alwaysFalse())
+            .updateMediaType(Steal.YES)
             .followMerges(true)
             .requireIncomingMid(MidRequire.YES)
             .deleteBroadcasters(alwaysTrue())
@@ -370,7 +377,7 @@ public class AssemblageConfig implements Serializable {
             return owner(null);
         }
 
-        public Builder stealAllCrids(Steal steal) {
+        public Builder stealAllCrids(BiPredicate<MediaObject, MediaObject> steal) {
             return stealCrids(TriSteal.of(steal));
         }
 
@@ -430,7 +437,7 @@ public class AssemblageConfig implements Serializable {
 
 
     public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
-        static <S> TriSteal<S> of(Steal s) {
+        static <S> TriSteal<S> of(BiPredicate<MediaObject, MediaObject> s) {
             return new TriStealImpl<>(Predicates.ignoreArg3(s));
         }
     }
