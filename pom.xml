@@ -23,7 +23,7 @@
     <revision>8.3</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <vpro.shared.version>5.3.1-SNAPSHOT</vpro.shared.version>
+    <vpro.shared.version>5.3.1</vpro.shared.version>
     <java.version>17</java.version>
   </properties>
 
