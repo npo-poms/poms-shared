@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.berlijn.domain.Parser;
+import nl.vpro.berlijn.domain.Util;
 import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 
 
@@ -18,7 +19,8 @@ class AvailabilityTest {
 
 
     public static Stream<byte[]> messages() {
-        return KafkaDumpReader.read(AvailabilityTest.class.getResourceAsStream("/availability/availability-messages.table")).map(KafkaDumpReader.Record::bytes).limit(1000);
+        return KafkaDumpReader.read(Util.getTable("/availability/availability-messages.table"))
+            .map(KafkaDumpReader.Record::bytes).limit(1000);
     }
 
     static Parser parser = Parser.getInstance();
