@@ -16,7 +16,7 @@ jobs:
         with:
           global: true
           name: 'github $GITHUB_ACTOR'
-          email: 'digitaal-techniek@vpro.nl'
+          email: 'githubk@mmprogrami.nl'
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release branch with Maven
         # We are in a kind of hybrid situation
