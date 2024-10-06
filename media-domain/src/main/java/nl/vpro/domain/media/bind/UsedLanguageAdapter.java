@@ -7,6 +7,8 @@ import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.i18n.languages.ISO_639;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -59,7 +61,10 @@ public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper,
         @XmlValue
         @JsonProperty
         public String getValue() {
-            return getCode().getDisplayLanguage(Locales.DUTCH);
+            return
+                ISO_639.get(getCode().getLanguage())
+                    .map(c -> c.getDisplayName(Locales.DUTCH))
+                    .orElseGet(() -> getCode().getDisplayLanguage(Locales.DUTCH));
         }
 
         public void setValue(String ignored) {

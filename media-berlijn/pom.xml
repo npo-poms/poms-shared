@@ -18,7 +18,7 @@
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
-      <version>3.4</version>
+      <version>3.6</version>
     </dependency>
     <dependency>
       <groupId>nl.vpro.media</groupId>

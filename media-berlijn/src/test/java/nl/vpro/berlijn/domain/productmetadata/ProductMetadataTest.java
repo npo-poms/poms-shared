@@ -42,7 +42,7 @@ class ProductMetadataTest {
 
     public static Stream<ProductMetadata> messages() {
         return KafkaDumpReader
-            .read(ProductMetadataTest.class.getResourceAsStream("/productmetadata/product-metadata.table"))
+            .read(Util.getTable("/productmetadata/product-metadata.table"))
             .map(KafkaDumpReader.Record::bytes)
             .map(parser::parseProductMetadata)
             .sorted(PomsMapper.randomOrder(random))
@@ -94,7 +94,7 @@ class ProductMetadataTest {
             testGroup(g);
         }
         if (o instanceof  Program p) {
-            //testProgram(p);
+            testProgram(p);
         }
 
     }
@@ -109,13 +109,13 @@ class ProductMetadataTest {
     }
 
     void testProgram(Program program) {
-        assertThat(program.getSubTitle())
+      /*  assertThat(program.getSubTitle())
             .withFailMessage("Program %s has no episode title", program)
             .isNotNull();
 
         assertThat(program.getMainTitle())
             .withFailMessage("Program %s has no main title", program)
-            .isNotNull();
+            .isNotNull();*/
     }
 
 }
