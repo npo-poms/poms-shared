@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.i18n.languages.UserDefinedLanguage;
 import org.springframework.stereotype.Service;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -141,6 +142,7 @@ public class PomsMapper {
         mo.setLanguages(
             streamNullable(contents.languages())
                 .filter(l -> l.language() != null)
+                .filter(l -> ! (l.language() instanceof UserDefinedLanguage))
                 .peek(l -> {
                     if (l.usage() == Language.Usage.dubbed) {
                         mo.setIsDubbed(true);
