@@ -13,8 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import nl.vpro.berlijn.domain.Parser;
-import nl.vpro.berlijn.domain.PomsMapper;
+import nl.vpro.berlijn.domain.*;
 import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
