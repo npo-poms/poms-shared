@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import nl.vpro.berlijn.domain.Parser;
+import nl.vpro.berlijn.domain.Util;
 import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 
 
@@ -17,7 +18,7 @@ public class EPGTest {
 
 
     public static Stream<byte[]> epg() {
-        return KafkaDumpReader.read(EPGTest.class.getResourceAsStream("/epg/epg-messages.table")).map(KafkaDumpReader.Record::bytes).limit(1000);
+        return KafkaDumpReader.read(Util.getTable(("/epg/epg-messages.table"))).map(KafkaDumpReader.Record::bytes).limit(1000);
     }
 
     static Parser parser = Parser.getInstance();
