@@ -12,8 +12,6 @@ jobs:
       MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true
       - uses: oleksiyrudenko/gha-git-credentials@v2.1.2
         with:
           global: true
