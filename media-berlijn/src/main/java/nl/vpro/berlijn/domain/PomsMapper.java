@@ -153,8 +153,12 @@ public class PomsMapper {
 
 
 
-        streamNullable(contents.signLanguages()).map(SignLanguage::type).forEach(lc -> {
-            mo.getLanguages().add(new UsedLanguage(lc.toLocale(), UsedLanguage.Usage.SIGNING));
+        streamNullable(contents.signLanguages())
+            .map(SignLanguage::type)
+            .forEach(lc -> {
+                mo.getLanguages()
+                    .add(new UsedLanguage(lc.toLocale(), UsedLanguage.Usage.SIGNING)
+                    );
         });
 
         mapAvailableSubtitles(contents, mo);

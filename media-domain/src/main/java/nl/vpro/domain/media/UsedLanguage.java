@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -101,13 +102,13 @@ public record UsedLanguage (
         SIGNING
     }
 
+    @Setter
     @XmlTransient
     public static abstract class AbstractWrapper {
 
-
+        @Getter
         protected Locale code;
 
-        @Setter
         protected UsedLanguage.Usage usage;
 
         public AbstractWrapper() {
@@ -124,13 +125,6 @@ public record UsedLanguage (
         }
 
 
-        public Locale getCode() {
-            return code;
-        }
-        public void setCode(Locale code) {
-            this.code = code;
-
-        }
         public UsedLanguage getUsedLanguage() {
             if (code == null) {
                 throw new IllegalStateException();
