@@ -45,7 +45,7 @@ class ProductMetadataTest {
             .map(KafkaDumpReader.Record::bytes)
             .map(parser::parseProductMetadata)
             .sorted(PomsMapper.randomOrder(random))
-           // .limit(1000)
+            .limit(1000)
             ;
 
     }

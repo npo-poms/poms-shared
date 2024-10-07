@@ -68,11 +68,15 @@ public class Parser {
     @Value("${berlijn.lenient:false}")
     public void setLenient(boolean lenient) {
         if (lenient) {
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            log.info("Berlijn json parser in Lenient mode");
+            if (mapper.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)) {
+                mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+                log.info("Berlijn json parser in Lenient mode");
+            }
         } else {
-            mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            log.info("Berlijn json parser in strict mode (failing on unknown properties)");
+            if (! mapper.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)) {
+                mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+                log.info("Berlijn json parser in strict mode (failing on unknown properties)");
+            }
         }
     }
 
