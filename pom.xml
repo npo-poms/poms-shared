@@ -67,6 +67,15 @@
     <module>media-berlijn</module>
 
   </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-iso-639</artifactId>
+        <version>3.6</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
