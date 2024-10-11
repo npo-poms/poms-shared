@@ -1,4 +1,8 @@
-package nl.vpro.ws.image;
+/*
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.images.ws;
 
 import java.util.concurrent.Future;
 
@@ -18,23 +22,23 @@ import nl.vpro.domain.media.support.OwnerType;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
-/**
- * 'Run as' Wrapper for ImageWebService
- *
- * @author Danny Sedney
- *
- */
-@WebService(name = "runAsImageWebService", portName = "runAsImageServicePort", targetNamespace = IMAGE_WS_NAMESPACE)
-public interface RunAsImageWebService {
-    // all methods get @WebParam(name = "principalId", targetNamespace = "") String
-    // principalId,
+@WebService(
+    name = "imageWebService",
+    portName = "imageServicePort",
+    targetNamespace = IMAGE_WS_NAMESPACE)
+public interface ImageWebService {
 
     @WebMethod
-    @WebResult(name = "imageMetadata", targetNamespace = "")
-    @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
-    @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
+    @WebResult(
+        name = "imageMetadata",
+        targetNamespace = "")
+    @RequestWrapper(
+        localName = "upload",
+        className = "nl.vpro.ws.image.UploadRequest")
+    @ResponseWrapper(
+        localName = "uploadResponse",
+        className = "nl.vpro.ws.image.UploadResponse")
     BasicBackendImageMetadata upload(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
@@ -44,22 +48,29 @@ public interface RunAsImageWebService {
     );
 
     @WebMethod(operationName = "upload")
-    @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
-    @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
+    @RequestWrapper(
+        localName = "upload",
+        className = "nl.vpro.ws.image.UploadRequest")
+    @ResponseWrapper(
+        localName = "uploadResponse",
+        className = "nl.vpro.ws.image.UploadResponse")
     Future<?> uploadAsync(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
-        @WebParam(name = "data", targetNamespace = "") DataHandler data, AsyncHandler<UploadResponse> handler);
+        @WebParam(name = "data", targetNamespace = "") DataHandler data,
+        AsyncHandler<UploadResponse> handler);
 
     @WebMethod(operationName = "upload")
-    @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
-    @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
+    @RequestWrapper(
+        localName = "upload",
+        className = "nl.vpro.ws.image.UploadRequest")
+    @ResponseWrapper(
+        localName = "uploadResponse",
+        className = "nl.vpro.ws.image.UploadResponse")
     Response<UploadResponse> uploadAsync(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
@@ -68,42 +79,53 @@ public interface RunAsImageWebService {
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
     @WebMethod
-    @WebResult(name = "imageMetadata", targetNamespace = "")
-    @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
-    @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
+    @WebResult(
+        name = "imageMetadata",
+        targetNamespace = "")
+    @RequestWrapper(
+        localName = "download",
+        className = "nl.vpro.ws.image.DownloadRequest")
+    @ResponseWrapper(
+        localName = "downloadResponse",
+        className = "nl.vpro.ws.image.DownloadResponse")
     BasicBackendImageMetadata download(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
         @WebParam(name = "url", targetNamespace = "") String url
     ) throws DownloadFault;
 
     @WebMethod(operationName = "download")
-    @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
-    @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
+    @RequestWrapper(
+        localName = "download",
+        className = "nl.vpro.ws.image.DownloadRequest")
+    @ResponseWrapper(
+        localName = "downloadResponse",
+        className = "nl.vpro.ws.image.DownloadResponse")
     Future<?> downloadAsync(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
         @WebParam(name = "url", targetNamespace = "") String url,
         AsyncHandler<DownloadResponse> handler);
 
     @WebMethod(operationName = "download")
-    @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
-    @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
+    @RequestWrapper(
+        localName = "download",
+        className = "nl.vpro.ws.image.DownloadRequest")
+    @ResponseWrapper(
+        localName = "downloadResponse",
+        className = "nl.vpro.ws.image.DownloadResponse")
     Response<DownloadResponse> downloadAsync(
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
-        @WebParam(name = "url", targetNamespace = "") String url);
-
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "url", targetNamespace = "") String url
+        );
 }

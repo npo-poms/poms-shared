@@ -2,7 +2,7 @@
  * Copyright (C) 2011 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.ws.image;
+package nl.vpro.images.ws;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,16 +14,16 @@ import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
-@XmlRootElement(name = "uploadResponse", namespace = IMAGE_WS_NAMESPACE)
+@XmlRootElement(name = "downloadResponse", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "uploadResponseType", propOrder = {
+@XmlType(name = "downloadResponseType", propOrder = {
     "urn",
     "imageMetadata"
 })
-@Getter
 @Setter
+@Getter
 @ToString
-public class UploadResponse {
+public class DownloadResponse {
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String urn;
@@ -31,14 +31,15 @@ public class UploadResponse {
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private BasicBackendImageMetadata imageMetadata;
 
-    public UploadResponse() {
+
+    public DownloadResponse() {
     }
 
-    public UploadResponse(String urn) {
+    public DownloadResponse(String urn) {
         this.urn = urn;
     }
 
-    public UploadResponse(String urn, BasicBackendImageMetadata imageMetadata) {
+    public DownloadResponse(String urn, BasicBackendImageMetadata imageMetadata) {
         this.urn = urn;
         this.imageMetadata = imageMetadata;
     }
