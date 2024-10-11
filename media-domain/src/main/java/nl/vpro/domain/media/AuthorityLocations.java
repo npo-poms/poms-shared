@@ -161,21 +161,29 @@ public class AuthorityLocations {
         final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (streamingPlatformStatus.hasAudio() && ! (encryption == DRM)) {
-            String locationUrl = String.format(audioTemplate, mediaObject.getMid());
-            Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, Platform.INTERNETAOD, locationUrl, "nepaudio");
-            log.debug("matched {}", authorityLocation);
-            makeLocationPublishable(authorityLocation);
-            result.add(authorityLocation);
+            if (mediaObject.getMid() != null) {
+                String locationUrl = audioTemplate.formatted(mediaObject.getMid());
+                Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, Platform.INTERNETAOD, locationUrl, "nepaudio");
+                log.debug("matched {}", authorityLocation);
+                makeLocationPublishable(authorityLocation);
+                result.add(authorityLocation);
+            } else {
+                log.warn("{} has no mid, cannot make audio url", mediaObject);
+            }
         }
         if (streamingPlatformStatus.hasDrm() || encryption == DRM) {
             for (Platform platform: Platform.values()) {
                 Prediction prediction = mediaObject.getPrediction(platform);
                 if (prediction != null && prediction.isPlannedAvailability()) { // drms are always made
-                    String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, DRM, "nep");
-                    Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
-                    log.debug("matched {}", authorityLocation);
-                    makeLocationPublishable(authorityLocation);
-                    result.add(authorityLocation);
+                    if (mediaObject.getMid() != null) {
+                        String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, DRM, "nep");
+                        Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+                        log.debug("matched {}", authorityLocation);
+                        makeLocationPublishable(authorityLocation);
+                        result.add(authorityLocation);
+                    } else {
+                        log.warn("{} has no mid, cannot make location url", mediaObject);
+                    }
                 }
             }
         }
@@ -183,11 +191,17 @@ public class AuthorityLocations {
             for (Platform platform: Platform.values()) {
                 Prediction prediction = mediaObject.getPrediction(platform);
                 if (prediction != null && prediction.isPlannedAvailability() && (prediction.getEncryption() == null || prediction.getEncryption() == Encryption.NONE)) {
-                    String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
-                    Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
-                    log.debug("matched {}", authorityLocation);
-                    makeLocationPublishable(authorityLocation);
-                    result.add(authorityLocation);
+                    if (mediaObject.getMid() != null) {
+
+                        String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
+                        Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+                        log.debug("matched {}", authorityLocation);
+                        makeLocationPublishable(authorityLocation);
+                        result.add(authorityLocation);
+                    } else {
+                        log.warn("{} has no mid, cannot make location url", mediaObject);
+
+                    }
                 }
             }
         }
@@ -253,7 +267,7 @@ public class AuthorityLocations {
      *
      * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and puboption then is 'nep'.
      */
-    private static String createLocationVideoUrl(StreamingStatus streamingStatus,  String mid, Platform platform, Encryption encryption, String pubOptie) {
+    private static String createLocationVideoUrl(StreamingStatus streamingStatus,  @NonNull String mid, Platform platform, Encryption encryption, String pubOptie) {
         String baseUrl = getBaseVideoUrl(platform, encryption, pubOptie);
         return baseUrl + mid;
     }
