@@ -184,6 +184,7 @@ public enum Workflow implements Displayable, XmlValued {
     static {
         Set<Workflow> list = new TreeSet<>(REVOKES);
         list.add(Workflow.IGNORE);
+        list.add(Workflow.TEMPORARY);
         REVOKES_OR_IGNORE = nullSafeSet(unmodifiableSet(list));
     }
 
