@@ -24,6 +24,10 @@ import java.util.stream.StreamSupport;
 @Log4j2
 public class KafkaDumpReader {
 
+    private KafkaDumpReader() {
+        // no instances!
+    }
+
     // pretty much absurd
     public static DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
