@@ -944,6 +944,10 @@ public interface MediaTestDataBuilder<
         ProgramTestDataBuilder(Program program) {
             super(program);
         }
+
+        public ProgramTestDataBuilder self() {
+            return this;
+        }
         @Override
         public ProgramTestDataBuilder withEverything() {
             AtomicLong mids = new AtomicLong(30000L);
@@ -1175,6 +1179,10 @@ public interface MediaTestDataBuilder<
             super(group);
         }
 
+        public GroupTestDataBuilder self() {
+            return this;
+        }
+
         @Override
         public GroupTestDataBuilder constrainedNew() {
             return MediaTestDataBuilder.super.constrainedNew()
@@ -1220,6 +1228,10 @@ public interface MediaTestDataBuilder<
             super(segment);
         }
 
+
+        public SegmentTestDataBuilder self() {
+            return this;
+        }
 
         public SegmentTestDataBuilder withStart() {
             return start(Duration.ofMinutes(2));

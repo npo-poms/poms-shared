@@ -46,6 +46,7 @@ public enum Platform implements Displayable {
      */
     PLUSVOD(true, "Nlziet/NPO Plus", true, VIDEO),
 
+
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
      *  Zie <a href="https://jira.vpro.nl/browse/MSE-2742">MSE-2742</a> Blijkbaar nooit gebruikt.

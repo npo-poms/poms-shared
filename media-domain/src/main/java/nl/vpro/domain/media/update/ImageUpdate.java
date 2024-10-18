@@ -250,6 +250,10 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
             return imageData(new ImageData(dataHandler));
         }
 
+        @Override
+        public Builder self() {
+            return this;
+        }
     }
 
     @lombok.Builder(builderClassName = "Builder")

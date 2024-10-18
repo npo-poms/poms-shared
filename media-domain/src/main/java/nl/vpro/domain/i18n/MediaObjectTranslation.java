@@ -8,14 +8,15 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
+import javax.xml.XMLConstants;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
-import javax.xml.XMLConstants;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.hibernate.annotations.SortNatural;
 import org.meeuw.functional.TriFunction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,7 +24,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.media.Email;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -105,6 +105,7 @@ public class MediaObjectTranslation implements
     @Valid
     @XmlElement(name = "title", required = true)
     @JsonProperty("titles")
+    @SortNatural
     protected Set<TitleTranslation> titles = new TreeSet<>();
 
 
@@ -112,6 +113,7 @@ public class MediaObjectTranslation implements
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
+    @SortNatural
     protected Set<DescriptionTranslation> descriptions = new TreeSet<>();
 
     @ManyToMany

@@ -383,7 +383,7 @@ public final class Program extends MediaObject {
         }
 
         if(! group.getType().canContainEpisodes()) {
-            throw new IllegalArgumentException("Must supply a group type " + GroupType.EPISODE_CONTAINERS + " when adding episodes.");
+            throw new IllegalArgumentException("Must supply a group type " + GroupType.EPISODE_CONTAINERS + " when adding episodes. Supplied %s.".formatted(group));
         }
 
         if(group.hasAncestor(this)) {

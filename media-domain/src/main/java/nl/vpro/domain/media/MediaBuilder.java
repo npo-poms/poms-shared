@@ -115,11 +115,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     String getMid();
 
 
+    /**
+     * Sets id. If you want to remove an id use {@link #withoutId()}, or {@link #nullableId(Long)}
+     */
     @SuppressWarnings("unchecked")
     default B id(long id) {
         mediaObject().setId(id);
         return (B)this;
     }
+
 
     default B nullableId(Long id) {
         mediaObject().setId(id);
@@ -1160,6 +1164,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         protected ProgramBuilder(Program program) {
             super(program);
         }
+
+        public ProgramBuilder self() {
+            return this;
+        }
     }
 
     @ToString(callSuper = true)
@@ -1192,6 +1200,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         protected GroupBuilder(Group group) {
             super(group);
+        }
+        public GroupBuilder self() {
+            return this;
         }
     }
 
@@ -1267,6 +1278,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         protected SegmentBuilder(Segment segment) {
             super(segment);
+        }
+        public SegmentBuilder self() {
+            return this;
         }
     }
 }

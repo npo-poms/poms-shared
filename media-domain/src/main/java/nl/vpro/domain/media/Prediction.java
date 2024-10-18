@@ -1,10 +1,5 @@
 package nl.vpro.domain.media;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +9,14 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -231,6 +233,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.plannedAvailability = source.plannedAvailability;
         this.encryption = source.encryption;
         this.authority = authority;
+    }
+
+    public void copyFrom(Prediction source) {
+        this.platform = source.platform;
+        this.publishStart = source.publishStart;
+        this.publishStop = source.publishStop;
+        this.state = source.state;
+        this.plannedAvailability = source.plannedAvailability;
+        this.encryption = source.encryption;
+        this.authority = source.authority;
     }
 
     /**
@@ -587,6 +599,24 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.plannedAvailability = true;
     }
 
+
+    public static class Builder {
+        public Builder range(@Nullable Range<Instant> range) {
+            if (range != null) {
+                if (range.hasLowerBound()) {
+                    publishStart(range.lowerEndpoint());
+                } else {
+                    publishStart(null);
+                }
+                if (range.hasUpperBound()) {
+                    publishStop(range.upperEndpoint());
+                } else {
+                    publishStop(null);
+                }
+            }
+            return this;
+        }
+    }
 
 
 }

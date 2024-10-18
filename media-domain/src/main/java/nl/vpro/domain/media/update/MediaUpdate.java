@@ -524,7 +524,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         media.setCredits(toList(credits, CreditsUpdate::toCredits, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
         media.setGeoRestrictions(toSet(geoRestrictions,
-            g -> g.getRegion() != Region.UNIVERSE,
+            g -> g.getRegion() != Region.WR,
             GeoRestrictionUpdate::toGeoRestriction
         ));
 

@@ -1,6 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Lombok;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +14,7 @@ import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.util.locker.ObjectLocker;
+
 
 
 /**
@@ -55,7 +55,7 @@ public abstract class MediaObjectLockerAspect  {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
-                throw Lombok.sneakyThrow(t);
+                throw sneakyThrow(t);
             }
 
         });
@@ -75,7 +75,7 @@ public abstract class MediaObjectLockerAspect  {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
-                throw Lombok.sneakyThrow(t);
+                throw sneakyThrow(t);
             }
 
         });
@@ -87,7 +87,7 @@ public abstract class MediaObjectLockerAspect  {
         try {
             return joinPoint.proceed(joinPoint.getArgs());
         } catch(Throwable t) {
-            throw Lombok.sneakyThrow(t);
+            throw sneakyThrow(t);
         }
     }
 
@@ -145,4 +145,16 @@ public abstract class MediaObjectLockerAspect  {
         }
         throw new IllegalStateException();
     }
+
+    public static RuntimeException sneakyThrow(Throwable t) {
+        if (t == null) {
+            throw new NullPointerException("t");
+        } else {
+            return sneakyThrow0(t);
+        }
+    }
+     private static <T extends Throwable> T sneakyThrow0(Throwable t) throws T {
+        throw (T) t;
+    }
+
 }

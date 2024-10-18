@@ -47,6 +47,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
             return start(date);
         }
 
+
     }
 
     @Column

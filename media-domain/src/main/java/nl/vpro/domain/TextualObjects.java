@@ -267,7 +267,7 @@ public class TextualObjects {
      * Returns the value for a certain {@link TextualType} and {@link OwnerType}. This implements a fall back mechanism.
      * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
      * <p>
-     * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
+     * Furthermore, if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
      */
     public static <OT extends OwnedText> Optional<OT> expand(
         @NonNull Collection<OT> titles,
@@ -668,5 +668,32 @@ public class TextualObjects {
 
         }
     }
+
+    public static <IT extends OwnedText, ID extends OwnedText, ITO extends TextualObject<IT, ID, ITO>,
+        RT extends OwnedText, RD extends OwnedText, RTO extends TextualObject<RT, RD, RTO>
+        > void removeSuperfluousOverrides(
+        ITO incomingText,
+        RTO reference
+    )  {
+        for (IT title : incomingText.getTitles()) {
+            getOptional(reference.getTitles(), title.getOwner(), title.getType()).ifPresent(t -> {
+                if (t.equals(title.get())) {
+                    title.set(null);
+                }
+            });
+        }
+        for (ID description : incomingText.getDescriptions()) {
+            getOptional(reference.getDescriptions(), description.getOwner(), description.getType()).ifPresent(t -> {
+                if (t.equals(description.get())) {
+                    description.set(null);
+                }
+            });
+        }
+        incomingText.getTitles().removeIf(t -> t.get() == null);
+        incomingText.getDescriptions().removeIf(d -> d.get() == null);
+
+
+    }
+
 
 }

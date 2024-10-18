@@ -90,11 +90,13 @@ public enum Region implements Displayable, org.meeuw.i18n.regions.Region {
 
     /**
      * It can be handy to have a region value that effectively doesn't restrict anything. This way there is no need for
-     * null checks and things like that.
+     * null checks and things like that. This currently not exposed in the API's.
+     * <p>
+     * It used to be named 'UNIVERSE' but MDS used 'WR' for the same goal, so since 8.3 we just conform to that.
      * @since 7.6
      */
     @XmlDocumentation("No georestriction")
-    UNIVERSE("Overal te zien") {
+    WR("Overal te zien") {
         @Override
         public boolean display() {
             return false;
