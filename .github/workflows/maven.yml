@@ -62,7 +62,7 @@ jobs:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/windows.bash@v2.17.1
+        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2.17.1
         if: always()  && runner.os == 'Windows'
         with:
           files: "**/target/surefire-reports/*.xml"
