@@ -145,8 +145,7 @@ Wed Jul 03 19:26:15 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-24T04:00:00.000Z"
   }
-}	0	201350
-Wed Jul 03 19:26:15 CEST 2024	PO24	{
+}	0	201350Wed Jul 03 19:26:15 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -293,8 +292,7 @@ Wed Jul 03 19:26:15 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-23T04:00:00.000Z"
   }
-}	0	201351
-Wed Jul 03 19:26:17 CEST 2024	PO24	{
+}	0	201351Wed Jul 03 19:26:17 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -441,8 +439,7 @@ Wed Jul 03 19:26:17 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-17T04:00:00.000Z"
   }
-}	0	201352
-Wed Jul 03 19:26:18 CEST 2024	PO24	{
+}	0	201352Wed Jul 03 19:26:18 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -589,8 +586,7 @@ Wed Jul 03 19:26:18 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-22T04:00:00.000Z"
   }
-}	0	201353
-Wed Jul 03 19:26:18 CEST 2024	PO24	{
+}	0	201353Wed Jul 03 19:26:18 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -737,8 +733,7 @@ Wed Jul 03 19:26:18 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-18T04:00:00.000Z"
   }
-}	0	201354
-Wed Jul 03 19:26:19 CEST 2024	PO24	{
+}	0	201354Wed Jul 03 19:26:19 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -885,8 +880,7 @@ Wed Jul 03 19:26:19 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-15T04:00:00.000Z"
   }
-}	0	201355
-Wed Jul 03 19:26:21 CEST 2024	PO24	{
+}	0	201355Wed Jul 03 19:26:21 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -1033,8 +1027,7 @@ Wed Jul 03 19:26:21 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-21T04:00:00.000Z"
   }
-}	0	201356
-Wed Jul 03 19:26:22 CEST 2024	PO24	{
+}	0	201356Wed Jul 03 19:26:22 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -1181,8 +1174,7 @@ Wed Jul 03 19:26:22 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-14T04:00:00.000Z"
   }
-}	0	201357
-Wed Jul 03 19:26:23 CEST 2024	PO24	{
+}	0	201357Wed Jul 03 19:26:23 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -1329,8 +1321,7 @@ Wed Jul 03 19:26:23 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-16T04:00:00.000Z"
   }
-}	0	201358
-Wed Jul 03 19:26:25 CEST 2024	PO24	{
+}	0	201358Wed Jul 03 19:26:25 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -1477,8 +1468,7 @@ Wed Jul 03 19:26:25 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-20T04:00:00.000Z"
   }
-}	0	201359
-Wed Jul 03 14:10:28 CEST 2024	NED3	{
+}	0	201359Wed Jul 03 14:10:28 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -2458,8 +2448,7 @@ Wed Jul 03 14:10:28 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-01T03:33:17.000Z"
   }
-}	0	201260
-Wed Jul 03 14:10:30 CEST 2024	NED3	{
+}	0	201260Wed Jul 03 14:10:30 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -4082,8 +4071,7 @@ Wed Jul 03 14:10:30 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-06-28T03:27:02.000Z"
   }
-}	0	201261
-Wed Jul 03 14:10:33 CEST 2024	NED3	{
+}	0	201261Wed Jul 03 14:10:33 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -5654,8 +5642,7 @@ Wed Jul 03 14:10:33 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-05T00:33:00.000Z"
   }
-}	0	201262
-Wed Jul 03 14:10:35 CEST 2024	NED3	{
+}	0	201262Wed Jul 03 14:10:35 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -6679,8 +6666,7 @@ Wed Jul 03 14:10:35 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-06T23:55:00.000Z"
   }
-}	0	201263
-Wed Jul 03 14:10:37 CEST 2024	NED3	{
+}	0	201263Wed Jul 03 14:10:37 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -8282,8 +8268,7 @@ Wed Jul 03 14:10:37 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-10T00:46:00.000Z"
   }
-}	0	201264
-Wed Jul 03 14:10:39 CEST 2024	NED3	{
+}	0	201264Wed Jul 03 14:10:39 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -9872,8 +9857,7 @@ Wed Jul 03 14:10:39 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-06T01:19:00.000Z"
   }
-}	0	201265
-Wed Jul 03 14:10:41 CEST 2024	NED3	{
+}	0	201265Wed Jul 03 14:10:41 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -11530,8 +11514,7 @@ Wed Jul 03 14:10:41 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-02T03:32:02.000Z"
   }
-}	0	201266
-Wed Jul 03 14:10:43 CEST 2024	NED3	{
+}	0	201266Wed Jul 03 14:10:43 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -13172,8 +13155,7 @@ Wed Jul 03 14:10:43 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-06-29T03:30:38.000Z"
   }
-}	0	201267
-Wed Jul 03 14:10:44 CEST 2024	NED3	{
+}	0	201267Wed Jul 03 14:10:44 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -14772,8 +14754,7 @@ Wed Jul 03 14:10:44 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-09T01:21:00.000Z"
   }
-}	0	201268
-Wed Jul 03 14:10:46 CEST 2024	NED3	{
+}	0	201268Wed Jul 03 14:10:46 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -16414,8 +16395,7 @@ Wed Jul 03 14:10:46 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-03T03:30:38.000Z"
   }
-}	0	201269
-Wed Jul 03 14:10:48 CEST 2024	NED3	{
+}	0	201269Wed Jul 03 14:10:48 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -18041,8 +18021,7 @@ Wed Jul 03 14:10:48 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-04T01:32:00.000Z"
   }
-}	0	201270
-Wed Jul 03 15:55:09 CEST 2024	RAD4	{
+}	0	201270Wed Jul 03 15:55:09 CEST 2024	RAD4	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -18196,8 +18175,7 @@ Wed Jul 03 15:55:09 CEST 2024	RAD4	{
     "channelId": "RAD4",
     "periodEnd": "2024-07-27T22:00:00.000Z"
   }
-}	0	201271
-Wed Jul 03 16:00:10 CEST 2024	101_	{
+}	0	201271Wed Jul 03 16:00:10 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -18674,8 +18652,7 @@ Wed Jul 03 16:00:10 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-19T22:16:14.000Z"
   }
-}	0	201272
-Wed Jul 03 16:00:12 CEST 2024	CULT	{
+}	0	201272Wed Jul 03 16:00:12 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -19132,8 +19109,7 @@ Wed Jul 03 16:00:12 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-17T23:45:12.000Z"
   }
-}	0	201273
-Wed Jul 03 16:00:13 CEST 2024	CULT	{
+}	0	201273Wed Jul 03 16:00:13 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -19589,8 +19565,7 @@ Wed Jul 03 16:00:13 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-22T22:29:06.000Z"
   }
-}	0	201274
-Wed Jul 03 16:00:14 CEST 2024	CULT	{
+}	0	201274Wed Jul 03 16:00:14 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -20017,8 +19992,7 @@ Wed Jul 03 16:00:14 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-26T23:40:22.000Z"
   }
-}	0	201275
-Wed Jul 03 16:00:14 CEST 2024	101_	{
+}	0	201275Wed Jul 03 16:00:14 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -20512,8 +20486,7 @@ Wed Jul 03 16:00:14 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-22T22:45:35.000Z"
   }
-}	0	201276
-Wed Jul 03 16:00:16 CEST 2024	101_	{
+}	0	201276Wed Jul 03 16:00:16 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -20918,8 +20891,7 @@ Wed Jul 03 16:00:16 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-21T23:27:24.000Z"
   }
-}	0	201277
-Wed Jul 03 16:00:17 CEST 2024	101_	{
+}	0	201277Wed Jul 03 16:00:17 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -21430,8 +21402,7 @@ Wed Jul 03 16:00:17 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-26T22:19:27.000Z"
   }
-}	0	201278
-Wed Jul 03 16:00:17 CEST 2024	101_	{
+}	0	201278Wed Jul 03 16:00:17 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -21858,8 +21829,7 @@ Wed Jul 03 16:00:17 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-18T21:59:40.000Z"
   }
-}	0	201279
-Wed Jul 03 16:00:18 CEST 2024	101_	{
+}	0	201279Wed Jul 03 16:00:18 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -22387,8 +22357,7 @@ Wed Jul 03 16:00:18 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-25T22:12:48.000Z"
   }
-}	0	201280
-Wed Jul 03 16:00:19 CEST 2024	101_	{
+}	0	201280Wed Jul 03 16:00:19 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -22865,8 +22834,7 @@ Wed Jul 03 16:00:19 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-17T21:59:52.000Z"
   }
-}	0	201281
-Wed Jul 03 16:00:19 CEST 2024	101_	{
+}	0	201281Wed Jul 03 16:00:19 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -23409,8 +23377,7 @@ Wed Jul 03 16:00:19 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-24T22:22:33.000Z"
   }
-}	0	201282
-Wed Jul 03 16:00:20 CEST 2024	101_	{
+}	0	201282Wed Jul 03 16:00:20 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -23902,8 +23869,7 @@ Wed Jul 03 16:00:20 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-23T22:23:03.000Z"
   }
-}	0	201283
-Wed Jul 03 16:00:21 CEST 2024	101_	{
+}	0	201283Wed Jul 03 16:00:21 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -24308,8 +24274,7 @@ Wed Jul 03 16:00:21 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-07-20T22:16:14.000Z"
   }
-}	0	201284
-Wed Jul 03 16:00:21 CEST 2024	CULT	{
+}	0	201284Wed Jul 03 16:00:21 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -24747,8 +24712,7 @@ Wed Jul 03 16:00:21 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-22T00:17:13.000Z"
   }
-}	0	201285
-Wed Jul 03 16:00:22 CEST 2024	CULT	{
+}	0	201285Wed Jul 03 16:00:22 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -25171,8 +25135,7 @@ Wed Jul 03 16:00:22 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-19T23:28:50.000Z"
   }
-}	0	201286
-Wed Jul 03 16:00:22 CEST 2024	CULT	{
+}	0	201286Wed Jul 03 16:00:22 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -25563,8 +25526,7 @@ Wed Jul 03 16:00:22 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-25T23:07:20.000Z"
   }
-}	0	201287
-Wed Jul 03 16:00:23 CEST 2024	CULT	{
+}	0	201287Wed Jul 03 16:00:23 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -25984,8 +25946,7 @@ Wed Jul 03 16:00:23 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-21T00:15:43.000Z"
   }
-}	0	201288
-Wed Jul 03 16:00:23 CEST 2024	CULT	{
+}	0	201288Wed Jul 03 16:00:23 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -26409,8 +26370,7 @@ Wed Jul 03 16:00:23 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-18T23:32:39.000Z"
   }
-}	0	201289
-Wed Jul 03 16:00:24 CEST 2024	CULT	{
+}	0	201289Wed Jul 03 16:00:24 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -26817,8 +26777,7 @@ Wed Jul 03 16:00:24 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-24T23:35:46.000Z"
   }
-}	0	201290
-Wed Jul 03 16:00:24 CEST 2024	CULT	{
+}	0	201290Wed Jul 03 16:00:24 CEST 2024	CULT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -27259,8 +27218,7 @@ Wed Jul 03 16:00:24 CEST 2024	CULT	{
     "channelId": "CULT",
     "periodEnd": "2024-07-23T22:57:45.000Z"
   }
-}	0	201291
-Wed Jul 03 16:25:14 CEST 2024	NED1	{
+}	0	201291Wed Jul 03 16:25:14 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -28079,8 +28037,7 @@ Wed Jul 03 16:25:14 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-04T01:15:14.000Z"
   }
-}	0	201292
-Wed Jul 03 16:30:12 CEST 2024	NED2	{
+}	0	201292Wed Jul 03 16:30:12 CEST 2024	NED2	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -28868,8 +28825,7 @@ Wed Jul 03 16:30:12 CEST 2024	NED2	{
     "channelId": "NED2",
     "periodEnd": "2024-07-06T01:00:00.000Z"
   }
-}	0	201293
-Wed Jul 03 16:40:09 CEST 2024	BVNT	{
+}	0	201293Wed Jul 03 16:40:09 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -29996,8 +29952,7 @@ Wed Jul 03 16:40:09 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-04T10:30:00.000Z"
   }
-}	0	201294
-Wed Jul 03 16:45:09 CEST 2024	NED1	{
+}	0	201294Wed Jul 03 16:45:09 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -30954,8 +30909,7 @@ Wed Jul 03 16:45:09 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-03T03:24:37.000Z"
   }
-}	0	201295
-Wed Jul 03 16:45:11 CEST 2024	NED2	{
+}	0	201295Wed Jul 03 16:45:11 CEST 2024	NED2	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -31614,8 +31568,7 @@ Wed Jul 03 16:45:11 CEST 2024	NED2	{
     "channelId": "NED2",
     "periodEnd": "2024-07-08T23:35:35.000Z"
   }
-}	0	201296
-Wed Jul 03 16:45:13 CEST 2024	NED2	{
+}	0	201296Wed Jul 03 16:45:13 CEST 2024	NED2	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -32253,8 +32206,7 @@ Wed Jul 03 16:45:13 CEST 2024	NED2	{
     "channelId": "NED2",
     "periodEnd": "2024-07-09T23:20:35.000Z"
   }
-}	0	201297
-Wed Jul 03 16:45:13 CEST 2024	NED2	{
+}	0	201297Wed Jul 03 16:45:13 CEST 2024	NED2	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -32811,8 +32763,7 @@ Wed Jul 03 16:45:13 CEST 2024	NED2	{
     "channelId": "NED2",
     "periodEnd": "2024-07-08T00:00:35.000Z"
   }
-}	0	201298
-Wed Jul 03 16:45:16 CEST 2024	NED2	{
+}	0	201298Wed Jul 03 16:45:16 CEST 2024	NED2	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -33354,8 +33305,7 @@ Wed Jul 03 16:45:16 CEST 2024	NED2	{
     "channelId": "NED2",
     "periodEnd": "2024-07-07T00:10:00.000Z"
   }
-}	0	201299
-Wed Jul 03 16:50:08 CEST 2024	BVNT	{
+}	0	201299Wed Jul 03 16:50:08 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -34294,8 +34244,7 @@ Wed Jul 03 16:50:08 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-07T10:25:00.000Z"
   }
-}	0	201300
-Wed Jul 03 16:50:11 CEST 2024	BVNT	{
+}	0	201300Wed Jul 03 16:50:11 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -35354,8 +35303,7 @@ Wed Jul 03 16:50:11 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-05T10:35:00.000Z"
   }
-}	0	201301
-Wed Jul 03 16:50:12 CEST 2024	BVNT	{
+}	0	201301Wed Jul 03 16:50:12 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -36360,8 +36308,7 @@ Wed Jul 03 16:50:12 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-11T10:25:00.000Z"
   }
-}	0	201302
-Wed Jul 03 16:50:14 CEST 2024	BVNT	{
+}	0	201302Wed Jul 03 16:50:14 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -37188,8 +37135,7 @@ Wed Jul 03 16:50:14 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-08T10:35:00.000Z"
   }
-}	0	201303
-Wed Jul 03 16:50:16 CEST 2024	BVNT	{
+}	0	201303Wed Jul 03 16:50:16 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -38080,8 +38026,7 @@ Wed Jul 03 16:50:16 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-14T10:20:00.000Z"
   }
-}	0	201304
-Wed Jul 03 16:50:17 CEST 2024	BVNT	{
+}	0	201304Wed Jul 03 16:50:17 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -39078,8 +39023,7 @@ Wed Jul 03 16:50:17 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-19T10:10:00.000Z"
   }
-}	0	201305
-Wed Jul 03 16:50:18 CEST 2024	BVNT	{
+}	0	201305Wed Jul 03 16:50:18 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -40116,8 +40060,7 @@ Wed Jul 03 16:50:18 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-27T10:35:00.000Z"
   }
-}	0	201306
-Wed Jul 03 16:50:19 CEST 2024	BVNT	{
+}	0	201306Wed Jul 03 16:50:19 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -41146,8 +41089,7 @@ Wed Jul 03 16:50:19 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-17T10:30:00.000Z"
   }
-}	0	201307
-Wed Jul 03 16:50:20 CEST 2024	BVNT	{
+}	0	201307Wed Jul 03 16:50:20 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -42188,8 +42130,7 @@ Wed Jul 03 16:50:20 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-09T10:30:00.000Z"
   }
-}	0	201308
-Wed Jul 03 16:50:21 CEST 2024	BVNT	{
+}	0	201308Wed Jul 03 16:50:21 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -42978,8 +42919,7 @@ Wed Jul 03 16:50:21 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-15T10:35:00.000Z"
   }
-}	0	201309
-Wed Jul 03 16:50:22 CEST 2024	BVNT	{
+}	0	201309Wed Jul 03 16:50:22 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -44014,8 +43954,7 @@ Wed Jul 03 16:50:22 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-20T10:35:00.000Z"
   }
-}	0	201310
-Wed Jul 03 16:50:23 CEST 2024	BVNT	{
+}	0	201310Wed Jul 03 16:50:23 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -44986,8 +44925,7 @@ Wed Jul 03 16:50:23 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-26T10:30:00.000Z"
   }
-}	0	201311
-Wed Jul 03 16:50:24 CEST 2024	BVNT	{
+}	0	201311Wed Jul 03 16:50:24 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -46024,8 +45962,7 @@ Wed Jul 03 16:50:24 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-12T10:30:00.000Z"
   }
-}	0	201312
-Wed Jul 03 16:50:25 CEST 2024	BVNT	{
+}	0	201312Wed Jul 03 16:50:25 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -46850,8 +46787,7 @@ Wed Jul 03 16:50:25 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-18T10:50:00.000Z"
   }
-}	0	201313
-Wed Jul 03 16:50:26 CEST 2024	BVNT	{
+}	0	201313Wed Jul 03 16:50:26 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -47842,8 +47778,7 @@ Wed Jul 03 16:50:26 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-16T10:30:00.000Z"
   }
-}	0	201314
-Wed Jul 03 16:50:28 CEST 2024	BVNT	{
+}	0	201314Wed Jul 03 16:50:28 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -48814,8 +48749,7 @@ Wed Jul 03 16:50:28 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-25T10:25:00.000Z"
   }
-}	0	201315
-Wed Jul 03 16:50:28 CEST 2024	BVNT	{
+}	0	201315Wed Jul 03 16:50:28 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -49884,8 +49818,7 @@ Wed Jul 03 16:50:28 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-13T10:35:00.000Z"
   }
-}	0	201316
-Wed Jul 03 16:50:29 CEST 2024	BVNT	{
+}	0	201316Wed Jul 03 16:50:29 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -50994,8 +50927,7 @@ Wed Jul 03 16:50:29 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-10T10:35:00.000Z"
   }
-}	0	201317
-Wed Jul 03 16:50:30 CEST 2024	BVNT	{
+}	0	201317Wed Jul 03 16:50:30 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -51758,8 +51690,7 @@ Wed Jul 03 16:50:30 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-22T10:30:00.000Z"
   }
-}	0	201318
-Wed Jul 03 16:50:31 CEST 2024	BVNT	{
+}	0	201318Wed Jul 03 16:50:31 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -52794,8 +52725,7 @@ Wed Jul 03 16:50:31 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-23T10:35:00.000Z"
   }
-}	0	201319
-Wed Jul 03 16:50:32 CEST 2024	BVNT	{
+}	0	201319Wed Jul 03 16:50:32 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -53962,8 +53892,7 @@ Wed Jul 03 16:50:32 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-06T10:50:00.000Z"
   }
-}	0	201320
-Wed Jul 03 16:50:33 CEST 2024	BVNT	{
+}	0	201320Wed Jul 03 16:50:33 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -55038,8 +54967,7 @@ Wed Jul 03 16:50:33 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-24T10:35:00.000Z"
   }
-}	0	201321
-Wed Jul 03 16:50:34 CEST 2024	BVNT	{
+}	0	201321Wed Jul 03 16:50:34 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -55864,8 +55792,7 @@ Wed Jul 03 16:50:34 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-21T10:30:00.000Z"
   }
-}	0	201322
-Wed Jul 03 17:00:08 CEST 2024	BVNT	{
+}	0	201322Wed Jul 03 17:00:08 CEST 2024	BVNT	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -56804,8 +56731,7 @@ Wed Jul 03 17:00:08 CEST 2024	BVNT	{
     "channelId": "BVNT",
     "periodEnd": "2024-07-07T10:25:00.000Z"
   }
-}	0	201323
-Wed Jul 03 17:00:14 CEST 2024	NED1	{
+}	0	201323Wed Jul 03 17:00:14 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -57627,8 +57553,7 @@ Wed Jul 03 17:00:14 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-05T01:00:20.000Z"
   }
-}	0	201324
-Wed Jul 03 17:00:16 CEST 2024	NED1	{
+}	0	201324Wed Jul 03 17:00:16 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -58618,8 +58543,7 @@ Wed Jul 03 17:00:16 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-06T01:00:40.000Z"
   }
-}	0	201325
-Wed Jul 03 17:00:17 CEST 2024	NED1	{
+}	0	201325Wed Jul 03 17:00:17 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -59669,8 +59593,7 @@ Wed Jul 03 17:00:17 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-10T01:00:30.000Z"
   }
-}	0	201326
-Wed Jul 03 17:00:19 CEST 2024	NED1	{
+}	0	201326Wed Jul 03 17:00:19 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -60085,8 +60008,7 @@ Wed Jul 03 17:00:19 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-08T00:30:20.000Z"
   }
-}	0	201327
-Wed Jul 03 17:00:20 CEST 2024	NED1	{
+}	0	201327Wed Jul 03 17:00:20 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -61040,8 +60962,7 @@ Wed Jul 03 17:00:20 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-12T01:05:30.000Z"
   }
-}	0	201328
-Wed Jul 03 17:00:20 CEST 2024	NED1	{
+}	0	201328Wed Jul 03 17:00:20 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -61947,8 +61868,7 @@ Wed Jul 03 17:00:20 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-11T01:20:30.000Z"
   }
-}	0	201329
-Wed Jul 03 17:00:21 CEST 2024	NED1	{
+}	0	201329Wed Jul 03 17:00:21 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -62425,8 +62345,7 @@ Wed Jul 03 17:00:21 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-07T00:20:40.000Z"
   }
-}	0	201330
-Wed Jul 03 17:00:22 CEST 2024	NED1	{
+}	0	201330Wed Jul 03 17:00:22 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -63490,8 +63409,7 @@ Wed Jul 03 17:00:22 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-13T01:15:30.000Z"
   }
-}	0	201331
-Wed Jul 03 17:00:24 CEST 2024	NED1	{
+}	0	201331Wed Jul 03 17:00:24 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -64620,8 +64538,7 @@ Wed Jul 03 17:00:24 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-09T01:10:20.000Z"
   }
-}	0	201332
-Wed Jul 03 17:10:10 CEST 2024	NED1	{
+}	0	201332Wed Jul 03 17:10:10 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -65017,8 +64934,7 @@ Wed Jul 03 17:10:10 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-14T23:40:00.000Z"
   }
-}	0	201333
-Wed Jul 03 17:10:12 CEST 2024	NED1	{
+}	0	201333Wed Jul 03 17:10:12 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -65800,8 +65716,7 @@ Wed Jul 03 17:10:12 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-20T00:25:30.000Z"
   }
-}	0	201334
-Wed Jul 03 17:10:14 CEST 2024	NED1	{
+}	0	201334Wed Jul 03 17:10:14 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -66945,8 +66860,7 @@ Wed Jul 03 17:10:14 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-16T01:50:30.000Z"
   }
-}	0	201335
-Wed Jul 03 17:10:16 CEST 2024	NED1	{
+}	0	201335Wed Jul 03 17:10:16 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -67932,8 +67846,7 @@ Wed Jul 03 17:10:16 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-17T01:35:30.000Z"
   }
-}	0	201336
-Wed Jul 03 17:10:17 CEST 2024	NED1	{
+}	0	201336Wed Jul 03 17:10:17 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -68745,8 +68658,7 @@ Wed Jul 03 17:10:17 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-19T00:45:30.000Z"
   }
-}	0	201337
-Wed Jul 03 17:10:18 CEST 2024	NED1	{
+}	0	201337Wed Jul 03 17:10:18 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -69209,8 +69121,7 @@ Wed Jul 03 17:10:18 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-14T01:25:00.000Z"
   }
-}	0	201338
-Wed Jul 03 17:10:19 CEST 2024	NED1	{
+}	0	201338Wed Jul 03 17:10:19 CEST 2024	NED1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -70197,8 +70108,7 @@ Wed Jul 03 17:10:19 CEST 2024	NED1	{
     "channelId": "NED1",
     "periodEnd": "2024-07-18T02:15:30.000Z"
   }
-}	0	201339
-Wed Jul 03 17:20:15 CEST 2024	NED3	{
+}	0	201339Wed Jul 03 17:20:15 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -71800,8 +71710,7 @@ Wed Jul 03 17:20:15 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-10T00:45:00.000Z"
   }
-}	0	201340
-Wed Jul 03 17:20:17 CEST 2024	NED3	{
+}	0	201340Wed Jul 03 17:20:17 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -73383,8 +73292,7 @@ Wed Jul 03 17:20:17 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-09T01:08:00.000Z"
   }
-}	0	201341
-Wed Jul 03 17:20:19 CEST 2024	NED3	{
+}	0	201341Wed Jul 03 17:20:19 CEST 2024	NED3	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -74338,8 +74246,7 @@ Wed Jul 03 17:20:19 CEST 2024	NED3	{
     "channelId": "NED3",
     "periodEnd": "2024-07-08T01:37:00.000Z"
   }
-}	0	201342
-Wed Jul 03 19:00:09 CEST 2024	RAD1	{
+}	0	201342Wed Jul 03 19:00:09 CEST 2024	RAD1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -74598,8 +74505,7 @@ Wed Jul 03 19:00:09 CEST 2024	RAD1	{
     "channelId": "RAD1",
     "periodEnd": "2024-07-16T03:00:00.000Z"
   }
-}	0	201343
-Wed Jul 03 19:00:10 CEST 2024	RAD1	{
+}	0	201343Wed Jul 03 19:00:10 CEST 2024	RAD1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -74843,8 +74749,7 @@ Wed Jul 03 19:00:10 CEST 2024	RAD1	{
     "channelId": "RAD1",
     "periodEnd": "2024-07-17T03:00:00.000Z"
   }
-}	0	201344
-Wed Jul 03 19:05:06 CEST 2024	RAD1	{
+}	0	201344Wed Jul 03 19:05:06 CEST 2024	RAD1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -75088,8 +74993,7 @@ Wed Jul 03 19:05:06 CEST 2024	RAD1	{
     "channelId": "RAD1",
     "periodEnd": "2024-07-19T03:00:00.000Z"
   }
-}	0	201345
-Wed Jul 03 19:05:06 CEST 2024	RAD1	{
+}	0	201345Wed Jul 03 19:05:06 CEST 2024	RAD1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -75333,8 +75237,7 @@ Wed Jul 03 19:05:06 CEST 2024	RAD1	{
     "channelId": "RAD1",
     "periodEnd": "2024-07-18T03:00:00.000Z"
   }
-}	0	201346
-Wed Jul 03 19:10:06 CEST 2024	RAD1	{
+}	0	201346Wed Jul 03 19:10:06 CEST 2024	RAD1	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -75563,8 +75466,7 @@ Wed Jul 03 19:10:06 CEST 2024	RAD1	{
     "channelId": "RAD1",
     "periodEnd": "2024-07-20T00:00:00.000Z"
   }
-}	0	201347
-Wed Jul 03 19:25:19 CEST 2024	101_	{
+}	0	201347Wed Jul 03 19:25:19 CEST 2024	101_	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76123,8 +76025,7 @@ Wed Jul 03 19:25:19 CEST 2024	101_	{
     "channelId": "101_",
     "periodEnd": "2024-06-25T22:14:37.000Z"
   }
-}	0	201348
-Wed Jul 03 19:25:58 CEST 2024	PO24	{
+}	0	201348Wed Jul 03 19:25:58 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76271,8 +76172,7 @@ Wed Jul 03 19:25:58 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-19T04:00:00.000Z"
   }
-}	0	201349
-Wed Jul 03 19:26:15 CEST 2024	PO24	{
+}	0	201349Wed Jul 03 19:26:15 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76419,8 +76319,7 @@ Wed Jul 03 19:26:15 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-24T04:00:00.000Z"
   }
-}	0	201350
-Wed Jul 03 19:26:15 CEST 2024	PO24	{
+}	0	201350Wed Jul 03 19:26:15 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76567,8 +76466,7 @@ Wed Jul 03 19:26:15 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-23T04:00:00.000Z"
   }
-}	0	201351
-Wed Jul 03 19:26:17 CEST 2024	PO24	{
+}	0	201351Wed Jul 03 19:26:17 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76715,8 +76613,7 @@ Wed Jul 03 19:26:17 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-17T04:00:00.000Z"
   }
-}	0	201352
-Wed Jul 03 19:26:18 CEST 2024	PO24	{
+}	0	201352Wed Jul 03 19:26:18 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -76863,8 +76760,7 @@ Wed Jul 03 19:26:18 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-22T04:00:00.000Z"
   }
-}	0	201353
-Wed Jul 03 19:26:18 CEST 2024	PO24	{
+}	0	201353Wed Jul 03 19:26:18 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77011,8 +76907,7 @@ Wed Jul 03 19:26:18 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-18T04:00:00.000Z"
   }
-}	0	201354
-Wed Jul 03 19:26:19 CEST 2024	PO24	{
+}	0	201354Wed Jul 03 19:26:19 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77159,8 +77054,7 @@ Wed Jul 03 19:26:19 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-15T04:00:00.000Z"
   }
-}	0	201355
-Wed Jul 03 19:26:21 CEST 2024	PO24	{
+}	0	201355Wed Jul 03 19:26:21 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77307,8 +77201,7 @@ Wed Jul 03 19:26:21 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-06-21T04:00:00.000Z"
   }
-}	0	201356
-Wed Jul 03 19:26:22 CEST 2024	PO24	{
+}	0	201356Wed Jul 03 19:26:22 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77455,8 +77348,7 @@ Wed Jul 03 19:26:22 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-14T04:00:00.000Z"
   }
-}	0	201357
-Wed Jul 03 19:26:23 CEST 2024	PO24	{
+}	0	201357Wed Jul 03 19:26:23 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77603,8 +77495,7 @@ Wed Jul 03 19:26:23 CEST 2024	PO24	{
     "channelId": "PO24",
     "periodEnd": "2024-07-16T04:00:00.000Z"
   }
-}	0	201358
-Wed Jul 03 19:26:25 CEST 2024	PO24	{
+}	0	201358Wed Jul 03 19:26:25 CEST 2024	PO24	{
   "type": "notify",
   "version": "1.0",
   "metadata": {
@@ -77752,7 +77643,3 @@ Wed Jul 03 19:26:25 CEST 2024	PO24	{
     "periodEnd": "2024-07-20T04:00:00.000Z"
   }
 }	0	201359
-version https://git-lfs.github.com/spec/v1
-oid sha256:10222a4ed3772e9e6ee37661e9900e009f96f8bd09d49242c36600009e2f0f46
-size 176870297
-

@@ -622,7 +622,8 @@ public class Location extends PublishableObject<Location>
 
     /**
      * For a Location it is true that it cannot have a wider embargo than its {@link #getPrediction() associated platform}
-     * @see #getOwnPublishStartInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
+     * <p>
+     * See also {@link #getOwnPublishStartInstant()} for the (settable) value that is not constraint by {@link #getPrediction()}
      */
     @Override
     public Instant getPublishStartInstant() {
@@ -771,7 +772,6 @@ public class Location extends PublishableObject<Location>
     /**
      * Locations are basically order on their programUrl
      */
-
     @Override
     public int compareTo(@NonNull Location that) {
         int result = 0;

@@ -18,7 +18,8 @@ public class EPGTest {
 
 
     public static Stream<byte[]> epg() {
-        return KafkaDumpReader.read(Util.getTable(("/epg/epg-messages.table"))).map(KafkaDumpReader.Record::bytes).limit(1000);
+        return KafkaDumpReader.read(Util.getTable(("/epg/epg-messages.table"))).map(KafkaDumpReader.Record::bytes)
+            .limit(1000);
     }
 
     static Parser parser = Parser.getInstance();
