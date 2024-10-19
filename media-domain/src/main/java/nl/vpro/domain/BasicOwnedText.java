@@ -9,17 +9,17 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
 /**
- * {@inheritDoc}
+ *
  * @author Michiel Meeuwissen
  * @since 5.3
  */
+@Setter
+@Getter
 public class BasicOwnedText extends BasicTypedText implements OwnedText {
 
     @Serial
     private static final long serialVersionUID = -6428591725078554520L;
 
-    @Getter
-    @Setter
     private OwnerType owner;
 
     public BasicOwnedText() {

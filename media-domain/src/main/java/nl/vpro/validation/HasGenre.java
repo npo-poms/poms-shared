@@ -15,7 +15,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Checks whether a {@link MediaIdentifiable} as at least one genre if that is required according to {@link MediaIdentifiable#getMediaType() media type}.{@link nl.vpro.domain.media.MediaType#requiresGenre() #requiresGenre()
+ * Checks whether a {@link MediaIdentifiable} as at least one genre if that is required according to {@link MediaIdentifiable#getMediaType() media type}.{@link nl.vpro.domain.media.MediaType#requiresGenre() requiresGenre}
  * @since 7.8
  * @author Michiel Meeuwissen
  */

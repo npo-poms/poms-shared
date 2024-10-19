@@ -4,9 +4,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Some methods that are not part of the public API, but are needed for testing or occosionally for maintenance.
+ * <p>
+ * E.g. normally you have no business in {@link PublishableObject#setWorkflow(Workflow) <em>setting</em> the workflow},
+ * that why the method is protected. If you need to do it anyway, you can use this class.
 
- * E.g. normally you have no business in {@link PublishableObject#setWorkflow(Workflow) <em>setting</em> the workflow),
- * that why the method is protected. If if you need to do it anyway, you can use this class.
  * @author Michiel Meeuwissen
  * @since 5.4
  */

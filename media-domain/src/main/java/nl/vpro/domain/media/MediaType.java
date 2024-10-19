@@ -20,7 +20,7 @@ import nl.vpro.i18n.Displayable;
 /**
  * This class provides a combined view on all program and group types and their
  * configuration options. Both program and groups have a type property, but there
- * is now way to add this property to their abstract super class while providing two
+ * is no way to add this property to their abstract super class while providing two
  * implementations of a generic super type.
  */
 @XmlEnum
@@ -743,7 +743,7 @@ public enum MediaType implements Displayable {
     }
 
     /**
-     * Returns all 'leaf' mediaTypes. That are all non-{@link #isAbstract()abstract} instances, that actually have a certain {@link #getSubType()}.
+     * Returns all 'leaf' mediaTypes. That are all non-{@link #isAbstract() abstract} instances, that actually have a certain {@link #getSubType()}.
      * @since 5.8
      */
     public static MediaType[] leafValues() {
