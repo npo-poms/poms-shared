@@ -87,7 +87,7 @@ public class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
     }
 
     @Override
-    public Arbitrary<? extends MemberRef> datapoints() {
+    public Arbitrary<Object> datapoints() {
 
         return Arbitraries.of(
             nullFields,

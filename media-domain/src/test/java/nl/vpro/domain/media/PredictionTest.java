@@ -48,7 +48,7 @@ public class PredictionTest  implements ComparableTheory<Prediction> {
 
 
     @Override
-    public Arbitrary<? extends Prediction> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             Prediction.announced().platform(Platform.INTERNETVOD).parent(null).build(),
             Prediction.announced().platform(Platform.INTERNETVOD).parent(new Program("mid_1")).build(),

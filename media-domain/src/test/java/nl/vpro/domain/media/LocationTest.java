@@ -275,7 +275,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Override
-    public Arbitrary<? extends Location> datapoints() {
+    public Arbitrary<Object> datapoints() {
         Location emptyFields = new Location();
         Location withOwner = new Location(OwnerType.BROADCASTER);
         Location withUrlAndOwner = new Location("1", OwnerType.BROADCASTER);

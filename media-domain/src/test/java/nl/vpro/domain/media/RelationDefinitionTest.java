@@ -67,7 +67,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
     @Override
-    public Arbitrary<? extends RelationDefinition> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             new RelationDefinition(), // with empty fields
             new RelationDefinition("LABEL", "VPRO"), // ide only
@@ -75,7 +75,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
    @Override
-   public Arbitrary<? extends Tuple.Tuple2<? extends RelationDefinition, ? extends RelationDefinition>> equalDatapoints() {
+   public Arbitrary<Tuple.Tuple2<Object, Object>> equalDatapoints() {
         return Arbitraries.of(
             Tuple.of(new RelationDefinition(), new RelationDefinition()),
             Tuple.of(

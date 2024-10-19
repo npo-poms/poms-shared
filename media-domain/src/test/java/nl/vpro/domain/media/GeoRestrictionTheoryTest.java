@@ -44,7 +44,7 @@ public class GeoRestrictionTheoryTest implements BasicObjectTheory<GeoRestrictio
     }
 
     @Override
-    public Arbitrary<? extends GeoRestriction> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             europeNoTime,
             nlNoTime,
