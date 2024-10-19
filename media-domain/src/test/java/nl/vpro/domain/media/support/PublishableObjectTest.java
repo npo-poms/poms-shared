@@ -63,7 +63,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
 
 
     @Property
-    public void testIsActivationWhenTrue(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsActivationWhenTrue(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED)));
         assumeThat(data.isPublishable(NOW), is(true));
@@ -72,21 +74,26 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property
-    public void testIsActivationWhenFalse(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsActivationWhenFalse(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), not(anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED))));
         assertFalse(data.isActivation(NOW));
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsRevocationWhenTrue(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocationWhenTrue(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(Workflow.FOR_DELETION));
         assertTrue(data.isDeactivation(NOW));
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsRevocationWhenTrueOnWindow(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocationWhenTrueOnWindow(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
@@ -98,14 +105,18 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
 
 
     @Property
-    public void testIsRevocationWhenFalse(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocationWhenFalse(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), not(anyOf(equalTo(PUBLISHED), equalTo(Workflow.FOR_DELETION))));
         assertFalse(data.isDeactivation(NOW));
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsRevocationWhenFalseOnWindow(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocationWhenFalseOnWindow(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
@@ -115,7 +126,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property
-    public void testIsPublishableWhenTrue(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsPublishableWhenTrue(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             anyOf(
@@ -132,7 +145,8 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property
-    public void testIsPublishableWhenFalse(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsPublishableWhenFalse(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             not(anyOf(
@@ -150,7 +164,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsPublishStopBeforeStart(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsPublishStopBeforeStart(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeNotNull(data.getPublishStartInstant());
         assumeNotNull(data.getPublishStopInstant());
@@ -159,7 +175,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsRevocableOnWhenDeleted(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocableOnWhenDeleted(@ForAll(DATAPOINTS) Object dataObject ) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeNotNull(data.getWorkflow());
         assumeThat(data.getWorkflow(), equalTo(Workflow.DELETED));
@@ -167,7 +185,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property
-    public void testIsRevocableOnWhenTrueOnWindow(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsRevocableOnWhenTrueOnWindow(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeNotNull(data.getWorkflow());
         assumeThat(data.getWorkflow(),
@@ -183,7 +203,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property
-    public void testIsNotRevocableWhenFalseOnWindow(@ForAll(DATAPOINTS) PublishableObject<?>data) {
+    public void testIsNotRevocableWhenFalseOnWindow(@ForAll(DATAPOINTS) Object dataObject) {
+        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             anyOf(
@@ -214,7 +236,7 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Override
-    public Arbitrary<? extends PublishableObject<?>> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             withId1,
             withId2,

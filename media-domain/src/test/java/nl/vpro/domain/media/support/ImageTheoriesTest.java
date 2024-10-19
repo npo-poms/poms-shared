@@ -77,8 +77,8 @@ public class ImageTheoriesTest implements BasicObjectTheory<Image> {
     }
 
     @Override
-    public Arbitrary<? extends Image> datapoints() {
-                Image emptyFields = new Image();
+    public Arbitrary<Object> datapoints() {
+        Image emptyFields = new Image();
         Image withOwner = new Image(OwnerType.BROADCASTER);
         Image withOwnerAndUri = new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234");
 

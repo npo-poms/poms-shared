@@ -677,19 +677,19 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         form.setSearches(search);
         JAXBTestUtil.roundTripAndSimilar(form, """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-             <api:mediaForm xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+            <api:mediaForm xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
                   <api:searches>
                       <api:locations match="MUST">
                           <api:matcher matchType="WILDCARD">https://radiobox2.*</api:matcher>
                       </api:locations>
                   </api:searches>
-              </api:mediaForm>
-              """);
+            </api:mediaForm>
+            """);
 
     }
 
     @Override
-    public Arbitrary<? extends MediaForm> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             MediaFormBuilder.emptyForm(),
             rad1,

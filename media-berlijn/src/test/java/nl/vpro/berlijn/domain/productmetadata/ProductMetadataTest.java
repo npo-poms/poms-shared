@@ -44,8 +44,8 @@ class ProductMetadataTest {
             .read(Util.getTable("/productmetadata/product-metadata.table"))
             .map(KafkaDumpReader.Record::bytes)
             .map(parser::parseProductMetadata)
-            //.sorted(PomsMapper.randomOrder(random))
-            //.limit(1000)
+            .sorted(PomsMapper.randomOrder(random))
+            .limit(1000)
             ;
 
     }

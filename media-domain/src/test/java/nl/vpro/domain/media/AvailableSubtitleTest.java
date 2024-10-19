@@ -46,7 +46,7 @@ public class AvailableSubtitleTest implements BasicObjectTheory<AvailableSubtitl
     }
 
     @Override
-    public Arbitrary<? extends AvailableSubtitles> datapoints() {
+    public Arbitrary<Object> datapoints() {
         return Arbitraries.of(
             AvailableSubtitles.builder()
                 .language(Locale.ENGLISH)
