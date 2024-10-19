@@ -13,7 +13,7 @@ import com.google.common.collect.Range;
 class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
 
     @Override
-    public Arbitrary<? extends BasicEmbargo> datapoints() {
+    public Arbitrary<Object> datapoints() {
         Arbitrary<Instant> instances = Arbitraries.integers()
             .between(-100_000, 100_000)
             .withDistribution(RandomDistribution.gaussian())
