@@ -53,8 +53,8 @@ jobs:
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
-          files: "**/target/surefire-reports/*.xml"
-        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+          #files: "**/target/surefire-reports/*.xml"
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '17'
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.17.1
         if: always() && runner.os == 'Linux'
