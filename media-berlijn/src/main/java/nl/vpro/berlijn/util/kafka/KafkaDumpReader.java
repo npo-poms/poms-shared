@@ -88,7 +88,7 @@ public class KafkaDumpReader {
         for (int i = 0 ; i < fields -1; i++) {
             result[i] = scanner.next().trim();
         }
-        scanner.useDelimiter("[\n\r]");
+        scanner.useDelimiter("[\n\r]+");
         result[fields - 1] = scanner.next().trim();
         return result;
     }
