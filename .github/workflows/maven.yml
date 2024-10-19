@@ -13,11 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest]
-        java: [ 17 ]
+        java: [ 21 ]
         # also check (once) on latest LTE (not 17 anymore)
         include:
           - os: ubuntu-latest
-            java: 21
+            java: 17
     runs-on: ${{ matrix.os }}
     steps:
       - name: Cancel previous Action
