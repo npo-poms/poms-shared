@@ -24,6 +24,8 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import nl.vpro.logging.Slf4jHelper;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPPlayerTokenService;
 import nl.vpro.nep.service.exception.NEPException;
@@ -119,10 +121,10 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
             httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
-            log.debug("Response {}", out.toString());
+            Slf4jHelper.log(log, response.getStatusLine().getStatusCode() < 300 ? Level.DEBUG: Level.ERROR, "Response {} '{}'", response.getStatusLine(), out);
             return out.toByteArray();
         } catch (Exception e) {
-            log.error("POST {}: {} , response {}: {}", url, json, out.toString(), e.getMessage());
+            log.error("POST {}: {} , response '{}': {}", url, json, out, e.getMessage());
             throw new NEPException(e, "POST " + url + ": " + json + ", response: " + out.toString());
         }
 
