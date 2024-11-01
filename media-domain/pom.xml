@@ -146,6 +146,10 @@
       <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
       <!-- needed for nohtml validation-->
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
@@ -241,6 +245,7 @@
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-i18n</artifactId>
     </dependency>
+
   </dependencies>
   <profiles>
     <profile>
