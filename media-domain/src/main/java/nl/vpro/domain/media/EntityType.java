@@ -10,6 +10,9 @@ import nl.vpro.domain.media.update.SegmentUpdate;
 import static nl.vpro.domain.media.MediaType.*;
 
 /**
+ * A number of enums that are mainly used to define possible set 'entity type'. Used e.g. in the media backend API
+ * endpoint definitions.
+ *
  * @author Michiel Meeuwissen
  * @since 5.10
  */
@@ -18,10 +21,25 @@ public interface EntityType {
 
     MediaType getMediaType();
 
+    /**
+     * Used as path-elements of endpoints that are relevant for any mediaobject.
+     */
     enum AllMedia implements EntityType {
+        /**
+         * Any type of mediaobject.
+         */
         media(MEDIA),
+        /**
+         * Just if it is a {@link nl.vpro.domain.media.Program}
+         */
         program(PROGRAM),
+        /**
+         * Just if it is a {@link nl.vpro.domain.media.Group}
+         */
         group(GROUP),
+        /**
+         * Just if it is a {@link nl.vpro.domain.media.Segment}
+         */
         segment(SEGMENT);
 
         @Getter
@@ -31,6 +49,11 @@ public interface EntityType {
             this.mediaType = type;
         }
 
+        /**
+         * Given some class, return the assiciated {@link AllMedia}. E.g. for {@link Program} or {@link ProgramUpdate}
+         * it returns {@link #program}
+         * @throws IllegalArgumentException if there is no sensible such mapping
+         */
         public static AllMedia valueOf(Class<?> type) {
             if (nl.vpro.domain.media.Program.class.isAssignableFrom(type)) return program;
             if (ProgramUpdate.class.isAssignableFrom(type)) return program;
@@ -45,6 +68,10 @@ public interface EntityType {
 
     }
 
+    /**
+     * Used as path-elements of endpoints that are relevant for {@link nl.vpro.domain.media.Program programs} only.
+     * But {@link Program#media} is a sensible value then too.
+     */
     enum Program implements EntityType {
         media(MEDIA),
         program(PROGRAM);
@@ -57,6 +84,10 @@ public interface EntityType {
         }
     }
 
+    /**
+     * Used as path-elements of endpoints that are relevant for {@link nl.vpro.domain.media.Group groups} only.
+     * But {@link Group#media} is a sensible value then too.
+     */
     enum Group implements EntityType {
         media(MEDIA),
         group(GROUP);
@@ -68,6 +99,9 @@ public interface EntityType {
         }
     }
 
+    /**
+     * Used as path-elements of endpoints that are relevant for {@link nl.vpro.domain.media.Program programs} and {@link Segment segments} only.
+     */
     enum NoGroups implements EntityType {
         media(MEDIA),
         program(PROGRAM),
@@ -80,6 +114,9 @@ public interface EntityType {
         }
     }
 
+    /**
+     * Used as path-elements of endpoints that are relevant for {@link nl.vpro.domain.media.Program programs} and {@link nl.vpro.domain.media.Group groups} only.
+     */
     enum NoSegments implements EntityType {
         media(MEDIA),
         program(PROGRAM),
