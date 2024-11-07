@@ -98,7 +98,7 @@ public interface MediaBackendRestService {
     String ERRORS_DESCRIPTION =
     """
     An optional address to which errors could be sent if they occur asynchronously. These errors may relate to authorization, or to database related problems.
-    This is a comma separated list of email addresses or callback URLs (this new in 7.10). If it is an email-address, the error will marked up in an amil and sent do that adres. If it is a callback URL, the error will be sent as a POST to that URL, with a text/plain body containing the error message.
+    This is a comma separated list of email addresses or callback URLs (this new in 7.10). If it is an email-address, the error will be marked up in an email and sent do that address. If it is a callback URL, the error will be sent as a POST to that URL, with a text/plain body containing the error message.
     """;
     String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRIDs in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
     String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both CRID and mid (or you used lookupcrid=false, and generate a mid), and the CRID existed already for a different mid, then this CRID will be (if allowed) removed from the old object.";
