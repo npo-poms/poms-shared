@@ -1,28 +1,33 @@
 package nl.vpro.sourcingservice;
 
-import com.fasterxml.jackson.core.StreamReadFeature;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.github.yskszk63.jnhttpmultipartformdatabodypublisher.MultipartFormDataBodyPublisher;
 import io.micrometer.core.instrument.MeterRegistry;
+import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
 import java.util.function.Supplier;
-import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
-import nl.vpro.domain.media.AVFileFormat;
-import nl.vpro.domain.media.update.UploadResponse;
-import static nl.vpro.i18n.MultiLanguageString.en;
-import nl.vpro.logging.simple.Level;
-import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.util.*;
+
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
+
+import com.fasterxml.jackson.core.StreamReadFeature;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import nl.vpro.domain.media.AVFileFormat;
+import nl.vpro.domain.media.update.UploadResponse;
+import nl.vpro.logging.simple.Level;
+import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.util.*;
+
+import static nl.vpro.i18n.MultiLanguageString.en;
 
 
 /**
@@ -70,11 +75,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .newBuilder()
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
-
-
-
-    @Deprecated
-    private String multipartPart = "ingest/%s/multipart-assetonly";
 
     private final Supplier<Configuration> configuration;
 
@@ -126,13 +126,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         InputStream inputStream,
         @Nullable String errors
     ) throws SourcingServiceException {
-        return switch (configuration.get().version()) {
-            case 1 ->
-                throw new UnsupportedOperationException("Version 1 is not supported anymore");
-            case 2 ->
-                uploadv2(logger, mid, contentType, inputStream);
-            default -> throw new IllegalArgumentException("Unknown version " + configuration.get().version());
-        };
+
+        return uploadv2(logger, mid, contentType, inputStream);
+
+
     }
 
 
@@ -264,22 +261,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return configuration.get().callBackUrl(mid);
     }
 
-    @SneakyThrows
-    protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
-        return request(pathForIngestMultipart(mid))
-            .header("Content-Type", body.contentType())
-            .POST(body)
-            .build();
-    }
-
-
-    protected HttpRequest ingest(HttpRequest.BodyPublisher body) {
-        return request("ingest")
-            .header("Content-Type", "application/json")
-            .POST(body)
-            .build();
-    }
-
 
     protected HttpRequest statusRequest(String mid) {
         return request("ingest/" + mid + "/status")
@@ -307,10 +288,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .uri(URI.create(forPath(path)));
     }
 
-    @ManagedAttribute
-    String pathForIngestMultipart(String mid) {
-        return multipartPart.formatted(mid);
-    }
 
     String forPath(String path) {
         return configuration.get().cleanBaseUrl() + "api/" + path;
@@ -320,7 +297,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     @ManagedAttribute
     @Override
     public String getUploadString() {
-        return forPath(pathForIngestMultipart("%s"));
+        return forPath(uploadRequestBuilder("%s").toString());
     }
 
     @ManagedAttribute
@@ -329,13 +306,4 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
 
-    @ManagedAttribute
-    public String getMultipartPart() {
-        return multipartPart;
-    }
-
-    @ManagedAttribute
-    public void setMultipartPart(String multipartPart) {
-        this.multipartPart = multipartPart;
-    }
 }

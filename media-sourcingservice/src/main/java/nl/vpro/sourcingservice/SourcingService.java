@@ -16,20 +16,9 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 
 public interface SourcingService {
 
-    /**
-     * Uploading to the sourcing service goes in these three phases.
-     * @deprecated Phases existed only in version 1
-     */
-    @Deprecated
-    enum Phase {
-        START,
-        UPLOAD,
-        FINISH
-    }
 
 
 
- 
      /**
      * Upload an (audio) asset to the NEP CDN
      * @param logger a logger to log progress to, may be showing to gui users too

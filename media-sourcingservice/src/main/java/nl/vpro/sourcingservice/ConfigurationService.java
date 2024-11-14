@@ -17,6 +17,7 @@ public class ConfigurationService implements Supplier<Configuration> {
         Configuration... configurations) {
         this.configurations = configurations;
         this.version = version;
+        assert this.version == 2;
     }
 
 
