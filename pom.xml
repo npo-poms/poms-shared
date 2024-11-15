@@ -23,7 +23,6 @@
     <revision>8.4</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <java.version>17</java.version>
   </properties>
 
    <scm>
