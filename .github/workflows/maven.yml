@@ -56,7 +56,7 @@ jobs:
           #files: "**/target/surefire-reports/*.xml"
         if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '21'"
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.1
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
         if: always() && runner.os == 'Linux'
         with:
           files: "**/target/surefire-reports/*.xml"
