@@ -14,10 +14,10 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest]
         java: [ 21 ]
-        # also check (once) on latest LTE (not 17 anymore)
+        # also check (once) on latest
         include:
           - os: ubuntu-latest
-            java: 17
+            java: 23
     runs-on: ${{ matrix.os }}
     steps:
       - name: Cancel previous Action
@@ -34,9 +34,9 @@ jobs:
           server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
           gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
-      - name: Build and deploy with Maven (Linux, java 17)
+      - name: Build and deploy with Maven (Linux, java 21)
         run:  mvn -ntp  -B -P"deploy,ossrh,npm" -U -fae deploy
-        if: runner.os == 'Linux' && matrix.java == '17'
+        if: runner.os == 'Linux' && matrix.java == '21'
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
@@ -46,7 +46,7 @@ jobs:
         if: runner.os == 'Linux' && matrix.java == '21'
       - name: Build with Maven (Other os)
         run: mvn -ntp -B  -U -fae package
-        if: "! (runner.os == 'Linux' && matrix.java == '17')"
+        if: "! (runner.os == 'Linux' && matrix.java == '21')"
         continue-on-error: true
       - name: Publish to codecov
         uses: codecov/codecov-action@v4
@@ -54,15 +54,15 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
           #files: "**/target/surefire-reports/*.xml"
-        if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '17'"
+        if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '21'"
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.17.1
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.1
         if: always() && runner.os == 'Linux'
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2.17.1
+        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2.18.0
         if: always()  && runner.os == 'Windows'
         with:
           files: "**/target/surefire-reports/*.xml"
