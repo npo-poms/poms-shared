@@ -109,6 +109,7 @@ public class MediaForm {
     @XmlElement
     private String text;
 
+
     @XmlElement(name = "title")
     @JsonProperty("titles")
     private Collection<TitleForm> titles;
@@ -616,6 +617,24 @@ public class MediaForm {
 
     public boolean hasSort() {
         return pager.getSort() != null;
+    }
+
+    public boolean isTextQuoted() {
+        if (hasText() && text.length() > 2) {
+            var first = text.charAt(0);
+            if (first == '\'' || first == '"') {
+                return text.charAt(text.length() - 1) == first;
+            }
+        }
+        return false;
+    }
+
+    public String getUnQuotedText() {
+        if (isTextQuoted()) {
+            return text.substring(1, text.length() - 1);
+        } else {
+            return text;
+        }
     }
 
     private static boolean isEmpty(Collection<?> collection) {
