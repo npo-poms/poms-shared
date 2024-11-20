@@ -107,7 +107,7 @@ public class MediaForm {
 
     @Getter
     @XmlElement
-    private String text;
+    private MediaFormText text;
 
 
     @XmlElement(name = "title")
@@ -299,6 +299,7 @@ public class MediaForm {
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
+        MediaFormText.BooleanOperator booleanOperator,
         Collection<MediaType> types,
         Boolean noBroadcast,
         Boolean hasLocations,
@@ -330,7 +331,13 @@ public class MediaForm {
         this.pager = pager;
         this.broadcasters = broadcasters;
         this.portals = portals;
-        this.text = text;
+        this.text = text == null ? null : new MediaFormText(text);
+        if (booleanOperator != null) {
+            if (this.text == null) {
+                this.text = new MediaFormText(null);
+            }
+            this.text.setBooleanOperator(booleanOperator);
+        }
         this.types = types;
         this.noPlaylist = noPlaylist;
         this.eventRange = eventRange;
@@ -400,7 +407,7 @@ public class MediaForm {
     }
 
     public MediaForm setText(String text) {
-        this.text = text;
+        this.text = new MediaFormText(text);
         return this;
     }
 
@@ -619,23 +626,21 @@ public class MediaForm {
         return pager.getSort() != null;
     }
 
-    public boolean isTextQuoted() {
-        if (hasText() && text.length() > 2) {
-            var first = text.charAt(0);
-            if (first == '\'' || first == '"') {
-                return text.charAt(text.length() - 1) == first;
-            }
+    public MediaFormText.BooleanOperator getBooleanOperator() {
+        if (text == null) {
+            return null;
         }
-        return false;
+        if (text.getBooleanOperator() == null) {
+            if (! hasSort()) {
+                return MediaFormText.BooleanOperator.OR;
+            } else {
+                return MediaFormText.BooleanOperator.AND;
+            }
+        } else {
+            return text.getBooleanOperator();
+        }
     }
 
-    public String getUnQuotedText() {
-        if (isTextQuoted()) {
-            return text.substring(1, text.length() - 1);
-        } else {
-            return text;
-        }
-    }
 
     private static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();

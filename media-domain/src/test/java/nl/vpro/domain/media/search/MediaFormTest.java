@@ -52,8 +52,8 @@ public class MediaFormTest {
                     },
                     "broadcasters" : [ "VPRO" ],
                     "text" : "\\"foobar\\""
-                  }
-                  """
+                }
+                """
             );
     }
 
