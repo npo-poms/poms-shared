@@ -42,24 +42,7 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 @Log4j2
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
-    /***
-     * Field in the multipart body
-     */
-    @Deprecated
-    private static final String CHECKSUM     = "checksum";
-
-    /***
-     * Field in the multipart body
-     */
-    @Deprecated
-    private static final String FILE_SIZE    = "file_size";
-    @Deprecated
-    private static final String FILE_CHUNK   = "file_chunk";
-    @Deprecated
-    private static final String UPLOAD_PHASE = "upload_phase";
-
     private static final String FILE   = "file";
-
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final ObjectReader V2READER;
