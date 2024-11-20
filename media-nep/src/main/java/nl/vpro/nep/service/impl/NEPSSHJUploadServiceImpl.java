@@ -126,7 +126,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             }
             long numberOfBytes = 0;
             try (
-                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE), null);
+                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE), FileAttributes.EMPTY);
                 final RemoteFile.RemoteFileOutputStream out = handle.new RemoteFileOutputStream()
             ) {
                 final byte[] buffer = new byte[batchSize];
