@@ -23,8 +23,19 @@ public class MediaFormText {
     @XmlAttribute
     BooleanOperator booleanOperator = null;
 
+    @XmlAttribute
+    Boolean exactMatching = null;
+
+    @XmlAttribute
+    Boolean implicitWildcard = null;
+
     @XmlValue
     private String text;
+
+
+    public boolean needsAttributes() {
+        return booleanOperator != null || implicitWildcard != null || exactMatching != null;
+    }
 
 
     public MediaFormText() {

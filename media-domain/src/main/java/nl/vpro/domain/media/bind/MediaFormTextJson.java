@@ -14,12 +14,20 @@ public class MediaFormTextJson {
 
         @Override
         public void serialize(MediaFormText mediaFormText, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            if (mediaFormText.getBooleanOperator() == null) {
+            if (!mediaFormText.needsAttributes()) {
                 jsonGenerator.writeString(mediaFormText.getText());
             } else {
                 jsonGenerator.writeStartObject();
                 jsonGenerator.writeStringField("value", mediaFormText.getText());
-                jsonGenerator.writeStringField("booleanOperator", mediaFormText.getBooleanOperator().name());
+                if (mediaFormText.getBooleanOperator() != null) {
+                    jsonGenerator.writeStringField("booleanOperator", mediaFormText.getBooleanOperator().name());
+                }
+                if (mediaFormText.getExactMatching() != null) {
+                    jsonGenerator.writeBooleanField("exactMatching", mediaFormText.getExactMatching());
+                }
+                if (mediaFormText.getImplicitWildcard() != null) {
+                    jsonGenerator.writeBooleanField("implicitWildcard", mediaFormText.getImplicitWildcard());
+                  }
                 jsonGenerator.writeEndObject();
             }
         }
@@ -40,6 +48,16 @@ public class MediaFormTextJson {
                     MediaFormText.BooleanOperator booleanOperator =
                         MediaFormText.BooleanOperator.valueOf(treeNode.get("booleanOperator").asText());
                     formText.setBooleanOperator(booleanOperator);;
+                }
+                if (treeNode.has("exactMatching")) {
+                    if (!treeNode.get("exactMatching").asBoolean()) {
+                        formText.setExactMatching(false);
+                    }
+                }
+                if (treeNode.has("implicitWildcard")) {
+                    if (!treeNode.get("implicitWildcard").asBoolean()) {
+                        formText.setImplicitWildcard(false);
+                    }
                 }
                 return formText;
 
