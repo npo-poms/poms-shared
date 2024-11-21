@@ -18,6 +18,7 @@ import jakarta.xml.bind.annotation.XmlType;
     propOrder =
         {
             "count",
+            "query",
             "result"
         }
 )
@@ -30,6 +31,15 @@ public abstract class AbstractScoredSearchResult<T> implements ScoredSearchResul
     @Getter
     @Setter
     protected Long count;
+
+
+    /**
+     * A string describing the query issues to obtain this result
+     * @since 8.4
+     */
+    @Getter
+    @Setter
+    protected String query;
 
     protected List<ScoredResult<T>> result;
 
