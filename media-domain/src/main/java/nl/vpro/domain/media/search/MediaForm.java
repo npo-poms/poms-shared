@@ -300,6 +300,8 @@ public class MediaForm {
         Collection<String> portals,
         String text,
         MediaFormText.BooleanOperator booleanOperator,
+        Boolean implicitWildcard,
+        Boolean exactMatching,
         Collection<MediaType> types,
         Boolean noBroadcast,
         Boolean hasLocations,
@@ -332,9 +334,9 @@ public class MediaForm {
         this.broadcasters = broadcasters;
         this.portals = portals;
         this.text = new MediaFormText(text);
-        if (booleanOperator != null) {
-            this.text.setBooleanOperator(booleanOperator);
-        }
+        this.text.setBooleanOperator(booleanOperator);
+        this.text.setImplicitWildcard(implicitWildcard);
+        this.text.setExactMatching(exactMatching);
         this.types = types;
         this.noPlaylist = noPlaylist;
         this.eventRange = eventRange;

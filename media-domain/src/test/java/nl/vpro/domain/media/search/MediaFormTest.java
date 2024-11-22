@@ -22,6 +22,7 @@ public class MediaFormTest {
             .asc(MediaSortField.lastModified)
             .broadcaster("VPRO")
             .quotedText("foobar")
+
             .max(1000)
             .build();
 
