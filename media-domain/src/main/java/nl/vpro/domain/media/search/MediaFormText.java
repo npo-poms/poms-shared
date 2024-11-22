@@ -3,7 +3,7 @@ package nl.vpro.domain.media.search;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Arrays;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -99,7 +99,19 @@ public class MediaFormText {
         }
         return parsedText;
     }
-
+    public Optional<String> getWildcard() {
+        if (!isQuoted()) {
+            Boolean implicitWildcard = getImplicitWildcard();
+            if ((implicitWildcard != null && implicitWildcard) && !text.endsWith(" ")) {
+                // the last word will be implicitely converted to a wildcard. The assumption being that the user is still typing
+                String parsed = getParsedText();
+                List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
+                var lastWord = split.getLast();
+                return Optional.of(lastWord + "*");
+            }
+        }
+        return Optional.empty();
+    }
     static String parseANDandNOT(String string) {
         return parseAND(parseNOT(string));
     }
