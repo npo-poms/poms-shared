@@ -113,4 +113,16 @@ public class MediaFormTest {
 
     }
 
+    @Test
+    void wildcard() {
+        MediaForm form = new MediaForm();
+        form.setText("bla");
+        assertThat(form.getText().getWildcard()).isEmpty();
+        form.getText().setImplicitWildcard(true);
+        assertThat(form.getText().getWildcard()).contains("bla*");
+        form.setText("bla ");
+        assertThat(form.getText().getWildcard()).isEmpty();
+
+    }
+
 }
