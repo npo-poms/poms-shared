@@ -33,7 +33,7 @@ import nl.vpro.domain.user.Organization;
     "broadcasters",
     "portals",
     "organizations",
-    "text",
+    "text_",
     "titles",
     "types",
     "releaseYear",
@@ -106,8 +106,8 @@ public class MediaForm {
     */
 
     @Getter
-    @XmlElement
-    private MediaFormText text;
+    @XmlTransient
+    private MediaFormText text = new MediaFormText();
 
 
     @XmlElement(name = "title")
@@ -331,11 +331,8 @@ public class MediaForm {
         this.pager = pager;
         this.broadcasters = broadcasters;
         this.portals = portals;
-        this.text = text == null ? null : new MediaFormText(text);
+        this.text = new MediaFormText(text);
         if (booleanOperator != null) {
-            if (this.text == null) {
-                this.text = new MediaFormText(null);
-            }
             this.text.setBooleanOperator(booleanOperator);
         }
         this.types = types;
@@ -412,6 +409,20 @@ public class MediaForm {
         }
         this.text.setText(text);
         return this;
+    }
+
+    @XmlElement(name = "text")
+    protected MediaFormText getText_() {
+        if (text == null || text.getText() == null) {
+            return null;
+        }
+        return text;
+    }
+    protected void setText_(MediaFormText text) {
+        if (text == null) {
+            text = new MediaFormText(null);
+        }
+        this.text = text;
     }
 
     public boolean hasText() {

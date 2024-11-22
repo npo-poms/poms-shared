@@ -8,6 +8,10 @@ import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.domain.media.search.MediaFormText.parseAND;
+import static nl.vpro.domain.media.search.MediaFormText.parseANDandNOT;
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.0
@@ -83,5 +87,30 @@ public class MediaFormTest {
                           </s:mediaForm>""");
     }
 
+
+    @Test
+    void AND() {
+        assertThat(parseAND("auto fiets")).isEqualTo("auto fiets");
+        assertThat(parseAND("auto and fiets vliegtuig")).isEqualTo("+auto +fiets vliegtuig");
+        assertThat(parseAND("and auto fiets vliegtuig")).isEqualTo("+auto +fiets +vliegtuig");
+    }
+
+    @Test
+    void NOT() {
+        assertThat(parseANDandNOT("auto not fiets")).isEqualTo("auto -fiets");
+        assertThat(parseANDandNOT("auto !fiets")).isEqualTo("auto -fiets");
+        assertThat(parseANDandNOT("auto ! fiets")).isEqualTo("auto -fiets");
+
+        assertThat(parseANDandNOT("auto not fiets not boot")).isEqualTo("auto -fiets -boot");
+        assertThat(parseANDandNOT("not fiets")).isEqualTo("-fiets");
+    }
+
+    @Test
+    void ANDandNOT() {
+        assertThat(parseANDandNOT("auto and fiets")).isEqualTo("+auto +fiets");
+        assertThat(parseANDandNOT("auto&fiets")).isEqualTo("+auto +fiets");
+        assertThat(parseANDandNOT("auto & ! fiets")).isEqualTo("+auto -fiets");
+
+    }
 
 }
