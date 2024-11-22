@@ -15,6 +15,8 @@ public interface SearchResult<T> extends Iterable<T> {
 
     Long getCount();
 
+    String getQuery();
+
     default int size() {
         return getResult().size();
     }
