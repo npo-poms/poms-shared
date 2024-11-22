@@ -15,7 +15,7 @@
       <xsd:element name="broadcaster" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="portal" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="organization" type="organizationType" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element name="text" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="text" type="tns:mediaFormText" minOccurs="0"/>
       <xsd:element name="title" type="tns:titleFormType" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="type" type="mediaTypeEnum" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="releaseYear" type="xsd:short" minOccurs="0"/>
@@ -60,6 +60,16 @@
       <xsd:element name="sort" type="tns:mediaSortField" minOccurs="0"/>
       <xsd:element name="order" type="tns:direction" minOccurs="0"/>
     </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="mediaFormText">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="booleanOperator" type="tns:booleanOperator"/>
+        <xsd:attribute name="exactMatching" type="xsd:boolean"/>
+        <xsd:attribute name="implicitWildcard" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
   </xsd:complexType>
 
   <xsd:complexType name="titleFormType">
@@ -131,6 +141,7 @@
   <xsd:complexType name="searchResult" abstract="true">
     <xsd:sequence>
       <xsd:element name="count" type="xsd:long" minOccurs="0"/>
+      <xsd:element name="query" type="xsd:string" minOccurs="0"/>
       <xsd:element name="result" type="xsd:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -222,6 +233,13 @@
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="ASC"/>
       <xsd:enumeration value="DESC"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="booleanOperator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="AND"/>
+      <xsd:enumeration value="OR"/>
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

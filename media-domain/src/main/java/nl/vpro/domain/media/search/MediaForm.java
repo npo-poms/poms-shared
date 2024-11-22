@@ -107,7 +107,8 @@ public class MediaForm {
 
     @Getter
     @XmlElement
-    private String text;
+    private MediaFormText text;
+
 
     @XmlElement(name = "title")
     @JsonProperty("titles")
@@ -298,6 +299,7 @@ public class MediaForm {
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
+        MediaFormText.BooleanOperator booleanOperator,
         Collection<MediaType> types,
         Boolean noBroadcast,
         Boolean hasLocations,
@@ -329,7 +331,13 @@ public class MediaForm {
         this.pager = pager;
         this.broadcasters = broadcasters;
         this.portals = portals;
-        this.text = text;
+        this.text = text == null ? null : new MediaFormText(text);
+        if (booleanOperator != null) {
+            if (this.text == null) {
+                this.text = new MediaFormText(null);
+            }
+            this.text.setBooleanOperator(booleanOperator);
+        }
         this.types = types;
         this.noPlaylist = noPlaylist;
         this.eventRange = eventRange;
@@ -399,7 +407,10 @@ public class MediaForm {
     }
 
     public MediaForm setText(String text) {
-        this.text = text;
+        if (this.text == null) {
+            this.text = new MediaFormText();
+        }
+        this.text.setText(text);
         return this;
     }
 
@@ -617,6 +628,22 @@ public class MediaForm {
     public boolean hasSort() {
         return pager.getSort() != null;
     }
+
+    public MediaFormText.BooleanOperator getBooleanOperator() {
+        if (text == null) {
+            return null;
+        }
+        if (text.getBooleanOperator() == null) {
+            if (! hasSort()) {
+                return MediaFormText.BooleanOperator.OR;
+            } else {
+                return MediaFormText.BooleanOperator.AND;
+            }
+        } else {
+            return text.getBooleanOperator();
+        }
+    }
+
 
     private static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
