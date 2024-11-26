@@ -156,4 +156,9 @@ public class MediaFormText {
         }
     }
 
+    @Override
+    public String toString() {
+        return text + " (" + getParsedText() + ")";
+    }
+
 }
