@@ -103,11 +103,17 @@ public class MediaFormText {
         if (!isQuoted()) {
             Boolean implicitWildcard = getImplicitWildcard();
             if ((implicitWildcard != null && implicitWildcard) && !text.endsWith(" ")) {
-                // the last word will be implicitely converted to a wildcard. The assumption being that the user is still typing
+                // the last word will be implicitly converted to a wildcard. The assumption being that the user is still typing
                 String parsed = getParsedText();
                 List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
                 var lastWord = split.getLast();
                 return Optional.of(lastWord + "*");
+            }
+            if (text.endsWith("*")) {
+                String parsed = getParsedText();
+                List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
+                var lastWord = split.getLast();
+                return Optional.of(lastWord + "*"); // * is removed by getParsedText()
             }
         }
         return Optional.empty();
