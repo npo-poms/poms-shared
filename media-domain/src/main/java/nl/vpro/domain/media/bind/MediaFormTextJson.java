@@ -15,14 +15,14 @@ public class MediaFormTextJson {
         @Override
         public void serialize(MediaFormText mediaFormText, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
             if (!mediaFormText.needsAttributes()) {
-                if (mediaFormText.getText() != null) {
-                    jsonGenerator.writeString(mediaFormText.getText());
+                if (mediaFormText.getValue() != null) {
+                    jsonGenerator.writeString(mediaFormText.getValue());
                 } else {
                     jsonGenerator.writeNull();
                 }
             } else {
                 jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("value", mediaFormText.getText());
+                jsonGenerator.writeStringField("value", mediaFormText.getValue());
                 if (mediaFormText.getBooleanOperator() != null) {
                     jsonGenerator.writeStringField("booleanOperator", mediaFormText.getBooleanOperator().name());
                 }
@@ -40,7 +40,7 @@ public class MediaFormTextJson {
     public static class Deserializer extends JsonDeserializer<MediaFormText> {
 
         @Override
-        public MediaFormText deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+        public MediaFormText deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
             JsonToken token = jsonParser.currentToken();
             if (token.isScalarValue()) {
                 return new MediaFormText(jsonParser.readValueAs(String.class));

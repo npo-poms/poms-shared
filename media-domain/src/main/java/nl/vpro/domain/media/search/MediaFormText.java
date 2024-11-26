@@ -34,7 +34,7 @@ public class MediaFormText {
     Boolean implicitWildcard = null;
 
     @XmlValue
-    private String text;
+    private String value;
 
     private String parsedText;
 
@@ -47,8 +47,8 @@ public class MediaFormText {
 
     }
 
-    public MediaFormText(String text) {
-        this.text = text;
+    public MediaFormText(String value) {
+        this.value = value;
     }
 
     public enum BooleanOperator {
@@ -56,23 +56,22 @@ public class MediaFormText {
         OR
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setValue(String value) {
+        this.value = value;
         this.parsedText = null;
-
     }
 
     public boolean isEmpty() {
-        return text == null || text.isEmpty();
+        return value == null || value.isEmpty();
     }
 
 
 
     public boolean isQuoted() {
-        if (! isEmpty() && text.length() > 2) {
-            var first = text.charAt(0);
+        if (! isEmpty() && value.length() > 2) {
+            var first = value.charAt(0);
             if (first == '\'' || first == '"') {
-                return text.charAt(text.length() - 1) == first;
+                return value.charAt(value.length() - 1) == first;
             }
         }
         return false;
@@ -80,14 +79,14 @@ public class MediaFormText {
 
     public String getUnQuotedValue() {
         if (isQuoted()) {
-            return text.substring(1, text.length() - 1);
+            return value.substring(1, value.length() - 1);
         } else {
-            return text;
+            return value;
         }
     }
     public String getParsedText() {
         if (parsedText == null) {
-            if (text == null) {
+            if (value == null) {
                 return null;
             }
             String queryStringText = getUnQuotedValue().toLowerCase().replaceAll("[^\\p{IsAlphabetic}&!+\\-\\d\\s]", "");
@@ -102,14 +101,14 @@ public class MediaFormText {
     public Optional<String> getWildcard() {
         if (!isQuoted()) {
             Boolean implicitWildcard = getImplicitWildcard();
-            if ((implicitWildcard != null && implicitWildcard) && !text.endsWith(" ")) {
+            if ((implicitWildcard != null && implicitWildcard) && !value.endsWith(" ")) {
                 // the last word will be implicitly converted to a wildcard. The assumption being that the user is still typing
                 String parsed = getParsedText();
                 List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
                 var lastWord = split.getLast();
                 return Optional.of(lastWord + "*");
             }
-            if (text.endsWith("*")) {
+            if (value.endsWith("*")) {
                 String parsed = getParsedText();
                 List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
                 var lastWord = split.getLast();
@@ -158,7 +157,7 @@ public class MediaFormText {
 
     @Override
     public String toString() {
-        return text + " (" + getParsedText() + ")";
+        return value + " (" + getParsedText() + ")";
     }
 
 }
