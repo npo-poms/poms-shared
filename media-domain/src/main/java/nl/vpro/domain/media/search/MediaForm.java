@@ -19,6 +19,7 @@ import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,7 +34,7 @@ import nl.vpro.domain.user.Organization;
     "broadcasters",
     "portals",
     "organizations",
-    "text",
+    "text_",
     "titles",
     "types",
     "releaseYear",
@@ -106,8 +107,8 @@ public class MediaForm {
     */
 
     @Getter
-    @XmlElement
-    private MediaFormText text;
+    @XmlTransient
+    private MediaFormText text = new MediaFormText();
 
 
     @XmlElement(name = "title")
@@ -295,11 +296,13 @@ public class MediaForm {
 
     @lombok.Builder(builderClassName = "Builder")
     MediaForm(
-        MediaPager pager,
+        @Nullable MediaPager pager,
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
         MediaFormText.BooleanOperator booleanOperator,
+        Boolean implicitWildcard,
+        Boolean exactMatching,
         Collection<MediaType> types,
         Boolean noBroadcast,
         Boolean hasLocations,
@@ -331,13 +334,10 @@ public class MediaForm {
         this.pager = pager;
         this.broadcasters = broadcasters;
         this.portals = portals;
-        this.text = text == null ? null : new MediaFormText(text);
-        if (booleanOperator != null) {
-            if (this.text == null) {
-                this.text = new MediaFormText(null);
-            }
-            this.text.setBooleanOperator(booleanOperator);
-        }
+        this.text = new MediaFormText(text);
+        this.text.setBooleanOperator(booleanOperator);
+        this.text.setImplicitWildcard(implicitWildcard);
+        this.text.setExactMatching(exactMatching);
         this.types = types;
         this.noPlaylist = noPlaylist;
         this.eventRange = eventRange;
@@ -414,6 +414,20 @@ public class MediaForm {
         return this;
     }
 
+    @XmlElement(name = "text")
+    protected MediaFormText getText_() {
+        if (text == null || text.getText() == null) {
+            return null;
+        }
+        return text;
+    }
+    protected void setText_(MediaFormText text) {
+        if (text == null) {
+            text = new MediaFormText(null);
+        }
+        this.text = text;
+    }
+
     public boolean hasText() {
         return text != null && !text.isEmpty();
     }
@@ -447,11 +461,9 @@ public class MediaForm {
     }
 
     public Collection<String> getTypesAsStrings() {
-        List<String> list = new ArrayList<>();
-        for(MediaType type : getTypes()) {
-            list.add(type.name());
-        }
-        return list;
+        return getTypes().stream()
+            .map(MediaType::name)
+            .toList();
     }
 
     public MediaForm setReleaseYear(Short s) {
@@ -462,7 +474,6 @@ public class MediaForm {
     public boolean hasReleaseDate() {
         return releaseYear != null;
     }
-
 
     public boolean includeSegments() {
         return getTypes().contains(MediaType.SEGMENT);
@@ -540,7 +551,7 @@ public class MediaForm {
     }
 
     /**
-     * @deprecated  ?
+     * @deprecated  {@link #setImagesWithoutCreditsCount(IntegerRange)} }
      */
     @Deprecated
     public boolean hasNoCredits() {
@@ -556,11 +567,9 @@ public class MediaForm {
         return sortRange != null && sortRange.hasValues();
     }
 
-
     public boolean hasEventRange() {
         return eventRange != null && eventRange.hasValues();
     }
-
 
     public boolean hasChannels() {
         return has(channels);

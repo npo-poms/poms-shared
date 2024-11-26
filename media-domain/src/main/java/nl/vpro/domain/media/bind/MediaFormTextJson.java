@@ -15,7 +15,11 @@ public class MediaFormTextJson {
         @Override
         public void serialize(MediaFormText mediaFormText, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
             if (!mediaFormText.needsAttributes()) {
-                jsonGenerator.writeString(mediaFormText.getText());
+                if (mediaFormText.getText() != null) {
+                    jsonGenerator.writeString(mediaFormText.getText());
+                } else {
+                    jsonGenerator.writeNull();
+                }
             } else {
                 jsonGenerator.writeStartObject();
                 jsonGenerator.writeStringField("value", mediaFormText.getText());
