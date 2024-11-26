@@ -19,6 +19,7 @@ import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -295,7 +296,7 @@ public class MediaForm {
 
     @lombok.Builder(builderClassName = "Builder")
     MediaForm(
-        MediaPager pager,
+        @Nullable MediaPager pager,
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
@@ -460,11 +461,9 @@ public class MediaForm {
     }
 
     public Collection<String> getTypesAsStrings() {
-        List<String> list = new ArrayList<>();
-        for(MediaType type : getTypes()) {
-            list.add(type.name());
-        }
-        return list;
+        return getTypes().stream()
+            .map(MediaType::name)
+            .toList();
     }
 
     public MediaForm setReleaseYear(Short s) {
@@ -475,7 +474,6 @@ public class MediaForm {
     public boolean hasReleaseDate() {
         return releaseYear != null;
     }
-
 
     public boolean includeSegments() {
         return getTypes().contains(MediaType.SEGMENT);
@@ -553,7 +551,7 @@ public class MediaForm {
     }
 
     /**
-     * @deprecated  ?
+     * @deprecated  {@link #setImagesWithoutCreditsCount(IntegerRange)} }
      */
     @Deprecated
     public boolean hasNoCredits() {
@@ -569,11 +567,9 @@ public class MediaForm {
         return sortRange != null && sortRange.hasValues();
     }
 
-
     public boolean hasEventRange() {
         return eventRange != null && eventRange.hasValues();
     }
-
 
     public boolean hasChannels() {
         return has(channels);
