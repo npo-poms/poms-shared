@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ import nl.vpro.domain.media.bind.MediaFormTextJson;
 @JsonSerialize(using = MediaFormTextJson.Serializer.class)
 @JsonDeserialize(using = MediaFormTextJson.Deserializer.class)
 @XmlAccessorType(XmlAccessType.NONE)
-public class MediaFormText {
+public class MediaFormText implements Supplier<String> {
 
     @XmlAttribute
     BooleanOperator booleanOperator = null;
@@ -56,7 +57,14 @@ public class MediaFormText {
         OR
     }
 
-    public void setValue(String value) {
+
+
+    @Override
+    public String get() {
+        return value;
+    }
+
+    public void set(String value) {
         this.value = value;
         this.parsedText = null;
     }

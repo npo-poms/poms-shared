@@ -410,7 +410,7 @@ public class MediaForm {
         if (this.text == null) {
             this.text = new MediaFormText();
         }
-        this.text.setValue(text);
+        this.text.set(text);
         return this;
     }
 
