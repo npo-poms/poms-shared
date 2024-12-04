@@ -2807,6 +2807,17 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
+     * @since 8.4
+     */
+    @XmlEnumValue("NPOS")
+    NPOS(VIDEO, Range.atLeast(Year.of(2003)), "https://npostart.nl", true) {
+        @Override
+        public String toString() {
+            return "NPO Start";
+        }
+    },
+
+    /**
      * This is not a real channel. It can be used for testing or mocking purposes.
      *
      * @since 5.15
