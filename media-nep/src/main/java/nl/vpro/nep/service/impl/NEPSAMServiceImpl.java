@@ -184,7 +184,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     private AccessApi getStreamApi(String baseUrl, Supplier<String> authenticator) {
-        if (accessApi == null) {
+        if (accessApi == null || ((NEPSAMAuthenticator) authenticator).needsRefresh()) {
             ResteasyProviderFactory factor = ResteasyProviderFactory.getInstance();
             var configuration = factor.getConfiguration();
             AccessApi streamApi = new AccessApi();
