@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import jakarta.annotation.PostConstruct;
@@ -44,7 +45,7 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
  */
 @Slf4j
 @ManagedResource
-public class NEPSAMAuthenticator implements Supplier<String> {
+public class NEPSAMAuthenticator implements Supplier<String>, BooleanSupplier {
     private final LoginRequest loginRequest;
     @VisibleForTesting
     LoginResponse loginResponse;
@@ -77,6 +78,11 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     }
 
     private static final ObjectMapper LENIENT = Jackson2Mapper.getLenientInstance();
+
+    @Override
+    public boolean getAsBoolean() {
+        return needsRefresh();
+    }
 
     protected void authenticate() throws IOException {
         try(CloseableHttpClient httpClient = HttpClients.custom()

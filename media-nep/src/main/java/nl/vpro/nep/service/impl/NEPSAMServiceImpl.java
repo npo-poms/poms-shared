@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -44,8 +43,8 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     private String drmProfileMid = "dash";
     private String noDrmProfileMid = "dash";
 
-    final Supplier<String> authenticatorMid;
-    final Supplier<String> authenticatorLive;
+    final NEPSAMAuthenticator authenticatorMid;
+    final NEPSAMAuthenticator authenticatorLive;
 
     final String baseUrlMid;
     final String baseUrlLive;
@@ -70,8 +69,8 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         @Value("${nep.sam-api.provider}") String providerLive,
         @Value("${nep.sam-api.platform}") String platformLive,
         @Value("${nep.sam-api.profile.drm}") String drmProfileLive,
-        @Named("NEPSAMAuthenticatorMid") @NonNull Supplier<String> authenticatorMid,
-        @Named("NEPSAMAuthenticatorLive") @NonNull Supplier<String> authenticatorLive) {
+        @Named("NEPSAMAuthenticatorMid") @NonNull NEPSAMAuthenticator authenticatorMid,
+        @Named("NEPSAMAuthenticatorLive") @NonNull NEPSAMAuthenticator authenticatorLive) {
         this.authenticatorMid = authenticatorMid;
         this.authenticatorLive = authenticatorLive;
         this.baseUrlMid = baseUrlMid;
@@ -91,7 +90,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
          String platform,
          String drmProfile,
          String noDrmProfile,
-         @NonNull Supplier<String> authenticator) {
+         @NonNull NEPSAMAuthenticator authenticator) {
         this(baseUrl, provider, platform, drmProfile, noDrmProfile, baseUrl, provider, platform, drmProfile, authenticator, authenticator);
     }
 
@@ -183,8 +182,8 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         return item;
     }
 
-    private AccessApi getStreamApi(String baseUrl, Supplier<String> authenticator) {
-        if (accessApi == null) {
+    private AccessApi getStreamApi(String baseUrl, NEPSAMAuthenticator authenticator) {
+        if (accessApi == null || authenticator.needsRefresh()) {
             ResteasyProviderFactory factor = ResteasyProviderFactory.getInstance();
             var configuration = factor.getConfiguration();
             AccessApi streamApi = new AccessApi();
