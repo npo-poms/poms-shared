@@ -88,7 +88,7 @@ public class MediaObjectLocker {
 
 
     /**
-     * Like {@link Mid}, but now for {@code nl.vpro.domain.subtitles.SubtitlesId}
+     * Like {@link Mid}, but now for {@link ScheduleEventIdentifier}
      */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Sid {
