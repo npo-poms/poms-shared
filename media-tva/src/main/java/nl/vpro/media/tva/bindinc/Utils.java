@@ -153,8 +153,12 @@ public final class Utils {
 
     public static void ready(Exchange exchange) {
         List<Temp> list = (List<Temp>) exchange.getProperty(ExchangePropertyKey.GROUPED_EXCHANGE);
-        for (Temp t : list) {
-            t.deleteFile();
+        if (list != null) {
+            for (Temp t : list) {
+                t.deleteFile();
+            }
+        } else {
+            log.debug("Not found {}", ExchangePropertyKey.GROUPED_EXCHANGE);
         }
     }
 
@@ -196,7 +200,6 @@ public final class Utils {
 
         public GenericFileAggregationStrategy(CamelContext context)  {
             super();
-            context.getTypeConverterRegistry().addTypeConverters(new Converters());
         }
         @Override
         @SuppressWarnings("unchecked")
@@ -211,7 +214,7 @@ public final class Utils {
     }
 
     @SuppressWarnings("unused")
-
+    @Converter(generateLoader = true)
     public static class Converters implements TypeConverters {
 
 
