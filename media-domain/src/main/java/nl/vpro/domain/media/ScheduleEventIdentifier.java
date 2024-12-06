@@ -77,7 +77,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public String asString() {
-        return channel.getXmlValue() + ":" + start;
+        return channel.getXmlValue() + ":" + (start == null ? "null" : start.atZone(Schedule.ZONE_ID).toLocalDateTime());
     }
 
     public static ScheduleEventIdentifier parse(CharSequence id) {
