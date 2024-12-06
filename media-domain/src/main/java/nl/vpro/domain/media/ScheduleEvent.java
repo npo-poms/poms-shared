@@ -83,6 +83,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
+    HasMid,
     Child<Program> {
 
     @Serial
@@ -354,6 +355,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public static ScheduleEvent of(Instant start) {
         return ScheduleEvent.builder().start(start).build();
     }
+
+    @Override
+    public String getMid() {
+        return getMidRef();
+    }
+
 
     private static Date guideDay(Date start) {
         if (start == null) {
