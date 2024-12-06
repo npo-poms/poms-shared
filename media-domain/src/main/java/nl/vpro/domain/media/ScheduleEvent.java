@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -158,12 +157,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Deprecated
     protected ScheduleEventType type;
 
+    @Getter
     @Setter
     @Embedded
     @Column(name = "primary")
     @XmlElement
     protected Lifestyle primaryLifestyle;
 
+    @Getter
     @Setter
     @Embedded
     @Column(name = "secondary")
@@ -613,14 +614,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
             this.mediaObject.removeScheduleEvent(this);
             this.mediaObject = null;
         }
-    }
-
-    public Lifestyle getPrimaryLifestyle() {
-        return primaryLifestyle;
-    }
-
-    public SecondaryLifestyle getSecondaryLifestyle() {
-        return secondaryLifestyle;
     }
 
     @Override
