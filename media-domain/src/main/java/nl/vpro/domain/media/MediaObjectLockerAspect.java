@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.event.Level;
 
+import nl.vpro.domain.media.update.ScheduleEventUpdate;
 import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.util.locker.ObjectLocker;
 
@@ -143,6 +144,9 @@ public abstract class MediaObjectLockerAspect  {
         }
         if (object instanceof ScheduleEvent scheduleEvent) {
             return scheduleEvent.getId();
+        }
+        if (object instanceof ScheduleEventUpdate scheduleEvent) {
+            return new ScheduleEventIdentifier(scheduleEvent.getChannel(), scheduleEvent.getStart());
         }
         throw new IllegalStateException();
     }
