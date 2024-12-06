@@ -23,6 +23,7 @@ import nl.vpro.services.TransactionService;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLocker.LockHolder;
 
+import static nl.vpro.util.locker.ObjectLocker.withKeyLock;
 import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
 
 /**
@@ -245,6 +246,20 @@ public class MediaObjectLocker {
         @NonNull Callable<T> callable) {
         return withCorrelationLock(
             MediaIdentifiable.Correlation.mid(lockHolder.getMid()),
+            reason, callable);
+    }
+
+
+      /**
+     * Locks the given {@link MediaIdentifiable} on its {@link MediaIdentifiable#getCorrelation()}
+     *
+     */
+    public static <T> T withSidLock(
+        @NonNull ScheduleEventIdentifier sid,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withKeyLock(
+            sid,
             reason, callable);
     }
 
