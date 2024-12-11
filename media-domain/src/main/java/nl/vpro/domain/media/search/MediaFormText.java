@@ -97,7 +97,7 @@ public class MediaFormText implements Supplier<String> {
     private static final Pattern PREPARSE = Pattern.compile("[^\\p{IsAlphabetic}&!+\\-\\d\\s]");
     private static final Pattern AFTERPARSE = Pattern.compile("[^\\p{IsAlphabetic}\\-\\d\\s]");
 
-    public String getCleanText() {
+    private String getCleanText() {
         String lower =   getUnQuotedValue().toLowerCase();
         Matcher m = PREPARSE.matcher(lower);
         return m.replaceAll("");
