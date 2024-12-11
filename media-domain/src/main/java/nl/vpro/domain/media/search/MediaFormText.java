@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -92,17 +93,29 @@ public class MediaFormText implements Supplier<String> {
             return value;
         }
     }
+
+    private static final Pattern PREPARSE = Pattern.compile("[^\\p{IsAlphabetic}&!+\\-\\d\\s]");
+    private static final Pattern AFTERPARSE = Pattern.compile("[^\\p{IsAlphabetic}\\-\\d\\s]");
+
+    public String getCleanText() {
+        String lower =   getUnQuotedValue().toLowerCase();
+        Matcher m = PREPARSE.matcher(lower);
+        return m.replaceAll("");
+    }
     public String getParsedText() {
         if (parsedText == null) {
             if (value == null) {
                 return null;
             }
-            String queryStringText = getUnQuotedValue().toLowerCase().replaceAll("[^\\p{IsAlphabetic}&!+\\-\\d\\s]", "");
+            String queryStringText = getCleanText();
+            String parse1;
             if (queryStringText.length() > 1) {
-                parsedText =  parseANDandNOT(queryStringText);
+                parse1 =  parseANDandNOT(queryStringText);
             } else {
-                parsedText =  queryStringText;
+                parse1 =  queryStringText;
             }
+            Matcher matcher =  AFTERPARSE.matcher(parse1);
+            parsedText =  matcher.replaceAll("");
         }
         return parsedText;
     }
