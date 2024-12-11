@@ -410,13 +410,13 @@ public class MediaForm {
         if (this.text == null) {
             this.text = new MediaFormText();
         }
-        this.text.setText(text);
+        this.text.set(text);
         return this;
     }
 
     @XmlElement(name = "text")
     protected MediaFormText getText_() {
-        if (text == null || text.getText() == null) {
+        if (text == null || text.get() == null) {
             return null;
         }
         return text;

@@ -15,14 +15,14 @@ public class MediaFormTextJson {
         @Override
         public void serialize(MediaFormText mediaFormText, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
             if (!mediaFormText.needsAttributes()) {
-                if (mediaFormText.getText() != null) {
-                    jsonGenerator.writeString(mediaFormText.getText());
+                if (mediaFormText.get() != null) {
+                    jsonGenerator.writeString(mediaFormText.get());
                 } else {
                     jsonGenerator.writeNull();
                 }
             } else {
                 jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("value", mediaFormText.getText());
+                jsonGenerator.writeStringField("value", mediaFormText.get());
                 if (mediaFormText.getBooleanOperator() != null) {
                     jsonGenerator.writeStringField("booleanOperator", mediaFormText.getBooleanOperator().name());
                 }

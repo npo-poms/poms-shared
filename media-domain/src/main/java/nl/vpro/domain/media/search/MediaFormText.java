@@ -126,13 +126,13 @@ public class MediaFormText implements Supplier<String> {
                 // the last word will be implicitly converted to a wildcard. The assumption being that the user is still typing
                 String parsed = getParsedText();
                 List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
-                var lastWord = split.getLast();
+                var lastWord = split.get(split.size() - 1);
                 return Optional.of(lastWord + "*");
             }
             if (value.endsWith("*")) {
                 String parsed = getParsedText();
                 List<String> split = Arrays.asList(parsed.trim().split("\\s+"));
-                var lastWord = split.getLast();
+                var lastWord = split.get(split.size() - 1);;
                 return Optional.of(lastWord + "*"); // * is removed by getParsedText()
             }
         }
