@@ -31,7 +31,7 @@ public class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRe
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<RestrictionTest.TestRestriction> datapoints() {
         return Arbitraries.of(
             withStartAndStop,
             persistedWithStartAndStop,

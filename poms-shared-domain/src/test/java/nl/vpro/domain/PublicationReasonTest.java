@@ -95,7 +95,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<PublicationReason> datapoints() {
         return Arbitraries.of(reasons);
     }
 

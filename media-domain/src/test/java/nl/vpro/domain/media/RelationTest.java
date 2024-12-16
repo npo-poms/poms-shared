@@ -159,7 +159,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<Relation> datapoints() {
         return Arbitraries.of(
             relation(null, "TYPE", "VPRO"),
             relation(1L, "TYPE", "VPRO"),

@@ -114,8 +114,7 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Property(maxDiscardRatio = 1000)
-    public void testIsRevocationWhenFalseOnWindow(@ForAll(DATAPOINTS) Object dataObject) {
-        PublishableObject<?> data = (PublishableObject<?>) dataObject;
+    public void testIsRevocationWhenFalseOnWindow(@ForAll(DATAPOINTS) PublishableObject<?> data) {
 
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
@@ -236,7 +235,7 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<PublishableObject<?>> datapoints() {
         return Arbitraries.of(
             withId1,
             withId2,

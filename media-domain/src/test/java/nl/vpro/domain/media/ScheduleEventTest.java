@@ -195,7 +195,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<ScheduleEvent> datapoints() {
         return Arbitraries.of(
             ScheduleEvent.builder().build(),
             ScheduleEvent.builder().start(now).build(),
@@ -207,7 +207,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Override
-    public Arbitrary<Tuple.Tuple2<Object, Object>> equalDatapoints() {
+    public Arbitrary<Tuple.Tuple2<ScheduleEvent, ScheduleEvent>> equalDatapoints() {
         return Arbitraries.of(
             Tuple.of(ScheduleEvent.builder().build(), ScheduleEvent.builder().build()),
             Tuple.of(

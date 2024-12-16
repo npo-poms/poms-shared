@@ -27,7 +27,7 @@ public class DescendantRefTest
     public static DescendantRef withBothMidAndUrn = new DescendantRef("MID", "URN", MediaType.CLIP);
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<DescendantRef> datapoints() {
         return Arbitraries.of(
             withEmptyFields,
             midOnly,

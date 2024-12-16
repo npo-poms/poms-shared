@@ -71,7 +71,7 @@ public class PersonTest implements BasicObjectTheory<Person> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<Person> datapoints() {
         Person pietjePuk = new Person("Pietje", "Puk", RoleType.ACTOR);
         pietjePuk.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         Person pietjePuk2 = new Person("Pietje", "Puk", RoleType.DIRECTOR);

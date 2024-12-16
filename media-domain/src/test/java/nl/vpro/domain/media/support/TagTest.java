@@ -22,7 +22,7 @@ public class TagTest implements ComparableTheory<Tag> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<Tag> datapoints() {
         Tag tag = new Tag("tag");
         return Arbitraries.of(
             tag,
@@ -34,7 +34,7 @@ public class TagTest implements ComparableTheory<Tag> {
     }
 
     @Override
-    public Arbitrary<Tuple.Tuple2<Object, Object>> equalDatapoints() {
+    public Arbitrary<Tuple.Tuple2<Tag, Tag>> equalDatapoints() {
         Tag tagNull = new Tag(null);
         Tag tag1 = new Tag("tag1");
         return Arbitraries.of(

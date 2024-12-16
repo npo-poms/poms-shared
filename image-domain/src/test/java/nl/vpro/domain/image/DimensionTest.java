@@ -24,7 +24,7 @@ public class DimensionTest implements ComparableTheory<Dimension> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<Dimension> datapoints() {
         IntegerArbitrary x = Arbitraries.integers().between(1, 1000);
         IntegerArbitrary y = Arbitraries.integers().between(1, 1000);
 
@@ -39,7 +39,7 @@ public class DimensionTest implements ComparableTheory<Dimension> {
     }
 
     @Override
-    public Arbitrary<Tuple.Tuple2<Object, Object>> equalDatapoints() {
+    public Arbitrary<Tuple.Tuple2<Dimension, Dimension>> equalDatapoints() {
 
         return Arbitraries.of(
             Tuple.of(
