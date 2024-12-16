@@ -689,7 +689,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<MediaForm> datapoints() {
         return Arbitraries.of(
             MediaFormBuilder.emptyForm(),
             rad1,

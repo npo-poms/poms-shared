@@ -278,7 +278,7 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     Instant now = Instant.now();
     @Override
-    public Arbitrary<Object> datapoints() {
+    public Arbitrary<ScheduleEvent> datapoints() {
         return Arbitraries.of(
             ScheduleEvent.builder().build(),
             ScheduleEvent.builder().start(now).build(),
