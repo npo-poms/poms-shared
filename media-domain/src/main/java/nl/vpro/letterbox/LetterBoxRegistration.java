@@ -63,7 +63,7 @@ public class LetterBoxRegistration implements Serializable {
         this.principalId = principalId;
         this.description = description;
         this.implementingClass = implementingClass;
-        this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(20) : asyncAfter;
+        this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(1) : asyncAfter;
         this.acceptAll = acceptAll;
         this.errors = errors;
     }
