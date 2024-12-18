@@ -12,9 +12,9 @@ import org.meeuw.theories.ComparableTheory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static java.time.Instant.ofEpochMilli;
+import static nl.vpro.test.util.jackson2.Jackson2TestUtil.roundTripAndSimilar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PublicationReasonTest implements ComparableTheory<PublicationReason> {
@@ -23,7 +23,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
     @Test
     public void marshall() {
         PublicationReason reason = new PublicationReason("foobar", Instant.EPOCH);
-        Jackson2TestUtil.roundTripAndSimilar(reason, """
+        roundTripAndSimilar(reason, """
             {
               "value" : "foobar",
               "publishDate" : 0
@@ -36,7 +36,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
         ObjectNode node = Jackson2Mapper.getInstance().createObjectNode();
         node.putPOJO("test", reason);
 
-        Jackson2TestUtil.roundTripAndSimilar(node, """
+        roundTripAndSimilar(node, """
             {
               "test" : {
                 "value" : "foobar",
