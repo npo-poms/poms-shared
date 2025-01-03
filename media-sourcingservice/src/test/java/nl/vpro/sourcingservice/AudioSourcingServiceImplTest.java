@@ -49,7 +49,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException {
+    public void uploadAudio() {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -72,7 +72,7 @@ class AudioSourcingServiceImplTest {
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
 
         List<ServeEvent> allServeEvents = getAllServeEvents();
-        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() -1);
+        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() - 1);
         assertThat(serveEvent.getRequest().isMultipart()).isTrue();
         log.info(serveEvent.getRequest().getHeaders());
         String boundary = serveEvent.getRequest().getHeader("Content-Type").split("boundary=")[1];
@@ -87,6 +87,7 @@ class AudioSourcingServiceImplTest {
                     """.formatted(boundary, boundary)
 
         );
+        log.info(serveEvent.toString());
 
     }
 
