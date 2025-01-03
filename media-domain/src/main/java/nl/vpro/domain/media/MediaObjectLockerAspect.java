@@ -79,7 +79,6 @@ public abstract class MediaObjectLockerAspect  {
             } catch(Throwable t) {
                 throw sneakyThrow(t);
             }
-
         });
     }
 
