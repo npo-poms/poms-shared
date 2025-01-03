@@ -78,6 +78,7 @@ public abstract class MediaObjectLockerAspect  {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
                 throw sneakyThrow(t);
+            } finally {
             }
         });
     }
