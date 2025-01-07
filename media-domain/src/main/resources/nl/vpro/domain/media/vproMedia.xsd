@@ -3315,7 +3315,7 @@
         </xs:annotation>
       </xs:enumeration>
 
-      <xs:enumeration value="NPOS">
+      <xs:enumeration value="NVOD">
         <xs:annotation>
           <xs:documentation>
             NPO Start
