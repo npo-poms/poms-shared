@@ -2809,8 +2809,8 @@ public enum Channel implements Displayable, XmlValued {
     /**
      * @since 8.4
      */
-    @XmlEnumValue("NPOS")
-    NPOS(VIDEO, Range.atLeast(Year.of(2003)), "https://npostart.nl", true) {
+    @XmlEnumValue("NVOD")
+    NVOD(VIDEO, Range.atLeast(Year.of(2003)), "https://npostart.nl", true) {
         @Override
         public String toString() {
             return "NPO Start";
