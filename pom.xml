@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>8.4-SNAPSHOT</version>
+    <version>8.4.0</version>
   </parent>
 
   <name>poms shared</name>
@@ -144,24 +144,6 @@
     </dependency>
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>vpro-nexus</id>
-      <distributionManagement>
-        <repository>
-          <id>nexus</id>
-          <name>Nexus releases</name>
-          <url>https://nexus.vpro.nl/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-          <id>nexus</id>
-          <name>Nexus snapshots</name>
-          <url>https://nexus.vpro.nl/content/repositories/snapshots</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-
-  </profiles>
 
   <distributionManagement>
     <snapshotRepository>
