@@ -111,7 +111,7 @@ public class MediaFormTest {
         assertThat(parseANDandNOT("auto and fiets")).isEqualTo("+auto +fiets");
         assertThat(parseANDandNOT("auto&fiets")).isEqualTo("+auto +fiets");
         assertThat(parseANDandNOT("auto & ! fiets")).isEqualTo("+auto -fiets");
-
+        assertThat(parseANDandNOT("+auto +fiets")).isEqualTo("+auto +fiets");
     }
 
     @Test
