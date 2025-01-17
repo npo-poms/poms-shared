@@ -41,6 +41,11 @@ public interface MediaPublisherHeaders {
     @Slf4j
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
+
+        /**
+         * @since 8.5
+         */
+        Kafka("KAFKA Queue")
         ;
 
 
