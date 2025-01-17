@@ -8,7 +8,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      MAVEN_ARGS: '--no-transfer-progress'
     if: startsWith(github.ref, 'refs/heads/REL-')
     steps:
       - uses: actions/checkout@v4
