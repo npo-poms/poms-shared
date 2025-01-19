@@ -36,7 +36,7 @@ public class CountryWrapper {
     }
 
     public CountryWrapper(String code) {
-        this.code = RegionService.getInstance().getByCode(code).orElse(new UnknownRegion(code));
+        this.code = RegionService.getInstance().getByCode(code, true).orElse(new UnknownRegion(code));
     }
 
     public CountryWrapper(Region code) {
