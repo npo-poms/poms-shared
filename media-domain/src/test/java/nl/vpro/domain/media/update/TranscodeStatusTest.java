@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.update;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,7 @@ public class TranscodeStatusTest {
             .builder()
             .mid("mid_123")
             .broadcasters(Arrays.asList("VPRO", "EO"))
+            .crids(List.of("crid://bnnvara.mema.media_item/26e81510-e430-40a4-8df1-964c92c86a72"))
             .build();
 
         JAXBTestUtil.roundTripAndSimilar(status, """
@@ -27,6 +29,9 @@ public class TranscodeStatusTest {
                     <broadcaster>VPRO</broadcaster>
                     <broadcaster>EO</broadcaster>
                 </broadcasters>
+                <crids>
+                    <crids>crid://bnnvara.mema.media_item/26e81510-e430-40a4-8df1-964c92c86a72</crids>
+                </crids>
             </transcodeStatus>""");
     }
 

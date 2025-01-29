@@ -1,8 +1,6 @@
 package nl.vpro.domain.media.update;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
@@ -56,6 +54,13 @@ public class TranscodeStatus {
     @XmlElementWrapper
     @XmlElement(name = "broadcaster")
     List<String> broadcasters;
+
+
+    @XmlElementWrapper
+    @XmlElement(name = "crids")
+    List<String> crids;
+
+
 
     public TranscodeStatus() {
     }
