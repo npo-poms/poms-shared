@@ -683,6 +683,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="crids" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="crids" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
      <xs:attribute name="mid" type="xs:string"/>
      <xs:attribute name="missingMedia" type="xs:boolean"/>
