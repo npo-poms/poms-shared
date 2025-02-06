@@ -73,7 +73,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
     @Override
     public String toString() {
-        return channel + ":" + (start != null ? start.atZone(Schedule.ZONE_ID).toLocalDateTime() : "<null>");
+        return channel.name() + ":" + (start != null ? start.atZone(Schedule.ZONE_ID).toLocalDateTime() : "<null>");
     }
 
     public String asString() {
