@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
-import nl.vpro.berlijn.validation.IntegerValues;
+import nl.vpro.validation.IntegerValues;
 
 
 /**

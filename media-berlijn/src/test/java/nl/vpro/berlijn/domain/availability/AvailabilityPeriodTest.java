@@ -12,7 +12,7 @@ import static java.time.Instant.EPOCH;
 import static java.time.Instant.ofEpochMilli;
 import static nl.vpro.berlijn.domain.availability.AvailabilityPeriod.ALWAYS;
 import static nl.vpro.berlijn.domain.availability.GeoIp.*;
-import static org.meeuw.assertj.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AvailabilityPeriodTest {
 

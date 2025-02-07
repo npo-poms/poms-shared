@@ -10,11 +10,11 @@ import jakarta.validation.ConstraintViolation;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.meeuw.util.kafka.KafkaDumpReader;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import nl.vpro.berlijn.domain.*;
-import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.update.Validation;

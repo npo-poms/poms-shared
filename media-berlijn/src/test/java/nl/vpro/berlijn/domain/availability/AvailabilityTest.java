@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.meeuw.util.kafka.KafkaDumpReader;
 
 import nl.vpro.berlijn.domain.Parser;
 import nl.vpro.berlijn.domain.Util;
-import nl.vpro.berlijn.util.kafka.KafkaDumpReader;
 
 
 @Log4j2
