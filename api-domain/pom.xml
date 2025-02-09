@@ -81,6 +81,10 @@
       <artifactId>jakarta.persistence-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.math</groupId>
+      <artifactId>mihxil-theories</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
