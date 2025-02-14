@@ -35,21 +35,21 @@ public interface MediaPublisherHeaders {
      * POMS used to support several 'destinations' when publishing. Corresponding to virtual topic in JMS.
      * There were 'Couchdb', 2 versions of elasticsearch (during transition), 'projectm', and 1 or two others.
      * <p>
-     * Nowadays, there is only one left, namely {@link #ElasticSearch}
-     * T
+     * At last, there was only one left, namely {@link #ElasticSearch}, but now there is also {@link #Kafka}.
+     *
      */
     @Slf4j
+    @Getter
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
 
         /**
+         * All data is published to kafka topics too, which can be picked up by Metadata Services
          * @since 8.5
          */
         Kafka("Kafka Topics")
         ;
 
-
-        @Getter
         private final String displayName;
 
         Destination(String displayName) {
