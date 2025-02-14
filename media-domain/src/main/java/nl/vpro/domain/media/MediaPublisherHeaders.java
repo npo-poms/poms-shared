@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.PolyNull;
 
+import nl.vpro.domain.PublicationReason;
 import nl.vpro.i18n.Displayable;
 
 
@@ -34,14 +35,14 @@ public interface MediaPublisherHeaders {
     String TRANSACTION_UUID_HEADER  = "transactionUUID";
 
     /**
-     * The reason why this message was published.
+     * The reason why this message was published {@see PublicationReason#toString()}, a {@link String} and a timestamp separated by {@link PublicationReason#FIELD_SPLITTER}
      */
     String REASON_HEADER            = "reason";
     /**
-     * A list recent reason. Encoded in a String, separated by {@link nl.vpro.domain.PublicationReason.Reasons#SEPARATOR}
+     * A list of recent reason. Encoded in a {@link String}, separated by {@link nl.vpro.domain.PublicationReason#RECORD_SPLITTER}
+     * @see #REASON_HEADER
      */
     String COLLECTED_REASONS_HEADER = "collectedReasons";
-
 
     /**
      * The user who triggered the publication
