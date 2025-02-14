@@ -45,7 +45,7 @@ public interface MediaPublisherHeaders {
         /**
          * @since 8.5
          */
-        Kafka("KAFKA Queue")
+        Kafka("Kafka Topic")
         ;
 
 
