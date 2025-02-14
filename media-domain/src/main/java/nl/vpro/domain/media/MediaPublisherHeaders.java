@@ -17,18 +17,62 @@ import nl.vpro.i18n.Displayable;
  */
 public interface MediaPublisherHeaders {
 
+    /**
+     * Indicates to which destinations the publisher application is requested to publish to. This used to be more relevant
+     * @see Destination
+     */
     String PUBLISH_TO_HEADER        = "publishTo";
+
+    /**
+     * At what moment this message was queued. This is used to calculate the time it took to publish.
+     */
     String QUEUETIME_HEADER         = "queueTime";
+
+    /**
+     *
+     */
     String TRANSACTION_UUID_HEADER  = "transactionUUID";
+
+    /**
+     * The reason why this message was published.
+     */
     String REASON_HEADER            = "reason";
+    /**
+     * A list recent reason. Encoded in a String, separated by {@link nl.vpro.domain.PublicationReason.Reasons#SEPARATOR}
+     */
     String COLLECTED_REASONS_HEADER = "collectedReasons";
 
 
+    /**
+     * The user who triggered the publication
+     */
     String TRIGGERED_BY_HEADER         = "triggeredBy";
+
+    /**
+     * The users who recently modified the object. A comma separated list of usernames.
+     */
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
+
+     /**
+     * The users who last modified the object.
+     */
     String LAST_MODIFIED_BY_HEADER     = "lastModifiedBy";
+
+    /**
+     * The mid of the object
+     */
     String MID = "mid";
+
+    /**
+     * The previous publishdate of the object
+     */
     String PREVIOUS_PUBLISHDATE_HEADER = "previousPublishDate";
+
+    /**
+     * A header to indicate that the object is to be considered deleted.
+     * @since 8.5
+     */
+    String DELETED = "deleted";
 
 
     /**
