@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.PolyNull;
 
 import nl.vpro.domain.PublicationReason;
@@ -97,11 +98,12 @@ public interface MediaPublisherHeaders {
 
         private final String displayName;
 
-        Destination(String displayName) {
+        Destination(@NonNull String displayName) {
             this.displayName = displayName;
         }
 
-        public static String[] toStringArray(Destination... destinations) {
+        @PolyNull
+        public static String[] toStringArray(@NonNull Destination @PolyNull... destinations) {
             if(destinations == null) {
                 return null;
             }
@@ -113,7 +115,8 @@ public interface MediaPublisherHeaders {
             return result;
         }
 
-        public static String[] toStringArray(Collection<Destination> destinations) {
+        @PolyNull
+        public static String[] toStringArray(@PolyNull Collection<@NonNull Destination> destinations) {
             if (destinations == null) {
                 return null;
             }
@@ -141,7 +144,8 @@ public interface MediaPublisherHeaders {
             return result;
         }
 
-        public static Destination[] arrayOfOrNull(String destination) {
+        @PolyNull
+        public static Destination[] arrayOfOrNull(@PolyNull String destination) {
             if (StringUtils.isBlank(destination)) {
                 return null;
             }
