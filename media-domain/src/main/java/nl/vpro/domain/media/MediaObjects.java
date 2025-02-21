@@ -120,7 +120,7 @@ public class MediaObjects {
     }
 
     /**
-     * Perfomrs of deep copy of the media object, this is currently implemented by serializing/deserializing it.
+     * Performs a deep copy of the media object, this is currently implemented by serializing/deserializing it.
      */
     @SuppressWarnings("unchecked")
     public static <T extends MediaObject> T deepCopy(T media) {
@@ -259,8 +259,6 @@ public class MediaObjects {
             toSegment.setMidRef(fromSegment.getMidRef());
             toSegment.setStart(fromSegment.getStart());
         }
-
-
     }
 
      /**
