@@ -90,6 +90,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @XmlAttribute
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private ChapterType chapterType = ChapterType.not_set;
 
 
