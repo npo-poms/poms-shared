@@ -87,6 +87,10 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @Transient
     private RecursiveMemberRef segmentOf;
 
+    @XmlAttribute
+    private ChapterType chapterType;;
+
+
     public Segment() {
     }
 
