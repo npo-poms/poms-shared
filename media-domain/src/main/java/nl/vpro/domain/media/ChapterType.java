@@ -2,8 +2,6 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
-import jakarta.xml.bind.annotation.XmlEnumValue;
-
 import nl.vpro.i18n.Displayable;
 
 /**
@@ -11,18 +9,18 @@ import nl.vpro.i18n.Displayable;
  */
 public enum ChapterType implements Displayable {
 
-    @XmlEnumValue("not set")
-    not_set("niet gezet"),
+    /**
+     * See <a href="https://nl.wikipedia.org/wiki/Ident">Wikipedia</a>
+     */
+    IDENT("Ident"),
 
-    ident("?"),
+    RECAP("samenvatting"),
 
-    recap("samenvatting"),
+    INTRO("introductie"),
 
-    intro("introductie"),
+    MAIN("hoofdgedeelte"),
 
-    main("hoofdgedeelte"),
-
-    credits("aftiteling")
+    CREDITS("aftiteling")
     ;
 
     @Getter

@@ -199,12 +199,11 @@
 
   <xs:simpleType name="chapterType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="not set"/>
-      <xs:enumeration value="ident"/>
-      <xs:enumeration value="recap"/>
-      <xs:enumeration value="intro"/>
-      <xs:enumeration value="main"/>
-      <xs:enumeration value="credits"/>
+      <xs:enumeration value="IDENT"/>
+      <xs:enumeration value="RECAP"/>
+      <xs:enumeration value="INTRO"/>
+      <xs:enumeration value="MAIN"/>
+      <xs:enumeration value="CREDITS"/>
     </xs:restriction>
   </xs:simpleType>
 
