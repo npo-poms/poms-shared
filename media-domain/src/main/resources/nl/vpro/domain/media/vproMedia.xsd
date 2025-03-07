@@ -197,6 +197,17 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="chapterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="not set"/>
+      <xs:enumeration value="ident"/>
+      <xs:enumeration value="recap"/>
+      <xs:enumeration value="intro"/>
+      <xs:enumeration value="main"/>
+      <xs:enumeration value="credits"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="segmentTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="SEGMENT"/>
@@ -670,6 +681,7 @@
           <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
           <xs:element type="xs:duration" name="start"/>
         </xs:sequence>
+        <xs:attribute name="chapterType" type="chapterType"/>
         <xs:attribute type="midType" name="midRef" use="required"/>
         <xs:attribute type="xs:anyURI" name="urnRef" use="required"/>
         <xs:attribute type="segmentTypeEnum" name="type" use="required"/>

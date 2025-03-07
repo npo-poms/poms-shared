@@ -172,6 +172,11 @@ public class SchemaTest extends AbstractSchemaTest {
         //testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
+    @Test
+    public void testChapterType() {
+        testMediaEnum("chapterType", ChapterType.class);
+
+    }
 
     @Test
     public void testWorkflow() {
