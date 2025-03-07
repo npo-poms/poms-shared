@@ -2,6 +2,9 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.PolyNull;
+
 import nl.vpro.i18n.Displayable;
 
 /**
@@ -30,5 +33,13 @@ public enum ChapterType implements Displayable {
 
     ChapterType(String displayName) {
         this.displayName = displayName;
+    }
+
+
+    public static @PolyNull  ChapterType valueOfOrNull(@PolyNull String id) {
+        if (StringUtils.isEmpty(id)) {
+            return null;
+        }
+        return valueOf(id.toUpperCase());
     }
 }
