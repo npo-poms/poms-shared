@@ -13,7 +13,7 @@ public enum ChapterType implements Displayable {
     /**
      * See <a href="https://nl.wikipedia.org/wiki/Ident">Wikipedia</a>
      */
-    IDENT("Ident"),
+    IDENT("ident"),
 
     RECAP("samenvatting"),
 
