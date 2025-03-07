@@ -26,8 +26,8 @@ public class TT888SubtitlesWriter extends AbstractSubtitlesWriter {
     }
 
     @Override
-    protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toTT888(iterate(subtitles, false), entityStream);
+    protected void stream(Subtitles subtitles, OutputStream outputStream) throws IOException {
+        SubtitlesUtil.toTT888(iterate(subtitles, false), outputStream);
     }
 
 }

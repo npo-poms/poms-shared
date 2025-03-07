@@ -27,13 +27,13 @@ public class VTTSubtitlesWriter extends AbstractSubtitlesWriter {
     }
 
     @Override
-    protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
+    protected void stream(Subtitles subtitles, OutputStream outputStream) throws IOException {
         SubtitlesContent content = subtitles.getContent();
         if (subtitles.isAvoidParsing() && content.getFormat() == SubtitlesFormat.WEBVTT) {
             log.debug("The subtitles are already in webvtt format");
-            entityStream.write(content.getValue());
+            outputStream.write(content.getValue());
         } else {
-            SubtitlesUtil.toVTT(iterate(subtitles, false), entityStream);
+            SubtitlesUtil.toVTT(iterate(subtitles, false), outputStream);
         }
     }
 }
