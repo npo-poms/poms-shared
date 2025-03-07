@@ -1,22 +1,35 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+
 import jakarta.xml.bind.annotation.XmlEnumValue;
+
+import nl.vpro.i18n.Displayable;
 
 /**
  * @since 8.6
  */
-public enum ChapterType {
+public enum ChapterType implements Displayable {
 
     @XmlEnumValue("not set")
-    not_set,
+    not_set("niet gezet"),
 
-    ident,
+    ident("?"),
 
-    recap,
+    recap("samenvatting"),
 
-    intro,
+    intro("introductie"),
 
-    main,
+    main("hoofdgedeelte"),
 
-    credits
+    credits("aftiteling")
+    ;
+
+    @Getter
+    private final String displayName;
+
+
+    ChapterType(String displayName) {
+        this.displayName = displayName;
+    }
 }
