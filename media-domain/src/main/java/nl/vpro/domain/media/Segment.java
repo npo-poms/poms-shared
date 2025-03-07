@@ -91,7 +91,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
-    private ChapterType chapterType = ChapterType.not_set;
+    private ChapterType chapterType = null;
 
 
     public Segment() {
