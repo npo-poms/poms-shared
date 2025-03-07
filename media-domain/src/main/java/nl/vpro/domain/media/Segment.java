@@ -88,7 +88,9 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     private RecursiveMemberRef segmentOf;
 
     @XmlAttribute
-    private ChapterType chapterType;;
+    @Getter
+    @Setter
+    private ChapterType chapterType = ChapterType.not_set;
 
 
     public Segment() {
@@ -143,6 +145,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
         this.start = source.start;
         this.midRef = source.midRef;
         this.urnRef = source.urnRef;
+        this.chapterType = source.chapterType;
     }
 
     public static Segment copy(Segment source) {

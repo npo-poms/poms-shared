@@ -568,6 +568,7 @@
         <xs:sequence>
           <xs:element name="start" type="xs:duration" form="qualified"/>
         </xs:sequence>
+        <xs:attribute name="chapterType" type="media:chapterType"/>
         <xs:attribute name="midRef" type="xs:string"/>
         <xs:attribute name="type" type="media:segmentTypeEnum" />
       </xs:extension>

@@ -484,6 +484,7 @@
       <xs:element name="asset" type="assetType" minOccurs="0"/>
       <xs:element name="start" type="xs:duration"/>
     </xs:sequence>
+    <xs:attribute name="chapterType" type="media:chapterType"/>
     <xs:attribute name="avType" type="media:avTypeEnum"/>
     <xs:attribute name="deleted" type="xs:boolean"/>
     <xs:attribute name="embeddable" type="xs:boolean"/>

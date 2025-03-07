@@ -82,6 +82,12 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Setter
     private java.time.Duration start;
 
+
+    @Setter
+    @XmlAttribute
+    private ChapterType chapterType;
+
+
     private String midRef;
     private ProgramUpdate parent;
 
@@ -104,6 +110,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         this.parent = parent;
         this.segmentType = mediaObject.getType();
         this.start = mediaObject.getStart();
+        this.chapterType = mediaObject.getChapterType();
         if (parent == null) {
             this.midRef = mediaObject.getMidRef();
         }
@@ -117,6 +124,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         p.setType(segmentType);
         p.setMidRef(midRef);
         p.setOwner(ownerType);
+        p.setChapterType(chapterType);
         return p;
     }
 
