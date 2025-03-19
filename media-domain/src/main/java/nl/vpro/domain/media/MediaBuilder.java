@@ -1261,6 +1261,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
         }
 
+        public T chapterType(ChapterType chapterType) {
+            mediaObject().setChapterType(chapterType);
+            return (T) this;
+        }
+
         /**
          * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
          */
