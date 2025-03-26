@@ -463,6 +463,7 @@
         "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
       }
     } ],
+    "chapterType" : "MAIN",
     "language" : [ {
       "value" : "fr"
     }, {
