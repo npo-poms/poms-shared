@@ -467,6 +467,7 @@
     "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:image:5"
   } ],
+  "chapterType" : "MAIN",
   "start" : 120000,
   "credits" : [ {
     "objectType" : "person",
