@@ -1093,6 +1093,7 @@
           "workflow" : "PUBLISHED",
           "urn" : "urn:vpro:media:image:5"
         } ],
+        "chapterType" : "MAIN",
         "start" : 0,
         "urnRef" : "urn:vpro:media:program:12",
         "midRef" : "VPROWON_20001",
