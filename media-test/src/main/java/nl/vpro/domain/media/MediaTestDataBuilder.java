@@ -1250,6 +1250,11 @@ public interface MediaTestDataBuilder<
         }
 
 
+        public SegmentTestDataBuilder withChapterType() {
+            return chapterType(ChapterType.MAIN);
+        }
+
+
         @Override
         public SegmentTestDataBuilder constrainedNew() {
             return MediaTestDataBuilder.super.constrainedNew().
@@ -1259,6 +1264,7 @@ public interface MediaTestDataBuilder<
         @Override
         public SegmentTestDataBuilder withEverything(AtomicLong ids, AtomicLong mids) {
             return MediaTestDataBuilder.super.withEverything(ids, mids)
+                .withChapterType()
                 .withStart();
 
         }
