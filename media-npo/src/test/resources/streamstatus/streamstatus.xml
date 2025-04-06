@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<streamstatus timestamp="2025-03-31T08:00:01">
+    <prid>
+        WO_BV_20079958
+    </prid>
+    <encryptie>
+    </encryptie>
+    <streamtype>
+        aod
+    </streamtype>
+    <platform>
+        internetvod
+    </platform>
+    <status>
+        online
+    </status>
+    <profielen>
+        <profiel>
+            <versie>
+                1743409435
+            </versie>
+            <protocol>
+                progressive
+            </protocol>
+        </profiel>
+    </profielen>
+</streamstatus>
