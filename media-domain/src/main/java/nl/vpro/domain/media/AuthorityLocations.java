@@ -8,16 +8,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
 
 import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.TriConsumer;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.domain.Changeables;
@@ -509,27 +510,29 @@ public class AuthorityLocations {
         }
     }
 
+    public static final TriConsumer<String, HttpResponse<Void>, Exception> BYTE_SIZE_CONSUMER = (locationUrl, response, exception) -> {
+        if (exception != null) {
+            log.warn("For {}: {} {}", locationUrl, exception.getClass().getName(), exception.getMessage());
+        }
+        if (response != null) {
+            int statusCode = response.statusCode();
+
+            org.slf4j.event.Level level = switch (statusCode) {
+                case 200 -> org.slf4j.event.Level.DEBUG;
+                case 451 -> org.slf4j.event.Level.INFO; // P0MS-244
+                default -> org.slf4j.event.Level.WARN;
+            };
+            log.atLevel(level).log("HEAD {} returned {}", locationUrl, response.statusCode());
+
+        }
+        // do nothing
+    };
     /**
      * Executes a HEAD request to determine the bytes size of given URL. For mp3's and such.
      * @since 7.7
      */
     public static OptionalLong getBytesize(String locationUrl) {
-        return HttpConnectionUtils.getOptionalByteSize(locationUrl, (response, exception) -> {
-            if (exception != null) {
-                log.warn("For {}: {} {}", locationUrl, exception.getClass().getName(), exception.getMessage());
-            }
-            if (response != null) {
-                int statusCode = response.statusCode();
-
-                org.slf4j.event.Level level = switch (statusCode) {
-                    case 200 -> org.slf4j.event.Level.DEBUG;
-                    case 451 -> org.slf4j.event.Level.INFO; // P0MS-244
-                    default -> org.slf4j.event.Level.WARN;
-                };
-                log.atLevel(level).log("HEAD {} returned {}", locationUrl, response.statusCode());
-
-            }
-        });
+        return HttpConnectionUtils.getOptionalByteSize(locationUrl, BYTE_SIZE_CONSUMER.withArg1(locationUrl));
     }
 
      private String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
