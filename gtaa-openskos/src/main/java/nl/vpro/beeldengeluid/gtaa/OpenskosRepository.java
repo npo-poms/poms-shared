@@ -10,7 +10,10 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -24,12 +27,10 @@ import java.util.stream.Stream;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Context;
 import jakarta.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
@@ -37,20 +38,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.Unmarshaller;
-import org.springframework.oxm.XmlMappingException;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.xml.sax.InputSource;
+
+import com.github.mizosoft.methanol.*;
+import com.github.mizosoft.methanol.adapter.jaxb.jakarta.JaxbAdapterFactory;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
-import nl.vpro.openarchives.oai.Record;
 import nl.vpro.openarchives.oai.*;
+import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -71,6 +67,10 @@ public class OpenskosRepository implements GTAARepository {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
+
+    ThreadLocal<RDFPost> Post_RDF = ThreadLocal.withInitial(() -> null);
+
+
     static OpenskosRepository instance;
 
     public static OpenskosRepository getInstance() {
@@ -79,8 +79,6 @@ public class OpenskosRepository implements GTAARepository {
         }
         return instance;
     }
-
-    private final RestTemplate template;
 
     private final String gtaaUrl;
     private final String gtaaKey;
@@ -119,14 +117,19 @@ public class OpenskosRepository implements GTAARepository {
 
     private final MeterRegistry meterRegistry;
 
+    private final Methanol client;
+
     @Inject
     public OpenskosRepository(
-        @Value("${gtaa.baseUrl}")
-        @NonNull String baseUrl,
-        @Value("${gtaa.key}")
-        @NonNull String key,
-        @Nullable MeterRegistry meterRegistry) {
-        this(baseUrl, key, null, null, null, null, 1,
+        @Value("${gtaa.baseUrl}") @NonNull String baseUrl,
+        @Value("${gtaa.key}") @NonNull String key,
+        @Nullable MeterRegistry meterRegistry)  {
+        this(baseUrl,
+            key,
+            null,
+            null,
+            null,
+            1,
             meterRegistry);
     }
 
@@ -134,15 +137,14 @@ public class OpenskosRepository implements GTAARepository {
     private OpenskosRepository(
         @NonNull String baseUrl,
         @NonNull String key,
-        @Nullable RestTemplate template,
         @Nullable String personsSpec,
         @Nullable String geoLocationsSpec,
         @Nullable String tenant,
         int retries,
-        @Nullable MeterRegistry meterRegistry) {
+        @Nullable MeterRegistry meterRegistry)  {
         this.gtaaUrl = baseUrl;
         this.gtaaKey = key;
-        this.template = createTemplateIfNull(template);
+        this.client = createClient(this.gtaaUrl);
         this.tenant = tenant;
         this.personsSpec = StringUtils.isEmpty(personsSpec) ? Scheme.person.getSpec() : personsSpec;
         this.geoLocationsSpec = StringUtils.isEmpty(geoLocationsSpec) ? Scheme.geographicname.getSpec() : geoLocationsSpec;
@@ -156,95 +158,97 @@ public class OpenskosRepository implements GTAARepository {
     }
 
 
+    private Methanol createClient(String baseUrl)  {
 
-    private void addErrorHandler() {
-        template.setErrorHandler(new ResponseErrorHandler() {
-            @Override
-            public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
-                final boolean hasError = ! response.getStatusCode().is2xxSuccessful();
-                if (hasError) {
-                    log.warn("{} has error: {}", template, response.getStatusCode());
-                } else {
-                    Post_RDF.remove();
-                }
-                return hasError;
-            }
 
-            @Override
-            public void handleError(@NonNull ClientHttpResponse response) throws IOException {
-                final StringWriter body = new StringWriter();
-                IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
-                final RDFPost postRdf = Post_RDF.get();
-                try {
 
-                    switch ((HttpStatus) response.getStatusCode()) {
-                        case CONFLICT:
-                            throw new GTAAConflict("Conflicting or duplicate label: " + postRdf.prefLabel + ": " + body);
-                        case BAD_REQUEST:
-                            if (body.toString().startsWith("The pref label already exists in that concept scheme")) {
-                                throw new GTAAConflict(body.toString());
-                            }
-                        default:
-                            final StringWriter writer = new StringWriter();
-                            if (postRdf != null) {
-                                writer.append("Request:\n");
-                                JAXB.marshal(postRdf.rdf, writer);
-                            }
-                            writer.append("Response:\n");
-                            writer.append(body.toString());
-                            throw new GTAAError(
-                                response.getStatusCode().value(),
-                                body.toString(),
-                                "For " + gtaaUrl + " " +
-                                response.getStatusCode() + " " + response.getStatusText() + " " + writer);
+
+        var adapterCodec =
+            AdapterCodec.newBuilder()
+                .basic()
+                .encoder(JaxbAdapterFactory.createEncoder())
+                .decoder(JaxbAdapterFactory.createDecoder())
+                .decoder(new BodyAdapter.Decoder() {
+                    @Override
+                    public  <T> HttpResponse.BodySubscriber<T> toObject(TypeRef<T> typeRef, @Nullable MediaType mediaType) {
+                        return HttpResponse.BodySubscribers.mapping(HttpResponse.BodySubscribers.ofInputStream(),
+                            (bytes) -> typeRef.uncheckedCast(new SAXSource(new InputSource(bytes))));
                     }
-                } finally {
-                    Post_RDF.remove();
-                }
-            }
-        });
+
+                    @Override
+                    public boolean isCompatibleWith(MediaType mediaType) {
+                        return mediaType.isCompatibleWith(MediaType.APPLICATION_XML);
+                    }
+
+                    @Override
+                    public boolean supportsType(TypeRef<?> typeRef) {
+                        return typeRef.exactRawType().equals(Source.class);
+                    }
+                })
+
+
+                .build();
+
+            var client =
+                Methanol.newBuilder()
+                    .adapterCodec(adapterCodec)
+                    .baseUri(baseUrl)
+                    .defaultHeader("Accept", "application/xml")
+                   /* .interceptor(new Methanol.Interceptor() {
+                        @Override
+                        public <T> HttpResponse<T> intercept(HttpRequest request, Chain<T> chain) throws IOException, InterruptedException {
+
+                            HttpResponse<T> response = chain.forward(request);
+                            if (!HttpStatus.isSuccessful(response)) {
+                                log.warn("{} has error: {}", request, response.statusCode());
+                            } else {
+                                Post_RDF.remove();
+                            }
+                            return response;
+                        }
+
+                        @Override
+                        public <T> CompletableFuture<HttpResponse<T>> interceptAsync(HttpRequest request, Chain<T> chain) {
+                            return null;
+                        }
+                    })*/
+                    .build();
+
+
+        return client;
     }
 
-    private static RestTemplate createTemplateIfNull(@Nullable RestTemplate template) {
-        if (template == null) {
 
-            Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-            jaxb2Marshaller.setPackagesToScan(
-                "nl.vpro.beeldengeluid.gtaa",
-                "nl.vpro.w3.rdf",
-                "nl.vpro.openarchives.oai"
-            );
+    private void handleError(@NonNull  HttpResponse<InputStream> response) throws IOException {
+        final StringWriter body = new StringWriter();
+        IOUtils.copy(response.body(), body, StandardCharsets.UTF_8);
+        final RDFPost postRdf = Post_RDF.get();
+        try {
 
-            try {
-                jaxb2Marshaller.afterPropertiesSet();
-            } catch (Exception ex) {
-                log.warn(ex.getMessage());
-
+            switch (response.statusCode()) {
+                case 409: // TODO
+                    throw new GTAAConflict("Conflicting or duplicate label: " + postRdf.prefLabel + ": " + body);
+                case 400:
+                    if (body.toString().startsWith("The pref label already exists in that concept scheme")) {
+                        throw new GTAAConflict(body.toString());
+                    }
+                default:
+                    final StringWriter writer = new StringWriter();
+                    if (postRdf != null) {
+                        writer.append("Request:\n");
+                        JAXB.marshal(postRdf.rdf, writer);
+                    }
+                    writer.append("Response:\n");
+                    writer.append(body.toString());
+                    throw new GTAAError(
+                        response.statusCode(),
+                        body.toString(),
+                        "For " + gtaaUrl + " " +
+                            response.statusCode() + " " + writer);
             }
-            DOMSourceUnmarshaller domSourceUnmarshaller = new DOMSourceUnmarshaller();
-
-            MarshallingHttpMessageConverter rdfHttpMessageConverter = new MarshallingHttpMessageConverter();
-            rdfHttpMessageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
-            rdfHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-            rdfHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-            MarshallingHttpMessageConverter rdfToDomHttpMessageConverter = new MarshallingHttpMessageConverter();
-            rdfToDomHttpMessageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
-
-            rdfToDomHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-            rdfToDomHttpMessageConverter.setUnmarshaller(domSourceUnmarshaller);
-
-            template = new RestTemplate();
-
-            DefaultUriBuilderFactory uriBuilder = new DefaultUriBuilderFactory();
-            uriBuilder.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-            template.setUriTemplateHandler(uriBuilder);
-
-            template.setMessageConverters(
-                Arrays.asList(rdfHttpMessageConverter, rdfToDomHttpMessageConverter)
-            );
+        } finally {
+            Post_RDF.remove();
         }
-        return template;
     }
 
     @PostConstruct
@@ -254,7 +258,7 @@ public class OpenskosRepository implements GTAARepository {
             personsSpec,
             geoLocationsSpec
         );
-        addErrorHandler();
+        //addErrorHandler();
     }
 
 
@@ -276,11 +280,11 @@ public class OpenskosRepository implements GTAARepository {
     @SuppressWarnings("StringConcatenationInLoop")
     private Description submit(@NonNull String prefLabel, @NonNull  List<Label> notes, @NonNull  String creator, @NonNull  Scheme scheme) {
 
-        ResponseEntity<Source> response = null;
+        HttpResponse<Source> response = null;
         RuntimeException rte = null;
         try {
             response = postRDF(prefLabel, notes, creator, scheme);
-            meterRegistry.counter("gtaa.submit", "status", response.getStatusCode().toString()).increment();
+            meterRegistry.counter("gtaa.submit", "status",String.valueOf(response.statusCode())).increment();
         } catch (GTAAConflict ex) {
             meterRegistry.counter("gtaa.submit", "status", "CONFLICT").increment();
             String postFix = ".";
@@ -291,12 +295,16 @@ public class OpenskosRepository implements GTAARepository {
                     // See MSE-3366
                     log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + postFix);
                     response = postRDF(prefLabel + postFix, notes, creator, scheme);
-                    meterRegistry.counter("gtaa.submit", "retry", "true", "status", response.getStatusCode().toString()).increment();
+                    meterRegistry.counter("gtaa.submit", "retry", "true", "status", String.valueOf(response.statusCode())).increment();
                     break;
                 } catch (GTAAConflict ex2) {
                     /* The version with "." already exists too */
                     log.debug("Duplicate label: {}", prefLabel);
                     rte = ex2;
+                } catch (IOException e) {
+                    log.warn(e.getMessage(), e);
+                } catch (InterruptedException e) {
+                    log.warn(e.getMessage(), e);
                 }
                 postFix += ".";
             }
@@ -309,19 +317,21 @@ public class OpenskosRepository implements GTAARepository {
         } catch (RuntimeException rt) {
             log.error(rt.getClass().getName() + " " + rt.getMessage());
             rte = rt;
+        } catch (IOException | InterruptedException e) {
+            log.warn(e.getMessage(), e);
         }
 
-        if (response != null && response.getBody() != null) {
+        if (response != null && response.body() != null) {
 
-            Source doc = response.getBody();
+            Source doc = response.body();
             logSource(doc);
 
             RDF rdf = JAXB.unmarshal(doc, RDF.class);
-            if (response.getStatusCode().is2xxSuccessful()) {
+            if (HttpStatus.isSuccessful(response.statusCode())) {
                 return rdf.getDescriptions().get(0);
             } else {
                 // Is this possible at all?
-                throw new RuntimeException("Status " + response.getStatusCode() + " for prefLabel: " + prefLabel, rte);
+                throw new RuntimeException("Status " + response.statusCode() + " for prefLabel: " + prefLabel, rte);
             }
         } else {
             throw new RuntimeException("For prefLabel: " + prefLabel, rte);
@@ -346,12 +356,12 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
+    public CountedIterator<Record> getPersonUpdates(Instant from, Instant to) {
         return getUpdates(from, to, personsSpec);
     }
 
     @Override
-    public CountedIterator<Record> getGeoLocationsUpdates(@Context Instant from, @Context Instant to) {
+    public CountedIterator<Record> getGeoLocationsUpdates(Instant from, Instant to) {
         return getUpdates(from, to, geoLocationsSpec);
     }
 
@@ -451,7 +461,6 @@ public class OpenskosRepository implements GTAARepository {
         return oai_pmh.getListRecord();
     }
 
-    ThreadLocal<RDFPost> Post_RDF = ThreadLocal.withInitial(() -> null);
 
 
     protected static class RDFPost {
@@ -464,12 +473,12 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
-    @SneakyThrows
-    private ResponseEntity<Source> postRDF(
+
+    private HttpResponse<Source> postRDF(
         final  @NonNull String prefLabel,
         final @NonNull List<@NonNull Label> notes,
         final @NonNull String creator,
-        final @NonNull Scheme scheme) {
+        final @NonNull Scheme scheme) throws IOException, InterruptedException {
         log.info("Submitting {} {} {} to {}", prefLabel, notes, creator, gtaaUrl);
         final RDF rdf = new RDF();
         rdf.setDescriptions(
@@ -485,24 +494,27 @@ public class OpenskosRepository implements GTAARepository {
                     .build()));
 
 
-        Post_RDF.set(new RDFPost(prefLabel, rdf));
+        RDFPost rdfPost = new RDFPost(prefLabel, rdf);
         // Beware parameter ordering is relevant
         final String encodedKey = Stream.of(gtaaKey.split(":", 2))
             .map(this::encode)
             .collect(Collectors.joining(":"));
         //String encodedKey = encode(gtaaKey);
 
-        return template.postForEntity(
-            String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
-                gtaaUrl,
-                encodedKey,
-                encode(tenant)
-            ),
-            rdf, Source.class);
+        MutableRequest post = MutableRequest.POST(String.format("api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
+            encodedKey,
+            encode(tenant)),
+            rdfPost.rdf, MediaType.APPLICATION_XML
+        );
+
+
+        return client.send(post, Source.class);
+
+
     }
 
 
-    @SneakyThrows
+
     @Nullable
     private String encode(@Nullable String u) {
         return u == null ? null : URLEncoder.encode(u, StandardCharsets.US_ASCII);
@@ -528,19 +540,22 @@ public class OpenskosRepository implements GTAARepository {
 
     @Nullable
     protected <T> T getForPath(final String path, final Class<T> tClass) {
-        String url = gtaaUrl + path;
-        log.info("Calling gtaa {}", url);
+
         meterRegistry.counter("gtaa.get", "path", path).increment();
 
         try {
-            ResponseEntity<T> entity = template.getForEntity(url, tClass);
-            return entity.getStatusCode().is2xxSuccessful() ? entity.getBody() : null;
+            MutableRequest request = MutableRequest.GET(path);
+            HttpResponse<T> entity = client.send(request, tClass);
+            return HttpStatus.isSuccessful(entity.statusCode()) ? entity.body() : null;
         } catch (NullPointerException npe) {
-            log.error("For GET {}: {}", url, npe.getMessage(), npe);
+            log.error("For GET {}{}: {}", gtaaUrl, path, npe.getMessage(), npe);
             throw npe;
         } catch (RuntimeException rt) {
-            log.error("For GET {}: {}", url, rt.getMessage());
+            log.error("For GET {}{}: {}", gtaaUrl, path, rt.getMessage());
             throw rt;
+        } catch (IOException | InterruptedException e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -550,6 +565,7 @@ public class OpenskosRepository implements GTAARepository {
         return findForSchemes(input, max, Arrays.stream(Scheme.values()).map(s -> new SchemeOrNot(s.getUrl(), false)).toArray(SchemeOrNot[]::new));
     }
 
+    @SneakyThrows
     @Override
     public List<Description> findForSchemes(String input, Integer max, SchemeOrNot... schemes) {
         if (max == null) {
@@ -574,9 +590,11 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public Optional<Description> retrieveConceptStatus(String id) {
-        String url = gtaaUrl + "api/find-concepts?id=" + id;
+        String url = "api/find-concepts?id=" + id;
         try {
-            RDF rdf = template.getForObject(url, RDF.class);
+
+
+            RDF rdf = null;// client.send(url, url, RDF.class);
             meterRegistry.counter("gtaa.retrieve", "id", id).increment();
 
             List<Description> descriptions = descriptions(rdf);
@@ -606,7 +624,10 @@ public class OpenskosRepository implements GTAARepository {
     public Optional<GTAAConcept> get(String id) {
         String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
-            RDF rdf = template.getForObject(url, RDF.class);
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .build();
+            RDF rdf = client.send(request, RDF.class).body();
             meterRegistry.counter("gtaa.get", "id", id).increment();
 
             List<Description> descriptions = descriptions(rdf);
@@ -614,17 +635,22 @@ public class OpenskosRepository implements GTAARepository {
         } catch (GTAAError clientError) {
             meterRegistry.counter("gtaa.get.error", "id", id, "status", String.valueOf(clientError.getStatusCode())).increment();
 
-            if (clientError.getStatusCode() == HttpStatus.NOT_FOUND.value()) {
+            if (clientError.getStatusCode() ==  404) {
                 return Optional.empty();
             }
-            if (clientError.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            if (clientError.getStatusCode() == 500) {
                 if (NOT_FOUND.matcher(clientError.getResponseBodyAsString()).matches()) {
                     return Optional.empty();
                 }
             }
             log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, clientError.getResponseBodyAsString(), clientError);
             throw clientError;
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            log.warn(e.getMessage(), e);
         }
+        return Optional.empty();
     }
 
     private String generateQueryByScheme(SchemeOrNot... schemeList) {
@@ -666,38 +692,6 @@ public class OpenskosRepository implements GTAARepository {
     @Override
     public String toString() {
         return OpenskosRepository.class.getSimpleName() + " " + gtaaUrl;
-    }
-
-    private static class DOMSourceUnmarshaller implements Unmarshaller {
-        @Override
-        public boolean supports(@NonNull Class<?> aClass) {
-            return Source.class.isAssignableFrom(aClass);
-        }
-
-        @NonNull
-        @Override
-        public Object unmarshal(@NonNull Source source) throws XmlMappingException {
-            try {
-                TransformerFactory factory = TransformerFactory.newInstance();
-                factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-                Transformer transformer = factory.newTransformer();
-                DOMResult result = new DOMResult();
-                transformer.transform(source, result);
-                return new DOMSource(result.getNode());
-            } catch (TransformerException e) {
-                  throw new WrappedTransformerException(e);
-            }
-
-        }
-    }
-
-    public static class  WrappedTransformerException extends XmlMappingException implements Serializable {
-        @Serial
-        private static final long serialVersionUID = -4299814482145831053L;
-
-        WrappedTransformerException(TransformerException e) {
-            super(e.getMessage(), e);
-        }
     }
 
 }
