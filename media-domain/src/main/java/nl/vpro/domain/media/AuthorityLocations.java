@@ -514,7 +514,22 @@ public class AuthorityLocations {
      * @since 7.7
      */
     public static OptionalLong getBytesize(String locationUrl) {
-        return HttpConnectionUtils.getOptionalByteSize(locationUrl);
+        return HttpConnectionUtils.getOptionalByteSize(locationUrl, (response, exception) -> {
+            if (exception != null) {
+                log.warn("For {}: {} {}", locationUrl, exception.getClass().getName(), exception.getMessage());
+            }
+            if (response != null) {
+                int statusCode = response.statusCode();
+
+                org.slf4j.event.Level level = switch (statusCode) {
+                    case 200 -> org.slf4j.event.Level.DEBUG;
+                    case 451 -> org.slf4j.event.Level.INFO; // P0MS-244
+                    default -> org.slf4j.event.Level.WARN;
+                };
+                log.atLevel(level).log("HEAD {} returned {}", locationUrl, response.statusCode());
+
+            }
+        });
     }
 
      private String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
