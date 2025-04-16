@@ -108,19 +108,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String contentType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws SourcingServiceException {
-        return uploadv2(logger, mid, contentType, inputStream);
-    }
-
-
-
-    @SneakyThrows
-    protected UploadResponse uploadv2(
-       SimpleLogger logger,
-       final String mid,
-       final String contentType,
-       final InputStream inputStream) throws SourcingServiceException {
-
+    ) throws SourcingServiceException, IOException, InterruptedException {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
