@@ -109,10 +109,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         InputStream inputStream,
         @Nullable String errors
     ) throws SourcingServiceException {
-
         return uploadv2(logger, mid, contentType, inputStream);
-
-
     }
 
 
@@ -194,7 +191,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             count,
             "2:"+  configuration.get().cleanBaseUrl()
             );
-
    }
 
 
@@ -211,7 +207,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
 
         return Optional.of(V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize());
-
     }
 
     @Override
