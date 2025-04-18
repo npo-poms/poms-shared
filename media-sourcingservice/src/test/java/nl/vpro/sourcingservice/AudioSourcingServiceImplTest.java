@@ -49,7 +49,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadAudio() {
+    public void uploadAudio() throws IOException, InterruptedException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
