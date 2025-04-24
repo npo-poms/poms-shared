@@ -17,7 +17,7 @@ jobs:
         # also check (once) on latest
         include:
           - os: ubuntu-latest
-            java: 23
+            java: 24
     runs-on: ${{ matrix.os }}
     env:
       MAVEN_ARGS: '--no-transfer-progress'
