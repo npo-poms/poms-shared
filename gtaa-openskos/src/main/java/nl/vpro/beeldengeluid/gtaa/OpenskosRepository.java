@@ -38,7 +38,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.*;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
@@ -66,6 +66,8 @@ import static java.time.format.DateTimeFormatter.ISO_INSTANT;
  */
 @Slf4j
 public class OpenskosRepository implements GTAARepository {
+
+    public static final MediaType RDF_TYPE = MediaType.parseMediaType("application/rdf+xml");
 
     public static final String CONFIG_FILE = "openskosrepository.properties";
 
@@ -205,7 +207,7 @@ public class OpenskosRepository implements GTAARepository {
         });
     }
 
-    private static RestTemplate createTemplateIfNull(@Nullable RestTemplate template) {
+    private static  RestTemplate createTemplateIfNull(@Nullable RestTemplate template) {
         if (template == null) {
 
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
@@ -224,12 +226,12 @@ public class OpenskosRepository implements GTAARepository {
             DOMSourceUnmarshaller domSourceUnmarshaller = new DOMSourceUnmarshaller();
 
             MarshallingHttpMessageConverter rdfHttpMessageConverter = new MarshallingHttpMessageConverter();
-            rdfHttpMessageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
+            rdfHttpMessageConverter.setSupportedMediaTypes(List.of(RDF_TYPE, MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
             rdfHttpMessageConverter.setMarshaller(jaxb2Marshaller);
             rdfHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
 
             MarshallingHttpMessageConverter rdfToDomHttpMessageConverter = new MarshallingHttpMessageConverter();
-            rdfToDomHttpMessageConverter.setSupportedMediaTypes(List.of(MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
+            rdfToDomHttpMessageConverter.setSupportedMediaTypes(List.of(RDF_TYPE, MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_FORM_URLENCODED));
 
             rdfToDomHttpMessageConverter.setMarshaller(jaxb2Marshaller);
             rdfToDomHttpMessageConverter.setUnmarshaller(domSourceUnmarshaller);

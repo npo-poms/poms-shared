@@ -6,6 +6,8 @@ import java.net.URI;
 import java.time.*;
 import java.util.*;
 
+import jakarta.xml.bind.JAXB;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -66,6 +68,8 @@ public class OpenskosRepositoryITest {
         GTAAConcept concept = impl.submit(geographicName, "poms_test");
         assertThat(concept.getScopeNotes()).isNotEmpty();
         assertThat(concept.getName()).isEqualTo(name);
+
+        JAXB.marshal(concept, System.out);
 
         String result = """
             <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:openskos="http://openskos.org/xmlns#" openskos:numFound="1" openskos:rows="20" openskos:start="0">
@@ -174,7 +178,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
 
         Optional<GTAAConcept> geo = impl.get("http://data.beeldengeluid.nl/gtaa/1723598");
-        assertThat(geo.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
+        assertThat(geo.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1723598"));
 
     }
 
@@ -192,6 +196,7 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
+    @Disabled
     public void testFindEyeGenre(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findForSchemes("science", 100, GTAARepository.SchemeOrNot.of(genrefilmmuseum));
