@@ -19,21 +19,18 @@
       <artifactId>gtaa-domain</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-oxm</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.wiremock</groupId>
       <artifactId>wiremock-standalone</artifactId>
     </dependency>
     <dependency>
-      <groupId>jakarta.ws.rs</groupId>
-      <artifactId>jakarta.ws.rs-api</artifactId>
-      <scope>provided</scope>
+      <groupId>com.github.mizosoft.methanol</groupId>
+      <artifactId>methanol-jaxb-jakarta</artifactId>
+      <version>1.8.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <optional>true</optional> <!-- annotation only -->
     </dependency>
     <dependency>
       <groupId>jakarta.annotation</groupId>
