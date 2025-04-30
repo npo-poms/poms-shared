@@ -24,3 +24,10 @@ search:
 		curl --get --data-urlencode "q=$(TERM)*" \
                 --data-urlencode "tenant=beng" \
                 'https://gtaa.apis.beeldengeluid.nl/api/find-concepts'
+
+
+search_acc:
+		curl --get --data-urlencode "q=$(TERM)*" \
+                --data-urlencode "tenant=beng" \
+                'https://skos-acc.beeldengeluid.nl/api/find-concepts'
+
