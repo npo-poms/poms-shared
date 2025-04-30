@@ -1388,7 +1388,7 @@ public class MediaObjects {
              }
              case REALIZED -> {
                  // Are there any 'REALIZED' prediction without locations that can be played anyway?
-                 // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
+                 // select * from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
                  // -> no
 
                  Optional<Location> matchingLocation = mediaObject.getLocations().stream()
