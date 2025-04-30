@@ -139,6 +139,19 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
+    public void testFindGeographicalNAme(Env env) {
+        OpenskosRepository impl = getRealInstance(env);
+        for (String name : List.of("Lutjebroek", "Gendringen")) {
+            List<Description> names = impl.findForSchemes(name, 100, GTAARepository.SchemeOrNot.of(Scheme.geographicname));
+            for (Description desc : names) {
+                log.info("{} -> {}", name, desc);
+            }
+        }
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("envs")
     public void testFindAnyThing(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
