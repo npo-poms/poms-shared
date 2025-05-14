@@ -117,12 +117,15 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return DateUtils.toInstant(time);
     }
 
+    @Setter
     @XmlTransient // See property
     protected SortedSet<ScheduleEvent> scheduleEvents;
 
+    @Setter
     @XmlAttribute
     protected Channel channel;
 
+    @Setter
     @XmlAttribute
     protected Net net;
 
@@ -324,16 +327,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return channel;
     }
 
-    public void setChannel(Channel value) {
-        this.channel = value;
-    }
-
     public Net getNet() {
         return net;
-    }
-
-    public void setNet(Net net) {
-        this.net = net;
     }
 
     public Integer getReleaseVersion() {
