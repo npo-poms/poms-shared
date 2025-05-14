@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>8.8.2</version>
+    <version>8.8.3-SNAPSHOT</version>
   </parent>
   <artifactId>gtaa-openskos</artifactId>
   <description>Contains an implementation of an openskos client for GTAA</description>
