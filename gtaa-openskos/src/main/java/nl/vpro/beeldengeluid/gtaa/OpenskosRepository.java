@@ -10,6 +10,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -38,7 +39,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.client.*;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
@@ -49,8 +50,8 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
-import nl.vpro.openarchives.oai.Record;
 import nl.vpro.openarchives.oai.*;
+import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -173,7 +174,7 @@ public class OpenskosRepository implements GTAARepository {
             }
 
             @Override
-            public void handleError(@NonNull ClientHttpResponse response) throws IOException {
+            public void handleError(@NonNull URI uri, @NonNull HttpMethod method, @NonNull ClientHttpResponse response) throws IOException {
                 final StringWriter body = new StringWriter();
                 IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
                 final RDFPost postRdf = Post_RDF.get();

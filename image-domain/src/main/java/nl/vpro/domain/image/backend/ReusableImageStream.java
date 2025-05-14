@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.image.backend;
 
-import jakarta.validation.constraints.Min;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.image.BufferedImage;
@@ -17,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 import javax.imageio.ImageIO;
+import jakarta.validation.constraints.Min;
 
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.*;
@@ -128,12 +128,7 @@ public class ReusableImageStream extends ImageStream {
         }
     }
 
-    @Override
-    @Deprecated(forRemoval = true, since = "4.1")
-    protected void finalize() throws Throwable {
-        super.finalize();
-        close();
-    }
+
 
     @Override
     public void close() throws IOException {
