@@ -180,6 +180,7 @@ public interface MediaTestDataBuilder<
     /**
      * @deprecated Use {@link #validDbConstraint()}
      */
+    @Deprecated
     default T constrainedDb() {
         return validDbConstraint();
     }
