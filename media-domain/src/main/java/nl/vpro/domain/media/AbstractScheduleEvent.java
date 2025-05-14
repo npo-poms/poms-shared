@@ -1,19 +1,19 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlSchemaType;
-import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -34,7 +34,7 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
 
     }
 
-    AbstractScheduleEvent(Channel channel, Net net, LocalDate guideDay, Date start, Date duration, MediaObject media) {
+    AbstractScheduleEvent(@NonNull Channel channel, Net net, @NonNull LocalDate guideDay, @NonNull Date start, Date duration, MediaObject media) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay;
@@ -49,61 +49,78 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
     @NotNull
     protected Channel channel;
 
+    @Setter
     @ManyToOne
     @Valid
     protected Net net;
 
+    // if (this.start != null) throw new IllegalStateException(); Used in test cases.
+    @Setter
     @Id
     @NotNull
     protected Date start;
 
+    @Setter
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @NotNull
     protected LocalDate guideDay;
 
+    @Setter
     @Embedded
     protected Repeat repeat;
 
+    @Setter
     protected String memberOf;
 
+    @Setter
     @OneToOne(orphanRemoval = true)
     @org.hibernate.annotations.Cascade({
         org.hibernate.annotations.CascadeType.ALL
     })
     protected AVAttributes avAttributes;
 
+    @Setter
     protected String textSubtitles;
 
+    @Setter
     @Column(name = "start_offset")
     @Temporal(TemporalType.TIME)
     protected Date offset;
 
+    @Setter
     @Temporal(TemporalType.TIME)
     protected Date duration;
 
+    @Setter
     protected String imi;
 
+    @Setter
     @Transient
     protected String urnRef;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     protected MediaObject mediaObject;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     protected ScheduleEventType type;
 
+    @Setter
     @Embedded
     @Column(name = "primary")
     protected Lifestyle primaryLifestyle;
 
+    @Setter
     @Embedded
     @Column(name = "secondary")
     protected SecondaryLifestyle secondaryLifestyle;
 
+    @Setter
     @Transient
     protected String midRef;
 
+    @Setter
     protected String poSeriesID;
 
     @XmlElement
@@ -111,17 +128,9 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return repeat;
     }
 
-    public void setRepeat(Repeat value) {
-        this.repeat = value;
-    }
-
     @XmlElement
     public String getMemberOf() {
         return memberOf;
-    }
-
-    public void setMemberOf(String value) {
-        this.memberOf = value;
     }
 
     @XmlElement
@@ -129,37 +138,20 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return avAttributes;
     }
 
-    public void setAvAttributes(AVAttributes value) {
-        this.avAttributes = value;
-    }
-
     @XmlElement
     public String getTextSubtitles() {
         return textSubtitles;
     }
 
-    public void setTextSubtitles(String value) {
-        this.textSubtitles = value;
-    }
-
     @XmlElement
     @XmlSchemaType(name = "date")
-    public LocalDate getGuideDay() {
+    public @NonNull LocalDate getGuideDay() {
         return guideDay;
     }
 
-    public void setGuideDay(LocalDate guideDay) {
-        this.guideDay = guideDay;
-    }
-
     @XmlElement
-    public Date getStart() {
+    public @NonNull Date getStart() {
         return start;
-    }
-
-    public void setStart(Date start) {
-        // if (this.start != null) throw new IllegalStateException(); Used in test cases.
-        this.start = start;
     }
 
     @XmlTransient
@@ -186,10 +178,6 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return offset;
     }
 
-    public void setOffset(Date offset) {
-        this.offset = offset;
-    }
-
     @XmlJavaTypeAdapter(DateToDuration.class)
     @XmlElement
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
@@ -199,16 +187,8 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return duration;
     }
 
-    public void setDuration(Date value) {
-        this.duration = value;
-    }
-
-    public void setImi(String value) {
-        this.imi = value;
-    }
-
     @XmlAttribute
-    public Channel getChannel() {
+    public @NonNull Channel getChannel() {
         return channel;
     }
 
@@ -226,10 +206,6 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return net;
     }
 
-    public void setNet(Net net) {
-        this.net = net;
-    }
-
     @XmlAttribute
     public String getImi() {
         return imi;
@@ -243,20 +219,12 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return urnRef;
     }
 
-    public void setUrnRef(String value) {
-        this.urnRef = value;
-    }
-
     @XmlAttribute(required = true)
     public String getMidRef() {
         if (this.midRef == null && mediaObject != null) {
             return mediaObject.getMid();
         }
         return midRef;
-    }
-
-    public void setMidRef(String midRef) {
-        this.midRef = midRef;
     }
 
     @XmlTransient
@@ -276,10 +244,6 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return type;
     }
 
-    public void setType(ScheduleEventType type) {
-        this.type = type;
-    }
-
     public String getPoProgID() {
         return getMidRef();
     }
@@ -291,10 +255,6 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
     @XmlTransient
     public String getPoSeriesID() {
         return poSeriesID;
-    }
-
-    public void setPoSeriesID(String poSeriesID) {
-        this.poSeriesID = poSeriesID;
     }
 
 
@@ -312,16 +272,8 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
         return primaryLifestyle;
     }
 
-    public void setPrimaryLifestyle(Lifestyle primaryLifestyle) {
-        this.primaryLifestyle = primaryLifestyle;
-    }
-
     public SecondaryLifestyle getSecondaryLifestyle() {
         return secondaryLifestyle;
-    }
-
-    public void setSecondaryLifestyle(SecondaryLifestyle secondaryLifestyle) {
-        this.secondaryLifestyle = secondaryLifestyle;
     }
 
     @Override
@@ -354,7 +306,7 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
     private static LocalDate guideLocalDate(Date start) {
         ZonedDateTime dateTime = start.toInstant().atZone(Schedule.ZONE_ID);
 
-        if (dateTime.toLocalTime().isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES))) {
+        if (dateTime.toLocalTime().isBefore(Schedule.START_OF_SCHEDULE.minusMinutes(2))) {
             dateTime = dateTime.minusDays(1);
         }
 

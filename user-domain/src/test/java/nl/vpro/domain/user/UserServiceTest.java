@@ -34,12 +34,12 @@ class UserServiceTest {
         }
 
         @Override
-        public <S> S doAs(String principalId, Duration duration, Callable<S> handler) throws Exception {
+        public <S> S doAs(String principalId, Duration duration, Callable<S> handler) {
             return null;
         }
 
         @Override
-        public <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception {
+        public <S> S systemDoAs(String principalId, Callable<S> handler) {
             return null;
         }
 
@@ -111,7 +111,7 @@ class UserServiceTest {
         Locale def = Locales.getDefault();
 
         List<CompletableFuture<?>> futures = new ArrayList<>();
-        try (AutoCloseable autoCloseable = Locales.with(new Locale("zh"))) {
+        try (AutoCloseable autoCloseable = Locales.with( Locale.of("zh"))) {
             for (int i = 0; i < 500; i++) {
                 int fi = i;
                 futures.add(userService.async(() -> {

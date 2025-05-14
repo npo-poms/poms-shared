@@ -13,7 +13,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.event.Level;
 
 import nl.vpro.domain.media.update.ScheduleEventUpdate;
-import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.util.locker.ObjectLocker;
 
 import static nl.vpro.util.ExceptionUtils.sneakyThrow;
@@ -78,7 +77,6 @@ public abstract class MediaObjectLockerAspect  {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
                 throw sneakyThrow(t);
-            } finally {
             }
         });
     }
@@ -123,7 +121,7 @@ public abstract class MediaObjectLockerAspect  {
                         }
                     }
 
-                    Slf4jHelper.log(log, warn ? Level.WARN : Level.DEBUG,"Object {} has no correlation id ({})", object, correlation);
+                    log.atLevel(warn ? Level.WARN : Level.DEBUG).log("Object {} has no correlation id ({})", object, correlation);
                 } else {
                     log.debug("{} has correlation {}", object, correlation);
                 }

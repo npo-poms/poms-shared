@@ -185,7 +185,7 @@ public enum TvaCountry {
 
     public String getIso3Code() {
         try {
-            return isoCode == null ? null : new Locale("en", isoCode).getISO3Country();
+            return isoCode == null ? null : Locale.of("en", isoCode).getISO3Country();
         } catch (MissingResourceException mrs) {
             return isoCode;
         }
