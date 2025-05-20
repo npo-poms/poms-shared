@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 5.5 (copied from dropped GTAARepositoryImplTest)
  * @author Michiel Meeuwissen
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
+@SuppressWarnings({"OptionalGetWithoutIsPresent", "HttpUrlsUsage"})
 @Slf4j
 public class OpenskosRepositoryITest {
 
@@ -131,7 +131,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> persons = impl.findPersons("Mies Bouwman", 100);
         assertThat(persons).isNotEmpty();
-        assertThat(persons.get(0).getStatus()).isNotNull();
+        assertThat(persons.getFirst().getStatus()).isNotNull();
         for (Description person : persons)  {
             log.info("{}", person);
         }
@@ -163,7 +163,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
-        assertThat(concepts.get(0).getStatus()).isNotNull();
+        assertThat(concepts.getFirst().getStatus()).isNotNull();
         for (Description concept : concepts) {
             log.info("{}", concept);
 
@@ -176,7 +176,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
         assertThat(geonames).isNotEmpty();
-        assertThat(geonames.get(0).getStatus()).isNotNull();
+        assertThat(geonames.getFirst().getStatus()).isNotNull();
         for (Description geoname : geonames)  {
             log.info("{}", geoname);
         }
@@ -202,8 +202,6 @@ public class OpenskosRepositoryITest {
 
     }
 
-
-
     @ParameterizedTest
     @MethodSource("envs")
     public void testFindByNotExistingGtaaUrl(Env env) {
@@ -213,7 +211,6 @@ public class OpenskosRepositoryITest {
         assertThat(person).isEmpty();
     }
 
-
     @ParameterizedTest
     @MethodSource("envs")
     @Disabled
@@ -221,13 +218,12 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findForSchemes("science", 100, GTAARepository.SchemeOrNot.of(genrefilmmuseum));
         assertThat(concepts).isNotEmpty();
-        assertThat(concepts.get(0).getStatus()).isNotNull();
+        assertThat(concepts.getFirst().getStatus()).isNotNull();
         for (Description concept : concepts) {
             log.info("{}", concept);
 
         }
     }
-
 
     @ParameterizedTest
     @MethodSource("envs")
