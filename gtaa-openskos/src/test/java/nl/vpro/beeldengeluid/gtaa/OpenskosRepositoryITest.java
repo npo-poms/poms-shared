@@ -137,15 +137,22 @@ public class OpenskosRepositoryITest {
         }
     }
 
+
+    private static List<Object[]> envsAnd() {
+        List<String> names = List.of("Lutjebroek", "Gendringen");
+        return Arrays.stream(envs()).map(e -> names.stream().map(n -> new Object[] {e, n}).toList()).flatMap(Collection::stream)
+            .toList();
+    }
+
+
     @ParameterizedTest
-    @MethodSource("envs")
-    public void testFindGeographicalNAme(Env env) {
+    @MethodSource("envsAnd")
+    public void testFindGeographicalNAme(Env env, String name) {
         OpenskosRepository impl = getRealInstance(env);
-        for (String name : List.of("Lutjebroek", "Gendringen")) {
-            List<Description> names = impl.findForSchemes(name, 100, GTAARepository.SchemeOrNot.of(Scheme.geographicname));
-            for (Description desc : names) {
-                log.info("{} -> {}", name, desc);
-            }
+        List<Description> names = impl.findForSchemes(name, 100, GTAARepository.SchemeOrNot.of(Scheme.geographicname));
+        assertThat(names).withFailMessage(() -> "Could not find descriptions for %s".formatted(name)).hasSizeGreaterThan(0);
+        for (Description desc : names) {
+            log.info("{} -> {}", name, desc);
         }
     }
 
