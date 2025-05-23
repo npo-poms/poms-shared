@@ -13,6 +13,7 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -46,7 +47,7 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
 
     @Id
     @Enumerated(EnumType.STRING)
-    @NotNull
+    @MonotonicNonNull
     protected Channel channel;
 
     @Setter
@@ -102,6 +103,7 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     protected MediaObject mediaObject;
 
+    @Deprecated
     @Setter
     @Enumerated(EnumType.STRING)
     protected ScheduleEventType type;
@@ -240,6 +242,7 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
 
 
     @XmlAttribute
+    @Deprecated
     public ScheduleEventType getType() {
         return type;
     }
