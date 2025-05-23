@@ -22,9 +22,9 @@ public class GeoRestrictionConstraintTest {
 
     @Test
     public void testGetStringValue() {
-        GeoRestrictionConstraint in = new GeoRestrictionConstraint(null, Region.BENELUX);
+        GeoRestrictionConstraint in = new GeoRestrictionConstraint(null, Region.EUROPE);
         JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:geoRestrictionConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">BENELUX</local:geoRestrictionConstraint>");
+            "<local:geoRestrictionConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">EUROPE</local:geoRestrictionConstraint>");
     }
 
     @Test
@@ -38,6 +38,7 @@ public class GeoRestrictionConstraintTest {
         assertThat(new GeoRestrictionConstraint(Platform.PLUSVOD, Region.NL).getValue()).isEqualTo("PLUSVOD:NL");
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withGeoRestrictions().build();
