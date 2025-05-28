@@ -28,7 +28,6 @@ import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.mediainfo.MediaInfoCaller;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.TimeUtils;
@@ -196,7 +195,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final boolean replaces) throws IOException {
 
 
-        logger.info("Media info for {}: {}", incomingFile, mediaInfo);
+
 
         try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, nepFile, size)) {
             try (

@@ -24,10 +24,10 @@
   </bean>
 
   <bean id="NEPUploadServiceVertical" class="nl.vpro.nep.service.impl.NEPSSHJUploadServiceImpl" autowire-candidate="false">
-    <constructor-arg value="${nep.gatekeeper-upload.host}" />
-    <constructor-arg value="${nep.gatekeeper-upload.username}" />
-    <constructor-arg value="${nep.gatekeeper-upload.password}" />
-    <constructor-arg value="${nep.gatekeeper-upload.hostkey}" />
+    <constructor-arg value="${nep.gatekeeper-upload.vertical.host}" />
+    <constructor-arg value="${nep.gatekeeper-upload.vertical.username}" />
+    <constructor-arg value="${nep.gatekeeper-upload.vertical.password}" />
+    <constructor-arg value="${nep.gatekeeper-upload.vertical.hostkey}" />
     <property name="sftpTimeout"  value="${nep.gatekeeper-upload.sftpTimeout}" />
     <property name="socketTimeout"  value="${nep.gatekeeper-upload.socketTimeout}" />
     <property name="connectTimeout"  value="${nep.gatekeeper-upload.connectTimeout}" />
