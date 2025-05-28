@@ -65,7 +65,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     private boolean preserveAttributes = false;
 
-    MediaInfoCaller mediaInfoCaller = new MediaInfoCaller();
+
 
 
     @Inject
@@ -195,7 +195,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final @NonNull Path incomingFile,
         final boolean replaces) throws IOException {
 
-        MediaInfoCaller.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
 
         logger.info("Media info for {}: {}", incomingFile, mediaInfo);
 
