@@ -28,6 +28,7 @@ import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.mediainfo.MediaInfoCaller;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.TimeUtils;
@@ -63,6 +64,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     private int batchSize = 1024 * 1024 * 5;
 
     private boolean preserveAttributes = false;
+
+    MediaInfoCaller mediaInfoCaller = new MediaInfoCaller();
 
 
     @Inject
@@ -189,9 +192,12 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final @NonNull SimpleLogger logger,
         final @NonNull String nepFile,
         final @NonNull Long size,
-        final @NonNull Path incomingStream,
+        final @NonNull Path incomingFile,
         final boolean replaces) throws IOException {
 
+        MediaInfoCaller.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
+
+        logger.info("Media info for {}: {}", incomingFile, mediaInfo);
 
         try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, nepFile, size)) {
             try (
@@ -210,7 +216,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     filet.setPreserveAttributes(preserveAttributes);
                     filet.setTransferListener(listener);
                     filet.upload(
-                        new FileSystemFile(incomingStream.toFile()), nepFile
+                        new FileSystemFile(incomingFile.toFile()), nepFile
                     );
                 }
 

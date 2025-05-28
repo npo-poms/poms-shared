@@ -151,7 +151,10 @@
       <artifactId>jboss-logging</artifactId>
       <scope>compile</scope>
     </dependency>
-
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-mediainfo</artifactId>
+    </dependency>
   </dependencies>
 
 
