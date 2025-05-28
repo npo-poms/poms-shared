@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.mediainfo.MediaInfoCaller;
+import nl.vpro.mediainfo.MediaInfo;
 import nl.vpro.nep.service.NEPUploadService;
 
 /**
@@ -18,7 +18,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
     final NEPUploadService nepftpUploadService;
     final NEPUploadService nepftpUploadVerticalService;
 
-    final MediaInfoCaller mediaInfoCaller = new MediaInfoCaller();
+    final MediaInfo mediaInfoCaller = new MediaInfo();
 
     public NEPUploadServiceSwitcher(
         NEPUploadService nepftpUploadService,
@@ -31,7 +31,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
     @Override
     public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces) throws IOException {
-        MediaInfoCaller.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
+        MediaInfo.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
         logger.info("Mediainfo for {}: {}", incomingFile, mediaInfo);
         if (mediaInfo.vertical()) {
             logger.info("Using vertical upload service for {}", nepFile);
