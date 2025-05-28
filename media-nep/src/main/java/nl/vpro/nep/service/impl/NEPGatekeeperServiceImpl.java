@@ -45,6 +45,8 @@ import nl.vpro.nep.service.NEPGatekeeperService;
 import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.*;
 
+import static nl.vpro.util.TimeUtils.parseDuration;
+
 
 /**
  * Wrapper for https://npo-webonly-gatekeeper.nepworldwide.nl
@@ -62,11 +64,13 @@ import nl.vpro.util.*;
 @Slf4j
 public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
-    public static final HALMapper MAPPER = new HALMapper();
+    private static final HALMapper MAPPER = createMapper();
 
-    static {
-        MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        MAPPER.registerModule(new JavaTimeModule());
+    public static HALMapper createMapper() {
+        HALMapper mapper = new HALMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.registerModule(new JavaTimeModule());
+        return mapper;
     }
     @Getter
     private final String url;
@@ -106,9 +110,9 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         this.url = url;
         this.userName = userName;
         this.password = password;
-        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElse(Duration.ofSeconds(1));
-        this.connectionRequestTimeout = TimeUtils.parseDuration(connectionRequestTimeout).orElse(this.connectTimeout);
-        this.socketTimeout= TimeUtils.parseDuration(socketTimeout).orElse(this.connectTimeout);
+        this.connectTimeout = parseDuration(connectTimeout).orElse(Duration.ofSeconds(1));
+        this.connectionRequestTimeout = parseDuration(connectionRequestTimeout).orElse(this.connectTimeout);
+        this.socketTimeout= parseDuration(socketTimeout).orElse(this.connectTimeout);
         this.pageSize = pageSize;
         this.ftpUserName = ftpUserName;
     }

@@ -36,7 +36,7 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 
 
 /**
- *  This is a wrapper for ftp.nepworldwide.nl This is were we have to upload file for transcoding
+ *  This is a wrapper for ftp.nepworldwide.nl This is where we have to upload files for transcoding
  * <p>
  *  TODO: For the download service we had severe troubles with 'rekeying' (at the end worked around by calling command line scp). Would this not be an issue for upload?
  */

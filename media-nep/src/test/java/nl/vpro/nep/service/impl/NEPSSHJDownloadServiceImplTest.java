@@ -96,22 +96,21 @@ public class NEPSSHJDownloadServiceImplTest {
 
         boolean simple = true;
         Instant start = Instant.now();
-        SSHClient client = impl.createClient();
-        final SFTPClient sftp = client.newSFTPClient();
+        try (SSHClient client = impl.createClient();
+             SFTPClient sftp = client.newSFTPClient()) {
 
-        if (! simple) {
+            if (!simple) {
 
-            try (final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
-                 final InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
-                 final FileOutputStream outputStream = new FileOutputStream(testDest)) {
-                long size = IOUtils.copy(in, outputStream, 1024 * 10);
-                log.info("Ready with {} bytes ({})", size, FileSizeFormatter.DEFAULT.formatSpeed(size, start));
+                try (final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
+                     final InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
+                     final FileOutputStream outputStream = new FileOutputStream(testDest)) {
+                    long size = IOUtils.copy(in, outputStream, 1024 * 10);
+                    log.info("Ready with {} bytes ({})", size, FileSizeFormatter.DEFAULT.formatSpeed(size, start));
+                }
+            } else {
+                sftp.get(fileName, new FileSystemFile(new File(testDest)));
             }
-        } else {
-            sftp.get(fileName, new FileSystemFile(new File(testDest )));
         }
-        sftp.close();
-        client.close();
 
         log.info("Duration {}", Duration.between(start, Instant.now()));
 

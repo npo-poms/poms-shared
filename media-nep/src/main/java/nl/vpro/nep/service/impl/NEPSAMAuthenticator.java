@@ -156,15 +156,7 @@ public class NEPSAMAuthenticator implements Supplier<String>, BooleanSupplier {
     }
 
 
-    @lombok.Value
-    public static class LoginRequest {
-        String username;
-        String password;
-
-        public LoginRequest(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
+    public record LoginRequest(String username, String password) {
     }
 
     @lombok.Value

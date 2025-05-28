@@ -21,7 +21,7 @@ public interface NEPUploadService {
 
     /**
      * Upload streamingly.
-     *
+     * <p>
      * See MSE-5800, this doesn't work with sshj anymore.
      */
      long upload(

@@ -225,8 +225,8 @@ public class NEPServiceImpl implements NEPService {
         } catch (Exception ignored) {
 
         }
-           try {
-               builder.append("tokens:").append(tokenService.get().toString()).append(",");
+        try {
+            builder.append("tokens:").append(tokenService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
@@ -235,7 +235,7 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     @PreDestroy
-    public void close() throws Exception {
+    public void close() {
         closeQuietly(
             gatekeeperService,
             itemizeService,
