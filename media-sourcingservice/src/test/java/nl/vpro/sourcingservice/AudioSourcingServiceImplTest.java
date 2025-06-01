@@ -23,7 +23,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
+import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2

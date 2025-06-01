@@ -8,6 +8,9 @@ import nl.vpro.util.FileSizeFormatter;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
+/**
+ * @since 8.10 (Used to be in SourcingService)
+ */
 public class UploadUtils {
 
     /**
