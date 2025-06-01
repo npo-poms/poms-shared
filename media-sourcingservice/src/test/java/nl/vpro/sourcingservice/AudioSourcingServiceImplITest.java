@@ -17,7 +17,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
 import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
-import static nl.vpro.poms.shared.Utils.loggingConsumer;
+import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
 
 
 @Log4j2

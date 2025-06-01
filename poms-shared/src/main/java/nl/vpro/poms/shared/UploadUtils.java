@@ -8,7 +8,7 @@ import nl.vpro.util.FileSizeFormatter;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
-public class Utils {
+public class UploadUtils {
 
     /**
      * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'receive'.
