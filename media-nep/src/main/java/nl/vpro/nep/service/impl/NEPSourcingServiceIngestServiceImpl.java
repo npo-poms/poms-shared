@@ -1,7 +1,7 @@
 package nl.vpro.nep.service.impl;
 
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import jakarta.inject.Named;
 
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.service.NEPSourceServiceIngestService;
 
-@Log4j2
+@Slf4j
 @Named("NEPSourceServiceIngestService")
 public  class NEPSourcingServiceIngestServiceImpl implements NEPSourceServiceIngestService {
 

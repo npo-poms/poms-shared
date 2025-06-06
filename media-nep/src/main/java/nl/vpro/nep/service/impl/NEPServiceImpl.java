@@ -148,7 +148,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path stream, boolean replaces) throws IOException {
+    public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
 
@@ -252,7 +252,7 @@ public class NEPServiceImpl implements NEPService {
      * This ingest version must be used for vertical video's. It's a bit absurd.
      */
     @Override
-    public void ingest(Payload payload) throws Exception {
+    public void ingest(Payload payload)  {
         sourceServiceIngestService.get().ingest(payload);
     }
 

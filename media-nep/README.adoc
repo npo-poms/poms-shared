@@ -8,13 +8,27 @@ NEP makes several API's available, which we make use of in POMS. It's a bit mess
 == REST APIs
 
 === NEPGatekeeperService
-Intake for transcoding jobs. No call back. Poll NEPDownloadService
+Intake for transcoding jobs. Poll the 'getTranscodeStatuses' endpoints./. Or it is called by via the 'postkantoor', as a streaming status call.
 
 `nep.gatekeeper-api.baseUrl=https://npo-webonly-gatekeeper.nepworldwide.nl`
 
 http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
 
 http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
+
+Only for landscape video.
+
+=== NEPSourceServiceIngestService
+
+
+WIP
+
+Absurdly, if you need to upload a video with a portrait aspect ratio, you need to use this (new) API. We were not provided much documentation, and it is not clear how it relates to the NEPGatekeeperService. I presume it is a rewrite.
+
+See https://publiekeomroep.atlassian.net/browse/P0MS-251
+
+It is currently unknown how to monitor this.
+
 
 === NEPItemizeService
 Intake for 'itemize' and 'grab screen'.

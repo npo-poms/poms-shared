@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface NEPSourceServiceIngestService {
 
-    void ingest(Payload payload) throws Exception;
+    void ingest(Payload payload);
 
     record Parameter(
         String key,
