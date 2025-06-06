@@ -58,12 +58,15 @@ widevine token, playready tokens
 
 == FTP Services
 
-There are two relevant FTP servers of which we wrap the relevant function into the following interfaces
+There are tree relevant FTP servers of which we wrap the relevant function into the following interfaces
 
 === NEPUploadService
-If you want to upload something for trancoding upload it here.
+If you want to upload something for transcoding upload it to one of the following FTP servers.
 
-`nep.gatekeeper-upload.host=ftp.nepworldwide.nl`
+`nep.gatekeeper-upload.host=ftp.nepworldwide.nl` (for landscape video)
+
+
+`nep.sourcing-service-upload.host=ftp1.cdn1.usvc.nepworldwide.nl ` (for portrait video)
 
 === NEPDownloadService
 If you want to download transcoded item, or itemized item. (iirc)
