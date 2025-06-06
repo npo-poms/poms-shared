@@ -187,7 +187,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
     @Override
-    public long upload(
+    public UploadResult upload(
         final @NonNull SimpleLogger logger,
         final @NonNull String nepFile,
         final @NonNull Long size,
@@ -204,7 +204,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 final SFTPClient sftp = client.get().newSFTPClient()
             ) {
                 if (!setup(sftp, logger, nepFile, size, replaces)) {
-                    return -1;
+                    return UploadResult.sizeOnly( -1);
                 }
 
                 try (var holder = createClient();
@@ -232,7 +232,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 }
                 throw sftpException;
             }
-            return setdown(listener.start, () -> listener.numberOfBytes, size, logger);
+            return UploadResult.sizeOnly(setdown(listener.start, () -> listener.numberOfBytes, size, logger));
         }
     }
 

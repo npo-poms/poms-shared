@@ -8,6 +8,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.mediainfo.MediaInfo;
+import nl.vpro.mediainfo.MediaInfoService;
 import nl.vpro.nep.service.NEPUploadService;
 
 import static nl.vpro.poms.shared.UploadUtils.PHASE;
@@ -20,7 +21,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
     final NEPUploadService nepftpUploadService;
     final NEPUploadService nepftpUploadVerticalService;
 
-    final MediaInfo mediaInfoCaller = new MediaInfo();
+    final MediaInfoService mediainfoService = new MediaInfoService();
 
     public NEPUploadServiceSwitcher(
         NEPUploadService nepftpUploadService,
@@ -32,18 +33,18 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
 
     @Override
-    public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces) throws IOException {
+    public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces) throws IOException {
         PHASE.set("mediainfo");
 
-        MediaInfo.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
+        MediaInfo mediaInfo = mediainfoService.apply(incomingFile);
         logger.info("Mediainfo for {}: {}", nepFile, mediaInfo);
         PHASE.set("mediainfo-conclusion");
         if (mediaInfo.vertical()) {
             logger.info("Using vertical upload service for {}", nepFile);
-            return nepftpUploadVerticalService.upload(logger, nepFile, size, incomingFile, replaces);
+            return nepftpUploadVerticalService.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
         } else {
             logger.info("Using standard upload service for {}", nepFile);
-            return nepftpUploadService.upload(logger, nepFile, size, incomingFile, replaces);
+            return nepftpUploadService.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
         }
     }
 

@@ -33,6 +33,8 @@ import nl.vpro.util.FileMetadata;
 public class NEPServiceImpl implements NEPService {
 
     private final Provider<NEPGatekeeperService> gatekeeperService;
+    private final Provider<NEPSourceServiceIngestService>  sourceServiceIngestService;
+
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
@@ -42,12 +44,14 @@ public class NEPServiceImpl implements NEPService {
     @Inject
     public NEPServiceImpl(
         @Named("NEPGatekeeperService") Provider<NEPGatekeeperService> gatekeeperService,
+        @Named("NEPSourceServiceIngestService") Provider<NEPSourceServiceIngestService> sourceServiceIngestService,
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
         @Named("NEPSAMService") Provider<NEPSAMService> samService,
         @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService     ) {
         this.gatekeeperService = gatekeeperService;
+        this.sourceServiceIngestService = sourceServiceIngestService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
@@ -242,6 +246,14 @@ public class NEPServiceImpl implements NEPService {
             samService,
             tokenService
         );
+    }
+
+    /**
+     * This ingest version must be used for vertical video's. It's a bit absurd.
+     */
+    @Override
+    public void ingest(Payload payload) throws Exception {
+        sourceServiceIngestService.get().ingest(payload);
     }
 
     @SafeVarargs
