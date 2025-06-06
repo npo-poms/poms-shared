@@ -99,7 +99,7 @@ public enum Region implements Displayable, org.meeuw.i18n.regions.Region {
     WR("Overal te zien") {
         @Override
         public boolean display() {
-            return false;
+            return true;
         }
     }
     ;
