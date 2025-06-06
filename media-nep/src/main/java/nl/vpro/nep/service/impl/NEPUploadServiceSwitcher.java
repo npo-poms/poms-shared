@@ -10,6 +10,8 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.mediainfo.MediaInfo;
 import nl.vpro.nep.service.NEPUploadService;
 
+import static nl.vpro.poms.shared.UploadUtils.PHASE;
+
 /**
  * @since 8.10
  */
@@ -31,8 +33,11 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
     @Override
     public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces) throws IOException {
+        PHASE.set("mediainfo");
+
         MediaInfo.Result mediaInfo = mediaInfoCaller.apply(incomingFile);
-        logger.info("Mediainfo for {}: {}", incomingFile, mediaInfo);
+        logger.info("Mediainfo for {}: {}", nepFile, mediaInfo);
+        PHASE.set("mediainfo-conclusion");
         if (mediaInfo.vertical()) {
             logger.info("Using vertical upload service for {}", nepFile);
             return nepftpUploadVerticalService.upload(logger, nepFile, size, incomingFile, replaces);

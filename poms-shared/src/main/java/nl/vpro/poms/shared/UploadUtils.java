@@ -13,6 +13,13 @@ import static nl.vpro.i18n.MultiLanguageString.en;
  */
 public class UploadUtils {
 
+
+    /**
+     * The current phase of the upload, used to log the phase in which the upload is.
+     * This is also included in the id of the html message that is sent to the GUI.
+     */
+    public static final ThreadLocal<String> PHASE = ThreadLocal.withInitial(() -> null);
+
     /**
      * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'receive'.
      */
