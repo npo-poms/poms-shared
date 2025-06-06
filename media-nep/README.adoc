@@ -27,6 +27,9 @@ Absurdly, if you need to upload a video with a portrait aspect ratio, you need t
 
 See https://publiekeomroep.atlassian.net/browse/P0MS-251
 
+`nep.source-service.baseUrl=https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/ingest/`
+
+
 It is currently unknown how to monitor this.
 
 
@@ -65,11 +68,10 @@ If you want to upload something for transcoding upload it to one of the followin
 
 `nep.gatekeeper-upload.host=ftp.nepworldwide.nl` (for landscape video)
 
-
-`nep.sourcing-service-upload.host=ftp1.cdn1.usvc.nepworldwide.nl ` (for portrait video)
+`nep.sourcing-service-upload.host=ftp1.cdn1.usvc.nepworldwide.nl` (for portrait video)
 
 === NEPDownloadService
 If you want to download transcoded item, or itemized item. (iirc)
 
 `nep.itemizer-download.host=sftp-itemizer.nepworldwide.nl`
-`
+
