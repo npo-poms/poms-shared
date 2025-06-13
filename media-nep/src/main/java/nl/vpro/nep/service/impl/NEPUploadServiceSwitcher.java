@@ -11,6 +11,7 @@ import nl.vpro.mediainfo.MediaInfo;
 import nl.vpro.mediainfo.MediaInfoService;
 import nl.vpro.nep.service.NEPUploadService;
 
+import static nl.vpro.i18n.MultiLanguageString.en;
 import static nl.vpro.poms.shared.UploadUtils.PHASE;
 
 /**
@@ -37,19 +38,28 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
         PHASE.set("mediainfo");
 
         MediaInfo mediaInfo = mediainfoService.apply(incomingFile);
-        logger.info("Mediainfo for {}: {}", nepFile, mediaInfo);
+        logger.info(
+            en("Mediainfo for %s: %s")
+                .nl("Mediainformatie voor %s: %s")
+                .formatted(nepFile, mediaInfo).build());
         PHASE.set("mediainfo-conclusion");
 
         final         NEPUploadService service;
 
         if (mediaInfo.vertical()) {
-            logger.info("Using vertical upload service for {}", nepFile);
+            logger.info(
+                en("Using vertical upload service for %s")
+                    .nl("Gebruik NEP-uploadservice voor verticale video voor %s")
+                    .formatted(nepFile).build());
             service = nepftpUploadVerticalService;
         } else {
-            logger.info("Using standard upload service for {}", nepFile);
+            logger.info(en("Using classic NEP upload service for %s")
+                    .nl("Gebruik klassieke NEP-uploadservice voor %s")
+                    .formatted(nepFile).build());
             service = nepftpUploadService;
         }
         try {
+            PHASE.set("upload");
             return service.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
         } catch (IOException e) {
             logger.error("Error uploading {}: {}", nepFile, e.getMessage(), e);
