@@ -40,10 +40,10 @@ public interface NEPUploadService {
 
     String getUploadString();
 
-    record UploadResult(long size, @With MediaInfo mediaInfo) {
+    record UploadResult(long size, String server, String error, @With MediaInfo mediaInfo) {
 
-        public static UploadResult sizeOnly(long size) {
-            return new UploadResult(size, null);
+        public static UploadResult sizeOnly(long size, String server) {
+            return new UploadResult(size, server, null, null);
         }
     }
 

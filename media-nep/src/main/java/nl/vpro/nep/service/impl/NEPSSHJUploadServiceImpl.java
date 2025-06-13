@@ -195,8 +195,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final boolean replaces) throws IOException {
 
 
-
-
         try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, nepFile, size)) {
             try (
 
@@ -204,7 +202,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 final SFTPClient sftp = client.get().newSFTPClient()
             ) {
                 if (!setup(sftp, logger, nepFile, size, replaces)) {
-                    return UploadResult.sizeOnly( -1);
+                    return UploadResult.sizeOnly( -1, null);
                 }
 
                 try (var holder = createClient();
@@ -232,7 +230,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 }
                 throw sftpException;
             }
-            return UploadResult.sizeOnly(setdown(listener.start, () -> listener.numberOfBytes, size, logger));
+            return UploadResult.sizeOnly(
+                setdown(listener.start, () -> listener.numberOfBytes, size, logger), toString());
         }
     }
 

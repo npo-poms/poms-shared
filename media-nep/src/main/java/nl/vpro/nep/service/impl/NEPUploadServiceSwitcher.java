@@ -33,18 +33,30 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
 
     @Override
-    public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces) throws IOException {
+    public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces)  {
         PHASE.set("mediainfo");
 
         MediaInfo mediaInfo = mediainfoService.apply(incomingFile);
         logger.info("Mediainfo for {}: {}", nepFile, mediaInfo);
         PHASE.set("mediainfo-conclusion");
+
+        final         NEPUploadService service;
+
         if (mediaInfo.vertical()) {
             logger.info("Using vertical upload service for {}", nepFile);
-            return nepftpUploadVerticalService.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
+            service = nepftpUploadVerticalService;
         } else {
             logger.info("Using standard upload service for {}", nepFile);
-            return nepftpUploadService.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
+            service = nepftpUploadService;
+        }
+        try {
+            return service.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
+        } catch (IOException e) {
+            logger.error("Error uploading {}: {}", nepFile, e.getMessage(), e);
+            return new UploadResult(size, service.toString(),
+                e.getMessage(),
+                mediaInfo);
+
         }
     }
 
