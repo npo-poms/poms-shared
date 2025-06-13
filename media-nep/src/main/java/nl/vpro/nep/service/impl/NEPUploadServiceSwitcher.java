@@ -62,7 +62,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
             PHASE.set("upload");
             return service.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
         } catch (IOException e) {
-            logger.error("Error uploading {}: {}", nepFile, e.getMessage(), e);
+            logger.error("Error uploading {} with {} : {}", nepFile, service, e.getMessage(), e);
             return new UploadResult(size, service.toString(),
                 e.getMessage(),
                 mediaInfo);
