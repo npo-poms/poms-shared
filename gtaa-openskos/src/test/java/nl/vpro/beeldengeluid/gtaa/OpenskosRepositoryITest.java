@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Contains tests which you can run to debug problems with connection to actual open skos server.
- * @since 5.5 (copied from dropped GTAARepositoryImplTest)
+ * @since 5.5
  * @author Michiel Meeuwissen
  */
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "HttpUrlsUsage"})
