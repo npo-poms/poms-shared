@@ -770,7 +770,7 @@ public class TVATransformerTest {
         //JAXB.marshal(o, System.out);
         Set<ConstraintViolation<MediaTable>> validate = validator.validate(o, ValidationLevel.WEAK_WARNING.getClasses());
         for (ConstraintViolation<MediaTable> cv : validate) {
-            log.warn("{}: {}", cv.getPropertyPath(), cv.getMessage());
+            log.info("{} : {}: {}", cv.getInvalidValue(), cv.getPropertyPath(), cv.getMessage());
         }
         assertThat(validator.validate(o, ValidationLevel.POMS.getClasses())).isEmpty();
 

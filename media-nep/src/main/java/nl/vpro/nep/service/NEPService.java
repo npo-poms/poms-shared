@@ -10,13 +10,11 @@ package nl.vpro.nep.service;
  */
 public interface NEPService extends
     NEPGatekeeperService,
+    NEPSourceServiceIngestService,
     NEPDownloadService,
     NEPUploadService,
     NEPItemizeService,
     NEPSAMService,
     NEPPlayerTokenService {
-
-
-
 
 }

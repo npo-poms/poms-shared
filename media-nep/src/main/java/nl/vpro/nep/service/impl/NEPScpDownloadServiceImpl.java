@@ -187,17 +187,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                     }
                 }
             } catch (InterruptedException e) {
-                log.error(e.getClass().getName() + ":" + e.getMessage(), e);
+                log.error("{}:{}", e.getClass().getName(), e.getMessage(), e);
                 Thread.currentThread().interrupt();
                 return;
             } catch (IOException  e) {
-                log.error(e.getClass().getName() + ":" + e.getMessage(), e);
+                log.error("{}:{}", e.getClass().getName(), e.getMessage(), e);
                 return;
             } catch (CommandExecutor.BrokenPipe | NEPException bp) {
                 log.debug(bp.getMessage());
                 throw bp;
             } catch (RuntimeException rte) {
-                log.warn(rte.getClass().getName() + ":" + rte.getMessage());
+                log.warn("{}:{}", rte.getClass().getName(), rte.getMessage());
                 catchedException = rte;
                 exitCode = -100;
             }

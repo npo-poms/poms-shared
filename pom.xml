@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>8.9-SNAPSHOT</version>
+    <version>8.10-SNAPSHOT</version>
   </parent>
 
   <name>poms shared</name>
@@ -20,7 +20,7 @@
   <description>Domain classes and utilities for NPO POMS projects.</description>
 
   <properties>
-    <revision>8.9</revision>
+    <revision>8.10</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
   </properties>

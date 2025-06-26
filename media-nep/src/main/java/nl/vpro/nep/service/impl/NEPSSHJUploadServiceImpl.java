@@ -36,7 +36,7 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 
 
 /**
- *  This is a wrapper for ftp.nepworldwide.nl This is were we have to upload file for transcoding
+ *  This is a wrapper for ftp.nepworldwide.nl This is where we have to upload files for transcoding
  * <p>
  *  TODO: For the download service we had severe troubles with 'rekeying' (at the end worked around by calling command line scp). Would this not be an issue for upload?
  */
@@ -63,6 +63,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     private int batchSize = 1024 * 1024 * 5;
 
     private boolean preserveAttributes = false;
+
+
 
 
     @Inject
@@ -185,11 +187,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
     @Override
-    public long upload(
+    public UploadResult upload(
         final @NonNull SimpleLogger logger,
         final @NonNull String nepFile,
         final @NonNull Long size,
-        final @NonNull Path incomingStream,
+        final @NonNull Path incomingFile,
         final boolean replaces) throws IOException {
 
 
@@ -200,7 +202,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 final SFTPClient sftp = client.get().newSFTPClient()
             ) {
                 if (!setup(sftp, logger, nepFile, size, replaces)) {
-                    return -1;
+                    return UploadResult.sizeOnly( -1, null);
                 }
 
                 try (var holder = createClient();
@@ -210,7 +212,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     filet.setPreserveAttributes(preserveAttributes);
                     filet.setTransferListener(listener);
                     filet.upload(
-                        new FileSystemFile(incomingStream.toFile()), nepFile
+                        new FileSystemFile(incomingFile.toFile()), nepFile
                     );
                 }
 
@@ -228,7 +230,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 }
                 throw sftpException;
             }
-            return setdown(listener.start, () -> listener.numberOfBytes, size, logger);
+            return UploadResult.sizeOnly(
+                setdown(listener.start, () -> listener.numberOfBytes, size, logger), toString());
         }
     }
 
