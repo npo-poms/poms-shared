@@ -70,7 +70,6 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
         this.ftpHost = ftpHost;
         this.username = username;
         this.password = password;
-
         this.batchSize = batchSize;
         init();
     }
@@ -139,18 +138,29 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
                 @Override
                 public void closed() {
                     log();
+                    Duration duration = Duration.between(start, Instant.now());
+                    logger.info(
+                        en("Ready uploading {}/{} (took {}, {})")
+                            .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
+                            .slf4jArgs(
+                                FORMATTER.format(numberOfBytes),
+                                FORMATTER.format(size),
+                                duration,
+                                FORMATTER.formatSpeed(numberOfBytes, duration))
+                    );
                 }
                 private void log() {
-                     logger.info(
-                         en("Uploaded {}/{} to {}:{} ({})")
-                                .nl("Geüpload {}/{} naar {}:{} ({})")
-                                .slf4jArgs(
-                                    FORMATTER.format(numberOfBytes.get()),
-                                    FORMATTER.format(size),
-                                    ftpHost, nepFile,
-                                    FORMATTER.formatSpeed(numberOfBytes, Duration.ofMillis(Duration.between(start, Instant.now()).toMillis()))
-                                )
-                        );
+                    Duration duration = Duration.between(start, Instant.now());
+                    logger.info(
+                        en("Uploaded {}/{} to {}:{} ({})")
+                            .nl("Geüpload {}/{} naar {}:{} ({})")
+                            .slf4jArgs(
+                                FORMATTER.format(numberOfBytes.get()),
+                                FORMATTER.format(size),
+                                ftpHost, nepFile,
+                                FORMATTER.formatSpeed(numberOfBytes, duration)
+                            )
+                    );
                 }
 
             });
