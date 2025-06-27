@@ -466,6 +466,11 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="KIDS_6"/>
       <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="3-6"/>
+      <xs:enumeration value="-9"/>
+      <xs:enumeration value="-12"/>
+      <xs:enumeration value="-14"/>
+      <xs:enumeration value="-16"/>
       <xs:enumeration value="YOUNG_ADULTS"/>
       <xs:enumeration value="ADULTS"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
