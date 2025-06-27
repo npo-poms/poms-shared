@@ -23,7 +23,7 @@
 
   </bean>
 
-  <bean id="NEPUploadServiceVertical" class="nl.vpro.nep.service.impl.NEPSSHJUploadServiceImpl" autowire-candidate="false">
+  <bean id="NEPUploadServiceVertical" class="nl.vpro.nep.service.impl.NEPFTPSUploadServiceImpl" autowire-candidate="false">
     <constructor-arg value="${nep.sourcing-service-upload.host}" />
     <constructor-arg value="${nep.sourcing-service-upload.username}" />
     <constructor-arg value="${nep.sourcing-service-upload.password}" />
