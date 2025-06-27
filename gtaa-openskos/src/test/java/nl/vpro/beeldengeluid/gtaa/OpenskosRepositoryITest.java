@@ -8,6 +8,7 @@ import java.util.*;
 
 import jakarta.xml.bind.JAXB;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,16 +27,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Contains tests which you can run to debug problems with connection to actual open skos server.
- * @since 5.5 (copied from dropped GTAARepositoryImplTest)
+ * @since 5.5
  * @author Michiel Meeuwissen
  */
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "HttpUrlsUsage"})
 @Slf4j
 public class OpenskosRepositoryITest {
 
+    @BeforeEach
+    public void setUp() {
+        var previous = OpenskosRepository.disposeInstance();
+        if (previous != null) {
+            log.debug("Disposed previous instance {}", previous);
+        }
+    }
 
     public static Object[] envs() {
-        return new Object[]{Env.ACC, Env.PROD};
+        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
     }
 
     @ParameterizedTest

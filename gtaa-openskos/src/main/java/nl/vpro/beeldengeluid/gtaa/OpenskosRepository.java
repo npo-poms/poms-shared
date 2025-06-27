@@ -83,6 +83,17 @@ public class OpenskosRepository implements GTAARepository {
         return instance;
     }
 
+    /**
+     * There should be only {@link #getInstance() one instance} of this class, but if you want to dispose of it, you can use this.
+     * This is useful for (integreation) testing purposes, to avoid the warning.
+     * @return the previous instance, or null if there was no instance.
+     */
+    public static OpenskosRepository disposeInstance() {
+        OpenskosRepository oldInstance = instance;
+        instance = null;
+        return oldInstance;
+    }
+
     private final RestTemplate template;
 
     private final String gtaaUrl;
