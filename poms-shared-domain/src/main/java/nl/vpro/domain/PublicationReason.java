@@ -63,7 +63,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
      * A reason can be joined with its publication time. Not in the database, just in the string representation of a
      * set of reasons (as put on headers).
      * <p>
-     * Uses  ASCII Unit separator US
+     * Uses ASCII Unit separator US
      */
     public static final String FIELD_SPLITTER = "␟";
 
