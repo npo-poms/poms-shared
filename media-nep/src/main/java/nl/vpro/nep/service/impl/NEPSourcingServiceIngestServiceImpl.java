@@ -26,6 +26,8 @@ public  class NEPSourcingServiceIngestServiceImpl implements NEPSourceServiceIng
     @Override
     public void ingest(Payload payload) {
 
+        log.info("Ingesting payload: {}", payload);
+        log.info("No yet implemented, baseUrl: {}", baseUrl);
 
     }
 }
