@@ -144,6 +144,18 @@ public enum OwnerType implements Displayable {
     BEELDENGELUID("Beeld & Geluid"),
 
 
+
+    /**
+     * This textual value is created temporarily, and may be discarded as soon something better is available.
+     * @since 8.11
+     */
+    INHERITED("Overerfd") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
+
     /**
      * This textual value is created temporarily, and may be discarded as soon something better is available.
      * It should probably only exist on unpublished objects.
