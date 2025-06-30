@@ -11,10 +11,10 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.functional.ThrowAnyFunction;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
@@ -24,6 +24,7 @@ import nl.vpro.logging.mdc.MDCConstants;
 import nl.vpro.logging.simple.SimpleLogger;
 
 import static nl.vpro.logging.mdc.MDCConstants.ON_BEHALF_OF;
+import static nl.vpro.util.ExceptionUtils.sneakyThrow;
 
 
 /**
@@ -254,6 +255,22 @@ public interface UserService<T extends User> {
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
 
+        return () -> UserService.this.<Void, R>wrap((a) -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                throw sneakyThrow(e);
+            }
+        }, logger, throwExceptions, clearMDC).apply(null);
+    }
+
+
+    default <A, R> ThrowAnyFunction<A, R> wrap(
+        @NonNull  Function<A, R> callable,
+        @Nullable SimpleLogger logger,
+        @Nullable Boolean throwExceptions,
+        boolean clearMDC) {
+
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
         Principal authentication;
         try {
@@ -264,12 +281,12 @@ public interface UserService<T extends User> {
         }
         final Principal onBehalfOf = authentication;
         final Map<String, String> copy =  MDC.getCopyOfContextMap();
-        if (logger != null) {
-            logger.info("Executing on behalf of {}", onBehalfOf);
+        if (logger != null && onBehalfOf != null) {
+            logger.info("Executing on behalf of {}", onBehalfOf.getName());
         }
         final Locale currentLocale = Locales.getDefault();
 
-        return () -> {
+        return (object) -> {
             MDC.clear(); // Running in an unknown thread, making sure MDC is clean
             try (AutoCloseable restore = Locales.with(currentLocale)){
                 if (onBehalfOf != null) {
@@ -277,25 +294,25 @@ public interface UserService<T extends User> {
                         restoreAuthentication(onBehalfOf);
                     } catch (Exception e) {
                         if (logger != null) {
-                            logger.error(e.getMessage());
+                            logger.error(e.getMessage(), e);
+                        } else {
+                            LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                         }
-                        LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                     }
                 }
                 if (copy != null) {
                     // and make sure that
                     copy.forEach(MDC::put);
                 }
-                return callable.call();
+                return callable.apply(object);
             } catch (Exception e) {
                 if (logger != null) {
                     logger.error(e.getMessage(), e);
                 }
                 if (throwExceptionsBoolean) {
                     throw e;
-                } else {
-                    return null;
                 }
+                return null;
             } finally {
                 dropAuthentication();
             }
@@ -333,7 +350,7 @@ public interface UserService<T extends User> {
     abstract class  Logout<S extends User> implements AutoCloseable {
 
         public static <T extends User> Logout<T> nop() {
-            return new Logout<T>() {
+            return new Logout<>() {
                 @Override
                 public void close() {
 
