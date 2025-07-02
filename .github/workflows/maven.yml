@@ -7,6 +7,9 @@ on:
     branches: [main, "REL-*"]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     strategy:
@@ -22,9 +25,6 @@ jobs:
     env:
       MAVEN_ARGS: '--no-transfer-progress'
     steps:
-      - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.12.1
-        continue-on-error: true # for act
       - uses: actions/checkout@v4.2.0
       - uses: actions/setup-java@v4
         with:
