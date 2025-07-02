@@ -14,6 +14,7 @@ import java.util.concurrent.*;
 import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.functional.ThrowAnyConsumer;
 import org.meeuw.functional.ThrowAnyFunction;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -262,6 +263,27 @@ public interface UserService<T extends User> {
                 throw sneakyThrow(e);
             }
         }, logger, throwExceptions, clearMDC).apply(null);
+    }
+
+     /**
+     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, SimpleLogger)} and {@link #async(Callable, SimpleLogger)}. This means that current user and {@link MDC} will be restored
+     * before {@link Callable#call()}
+     * @since 5.6
+     */
+    default <A> ThrowAnyConsumer<A> wrap(
+        @NonNull  Consumer<A> callable,
+        @Nullable SimpleLogger logger,
+        @Nullable Boolean throwExceptions,
+        boolean clearMDC) {
+
+        return (ac) -> UserService.this.<A, Void>wrap((a) -> {
+            try {
+                callable.accept(a);
+                return null;
+            } catch (Exception e) {
+                throw sneakyThrow(e);
+            }
+        }, logger, throwExceptions, clearMDC).apply(ac);
     }
 
 
