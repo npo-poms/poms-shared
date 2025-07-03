@@ -110,6 +110,16 @@
       <xs:enumeration value="RADIOBOX"/>
       <xs:enumeration value="BEELDENGELUID"/>
       <xs:enumeration value="TEMPORARY"/>
+      <xs:enumeration value="INHERITED">
+        <xs:annotation>
+          <xs:documentation>
+            The value is inherited from the parent object. E.g. the target group of a broadcast is inherited
+            from the series/season if it doesn't itself have target group.
+            Since 8.10.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
     </xs:restriction>
   </xs:simpleType>
 
