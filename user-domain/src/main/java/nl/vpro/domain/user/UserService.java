@@ -14,8 +14,7 @@ import java.util.concurrent.*;
 import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.*;
-import org.meeuw.functional.ThrowAnyConsumer;
-import org.meeuw.functional.ThrowAnyFunction;
+import org.meeuw.functional.*;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
@@ -255,14 +254,13 @@ public interface UserService<T extends User> {
         @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
-
-        return () -> UserService.this.<Void, R>wrap((a) -> {
-            try {
+        ThrowingFunction<Void, R, Exception> asFunction = new ThrowingFunction<>() {
+            @Override
+            public R applyWithException(Void a) throws Exception {
                 return callable.call();
-            } catch (Exception e) {
-                throw sneakyThrow(e);
             }
-        }, logger, throwExceptions, clearMDC).apply(null);
+        };
+        return Functions.withArg1(UserService.this.wrap(asFunction, logger, throwExceptions,clearMDC));
     }
 
      /**
@@ -288,7 +286,7 @@ public interface UserService<T extends User> {
 
 
     default <A, R> ThrowAnyFunction<A, R> wrap(
-        @NonNull  Function<A, R> callable,
+        @NonNull  Function<A, R> function,
         @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
@@ -326,7 +324,7 @@ public interface UserService<T extends User> {
                     // and make sure that
                     copy.forEach(MDC::put);
                 }
-                return callable.apply(object);
+                return function.apply(object);
             } catch (Exception e) {
                 if (logger != null) {
                     logger.error(e.getMessage(), e);
