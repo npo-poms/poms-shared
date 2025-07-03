@@ -14,7 +14,8 @@ import java.util.concurrent.*;
 import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.*;
-import org.meeuw.functional.*;
+import org.meeuw.functional.ThrowAnyConsumer;
+import org.meeuw.functional.ThrowAnyFunction;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
@@ -24,7 +25,8 @@ import nl.vpro.logging.mdc.MDCConstants;
 import nl.vpro.logging.simple.SimpleLogger;
 
 import static nl.vpro.logging.mdc.MDCConstants.ON_BEHALF_OF;
-import static nl.vpro.util.ExceptionUtils.sneakyThrow;
+import static org.meeuw.functional.Functions.ignoreArg1;
+import static org.meeuw.functional.Functions.withNull;
 
 
 /**
@@ -254,13 +256,8 @@ public interface UserService<T extends User> {
         @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
-        ThrowingFunction<Void, R, Exception> asFunction = new ThrowingFunction<>() {
-            @Override
-            public R applyWithException(Void a) throws Exception {
-                return callable.call();
-            }
-        };
-        return Functions.withArg1(UserService.this.wrap(asFunction, logger, throwExceptions,clearMDC));
+        // just wrap it in ta function, and then back, because we implemented it for functions already
+        return withNull(wrap(ignoreArg1(callable), logger, throwExceptions,clearMDC));
     }
 
      /**
@@ -273,15 +270,12 @@ public interface UserService<T extends User> {
         @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
-
-        return (ac) -> UserService.this.<A, Void>wrap((a) -> {
-            try {
-                callable.accept(a);
-                return null;
-            } catch (Exception e) {
-                throw sneakyThrow(e);
-            }
-        }, logger, throwExceptions, clearMDC).apply(ac);
+        ThrowAnyFunction<A, Void> function = (a) -> {
+            callable.accept(a);
+            return null;
+        };
+        ThrowAnyFunction<A, Void> wrapped = wrap(function, logger, throwExceptions, clearMDC);
+        return wrapped::apply;
     }
 
 
