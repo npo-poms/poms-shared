@@ -49,7 +49,6 @@ jobs:
       - name: Build with Maven (Other os)
         run: mvn -B  -U -fae package
         if: "! (runner.os == 'Linux' && matrix.java == '21')"
-        continue-on-error: true
       - name: Publish to codecov
         uses: codecov/codecov-action@v4
         with:
@@ -58,7 +57,7 @@ jobs:
           #files: "**/target/surefire-reports/*.xml"
         if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '21'"
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
         if: always() && runner.os == 'Linux'
         with:
           files: "**/target/surefire-reports/*.xml"
