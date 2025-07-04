@@ -43,7 +43,9 @@ public interface UserService<T extends User> {
     /**
      * @since 8.10
      */
-    String getDisplayId(Principal principal);
+    default String getDisplayId(Principal principal) {
+        return principal.getName();
+    }
 
     /**
      * Given an existing user, and a user obtained from sso or so, determins whether calling {@link #update(User)} is important now.
