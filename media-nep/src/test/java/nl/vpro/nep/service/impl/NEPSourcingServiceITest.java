@@ -17,7 +17,7 @@ public class NEPSourcingServiceITest {
 
     NEPSourcingServiceImpl nepSourceServiceIngestService = new NEPSourcingServiceImpl(
         "https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/",
-         "",
+         NEPTest.PROPERTIES.getProperty("nep.sourcing-service-bearer")
     );
 
 
