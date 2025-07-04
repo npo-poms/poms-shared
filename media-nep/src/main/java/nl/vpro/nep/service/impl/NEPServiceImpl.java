@@ -3,11 +3,13 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.*;
 
 import jakarta.annotation.PreDestroy;
@@ -33,7 +35,7 @@ import nl.vpro.util.FileMetadata;
 public class NEPServiceImpl implements NEPService {
 
     private final Provider<NEPGatekeeperService> gatekeeperService;
-    private final Provider<NEPSourceServiceIngestService>  sourceServiceIngestService;
+    private final Provider<NEPSourcingService>  sourceServiceIngestService;
 
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
@@ -44,7 +46,7 @@ public class NEPServiceImpl implements NEPService {
     @Inject
     public NEPServiceImpl(
         @Named("NEPGatekeeperService") Provider<NEPGatekeeperService> gatekeeperService,
-        @Named("NEPSourceServiceIngestService") Provider<NEPSourceServiceIngestService> sourceServiceIngestService,
+        @Named("NEPSourceServiceIngestService") Provider<NEPSourcingService> sourceServiceIngestService,
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
@@ -252,8 +254,8 @@ public class NEPServiceImpl implements NEPService {
      * This ingest version must be used for vertical video's. It's a bit absurd.
      */
     @Override
-    public void ingest(Payload payload)  {
-        sourceServiceIngestService.get().ingest(payload);
+    public CompletableFuture<HttpResponse<RequestResult>> ingest(Payload payload) {
+        return sourceServiceIngestService.get().ingest(payload);
     }
 
     @SafeVarargs
