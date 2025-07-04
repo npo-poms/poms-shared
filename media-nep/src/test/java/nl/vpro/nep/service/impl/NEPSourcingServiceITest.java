@@ -17,7 +17,8 @@ public class NEPSourcingServiceITest {
 
     NEPSourcingServiceImpl nepSourceServiceIngestService = new NEPSourcingServiceImpl(
         "https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/",
-        "32e22fd3-e3ca-4302-9459-d56a6f094d39");
+         "",
+    );
 
 
     @Test
