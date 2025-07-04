@@ -33,7 +33,7 @@ public  class NEPSourcingServiceImpl implements NEPSourcingService {
     public NEPSourcingServiceImpl(
         @Value("${nep.source-service.baseUrl:https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/}") String baseUrl,
         @Value("${nep.source-service.bearerToken}") String bearerToken,
-        @Value("${nep.sourcing-service-upload.host}") String ftpHost,
+        @Value("${nep.sourcing-service-upload.host.smart}") String ftpHost,
         @Value("${nep.sourcing-service-upload.username}") String username
         ) {
         this.baseUrl = URI.create(baseUrl);
