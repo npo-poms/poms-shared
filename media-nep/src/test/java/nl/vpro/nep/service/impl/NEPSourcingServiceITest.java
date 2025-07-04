@@ -17,7 +17,9 @@ public class NEPSourcingServiceITest {
 
     NEPSourcingServiceImpl nepSourceServiceIngestService = new NEPSourcingServiceImpl(
         "https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/",
-         NEPTest.PROPERTIES.getProperty("nep.sourcing-service-bearer")
+         NEPTest.PROPERTIES.getProperty("nep.sourcing-service-bearer"),
+         "smartftp1.cdn1.usvc.twobridges.io",
+        "npo_webonly_vertical"
     );
 
 
@@ -25,7 +27,7 @@ public class NEPSourcingServiceITest {
     public void ingest() throws ExecutionException, InterruptedException {
         CompletableFuture<HttpResponse<NEPSourcingService.RequestResult>> ingest = nepSourceServiceIngestService.ingest(new NEPSourcingService.Payload(
             "WO_NPO_L20000010_2025-07-04T101905195_portrait.mp4",
-            "npo_webonly_vertical@smartftp1.cdn1.usvc.twobridges.io",
+            null,
             List.of(
                 new NEPSourcingService.Profile(
                     UUID.fromString("89968391-875e-47d1-8912-7f2f5135a837"),

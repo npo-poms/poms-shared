@@ -255,6 +255,7 @@ public class NEPServiceImpl implements NEPService {
      */
     @Override
     public CompletableFuture<HttpResponse<RequestResult>> ingest(Payload payload) {
+
         return sourceServiceIngestService.get().ingest(payload);
     }
 

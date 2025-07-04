@@ -1,5 +1,7 @@
 package nl.vpro.nep.service;
 
+import lombok.With;
+
 import java.net.http.HttpResponse;
 import java.time.Instant;
 import java.util.List;
@@ -23,12 +25,18 @@ public interface NEPSourcingService {
     }
 
 
+    @lombok.Builder
+    @With
     record Payload(
         String fileName,
         String origin,
         List<Profile> profiles,
         List<String> ancillaryFiles
     ) {
+
+        public static Payload forFile(String fileName) {
+            return new Payload(fileName, null, null, List.of());
+        }
     }
 
     record RequestResult(
