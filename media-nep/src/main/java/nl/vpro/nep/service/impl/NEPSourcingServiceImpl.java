@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.nep.service.NEPSourcingService;
 
 @Slf4j
@@ -45,7 +46,7 @@ public  class NEPSourcingServiceImpl implements NEPSourcingService {
             .build();
         log.info("Sending ingest request to {}", httpRequest.uri());
         return httpClient.sendAsync(httpRequest,
-            MAPPER.asBodyHandler(RequestResult.class)
+            MAPPER.asBodyHandler(RequestResult.class, Level.INFO)
         );
 
     }
