@@ -41,6 +41,11 @@ public interface UserService<T extends User> {
 
 
     /**
+     * @since 8.10
+     */
+    String getDisplayId(Principal principal);
+
+    /**
      * Given an existing user, and a user obtained from sso or so, determins whether calling {@link #update(User)} is important now.
      */
     boolean needsUpdate(T oldUser, T newUser);
@@ -296,7 +301,7 @@ public interface UserService<T extends User> {
         final Principal onBehalfOf = authentication;
         final Map<String, String> copy =  MDC.getCopyOfContextMap();
         if (logger != null && onBehalfOf != null) {
-            logger.info("Executing on behalf of {}", onBehalfOf.getName());
+            logger.info("Executing on behalf of {}", getDisplayId(onBehalfOf));
         }
         final Locale currentLocale = Locales.getDefault();
 

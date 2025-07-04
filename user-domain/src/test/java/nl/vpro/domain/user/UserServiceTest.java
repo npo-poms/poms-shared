@@ -29,6 +29,11 @@ class UserServiceTest {
 
     private final UserService<User> userService = new UserService<>() {
         @Override
+        public String getDisplayId(Principal principal) {
+            return principal.getName();
+        }
+
+        @Override
         public boolean needsUpdate(User oldUser, User newUser) {
             return false;
         }
