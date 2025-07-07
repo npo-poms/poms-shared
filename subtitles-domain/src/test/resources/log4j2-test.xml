@@ -6,8 +6,6 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="com.joestelmach.natty" level="WARN" />
-
     <Root level="INFO">
       <Appender-Ref ref="stdout" />
     </Root>
