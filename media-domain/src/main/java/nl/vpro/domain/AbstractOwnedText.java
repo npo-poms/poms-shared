@@ -27,7 +27,8 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implemen
 
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "owner_type") // PostgreSQL enum type
+    //@Column(nullable = false, columnDefinition = "owner_type")
+    @Column(nullable = false)
     @XmlAttribute(required = true)
     @Getter
     @Setter
