@@ -106,7 +106,8 @@ public class Image extends PublishableObject<Image>
     @Serial
     private static final long serialVersionUID = 2182582685395751329L;
 
-    @Column(nullable = false)
+
+    @Column(nullable = false, columnDefinition = "owner_type") // PostgreSQL enum type
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter

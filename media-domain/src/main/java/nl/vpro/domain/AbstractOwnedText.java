@@ -25,8 +25,9 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implemen
     @Serial
     private static final long serialVersionUID = 8742323961769012971L;
 
-    @Column(nullable = false)
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "owner_type") // PostgreSQL enum type
     @XmlAttribute(required = true)
     @Getter
     @Setter

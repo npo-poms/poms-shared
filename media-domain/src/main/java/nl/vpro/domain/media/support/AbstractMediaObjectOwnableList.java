@@ -1,12 +1,13 @@
 package nl.vpro.domain.media.support;
 
 
-import jakarta.persistence.*;
-import jakarta.xml.bind.annotation.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.util.*;
+
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -42,6 +43,7 @@ public abstract class AbstractMediaObjectOwnableList<
     protected MediaObject parent;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "owner_type") // PostgreSQL enum type
     @XmlAttribute
     @Setter(AccessLevel.PRIVATE)
     @Getter
