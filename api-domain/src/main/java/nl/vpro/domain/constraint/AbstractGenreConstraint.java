@@ -3,13 +3,10 @@ package nl.vpro.domain.constraint;
 import java.util.stream.Stream;
 
 import jakarta.validation.constraints.Pattern;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.StringUtils;
+import static org.apache.commons.lang3.Strings.CS;
 
-import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -43,20 +40,20 @@ public abstract class AbstractGenreConstraint<T> extends AbstractTextConstraint<
 
     @Override
     public boolean isExact() {
-        return value == null || !endsWith(value, "*");
+        return value == null || !CS.endsWith(value, "*");
     }
 
     @Override
     public String getWildcardValue() {
-        return removeEnd(value, "*");
+        return CS.removeEnd(value, "*");
     }
 
     @Override
     public boolean test(T  t) {
         if (isExact()) {
-            return getTermIds(t).anyMatch(g -> StringUtils.equals(value, g));
+            return getTermIds(t).anyMatch(g -> CS.equals(value, g));
         } else {
-            return getTermIds(t).anyMatch(g -> startsWith(g, getWildcardValue()));
+            return getTermIds(t).anyMatch(g -> CS.startsWith(g, getWildcardValue()));
         }
     }
 
