@@ -59,4 +59,10 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     public void setValues(List<TargetGroup> list) {
         this.values = list;
     }
+
+    public TargetGroups withOwner(OwnerType owner) {
+        return TargetGroups.builder()
+            .values(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
+            .owner(owner).build();
+    }
 }
