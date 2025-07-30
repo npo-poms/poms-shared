@@ -146,10 +146,10 @@ public enum OwnerType implements Displayable {
 
 
     /**
-     * This textual value is created temporarily, and may be discarded as soon something better is available.
-     * @since 8.11
+     * This textual value is created when 'inheriting' is supported. Currently, only for {@code TargetGroups}
+     * @since 8.10
      */
-    INHERITED("Overerfd") {
+    INHERITED("Overgeërfd") {
         @Override
         public boolean display() {
             return false;
