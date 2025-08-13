@@ -67,7 +67,7 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     @Override
     @XmlElement(name="targetGroup")
     @JsonProperty("values")
-    protected List<TargetGroup> getFilteredValues() {
+    public List<TargetGroup> getFilteredValues() {
         if (owner == OwnerType.INHERITED) {
             AgeRating a = getParent().getAgeRating();
             if (a != null) {

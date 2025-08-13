@@ -53,6 +53,7 @@ public abstract class AbstractMediaObjectOwnableList<
     @OneToMany(orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index", nullable = true)
+    @Getter
     protected List<I> values = new ArrayList<>();
 
 
@@ -100,17 +101,5 @@ public abstract class AbstractMediaObjectOwnableList<
         }
     }
 
-    @Override
-    @NonNull
-    public final List<I> getValues() {
-        return values;
-    }
-
-    /**
-     * Returns the values in this list, optionally filtered for XML/json. The case was that inherited targetgrups can be filtered using the agerating of the mediaobject.
-     * @since 8.10
-     */
-    @JsonProperty("values")
-    protected abstract List<I> getFilteredValues();
 
 }
