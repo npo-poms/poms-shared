@@ -19,6 +19,7 @@ import jakarta.validation.constraints.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hibernate.Hibernate;
 import org.slf4j.helpers.MessageFormatter;
 
 import com.google.common.collect.*;
@@ -1416,4 +1417,32 @@ public class MediaObjects {
          }
     }
 
+
+    /**
+     * @since 8.10
+     */
+    public static Optional<TargetGroups> getEffectiveTargetGroups(MediaObject media, OwnerType owner) {
+        // TODO, if media is program then it may check parent groups for inherited target groups
+        TargetGroups tg =  OwnableLists.filterByOwnerOrFirst(
+                media.getTargetGroups(), owner).orElse(null);
+        if (tg == null  && media instanceof Program program) {
+
+
+            tg = program.getAncestors().stream()
+                .map(g -> Hibernate.unproxy(g))
+                .filter(Group.class::isInstance)
+                .map(Group.class::cast)
+                .map(group -> {
+                    return group.getTargetGroups().stream()
+                        .findFirst()
+                        .map(g -> g.withOwner(OwnerType.INHERITED))
+                        .orElse(null);
+                })
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+
+        }
+        return Optional.ofNullable(tg);
+    }
 }

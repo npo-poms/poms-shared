@@ -321,7 +321,7 @@ public final class Program extends MediaObject {
     }
 
     public boolean isEpisode() {
-        return episodeOf != null && episodeOf.size() > 0;
+        return episodeOf != null && !episodeOf.isEmpty();
     }
 
     public boolean isEpisodeOf(MediaObject owner) {
