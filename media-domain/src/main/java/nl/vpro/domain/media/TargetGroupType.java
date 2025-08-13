@@ -11,13 +11,14 @@ import nl.vpro.i18n.Displayable;
 @XmlType(name = "targetGroupEnum")
 public enum TargetGroupType implements Displayable {
     KIDS_6("Kinderen tot 6 jaar (Zappelin)"),
-    KIDS_12("Kinderen 6-12 (Zapp)"),
 
 
     /**
      * @since 8.10
      */
     KIDS_9("Kindprofiel tot 9"),
+
+    KIDS_12("Kinderen 6-12 (Zapp)"),
 
     /**
      * @since 8.10
