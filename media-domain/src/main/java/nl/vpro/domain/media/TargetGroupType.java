@@ -2,7 +2,10 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
-import jakarta.xml.bind.annotation.*;
+import java.util.Set;
+
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.i18n.Displayable;
 
@@ -10,38 +13,46 @@ import nl.vpro.i18n.Displayable;
 @XmlEnum
 @XmlType(name = "targetGroupEnum")
 public enum TargetGroupType implements Displayable {
-    KIDS_6("Kinderen tot 6 jaar (Zappelin)"),
+    KIDS_6("Kinderen tot 6 jaar (Zappelin)", Set.of(AgeRating.ALL)),
 
 
     /**
      * @since 8.10
      */
-    KIDS_9("Kindprofiel tot 9"),
+    KIDS_9("Kindprofiel tot 9", Set.of(AgeRating.ALL, AgeRating._6)),
 
-    KIDS_12("Kinderen 6-12 (Zapp)"),
-
-    /**
-     * @since 8.10
-     */
-    KIDS_14("Kindprofiel tot 14"),
+    KIDS_12("Kinderen 6-12 (Zapp)", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9)),
 
     /**
      * @since 8.10
      */
-    KIDS_16("Kindprofiel tot 16"),
+    KIDS_14("Kindprofiel tot 14", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12)),
 
-    YOUNG_ADULTS("Jongeren (NPO3)"),
-    ADULTS("Volwassenen"),
-    ADULTS_WITH_KIDS_6( "Volwassenen met kinderen 0-6 jaar"),
-    ADULTS_WITH_KIDS_12("Volwassenen met kinderen 6-12 jaar"),
-    EVERYONE("Iedereen")
+    /**
+     * @since 8.10
+     */
+    KIDS_16("Kindprofiel tot 16", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14)),
+
+    YOUNG_ADULTS("Jongeren (NPO3)", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
+    ADULTS("Volwassenen", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
+    ADULTS_WITH_KIDS_6( "Volwassenen met kinderen 0-6 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
+    ADULTS_WITH_KIDS_12("Volwassenen met kinderen 6-12 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
+    EVERYONE("Iedereen", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16))
     ;
 
     @Getter
     private final String displayName;
 
-    TargetGroupType(String displayName) {
+    /**
+     * There is a link between target groups and age-rating. If the mediaobject has an agerating, then the only targetgroups allowed are the ones wich have that agerating
+     * @sicne 8.10
+     */
+    @Getter
+    private final Set<AgeRating> ageRatings;
+
+    TargetGroupType(String displayName, Set<AgeRating> ageRatings) {
         this.displayName = displayName;
+        this.ageRatings = ageRatings;
     }
    @Override
    public String toString() {

@@ -16,7 +16,7 @@ import jakarta.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -41,20 +41,16 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     private TargetGroups(
         @NonNull @Singular  List<TargetGroupType> values,
         @NonNull OwnerType owner) {
-        this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());
+        this.values = values.stream()
+            .map(TargetGroup::new)
+            .collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
     }
 
-    @Override
-    @NonNull
-    @XmlElement(name="targetGroup")
-    @JsonIgnore
-    public List<TargetGroup> getValues() {
-        return values;
-    }
+
 
     public void setValues(List<TargetGroup> list) {
         this.values = list;
@@ -64,5 +60,22 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
         return TargetGroups.builder()
             .values(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
             .owner(owner).build();
+    }
+
+
+
+    @Override
+    @XmlElement(name="targetGroup")
+    @JsonProperty("values")
+    protected List<TargetGroup> getFilteredValues() {
+        if (owner == OwnerType.INHERITED) {
+            AgeRating a = getParent().getAgeRating();
+            if (a != null) {
+                return values.stream()
+                    .filter(tg -> tg.value.getAgeRatings().contains(a))
+                    .collect(Collectors.toList());
+            }
+        }
+        return values;
     }
 }

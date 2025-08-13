@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -51,7 +52,6 @@ public abstract class AbstractMediaObjectOwnableList<
 
     @OneToMany(orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "parent_id")
-    @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
     protected List<I> values = new ArrayList<>();
 
@@ -99,5 +99,18 @@ public abstract class AbstractMediaObjectOwnableList<
             throw new RuntimeException(cnse);
         }
     }
+
+    @Override
+    @NonNull
+    public final List<I> getValues() {
+        return values;
+    }
+
+    /**
+     * Returns the values in this list, optionally filtered for XML/json. The case was that inherited targetgrups can be filtered using the agerating of the mediaobject.
+     * @since 8.10
+     */
+    @JsonProperty("values")
+    protected abstract List<I> getFilteredValues();
 
 }

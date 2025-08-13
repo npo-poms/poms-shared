@@ -13,6 +13,7 @@ import jakarta.xml.bind.annotation.XmlType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -50,8 +51,8 @@ public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
     @Override
     @NonNull
     @XmlElement(name="topic")
-    @JsonIgnore
-    public List<Topic> getValues() {
+    @JsonProperty("values")
+    public List<Topic> getFilteredValues() {
         return values;
     }
 
