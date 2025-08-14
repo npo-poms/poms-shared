@@ -93,7 +93,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
  *
  * @author roekoe
  */
-@SuppressWarnings({"WSReferenceInspection", "JpaDataSourceORMInspection"})
+@SuppressWarnings({"JpaDataSourceORMInspection"})
 
 // jpa
 @Entity
@@ -320,7 +320,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
 
     /**
-     * There seems to be a difference between {@link #ageRating} and {@link #ageRestriction}.
+     * There seems to be a difference between {@link #ageRating} and {@code ageRestriction}.
      * @since 7.11
      */
     @Enumerated(EnumType.STRING)
@@ -543,6 +543,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @PublicationFilter
     protected List<@NotNull @Valid Image> images;
 
+    @Setter
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
     protected boolean isEmbeddable = true;
@@ -553,7 +554,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Instant sortInstant;
 
     // Used for monitoring publication delay. Not exposed via java.
-    // Set its value in sql to now() when unmodified media is republished.
+    // Set its value in sql to now() when unmodified media is republishd.
     @Column(name = "repubDate", unique = false)
     protected Instant repubDate;
 
@@ -732,7 +733,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public void setAvailableSubtitles(SortedSet<AvailableSubtitles> incoming)  {
-        this.availableSubtitles = (SortedSet<AvailableSubtitles>) updateSortedSet(this.availableSubtitles, incoming);
+        this.availableSubtitles = updateSortedSet(this.availableSubtitles, incoming);
     }
 
     @Override
@@ -2225,10 +2226,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (prediction == null) {
             if (! location.isDeleted()) {
                 log.debug("No prediction for {}", location);
-                findOrCreatePrediction(platform, true, (c) -> {
+                findOrCreatePrediction(platform, true, (c) ->
                     MediaObjects.correctPrediction(c, this, Level.DEBUG, instant(), (ps, p) -> {
-                    });
-                });
+                }));
             }
         } else {
             if (!location.isDeleted()) {
@@ -2589,7 +2589,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Nullable
     public Image getMainImage() {
         if (images != null && !images.isEmpty()) {
-            return images.get(0);
+            return images.getFirst();
         }
         return null;
     }
@@ -2682,10 +2682,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
         return isEmbeddable;
-    }
-
-    public void setEmbeddable(boolean embeddable) {
-        isEmbeddable = embeddable;
     }
 
     /**
