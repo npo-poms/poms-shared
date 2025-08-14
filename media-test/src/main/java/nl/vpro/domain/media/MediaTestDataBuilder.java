@@ -934,7 +934,6 @@ public interface MediaTestDataBuilder<
                 .withSource()
                 .withSubtitles()
                 .withTags()
-                .withTargetGroups()
                 .withTeletext()
                 .withTitles()
                 .withTopics()
