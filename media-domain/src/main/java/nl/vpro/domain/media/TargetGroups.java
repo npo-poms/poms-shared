@@ -52,6 +52,7 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
 
 
     @JsonSetter("values")
+    @XmlElement(name="targetGroup")
     public void setValues(List<TargetGroup> list) {
         this.values = list;
         if (list != null) {

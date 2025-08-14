@@ -23,7 +23,7 @@ public interface MediaObjectOwnableList<
     Identifiable<Long>, Cloneable {
 
     /**
-     * Returns the values in this list, optionally filtered for XML/json. The case was that inherited targetgrups can be filtered using the agerating of the mediaobject.
+     * Returns the values in this list, optionally filtered for XML/json. The case was that inherited {@link nl.vpro.domain.media.TargetGroups} can be filtered using the {@link MediaObject#getAgeRating() age ratin} of the {@link MediaObject}.
      * @since 8.10
      */
     List<I> getFilteredValues();
