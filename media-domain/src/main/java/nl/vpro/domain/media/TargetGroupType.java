@@ -13,25 +13,25 @@ import nl.vpro.i18n.Displayable;
 @XmlEnum
 @XmlType(name = "targetGroupEnum")
 public enum TargetGroupType implements Displayable {
-    KIDS_6("Kinderen tot 6 jaar (Zappelin)", Set.of(AgeRating.ALL)),
+    KIDS_6("Kinderen tot 6 jaar", Set.of(AgeRating.ALL)),
 
 
     /**
      * @since 8.10
      */
-    KIDS_9("Kindprofiel tot 9", Set.of(AgeRating.ALL, AgeRating._6)),
+    KIDS_9("Kinderen 6 tot 9 jaar", Set.of(AgeRating.ALL, AgeRating._6)),
 
-    KIDS_12("Kinderen 6-12 (Zapp)", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9)),
-
-    /**
-     * @since 8.10
-     */
-    KIDS_14("Kindprofiel tot 14", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12)),
+    KIDS_12("Kinderen 9 tot 12 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9)),
 
     /**
      * @since 8.10
      */
-    KIDS_16("Kindprofiel tot 16", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14)),
+    KIDS_14("Kinderen 12 tot 14 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12)),
+
+    /**
+     * @since 8.10
+     */
+    KIDS_16("Kinderen 12 tot 14 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14)),
 
     YOUNG_ADULTS("Jongeren (NPO3)", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
     ADULTS("Volwassenen", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
