@@ -53,9 +53,13 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     }
 
 
-
+    @JsonSetter("values")
+    @XmlElement(name="targetGroup")
     public void setValues(List<TargetGroup> list) {
         this.values = list;
+        if (list != null) {
+            list.forEach(v -> v.setParent(this));
+        }
     }
 
     public TargetGroups withOwner(OwnerType owner) {
@@ -74,9 +78,9 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
 
     @Override
     @XmlElement(name="targetGroup")
-    @JsonProperty("values")
+    @JsonGetter("values")
     public List<TargetGroup> getFilteredValues() {
-        if (owner == OwnerType.INHERITED) {
+        if (owner == OwnerType.INHERITED && getParent() != null) {
             AgeRating a = getParent().getAgeRating();
             if (a != null) {
                 return values.stream()
