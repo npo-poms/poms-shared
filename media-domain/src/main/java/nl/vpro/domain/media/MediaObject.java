@@ -2035,6 +2035,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
+    /**
+     * Return a set of all ancestors. Sorted set, sorted on id..
+     */
     public SortedSet<MediaObject> getAncestors() {
         SortedSet<MediaObject> set = new TreeSet<>((mediaObject, mediaObject1) -> {
             if (mediaObject == null || mediaObject1 == null) {

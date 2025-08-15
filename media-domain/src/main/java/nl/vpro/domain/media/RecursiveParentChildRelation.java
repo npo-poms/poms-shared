@@ -11,40 +11,39 @@ import java.util.TreeSet;
  */
 public interface RecursiveParentChildRelation extends ParentChildRelation {
 
-	SortedSet<RecursiveMemberRef> getMemberOf();
+    SortedSet<RecursiveMemberRef> getMemberOf();
 
-	void setMemberOf(SortedSet<RecursiveMemberRef>  memberOf);
+    void setMemberOf(SortedSet<RecursiveMemberRef> memberOf);
 
-	default SortedSet<RecursiveMemberRef> getOrCreateMemberOf() {
-		if (getMemberOf() == null) {
-			setMemberOf(new TreeSet<>());
-		}
-		return getMemberOf();
-	}
-
-	SortedSet<RecursiveMemberRef> getEpisodeOf();
-
-	void setEpisodeOf(SortedSet<RecursiveMemberRef> episodeOf);
-
-	default SortedSet<RecursiveMemberRef> getOrCreateEpisodeOf() {
-		if (getEpisodeOf() == null) {
-			setEpisodeOf(new TreeSet<>());
-		}
-		return getEpisodeOf();
-	}
-
-	default SortedSet<RecursiveMemberRef> getOrCreate(StandaloneMemberRef.ObjectType type) {
-	    switch(type) {
-            case memberRef: return getOrCreateMemberOf();
-            case episodeRef: return getOrCreateEpisodeOf();
+    default SortedSet<RecursiveMemberRef> getOrCreateMemberOf() {
+        if (getMemberOf() == null) {
+            setMemberOf(new TreeSet<>());
         }
-        throw new UnsupportedOperationException();
+        return getMemberOf();
+    }
+
+    SortedSet<RecursiveMemberRef> getEpisodeOf();
+
+    void setEpisodeOf(SortedSet<RecursiveMemberRef> episodeOf);
+
+    default SortedSet<RecursiveMemberRef> getOrCreateEpisodeOf() {
+        if (getEpisodeOf() == null) {
+            setEpisodeOf(new TreeSet<>());
+        }
+        return getEpisodeOf();
+    }
+
+    default SortedSet<RecursiveMemberRef> getOrCreate(StandaloneMemberRef.ObjectType type) {
+        return switch (type) {
+            case memberRef -> getOrCreateMemberOf();
+            case episodeRef -> getOrCreateEpisodeOf();
+        };
     }
 
 
-	RecursiveMemberRef getSegmentOf();
+    RecursiveMemberRef getSegmentOf();
 
-	void setSegmentOf(RecursiveMemberRef recursiveMemberRef);
+    void setSegmentOf(RecursiveMemberRef recursiveMemberRef);
 
 
 }

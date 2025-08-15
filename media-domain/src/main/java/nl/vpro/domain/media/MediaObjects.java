@@ -1214,7 +1214,7 @@ public class MediaObjects {
      * @return An {@link Optional} of a {@link Range} of {@link Instant}. The optional is empty if the mediaobject was never announced, and is, was and probably will be unplayable.
      * @since 5.31
      */
-    public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+    public static Optional<Range<@NonNull Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         List<Location> locations = mediaObject.getLocations().stream()
             .filter(l -> platform.matches(l.getPlatform()))
             .filter(MediaObjects::locationFilter)
@@ -1226,7 +1226,7 @@ public class MediaObjects {
             if (prediction == null) {
                 return Optional.empty();
             } else {
-                Range<Instant> range = prediction.asRange();
+                Range<@NonNull Instant> range = prediction.asRange();
                 if (range.contains(instant())) {
                     // no playable locations, but still the prediction is not under embargo
                     // this means that the available locations are unfit because of ::locationFilter
@@ -1238,9 +1238,9 @@ public class MediaObjects {
             }
         } else {
             // we found relevant locations. So, it is playable in the span of their ranges (unless they don't overlap, but that cannot be covered by a single range)
-            Range<Instant> result = null;
+            Range<@NonNull Instant> result = null;
             for (Location location : locations) {
-                Range<Instant> range = location.asRange();
+                Range<@NonNull Instant> range = location.asRange();
                 if (result == null) {
                     result = range;
                 } else {
@@ -1257,7 +1257,7 @@ public class MediaObjects {
      * @param zoneId The timezone for which this must be evaluated or {@code null}, to fall back to {@link Schedule#ZONE_ID}
      * @since 5.31
      */
-    public static Map<Platform, Range<LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
+    public static Map<Platform, Range<@NonNull LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
         final ZoneId finalZoneId = zoneId== null? Schedule.ZONE_ID : zoneId;
         return playableRanges(mediaObject).entrySet()
             .stream()
@@ -1272,8 +1272,8 @@ public class MediaObjects {
      * @see #playableRanges(MediaObject, ZoneId)
      * @since 5.31
      */
-    public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
-        final Map<Platform, Range<Instant>> result = new TreeMap<>();
+    public static Map<Platform, Range<@NonNull Instant>> playableRanges(@NonNull MediaObject mediaObject) {
+        final Map<Platform, Range<@NonNull Instant>> result = new TreeMap<>();
         Arrays.stream(Platform.values()).forEach(p ->
             playableRange(p, mediaObject)
                 .ifPresent(r -> result.put(p, r)
@@ -1417,6 +1417,26 @@ public class MediaObjects {
          }
     }
 
+    public static Generation getParents(MediaObject mediaObject) {
+        Set<MemberRef> values = new HashSet<>();
+
+        if (mediaObject instanceof Program p) {
+            p.getEpisodeOf().forEach(values::add);
+        }
+        if (mediaObject instanceof Segment s) {
+            values.add(MemberRef.builder().parent(s.getParent()).member(s).build())
+
+        }
+        mediaObject.getMemberOf().forEach(values::add);
+
+
+    }
+
+    public static Stream<Generation> getAncestorGenerations(MediaObject mediaObject) {
+        mediaObject.getVirtualMemberRefs();
+        return null;
+
+    }
 
     /**
      * Calculates the 'effective targetgroups' for a Mediaobject. This is mainly for use in the GUI.

@@ -28,20 +28,20 @@ public @interface HasTitle {
 
     Class<? extends Payload>[] payload() default {};
 
-	/**
-	 * The types of the title to require at least one of. Defaults to { {@link TextualType#SUB}, {@link TextualType#MAIN} }
-	 */
+    /**
+     * The types of the title to require at least one of. Defaults to { {@link TextualType#SUB}, {@link TextualType#MAIN} }
+     */
     TextualType[] type() default {TextualType.SUB, TextualType.MAIN};
 
-	/**
-	 * Defines several {@link HasTitle} constraints on the same element.
-	 *
-	 * @see HasTitle
-	 */
-	@Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
-	@Retention(RUNTIME)
-	@Documented
-	@interface List {
-		HasTitle[] value();
-	}
+    /**
+     * Defines several {@link HasTitle} constraints on the same element.
+     *
+     * @see HasTitle
+     */
+    @Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        HasTitle[] value();
+    }
 }
