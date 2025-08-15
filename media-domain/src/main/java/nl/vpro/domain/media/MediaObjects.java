@@ -1419,6 +1419,11 @@ public class MediaObjects {
 
 
     /**
+     * Calculates the 'effective targetgroups' for a Mediaobject. This is mainly for use in the GUI.
+     * If no targetgroups are found, the parent groups will be checked, and if _those_ have it, then implicitely an 'INHERITED' value will be
+     * added. This will be arranged also by the {@code UpdateInheritedValuesService} in the database. But because that may occur only after a
+     * certain delay, that may be confusing without this.
+     *
      * @since 8.10
      */
     public static Optional<TargetGroups> getEffectiveTargetGroups(MediaObject media, OwnerType owner) {
@@ -1426,10 +1431,8 @@ public class MediaObjects {
         TargetGroups tg =  OwnableLists.filterByOwnerOrFirst(
                 media.getTargetGroups(), owner).orElse(null);
         if (tg == null  && media instanceof Program program) {
-
-
             tg = program.getAncestors().stream()
-                .map(g -> Hibernate.unproxy(g))
+                .map(Hibernate::unproxy)
                 .filter(Group.class::isInstance)
                 .map(Group.class::cast)
                 .map(group -> {
