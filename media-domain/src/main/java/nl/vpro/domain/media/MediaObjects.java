@@ -1418,23 +1418,23 @@ public class MediaObjects {
     }
 
     public static Generation getParents(MediaObject mediaObject) {
-        Set<MemberRef> values = new HashSet<>();
+        Set<RecursiveParentChildRelation> values = new HashSet<>();
 
         if (mediaObject instanceof Program p) {
-            p.getEpisodeOf().forEach(values::add);
+            values.addAll(p.getEpisodeOf());
         }
         if (mediaObject instanceof Segment s) {
-            values.add(MemberRef.builder().parent(s.getParent()).member(s).build())
+            values.add(MemberRef.builder().parent(s.getParent()).member(s).build());
 
         }
-        mediaObject.getMemberOf().forEach(values::add);
-
+        values.addAll(mediaObject.getMemberOf());
+        return new Generation(values, 1);
 
     }
 
     public static Stream<Generation> getAncestorGenerations(MediaObject mediaObject) {
-        mediaObject.getVirtualMemberRefs();
-        return null;
+        Generation start =  getParents(mediaObject);
+        return Stream.iterate(start, Generation::isNotEmpty, Generation::up);
 
     }
 
@@ -1451,17 +1451,17 @@ public class MediaObjects {
         TargetGroups tg =  OwnableLists.filterByOwnerOrFirst(
                 media.getTargetGroups(), owner).orElse(null);
         if (tg == null  && media instanceof Program program) {
-            tg = program.getAncestors().stream()
+            tg = getAncestorGenerations(program).flatMap(g -> g.members().stream())
                 .map(Hibernate::unproxy)
                 .filter(Group.class::isInstance)
                 .map(Group.class::cast)
-                .map(group -> {
-                    return group.getTargetGroups().stream()
+                .map(group ->
+                    group.getTargetGroups().stream()
                         .findFirst()
-                        .map(g -> g.withOwner(OwnerType.INHERITED))
-                        .orElse(null);
-                })
+                        .orElse(null))
                 .filter(Objects::nonNull)
+                .peek(fromUp -> log.info("Inheriting from {}", fromUp))
+                .map(fromUp -> fromUp.withOwner(OwnerType.INHERITED))
                 .findFirst()
                 .orElse(null);
 

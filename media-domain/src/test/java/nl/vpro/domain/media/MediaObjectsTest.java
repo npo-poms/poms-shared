@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.*;
 
@@ -450,6 +451,28 @@ public class MediaObjectsTest {
 
         MediaObjects.integrate(existing, incoming);
         assertThat(existing.stream().map(i -> i.value)).containsExactly("a", "x", "y");
+
+    }
+
+
+    @Test
+    public void generations() {
+        final Group g1  = MediaBuilder.group().mid("g1").build();
+        final Group g2  = MediaBuilder.group().mid("g2").build();
+        final Group g3  = MediaBuilder.group().mid("g3").memberOf(g2).build();
+        final Program program = MediaBuilder.program().memberOf(g1).memberOf(g3).build();
+        List<Generation> generations = MediaObjects.getAncestorGenerations(program).toList();
+
+        Generation parents = generations.get(0);
+        log.info("{}", parents);
+        Generation grandparents = parents.up();
+        log.info("{}", grandparents);
+
+
+        assertThat(generations).hasSize(2);
+
+        log.info("{}", generations);
+
 
     }
 }
