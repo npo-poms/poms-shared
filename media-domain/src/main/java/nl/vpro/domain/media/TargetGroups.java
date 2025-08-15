@@ -40,7 +40,8 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     @lombok.Builder(builderClassName = "Builder")
     private TargetGroups(
         @NonNull @Singular  List<TargetGroupType> values,
-        @NonNull OwnerType owner) {
+        @NonNull OwnerType owner,
+        MediaObject parent) {
         this.values = values.stream()
             .map(TargetGroup::new)
             .collect(Collectors.toList());
@@ -48,6 +49,7 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
+        this.parent = parent;
     }
 
 
@@ -58,8 +60,14 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
 
     public TargetGroups withOwner(OwnerType owner) {
         return TargetGroups.builder()
-            .values(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
-            .owner(owner).build();
+            .values(
+                values.stream()
+                    .map(TargetGroup::getValue)
+                    .collect(Collectors.toList())
+            )
+            .owner(owner)
+            .parent(getParent())
+            .build();
     }
 
 
