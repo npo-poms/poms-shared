@@ -44,8 +44,8 @@ public enum TargetGroupType implements Displayable {
     private final String displayName;
 
     /**
-     * There is a link between target groups and age-rating. If the mediaobject has an agerating, then the only targetgroups allowed are the ones wich have that agerating
-     * @sicne 8.10
+     * There is a link between target groups and age-rating. If the {@link MediaObject media object} has an {@link MediaObject#getAgeRating() age rating}, then the only target groups that are allowed are the ones which contain that age rating.
+     * @since 8.10
      */
     @Getter
     private final Set<AgeRating> ageRatings;
