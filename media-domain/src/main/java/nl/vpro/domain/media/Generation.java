@@ -10,6 +10,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public record Generation(Set<RecursiveParentChildRelation> members, int level) {
 
+    public Generation(Set<RecursiveParentChildRelation> members, int level) {
+        this.members = sorted(members);
+        this.level = level;
+    }
 
     public Generation up() {
         Set<RecursiveParentChildRelation> parents = new HashSet<>();
@@ -29,5 +33,17 @@ public record Generation(Set<RecursiveParentChildRelation> members, int level) {
     @NonNull
     public String toString() {
         return level + " " + members.stream().map(m -> m.getType() + ":" + m.getParentMid()).collect(Collectors.joining(","));
+    }
+
+    private static SortedSet<RecursiveParentChildRelation> sorted(Set<RecursiveParentChildRelation> set) {
+
+        // sorted
+        // Reversed because then 'SEASON' comes for 'SERIES', which I guess is the use case.
+        SortedSet<RecursiveParentChildRelation> ss = new TreeSet<>(
+            Comparator.comparing(ParentChildRelation::getType).reversed()
+        );
+        ss.addAll(set);
+        return ss;
+
     }
 }
