@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.*;
 
@@ -31,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.4
  */
-@SuppressWarnings({"deprecation", "OptionalGetWithoutIsPresent"})
+@SuppressWarnings({"deprecation", "OptionalGetWithoutIsPresent", "DataFlowIssue"})
 @Slf4j
 public class MediaObjectsTest {
 
@@ -241,8 +240,8 @@ public class MediaObjectsTest {
         Optional<List<MemberRef>> path = MediaObjects.getPath(g2, p, descendants);
 
         assertThat(path.get()).hasSize(1);
-        assertThat(path.get().get(0).getMediaRef()).isEqualTo("g2");
-        assertThat(path.get().get(0).getMember().getMid()).isEqualTo("p1");
+        assertThat(path.get().getFirst().getMediaRef()).isEqualTo("g2");
+        assertThat(path.get().getFirst().getMember().getMid()).isEqualTo("p1");
     }
 
 
@@ -456,15 +455,14 @@ public class MediaObjectsTest {
 
 
     @Test
-    @Disabled("tofix")
-    public void generations() {
+        public void generations() {
         final Group g1  = MediaBuilder.group().mid("g1").build();
         final Group g2  = MediaBuilder.group().mid("g2").build();
         final Group g3  = MediaBuilder.group().mid("g3").memberOf(g2).build();
         final Program program = MediaBuilder.program().memberOf(g1).memberOf(g3).build();
         List<Generation> generations = MediaObjects.getAncestorGenerations(program).toList();
 
-        Generation parents = generations.get(0);
+        Generation parents = generations.getFirst();
         log.info("{}", parents);
         Generation grandparents = parents.up();
         log.info("{}", grandparents);

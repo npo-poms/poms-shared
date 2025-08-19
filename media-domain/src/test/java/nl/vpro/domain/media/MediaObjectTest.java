@@ -561,8 +561,8 @@ public class MediaObjectTest {
         constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate));
 
 
-        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
-        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is geen geldig gebied");
+        assertThat(constraintViolations.getFirst().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
+        assertThat(constraintViolations.getFirst().getMessage()).isEqualTo("nl_XX is geen geldig gebied");
         assertThat(constraintViolations).hasSize(1);
     }
 
@@ -621,12 +621,12 @@ public class MediaObjectTest {
             Set<ConstraintViolation<Program>> constraintViolations = dbValidate(p);
             assertThat(constraintViolations).hasSize(0);
         }
-        p.getWebsites().get(0).setUrl("http://bla");
+        p.getWebsites().getFirst().setUrl("http://bla");
         validate(p, true, 1);
-        p.getWebsites().get(0).setUrl("http://bla.nl");
+        p.getWebsites().getFirst().setUrl("http://bla.nl");
         validate(p, true, 0);
 
-        p.getWebsites().get(0).setUrl("www.kro-ncrv.nl/kruispunt");
+        p.getWebsites().getFirst().setUrl("www.kro-ncrv.nl/kruispunt");
         validate(p, true, 1);
     }
 
