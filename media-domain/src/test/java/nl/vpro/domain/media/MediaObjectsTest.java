@@ -455,10 +455,10 @@ public class MediaObjectsTest {
 
 
     @Test
-        public void generations() {
-        final Group g1  = MediaBuilder.group().mid("g1").build();
-        final Group g2  = MediaBuilder.group().mid("g2").build();
-        final Group g3  = MediaBuilder.group().mid("g3").memberOf(g2).build();
+    public void generations() {
+        final Group g1  = MediaBuilder.group().mid("g1").type(GroupType.SERIES).build();
+        final Group g2  = MediaBuilder.group().mid("g2").type(GroupType.SERIES).build();
+        final Group g3  = MediaBuilder.group().mid("g3").type(GroupType.SEASON).memberOf(g2).build();
         final Program program = MediaBuilder.program().memberOf(g1).memberOf(g3).build();
         List<Generation> generations = MediaObjects.getAncestorGenerations(program).toList();
 
