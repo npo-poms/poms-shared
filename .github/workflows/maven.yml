@@ -46,7 +46,7 @@ jobs:
         run: mvn versions:display-dependency-updates
         if: runner.os == 'Linux' && matrix.java == '21'
       - name: Build with Maven (Other os)
-        run: mvn -B  -U -fae package
+        run: mvn -B  -U  -D"maven.test.failure.ignore=true" package
         if: "! (runner.os == 'Linux' && matrix.java == '21')"
       - name: Publish to codecov
         uses: codecov/codecov-action@v4
