@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.*;
 
@@ -463,7 +462,7 @@ public class MediaObjectsTest {
         final Program program = MediaBuilder.program().memberOf(g1).memberOf(g3).build();
         List<Generation> generations = MediaObjects.getAncestorGenerations(program).toList();
 
-        Generation parents = generations.get(0);
+        Generation parents = generations.getFirst();
         log.info("{}", parents);
         Generation grandparents = parents.up();
         log.info("{}", grandparents);
