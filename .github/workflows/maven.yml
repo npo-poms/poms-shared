@@ -36,7 +36,7 @@ jobs:
           server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Build and deploy with Maven (Linux, java 21)
-        run:  mvn -B -P"deploy,central,npm" -U -fae deploy
+        run:  mvn -B -P"deploy,central,npm" -U -D"maven.test.failure.ignore=true" deploy
         if: runner.os == 'Linux' && matrix.java == '21'
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
@@ -67,6 +67,8 @@ jobs:
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
+      - uses: mmprogrami/after-maven-action@main
+
 
 
 
