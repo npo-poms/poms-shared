@@ -67,7 +67,7 @@ jobs:
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
-      - uses: mmprogrami/after-maven-action@main
+      - uses: MMProgrami/after-maven-action@v1
 
 
 
