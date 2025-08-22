@@ -8,6 +8,7 @@ import java.nio.file.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,7 @@ class AudioSourcingServiceImplITest {
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException {
+    public void uploadAudio() throws IOException, InterruptedException, ExecutionException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
@@ -80,7 +81,7 @@ class AudioSourcingServiceImplITest {
             "audio/mpeg",
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
-        );
+        ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
     }
 

@@ -3,6 +3,7 @@ package nl.vpro.sourcingservice;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -20,14 +21,14 @@ public interface SourcingService {
      * @param inputStream The inputStream for the asset. Will be implicitly closed when consumed (or when an exception occurs)
      * @param errors email address to associate with mishaps
      */
-    UploadResponse upload(
+    CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
         String mimeType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws IOException, InterruptedException, SourcingServiceException;
+    );
 
 
 

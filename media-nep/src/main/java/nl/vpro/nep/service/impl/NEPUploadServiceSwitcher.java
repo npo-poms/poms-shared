@@ -22,12 +22,14 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
     final NEPUploadService nepftpUploadService;
     final NEPUploadService nepftpUploadVerticalService;
 
-    final MediaInfoService mediainfoService = new MediaInfoService();
+    final MediaInfoService mediainfoService;
 
     public NEPUploadServiceSwitcher(
+        MediaInfoService mediainfoService,
         NEPUploadService nepftpUploadService,
         NEPUploadService nepftpUploadVerticalService
     ) {
+        this.mediainfoService = mediainfoService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpUploadVerticalService = nepftpUploadVerticalService;
     }

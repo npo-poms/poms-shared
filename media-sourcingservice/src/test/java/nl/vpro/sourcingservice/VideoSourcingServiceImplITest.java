@@ -56,7 +56,7 @@ class VideoSourcingServiceImplITest {
 
         impl.upload(
             simple(log),
-            "WO_VPRO_A20069594",
+            "WO_VPRO_20286719",
             Files.size(file),
             "video/mp4",
             Files.newInputStream(file),
@@ -69,7 +69,7 @@ class VideoSourcingServiceImplITest {
     @Test
     public void status() throws IOException, InterruptedException {
 
-        Object status = impl.status("WO_VPRO_A20069594");
+        Object status = impl.status("WO_VPRO_20286719");
         log.info("Status {}", status);
     }
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException {
+    public void uploadAudio() throws IOException, InterruptedException, ExecutionException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -68,7 +69,7 @@ class AudioSourcingServiceImplTest {
             "audio/mpeg",
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
-        );
+        ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
 
         List<ServeEvent> allServeEvents = getAllServeEvents();

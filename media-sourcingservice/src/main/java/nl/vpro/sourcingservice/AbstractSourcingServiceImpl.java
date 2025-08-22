@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import org.apache.tika.mime.*;
@@ -101,14 +102,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     @Override
-    public UploadResponse upload(
+    public CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
         String contentType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws SourcingServiceException, IOException, InterruptedException {
+    )  {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
@@ -135,53 +136,56 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info(en("Posting {} for {} to {}")
             .nl("Posting {} voor {} naar {}").slf4jArgs(fileName, mid, post.uri()));
 
-        final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
+        final CompletableFuture<HttpResponse<String>> asyncSend = client.sendAsync(post, HttpResponse.BodyHandlers.ofString());
 
 
-        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
+        return asyncSend.thenApply((send) -> {
+            final boolean success = send.statusCode() >= 200 && send.statusCode() < 300;
 
-        if (! success) {
-            log.warn("Status code for {}: {}", post.uri(), send.statusCode());
-        }
-        Long count = null;
-        if (inputStream instanceof FileCachingInputStream fc) {
-            count = fc.getCount();
-        }
 
-        String status ;
-        String response ;
-        try {
-            final JsonNode bodyNode = JSONREADER.readTree(send.body());
-            logger.info("{} {}", mid, bodyNode);
-
-            status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
-            response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
             if (!success) {
-                throw new SourcingServiceException(send.statusCode(), bodyNode);
+                log.warn("Status code for {}: {}", post.uri(), send.statusCode());
             }
-        } catch (SourcingServiceException sse) {
-            throw sse;
-        } catch (Exception e) {
-            if (success) {
-                logger.error(e.getClass() + " " + e.getMessage(), e);
+            Long count = null;
+            if (inputStream instanceof FileCachingInputStream fc) {
+                count = fc.getCount();
             }
-            status = null;
-            response = null;
 
-        }
+            String status;
+            String response;
+            try {
+                final JsonNode bodyNode = JSONREADER.readTree(send.body());
+                logger.info("{} {}", mid, bodyNode);
 
-        logger.log(success?  Level.INFO : Level.ERROR,
-            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
+                status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
+                response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+                if (!success) {
+                    throw new SourcingServiceException(send.statusCode(), bodyNode);
+                }
+            } catch (SourcingServiceException sse) {
+                throw sse;
+            } catch (Exception e) {
+                if (success) {
+                    logger.error(e.getClass() + " " + e.getMessage(), e);
+                }
+                status = null;
+                response = null;
+
+            }
+
+            logger.log(success ? Level.INFO : Level.ERROR,
+                "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
 
 
-        return new UploadResponse(
-            mid,
-            send.statusCode(),
-            status,
-            response,
-            count,
-            "2:"+  configuration.get().cleanBaseUrl()
+            return new UploadResponse(
+                mid,
+                send.statusCode(),
+                status,
+                response,
+                count,
+                "2:" + configuration.get().cleanBaseUrl()
             );
+        });
    }
 
 
