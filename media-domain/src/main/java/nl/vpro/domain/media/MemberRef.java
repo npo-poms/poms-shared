@@ -587,6 +587,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         hash = 53 * hash + (this.member != null ? this.member.hashCode() : 0);
         hash = 53 * hash + (this.getMediaRef() != null ? this.getMediaRef().hashCode() : 0);
         hash = 53 * hash + (this.number != null ? this.number.hashCode() : 0);
+        hash = 53 * hash + (this.owner != null ? this.owner.hashCode() : 0);
         return hash;
     }
 

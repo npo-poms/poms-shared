@@ -41,6 +41,7 @@ public record Generation(Set<RecursiveParentChildRelation> members, int level) {
         // Reversed because then 'SEASON' comes for 'SERIES', which I guess is the use case.
         SortedSet<RecursiveParentChildRelation> ss = new TreeSet<>(
             Comparator.comparing(ParentChildRelation::getType).reversed()
+                .thenComparing(ParentChildRelation::getParentMid)
         );
         ss.addAll(set);
         return ss;

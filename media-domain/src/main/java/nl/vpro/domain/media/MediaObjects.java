@@ -1433,7 +1433,7 @@ public class MediaObjects {
     }
 
     public static Stream<Generation> getAncestorGenerations(MediaObject mediaObject) {
-        Generation start =  getParents(mediaObject);
+        Generation start = getParents(mediaObject);
         return Stream.iterate(start, Generation::isNotEmpty, Generation::up);
 
     }

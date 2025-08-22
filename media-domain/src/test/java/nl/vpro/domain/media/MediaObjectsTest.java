@@ -454,18 +454,23 @@ public class MediaObjectsTest {
     }
 
 
-    @Test
+    @RepeatedTest(10)
     public void generations() {
         final Group g1  = MediaBuilder.group().mid("g1").build();
         final Group g2  = MediaBuilder.group().mid("g2").build();
         final Group g3  = MediaBuilder.group().mid("g3").memberOf(g2).build();
-        final Program program = MediaBuilder.program().memberOf(g1).memberOf(g3).build();
+        final Program program = MediaBuilder.program()
+            .memberOf(g1)
+            .memberOf(g3)
+            .build();
         List<Generation> generations = MediaObjects.getAncestorGenerations(program).toList();
 
         Generation parents = generations.getFirst();
         log.info("{}", parents);
+        assertThat(parents.members()).hasSize(2); // g1, g2
         Generation grandparents = parents.up();
         log.info("{}", grandparents);
+        assertThat(grandparents.members()).hasSize(1);
 
 
         assertThat(generations).hasSize(2);
