@@ -9,13 +9,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.logging.simple.Log4j2SimpleLogger;
+import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
 
 @Log4j2
-@Disabled("This does actual stuff, need actual token. Furthermore, we don't use this")
 class VideoSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
@@ -38,7 +36,7 @@ class VideoSourcingServiceImplITest {
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
         Configuration configuration = new Configuration(
-            "https://test.sourcing-video.cdn.npoaudio.nl/",
+            PROPERTIES.getProperty("sourcingservice.video.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
@@ -54,9 +52,16 @@ class VideoSourcingServiceImplITest {
     @Test
     public void uploadVideo() throws IOException, InterruptedException {
         Instant start = Instant.now();
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "portrait.mp4");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", Files.size(file), null, Files.newInputStream(file), null);
+        impl.upload(
+            simple(log),
+            "WO_VPRO_A20069594",
+            Files.size(file),
+            "video/mp4",
+            Files.newInputStream(file),
+            "michiel.meeuwissen@gmail.com"
+        );
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
@@ -64,7 +69,7 @@ class VideoSourcingServiceImplITest {
     @Test
     public void status() throws IOException, InterruptedException {
 
-        Object status = impl.status("WO_VPRO_20057921");
+        Object status = impl.status("WO_VPRO_A20069594");
         log.info("Status {}", status);
     }
 

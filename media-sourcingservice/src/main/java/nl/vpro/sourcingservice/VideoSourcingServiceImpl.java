@@ -17,15 +17,12 @@ import nl.vpro.domain.media.AVFileFormat;
 @Log4j2
 public class VideoSourcingServiceImpl extends AbstractSourcingServiceImpl implements VideoSourcingService {
 
-
-
     public VideoSourcingServiceImpl(
         @NonNull Supplier<Configuration> configuration,
         MeterRegistry meterRegistry
        ) {
         super(configuration, meterRegistry);
     }
-
 
     @Override
     protected AVFileFormat defaultFormat() {
@@ -36,6 +33,5 @@ public class VideoSourcingServiceImpl extends AbstractSourcingServiceImpl implem
     protected String implName() {
         return "video";
     }
-
 
 }

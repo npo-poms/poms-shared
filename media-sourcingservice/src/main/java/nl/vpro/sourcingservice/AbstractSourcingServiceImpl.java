@@ -78,8 +78,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         try {
 
             MimeType tika = MimeTypes.getDefaultMimeTypes().getRegisteredMimeType(mimeType);
-            if (tika== null) {
-                tika= MimeTypes.getDefaultMimeTypes().forName(mimeType);
+            if (tika == null) {
+                tika = MimeTypes.getDefaultMimeTypes().forName(mimeType);
             }
             if (!tika.getExtensions().isEmpty()) {
                 if (tika.getExtensions().contains(defaultExt)) {
@@ -130,7 +130,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpRequest post = uploadRequestBuilder
             .header("Content-Type", body.contentType())
             .POST(body)
-
             .build();
 
         logger.info(en("Posting {} for {} to {}")
@@ -140,6 +139,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
         final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
+
+        if (! success) {
+            log.warn("Status code for {}: {}", post.uri(), send.statusCode());
+        }
         Long count = null;
         if (inputStream instanceof FileCachingInputStream fc) {
             count = fc.getCount();
@@ -160,7 +163,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw sse;
         } catch (Exception e) {
             if (success) {
-                logger.error(e.getMessage(), e);
+                logger.error(e.getClass() + " " + e.getMessage(), e);
             }
             status = null;
             response = null;
