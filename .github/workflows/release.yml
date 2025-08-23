@@ -21,8 +21,7 @@ jobs:
           server-username: CENTRAL_USERNAME
           server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
-          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
-      - uses: oleksiyrudenko/gha-git-credentials@v2.1.2
+      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           global: true
           name: 'github $GITHUB_ACTOR'
@@ -36,4 +35,4 @@ jobs:
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}

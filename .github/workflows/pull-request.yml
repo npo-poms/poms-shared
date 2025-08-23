@@ -15,15 +15,13 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       MAVEN_ARGS: '--no-transfer-progress'
     steps:
-      - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.12.1
-        continue-on-error: true # for act
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
@@ -40,7 +38,7 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME}}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD}}
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: (success() || failure())
         with:
           junit_files: "**/target/surefire-reports/*.xml"
