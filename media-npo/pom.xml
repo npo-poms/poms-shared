@@ -11,6 +11,7 @@
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-npo</artifactId>
+  <name>media-npo</name>
   <description>Java bindings of several types of NPO related XML formats that POMS supports. Mainly in import processes</description>
 
   <dependencies>
