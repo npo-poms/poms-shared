@@ -7,6 +7,8 @@
     <version>8.10.1-SNAPSHOT</version>
   </parent>
   <artifactId>gtaa-openskos</artifactId>
+  <name>gtaa-openskos</name>
+
   <description>Contains an implementation of an openskos client for GTAA</description>
 
   <dependencies>
