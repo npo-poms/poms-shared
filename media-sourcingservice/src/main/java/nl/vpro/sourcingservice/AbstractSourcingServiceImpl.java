@@ -270,7 +270,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     @ManagedAttribute
     @Override
     public String getUploadString() {
-        return forPath(uploadRequestBuilder("%s").toString());
+        return forPath("ingest/%s/upload");
     }
 
     @ManagedAttribute
