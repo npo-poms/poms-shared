@@ -54,6 +54,7 @@ jobs:
              echo "profile=" >> $GITHUB_OUTPUT
           fi
       - name: Build  with Maven
+        shell: bash
         run:  |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
             mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests ${{ steps.set_target.outputs.target}}
