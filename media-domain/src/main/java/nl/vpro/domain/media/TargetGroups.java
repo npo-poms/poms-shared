@@ -74,6 +74,18 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
             .build();
     }
 
+     public TargetGroups withParent(MediaObject parent) {
+        return TargetGroups.builder()
+            .values(
+                values.stream()
+                    .map(TargetGroup::getValue)
+                    .collect(Collectors.toList())
+            )
+            .owner(getOwner())
+            .parent(parent)
+            .build();
+    }
+
 
 
     @Override
@@ -90,4 +102,6 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
         }
         return values;
     }
+
+
 }
