@@ -6,6 +6,11 @@ on:
   push:
     branches: [main, "REL-*"]
   workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Skip tests'
+        required: false
+        default: 'false'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,7 +41,12 @@ jobs:
           server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Build and deploy with Maven (Linux, java 21)
-        run:  mvn -B -P"deploy,central,npm" -U -D"maven.test.failure.ignore=true" deploy
+        run:  |
+          if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
+            mvn -B -P"deploy,central,npm" -U -DskipTests deploy
+          else
+            mvn -B -P"deploy,central,npm" -U -D"maven.test.failure.ignore=true" deploy
+          fi
         if: runner.os == 'Linux' && matrix.java == '21'
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
@@ -46,7 +56,12 @@ jobs:
         run: mvn versions:display-dependency-updates
         if: runner.os == 'Linux' && matrix.java == '21'
       - name: Build with Maven (Other os)
-        run: mvn -B  -U  -D"maven.test.failure.ignore=true" package
+        run: |
+          if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
+            mvn -B  -U  -DskipTests package
+          else
+            mvn -B  -U  -D"maven.test.failure.ignore=true" package
+          fi
         if: "! (runner.os == 'Linux' && matrix.java == '21')"
       - name: Publish to codecov
         uses: codecov/codecov-action@v4
