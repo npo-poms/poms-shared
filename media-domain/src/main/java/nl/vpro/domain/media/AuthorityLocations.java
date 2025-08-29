@@ -196,6 +196,7 @@ public class AuthorityLocations {
 
                         String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
                         Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+
                         log.debug("matched {}", authorityLocation);
                         makeLocationPublishable(authorityLocation);
                         result.add(authorityLocation);
