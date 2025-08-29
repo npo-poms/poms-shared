@@ -41,37 +41,39 @@ jobs:
           server-username: CENTRAL_USERNAME
           server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
-      - name: Build and deploy with Maven (Linux, java 21)
+      - name: Determine target
+        id: set_target
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" && "${RUNNER_OS}" == "Linux" && "${{ matrix.java }}" == "21" ]]; then
+             echo "target=deploy" >> $GITHUB_OUTPUT
+             echo "profile=deploy," >> $GITHUB_OUTPUT
+             echo "mainbuild=true" >> $GITHUB_OUTPUT
+          else
+             echo "target=" >> $GITHUB_OUTPUT
+             echo "profile=" >> $GITHUB_OUTPUT
+          fi
+      - name: Build  with Maven
         run:  |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
-            mvn -B -P"deploy,central,npm" -U -DskipTests deploy
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests ${{ steps.set_target.outputs.target}}
           else
-            mvn -B -P"deploy,central,npm" -U -D"maven.test.failure.ignore=true" deploy
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -D"maven.test.failure.ignore=true"  ${{ steps.set_target.outputs.target}}
           fi
-        if: runner.os == 'Linux' && matrix.java == '21'
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Show dependency updates
         run: mvn versions:display-dependency-updates
-        if: runner.os == 'Linux' && matrix.java == '21'
-      - name: Build with Maven (Other os)
-        shell: bash
-        run: |
-          if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
-            mvn -B  -U  -DskipTests package
-          else
-            mvn -B  -U  -D"maven.test.failure.ignore=true" package
-          fi
-        if: "! (runner.os == 'Linux' && matrix.java == '21')"
+        if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v4
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
           #files: "**/target/surefire-reports/*.xml"
-        if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '21'"
+        if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: (success() || failure()) && runner.os == 'Linux'

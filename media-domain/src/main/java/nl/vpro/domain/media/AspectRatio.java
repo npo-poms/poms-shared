@@ -73,7 +73,7 @@ public enum AspectRatio implements XmlValued, Displayable {
      */
     public static AspectRatio fromString(String s) {
         if (s == null || s.isEmpty()) return null;
-        String[] split = s.split("\\s*[^\\d]\\s*", 2);
+        String[] split = s.split("\\s*\\D\\s*", 2);
         return fromDimension(
             Integer.parseInt(split[0].trim()),
             Integer.parseInt(split[1].trim()));
