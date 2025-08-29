@@ -31,7 +31,7 @@ public enum TargetGroupType implements Displayable {
     /**
      * @since 8.10
      */
-    KIDS_16("Kinderen 12 tot 14 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14)),
+    KIDS_16("Kinderen 14 tot 16 jaar", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14)),
 
     YOUNG_ADULTS("Jongeren (NPO3)", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
     ADULTS("Volwassenen", Set.of(AgeRating.ALL, AgeRating._6, AgeRating._9, AgeRating._12, AgeRating._14, AgeRating._16)),
