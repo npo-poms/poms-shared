@@ -1434,7 +1434,10 @@ public class MediaObjects {
 
     public static Stream<Generation> getAncestorGenerations(MediaObject mediaObject) {
         Generation start = getParents(mediaObject);
-        return Stream.iterate(start, Generation::isNotEmpty, Generation::up);
+        return Stream.iterate(start,
+            Generation::isNotEmpty,
+            Generation::up
+        );
 
     }
 
@@ -1446,25 +1449,36 @@ public class MediaObjects {
      *
      * @since 8.10
      */
-    public static Optional<TargetGroups> getEffectiveTargetGroups(MediaObject media, OwnerType owner) {
-        // TODO, if media is program then it may check parent groups for inherited target groups
+    public static Optional<TargetGroups> getEffectiveTargetGroups(MediaObject media, OwnerType owner, MediaProvider mediaService) {
+
         TargetGroups tg =  OwnableLists.filterByOwnerOrFirst(
                 media.getTargetGroups(), owner).orElse(null);
-        if (tg == null  && media instanceof Program program) {
-            tg = getAncestorGenerations(program).flatMap(g -> g.members().stream())
-                .map(Hibernate::unproxy)
-                .filter(Group.class::isInstance)
-                .map(Group.class::cast)
-                .map(group ->
-                    group.getTargetGroups().stream()
-                        .findFirst()
-                        .orElse(null))
-                .filter(Objects::nonNull)
-                .peek(fromUp -> log.info("Inheriting from {}", fromUp))
-                .map(fromUp -> fromUp.withOwner(OwnerType.INHERITED))
-                .findFirst()
-                .orElse(null);
+        if (media instanceof Program program) {
+            if (tg == null || tg.getOwner() == OwnerType.INHERITED) {
+                TargetGroups original = tg;
+                tg = getAncestorGenerations(program)
+                    .flatMap(g -> g.members().stream())
+                    .map(RecursiveParentChildRelation::getMidRef)
+                    .map(mediaService)
+                    .map(Hibernate::unproxy)
+                    .filter(Group.class::isInstance)
+                    .map(Group.class::cast)
+                    .map(group ->
+                        group.getTargetGroups().stream()
+                            .findFirst()
+                            .orElse(null))
+                    .filter(Objects::nonNull)
+                    .peek(fromUp ->
+                        log.debug("Inheriting from {}", fromUp)
+                    )
+                    .map(fromUp -> fromUp.withOwner(OwnerType.INHERITED).withParent(program))
+                    .findFirst()
+                    .orElse(null);
+                if (original != null && tg != null && ! Objects.equals(original.getValues(), tg.getValues())) {
+                    log.info("Implicitly upgraded TargetGroups of {} {} -> {}", media.getMid(), original, tg);
 
+                }
+            }
         }
         return Optional.ofNullable(tg);
     }
