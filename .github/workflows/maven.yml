@@ -11,6 +11,10 @@ on:
         description: 'Skip tests'
         required: false
         default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
