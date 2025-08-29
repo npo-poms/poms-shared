@@ -15,6 +15,7 @@ import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.dublincore.terms.Date;
@@ -189,7 +190,7 @@ public class Description extends AbstractGTAAObject {
     }
 
     public Optional<URI> getRedirectedFrom() {
-        return getCleanChangeNote().filter(note -> StringUtils.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).map(URI::create).findAny();
+        return getCleanChangeNote().filter(note -> Strings.CS.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).map(URI::create).findAny();
     }
 
     private Stream<String> getCleanChangeNote() {
