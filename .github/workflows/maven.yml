@@ -60,6 +60,7 @@ jobs:
         run: mvn versions:display-dependency-updates
         if: runner.os == 'Linux' && matrix.java == '21'
       - name: Build with Maven (Other os)
+        shell: bash
         run: |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
             mvn -B  -U  -DskipTests package
