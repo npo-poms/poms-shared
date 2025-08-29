@@ -89,7 +89,7 @@ jobs:
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - uses: MMProgrami/after-maven-action@main
         with:
-          determin_version: 'false'
+          determine_version: 'false'
 
 
 
