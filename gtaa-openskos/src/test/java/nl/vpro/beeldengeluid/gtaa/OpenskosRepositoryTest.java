@@ -3,14 +3,15 @@ package nl.vpro.beeldengeluid.gtaa;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.jupiter.api.Test;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -27,6 +28,7 @@ import static nl.vpro.beeldengeluid.gtaa.OpenskosTests.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@SuppressWarnings({"HttpUrlsUsage", "OptionalGetWithoutIsPresent"})
 @Slf4j
 @WireMockTest
 public class OpenskosRepositoryTest {
@@ -48,7 +50,7 @@ public class OpenskosRepositoryTest {
 
         List<Description> persons = repo.findPersons("test", 1);
         assertThat(persons).isNotEmpty();
-        Description description = persons.get(0);
+        Description description = persons.getFirst();
         assertThat(description.getStatus()).isNotNull();
         assertThat(description.getPrefLabel().getValue()).isEqualTo("test2, test.");
         assertThat(description.getStatus()).isEqualTo(Status.candidate);
@@ -73,8 +75,8 @@ public class OpenskosRepositoryTest {
         assertThat(testCreatorX.getName()).isEqualTo("Testlabel1");
     }
 
-     @Test
-    public void submitDuplicate(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    @Test
+    public void submitDuplicate(WireMockRuntimeInfo wmRuntimeInfo) {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(ok("Concept 'Puk, Pietje (nl)' already exists").withStatus(409)));
@@ -84,9 +86,9 @@ public class OpenskosRepositoryTest {
             .familyName("Puk")
             .build();
 
-        assertThatThrownBy(() -> {
-            repo.submit(pietje, "testCreatorX");
-        }).isInstanceOf(GTAAConflict.class);
+        assertThatThrownBy(() ->
+            repo.submit(pietje, "testCreatorX")
+        ).isInstanceOf(GTAAConflict.class);
     }
 
 
@@ -141,7 +143,7 @@ public class OpenskosRepositoryTest {
             assertThat(next).isNotNull();
             assertThat(next.getHeader().getDatestamp()).isNotNull();
             assertThat(next.getMetaData().getFirstDescription().getPrefLabel().getValue()).isEqualTo("Giotakes, Nico");
-            assertThat(StringUtils.deleteWhitespace(next.getMetaData().getFirstDescription().getChangeNote().get(0)))
+            assertThat(StringUtils.deleteWhitespace(next.getMetaData().getFirstDescription().getChangeNote().getFirst()))
                     .isEqualTo("Forward:http://data.beeldengeluid.nl/gtaa/1672578");
             while(updates.hasNext()) {
                 count++;
@@ -151,7 +153,7 @@ public class OpenskosRepositoryTest {
                         assertThat(next.getMetaData().getFirstDescription().getRedirectedFrom())
                                 .contains(URI.create("http://data.beeldengeluid.nl/gtaa/29654"));
                     }
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
                 if (next.getMetaData() == null) {
@@ -162,11 +164,11 @@ public class OpenskosRepositoryTest {
         }
     }
 
-
-
-
+    @SuppressWarnings("DataFlowIssue")
     static String f(String file) throws IOException {
-        return IOUtils.toString(OpenskosRepositoryTest.class.getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
+        try (InputStream input = OpenskosRepositoryTest.class.getResourceAsStream(Strings.CS.prependIfMissing(file, "/"))) {
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
     }
 
     @Test
