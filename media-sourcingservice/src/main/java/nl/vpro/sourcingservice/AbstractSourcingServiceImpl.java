@@ -241,7 +241,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     protected HttpRequest.Builder uploadRequestBuilder(String mid) {
-        return request("ingest/" + mid + "/upload");
+        return request(getUploadPath().formatted(mid));
     }
 
     @SneakyThrows
@@ -270,7 +270,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     @ManagedAttribute
     @Override
     public String getUploadString() {
-        return forPath("ingest/%s/upload");
+        return forPath(getUploadPath());
+    }
+
+    public String getUploadPath() {
+        return "ingest/%s/upload";
     }
 
     @ManagedAttribute
@@ -278,5 +282,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return configuration.get().cleanBaseUrl();
     }
 
+
+    @Override
+    public String toString() {
+        return getUploadString();
+    }
 
 }
