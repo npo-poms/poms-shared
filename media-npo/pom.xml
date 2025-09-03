@@ -56,5 +56,10 @@
       <artifactId>jakarta.el</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
