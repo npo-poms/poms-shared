@@ -237,7 +237,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
     groups = WarningValidatorGroup.class,
     type = {TextualType.MAIN}
 )
-@AVTypeValidation
+@AVTypeValidation(groups = PrePersistValidatorGroup.class)
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
