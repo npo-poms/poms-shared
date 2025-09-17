@@ -65,6 +65,9 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - uses: MMProgrami/after-maven-action@v2
+        with:
+          determine_version: 'false'
       - name: Show dependency updates
         run: mvn versions:display-dependency-updates
         if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
@@ -87,9 +90,7 @@ jobs:
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
-      - uses: MMProgrami/after-maven-action@v2
-        with:
-          determine_version: 'false'
+
 
 
 
