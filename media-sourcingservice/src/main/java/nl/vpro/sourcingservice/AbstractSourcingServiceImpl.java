@@ -120,9 +120,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .inputStream(inputStream)
                 .batchSize((long) configuration.get().chunkSize())
                 .consumer(l -> logger.info(
-                    en("Uploaded %s to %s")
-                        .nl("Geüpload %s naar %s")
-                        .formatted(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
+                    en("Uploaded %s/%s to %s")
+                        .nl("Geüpload %s/%s naar %s")
+                        .formatted(
+                            FileSizeFormatter.DEFAULT.format(l),
+                            FileSizeFormatter.DEFAULT.format(fileSize),
+                            configuration.get().cleanBaseUrl()))
                 )
                 .build(),
             contentType
@@ -144,7 +147,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
             if (!success) {
-                log.warn("Status code for {}: {}", post.uri(), send.statusCode());
+                logger.warn("Status code for {}: {}", post.uri(), send.statusCode());
+            }  else {
+                logger.info("Status code for {}: {}", post.uri(), send.statusCode());
+
             }
             Long count = null;
             if (inputStream instanceof FileCachingInputStream fc) {
@@ -176,6 +182,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             logger.log(success ? Level.INFO : Level.ERROR,
                 "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
 
+            boolean retryable = true;
+            if (send.statusCode() == 404) {
+                retryable = false;
+            }
+
 
             return new UploadResponse(
                 mid,
@@ -183,7 +194,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 status,
                 response,
                 count,
-                "2:" + configuration.get().cleanBaseUrl()
+                "2:" + configuration.get().cleanBaseUrl(),
+                retryable
             );
         });
    }

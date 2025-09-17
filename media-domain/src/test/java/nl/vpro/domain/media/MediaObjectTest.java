@@ -610,6 +610,7 @@ public class MediaObjectTest {
     @Test
     public void testWebsiteValidation() {
         Program p = new Program();
+        p.setMid("mid_123");
         p.addGenre(new Genre("3.0.1.1.4"));
         p.setType(ProgramType.BROADCAST);
         p.addWebsite(new Website("bla"));
