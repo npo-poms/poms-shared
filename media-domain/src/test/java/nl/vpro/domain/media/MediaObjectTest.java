@@ -654,6 +654,7 @@ public class MediaObjectTest {
     @Test
     public void getAVTypeValidation() {
         Program p = new Program();
+        p.setMid("mid_123");
         p.setType(ProgramType.TRACK);
         p.setAVType(AVType.AUDIO);
         p.setAgeRating(AgeRating.ALL);
@@ -661,7 +662,7 @@ public class MediaObjectTest {
         validate(p, true, 0);
 
         p.setAVType(AVType.MIXED);
-        validate(p, true, 1);
+        dbValidate(p, 1);
     }
 
 
