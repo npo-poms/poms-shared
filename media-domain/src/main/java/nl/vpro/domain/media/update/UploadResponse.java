@@ -27,13 +27,16 @@ public class UploadResponse {
 
     String version;
 
-    public UploadResponse(String mid, int statusCode, String status, String response, Long bytes, String version) {
+    Boolean retryable;
+
+    public UploadResponse(String mid, int statusCode, String status, String response, Long bytes, String version, Boolean retryable) {
         this.statusCode = statusCode;
         this.status = status;
         this.response = response;
         this.mid = mid;
         this.bytes = bytes;
         this.version = version;
+        this.retryable = retryable;
     }
     private UploadResponse() {
 
@@ -41,5 +44,9 @@ public class UploadResponse {
 
     public boolean isSuccessFull() {
         return statusCode >= 200 && statusCode < 300;
+    }
+
+    public boolean isRetryable() {
+        return retryable == null || retryable;
     }
 }
