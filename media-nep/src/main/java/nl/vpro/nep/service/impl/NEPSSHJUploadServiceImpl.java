@@ -21,6 +21,7 @@ import java.util.function.Supplier;
 import jakarta.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -445,6 +446,13 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             }
         }
     }
+
+
+    @Override
+    public boolean isEnabled() {
+        return StringUtils.isNotBlank(password);
+    }
+
 }
 
 
