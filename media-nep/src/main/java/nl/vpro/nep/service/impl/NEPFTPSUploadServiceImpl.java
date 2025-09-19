@@ -16,6 +16,7 @@ import jakarta.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.ObservableInputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPSClient;
@@ -201,6 +202,11 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
     @Override
     public String getUploadString() {
         return username + "@" + ftpHost;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return StringUtils.isNotBlank(password);
     }
 
     @Override

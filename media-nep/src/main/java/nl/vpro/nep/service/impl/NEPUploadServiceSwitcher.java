@@ -46,9 +46,12 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
                 .formatted(nepFile, mediaInfo).build());
         PHASE.set("mediainfo-conclusion");
 
-        final         NEPUploadService service;
+        final  NEPUploadService service;
 
         if (mediaInfo.vertical()) {
+            if (!nepftpUploadVerticalService.isEnabled()) {
+                throw new IllegalStateException("Vertical upload to NEP was never properly implemented. And this could should ot have been reached.");
+            }
             logger.info(
                 en("Using vertical upload service for %s")
                     .nl("Gebruik NEP-uploadservice voor verticale video voor %s")
@@ -80,5 +83,10 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
     @Override
     public String getUploadString() {
         return nepftpUploadService.getUploadString() + "/" + nepftpUploadVerticalService.getUploadString();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return nepftpUploadService.isEnabled() || nepftpUploadVerticalService.isEnabled();
     }
 }
