@@ -49,7 +49,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
         final  NEPUploadService service;
 
         if (mediaInfo.vertical()) {
-            if (!nepftpUploadVerticalService.isEnabled()) {
+            if (!nepftpUploadVerticalService.isUploadEnabled()) {
                 throw new IllegalStateException("Vertical upload to NEP was never properly implemented. And this could should ot have been reached.");
             }
             logger.info(
@@ -86,7 +86,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
     }
 
     @Override
-    public boolean isEnabled() {
-        return nepftpUploadService.isEnabled() || nepftpUploadVerticalService.isEnabled();
+    public boolean isUploadEnabled() {
+        return nepftpUploadService.isUploadEnabled() || nepftpUploadVerticalService.isUploadEnabled();
     }
 }
