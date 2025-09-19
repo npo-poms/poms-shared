@@ -162,6 +162,11 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public boolean isUploadEnabled() {
+        return nepftpUploadService.get().isUploadEnabled();
+    }
+
+    @Override
     public WideVineResponse widevineToken(String ip) throws NEPException {
         return tokenService.get().widevineToken(ip);
     }

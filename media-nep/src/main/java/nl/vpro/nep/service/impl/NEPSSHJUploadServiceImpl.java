@@ -449,7 +449,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
 
     @Override
-    public boolean isEnabled() {
+    public boolean isUploadEnabled() {
         return StringUtils.isNotBlank(password);
     }
 
