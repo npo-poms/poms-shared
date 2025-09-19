@@ -3,6 +3,8 @@ package nl.vpro.nep.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -82,7 +84,10 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
     @Override
     public String getUploadString() {
-        return nepftpUploadService.getUploadString() + "/" + nepftpUploadVerticalService.getUploadString();
+        return Stream.of(nepftpUploadService, nepftpUploadVerticalService)
+            .filter(NEPUploadService::isUploadEnabled)
+            .map(NEPUploadService::getUploadString)
+            .collect(Collectors.joining("+"));
     }
 
     @Override
