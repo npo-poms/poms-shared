@@ -519,6 +519,7 @@ public interface MediaBackendRestService {
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
         @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
+        @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
     @POST
