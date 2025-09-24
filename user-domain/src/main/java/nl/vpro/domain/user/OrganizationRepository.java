@@ -25,8 +25,8 @@ interface OrganizationRepository {
      */
     <T extends Organization> T getByPropertyIgnoreCase(String property, String value, Class<T> clazz);
 
-    <T extends Organization> T merge(T broadcaster);
+    <T extends Organization> T merge(T organization);
 
-    <T extends Organization> void delete(T broadcaster);
+    <T extends Organization> void delete(T organization);
 
 }
