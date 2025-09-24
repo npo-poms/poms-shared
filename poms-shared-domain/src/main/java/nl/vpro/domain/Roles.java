@@ -30,6 +30,13 @@ public class Roles {
     public static final String USER = MEDIA + "USER";
     public static final String USER_ROLE = ROLE + USER;
 
+
+    /**
+     * This is the default role of normal users. They have access, and can only write content of their own broadcaster(s)
+     */
+    public static final String KEYUSER = MEDIA + "KEYUSER";
+    public static final String KEYUSER_ROLE = ROLE + KEYUSER;
+
     /**
      * A super-user has user access to nodes of every broadcaster.
      */
