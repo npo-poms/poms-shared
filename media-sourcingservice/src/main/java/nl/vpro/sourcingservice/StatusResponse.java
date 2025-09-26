@@ -8,20 +8,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Getter
-@ToString(callSuper = true)
-public class StatusResponse extends AbstractResponse {
+public class StatusResponse {
 
-
+    final String status;
     final Response response;
 
     @JsonCreator
     public StatusResponse(@JsonProperty("status") String status, @JsonProperty("response") Response response) {
-        super(status);
+        this.status = status;
         this.response = response;
     }
 
     @Data
-    @Builder
+    @lombok.Builder
     public static class Response {
 
         Instant created_at;
