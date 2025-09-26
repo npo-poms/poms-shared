@@ -50,7 +50,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private static final ObjectReader JSONREADER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
-        V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+        V2READER = MAPPER.readerFor(StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
         JSONREADER = MAPPER.readerFor(ObjectNode.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
 
     }
@@ -213,7 +213,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
 
-        return Optional.of(V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize());
+        return Optional.of(V2READER.readValue(statusResponse.body(), StatusResponse.class));
     }
 
     @Override

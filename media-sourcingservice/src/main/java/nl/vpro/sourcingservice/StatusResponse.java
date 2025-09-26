@@ -33,7 +33,7 @@ public class StatusResponse extends AbstractResponse {
         String status;
         String filename;
         String original_filename;
-        String mid;
+        String prid;
     }
 
 }
