@@ -587,31 +587,27 @@ public class MediaObjectTest {
         });
 
         assertThat(invalid.stream().map(c -> c == null ? "null" : (c.getCode() + ":" + c.getName(Locales.NETHERLANDISH))).collect(Collectors.joining("\n"))).isEqualTo("""
-              UNDEFINED:Undefined
-              AC:Ascension Island
-              AN:Nederlandse Antillen
-              BU:Burma
-              CP:Clipperton Island
-              CS:Serbia and Montenegro
-              DG:Diego Garcia
-              EA:Ceuta, Melilla
-              EU:European Union
-              EZ:Eurozone
-              FX:France, Metropolitan
-              IC:Canary Islands
-              NT:Neutral Zone
-              SF:Finland
-              SU:USSR
-              TA:Tristan da Cunha
-              TP:East Timor
-              UK:United Kingdom
-              XI:Noord-Ierland
-              XU:Verenigd Koninkrijk (zonder Noord-Ierland)
-              XK:Kosovo
-              YU:Yugoslavia
-              ZR:Zaire
-              XN:Nordic Patent Institute
-              null""");
+                AC:Ascension Island
+                AN:Nederlandse Antillen
+                BU:Burma
+                CP:Clipperton Island
+                CS:Serbia and Montenegro
+                DG:Diego Garcia
+                EA:Ceuta, Melilla
+                EU:European Union
+                EZ:Eurozone
+                FX:France, Metropolitan
+                IC:Canary Islands
+                NT:Neutral Zone
+                SF:Finland
+                SU:USSR
+                TA:Tristan da Cunha
+                TP:East Timor
+                UK:United Kingdom
+                YU:Yugoslavia
+                ZR:Zaire
+                XN:Nordic Patent Institute
+                null""");
 
 
 
