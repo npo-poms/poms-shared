@@ -87,11 +87,7 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
         this(v, OwnerType.BROADCASTER);
     }
     public SocialRef(String v, OwnerType owner) {
-        if(v.startsWith("@")) {
-            type = Type.ACCOUNT;
-        } else if(v.startsWith("#")) {
-            type = Type.HASHTAG;
-        }
+        type = detectType(v);
         value = v;
         this.owner = owner;
     }
@@ -144,5 +140,29 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
 
     public static String getValueOrNull(SocialRef ref) {
         return ref == null ? null : ref.getValue();
+    }
+
+    public static Type detectType(String v) {
+        if (v.startsWith("@")) {
+            if (v.contains("bsky.social")) {
+                return Type.BSKY;
+            }
+            if (v.contains("mastodon")) {
+                return Type.MASTODON;
+            }
+            if (v.contains("linkedin.com")) {
+                return Type.LINKEDIN;
+            }
+            if (v.contains("instagram.com")) {
+                return Type.INSTAGRAM;
+            }
+            if (v.contains("facebook.com")) {
+                return Type.FACEBOOK;
+            }
+            return Type.ACCOUNT;
+        } else if (v.startsWith("#")) {
+            return Type.HASHTAG;
+        }
+        return Type.OTHER;
     }
 }
