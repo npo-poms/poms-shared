@@ -14,10 +14,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = TwitterRefValidator.class)
+@Constraint(validatedBy = SocialRefValidator.class)
 @Documented
 public @interface SocialRef {
-    String message() default "{nl.vpro.constraints.TwitterRef}";
+    String message() default "{nl.vpro.constraints.SocialRef}";
 
     Class<?>[] groups() default {};
 
