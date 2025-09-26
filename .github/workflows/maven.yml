@@ -68,9 +68,7 @@ jobs:
       - uses: MMProgrami/after-maven-action@v2
         with:
           determine_version: 'false'
-      - name: Show dependency updates
-        run: mvn versions:display-dependency-updates
-        if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
+          coverage: 'true'
       - name: Publish to codecov
         uses: codecov/codecov-action@v5
         with:
