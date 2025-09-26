@@ -44,7 +44,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 public class MediaObjectTranslation implements
-    LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>,
+    LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, SocialRefTranslation, MediaObjectTranslation>,
     Identifiable<Long>,
     Accountable, Serializable {
 
@@ -137,7 +137,7 @@ public class MediaObjectTranslation implements
     @Valid
     @XmlElement(name = "twitter")
     @JsonProperty("twitter")
-    protected List<TwitterRefTranslation> twitterRefs = new ArrayList<>();
+    protected List<SocialRefTranslation> twitterRefs = new ArrayList<>();
 
     public MediaObjectTranslation(String mid, Locale locale) {
         this.mid = mid;
@@ -247,13 +247,13 @@ public class MediaObjectTranslation implements
     }
 
     @Override
-    public List<TwitterRefTranslation> getTwitterRefs() {
+    public List<SocialRefTranslation> getSocialRefs() {
         return this.twitterRefs;
 
     }
 
     @Override
-    public void setTwitterRefs(List<TwitterRefTranslation> twitterRefs) {
+    public void setSocialRefs(List<SocialRefTranslation> twitterRefs) {
         this.twitterRefs = twitterRefs;
     }
 

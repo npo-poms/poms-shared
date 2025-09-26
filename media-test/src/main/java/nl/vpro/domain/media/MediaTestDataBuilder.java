@@ -677,8 +677,8 @@ public interface MediaTestDataBuilder<
         return websites(HTTP_JOURNAAL, HTTP_TEGENLICHT);
     }
 
-    TwitterRef HASH_VPRO = new TwitterRef("#vpro");
-    TwitterRef AT_TWITTER = new TwitterRef("@twitter");
+    SocialRef HASH_VPRO = new SocialRef("#vpro");
+    SocialRef AT_TWITTER = new SocialRef("@twitter");
     default T withTwitterRefs() {
         return twitterRefs(HASH_VPRO, AT_TWITTER);
     }

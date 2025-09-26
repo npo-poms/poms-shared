@@ -10,5 +10,5 @@ import jakarta.persistence.Entity;
  */
 @Entity
 @ToString(callSuper = true)
-public class TwitterRefTranslation extends TextTranslation {
+public class SocialRefTranslation extends TextTranslation {
 }

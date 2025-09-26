@@ -605,8 +605,8 @@ public class TVATransformerTest {
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
 
-        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210744668").get().getTwitterRefs()).containsExactly(new TwitterRef("#cultureclub"));
-        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210758668").get().getTwitterRefs()).isEmpty();
+        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210744668").get().getSocialRefs()).containsExactly(new SocialRef("#cultureclub"));
+        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210758668").get().getSocialRefs()).isEmpty();
 
     }
 

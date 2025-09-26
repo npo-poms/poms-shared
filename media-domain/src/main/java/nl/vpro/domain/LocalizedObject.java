@@ -7,7 +7,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.Tag;
 
 /**
- * An object that can be translated. The is valid for the fields of {@link TextualObject}, but also for {@link Tag}, {@link Website}, and {@link nl.vpro.domain.media.TwitterRef} references.
+ * An object that can be translated. The is valid for the fields of {@link TextualObject}, but also for {@link Tag}, {@link Website}, and {@link SocialRef} references.
  *
  * @author Michiel Meeuwissen
  * @since 5.1
@@ -106,12 +106,12 @@ public interface LocalizedObject<
         return getWebsites().remove(website);
     }
 
-    List<TR> getTwitterRefs();
+    List<TR> getSocialRefs();
 
-    void setTwitterRefs(List<TR> twitterRefs);
+    void setSocialRefs(List<TR> twitterRefs);
 
     default void addTwitterRef(TR ref) {
-        List<TR> twitterRefs = getTwitterRefs();
+        List<TR> twitterRefs = getSocialRefs();
 
         if (twitterRefs == null) {
             twitterRefs = new ArrayList<>();

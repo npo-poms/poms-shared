@@ -226,7 +226,7 @@ public class MediaObjects {
 
         to.setTags(from.getTags());
         to.setTeletext(from.getTeletext());
-        to.setTwitterRefs(from.getTwitterRefs());
+        to.setSocialRefs(from.getSocialRefs());
         to.setTargetGroups(from.getTargetGroups());
 
         to.setWebsites(from.getWebsites());
@@ -381,18 +381,18 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterHash(@NonNull  MediaObject object) {
-        for (TwitterRef ref : object.getTwitterRefs()) {
-            if (ref.getType() == TwitterRef.Type.HASHTAG) {
+    public static SocialRef getSocialHash(@NonNull  MediaObject object) {
+        for (SocialRef ref : object.getSocialRefs()) {
+            if (ref.getType() == SocialRef.Type.HASHTAG) {
                 return ref;
             }
         }
         return null;
     }
 
-    public static TwitterRef getTwitterAccount(@NonNull MediaObject object) {
-        for (TwitterRef ref : object.getTwitterRefs()) {
-            if (ref.getType() == TwitterRef.Type.ACCOUNT) {
+    public static SocialRef getSocialAccount(@NonNull MediaObject object) {
+        for (SocialRef ref : object.getSocialRefs()) {
+            if (ref.getType() == SocialRef.Type.ACCOUNT) {
                 return ref;
             }
         }

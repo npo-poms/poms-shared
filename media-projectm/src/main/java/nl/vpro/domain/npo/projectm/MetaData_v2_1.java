@@ -43,8 +43,8 @@ public class MetaData_v2_1 {
         aflevering.setAfltitel(getTitle(program, TextualType.SUB));
         aflevering.setMail(firstOrNull(program.getEmail()));
         aflevering.setWebs(firstOrNull(program.getWebsites()));
-        aflevering.setTwitteraccount(TwitterRef.getValueOrNull(MediaObjects.getTwitterAccount(program)));
-        aflevering.setTwitterhashtag(TwitterRef.getValueOrNull(MediaObjects.getTwitterHash(program)));
+        aflevering.setTwitteraccount(SocialRef.getValueOrNull(MediaObjects.getSocialAccount(program)));
+        aflevering.setTwitterhashtag(SocialRef.getValueOrNull(MediaObjects.getSocialHash(program)));
         aflevering.setGenre(getGenre(program));
         aflevering.setSubgenre(getSubGenre(program));
         aflevering.setOmroepen(createOmroepen(program, ServiceLocator.getBroadcasterService()));
@@ -90,8 +90,8 @@ public class MetaData_v2_1 {
         serie.setOrti(getTitle(group, TextualType.ORIGINAL));
         serie.setMail(firstOrNull(group.getEmail()));
         serie.setWebs(firstOrNull(group.getWebsites()));
-        serie.setTwitteraccount(TwitterRef.getValueOrNull(MediaObjects.getTwitterAccount(group)));
-        serie.setTwitterhashtag(TwitterRef.getValueOrNull(MediaObjects.getTwitterHash(group)));
+        serie.setTwitteraccount(SocialRef.getValueOrNull(MediaObjects.getSocialAccount(group)));
+        serie.setTwitterhashtag(SocialRef.getValueOrNull(MediaObjects.getSocialHash(group)));
         serie.setGenre(getGenre(group));
         serie.setSubgenre(getSubGenre(group));
         serie.setOmroepen(createOmroepen(group, ServiceLocator.getBroadcasterService()));

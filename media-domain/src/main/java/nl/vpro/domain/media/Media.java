@@ -25,7 +25,7 @@ import nl.vpro.nicam.NicamRated;
 @Beta
 public interface Media<T extends Media<T>> extends
     NicamRated,
-    LocalizedObject<Title, Description, Website, TwitterRef, T>,
+    LocalizedObject<Title, Description, Website, SocialRef, T>,
     TrackableMedia,
     MediaIdentifiable ,
     MutableEmbargo<T>,

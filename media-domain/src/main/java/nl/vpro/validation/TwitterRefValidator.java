@@ -10,13 +10,15 @@ import java.util.regex.Pattern;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import nl.vpro.domain.media.SocialRef;
+
 @Deprecated
-public class TwitterRefValidator implements ConstraintValidator<TwitterRef , nl.vpro.domain.media.TwitterRef> {
+public class TwitterRefValidator implements ConstraintValidator<TwitterRef , SocialRef> {
 
     public static final Pattern PATTERN = Pattern.compile("^@\\w{1,50}|#\\w{1,279}$", Pattern.CASE_INSENSITIVE);
 
     @Override
-    public boolean isValid(nl.vpro.domain.media.TwitterRef twitterRef, ConstraintValidatorContext context) {
+    public boolean isValid(SocialRef twitterRef, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
 
         String validatedValue = twitterRef.getValue();

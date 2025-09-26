@@ -732,6 +732,12 @@
             <xs:restriction base="xs:string">
               <xs:enumeration value="ACCOUNT"/>
               <xs:enumeration value="HASHTAG"/>
+              <xs:enumeration value="BSKY"/>
+              <xs:enumeration value="LINKEDIN"/>
+              <xs:enumeration value="FACEBOOK"/>
+              <xs:enumeration value="INSTAGRAM"/>
+              <xs:enumeration value="MASTODON"/>
+              <xs:enumeration value="OTHER"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:attribute>

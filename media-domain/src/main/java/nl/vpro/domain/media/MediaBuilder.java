@@ -751,21 +751,21 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B twitterRefs(String... twitter) {
-        List<TwitterRef> reference = new ArrayList<>();
+        List<SocialRef> reference = new ArrayList<>();
         for(String t : twitter) {
-            reference.add(new TwitterRef(t));
+            reference.add(new SocialRef(t));
         }
-        mediaObject().getTwitterRefs().addAll(reference);
+        mediaObject().getSocialRefs().addAll(reference);
         return (B)this;
     }
 
-    default B twitterRefs(TwitterRef... twitter) {
-        List<TwitterRef> reference = new ArrayList<>(Arrays.asList(twitter));
-        mediaObject().getTwitterRefs().addAll(reference);
+    default B twitterRefs(SocialRef... twitter) {
+        List<SocialRef> reference = new ArrayList<>(Arrays.asList(twitter));
+        mediaObject().getSocialRefs().addAll(reference);
         return (B) this;
     }
     default B clearTwitterRefs() {
-        mediaObject().getTwitterRefs().clear();
+        mediaObject().getSocialRefs().clear();
         return (B) this;
     }
     @SuppressWarnings("unchecked")

@@ -135,7 +135,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
         "contentRatings",
         "email",
         "websites",
-        "twitterRefs",
+        "socialRefs",
         "teletext",
         "predictionsForXml",
         "_Locations",
@@ -488,14 +488,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected @Valid List<@NotNull @Valid Website> websites;
 
-    @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
+    @OneToMany(cascade = ALL, targetEntity = SocialRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
     @OrderColumn(name = "list_index",
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull @Valid TwitterRef> twitterRefs;
+    protected List<@NotNull @Valid SocialRef> twitterRefs;
 
     @Setter
     protected Short teletext;
@@ -687,7 +687,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getWebsites().forEach(website ->
             this.addWebsite(Website.copy(website))
         );
-        source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
+        source.getSocialRefs().forEach(ref -> this.addTwitterRef(SocialRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getEncryption());
@@ -1907,7 +1907,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement(name = "twitter")
     @JsonProperty("twitter")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<TwitterRef> getTwitterRefs() {
+    public List<SocialRef> getSocialRefs() {
         if (twitterRefs == null) {
             twitterRefs = new ArrayList<>();
         }
@@ -1915,7 +1915,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public void setTwitterRefs(List<@NonNull  TwitterRef> twitterRefs) {
+    public void setSocialRefs(List<@NonNull SocialRef> twitterRefs) {
         this.twitterRefs = updateList(this.twitterRefs, twitterRefs);
     }
 

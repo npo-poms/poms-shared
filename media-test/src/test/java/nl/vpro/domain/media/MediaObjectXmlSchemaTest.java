@@ -880,11 +880,11 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testTwitter() throws JAXBException, IOException, SAXException {
         Program program = program().constrained().build();
-        program.setTwitterRefs(Arrays.asList(new TwitterRef("@vpro"), new TwitterRef("#vpro")));
+        program.setSocialRefs(Arrays.asList(new SocialRef("@vpro"), new SocialRef("#vpro")));
         StringWriter writer = new StringWriter();
         JAXB.marshal(program, writer);
         program = JAXB.unmarshal(new StringReader(writer.toString()), Program.class);
-        assertThat(program.getTwitterRefs()).containsExactly(new TwitterRef("@vpro"), new TwitterRef("#vpro"));
+        assertThat(program.getSocialRefs()).containsExactly(new SocialRef("@vpro"), new SocialRef("#vpro"));
         schemaValidator.validate(new JAXBSource(marshaller, program));
     }
 

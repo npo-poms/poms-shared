@@ -699,7 +699,7 @@ public class MediaObjectTest {
     @Disabled
     public void testTwitterRefValidationProperty() {
         Program p = new Program();
-        p.getTwitterRefs().add(new TwitterRef("aa"));
+        p.getSocialRefs().add(new SocialRef("aa"));
         Set<ConstraintViolation<Program>> validate = validate(p, true);
         assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().equals("twitterRefs[0].value"))).hasSize(1);
         {

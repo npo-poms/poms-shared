@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.Location;
-import nl.vpro.domain.media.TwitterRef;
+import nl.vpro.domain.media.SocialRef;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -392,7 +392,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         this.genres = toSet(mediaobject.getGenres(), Genre::getTermId);
         this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
         this.websites = toList(mediaobject.getWebsites(), Website::get);
-        this.twitterrefs= toList(mediaobject.getTwitterRefs(), TwitterRef::get);
+        this.twitterrefs= toList(mediaobject.getSocialRefs(), SocialRef::get);
         this.email = toList(mediaobject.getEmail(), nl.vpro.domain.media.Email::get);
 
 
@@ -565,7 +565,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
                 .collect(Collectors.toList()));
 
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
-        returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
+        returnObject.setSocialRefs(toList(twitterrefs, (t) -> new SocialRef(t, owner)));
         returnObject.setEmail(toList(email, (e) -> new nl.vpro.domain.media.Email(e, owner)));
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
