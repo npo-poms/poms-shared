@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.Hibernate;
-import org.slf4j.helpers.MessageFormatter;
 
 import com.google.common.collect.*;
 
@@ -564,6 +563,9 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * @param args for reason, see {@link String#format(String, Object...)}.
+     */
     public static boolean markForRepublication(
         @NonNull MediaObject media,
         String reason,
@@ -598,9 +600,13 @@ public class MediaObjects {
             return false;
         }
     }
+
+    /**
+     * @param args for reason, see {@link String#format(String, Object...)}.
+     */
     protected static void appendReason(MediaObject media, String reason, Object... args) {
         if (StringUtils.isNotBlank(reason)) {
-            final String formattedReason =  MessageFormatter.arrayFormat(reason, args).getMessage();
+            final String formattedReason =  reason.formatted(args);
             final String existingReason = media.getRepubReason();
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
