@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Licensed under the Apache License, Version 2.0
+ * Copyright (C) 2025 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  */
 package nl.vpro.validation;
@@ -10,8 +10,7 @@ import java.util.regex.Pattern;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-@Deprecated
-public class TwitterRefValidator implements ConstraintValidator<TwitterRef , nl.vpro.domain.media.TwitterRef> {
+public class SocialRefValidator implements ConstraintValidator<SocialRef , nl.vpro.domain.media.TwitterRef> {
 
     public static final Pattern PATTERN = Pattern.compile("^@\\w{1,50}|#\\w{1,279}$", Pattern.CASE_INSENSITIVE);
 

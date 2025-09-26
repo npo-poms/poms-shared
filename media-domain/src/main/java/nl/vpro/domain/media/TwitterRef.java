@@ -20,12 +20,13 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
+ * A reference to a social media account of hashtag. Used to be only twitter, hence the name.
  * @author Michiel Meeuwissen
  * @since 3.0
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@nl.vpro.validation.TwitterRef
+@nl.vpro.validation.SocialRef
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "twitterRefType")
 public class TwitterRef implements Serializable, Supplier<String>, MutableOwnable {
