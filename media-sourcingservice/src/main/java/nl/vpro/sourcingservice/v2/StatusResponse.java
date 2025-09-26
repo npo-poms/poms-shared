@@ -48,6 +48,8 @@ public class StatusResponse  extends AbstractResponse {
                   .streamstatus_updated(response.getStreamstatus_updated())
                   .published_at(response.getPublished_at())
                   .deleted_at(response.getDeleted_at())
+                  .status(response.getStatus())
+                  .hard_delete_at(response.getHard_delete_at())
                   .build()
             );
     }
