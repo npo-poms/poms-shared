@@ -29,7 +29,7 @@ public class SocialRefValidator implements ConstraintValidator<SocialRef , nl.vp
 
         final Matcher matcher = PATTERN.matcher(validatedValue);
         if(!matcher.find()) {
-            context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.twitterRefs.Pattern}")
+            context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.socialRefs.Pattern}")
                 .addPropertyNode("value")
                 .addConstraintViolation();
             return false;
