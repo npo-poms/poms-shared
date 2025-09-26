@@ -110,15 +110,15 @@ public interface LocalizedObject<
 
     void setSocialRefs(List<TR> twitterRefs);
 
-    default void addTwitterRef(TR ref) {
-        List<TR> twitterRefs = getSocialRefs();
+    default void addSocialRef(TR ref) {
+        List<TR> socialRefs = getSocialRefs();
 
-        if (twitterRefs == null) {
-            twitterRefs = new ArrayList<>();
+        if (socialRefs == null) {
+            socialRefs = new ArrayList<>();
         }
 
-        if (!twitterRefs.contains(ref)) {
-            twitterRefs.add(ref);
+        if (!socialRefs.contains(ref)) {
+            socialRefs.add(ref);
         }
     }
 

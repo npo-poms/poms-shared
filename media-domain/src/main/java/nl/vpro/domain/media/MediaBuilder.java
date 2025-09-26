@@ -750,7 +750,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    default B twitterRefs(String... twitter) {
+    default B socialRefs(String... twitter) {
         List<SocialRef> reference = new ArrayList<>();
         for(String t : twitter) {
             reference.add(new SocialRef(t));
@@ -759,12 +759,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B twitterRefs(SocialRef... twitter) {
+    default B socialRefs(SocialRef... twitter) {
         List<SocialRef> reference = new ArrayList<>(Arrays.asList(twitter));
         mediaObject().getSocialRefs().addAll(reference);
         return (B) this;
     }
-    default B clearTwitterRefs() {
+    default B clearSocialRefs() {
         mediaObject().getSocialRefs().clear();
         return (B) this;
     }

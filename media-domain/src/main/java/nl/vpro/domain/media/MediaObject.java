@@ -687,7 +687,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getWebsites().forEach(website ->
             this.addWebsite(Website.copy(website))
         );
-        source.getSocialRefs().forEach(ref -> this.addTwitterRef(SocialRef.copy(ref)));
+        source.getSocialRefs().forEach(ref -> this.addSocialRef(SocialRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getEncryption());

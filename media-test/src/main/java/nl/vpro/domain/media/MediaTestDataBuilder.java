@@ -680,7 +680,7 @@ public interface MediaTestDataBuilder<
     SocialRef HASH_VPRO = new SocialRef("#vpro");
     SocialRef AT_TWITTER = new SocialRef("@twitter");
     default T withTwitterRefs() {
-        return twitterRefs(HASH_VPRO, AT_TWITTER);
+        return socialRefs(HASH_VPRO, AT_TWITTER);
     }
 
     default T withTeletext() {

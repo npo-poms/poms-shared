@@ -72,7 +72,7 @@ public class AssemblageConfig implements Serializable {
     boolean ratingsUpdate = true;
 
     @lombok.Builder.Default
-    Boolean copyTwitterRefs = null;
+    Boolean copySocialRefs = null;
 
     @lombok.Builder.Default
     boolean copyIntentions = true;
@@ -235,7 +235,7 @@ public class AssemblageConfig implements Serializable {
             guessEpisodePosition,
             memberOfUpdate,
             ratingsUpdate,
-            copyTwitterRefs,
+            copySocialRefs,
             copyIntentions,
             copyTargetGroups,
             copyGeoLocations,
@@ -300,7 +300,7 @@ public class AssemblageConfig implements Serializable {
             .guessEpisodePosition(true)
             .memberRefMatchOwner()
             .ratingsUpdate(true)
-            .copyTwitterRefs(true)
+            .copySocialRefs(true)
             .copyIntentions(true)
             .copyTargetGroups(true)
             .copyGeoLocations(true)
@@ -335,8 +335,8 @@ public class AssemblageConfig implements Serializable {
         if (copyPredictions == null) {
             setCopyPredictions(version == null || version.isNotBefore(5, 6));
         }
-        if (copyTwitterRefs == null) {
-            setCopyTwitterRefs(version == null || version.isNotBefore(5, 10));
+        if (copySocialRefs == null) {
+            setCopySocialRefs(version == null || version.isNotBefore(5, 10));
         }
     }
 
@@ -348,8 +348,8 @@ public class AssemblageConfig implements Serializable {
         return copyPredictions != null && copyPredictions;
     }
 
-    public boolean isCopyTwitterRefs() {
-        return copyTwitterRefs != null && copyTwitterRefs;
+    public boolean isCopySocialRefs() {
+        return copySocialRefs != null && copySocialRefs;
     }
 
     public boolean isCopyLanguageAndCountry() {

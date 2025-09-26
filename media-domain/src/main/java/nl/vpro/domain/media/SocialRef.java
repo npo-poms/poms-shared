@@ -30,6 +30,7 @@ import nl.vpro.i18n.Displayable;
 @nl.vpro.validation.SocialRef
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "twitterRefType")
+@Entity
 public class SocialRef implements Serializable, Supplier<String>, MutableOwnable {
 
     @Serial
@@ -41,7 +42,7 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
         BSKY("Bluesky account"),
         LINKEDIN("Linkedin account"),
         FACEBOOK("Facebook account"),
-        INSTAGRAM("Facebook account"),
+        INSTAGRAM("Instagram account"),
         MASTODON("Mastodon account"),
         OTHER("Other social media account")
         ;
@@ -156,7 +157,7 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
             if (v.contains("bsky.social")) {
                 return Type.BSKY;
             }
-            if (v.contains("mastodon")) {
+            if (v.contains(".masto")) {
                 return Type.MASTODON;
             }
             if (v.contains("linkedin.com")) {
