@@ -92,6 +92,7 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
         this.owner = owner;
     }
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public SocialRef(SocialRef source) {
         this(source.value, source.owner);
     }
