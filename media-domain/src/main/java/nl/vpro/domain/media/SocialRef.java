@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -83,18 +84,25 @@ public class SocialRef implements Serializable, Supplier<String>, MutableOwnable
     public SocialRef() {
     }
 
-    public SocialRef(String v) {
+    public SocialRef(@NonNull String v) {
         this(v, OwnerType.BROADCASTER);
     }
-    public SocialRef(String v, OwnerType owner) {
-        type = detectType(v);
+    public SocialRef(@NonNull String v, @NonNull Type type) {
+        this(v, OwnerType.BROADCASTER, type);
+    }
+    public SocialRef(@NonNull String v, @NonNull OwnerType owner) {
+        this(v, owner, detectType(v));
+    }
+
+    public SocialRef(@NonNull String v, @NonNull OwnerType owner, @NonNull Type type) {
+        this.type = type;
         value = v;
         this.owner = owner;
     }
 
     @SuppressWarnings("CopyConstructorMissesField")
     public SocialRef(SocialRef source) {
-        this(source.value, source.owner);
+        this(source.value, source.owner, source.type);
     }
 
     public static SocialRef copy(SocialRef source) {
