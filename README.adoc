@@ -1,7 +1,7 @@
 = poms-shared
 
 image:https://github.com/npo-poms/poms-shared/workflows/build/badge.svg?[Build Status,link=https://github.com/npo-poms/poms-shared/actions?query=workflow%3Abuild]
-image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-shared.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:%22nl.vpro.poms%22%20OR%20g:%22nl.vpro.media%22%20OR%20g:%22nl.vpro.api%22]
+image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-shared.svg?label=Maven%20Central[Maven Central,link=https://central.sonatype.com/search?q=g%3Anl.vpro.poms+g%3Anl.vpro.media+g%3Anl.vpro.api]
 image:https://codecov.io/gh/npo-poms/poms-shared/branch/main/graph/badge.svg[codecov,link=https://codecov.io/gh/npo-poms/poms-shared]
 image:http://www.javadoc.io/badge/nl.vpro.media/media-domain.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/nl.vpro.media/media-domain]
 image:https://img.shields.io/nexus/s/https/oss.sonatype.org/nl.vpro.poms/poms-shared-parent.svg[snapshots,link=https://oss.sonatype.org/content/repositories/snapshots/nl/vpro/poms/poms-shared/]
