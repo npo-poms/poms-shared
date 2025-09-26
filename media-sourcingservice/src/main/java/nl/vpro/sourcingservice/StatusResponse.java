@@ -21,6 +21,8 @@ public class StatusResponse {
 
     @Data
     @lombok.Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Response {
 
         Instant created_at;
