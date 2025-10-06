@@ -8,6 +8,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.junit.jupiter.api.*;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
@@ -15,7 +16,6 @@ import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -68,13 +68,13 @@ public class CountryCodeAdapterTest {
     @Test
     public void finlandReserved() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
-        assertThat(cca.marshal(new CurrentCountry(CountryCode.SF)).getName()).isEqualTo("Finland");
+        assertThat(cca.marshal(CurrentCountry.of(CountryCode.SF)).getName()).isEqualTo("Finland");
     }
 
     @Test
     public void finland() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
-        assertThat(cca.marshal(new CurrentCountry(CountryCode.FI)).getName()).isEqualTo("Finland");
+        assertThat(cca.marshal(CurrentCountry.of(CountryCode.FI)).getName()).isEqualTo("Finland");
     }
 
     public static class A {

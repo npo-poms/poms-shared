@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 
-import static com.neovisionaries.i18n.CountryCode.GB;
-import static com.neovisionaries.i18n.CountryCode.NL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.of;
+import static org.meeuw.i18n.countries.codes.CountryCode.GB;
+import static org.meeuw.i18n.countries.codes.CountryCode.NL;
 
 /**
  * @author Michiel Meeuwissen

@@ -31,6 +31,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
 import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.RegionService;
 
 import com.fasterxml.jackson.annotation.*;
@@ -39,7 +40,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Collections2;
-import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.bind.CollectionOfPublishable;

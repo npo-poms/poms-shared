@@ -6,7 +6,7 @@ import java.util.*;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.neovisionaries.i18n.CountryCode;
+import org.meeuw.i18n.countries.codes.CountryCode;
 
 import nl.vpro.domain.media.bind.TvaCountryAdapter;
 
@@ -191,7 +191,7 @@ public enum TvaCountry {
         }
     }
 
-    public static TvaCountry valueOf(CountryCode code) {
+    public static TvaCountry valueOf(org.meeuw.i18n.countries.codes.CountryCode code) {
         return valueOf(code.getAlpha2());
     }
 
