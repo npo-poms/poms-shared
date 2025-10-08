@@ -62,7 +62,7 @@ public enum OwnerType implements Displayable {
     /**
      * Represents Ownable data updated by MIS via TVAnytime deliveries. Whatson/Berlijn route.
      */
-    MIS("WhatsOn"),
+    MIS("WhatsOn/MIS"),
 
     /**
      * Represents Ownable data updated by CERES via predict, metadata, notify or revoke file delivery. It is possible
