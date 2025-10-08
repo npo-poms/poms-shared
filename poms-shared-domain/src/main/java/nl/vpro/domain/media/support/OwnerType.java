@@ -100,7 +100,12 @@ public enum OwnerType implements Displayable {
      * @deprecated  Not used any more since ~ 2016?
      */
     @Deprecated
-    WHATS_ON("Whats'On"),
+    WHATS_ON("Whats'On") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
     /**
      * Represents Ownable data from Immix ("Beeld en Geluid") send to Poms via updates from their archive.
