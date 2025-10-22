@@ -10,8 +10,8 @@ strict digraph {
 	  color="green"
 	]
   CMS_REPOS [
-	  label="CMS storage\nFor poms this is a database\n
-	  e.g: https://data.beeldengeluid.nl/gtaa/151550, Dick Schoof"
+	  label="CMS storage\nFor poms this is a RDB\n
+	  e.g: http://data.beeldengeluid.nl/gtaa/151550, Dick Schoof"
 	  color="green"
 		shape=cylinder
 	]
@@ -23,7 +23,7 @@ strict digraph {
 	 ]
 	 GTAA_REPOS [
 	  label="GTAA storage\n
-	  e.g.: 151550, gtaa:Persoonsnamenm, Schoof, Dick @nl, IND, etc."
+	  e.g.: 151550, gtaa:Persoonsnamenm, Schoof, Dick @nl, approved, IND, etc."
 	  color="red"
 		shape=cylinder
 	]
