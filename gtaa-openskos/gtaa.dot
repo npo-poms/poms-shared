@@ -10,8 +10,10 @@ strict digraph {
 	  color="green"
 	]
   CMS_REPOS [
-	  label="CMS storage\nFor poms this is a database"
+	  label="CMS storage\nFor poms this is a database\n
+	  e.g: https://data.beeldengeluid.nl/gtaa/151550, Dick Schoof"
 	  color="green"
+		shape=cylinder
 	]
 
    GTAA  [
@@ -19,6 +21,12 @@ strict digraph {
 			href="https://gtaa.apis.beeldengeluid.nl/"
 	    color="red"
 	 ]
+	 GTAA_REPOS [
+	  label="GTAA storage\n
+	  e.g.: 151550, gtaa:Persoonsnamenm, Schoof, Dick @nl, IND, etc."
+	  color="red"
+		shape=cylinder
+	]
    POMS_BACKEND  [
 	    label="POMS Backend for Thesaurus\nlives in 'publish.pages'"
 			href="https://publish.pages.omroep.nl/docs/api/#/thesaurus"
@@ -31,13 +39,16 @@ strict digraph {
 	 ]
 
 	 CMS_FRONTEND -> CMS_BACKEND [label="secured, CRUD"]
-	 CMS_FRONTEND -> POMS_FRONTEND [label="search\nno/hardly authentication"]
+	 CMS_FRONTEND -> POMS_FRONTEND [label="search\nno or just simple authentication"]
 
-	 CMS_BACKEND -> POMS_BACKEND [label="May submit, may request updates"]
+	 CMS_BACKEND -> POMS_BACKEND [label="submit, authenticated"]
+	 CMS_BACKEND -> POMS_FRONTEND [label="read updates"]
 	 CMS_BACKEND -> CMS_REPOS [label="read/write"]
 
-   POMS_BACKEND -> GTAA [label="submit actions\nbecause of authentication"]
-   POMS_FRONTEND -> GTAA [label="search actions"]
+   POMS_BACKEND -> GTAA [label="submit actions"]
+   POMS_FRONTEND -> GTAA [label="search/get/list actions"]
+
+   GTAA -> GTAA_REPOS
 
 
 
