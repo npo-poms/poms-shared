@@ -1,36 +1,52 @@
-= GTAA Openskos
+= Common Thesaurus for AudioVisual Archives (GTAA)
 :toc:
 
-This contains the 'openskos' implementation of the GTAA repository.
+This contains the 'openskos' client implementation of the link:https://www.beeldengeluid.nl/onderzoek/onderzoek/kennisthemas/metadata/gemeenschappelijke-thesaurus-audiovisuele-archieven[GTAA repository].
 
+So this code produces the specific implementation of link:https://github.com/npo-poms/poms-shared/blob/main/gtaa-domain/src/main/java/nl/vpro/domain/gtaa/GTAARepository.java[GTAARepository]
+
+== Axes
+
+GTAA provides several axes ('schemes') of information. POMS uses several of them, but the must important one is the persons.
+
+Every concept has its own unique 'gtaa id'.
+
+The repository provides methods to
+
+- Find persons or information from other schemes, in the GTAA of Beeld en Geluid.
+- For some use cases it is important to sync data from the GTAA to your local database or so. Poms uses the several 'update' calls to inspect all changes and see if something needs change in its own database.
+- It is also possible to submit new concepts to the GTAA in case one is missing. T
+
+
+== Frontend code
+
+Beeld en Geluid does not provide a frontend. The poms team made something and this is used in both poms, and can also be used in other frontends.
+
+See https://github.com/npo-poms/thesaurus
 
 == About OpenSKOS
 
-See http://openskos.org/
+It seems that 'open skos' (Used to be at http://openskos.org/) does not exist any more. BENG did rewrite it, and this required only minor changes on the client side.
 
-(follows text as recently received from B&G)
 
-Voor de volledigheid hieronder het overzicht van huidige omgevingen. Omdat we momenteel niet aan het doorontwikkelen zijn op OpenSKOS is de er één omgeving komen te vervallen. Voor jullie informatie: de editor van OpenSKOS is per eind 2020 end of life. Een complete rewrite is noodzakelijk. We nemen van die gelegenheid gebruik om OpenSKOS te vergelijken met andere oplossingen (waaronder Poolparty). We prioriteren bij die zoektocht de robuustheid van de oplossing voor uitwisseling van data met jullie als omroepen. OpenSKOS is ontstaan uit een onderzoeksproject en heeft altijd een beetje die dynamiek gehouden. We hopen dus eea te kunnen verbeteren, bijvoorbeeld minder nieuwe releases e.d. We houden jullie op de hoogte.
-
-=== Test
-
-http://beg-openskos.test7.picturae.pro/
-
-=== Acceptatie
-
-http://beg-openskos.accept.test7.picturae.pro
-Deze is nieuw aangemaakt.
-Hierop staat een actuele kopie van de data op productie
-Deze heeft de bestaande acceptatie omgeving (http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/ ) vervangen
 
 
 === Productie
 
-http://openskos.beeldengeluid.nl/
-http://data.beeldengeluid.nl/
-Dit is een alias, die verwijst naar http://openskos.beeldengeluid.nl/ .
-Het is dus geen aparte omgeving.
-Hij is nodig voor bestaande links (de uri van een concept verwijst hier naar, bijvoorbeeld: http://data.beeldengeluid.nl/gtaa/1382356).
+https://gtaa.apis.beeldengeluid.nl/ Gives an overview.
+
+=== Test
+
+There is no test-environment nowadays.
+
+
+=== Acceptatie
+
+https://skos-acc.beeldengeluid.nl/
+
+
+
+
 
 
 
