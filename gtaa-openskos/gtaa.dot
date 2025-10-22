@@ -2,11 +2,11 @@
 strict digraph {
 
   CMS_FRONTEND [
-		label="CMS frontend\nFor example GUI of poms itself",
+		label="CMS frontend\ne.g. GUI of poms itself",
 		color="green"
 	]
 	CMS_BACKEND  [
-	  label="CMS backend\nFor example poms itself"
+	  label="CMS backend\ne.g. poms itself"
 	  color="green"
 	]
   CMS_REPOS [
