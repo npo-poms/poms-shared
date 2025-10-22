@@ -31,6 +31,8 @@ It seems that 'open skos' (Used to be at http://openskos.org/) does not exist an
 
 == All together
 
+The relations of the different relevant services are shown in this picture
+
 image::gtaa.svg[]
 
 green elements::
