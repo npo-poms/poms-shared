@@ -40,6 +40,8 @@ System just for the sake of illustration. POMS itself is example because
 - It refers to thesaurus by gtaa-urls. For persons, but some other schemes are supported to (see poms gui)
 - It may periodically check for updates, e.g. the gtaa status may change or so, and this needs update in its own database
 
+Another green element could also be the link:https://rs.poms.omroep.nl/v1/thesaurus/example/[example page]
+
 blue elements::
 These are
 - link:https://rs.poms.omroep.nl/v1/docs/api/#/[the thesaurus endpoints on the poms frontend api]
