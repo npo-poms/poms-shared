@@ -36,6 +36,8 @@ image::gtaa.svg[]
 green elements::
 System just for the sake of illustration. POMS itself is example because
 - It refers to thesaurus by gtaa-urls. For persons, but some other schemes are supported to (see poms gui)
+- It may periodically check for updates, e.g. the gtaa status may change or so, and this needs update in its own database
+
 blue elements::
 These are
 - link:https://rs.poms.omroep.nl/v1/docs/api/#/[the thesaurus endpoints on the poms frontend api]
@@ -48,7 +50,7 @@ The second one proxies the write endpoints. It is on the 'publish.pages.omroep.n
 - it is secured by backend accounts
 
 red elements::
-This represents the endpoints of B&G itself. They are all secured by just one account.
+This represents the services of B&G itself. The api is secured by just one account for POMS.
 
 == URLS
 
