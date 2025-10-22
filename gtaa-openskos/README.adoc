@@ -15,21 +15,42 @@ The repository provides methods to
 
 - Find persons or information from other schemes, in the GTAA of Beeld en Geluid.
 - For some use cases it is important to sync data from the GTAA to your local database or so. Poms uses the several 'update' calls to inspect all changes and see if something needs change in its own database.
-- It is also possible to submit new concepts to the GTAA in case one is missing. T
+- It is also possible to submit new concepts to the GTAA in case one is missing.
 
 
 == Frontend code
 
-Beeld en Geluid does not provide a frontend. The poms team made something and this is used in both poms, and can also be used in other frontends.
+Beeld en Geluid does not provide a frontend. The poms team made something and this is used in both poms, and can also be used in other applications.
 
 See https://github.com/npo-poms/thesaurus
 
 == About OpenSKOS
 
-It seems that 'open skos' (Used to be at http://openskos.org/) does not exist any more. BENG did rewrite it, and this required only minor changes on the client side.
+It seems that 'open skos' (Used to be at http://openskos.org/) does not exist anymore. BENG did rewrite it, and this required only minor changes on the client side.
 
 
+== All together
 
+image::gtaa.svg[]
+
+green elements::
+System just for the sake of illustration. POMS itself is example because
+- It refers to thesaurus by gtaa-urls. For persons, but some other schemes are supported to (see poms gui)
+blue elements::
+These are
+- link:https://rs.poms.omroep.nl/v1/docs/api/#/[the thesaurus endpoints on the poms frontend api]
+- link:https://publish.pages.omroep.nl/docs/api/#/thesaurus[the thesaurus endpoint on the poms pages api]
+
+This first one proxies the read endpoint on the thesaurus.
+The second one proxies the write endpoints. It is on the 'publish.pages.omroep.nl' domain, for no particular good reason but:
+
+- because it is not (directly) related to media
+- it is secured by backend accounts
+
+red elements::
+This represents the endpoints of B&G itself. They are all secured by just one account.
+
+== URLS
 
 === Productie
 

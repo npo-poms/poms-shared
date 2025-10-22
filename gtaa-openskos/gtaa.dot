@@ -1,0 +1,44 @@
+
+strict digraph {
+
+  CMS_FRONTEND [
+		label="CMS frontend\nFor example GUI of poms itself",
+		color="green"
+	]
+	CMS_BACKEND  [
+	  label="CMS backend\nFor example poms itself"
+	  color="green"
+	]
+  CMS_REPOS [
+	  label="CMS storage\nFor poms this is a database"
+	  color="green"
+	]
+
+   GTAA  [
+	    label="GTAA\nthesaurus of B&G"
+			href="https://gtaa.apis.beeldengeluid.nl/"
+	    color="red"
+	 ]
+   POMS_BACKEND  [
+	    label="POMS Backend for Thesaurus\nlives in 'publish.pages'"
+			href="https://publish.pages.omroep.nl/docs/api/#/thesaurus"
+	    color="blue"
+  ]
+   POMS_FRONTEND  [
+	    label="POMS Frontend for Thesaurus\nlives in frontend api rs.poms.omroep.nl"
+	    href="https://rs-test.poms.omroep.nl/v1/docs/api/#/thesaurus"
+	    color="blue"
+	 ]
+
+	 CMS_FRONTEND -> CMS_BACKEND [label="secured, CRUD"]
+	 CMS_FRONTEND -> POMS_FRONTEND [label="search\nno/hardly authentication"]
+
+	 CMS_BACKEND -> POMS_BACKEND [label="May submit, may request updates"]
+	 CMS_BACKEND -> CMS_REPOS [label="read/write"]
+
+   POMS_BACKEND -> GTAA [label="submit actions\nbecause of authentication"]
+   POMS_FRONTEND -> GTAA [label="search actions"]
+
+
+
+}
