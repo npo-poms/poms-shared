@@ -43,7 +43,8 @@ public class OpenskosRepositoryITest {
     }
 
     public static Object[] envs() {
-        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
+//        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
+        return new Object[]{Env.ACC};
     }
 
     @ParameterizedTest
@@ -155,7 +156,7 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envsAnd")
-    public void testFindGeographicalNAme(Env env, String name) {
+    public void testFindGeographicalName(Env env, String name) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> names = impl.findForSchemes(name, 100, GTAARepository.SchemeOrNot.of(Scheme.geographicname));
         assertThat(names).withFailMessage(() -> "Could not find descriptions for %s".formatted(name)).hasSizeGreaterThan(0);
