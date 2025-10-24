@@ -1002,7 +1002,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * <p>
      * Only in the {@link Views.Publisher} version of the json.
      */
-    @JsonView({Views.ForwardPublisher.class})
+    @JsonView(Views.ForwardPublisher.class)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Title> getExpandedTitles() {
         return TextualObjects.expandTitlesMajorOwnerTypes(this);
