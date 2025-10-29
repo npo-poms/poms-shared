@@ -365,12 +365,16 @@ public class AssemblageConfig implements Serializable {
         return copyLanguageAndCountry != null && copyLanguageAndCountry;
     }
 
+    /**
+     * Applies {@link #getCleaner()}, {@link #getMultilineCleaner()} and {@link #getRemoveTextIf()}
+     * @since 8.11
+     */
     public <T extends TypedText, D extends TypedText> void clean(TextualObjectUpdate<T, D, ?> incomingObject) {
         if (getCleaner() != null) {
             for (T title : new ArrayList<>(incomingObject.getTitles())) {
                 title.set(getCleaner().apply(title.get()));
                 if (getRemoveTextIf().test(title)) {
-                    log.info("Implicitly removed title {}", title);
+                    log.info("Implicitly removed title '{}' from {}", title, incomingObject);
                     incomingObject.removeTitle(title);
                 }
             }
@@ -379,7 +383,7 @@ public class AssemblageConfig implements Serializable {
             for (D description : new ArrayList<>(incomingObject.getDescriptions())) {
                 description.set(getMultilineCleaner().apply(description.get()));
                 if (getRemoveTextIf().test(description)) {
-                    log.info("Implicitly removed description {}", description);
+                    log.info("Implicitly removed description '{}' from {}", description, incomingObject);
                     incomingObject.removeDescription(description);
                 }
             }
