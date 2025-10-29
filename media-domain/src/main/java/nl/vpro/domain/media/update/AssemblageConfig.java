@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.meeuw.functional.*;
 import org.slf4j.helpers.MessageFormatter;
 
+import nl.vpro.domain.OwnedText;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.logging.simple.*;
@@ -190,6 +191,10 @@ public class AssemblageConfig implements Serializable {
 
 
     @lombok.Builder.Default
+    Predicate<OwnedText> removeTextIf =  Predicates.alwaysFalse();
+
+
+    @lombok.Builder.Default
     Predicate<MemberRef> createTemporaryGroups = alwaysFalse();
 
 
@@ -262,6 +267,7 @@ public class AssemblageConfig implements Serializable {
             implicitUndelete,
             cleaner,
             multilineCleaner,
+            removeTextIf,
             createTemporaryGroups,
             logger);
     }
