@@ -22,11 +22,13 @@ The repository provides methods to
 
 Beeld en Geluid does not provide a frontend. The poms team made something and this is used in both poms, and can also be used in other applications.
 
-See https://github.com/npo-poms/thesaurus
+See https://github.com/npo-poms/thesaurus.
 
 == About OpenSKOS
 
 It seems that 'open skos' (Used to be at http://openskos.org/) does not exist anymore. BENG did rewrite it, and this required only minor changes on the client side.
+
+This module provides this client as a 'repository for GTAA' link:src/main/java/nl/vpro/beeldengeluid/gtaa/OpenskosRepository.java i
 
 
 == All together

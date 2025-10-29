@@ -1,6 +1,8 @@
 package nl.vpro.domain.media.update;
 
 import lombok.*;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.meeuw.functional.*;
 import org.slf4j.helpers.MessageFormatter;
 
-import nl.vpro.domain.OwnedText;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.logging.simple.*;
@@ -32,6 +34,7 @@ import static org.meeuw.functional.Predicates.*;
 @Data
 @EqualsAndHashCode
 @ToString
+@Log4j2
 public class AssemblageConfig implements Serializable {
 
     @Serial
@@ -191,7 +194,7 @@ public class AssemblageConfig implements Serializable {
 
 
     @lombok.Builder.Default
-    Predicate<OwnedText> removeTextIf =  Predicates.alwaysFalse();
+    Predicate<TypedText> removeTextIf =  Predicates.alwaysFalse();
 
 
     @lombok.Builder.Default
@@ -360,6 +363,27 @@ public class AssemblageConfig implements Serializable {
 
     public boolean isCopyLanguageAndCountry() {
         return copyLanguageAndCountry != null && copyLanguageAndCountry;
+    }
+
+    public <T extends TypedText, D extends TypedText> void clean(TextualObjectUpdate<T, D, ?> incomingObject) {
+        if (getCleaner() != null) {
+            for (T title : new ArrayList<>(incomingObject.getTitles())) {
+                title.set(getCleaner().apply(title.get()));
+                if (getRemoveTextIf().test(title)) {
+                    log.info("Implicitly removed title {}", title);
+                    incomingObject.removeTitle(title);
+                }
+            }
+        }
+        if (getMultilineCleaner() != null) {
+            for (D description : new ArrayList<>(incomingObject.getDescriptions())) {
+                description.set(getMultilineCleaner().apply(description.get()));
+                if (getRemoveTextIf().test(description)) {
+                    log.info("Implicitly removed description {}", description);
+                    incomingObject.removeDescription(description);
+                }
+            }
+        }
     }
 
     public static class Builder {
