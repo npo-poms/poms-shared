@@ -31,3 +31,7 @@ search_acc:
                 --data-urlencode "tenant=beng" \
                 'https://skos-acc.beeldengeluid.nl/api/find-concepts'
 
+
+
+%.svg: %.dot Makefile
+	 dot  -Tsvg $< -o $@

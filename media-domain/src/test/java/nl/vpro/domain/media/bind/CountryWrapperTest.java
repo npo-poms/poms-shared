@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 
-import static com.neovisionaries.i18n.CountryCode.GB;
-import static com.neovisionaries.i18n.CountryCode.NL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.of;
+import static org.meeuw.i18n.countries.codes.CountryCode.GB;
+import static org.meeuw.i18n.countries.codes.CountryCode.NL;
 
 /**
  * @author Michiel Meeuwissen
@@ -32,7 +32,7 @@ public class CountryWrapperTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("name is hard coded to be always dutch")
     public void getNameGBUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
@@ -43,7 +43,7 @@ public class CountryWrapperTest {
     @Disabled
     public void getNameUS() {
         Locale.setDefault(Locale.US);
-        CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(GB));
+        CountryWrapper wrapper = new CountryWrapper(CurrentCountry.of(GB));
         assertThat(wrapper.getName()).isEqualTo("United Kingdom");
     }
 
@@ -56,7 +56,7 @@ public class CountryWrapperTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("name is hard coded to be always dutch")
     public void getNameENGUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
@@ -64,6 +64,7 @@ public class CountryWrapperTest {
     }
 
     @Test
+    @Disabled("name is hard coded to be always dutch")
     public void getNameUTUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(NL, "UT").get());

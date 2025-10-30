@@ -91,7 +91,7 @@ public class NEPGatekeeperServiceImplITest {
     }
 
     @Test
-    public void getStatuses() throws IOException, NEPException {
+    public void getStatuses() throws NEPException {
 
         List<String> mids = new ArrayList<>();
     /*    File file = new File("/Users/michiel/npo/media/trunk/player7.404");

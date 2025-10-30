@@ -12,7 +12,7 @@ import nl.vpro.i18n.Displayable;
 public enum ValidationLevel implements Displayable {
 
     /**
-     *  Some fields are filled automatically, e.g. 'mid'. But they are required on persistance.
+     *  Some fields are filled automatically, e.g. 'mid'. But they are required on persistence.
      *  This is the validation used by hibernate.
      * @since 7.10
      */

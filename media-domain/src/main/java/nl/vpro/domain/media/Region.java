@@ -13,9 +13,8 @@ import jakarta.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.i18n.Displayable;
 
@@ -35,7 +34,7 @@ public enum Region implements Displayable, org.meeuw.i18n.regions.Region {
     NL("Nederland") {
         @Override
         public Optional<URI> getIcon() {
-            return Country.of(CountryCode.NL).getIcon();
+            return Country.of(org.meeuw.i18n.countries.codes.CountryCode.NL).getIcon();
         }
     },
 
