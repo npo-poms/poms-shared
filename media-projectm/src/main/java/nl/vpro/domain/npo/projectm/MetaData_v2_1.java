@@ -112,7 +112,7 @@ public class MetaData_v2_1 {
 
         Image image = media.findImage(ImageType.ICON);
         if (image == null) {
-            image = media.getImages().get(0);
+            image = media.getImages().getFirst();
         }
 
         if (image == null) {
