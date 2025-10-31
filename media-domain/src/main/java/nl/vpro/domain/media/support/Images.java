@@ -32,11 +32,6 @@ public class Images {
      * @throws NullPointerException on null arguments or null imageUri
      */
     public static String getImageLocation(@NonNull Image image, String fileExtension, String... conversions) {
-        ImageUrlService instance = ImageUrlServiceHolder.getInstance();
-        Long id = instance.getId(image);
-        if (id == null) {
-            return null;
-        }
-        return instance.getImageLocation(id, fileExtension, conversions);
+        return ImageUrlServiceHolder.getImageLocation(image, fileExtension, conversions);
     }
 }

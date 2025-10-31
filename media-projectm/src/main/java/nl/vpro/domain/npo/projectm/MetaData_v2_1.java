@@ -119,13 +119,7 @@ public class MetaData_v2_1 {
             return null;
         }
 
-
-        ImageUrlService instance = ImageUrlServiceHolder.getInstance();
-        Long id = instance.getId(image);
-        if (id == null) {
-            return null;
-        }
-        return instance.getImageLocation(id, "jpg", imageFormat);
+        return ImageUrlServiceHolder.getImageLocation(image, "jpg", imageFormat);
     }
 
     protected static String getDescription(MediaObject media, TextualType type) {
