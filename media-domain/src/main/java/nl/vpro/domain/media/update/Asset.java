@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
@@ -46,6 +49,8 @@ public class Asset implements MutableEmbargo<Asset> {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant publishStop;
 
+    @Setter
+    @Getter
     @XmlElements(value = {
         @XmlElement(name = "assetData",  type = AssetData.class),
         @XmlElement(name = "assetLocation", type = AssetLocation.class)
@@ -98,14 +103,6 @@ public class Asset implements MutableEmbargo<Asset> {
     public Asset setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
-    }
-
-    public AssetSource getSource() {
-        return source;
-    }
-
-    public void setSource(AssetSource source) {
-        this.source = source;
     }
 
     public InputStream getInputStream() {
