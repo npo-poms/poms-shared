@@ -8,11 +8,12 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -99,7 +100,7 @@ public class Asset implements MutableEmbargo<Asset> {
         return this;
     }
 
-    public Object getSource() {
+    public AssetSource getSource() {
         return source;
     }
 
