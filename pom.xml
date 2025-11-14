@@ -20,7 +20,7 @@
   <description>Domain classes and utilities for NPO POMS projects.</description>
 
   <properties>
-    <revision>8.11</revision>
+    <revision>8.12</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
   </properties>
