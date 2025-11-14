@@ -14,6 +14,10 @@ import jakarta.validation.Payload;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+
+/**
+ * @deprecated Use {@link SocialRef}
+ */
 @Target({TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = TwitterRefValidator.class)

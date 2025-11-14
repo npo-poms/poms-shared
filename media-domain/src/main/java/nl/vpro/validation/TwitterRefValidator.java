@@ -12,6 +12,9 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.media.SocialRef;
 
+/**
+ * @deprecated Use {@link SocialRefValidator}
+ */
 @Deprecated
 public class TwitterRefValidator implements ConstraintValidator<TwitterRef , SocialRef> {
 
