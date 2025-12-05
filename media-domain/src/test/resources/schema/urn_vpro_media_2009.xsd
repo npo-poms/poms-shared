@@ -422,6 +422,7 @@
         </xs:sequence>
         <xs:attribute name="gtaaUri" type="xs:string"/>
         <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
+        <xs:attribute name="externalid" type="xs:string"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

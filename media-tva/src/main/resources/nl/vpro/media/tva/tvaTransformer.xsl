@@ -35,6 +35,9 @@
   If a person uri prefix is specified then person ids will be filled in the 'gtaaUri' attribute
   -->
   <xsl:param name="personUriPrefix" select="''" />
+
+  <xsl:param name="personExternalIdPrefix" select="'tva:'" />
+
   <!--
   The workflow of the new object. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if
   the resulting object will be published as is.
@@ -697,6 +700,9 @@
         <!-- <person> -->
         <xsl:for-each select="tva:CreditsItem/tva:PersonNameIDRef">
           <xsl:element name="person">
+            <xsl:attribute name="externalid">
+              <xsl:value-of select="$personExternalIdPrefix" /><xsl:value-of select="current()/@ref" />
+            </xsl:attribute>
             <xsl:attribute name="role">
               <xsl:call-template name="roles">
                 <xsl:with-param name="id">
