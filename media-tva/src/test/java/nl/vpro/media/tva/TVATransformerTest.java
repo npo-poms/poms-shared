@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.test.appender.ListAppender;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.parallel.Isolated;
+import org.junit.jupiter.api.parallel.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.Document;
@@ -57,8 +57,9 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.cs;
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "DataFlowIssue"})
 @Log4j2
 @Isolated("Because of the logger")
+@Execution(ExecutionMode.SAME_THREAD) // genreFunction is sometimes configuration for test
 public class TVATransformerTest {
-    final EpgGenreFunction genreFunction = new EpgGenreFunction();
+    static final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
 
     static ListAppender appender = new ListAppender("List");
@@ -67,19 +68,17 @@ public class TVATransformerTest {
         var loggerContext = LoggerContext.getContext(false);
         appender.start();
         loggerContext.getConfiguration().addLoggerAppender(loggerContext.getRootLogger(), appender);
-
+        ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
 
     @BeforeEach
     public void init() {
         appender.clear();
         genreFunction.setNotFound(NotFound.FATAL);
+        genreFunction.setMatchOnValuePrefix("");
+        genreFunction.setIgnore(Set.of());
     }
 
-    @BeforeAll
-    public static void initAll() {
-        ClassificationServiceLocator.setInstance(new MediaClassificationService());
-    }
 
     @Test
     public void transform() throws TransformerException, ParserConfigurationException, SAXException, IOException {
@@ -202,7 +201,7 @@ public class TVATransformerTest {
         MediaTable table = JAXB.unmarshal(new StringReader(transform("pd/pd/NED320150805P.xml")), MediaTable.class);
         validate(table);
 
-        Program program = table.getProgramTable().get(0);
+        Program program = table.getProgramTable().getFirst();
 
 
         assertThat(program.getMainTitle()).isEqualTo("SERIE TITEL");
@@ -219,17 +218,17 @@ public class TVATransformerTest {
 
         assertThat(table.getGroupTable()).hasSize(2);
 
-        assertThat(table.getGroupTable().get(0).getType()).isEqualTo(GroupType.SEASON);
-        assertThat(table.getGroupTable().get(0)).hasAVType(AVType.VIDEO);
-        assertThat(table.getGroupTable().get(0).getBroadcasters().get(0).getId()).isEqualTo("EO");
-        assertThat(table.getGroupTable().get(0).getMainDescription()).isEqualTo("Dit is de seizoensbeschrijving");
+        assertThat(table.getGroupTable().getFirst().getType()).isEqualTo(GroupType.SEASON);
+        assertThat(table.getGroupTable().getFirst()).hasAVType(AVType.VIDEO);
+        assertThat(table.getGroupTable().getFirst().getBroadcasters().getFirst().getId()).isEqualTo("EO");
+        assertThat(table.getGroupTable().getFirst().getMainDescription()).isEqualTo("Dit is de seizoensbeschrijving");
         assertThat(table.getGroupTable().get(0).getMainTitle()).isEqualTo("SERIE TITEL");
         assertThat(table.getGroupTable().get(0).getMemberOf().first().getNumber()).isEqualTo(3);
 
 
         assertThat(table.getGroupTable().get(1).getType()).isEqualTo(GroupType.SERIES);
         assertThat(table.getGroupTable().get(1)).isVideo();
-        assertThat(table.getGroupTable().get(1).getBroadcasters().get(0).getId()).isEqualTo("EO");
+        assertThat(table.getGroupTable().get(1).getBroadcasters().getFirst().getId()).isEqualTo("EO");
         assertThat(table.getGroupTable().get(1).getMainDescription()).isEqualTo("Dit is de Seriesbeschrijving");
         assertThat(table.getGroupTable().get(1).getMainTitle()).isEqualTo("IK BEN EEN MOEDERSERIE");
     }
@@ -297,9 +296,9 @@ public class TVATransformerTest {
         // the odd language
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        table.getProgramTable().forEach(p -> {
-            log.info("{}: {}", p.getMid(), p.getLanguages());
-        });
+        table.getProgramTable().forEach(p ->
+            log.info("{}: {}", p.getMid(), p.getLanguages())
+        );
 
         validate(table);
     }
@@ -310,9 +309,7 @@ public class TVATransformerTest {
         String xml = transform("pd/pd/NED220231027P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        table.getProgramTable().forEach(p -> {
-            log.info("{}: {}", p.getMid(), p.getLanguages());
-        });
+        table.getProgramTable().forEach(p -> log.info("{}: {}", p.getMid(), p.getLanguages()));
 
         validate(table);
     }
@@ -461,7 +458,7 @@ public class TVATransformerTest {
         //log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(TextualObjects.getDescription(p, TextualType.LONG)).isEqualTo("Om hun ontsnapping te financieren, doen de twee ontsnapte gevangenen, Gloria en Lin, zich voor als therapeuten voor vier mannen die veroordeeld zijn voor aanranding. Filmproducent Ralf, app-ontwikkelaar Julian, voetbalster Kobe en gynaecoloog Ferdinand willen zich min of meer vrijwillig rehabiliteren in een afgelegen landhuis in Brandenburg, met therapie als gevolg van de MeToo-beweging. (LONG)");
-        assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
+        assertThat(p.getCredits().getFirst().getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
 
@@ -512,7 +509,7 @@ public class TVATransformerTest {
         assertThat(p.getCrids()).containsExactly("crid://media-press.tv/203053643", "crid://npo/programmagegevens/1902975399668");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
-        assertThat(p.getCountries().get(0).getName(Locales.NETHERLANDISH)).isEqualTo("Oost Duitsland");
+        assertThat(p.getCountries().getFirst().getName(Locales.NETHERLANDISH)).isEqualTo("Oost Duitsland");
 
         Program p2 = (Program) table.find("POW_04508476").get();
         assertThat(p2.getScheduleEvents()).hasSize(2);
@@ -657,7 +654,7 @@ public class TVATransformerTest {
         validate(table);
 
         for (Program p : table.getProgramTable()) {
-            p.getEpisodeOf().stream().map(r -> r.getMidRef()).forEach(
+            p.getEpisodeOf().stream().map(MemberRef::getMidRef).forEach(
                 r -> assertThat(table.getGroup(r)).isNotNull()
             );
 
@@ -668,8 +665,7 @@ public class TVATransformerTest {
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
         genreFunction.setMatchOnValuePrefix(BINDINC_GENRE_PREFIX);
-
-        genreFunction.setIgnore(new HashSet<>(Arrays.asList(BINDINC_GENRE_PREFIX + "Overige")));
+        genreFunction.setIgnore(Set.of(BINDINC_GENRE_PREFIX + "Overige"));
 
         Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
 
@@ -685,10 +681,10 @@ public class TVATransformerTest {
     }
 
 
-    TransformerFactoryImpl FACTORY = new net.sf.saxon.TransformerFactoryImpl();
+    static TransformerFactoryImpl FACTORY = new TransformerFactoryImpl();
 
     private static final Set<Net> KNOWN_NETS = new HashSet<>(Arrays.asList(new Net("ZAPP", "Z@PP"), new Net("ZAPPELIN", "Zappelin")));
-    {
+    static {
         SaxonConfiguration configuration = new SaxonConfiguration();
         configuration.setExtensions(Arrays.asList(
             new FindBroadcasterFunction(null) {
@@ -723,18 +719,18 @@ public class TVATransformerTest {
         FACTORY.setConfiguration(configuration);
     }
 
-    private String transform(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    private static String transform(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         return transform(resource, (t) -> {});
     }
 
-    private String transform(InputStream resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    static String transform(InputStream resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
         getTransformer(configure).transform(new StreamSource(resource), result);
         return out.toString(StandardCharsets.UTF_8);
     }
 
-    private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    private static String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         if (input == null) {
             throw new IllegalArgumentException("Could not find " + resource);
@@ -743,7 +739,9 @@ public class TVATransformerTest {
     }
 
 
-    private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+
+    private static synchronized Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+
         Transformer transformer = getTransformer("/nl/vpro/media/tva/tvaTransformer.xsl");
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
@@ -756,8 +754,8 @@ public class TVATransformerTest {
         return transformer;
     }
 
-     private Transformer getTransformer(String resource) throws TransformerConfigurationException {
-        StreamSource stylesource = new StreamSource(getClass().getResourceAsStream(resource));
+    static Transformer getTransformer(String resource) throws TransformerConfigurationException {
+        StreamSource stylesource = new StreamSource(TVATransformerTest.class.getResourceAsStream(resource));
         Transformer transformer = FACTORY.newTransformer(stylesource);
 
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");

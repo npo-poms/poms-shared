@@ -740,7 +740,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<String> getCrids() {
+    public @NonNull List<@NonNull String> getCrids() {
         if (crids == null) {
             crids = new ArrayList<>();
         }

@@ -230,7 +230,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this.channel = channel;
         this.start = of(start, localStart, startDay);
         this.stop = of(stop, localStop, stopDay);
-        if (scheduleEvents != null && scheduleEvents.size() > 0) {
+        if (scheduleEvents != null && !scheduleEvents.isEmpty()) {
             this.scheduleEvents = new TreeSet<>(scheduleEvents);
             for (ScheduleEvent e : this.scheduleEvents) {
                 if (e.getChannel() == null) {
