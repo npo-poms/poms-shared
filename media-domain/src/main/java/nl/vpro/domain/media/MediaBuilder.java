@@ -555,6 +555,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    /**
+     * @since 8.12
+     */
+    default B releaseYear(Year y) {
+        return releaseYear((short) y.getValue());
+    }
+
+
     default B persons(Person... persons) {
         return persons(Arrays.asList(persons));
     }
