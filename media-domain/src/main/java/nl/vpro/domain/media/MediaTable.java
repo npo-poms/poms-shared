@@ -30,6 +30,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 import static nl.vpro.domain.media.MediaObjects.deepCopy;
 
 
+@Setter
 @XmlRootElement(name = "mediaInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaTableType",
@@ -60,18 +61,15 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
 
     @XmlElement
     @Getter
-    @Setter
     @Valid
     protected LocationTable locationTable;
 
     @XmlElement
-    @Setter
     @Valid
     protected Schedule schedule;
 
     @XmlAttribute
     @Getter
-    @Setter
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
@@ -80,17 +78,14 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
 
     @XmlAttribute
     @Getter
-    @Setter
     protected String publisher;
 
     @XmlAttribute
     @Getter
-    @Setter
     protected Short version;
 
     @XmlAttribute
     @Getter
-    @Setter
     protected String source;
 
     /**
@@ -151,7 +146,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
      */
     @SuppressWarnings("unchecked")
     public <T extends MediaObject> Optional<T> findByCrid(String crid) {
-        for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
+        for (@NonNull MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (p.getCrids().contains(crid)) {
                 return Optional.of((T) p);
             }
@@ -196,21 +191,44 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     }
 
     /**
+     * If programs were added, but no explicit schedule. Just calculate the schedule.
+     * @since 8.12
+     */
+
+    public boolean setScheduleIfNeeded() {
+        if (schedule == null) {
+            this.schedule = getSchedule();
+            for (ScheduleEvent e : this.schedule) {
+                if (this.schedule.getChannel() != null && ! Objects.equals(e.getChannel(), this.schedule.getChannel())) {
+                    throw new IllegalStateException("Schedule events are not all from same channel");
+                }
+                this.schedule.setChannel(e.getChannel());
+                if (this.schedule.start == null || this.schedule.start.isAfter(e.start)) {
+                    this.schedule.start = e.start;
+                }
+                Instant stop = e.getStopInstant();
+                if (this.schedule.stop == null || this.schedule.stop.isBefore(stop)) {
+                    this.schedule.stop = stop;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @since 5.9
      */
     public boolean contains(String mid) {
         return find(mid).isPresent();
     }
 
-    public List<Program> getProgramTable() {
+    public @NonNull List<@NonNull Program> getProgramTable() {
         if(programTable == null) {
             programTable = new ArrayList<>();
         }
         return programTable;
-    }
-
-    public void setProgramTable(List<Program> programTable) {
-        this.programTable = programTable;
     }
 
     public MediaTable addGroup(Group group) {
@@ -222,15 +240,11 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         return this;
     }
 
-    public List<Group> getGroupTable() {
+    public @NonNull List<@NonNull Group> getGroupTable() {
         if(groupTable == null) {
             groupTable = new ArrayList<>();
         }
         return this.groupTable;
-    }
-
-    public void setGroupTable(List<Group> groupTable) {
-        this.groupTable = groupTable;
     }
 
     @Override
@@ -264,7 +278,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         }
         for (Map.Entry<String, List<Program>>  e : map.entrySet()) {
             if (e.getValue().size() > 1) {
-                Program first = e.getValue().get(0);
+                Program first = e.getValue().getFirst();
                 log.debug("Found duplicate program {}", first);
                 for (int i = 1; i < e.getValue().size(); i++) {
                     Program another = e.getValue().get(i);
@@ -354,4 +368,31 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         return StreamSupport.stream(Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED), false);
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof MediaTable table)) return false;
+
+        return
+            Objects.equals(programTable, table.programTable) &&
+                Objects.equals(groupTable, table.groupTable) &&
+                Objects.equals(locationTable, table.locationTable) &&
+                Objects.equals(schedule, table.schedule) &&
+                Objects.equals(publicationTime, table.publicationTime) &&
+                Objects.equals(publisher, table.publisher) &&
+                Objects.equals(version, table.version) &&
+                Objects.equals(source, table.source);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(programTable);
+        result = 31 * result + Objects.hashCode(groupTable);
+        result = 31 * result + Objects.hashCode(locationTable);
+        result = 31 * result + Objects.hashCode(schedule);
+        result = 31 * result + Objects.hashCode(publicationTime);
+        result = 31 * result + Objects.hashCode(publisher);
+        result = 31 * result + Objects.hashCode(version);
+        result = 31 * result + Objects.hashCode(source);
+        return result;
+    }
 }
