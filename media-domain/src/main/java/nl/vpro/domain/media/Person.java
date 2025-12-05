@@ -108,6 +108,7 @@ public class Person extends Credits implements PersonInterface {
     public Person(Person source, MediaObject parent) {
         this(source.getGivenName(), source.getFamilyName(), source.getRole());
         this.gtaaInfo = source.gtaaInfo;
+        this.externalId = source.getExternalId();
         this.mediaObject = parent;
     }
 
@@ -122,7 +123,8 @@ public class Person extends Credits implements PersonInterface {
         GTAAStatus gtaaStatus,
         URI uri,
         Boolean gtaaKnownAs,
-        String name
+        String name,
+        String externalId
         ) {
         this.id = id;
         this.role = role;
@@ -133,6 +135,7 @@ public class Person extends Credits implements PersonInterface {
         if (familyName != null) {
             this.familyName = familyName;
         }
+        this.externalId = externalId;
         this.mediaObject = mediaObject;
         if (uri != null) {
             this.gtaaInfo = new EmbeddablePerson();
