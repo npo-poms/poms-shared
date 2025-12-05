@@ -39,6 +39,7 @@
                 </xsl:choose>
               </xsl:attribute>
 
+
               <tva:BasicDescription>
                 <!-- main title -->
                 <xsl:for-each select="title[@type='MAIN' and @owner = 'MIS']">
@@ -93,6 +94,21 @@
                     <tva:Name><xsl:value-of select="normalize-space(.)"/></tva:Name>
                   </tva:Genre>
                 </xsl:for-each>
+                <tva:CreditsList>
+                  <xsl:for-each select="credits/person[@externalId != '']">
+                    <tva:CreditsItem>
+                      <xsl:attribute name="role">
+                        <xsl:call-template name="roles">
+                          <xsl:with-param name="id">
+                            <xsl:value-of select="@role"/>
+                          </xsl:with-param>
+                        </xsl:call-template>
+                      </xsl:attribute>
+                      <tva:PersonNameIDRef ref="{substring(@externalId, 5)}"/>
+                    </tva:CreditsItem>
+                  </xsl:for-each>
+                </tva:CreditsList>
+
 
               </tva:BasicDescription>
             </tva:ProgramInformation>
@@ -141,17 +157,51 @@
           </xsl:for-each>
         </tva:ProgramLocationTable>
         <tva:CreditsInformationTable>
-          <xsl:for-each select="/"
+          <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person" group-by="@externalId">
+            <xsl:if test="@externalId">
+
+              <xsl:for-each select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]">
+                <tva:PersonName personNameId="{substring(@externalId, 5)}">
+                  <mpeg7:GivenName xml:lang="NL" initial="">
+                    <xsl:value-of select="givenName" />
+                  </mpeg7:GivenName>
+                  <mpeg7:FamilyName xml:lang="NL">
+                    <xsl:value-of select="familyName" />
+                  </mpeg7:FamilyName>
+                </tva:PersonName>
+              </xsl:for-each>
+            </xsl:if>
+          </xsl:for-each-group>
         </tva:CreditsInformationTable>
       </tva:ProgramDescription>
     </tva:TVAMain>
   </xsl:template>
 
-  <!-- identity fallback for nodes not explicitly mapped (keeps simple text children) -->
-  <xsl:template match="node()|@*">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
+
+
+
+  <xsl:template name="roles">
+    <xsl:param name="id"/>
+    <xsl:choose>
+      <xsl:when test="$id = 'ACTOR'">urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR</xsl:when>
+      <xsl:when test="$id = 'PRESENTER'">urn:tva:metadata:cs:TVARoleCS:2004:V721</xsl:when>
+      <xsl:when test="$id = 'COMMENTATOR'">urn:tva:metadata:cs:TVARoleCS:2004:V32</xsl:when>
+      <xsl:when test="$id = 'DIRECTOR'">urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR</xsl:when>
+      <xsl:when test="$id = 'SCRIPTWRITER'">urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER</xsl:when>
+      <xsl:when test="$id = 'COMPOSER'">urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER</xsl:when>
+      <xsl:when test="$id = 'PRODUCER'">PRODUCER</xsl:when>
+      <xsl:when test="$id = 'ASSISTANT_DIRECTOR'">ASSISTANT_DIRECTOR</xsl:when>
+      <xsl:when test="$id = 'CAMERA'">CAMERA</xsl:when>
+      <xsl:when test="$id = 'CHOREOGRAPHY'">CHOREOGRAPHY</xsl:when>
+      <xsl:when test="$id = 'DUBBING'">DUBBING</xsl:when>
+      <xsl:when test="$id = 'MAKEUP'">MAKEUP</xsl:when>
+      <xsl:when test="$id = 'EDITOR'">MONTAGE</xsl:when>
+      <xsl:when test="$id = 'PRODUCTION_MANAGEMENT'">PRODUCTION_MANAGEMENT</xsl:when>
+      <xsl:when test="$id = 'STAGING'">STAGING</xsl:when>
+      <xsl:when test="$id = 'STUNT'">STUNT</xsl:when>
+      <xsl:when test="$id = 'VISUAL_EFFECTS'">VISUAL_EFFECTS</xsl:when>
+      <xsl:otherwise>UNDEFINED</xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>

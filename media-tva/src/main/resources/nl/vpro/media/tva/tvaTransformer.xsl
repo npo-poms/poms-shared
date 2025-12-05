@@ -700,7 +700,7 @@
         <!-- <person> -->
         <xsl:for-each select="tva:CreditsItem/tva:PersonNameIDRef">
           <xsl:element name="person">
-            <xsl:attribute name="externalid">
+            <xsl:attribute name="externalId">
               <xsl:value-of select="$personExternalIdPrefix" /><xsl:value-of select="current()/@ref" />
             </xsl:attribute>
             <xsl:attribute name="role">

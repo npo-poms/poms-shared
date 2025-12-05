@@ -45,7 +45,13 @@ public class POMSToTVATransformerTest {
                 .crids("tva:1")
                 .mainTitle("mis title", OwnerType.MIS)
                 .mainDescription("mis description", OwnerType.MIS)
-            .credits(new Person("Pietje", "Puk", RoleType.PRESENTER))
+            .credits(Person.builder()
+                .givenName("Pietje")
+                .familyName("Puk")
+                .role(RoleType.PRESENTER)
+                .externalId("tva:12345")
+                .build()
+            )
                 .scheduleEvent(
                     Channel.XXXX,
                     Instant.now().truncatedTo(ChronoUnit.MINUTES),
