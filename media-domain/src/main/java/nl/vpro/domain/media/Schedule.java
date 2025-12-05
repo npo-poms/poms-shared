@@ -200,7 +200,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this.net = net;
         this.start = start;
         this.stop = stop;
-        if (scheduleEvents != null && scheduleEvents.size() > 0) {
+        if (scheduleEvents != null && !scheduleEvents.isEmpty()) {
             this.scheduleEvents = new TreeSet<>(scheduleEvents);
             for (ScheduleEvent e : this.scheduleEvents) {
                 if (e.getChannel() == null) {
@@ -351,7 +351,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
     /* Need a getter with the above setter, otherwise Hibernate fails */
     public LocalDate getGuideDate() {
-        return LocalDate.from(getStart());
+        return LocalDate.from(getStart().atZone(ZONE_ID));
     }
 
     public void setStart(LocalDateTime start) {
