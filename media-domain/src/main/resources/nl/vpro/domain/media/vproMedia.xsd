@@ -606,7 +606,11 @@
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
     <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
-    <xs:attribute name="externalid" type="xs:string"/>
+    <xs:attribute name="externalId" type="xs:string">
+       <xs:annotation>
+          <xs:documentation>Contains the id of this person in some exernalt system.</xs:documentation>
+       </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <xs:complexType name="nameType">
