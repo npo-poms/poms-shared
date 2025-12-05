@@ -33,9 +33,6 @@
                   <xsl:when test="crid[1] and normalize-space(crid[1]) != ''">
                     <xsl:value-of select="normalize-space(crid[1])"/>
                   </xsl:when>
-                  <xsl:when test="@mid">
-                    <xsl:value-of select="@mid"/>
-                  </xsl:when>
                   <xsl:otherwise>
                     <xsl:text>generated-{@position}</xsl:text>
                   </xsl:otherwise>
@@ -143,6 +140,9 @@
             </tva:Schedule>
           </xsl:for-each>
         </tva:ProgramLocationTable>
+        <tva:CreditsInformationTable>
+          <xsl:for-each select="/"
+        </tva:CreditsInformationTable>
       </tva:ProgramDescription>
     </tva:TVAMain>
   </xsl:template>
