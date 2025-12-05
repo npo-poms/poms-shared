@@ -49,7 +49,7 @@ public class POMSToTVATransformerTest {
                 .givenName("Pietje")
                 .familyName("Puk")
                 .role(RoleType.PRESENTER)
-                .externalId("tva:12345")
+                .externalId("whatson:12345")
                 .build()
             )
                 .scheduleEvent(

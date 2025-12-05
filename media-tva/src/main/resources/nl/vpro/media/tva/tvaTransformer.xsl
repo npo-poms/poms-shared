@@ -36,7 +36,7 @@
   -->
   <xsl:param name="personUriPrefix" select="''" />
 
-  <xsl:param name="personExternalIdPrefix" select="'tva:'" />
+  <xsl:param name="personExternalIdPrefix" select="'whatson:'" />
 
   <!--
   The workflow of the new object. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if

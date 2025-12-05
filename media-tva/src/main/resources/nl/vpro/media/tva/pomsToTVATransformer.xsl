@@ -18,6 +18,9 @@
 
   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
+  <xsl:param name="personExternalIdPrefix" select="'whatson:'" />
+
+
   <!-- root: map mediaInformation -> tva:TVAMain -->
   <xsl:template match="/mediaInformation">
     <tva:TVAMain xmlns:tva="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001">
@@ -104,7 +107,7 @@
                           </xsl:with-param>
                         </xsl:call-template>
                       </xsl:attribute>
-                      <tva:PersonNameIDRef ref="{substring(@externalId, 5)}"/>
+                      <tva:PersonNameIDRef ref="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}"/>
                     </tva:CreditsItem>
                   </xsl:for-each>
                 </tva:CreditsList>
@@ -158,10 +161,10 @@
         </tva:ProgramLocationTable>
         <tva:CreditsInformationTable>
           <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person" group-by="@externalId">
-            <xsl:if test="@externalId">
+            <xsl:if test="starts-with(@externalId, $personExternalIdPrefix)">
 
               <xsl:for-each select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]">
-                <tva:PersonName personNameId="{substring(@externalId, 5)}">
+                <tva:PersonName personNameId="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}">
                   <mpeg7:GivenName xml:lang="NL" initial="">
                     <xsl:value-of select="givenName" />
                   </mpeg7:GivenName>
