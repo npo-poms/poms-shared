@@ -67,13 +67,18 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     protected MediaObject mediaObject;
 
     public static Credits copy(Credits credits, MediaObject mediaObject) {
-        if (credits instanceof Person) {
-            return Person.copy((Person) credits, mediaObject);
-        } else if (credits instanceof Name) {
-            return Name.copy((Name) credits, mediaObject);
+        if (credits instanceof Person person) {
+            return Person.copy(person, mediaObject);
+        } else if (credits instanceof Name name) {
+            return Name.copy(name, mediaObject);
         } else {
             throw new IllegalStateException();
         }
+    }
+
+    public void fillFrom(Credits person) {
+        this.id = person.id;
+        this.role = person.role;
     }
 
 
