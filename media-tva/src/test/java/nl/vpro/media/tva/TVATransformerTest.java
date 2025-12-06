@@ -72,6 +72,7 @@ public class TVATransformerTest {
     }
 
     @BeforeEach
+    @AfterEach
     public void init() {
         appender.clear();
         genreFunction.setNotFound(NotFound.FATAL);

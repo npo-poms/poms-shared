@@ -155,7 +155,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H02M30S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -217,7 +217,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H02M30S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -250,27 +250,27 @@
        <releaseYear>2016</releaseYear>
        <duration>PT00H05M00S</duration>
        <credits>
-          <person externalid="tva:106198532517" role="ACTOR">
+          <person externalId="whatson:106198532517" role="ACTOR">
              <givenName>Guy</givenName>
              <familyName>Clemens</familyName>
           </person>
-          <person externalid="tva:212362236517" role="ACTOR">
+          <person externalId="whatson:212362236517" role="ACTOR">
              <givenName>Nasrdin</givenName>
              <familyName>Dchar</familyName>
           </person>
-          <person externalid="tva:807203565517" role="ACTOR">
+          <person externalId="whatson:807203565517" role="ACTOR">
              <givenName>Georgina</givenName>
              <familyName>Verbaan</familyName>
           </person>
-          <person externalid="tva:1259419497517" role="DIRECTOR">
+          <person externalId="whatson:1259419497517" role="DIRECTOR">
              <givenName>Steven</givenName>
              <familyName>de Beul</familyName>
           </person>
-          <person externalid="tva:1259419502517" role="DIRECTOR">
+          <person externalId="whatson:1259419502517" role="DIRECTOR">
              <givenName>Ben</givenName>
              <familyName>Tesseur</familyName>
           </person>
-          <person externalid="tva:1622764205517" role="SCRIPTWRITER">
+          <person externalId="whatson:1622764205517" role="SCRIPTWRITER">
              <givenName>Mieke</givenName>
              <familyName>de Jong</familyName>
           </person>
@@ -303,27 +303,27 @@
        <releaseYear>2016</releaseYear>
        <duration>PT00H04M59S</duration>
        <credits>
-          <person externalid="tva:106198532517" role="ACTOR">
+          <person externalId="whatson:106198532517" role="ACTOR">
              <givenName>Guy</givenName>
              <familyName>Clemens</familyName>
           </person>
-          <person externalid="tva:212362236517" role="ACTOR">
+          <person externalId="whatson:212362236517" role="ACTOR">
              <givenName>Nasrdin</givenName>
              <familyName>Dchar</familyName>
           </person>
-          <person externalid="tva:807203565517" role="ACTOR">
+          <person externalId="whatson:807203565517" role="ACTOR">
              <givenName>Georgina</givenName>
              <familyName>Verbaan</familyName>
           </person>
-          <person externalid="tva:1259419497517" role="DIRECTOR">
+          <person externalId="whatson:1259419497517" role="DIRECTOR">
              <givenName>Steven</givenName>
              <familyName>de Beul</familyName>
           </person>
-          <person externalid="tva:1259419502517" role="DIRECTOR">
+          <person externalId="whatson:1259419502517" role="DIRECTOR">
              <givenName>Ben</givenName>
              <familyName>Tesseur</familyName>
           </person>
-          <person externalid="tva:1622764205517" role="SCRIPTWRITER">
+          <person externalId="whatson:1622764205517" role="SCRIPTWRITER">
              <givenName>Mieke</givenName>
              <familyName>de Jong</familyName>
           </person>
@@ -356,7 +356,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H02M51S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -417,7 +417,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H02M12S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -477,7 +477,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H03M05S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -539,7 +539,7 @@
        <releaseYear>2019</releaseYear>
        <duration>PT00H02M23S</duration>
        <credits>
-          <person externalid="tva:1527410872517" role="PRESENTER">
+          <person externalId="whatson:1527410872517" role="PRESENTER">
              <givenName>Fenna</givenName>
              <familyName>Ramos</familyName>
           </person>
@@ -685,15 +685,15 @@
        <releaseYear>2018</releaseYear>
        <duration>PT00H11M14S</duration>
        <credits>
-          <person externalid="tva:1117948040517" role="PRESENTER">
+          <person externalId="whatson:1117948040517" role="PRESENTER">
              <givenName>Klaasje</givenName>
              <familyName>Meijer</familyName>
           </person>
-          <person externalid="tva:1117944836517" role="PRESENTER">
+          <person externalId="whatson:1117944836517" role="PRESENTER">
              <givenName>Hanne</givenName>
              <familyName>Verbruggen</familyName>
           </person>
-          <person externalid="tva:1117947403517" role="PRESENTER">
+          <person externalId="whatson:1117947403517" role="PRESENTER">
              <givenName>Marthe</givenName>
              <familyName>De Pillecyn</familyName>
           </person>
@@ -895,7 +895,7 @@
        <releaseYear>2014</releaseYear>
        <duration>PT00H12M09S</duration>
        <credits>
-          <person externalid="tva:798695594517" role="DIRECTOR">
+          <person externalId="whatson:798695594517" role="DIRECTOR">
              <givenName>David</givenName>
              <familyName>McCamley</familyName>
           </person>
@@ -1296,7 +1296,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2015</releaseYear>
        <duration>PT00H22M10S</duration>
        <credits>
-          <person externalid="tva:798725899517" role="DIRECTOR">
+          <person externalId="whatson:798725899517" role="DIRECTOR">
              <givenName>Andrew</givenName>
              <familyName>Collins</familyName>
           </person>
@@ -1332,43 +1332,43 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2011</releaseYear>
        <duration>PT00H25M09S</duration>
        <credits>
-          <person externalid="tva:1778683571517" role="ACTOR">
+          <person externalId="whatson:1778683571517" role="ACTOR">
              <givenName>Sjarel</givenName>
              <familyName>Branckaerts</familyName>
           </person>
-          <person externalid="tva:1778683575517" role="ACTOR">
+          <person externalId="whatson:1778683575517" role="ACTOR">
              <givenName>Anton</givenName>
              <familyName>Cogen</familyName>
           </person>
-          <person externalid="tva:1778683579517" role="ACTOR">
+          <person externalId="whatson:1778683579517" role="ACTOR">
              <givenName>Fred</givenName>
              <familyName>van Kuyk</familyName>
           </person>
-          <person externalid="tva:718676230517" role="ACTOR">
+          <person externalId="whatson:718676230517" role="ACTOR">
              <givenName>Nicky</givenName>
              <familyName>Langley</familyName>
           </person>
-          <person externalid="tva:660147244517" role="ACTOR">
+          <person externalId="whatson:660147244517" role="ACTOR">
              <givenName>Free</givenName>
              <familyName>Souffriau</familyName>
           </person>
-          <person externalid="tva:1189647889517" role="ACTOR">
+          <person externalId="whatson:1189647889517" role="ACTOR">
              <givenName>Louis</givenName>
              <familyName>Talpe</familyName>
           </person>
-          <person externalid="tva:1778683586517" role="DIRECTOR">
+          <person externalId="whatson:1778683586517" role="DIRECTOR">
              <givenName>Bart</givenName>
              <familyName>van Leemputten</familyName>
           </person>
-          <person externalid="tva:1780408570517" role="DIRECTOR">
+          <person externalId="whatson:1780408570517" role="DIRECTOR">
              <givenName>Matthias</givenName>
              <familyName>Temmermans</familyName>
           </person>
-          <person externalid="tva:1778683594517" role="SCRIPTWRITER">
+          <person externalId="whatson:1778683594517" role="SCRIPTWRITER">
              <givenName>Hans</givenName>
              <familyName>Bourlon</familyName>
           </person>
-          <person externalid="tva:22881468517" role="SCRIPTWRITER">
+          <person externalId="whatson:22881468517" role="SCRIPTWRITER">
              <givenName>Gert</givenName>
              <familyName>Verhulst</familyName>
           </person>
@@ -1487,7 +1487,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2016</releaseYear>
        <duration>PT00H12M24S</duration>
        <credits>
-          <person externalid="tva:798702755517" role="DIRECTOR">
+          <person externalId="whatson:798702755517" role="DIRECTOR">
              <givenName>Daniel</givenName>
              <familyName>Duda</familyName>
           </person>
@@ -1742,7 +1742,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2012</releaseYear>
        <duration>PT00H28M10S</duration>
        <credits>
-          <person externalid="tva:659948346517" role="PRESENTER">
+          <person externalId="whatson:659948346517" role="PRESENTER">
              <givenName>Steve</givenName>
              <familyName>Backshall</familyName>
           </person>
@@ -1777,15 +1777,15 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2010</releaseYear>
        <duration>PT00H28M13S</duration>
        <credits>
-          <person externalid="tva:1002920211517" role="ACTOR">
+          <person externalId="whatson:1002920211517" role="ACTOR">
              <givenName>Katherina</givenName>
              <familyName>Unger</familyName>
           </person>
-          <person externalid="tva:1002920587517" role="ACTOR">
+          <person externalId="whatson:1002920587517" role="ACTOR">
              <givenName>Coco</givenName>
              <familyName>Nima</familyName>
           </person>
-          <person externalid="tva:1002920923517" role="ACTOR">
+          <person externalId="whatson:1002920923517" role="ACTOR">
              <givenName>Aurelia</givenName>
              <familyName>Stern</familyName>
           </person>
@@ -1819,11 +1819,11 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H21M11S</duration>
        <credits>
-          <person externalid="tva:533709709517" role="PRESENTER">
+          <person externalId="whatson:533709709517" role="PRESENTER">
              <givenName>Bart</givenName>
              <familyName>Meijer</familyName>
           </person>
-          <person externalid="tva:1521005433517" role="PRESENTER">
+          <person externalId="whatson:1521005433517" role="PRESENTER">
              <givenName>Tonnie van der</givenName>
              <familyName>Neut</familyName>
           </person>
@@ -1887,15 +1887,15 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H10M15S</duration>
        <credits>
-          <person externalid="tva:1711253784517" role="ACTOR">
+          <person externalId="whatson:1711253784517" role="ACTOR">
              <givenName>Yuani</givenName>
              <familyName>Blindenburg</familyName>
           </person>
-          <person externalid="tva:1715627540517" role="ACTOR">
+          <person externalId="whatson:1715627540517" role="ACTOR">
              <givenName>Rick</givenName>
              <familyName>Nanne</familyName>
           </person>
-          <person externalid="tva:1761892835517" role="DIRECTOR">
+          <person externalId="whatson:1761892835517" role="DIRECTOR">
              <givenName>Jeroen</givenName>
              <familyName>Kerklingh</familyName>
           </person>
@@ -1930,103 +1930,103 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H11M25S</duration>
        <credits>
-          <person externalid="tva:1046510137517" role="ACTOR">
+          <person externalId="whatson:1046510137517" role="ACTOR">
              <givenName>Felix</givenName>
              <familyName>Burleson</familyName>
           </person>
-          <person externalid="tva:1407328874517" role="ACTOR">
+          <person externalId="whatson:1407328874517" role="ACTOR">
              <givenName>Yeliz</givenName>
              <familyName>Dogan</familyName>
           </person>
-          <person externalid="tva:1208364628517" role="ACTOR">
+          <person externalId="whatson:1208364628517" role="ACTOR">
              <givenName>Judy</givenName>
              <familyName>Doorman</familyName>
           </person>
-          <person externalid="tva:1207931344517" role="ACTOR">
+          <person externalId="whatson:1207931344517" role="ACTOR">
              <givenName>Juda</givenName>
              <familyName>Goslinga</familyName>
           </person>
-          <person externalid="tva:1287055865517" role="ACTOR">
+          <person externalId="whatson:1287055865517" role="ACTOR">
              <givenName>Renée</givenName>
              <familyName>de Gruijl</familyName>
           </person>
-          <person externalid="tva:1707541026517" role="ACTOR">
+          <person externalId="whatson:1707541026517" role="ACTOR">
              <givenName>Donovan</givenName>
              <familyName>Gyurákovics</familyName>
           </person>
-          <person externalid="tva:1751266193517" role="ACTOR">
+          <person externalId="whatson:1751266193517" role="ACTOR">
              <givenName>Tobias</givenName>
              <familyName>van Harmelen</familyName>
           </person>
-          <person externalid="tva:1083805019517" role="ACTOR">
+          <person externalId="whatson:1083805019517" role="ACTOR">
              <givenName>Marcel</givenName>
              <familyName>Harteveld</familyName>
           </person>
-          <person externalid="tva:1046510167517" role="ACTOR">
+          <person externalId="whatson:1046510167517" role="ACTOR">
              <givenName>Steef</givenName>
              <familyName>Hupkes</familyName>
           </person>
-          <person externalid="tva:1562814286517" role="ACTOR">
+          <person externalId="whatson:1562814286517" role="ACTOR">
              <givenName>Claudia</givenName>
              <familyName>Kanne</familyName>
           </person>
-          <person externalid="tva:1269120610517" role="ACTOR">
+          <person externalId="whatson:1269120610517" role="ACTOR">
              <givenName>Rosaline</givenName>
              <familyName>Lantink</familyName>
           </person>
-          <person externalid="tva:1253634914517" role="ACTOR">
+          <person externalId="whatson:1253634914517" role="ACTOR">
              <givenName>Iris</givenName>
              <familyName>van Loen</familyName>
           </person>
-          <person externalid="tva:1743672701517" role="ACTOR">
+          <person externalId="whatson:1743672701517" role="ACTOR">
              <givenName>Hannah</givenName>
              <familyName>van Meurs</familyName>
           </person>
-          <person externalid="tva:1407328887517" role="ACTOR">
+          <person externalId="whatson:1407328887517" role="ACTOR">
              <givenName>Tobias</givenName>
              <familyName>Oelderik</familyName>
           </person>
-          <person externalid="tva:1173036718517" role="ACTOR">
+          <person externalId="whatson:1173036718517" role="ACTOR">
              <givenName>Bruno</givenName>
              <familyName>Prent</familyName>
           </person>
-          <person externalid="tva:1449265405517" role="ACTOR">
+          <person externalId="whatson:1449265405517" role="ACTOR">
              <givenName>Giorgio</givenName>
              <familyName>Sanches</familyName>
           </person>
-          <person externalid="tva:1253634942517" role="ACTOR">
+          <person externalId="whatson:1253634942517" role="ACTOR">
              <givenName>Joe</givenName>
              <familyName>Sinduhije</familyName>
           </person>
-          <person externalid="tva:1568689107517" role="ACTOR">
+          <person externalId="whatson:1568689107517" role="ACTOR">
              <givenName>Jard</givenName>
              <familyName>Struik</familyName>
           </person>
-          <person externalid="tva:1400917297517" role="ACTOR">
+          <person externalId="whatson:1400917297517" role="ACTOR">
              <givenName>Roosmarijn</givenName>
              <familyName>Wind</familyName>
           </person>
-          <person externalid="tva:1625951174517" role="DIRECTOR">
+          <person externalId="whatson:1625951174517" role="DIRECTOR">
              <givenName>Raynor</givenName>
              <familyName>Arkenbout</familyName>
           </person>
-          <person externalid="tva:1083805024517" role="SCRIPTWRITER">
+          <person externalId="whatson:1083805024517" role="SCRIPTWRITER">
              <givenName>Brian</givenName>
              <familyName>De Vore</familyName>
           </person>
-          <person externalid="tva:1008909852517" role="SCRIPTWRITER">
+          <person externalId="whatson:1008909852517" role="SCRIPTWRITER">
              <givenName>Gerben</givenName>
              <familyName>Hetebrij</familyName>
           </person>
-          <person externalid="tva:1022122358517" role="SCRIPTWRITER">
+          <person externalId="whatson:1022122358517" role="SCRIPTWRITER">
              <givenName>Nick</givenName>
              <familyName>Jongerius</familyName>
           </person>
-          <person externalid="tva:1046510232517" role="SCRIPTWRITER">
+          <person externalId="whatson:1046510232517" role="SCRIPTWRITER">
              <givenName>Anya</givenName>
              <familyName>Koek</familyName>
           </person>
-          <person externalid="tva:1418394039517" role="SCRIPTWRITER">
+          <person externalId="whatson:1418394039517" role="SCRIPTWRITER">
              <givenName>Diana</givenName>
              <familyName>Sno</familyName>
           </person>
@@ -2060,7 +2060,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H25M37S</duration>
        <credits>
-          <person externalid="tva:1080375301517" role="PRESENTER">
+          <person externalId="whatson:1080375301517" role="PRESENTER">
              <givenName>Rachel</givenName>
              <familyName>Rosier</familyName>
           </person>
@@ -2092,11 +2092,11 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H20M02S</duration>
        <credits>
-          <person externalid="tva:533709709517" role="PRESENTER">
+          <person externalId="whatson:533709709517" role="PRESENTER">
              <givenName>Bart</givenName>
              <familyName>Meijer</familyName>
           </person>
-          <person externalid="tva:1521005433517" role="PRESENTER">
+          <person externalId="whatson:1521005433517" role="PRESENTER">
              <givenName>Tonnie van der</givenName>
              <familyName>Neut</familyName>
           </person>
@@ -2129,7 +2129,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H15M55S</duration>
        <credits>
-          <person externalid="tva:1417676799517" role="PRESENTER">
+          <person externalId="whatson:1417676799517" role="PRESENTER">
              <givenName>Jill</givenName>
              <familyName>Schirnhofer</familyName>
           </person>
@@ -2162,7 +2162,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H10M25S</duration>
        <credits>
-          <person externalid="tva:1424202490517" role="PRESENTER">
+          <person externalId="whatson:1424202490517" role="PRESENTER">
              <givenName>Tatum</givenName>
              <familyName>Dagelet</familyName>
           </person>
@@ -2197,19 +2197,19 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H10M24S</duration>
        <credits>
-          <person externalid="tva:1704066217517" role="ACTOR">
+          <person externalId="whatson:1704066217517" role="ACTOR">
              <givenName>Mikky</givenName>
              <familyName>Dijkstra</familyName>
           </person>
-          <person externalid="tva:1225037544517" role="ACTOR">
+          <person externalId="whatson:1225037544517" role="ACTOR">
              <givenName>Carla</givenName>
              <familyName>Noom</familyName>
           </person>
-          <person externalid="tva:1533882940517" role="ACTOR">
+          <person externalId="whatson:1533882940517" role="ACTOR">
              <givenName>Else</givenName>
              <familyName>Talsma</familyName>
           </person>
-          <person externalid="tva:1292927883517" role="DIRECTOR">
+          <person externalId="whatson:1292927883517" role="DIRECTOR">
              <givenName>Nicolien</givenName>
              <familyName>Kool</familyName>
           </person>
@@ -2244,87 +2244,87 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2019</releaseYear>
        <duration>PT00H11M25S</duration>
        <credits>
-          <person externalid="tva:1046510137517" role="ACTOR">
+          <person externalId="whatson:1046510137517" role="ACTOR">
              <givenName>Felix</givenName>
              <familyName>Burleson</familyName>
           </person>
-          <person externalid="tva:1407328874517" role="ACTOR">
+          <person externalId="whatson:1407328874517" role="ACTOR">
              <givenName>Yeliz</givenName>
              <familyName>Dogan</familyName>
           </person>
-          <person externalid="tva:1208364628517" role="ACTOR">
+          <person externalId="whatson:1208364628517" role="ACTOR">
              <givenName>Judy</givenName>
              <familyName>Doorman</familyName>
           </person>
-          <person externalid="tva:1287055865517" role="ACTOR">
+          <person externalId="whatson:1287055865517" role="ACTOR">
              <givenName>Renée</givenName>
              <familyName>de Gruijl</familyName>
           </person>
-          <person externalid="tva:1083805019517" role="ACTOR">
+          <person externalId="whatson:1083805019517" role="ACTOR">
              <givenName>Marcel</givenName>
              <familyName>Harteveld</familyName>
           </person>
-          <person externalid="tva:1046510167517" role="ACTOR">
+          <person externalId="whatson:1046510167517" role="ACTOR">
              <givenName>Steef</givenName>
              <familyName>Hupkes</familyName>
           </person>
-          <person externalid="tva:1562814286517" role="ACTOR">
+          <person externalId="whatson:1562814286517" role="ACTOR">
              <givenName>Claudia</givenName>
              <familyName>Kanne</familyName>
           </person>
-          <person externalid="tva:1253634914517" role="ACTOR">
+          <person externalId="whatson:1253634914517" role="ACTOR">
              <givenName>Iris</givenName>
              <familyName>van Loen</familyName>
           </person>
-          <person externalid="tva:1407328887517" role="ACTOR">
+          <person externalId="whatson:1407328887517" role="ACTOR">
              <givenName>Tobias</givenName>
              <familyName>Oelderik</familyName>
           </person>
-          <person externalid="tva:1173036718517" role="ACTOR">
+          <person externalId="whatson:1173036718517" role="ACTOR">
              <givenName>Bruno</givenName>
              <familyName>Prent</familyName>
           </person>
-          <person externalid="tva:1497091232517" role="ACTOR">
+          <person externalId="whatson:1497091232517" role="ACTOR">
              <givenName>Armand</givenName>
              <familyName>Rosbak</familyName>
           </person>
-          <person externalid="tva:1449265405517" role="ACTOR">
+          <person externalId="whatson:1449265405517" role="ACTOR">
              <givenName>Giorgio</givenName>
              <familyName>Sanches</familyName>
           </person>
-          <person externalid="tva:1253634942517" role="ACTOR">
+          <person externalId="whatson:1253634942517" role="ACTOR">
              <givenName>Joe</givenName>
              <familyName>Sinduhije</familyName>
           </person>
-          <person externalid="tva:1568689107517" role="ACTOR">
+          <person externalId="whatson:1568689107517" role="ACTOR">
              <givenName>Jard</givenName>
              <familyName>Struik</familyName>
           </person>
-          <person externalid="tva:1400917297517" role="ACTOR">
+          <person externalId="whatson:1400917297517" role="ACTOR">
              <givenName>Roosmarijn</givenName>
              <familyName>Wind</familyName>
           </person>
-          <person externalid="tva:1625951174517" role="DIRECTOR">
+          <person externalId="whatson:1625951174517" role="DIRECTOR">
              <givenName>Raynor</givenName>
              <familyName>Arkenbout</familyName>
           </person>
-          <person externalid="tva:1083805024517" role="SCRIPTWRITER">
+          <person externalId="whatson:1083805024517" role="SCRIPTWRITER">
              <givenName>Brian</givenName>
              <familyName>De Vore</familyName>
           </person>
-          <person externalid="tva:1008909852517" role="SCRIPTWRITER">
+          <person externalId="whatson:1008909852517" role="SCRIPTWRITER">
              <givenName>Gerben</givenName>
              <familyName>Hetebrij</familyName>
           </person>
-          <person externalid="tva:1022122358517" role="SCRIPTWRITER">
+          <person externalId="whatson:1022122358517" role="SCRIPTWRITER">
              <givenName>Nick</givenName>
              <familyName>Jongerius</familyName>
           </person>
-          <person externalid="tva:1046510232517" role="SCRIPTWRITER">
+          <person externalId="whatson:1046510232517" role="SCRIPTWRITER">
              <givenName>Anya</givenName>
              <familyName>Koek</familyName>
           </person>
-          <person externalid="tva:1418394039517" role="SCRIPTWRITER">
+          <person externalId="whatson:1418394039517" role="SCRIPTWRITER">
              <givenName>Diana</givenName>
              <familyName>Sno</familyName>
           </person>
@@ -2445,27 +2445,27 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H26M00S</duration>
        <credits>
-          <person externalid="tva:569595518517" role="PRESENTER">
+          <person externalId="whatson:569595518517" role="PRESENTER">
              <givenName>Sofie</givenName>
              <familyName>van den Enk</familyName>
           </person>
-          <person externalid="tva:1364173574517" role="PRESENTER">
+          <person externalId="whatson:1364173574517" role="PRESENTER">
              <givenName>Marijn</givenName>
              <familyName>Frank</familyName>
           </person>
-          <person externalid="tva:1010338795517" role="PRESENTER">
+          <person externalId="whatson:1010338795517" role="PRESENTER">
              <givenName>Teun</givenName>
              <familyName>van de Keuken</familyName>
           </person>
-          <person externalid="tva:882094178517" role="PRESENTER">
+          <person externalId="whatson:882094178517" role="PRESENTER">
              <givenName>Ersin</givenName>
              <familyName>Kiris</familyName>
           </person>
-          <person externalid="tva:1164162618517" role="PRESENTER">
+          <person externalId="whatson:1164162618517" role="PRESENTER">
              <givenName>Daan</givenName>
              <familyName>Nieber</familyName>
           </person>
-          <person externalid="tva:1158258780517" role="PRESENTER">
+          <person externalId="whatson:1158258780517" role="PRESENTER">
              <givenName>Maarten</givenName>
              <familyName>Remmers</familyName>
           </person>
@@ -2498,7 +2498,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H46M00S</duration>
        <credits>
-          <person externalid="tva:1400040783517" role="PRESENTER">
+          <person externalId="whatson:1400040783517" role="PRESENTER">
              <givenName>Jennifer</givenName>
              <familyName>Hoffman</familyName>
           </person>
@@ -2532,19 +2532,19 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H36M00S</duration>
        <credits>
-          <person externalid="tva:1749332089517" role="PRESENTER">
+          <person externalId="whatson:1749332089517" role="PRESENTER">
              <givenName>Farbod</givenName>
              <familyName>Moghaddam</familyName>
           </person>
-          <person externalid="tva:1387562339517" role="PRESENTER">
+          <person externalId="whatson:1387562339517" role="PRESENTER">
              <givenName>Filemon</givenName>
              <familyName>Wesselink</familyName>
           </person>
-          <person externalid="tva:1611254954517" role="PRESENTER">
+          <person externalId="whatson:1611254954517" role="PRESENTER">
              <givenName>Sophie</givenName>
              <familyName>Frankenmolen</familyName>
           </person>
-          <person externalid="tva:572100054517" role="PRESENTER">
+          <person externalId="whatson:572100054517" role="PRESENTER">
              <givenName>Yora</givenName>
              <familyName>Rienstra</familyName>
           </person>
@@ -2573,7 +2573,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2015</releaseYear>
        <duration>PT01H41M00S</duration>
        <credits>
-          <person externalid="tva:1378928077517" role="DIRECTOR">
+          <person externalId="whatson:1378928077517" role="DIRECTOR">
              <givenName>Pierre</givenName>
              <familyName>Deschamps</familyName>
           </person>
@@ -2604,7 +2604,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H49M50S</duration>
        <credits>
-          <person externalid="tva:671759368517" role="PRESENTER">
+          <person externalId="whatson:671759368517" role="PRESENTER">
              <givenName>Matthijs</givenName>
              <familyName>van Nieuwkerk</familyName>
           </person>
@@ -2639,27 +2639,27 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H25M30S</duration>
        <credits>
-          <person externalid="tva:569595518517" role="PRESENTER">
+          <person externalId="whatson:569595518517" role="PRESENTER">
              <givenName>Sofie</givenName>
              <familyName>van den Enk</familyName>
           </person>
-          <person externalid="tva:1364173574517" role="PRESENTER">
+          <person externalId="whatson:1364173574517" role="PRESENTER">
              <givenName>Marijn</givenName>
              <familyName>Frank</familyName>
           </person>
-          <person externalid="tva:1010338795517" role="PRESENTER">
+          <person externalId="whatson:1010338795517" role="PRESENTER">
              <givenName>Teun</givenName>
              <familyName>van de Keuken</familyName>
           </person>
-          <person externalid="tva:882094178517" role="PRESENTER">
+          <person externalId="whatson:882094178517" role="PRESENTER">
              <givenName>Ersin</givenName>
              <familyName>Kiris</familyName>
           </person>
-          <person externalid="tva:1164162618517" role="PRESENTER">
+          <person externalId="whatson:1164162618517" role="PRESENTER">
              <givenName>Daan</givenName>
              <familyName>Nieber</familyName>
           </person>
-          <person externalid="tva:1158258780517" role="PRESENTER">
+          <person externalId="whatson:1158258780517" role="PRESENTER">
              <givenName>Maarten</givenName>
              <familyName>Remmers</familyName>
           </person>
@@ -2692,7 +2692,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H45M30S</duration>
        <credits>
-          <person externalid="tva:1400040783517" role="PRESENTER">
+          <person externalId="whatson:1400040783517" role="PRESENTER">
              <givenName>Jennifer</givenName>
              <familyName>Hoffman</familyName>
           </person>
@@ -2725,7 +2725,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H50M22S</duration>
        <credits>
-          <person externalid="tva:671759368517" role="PRESENTER">
+          <person externalId="whatson:671759368517" role="PRESENTER">
              <givenName>Matthijs</givenName>
              <familyName>van Nieuwkerk</familyName>
           </person>
@@ -2759,19 +2759,19 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H35M30S</duration>
        <credits>
-          <person externalid="tva:1749332089517" role="PRESENTER">
+          <person externalId="whatson:1749332089517" role="PRESENTER">
              <givenName>Farbod</givenName>
              <familyName>Moghaddam</familyName>
           </person>
-          <person externalid="tva:1387562339517" role="PRESENTER">
+          <person externalId="whatson:1387562339517" role="PRESENTER">
              <givenName>Filemon</givenName>
              <familyName>Wesselink</familyName>
           </person>
-          <person externalid="tva:1611254954517" role="PRESENTER">
+          <person externalId="whatson:1611254954517" role="PRESENTER">
              <givenName>Sophie</givenName>
              <familyName>Frankenmolen</familyName>
           </person>
-          <person externalid="tva:572100054517" role="PRESENTER">
+          <person externalId="whatson:572100054517" role="PRESENTER">
              <givenName>Yora</givenName>
              <familyName>Rienstra</familyName>
           </person>
@@ -2805,7 +2805,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H49M00S</duration>
        <credits>
-          <person externalid="tva:671759368517" role="PRESENTER">
+          <person externalId="whatson:671759368517" role="PRESENTER">
              <givenName>Matthijs</givenName>
              <familyName>van Nieuwkerk</familyName>
           </person>
@@ -2838,7 +2838,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
        <releaseYear>2020</releaseYear>
        <duration>PT00H48M34S</duration>
        <credits>
-          <person externalid="tva:671759368517" role="PRESENTER">
+          <person externalId="whatson:671759368517" role="PRESENTER">
              <givenName>Matthijs</givenName>
              <familyName>van Nieuwkerk</familyName>
           </person>
