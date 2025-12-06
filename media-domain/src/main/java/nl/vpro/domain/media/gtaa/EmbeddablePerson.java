@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.gtaa;
 
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serial;
@@ -18,6 +19,7 @@ import jakarta.persistence.Embeddable;
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
+@Setter
 @Embeddable
 @ToString(callSuper = true)
 public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializable {
@@ -46,7 +48,4 @@ public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializab
         return knownAs != null ? knownAs : false;
     }
 
-    public void setKnownAs(boolean knownAs) {
-        this.knownAs = knownAs;
-    }
 }
