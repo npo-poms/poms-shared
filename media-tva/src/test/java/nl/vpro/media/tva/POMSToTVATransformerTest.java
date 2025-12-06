@@ -21,8 +21,8 @@ import org.xml.sax.SAXException;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
 
+import static nl.vpro.domain.media.support.OwnerType.MIS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -39,12 +39,25 @@ public class POMSToTVATransformerTest {
     @Test
     public void toTVAAndBack() throws TransformerException, ParserConfigurationException, SAXException, IOException {
         MediaTable table = new MediaTable();
+        Group series = MediaTestDataBuilder.series()
+            .mid("series_1")
+            .mainTitle("series title", MIS)
+            .build();
+        Group season = MediaTestDataBuilder.series()
+            .mid("season_1")
+            .mainTitle("season title (ignored)", MIS)
+            .memberOf(series, 1)
+            .build();
+
+        table.addGroup(series, season);
+
         table.addProgram(MediaTestDataBuilder
-            .program()
-                .mid("mid_1")
-                .crids("tva:1")
-                .mainTitle("mis title", OwnerType.MIS)
-                .mainDescription("mis description", OwnerType.MIS)
+            .broadcast()
+            .mid("mid_1")
+            .crids("tva:1")
+            .mainTitle("mis season title", MIS)
+            .subTitle("mis episode title", MIS)
+            .mainDescription("mis description", MIS)
             .credits(Person.builder()
                 .givenName("Pietje")
                 .familyName("Puk")
@@ -52,11 +65,12 @@ public class POMSToTVATransformerTest {
                 .externalId("whatson:12345")
                 .build()
             )
-                .scheduleEvent(
-                    Channel.XXXX,
-                    Instant.now().truncatedTo(ChronoUnit.MINUTES),
-                    Duration.ofHours(1)
-                )
+            .scheduleEvent(
+                Channel.XXXX,
+                Instant.now().truncatedTo(ChronoUnit.MINUTES),
+                Duration.ofHours(1)
+            )
+            .episodeOf(season, 1)
             .build());
         table.setScheduleIfNeeded();
         StringWriter writer = new StringWriter();

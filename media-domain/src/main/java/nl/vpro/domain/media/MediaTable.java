@@ -102,12 +102,12 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         }
     }
 
-    public MediaTable addProgram(Program program) {
+    public MediaTable addProgram(Program... program) {
         if(programTable == null) {
             programTable = new ArrayList<>();
         }
 
-        programTable.add(program);
+        programTable.addAll(List.of(program));
         return this;
     }
 
@@ -231,12 +231,12 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         return programTable;
     }
 
-    public MediaTable addGroup(Group group) {
+    public MediaTable addGroup(Group... group) {
         if(groupTable == null) {
             groupTable = new ArrayList<>();
         }
 
-        groupTable.add(group);
+        groupTable.addAll(Arrays.asList(group));
         return this;
     }
 

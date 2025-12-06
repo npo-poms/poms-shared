@@ -2,12 +2,11 @@
 <xsl:stylesheet
   version="2.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns="urn:vpro:media:2009"
+  xmlns:media="urn:vpro:media:2009"
   xpath-default-namespace="urn:vpro:media:2009"
-  xmlns:tva="urn:tva:metadata:2004"
+  xmlns="urn:tva:metadata:2004"
   xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  exclude-result-prefixes="mpeg7 xsi">
+  exclude-result-prefixes="media">
 
   <!--
   XML that can produce the TVA XML back from poms data.
@@ -23,13 +22,13 @@
 
   <!-- root: map mediaInformation -> tva:TVAMain -->
   <xsl:template match="/mediaInformation">
-    <tva:TVAMain xmlns:tva="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001">
+    <TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001">
       <!-- ProgramDescription with ProgramInformationTable and ProgramLocationTable -->
-      <tva:ProgramDescription>
-        <tva:ProgramInformationTable>
+      <ProgramDescription>
+        <ProgramInformationTable>
           <!-- Map each poms program -> tva:ProgramInformation -->
           <xsl:for-each select="programTable/program">
-            <tva:ProgramInformation>
+            <ProgramInformation>
               <!-- programId from first crid child or mid attribute -->
               <xsl:attribute name="programId">
                 <xsl:choose>
@@ -43,26 +42,42 @@
               </xsl:attribute>
 
 
-              <tva:BasicDescription>
+              <BasicDescription>
                 <!-- main title -->
                 <xsl:for-each select="title[@type='MAIN' and @owner = 'MIS']">
-                  <tva:Title>
+                  <Title>
                     <xsl:attribute name="type">main</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
-                  </tva:Title>
+                  </Title>
+                </xsl:for-each>
+                <xsl:for-each select="title[@type='SUB' and @owner = 'MIS']">
+                  <Title>
+                    <xsl:attribute name="type">episodeTitle</xsl:attribute>
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </Title>
+                </xsl:for-each>
+                <xsl:for-each select="episodeOf[1]">
+                  <xsl:for-each select="memberOf[1]">
+                    <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
+                      <Title>
+                        <xsl:attribute name="type">parentSeriesTitle</xsl:attribute>
+                        <xsl:value-of select="normalize-space(title[@type='MAIN' and @owner = 'MIS'])"/>
+                      </Title>
+                    </xsl:for-each>
+                  </xsl:for-each>
                 </xsl:for-each>
 
                 <!-- original title -->
                 <xsl:for-each select="title[@type='ORIGINAL' and @owner = 'MIS']">
-                  <tva:Title>
+                  <Title>
                     <xsl:attribute name="type">translatedtitle</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
-                  </tva:Title>
+                  </Title>
                 </xsl:for-each>
 
                 <!-- descriptions -->
                 <xsl:for-each select="description[@owner = 'MIS']">
-                  <tva:Synopsis>
+                  <Synopsis>
                     <xsl:attribute name="length">
                       <xsl:choose>
                         <xsl:when test="@type='SHORT'">short</xsl:when>
@@ -71,35 +86,35 @@
                       </xsl:choose>
                     </xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
-                  </tva:Synopsis>
+                  </Synopsis>
                 </xsl:for-each>
 
                 <!-- other identifiers: map poProgID / poSeriesID -->
                 <xsl:for-each select="poProgID">
-                  <tva:OtherIdentifier>
+                  <OtherIdentifier>
                     <xsl:attribute name="type">ProductID</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
-                  </tva:OtherIdentifier>
+                  </OtherIdentifier>
                 </xsl:for-each>
                 <xsl:for-each select="poSeriesID">
-                  <tva:OtherIdentifier>
+                  <OtherIdentifier>
                     <xsl:attribute name="type">SeriesID</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
-                  </tva:OtherIdentifier>
+                  </OtherIdentifier>
                 </xsl:for-each>
 
                 <!-- simple genre mapping: create tva:Genre entries using poms genre ids -->
                 <xsl:for-each select="genre">
-                  <tva:Genre>
+                  <Genre>
                     <xsl:attribute name="href">
                       <xsl:value-of select="concat('urn:tva:metadata:cs:2004:', normalize-space(.))"/>
                     </xsl:attribute>
-                    <tva:Name><xsl:value-of select="normalize-space(.)"/></tva:Name>
-                  </tva:Genre>
+                    <Name><xsl:value-of select="normalize-space(.)"/></Name>
+                  </Genre>
                 </xsl:for-each>
-                <tva:CreditsList>
+                <CreditsList>
                   <xsl:for-each select="credits/person[@externalId != '']">
-                    <tva:CreditsItem>
+                    <CreditsItem>
                       <xsl:attribute name="role">
                         <xsl:call-template name="roles">
                           <xsl:with-param name="id">
@@ -107,21 +122,22 @@
                           </xsl:with-param>
                         </xsl:call-template>
                       </xsl:attribute>
-                      <tva:PersonNameIDRef ref="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}"/>
-                    </tva:CreditsItem>
+                      <PersonNameIDRef ref="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}"/>
+                    </CreditsItem>
                   </xsl:for-each>
-                </tva:CreditsList>
+                </CreditsList>
 
 
-              </tva:BasicDescription>
-            </tva:ProgramInformation>
+              </BasicDescription>
+            </ProgramInformation>
           </xsl:for-each>
-        </tva:ProgramInformationTable>
+        </ProgramInformationTable>
+        <GroupInformationTable /> <!-- seems useful, but unused -? -->
 
         <!-- ProgramLocationTable / Schedule: aggregate schedules from poms:schedule -->
-        <tva:ProgramLocationTable>
+        <ProgramLocationTable>
           <xsl:for-each select="/mediaInformation/schedule">
-            <tva:Schedule>
+            <Schedule>
               <!-- map attributes -->
               <xsl:if test="@start"><xsl:attribute name="start"><xsl:value-of select="@start"/></xsl:attribute></xsl:if>
               <xsl:if test="@stop"><xsl:attribute name="end"><xsl:value-of select="@stop"/></xsl:attribute></xsl:if>
@@ -131,53 +147,64 @@
               <xsl:for-each select="scheduleEvent">
                 <xsl:variable name="mid"><xsl:value-of select="@midRef" /></xsl:variable>
                 <xsl:variable name="crid"><xsl:value-of select="/mediaInformation/programTable/program[@mid=$mid]/crid[1]" /></xsl:variable>
+
               <!-- each scheduleEvent -->
-                <tva:ScheduleEvent>
-                  <tva:Program crid="{$crid}" />
+                <ScheduleEvent>
+                  <Program crid="{$crid}" />
 
                   <!-- start/stop/duration -->
-                  <xsl:if test="start"><tva:PublishedStartTime><xsl:value-of select="start"/></tva:PublishedStartTime></xsl:if>
-                  <xsl:if test="duration"><tva:PublishedDuration><xsl:value-of select="duration"/></tva:PublishedDuration></xsl:if>
+                  <xsl:if test="start"><PublishedStartTime><xsl:value-of select="start"/></PublishedStartTime></xsl:if>
+                  <xsl:if test="duration"><PublishedDuration><xsl:value-of select="duration"/></PublishedDuration></xsl:if>
 
                   <!-- identifiers inside ScheduleEvent -->
                   <xsl:for-each select="poProgID">
-                    <tva:OtherIdentifier>
+                    <OtherIdentifier>
                       <xsl:attribute name="type">ProductID</xsl:attribute>
                       <xsl:value-of select="normalize-space(.)"/>
-                    </tva:OtherIdentifier>
+                    </OtherIdentifier>
                   </xsl:for-each>
                   <xsl:for-each select="poSeriesID">
-                    <tva:OtherIdentifier>
+                    <OtherIdentifier>
                       <xsl:attribute name="type">SeriesID</xsl:attribute>
                       <xsl:value-of select="normalize-space(.)"/>
-                    </tva:OtherIdentifier>
+                    </OtherIdentifier>
                   </xsl:for-each>
-
-                </tva:ScheduleEvent>
+                  <xsl:for-each select="/mediaInformation/programTable/program[@mid=$mid]/episodeOf[1]">
+                    <OtherIdentifier>
+                      <xsl:attribute name="type">SeriesID</xsl:attribute>
+                      <xsl:value-of select="normalize-space(@midRef)"/>
+                    </OtherIdentifier>
+                    <xsl:for-each select="memberOf[1]">
+                      <OtherIdentifier>
+                        <xsl:attribute name="type">ParentSeriesID</xsl:attribute>
+                        <xsl:value-of select="normalize-space(@midRef)"/>
+                      </OtherIdentifier>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </ScheduleEvent>
               </xsl:for-each>
-
-            </tva:Schedule>
+            </Schedule>
           </xsl:for-each>
-        </tva:ProgramLocationTable>
-        <tva:CreditsInformationTable>
+        </ProgramLocationTable>
+
+        <CreditsInformationTable>
           <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person" group-by="@externalId">
             <xsl:if test="starts-with(@externalId, $personExternalIdPrefix)">
-
               <xsl:for-each select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]">
-                <tva:PersonName personNameId="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}">
+                <PersonName personNameId="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}">
                   <mpeg7:GivenName xml:lang="NL" initial="">
                     <xsl:value-of select="givenName" />
                   </mpeg7:GivenName>
                   <mpeg7:FamilyName xml:lang="NL">
                     <xsl:value-of select="familyName" />
                   </mpeg7:FamilyName>
-                </tva:PersonName>
+                </PersonName>
               </xsl:for-each>
             </xsl:if>
           </xsl:for-each-group>
-        </tva:CreditsInformationTable>
-      </tva:ProgramDescription>
-    </tva:TVAMain>
+        </CreditsInformationTable>
+      </ProgramDescription>
+    </TVAMain>
   </xsl:template>
 
 
