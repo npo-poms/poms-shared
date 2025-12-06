@@ -1064,7 +1064,8 @@ public class MediaObjectJsonSchemaTest {
                 "objectType" : "person",
                 "givenName" : "Hans",
                 "familyName" : "Goedkoop",
-                "role" : "PRESENTER"
+                "role" : "PRESENTER",
+                "externalId" : "whatson:12345"
               }, {
                 "objectType" : "person",
                 "givenName" : "Meta",
