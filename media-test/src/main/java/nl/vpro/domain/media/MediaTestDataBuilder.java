@@ -514,6 +514,7 @@ public interface MediaTestDataBuilder<
                 .givenName("Hans")
                 .familyName("Goedkoop")
                 .role(RoleType.PRESENTER)
+                .externalId("whatson:12345")
                 .build(),
             Person.builder()
                 .givenName("Meta")
