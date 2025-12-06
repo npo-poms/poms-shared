@@ -151,6 +151,21 @@ public class Person extends Credits implements PersonInterface {
         }
     }
 
+    @Override
+    public void fillFrom(Credits credits) {
+        super.fillFrom(credits);
+        if (credits instanceof Person person) {
+            this.givenName = person.givenName;
+            this.familyName = person.familyName;
+            this.externalId = person.externalId;
+            if (person.getGtaaInfo() != null) {
+                this.setGtaaKnownAs(person.getGtaaKnownAs());
+                this.setGtaaStatus(person.getGtaaStatus());
+                this.setGtaaUri(person.getGtaaUri());
+            }
+        }
+    }
+
     /**
      * Sets both the given name and the family name by splitting the String on a comma.
      */
