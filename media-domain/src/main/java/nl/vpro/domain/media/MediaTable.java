@@ -373,10 +373,10 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         if (!(o instanceof MediaTable table)) return false;
 
         return
-            Objects.equals(programTable, table.programTable) &&
-                Objects.equals(groupTable, table.groupTable) &&
+            Objects.equals(getProgramTable(), table.getProgramTable()) &&
+                Objects.equals(getGroupTable(), table.getGroupTable()) &&
                 Objects.equals(locationTable, table.locationTable) &&
-                Objects.equals(schedule, table.schedule) &&
+                Objects.equals(getSchedule(), table.getSchedule()) &&
                 Objects.equals(publicationTime, table.publicationTime) &&
                 Objects.equals(publisher, table.publisher) &&
                 Objects.equals(version, table.version) &&
@@ -385,10 +385,10 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(programTable);
-        result = 31 * result + Objects.hashCode(groupTable);
+        int result = Objects.hashCode(getProgramTable());
+        result = 31 * result + Objects.hashCode(getGroupTable());
         result = 31 * result + Objects.hashCode(locationTable);
-        result = 31 * result + Objects.hashCode(schedule);
+        result = 31 * result + Objects.hashCode(getSchedule());
         result = 31 * result + Objects.hashCode(publicationTime);
         result = 31 * result + Objects.hashCode(publisher);
         result = 31 * result + Objects.hashCode(version);
