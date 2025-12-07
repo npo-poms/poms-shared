@@ -57,6 +57,12 @@
                   </Title>
                 </xsl:for-each>
                 <xsl:for-each select="episodeOf[1]">
+               <!--   <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
+                    <Title>
+                      <xsl:attribute name="type">main</xsl:attribute>
+                      <xsl:value-of select="normalize-space(title[@type='MAIN' and @owner = 'MIS'])"/>
+                    </Title>
+                  </xsl:for-each>-->
                   <xsl:for-each select="memberOf[1]">
                     <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
                       <Title>
