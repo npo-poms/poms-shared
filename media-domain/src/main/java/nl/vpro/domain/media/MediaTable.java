@@ -91,15 +91,17 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     /**
      * @since 5.9
      */
-    public MediaTable add(MediaObject mo) {
-        if (mo instanceof Program program) {
-            return addProgram(program);
-        } else if (mo instanceof Group group) {
-            return addGroup(group);
-        } else {
-            log.warn("Could not add {}", mo);
-            return this;
+    public MediaTable add(MediaObject... mos) {
+        for (MediaObject mo : mos) {
+            if (mo instanceof Program program) {
+                addProgram(program);
+            } else if (mo instanceof Group group) {
+                addGroup(group);
+            } else {
+                log.warn("Could not add {}", mo);
+            }
         }
+        return this;
     }
 
     public MediaTable addProgram(Program... program) {
