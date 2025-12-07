@@ -76,9 +76,13 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         }
     }
 
-    public void fillFrom(Credits person) {
-        this.id = person.id;
-        this.role = person.role;
+    /**
+     * Copies all field (besides {@link #id} from parameter.
+     * @param credits The object to copy the information from
+     * @since 8.12
+     */
+    public void fillFrom(Credits credits) {
+        this.role = credits.role;
     }
 
 
