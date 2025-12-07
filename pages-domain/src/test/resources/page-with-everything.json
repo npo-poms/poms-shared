@@ -1172,7 +1172,8 @@
           "givenName" : "Hans",
           "familyName" : "Goedkoop",
           "role" : "PRESENTER",
-          "name" : "Goedkoop, Hans"
+          "name" : "Goedkoop, Hans",
+          "externalId" : "whatson:12345"
         }, {
           "objectType" : "person",
           "givenName" : "Meta",
@@ -1213,7 +1214,8 @@
         "givenName" : "Hans",
         "familyName" : "Goedkoop",
         "role" : "PRESENTER",
-        "name" : "Goedkoop, Hans"
+        "name" : "Goedkoop, Hans",
+        "externalId" : "whatson:12345"
       }, {
         "objectType" : "person",
         "givenName" : "Meta",
