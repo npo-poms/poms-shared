@@ -1,22 +1,21 @@
 package nl.vpro.media.tva;
 
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import net.sf.saxon.TransformerFactoryImpl;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.om.Sequence;
-import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.value.StringValue;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.Result;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import jakarta.validation.ConstraintViolation;
@@ -46,6 +45,7 @@ import nl.vpro.validation.ValidationLevel;
 
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
 import static nl.vpro.media.tva.Constants.*;
+import static nl.vpro.media.tva.Transform.tvaToMediaTable;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.meeuw.i18n.languages.ISO_639_1_Code.cs;
@@ -75,6 +75,7 @@ public class TVATransformerTest {
     @AfterEach
     public void init() {
         appender.clear();
+        Transform.setTVAConfiguration(SAXON_CONFIGURATION);
         genreFunction.setNotFound(NotFound.FATAL);
         genreFunction.setMatchOnValuePrefix("");
         genreFunction.setIgnore(Set.of());
@@ -82,9 +83,9 @@ public class TVATransformerTest {
 
 
     @Test
-    public void transform() throws TransformerException, ParserConfigurationException, SAXException, IOException {
+    public void basicTransform() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         genreFunction.setNotFound(NotFound.ASIS);
-        String xml = transform("pd/pd/NED320150805P.xml");
+        String xml = transform("pd/pd/NED320150805P.xml", Map.of());
         similar(xml,
             """
                 <?xml version="1.0" encoding="UTF-8"?>
@@ -192,13 +193,13 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void transform_MSE_4907() throws TransformerException, ParserConfigurationException, SAXException, IOException {
+    public void transform_MSE_4907() throws TransformerException, ParserConfigurationException, SAXException {
         String xml = transform("pd/pd/NED320200220P.xml");
         similar(xml, getClass().getResourceAsStream("/pd/pd/NED320200220P.mediatable.xml"));
     }
 
     @Test
-    public void unmarshalAfterUnmarshal() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void unmarshalAfterUnmarshal() throws ParserConfigurationException, SAXException, TransformerException {
         MediaTable table = JAXB.unmarshal(new StringReader(transform("pd/pd/NED320150805P.xml")), MediaTable.class);
         validate(table);
 
@@ -235,14 +236,14 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void regional() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void regional() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/OZEE20150914P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         validate(table);
     }
 
     @Test
-    public void oddDate () throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void oddDate () throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220150915P.xml");
 
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -250,7 +251,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void moreSeasons() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void moreSeasons() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220150919P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -261,7 +262,7 @@ public class TVATransformerTest {
 
     }
     @Test
-    public void email() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void email() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220150919P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -283,7 +284,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void withHtml() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void withHtml() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/OFRY20150921P.xml"); // This acually came in on dev and didn't work.
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -292,7 +293,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void oddLanguageJw() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void oddLanguageJw() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/HOLL20151005P.xml"); // This actually came in on dev and didn't work.
         // the odd language
         //System.out.println(xml);
@@ -306,7 +307,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void oddLanguageSH() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void oddLanguageSH() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220231027P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -317,7 +318,7 @@ public class TVATransformerTest {
 
     @Test
     @Disabled("Some xml's simply do not validate")
-    public void MSE_3144() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3144() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/MSE-3144/NED220160223P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -327,7 +328,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3144_1() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3144_1() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/MSE-3144/NED320160221P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -337,7 +338,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3153() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3153() throws ParserConfigurationException, SAXException, TransformerException {
         // Het koepelprogramma KN_1676556 krijgt geen Seizoen
         String xml = transform("pd/pd/MSE-3153/NED320160104P.xml");
         //System.out.println(xml);
@@ -352,7 +353,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void schedule() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void schedule() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/OZEE20150914P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -366,7 +367,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3202() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3202() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/BRAB20160317P.xml");
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -385,7 +386,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void MSE_3273() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3273() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/MSE-3273/NED320160704P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -403,7 +404,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3454_And_LanguageCode_XX_ZZ() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_3454_And_LanguageCode_XX_ZZ() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/MSE-3454/NED320160920P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (Program program: table.getProgramTable()) {
@@ -424,7 +425,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void missingCrids() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void missingCrids() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED320160711P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (MediaObject mediaObject : table.getProgramTable()) {
@@ -433,7 +434,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_4581() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_4581() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED320190715P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         MediaObject example = table.find("VPWON_1307584").orElseThrow(IllegalArgumentException::new);
@@ -558,7 +559,7 @@ public class TVATransformerTest {
         "NED120210310P.xml",
         "NED320190902P.xml" //  MSE_4593
          })
-    public void MSE_5051_newgenres(String source) throws ParserConfigurationException, TransformerException, SAXException, IOException {
+    public void MSE_5051_newgenres(String source) throws ParserConfigurationException, TransformerException, SAXException {
         String xml = transform("pd/pd/" + source);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (Program p : table.getProgramTable()) {
@@ -579,7 +580,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5159_htmlInTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+    public void MSE_5159_htmlInTitle() throws ParserConfigurationException, TransformerException, SAXException {
         String xml = transform("pd/pd/CULT20211016P.xml");
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -598,7 +599,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void MSE_5213() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_5213() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NORH20220204P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -609,7 +610,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5290_series_genres() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_5290_series_genres() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220211017P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -630,7 +631,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5303_translatedTitle() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_5303_translatedTitle() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED320220729P.xml");
         log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -647,7 +648,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void _101schedule() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+    public void _101schedule() throws ParserConfigurationException, TransformerException, SAXException {
         String xml = transform("pd/pd/101_20240714P.xml");
         log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -670,31 +671,31 @@ public class TVATransformerTest {
 
         Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
 
-        String xml = transform(resource, (transformer) -> {
-            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
-            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
-            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
-            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
-            }
-        );
+        String xml = transform(resource,Map.of(
+            XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/",
+            XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue(),
+            XSL_PARAM_LONGDESCRIPTIONS, "true",
+            XSL_PARAM_CHANNELMAPPING, channelMapping
+        ));
         return xml;
 
     }
 
 
-    static TransformerFactoryImpl FACTORY = new TransformerFactoryImpl();
+
 
     private static final Set<Net> KNOWN_NETS = new HashSet<>(Arrays.asList(new Net("ZAPP", "Z@PP"), new Net("ZAPPELIN", "Zappelin")));
+    static final SaxonConfiguration SAXON_CONFIGURATION;
     static {
-        SaxonConfiguration configuration = new SaxonConfiguration();
-        configuration.setExtensions(Arrays.asList(
+        SAXON_CONFIGURATION = new SaxonConfiguration();
+        SAXON_CONFIGURATION.setExtensions(Arrays.asList(
             new FindBroadcasterFunction(null) {
                 @Override
                 public ExtensionFunctionCall makeCallExpression() {
                     return new ExtensionFunctionCall() {
                         @SuppressWarnings("resource")
                         @Override
-                        public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
+                        public Sequence call(XPathContext context, Sequence[] arguments) {
                             String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase().replaceAll("\\s+", "_");
                             switch (value) {
                                 case "AVROTROS" -> value = "AVTR";
@@ -717,51 +718,31 @@ public class TVATransformerTest {
             new ValidValueFunction()
             )
         );
-        FACTORY.setConfiguration(configuration);
+
     }
 
-    private static String transform(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        return transform(resource, (t) -> {});
-    }
-
-    static String transform(InputStream resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    static String transform(InputStream resource, Map<String, Object> parameters) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
-        getTransformer(configure).transform(new StreamSource(resource), result);
+        tvaToMediaTable(parameters).transform(new StreamSource(resource), result);
         return out.toString(StandardCharsets.UTF_8);
     }
 
-    private static String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    private static String  transform(String resource, Map<String, Object> parameters) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         if (input == null) {
             throw new IllegalArgumentException("Could not find " + resource);
         }
-        return transform(input, configure);
+        return transform(input, parameters);
+    }
+    @SneakyThrows
+    private static String  transform(String resource)  {
+        return transform(resource, Collections.emptyMap());
     }
 
 
 
-    private static synchronized Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
 
-        Transformer transformer = getTransformer("/nl/vpro/media/tva/tvaTransformer.xsl");
-        transformer.setParameter(
-            XSL_PARAM_CHANNELMAPPING,
-            createChannelMapping(Constants.ChannelIdType.PD));
-        transformer.setParameter(
-            XSL_PARAM_WORKFLOW,
-            Workflow.FOR_REPUBLICATION.getXmlValue()
-        );
-        configure.accept(transformer);
-        return transformer;
-    }
-
-    static Transformer getTransformer(String resource) throws TransformerConfigurationException {
-        StreamSource stylesource = new StreamSource(TVATransformerTest.class.getResourceAsStream(resource));
-        Transformer transformer = FACTORY.newTransformer(stylesource);
-
-        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        return transformer;
-    }
 
     private void validate(MediaTable o) {
         Validator validator = Validation.getValidator();

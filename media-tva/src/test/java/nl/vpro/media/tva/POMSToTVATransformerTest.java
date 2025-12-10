@@ -6,13 +6,13 @@ import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.function.Consumer;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.Result;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.JAXBException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,10 +34,11 @@ public class POMSToTVATransformerTest {
     @BeforeAll
     public static void initAll() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
+        Transform.setTVAConfiguration(TVATransformerTest.SAXON_CONFIGURATION);
     }
 
     @Test
-    public void toTVAAndBack() throws TransformerException, ParserConfigurationException, SAXException, IOException {
+    public void toTVAAndBack() throws TransformerException, ParserConfigurationException, SAXException, IOException, JAXBException {
         MediaTable table = new MediaTable();
         Group series = MediaTestDataBuilder
             .series()
@@ -75,14 +76,13 @@ public class POMSToTVATransformerTest {
 
         table.add(season, series, broadcast); // order (sadly) matters
         table.setScheduleIfNeeded();
-        StringWriter writer = new StringWriter();
-        JAXB.marshal(table, writer);
-        String transform = transform(new ByteArrayInputStream(writer.toString().getBytes(UTF_8)), (c) -> {
-        });
-        log.info(writer + "\n" + transform);
-        var rounded = TVATransformerTest.transform(new ByteArrayInputStream(transform.getBytes(UTF_8)), (t)->{});
 
-        var roundedObject = JAXB.unmarshal(new ByteArrayInputStream(rounded.getBytes(UTF_8)), MediaTable.class);
+        StringWriter writer = new StringWriter();
+        Result result = new StreamResult(writer);
+        Transform.toTVA(table, result);
+
+        log.info(writer);
+        var roundedObject = Transform.toMediaTable(new ByteArrayInputStream(writer.toString().getBytes(UTF_8)), Map.of());
 
         assertThat(roundedObject.find("mid_1")).contains(broadcast);
         assertThat(roundedObject.find("series_1")).contains(series);
@@ -92,31 +92,7 @@ public class POMSToTVATransformerTest {
     }
 
 
-    private String transform(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        return transform(resource, (t) -> {});
-    }
 
-    private String transform(InputStream resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Result result = new StreamResult(out);
-        getTransformer(configure).transform(new StreamSource(resource), result);
-        return out.toString(UTF_8);
-    }
-
-    private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
-        InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-        if (input == null) {
-            throw new IllegalArgumentException("Could not find " + resource);
-        }
-        return transform(input, configure);
-    }
-
-
-    private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
-        Transformer transformer = TVATransformerTest.getTransformer("/nl/vpro/media/tva/pomsToTVATransformer.xsl");
-        configure.accept(transformer);
-        return transformer;
-    }
 
 
 }
