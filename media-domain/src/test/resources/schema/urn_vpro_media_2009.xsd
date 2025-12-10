@@ -1112,13 +1112,13 @@
 
   <xs:simpleType name="ageRating">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="ALL"/>
       <xs:enumeration value="6"/>
       <xs:enumeration value="9"/>
       <xs:enumeration value="12"/>
       <xs:enumeration value="14"/>
       <xs:enumeration value="16"/>
       <xs:enumeration value="18"/>
-      <xs:enumeration value="ALL"/>
       <xs:enumeration value="NOT_YET_RATED"/>
     </xs:restriction>
   </xs:simpleType>

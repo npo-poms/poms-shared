@@ -464,6 +464,7 @@
 
   <xs:simpleType name="targetGroupEnum">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="EVERYONE"/>
       <xs:enumeration value="KIDS_6"/>
       <xs:enumeration value="KIDS_9"/>
       <xs:enumeration value="KIDS_12"/>
@@ -473,7 +474,6 @@
       <xs:enumeration value="ADULTS"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
-      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 

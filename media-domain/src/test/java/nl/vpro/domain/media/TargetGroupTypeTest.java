@@ -23,7 +23,7 @@ class TargetGroupTypeTest {
             "ADULTS:[ALL, _12, _14, _16, _6, _9]",
             "ADULTS_WITH_KIDS_6:[ALL, _12, _14, _16, _6, _9]",
             "ADULTS_WITH_KIDS_12:[ALL, _12, _14, _16, _6, _9]",
-            "EVERYONE:[ALL, _12, _14, _16, _6, _9]"
+            "EVERYONE:[ALL]"
         );
 
     }
