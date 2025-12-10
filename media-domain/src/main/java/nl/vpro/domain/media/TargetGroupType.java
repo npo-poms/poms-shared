@@ -18,7 +18,7 @@ import nl.vpro.i18n.Displayable;
 @XmlType(name = "targetGroupEnum")
 public enum TargetGroupType implements Displayable {
 
-    KIDS_6("Kinderen tot 6 jaar", Set.of(AgeRating.ALL)),
+    KIDS_6("Kinderen tot 6 jaar", EnumSet.of(AgeRating.ALL)),
 
     /**
      * @since 8.10
