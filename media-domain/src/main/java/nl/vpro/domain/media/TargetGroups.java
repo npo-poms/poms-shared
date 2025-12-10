@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.*;
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
 
+/**
+ * Collects, for a certain {@link OwnerType owner}, a list of {@link TargetGroup target groups}, which are connected to a {@link MediaObject media object}.
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupsType")

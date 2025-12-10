@@ -18,6 +18,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 
+
+/**
+ * Represents one target group {@link TargetGroupType} in a {@link TargetGroups} list.
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupType")

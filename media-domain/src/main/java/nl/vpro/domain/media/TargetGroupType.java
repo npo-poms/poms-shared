@@ -10,6 +10,9 @@ import jakarta.xml.bind.annotation.XmlType;
 import nl.vpro.i18n.Displayable;
 
 
+/**
+ * Used as a value in {@link TargetGroup#value}.
+ */
 @XmlEnum
 @XmlType(name = "targetGroupEnum")
 public enum TargetGroupType implements Displayable {
@@ -54,8 +57,9 @@ public enum TargetGroupType implements Displayable {
         this.displayName = displayName;
         this.ageRatings = ageRatings;
     }
-   @Override
-   public String toString() {
+
+    @Override
+    public String toString() {
         return getDisplayName();
     }
 }
