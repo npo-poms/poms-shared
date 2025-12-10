@@ -158,7 +158,7 @@
               <xsl:if test="@channel"><xsl:attribute name="serviceIDRef"><xsl:value-of select="@channel"/></xsl:attribute></xsl:if>
 
 
-              <xsl:for-each select="scheduleEvent">
+              <xsl:for-each-group select="scheduleEvent" group-by="@midRef">
                 <xsl:variable name="mid"><xsl:value-of select="@midRef" /></xsl:variable>
                 <xsl:variable name="crid"><xsl:value-of select="/mediaInformation/programTable/program[@mid=$mid]/crid[1]" /></xsl:variable>
 
@@ -196,7 +196,7 @@
                     </xsl:for-each-group>
                   </xsl:for-each-group>
                 </ScheduleEvent>
-              </xsl:for-each>
+              </xsl:for-each-group>
             </Schedule>
           </xsl:for-each>
         </ProgramLocationTable>
