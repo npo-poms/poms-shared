@@ -123,6 +123,29 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         return this;
     }
 
+    public MediaTable fillFrom(Schedule schedule) {
+        this.schedule = schedule;
+        schedule.getScheduleEvents().forEach(e -> {
+            addProgram(e.getParent());
+            for (MemberRef g : e.getParent().getEpisodeOf()) {
+                if (g.getGroup() instanceof Group group) {
+                    if (group.getType() == GroupType.SERIES) {
+                        addGroup(group);
+                    } else if (group.getType() == GroupType.SEASON) {
+                        addGroup(group);
+                        for (MemberRef gg : group.getMemberOf()) {
+                            if (gg.getGroup() instanceof Group series && series.getType() == GroupType.SERIES) {
+                                addGroup(series);
+                            }
+                        }
+                    }
+                }
+
+            }
+        });
+        return this;
+    }
+
     /**
      * Searches the mediaobject with given mid in the table. This may return a {@link Program}, {@link Group}, or {@link Segment}
      */
