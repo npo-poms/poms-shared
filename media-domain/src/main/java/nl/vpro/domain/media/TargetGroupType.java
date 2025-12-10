@@ -41,7 +41,7 @@ public enum TargetGroupType implements Displayable {
     ADULTS("Volwassenen", EnumSet.range(AgeRating.ALL, AgeRating._16)),
     ADULTS_WITH_KIDS_6( "Volwassenen met kinderen 0-6 jaar", EnumSet.range(AgeRating.ALL, AgeRating._16)),
     ADULTS_WITH_KIDS_12("Volwassenen met kinderen 6-12 jaar", EnumSet.range(AgeRating.ALL,  AgeRating._16)),
-    EVERYONE("Iedereen", EnumSet.range(AgeRating.ALL,  AgeRating._16))
+    EVERYONE("Iedereen", EnumSet.of(AgeRating.ALL))
     ;
 
     @Getter
