@@ -23,6 +23,12 @@
   <!-- root: map mediaInformation -> tva:TVAMain -->
   <xsl:template match="/mediaInformation">
     <TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001">
+      <xsl:comment>
+        This is experimental since poms 8.12.
+        It is produced from POMS MediaTable XML (see https://poms.omroep.nl/schema/vproMedia.xsd).
+
+        It is mainly used to generate test data for the integration tests.
+      </xsl:comment>
       <!-- ProgramDescription with ProgramInformationTable and ProgramLocationTable -->
       <ProgramDescription>
         <ProgramInformationTable>
@@ -82,19 +88,21 @@
                 </xsl:for-each>
 
                 <!-- descriptions -->
-                <xsl:for-each select="description[@owner = 'MIS']">
-                  <Synopsis>
-                    <xsl:attribute name="length">
-                      <xsl:choose>
-                        <xsl:when test="@type='SHORT'">short</xsl:when>
-                        <xsl:when test="@type='LONG'">long</xsl:when>
-                        <xsl:otherwise>medium</xsl:otherwise>
-                      </xsl:choose>
-                    </xsl:attribute>
+                <xsl:for-each select="description[@owner = 'MIS' and @type='SHORT']">
+                  <Synopsis length="short">
                     <xsl:value-of select="normalize-space(.)"/>
                   </Synopsis>
                 </xsl:for-each>
-
+                <xsl:for-each select="description[@owner = 'MIS' and @type='LONG']">
+                  <Synopsis length="long">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </Synopsis>
+                </xsl:for-each>
+                <xsl:for-each select="description[@owner = 'MIS' and @type='MAIN']">
+                  <Synopsis length="medium">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </Synopsis>
+                </xsl:for-each>
                 <!-- other identifiers: map poProgID / poSeriesID -->
                 <xsl:for-each select="poProgID">
                   <OtherIdentifier>
