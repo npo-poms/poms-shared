@@ -154,7 +154,7 @@
                 <xsl:variable name="mid"><xsl:value-of select="@midRef" /></xsl:variable>
                 <xsl:variable name="crid"><xsl:value-of select="/mediaInformation/programTable/program[@mid=$mid]/crid[1]" /></xsl:variable>
 
-              <!-- each scheduleEvent -->
+                <!-- each scheduleEvent -->
                 <ScheduleEvent>
                   <Program crid="{$crid}" />
 
@@ -175,18 +175,18 @@
                       <xsl:value-of select="normalize-space(.)"/>
                     </OtherIdentifier>
                   </xsl:for-each>
-                  <xsl:for-each select="/mediaInformation/programTable/program[@mid=$mid]/episodeOf[1]">
+                  <xsl:for-each-group select="/mediaInformation/programTable/program[@mid=$mid]/episodeOf[1]" group-by="@midRef">
                     <OtherIdentifier>
                       <xsl:attribute name="type">SeriesID</xsl:attribute>
                       <xsl:value-of select="normalize-space(@midRef)"/>
                     </OtherIdentifier>
-                    <xsl:for-each select="memberOf[1]">
+                    <xsl:for-each-group select="memberOf[@type='SERIES'][1]" group-by="@midRef">
                       <OtherIdentifier>
                         <xsl:attribute name="type">ParentSeriesID</xsl:attribute>
                         <xsl:value-of select="normalize-space(@midRef)"/>
                       </OtherIdentifier>
-                    </xsl:for-each>
-                  </xsl:for-each>
+                    </xsl:for-each-group>
+                  </xsl:for-each-group>
                 </ScheduleEvent>
               </xsl:for-each>
             </Schedule>
