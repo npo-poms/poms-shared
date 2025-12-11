@@ -92,6 +92,38 @@ jobs:
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
+  branch:
+    runs-on: ubuntu-latest
+    environment: branch-main
+    if: github.ref == 'refs/heads/main'
+    env:
+      MAVEN_ARGS: '--no-transfer-progress'
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          global: true
+          name: 'github $GITHUB_ACTOR'
+          email: 'github@mmprogrami.nl'
+          token: '${{ secrets.GITHUB_TOKEN  }}'
+      - name: Release branch with Maven
+        # We are in a kind of hybrid situation
+        # For main we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
+        # For release branches this is overridden by the release:branch plugin
+        run: |
+          VERSION=`mvn -B help:evaluate -Dexpression=project.version -q -DforceStdout`
+          RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+          REVISION=`mvn -B help:evaluate -Dexpression=revision -q -DforceStdout`
+          DEVELOPMENT_REVISION=`echo $REVISION | gawk 'match($1, /([0-9]+)\.([0-9]+)/, a) {print a[1]"."(a[2]+1)}'`
+          BRANCH=REL-$VERSION
+          git checkout -b  $BRANCH
+          mvn -DnewVersion=$RELEASE_VERSION versions:set
+          git commit -am "Updated version to ${RELEASE_VERSION} for release branch"
+          git push origin $BRANCH
+          git checkout main
+          mvn -B versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
+          git commit -am "Updated revision to ${DEVELOPMENT_REVISION} for next development iteration"
+          git push origin main
   release:
     needs: build
     runs-on: ubuntu-latest
