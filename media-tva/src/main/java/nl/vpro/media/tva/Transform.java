@@ -5,6 +5,7 @@ import net.sf.saxon.TransformerFactoryImpl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
@@ -37,24 +38,32 @@ public class Transform {
     static boolean tvaFactoryConfigured = false;
     static final TransformerFactoryImpl MEDIATABLE_FACTORY = new TransformerFactoryImpl();
 
-    static Transformer mediaTableToTva;
+    // Cached compiled templates
+    private static Templates TVA_TEMPLATES;
+    private static Templates MEDIATABLE_TEMPLATES;
 
-    public static synchronized Transformer tvaToMediaTable(Map<String, Object> parameters) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+    // Cached JAXBContext
+    private static JAXBContext MEDIA_TABLE_CONTEXT;
+
+    public static Transformer tvaToMediaTable(Map<String, Object> parameters) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
         if (! tvaFactoryConfigured) {
             throw new IllegalStateException("No SaxonConfiguration set. Please call setTVAConfiguration first.");
         }
-        final Transformer tvaToMediaTable = getTransformer(TVA_FACTORY, "/nl/vpro/media/tva/tvaTransformer.xsl");
-        tvaToMediaTable.setParameter(
+        ensureTVATemplates();
+
+        Transformer transformer = TVA_TEMPLATES.newTransformer();
+        transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
             createChannelMapping(Constants.ChannelIdType.PD));
-        tvaToMediaTable.setParameter(
+        transformer.setParameter(
             XSL_PARAM_WORKFLOW,
             Workflow.FOR_REPUBLICATION.getXmlValue()
         );
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-            tvaToMediaTable.setParameter(entry.getKey(), entry.getValue());
+            transformer.setParameter(entry.getKey(), entry.getValue());
         }
-        return tvaToMediaTable;
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        return transformer;
     }
 
     public static void setTVAConfiguration(SaxonConfiguration configuration) {
@@ -71,11 +80,11 @@ public class Transform {
         return toMediaTable(input, Map.of());
     }
 
-    public static synchronized Transformer mediaTableToTVA() throws TransformerConfigurationException {
-        if (mediaTableToTva == null) {
-            mediaTableToTva = getTransformer(MEDIATABLE_FACTORY, "/nl/vpro/media/tva/pomsToTVATransformer.xsl");
-        }
-        return  mediaTableToTva;
+    public static Transformer mediaTableToTVA() throws TransformerConfigurationException {
+        ensureMediaTableTemplates();
+        Transformer transformer = MEDIATABLE_TEMPLATES.newTransformer();
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        return  transformer;
     }
 
     public static void toTVA(MediaTable mediaTable, Result result) throws JAXBException, TransformerException {
@@ -86,8 +95,46 @@ public class Transform {
     private static Transformer getTransformer(TransformerFactoryImpl factory, String resource) throws TransformerConfigurationException {
         StreamSource stylesource = new StreamSource(Transform.class.getResourceAsStream(resource));
         Transformer transformer = factory.newTransformer(stylesource);
+
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         return transformer;
+    }
+
+
+
+    private static synchronized void ensureTVATemplates() throws TransformerConfigurationException {
+        if (TVA_TEMPLATES != null) {
+            return;
+        }
+        synchronized (Transform.class) {
+            if (TVA_TEMPLATES == null) {
+                try (InputStream is = Transform.class.getResourceAsStream("/nl/vpro/media/tva/tvaTransformer.xsl")) {
+                    Objects.requireNonNull(is, "Resource not found: /nl/vpro/media/tva/tvaTransformer.xsl");
+                    StreamSource stylesource = new StreamSource(is);
+                    TVA_TEMPLATES = TVA_FACTORY.newTemplates(stylesource);
+                } catch (IOException e) {
+                    // IOException won't actually be thrown by newTemplates, but keep signature-compatible
+                    throw new TransformerConfigurationException("Failed to load TVA stylesheet", e);
+                }
+            }
+        }
+    }
+
+    private static void ensureMediaTableTemplates() throws TransformerConfigurationException {
+        if (MEDIATABLE_TEMPLATES != null) {
+            return;
+        }
+        synchronized (Transform.class) {
+            if (MEDIATABLE_TEMPLATES == null) {
+                try (InputStream is = Transform.class.getResourceAsStream("/nl/vpro/media/tva/pomsToTVATransformer.xsl")) {
+                    Objects.requireNonNull(is, "Resource not found: /nl/vpro/media/tva/pomsToTVATransformer.xsl");
+                    StreamSource stylesource = new StreamSource(is);
+                    MEDIATABLE_TEMPLATES = MEDIATABLE_FACTORY.newTemplates(stylesource);
+                } catch (IOException e) {
+                    throw new TransformerConfigurationException("Failed to load mediaTable stylesheet", e);
+                }
+            }
+        }
     }
 
 
