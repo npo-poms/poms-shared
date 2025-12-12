@@ -191,8 +191,10 @@
             <xsl:value-of select="." />
           </xsl:for-each>
         </xsl:variable>
-        <xsl:for-each
-            select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'SeriesID' and contains($seriesIDs, text())][1]">
+        <xsl:for-each-group
+            select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'SeriesID' and contains($seriesIDs, text())][1]"
+            group-by="."
+        >
           <xsl:variable name="programCrid">
             <xsl:value-of select="../tva:Program/@crid"/>
           </xsl:variable>
@@ -261,7 +263,7 @@
             </xsl:for-each>
 
           </group>
-        </xsl:for-each>
+        </xsl:for-each-group>
 
         <xsl:variable name="parentSeriesIDS">
           <xsl:for-each select="distinct-values(tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID']/text())">
@@ -273,7 +275,9 @@
         </xsl:variable>
 
 
-        <xsl:for-each select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID' and contains($parentSeriesIDS, text())][1]">
+        <xsl:for-each-group select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID' and contains($parentSeriesIDS, text())][1]"
+                            group-by="."
+        >
           <xsl:variable name="programCrid">
             <xsl:value-of select="../tva:Program/@crid" />
           </xsl:variable>
@@ -311,7 +315,7 @@
               </xsl:for-each>
             </xsl:for-each>
           </group>
-        </xsl:for-each>
+        </xsl:for-each-group>
       </groupTable>
       <!-- <schedule> -->
       <xsl:element name="schedule">
