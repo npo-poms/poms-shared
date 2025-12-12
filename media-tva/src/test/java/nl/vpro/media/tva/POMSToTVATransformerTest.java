@@ -52,7 +52,7 @@ public class POMSToTVATransformerTest {
             .memberOf(series, 1)
             .build();
 
-        var broadcast = MediaTestDataBuilder
+        var broadcast1 = MediaTestDataBuilder
             .broadcast()
             .mid("mid_1")
             .crids("tva:1")
@@ -74,7 +74,29 @@ public class POMSToTVATransformerTest {
             .episodeOf(season, 1)
             .build();
 
-        table.add(season, series, broadcast); // order (sadly) matters
+        var broadcast2 = MediaTestDataBuilder
+            .broadcast()
+            .mid("mid_2")
+            .crids("tva:2")
+            .mainTitle("mis season2 title", MIS)
+            .subTitle("mis episode2 title", MIS)
+            .mainDescription("mis description2", MIS)
+            .credits(Person.builder()
+                .givenName("Pietje")
+                .familyName("Puk")
+                .role(RoleType.GUEST)
+                .externalId("whatson:12345")
+                .build()
+            )
+            .scheduleEvent(
+                Channel.XXXX,
+                Instant.now().plus(Duration.ofHours(2)).truncatedTo(ChronoUnit.MINUTES),
+                Duration.ofHours(1)
+            )
+            .episodeOf(season, 1)
+            .build();
+
+        table.add(season, series, broadcast1, broadcast2); // order (sadly) matters
         table.setScheduleIfNeeded();
 
         StringWriter writer = new StringWriter();
@@ -84,7 +106,7 @@ public class POMSToTVATransformerTest {
         log.info(writer);
         var roundedObject = Transform.toMediaTable(new ByteArrayInputStream(writer.toString().getBytes(UTF_8)), Map.of());
 
-        assertThat(roundedObject.find("mid_1")).contains(broadcast);
+        assertThat(roundedObject.find("mid_1")).contains(broadcast1);
         assertThat(roundedObject.find("series_1")).contains(series);
         assertThat(roundedObject.find("season_1")).contains(season);
         assertThat(roundedObject).isEqualTo(table);
