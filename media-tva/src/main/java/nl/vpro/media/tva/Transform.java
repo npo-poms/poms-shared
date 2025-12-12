@@ -92,16 +92,6 @@ public class Transform {
     }
 
 
-    private static Transformer getTransformer(TransformerFactoryImpl factory, String resource) throws TransformerConfigurationException {
-        StreamSource stylesource = new StreamSource(Transform.class.getResourceAsStream(resource));
-        Transformer transformer = factory.newTransformer(stylesource);
-
-        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        return transformer;
-    }
-
-
-
     private static synchronized void ensureTVATemplates() throws TransformerConfigurationException {
         if (TVA_TEMPLATES != null) {
             return;
