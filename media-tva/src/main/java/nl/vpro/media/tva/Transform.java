@@ -36,14 +36,22 @@ public class Transform {
 
     static final TransformerFactoryImpl TVA_FACTORY = new TransformerFactoryImpl();
     static boolean tvaFactoryConfigured = false;
-    static final TransformerFactoryImpl MEDIATABLE_FACTORY = new TransformerFactoryImpl();
 
     // Cached compiled templates
     private static Templates TVA_TEMPLATES;
     private static Templates MEDIATABLE_TEMPLATES;
 
     // Cached JAXBContext
-    private static JAXBContext MEDIA_TABLE_CONTEXT;
+    private static final JAXBContext MEDIA_TABLE_CONTEXT ;
+    static {
+        JAXBContext jaxbContext = null;
+        try {
+            jaxbContext = JAXBContext.newInstance(MediaTable.class);
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+        MEDIA_TABLE_CONTEXT = jaxbContext;
+    }
 
     public static Transformer tvaToMediaTable(Map<String, Object> parameters) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
         if (! tvaFactoryConfigured) {
@@ -72,7 +80,7 @@ public class Transform {
     }
 
     public static MediaTable toMediaTable(InputStream input, Map<String, Object> parameters) throws JAXBException, TransformerException, ParserConfigurationException, IOException, SAXException {
-        JAXBResult result = new JAXBResult(JAXBContext.newInstance(MediaTable.class));
+        JAXBResult result = new JAXBResult(MEDIA_TABLE_CONTEXT);
         tvaToMediaTable(parameters).transform(new StreamSource(input), result);
         return (MediaTable) result.getResult();
     }
@@ -92,7 +100,7 @@ public class Transform {
     }
 
 
-    private static synchronized void ensureTVATemplates() throws TransformerConfigurationException {
+    private static  void ensureTVATemplates() throws TransformerConfigurationException {
         if (TVA_TEMPLATES != null) {
             return;
         }
@@ -115,6 +123,7 @@ public class Transform {
             return;
         }
         synchronized (Transform.class) {
+            final TransformerFactoryImpl MEDIATABLE_FACTORY = new TransformerFactoryImpl();
             if (MEDIATABLE_TEMPLATES == null) {
                 try (InputStream is = Transform.class.getResourceAsStream("/nl/vpro/media/tva/pomsToTVATransformer.xsl")) {
                     Objects.requireNonNull(is, "Resource not found: /nl/vpro/media/tva/pomsToTVATransformer.xsl");
