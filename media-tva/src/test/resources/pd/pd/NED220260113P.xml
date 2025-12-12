@@ -1,0 +1,2166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2025-12-12T15:31:12.560+01:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341480668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Al de Journaaluitzendingen met gebarentolken.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341620668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tijd voor MAX</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Tijd voor MAX</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Middagmagazine met Sybrand Niessen en Martine van Os.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>187</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>18</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341652668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">BinnensteBuiten</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">BinnensteBuiten</Title>
+          <Synopsis xml:lang="NL" length="long">Een gepassioneerde en duurzame dosis huis en interieur, tuin en natuur, eten en drinken.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Een Amsterdams huisje vol met boeken en tweedehands schatten, chef-kok Ramon ontdekt hoe cichorei wordt gemaakt en een hoogstamboomgaard waar ook ruimte is voor rouw en verdriet.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In Amsterdam-Noord woont Imke met haar gezin in een knus, groen huisje. Voor de inrichting liet Imke zich inspireren door een vroege ochtendwandeling in de weilanden: een kleurenpalet van zachte neveltinten vormt de basis van haar interieur. * Chef-kok Ramon is in het Friese Damwâld. Dit dorp komt in de 19e eeuw bekend te staan om de productie van een betaalbare koffievervanger oftewel; cichorei. * Na overlijden van haar man koopt Nicoline een 100 jaar oude, zwaar verwaarloosde hoogstamboomgaard. Samen met vrijwilligers knapt ze deze boomgaard op. Naast dat er gewerkt wordt, is er ook ruimte om stil te staan bij rouw en verlies.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het programma biedt inspiratie binnen- en buitenshuis op het gebied van duurzaamheid, huis en interieur, tuin en natuur en ambachtelijk gemaakte producten. Chef-koks Alain Caron, Ramon Brugman, Leon Mazairac, Sharon de Miranda en Nadia Zerouali bereiden een lekkere maaltijd. Sommelier Lendl Mijnhijmer verzorgt de drank. Interieurstylist Theo-Bert Pot en architectuurhistoricus Valentijn Carbo veranderen/bespreken huizen. Tuinspecialist Martin Stuger tovert een tuin om en boswachter Marieke Schatteleijn en vogelaar Camilla Dreef bespreken de fascinerende Nederlandse natuur.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>104</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>12</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341607668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">MAX Geheugentrainer</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">MAX Geheugentrainer</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Train uw brein dagelijks bij MAX.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0719" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0719" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>190</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>19</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341585668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal met gebarentaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Al de Journaaluitzendingen met gebarentolken.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341492668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nederland in Beweging</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nederland in Beweging</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wilt u investeren in uw gezondheid? Beweeg dagelijks mee met Nederland in Beweging! Meedoen betekent dat u al een kwartier beweegt van het aanbevolen dagelijkse half uur.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0499" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0499" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>190</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>22</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341536668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zentijd</Title>
+          <Title xml:lang="NL" type="episodeTitle">Beter slapen met de 4-7-8 ademhaling</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zentijd</Title>
+          <Synopsis xml:lang="NL" length="long">Laagdrempelige yoga-, meditatie- en ademhalingsoefeningen waar iedereen aan mee kan doen. Want yoga is goed voor ons allemaal! Dus rol je matje uit, doe mee met onze docenten Djilani, Jolijn, Roos en Rohima en kom steeds meer in balans met je lichaam en je geest.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De 4-7-8 ademhaling helpt je ontspannen en brengt diepe rust. Daarom doen veel yogaliefhebbers 'm vaak voor het slapengaan. Doe hem mee met Jolijn en kijk wat het effect is op jouw nachtrust.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De 4-7-8 ademhaling helpt je ontspannen en brengt diepe rust. Daarom doen veel yogaliefhebbers 'm vaak voor het slapengaan. Er zijn zelfs ademcoaches die beweren dat je er binnen een minuut van in slaap valt! Doe hem mee met Jolijn en kijk wat het effect is op jouw nachtrust.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Laagdrempelige yoga-, meditatie- en ademhalingsoefeningen waar iedereen aan mee kan doen. Want yoga is goed voor ons allemaal! Dus rol je matje uit, doe mee met onze docenten Djilani, Jolijn, Roos en Rohima en kom steeds meer in balans met je lichaam en je geest.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4060" type="secondary">
+            <Name xml:lang="NL">Levensbeschouwing</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4060" type="secondary">
+            <Name xml:lang="NL">Levensbeschouwing</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:4060" type="secondary">
+            <Name xml:lang="NL">Levensbeschouwing</Name>
+          </GenreParentSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="2424504547517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2025</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>92</TotalEpisodes>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>2</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2543682593668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwsuur</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het nieuws met achtergronden, duiding en analyse.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList/>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>352</TotalEpisodes>
+          <EpisodeNumber>11</EpisodeNumber>
+          <Season>18</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2543706784668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Expeditie Nederland</Title>
+          <Title xml:lang="NL" type="episodeTitle">Ondergronds in de regio</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Expeditie Nederland</Title>
+          <Synopsis xml:lang="NL" length="short">Op veel plaatsen in de regio, spelen zich onder de grond dingen af waar maar weinig mensen weet van hebben. Atoombunkers en zelfs een compleet geheim NAVO-hoofdkwartier bleven zo jaren uit het zicht.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Op veel plaatsen in de regio spelen zich onder de grond verhalen af die weinig mensen kennen. Atoombunkers en zelfs een geheim NAVO-hoofdkwartier bleven zo jaren uit het zicht. In de bossen bij Vierhouten ontstond tijdens de Tweede Wereldoorlog het Verscholen Dorp: een ondergronds netwerk van hutten waar mensen ondergedoken leefden. Diep onder de Erasmusbrug ligt een Kathedraal aan techniek.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Onderwerpen die iedereen raken kunnen, hoe klein ons land ook is, een paar kilometer verderop een ander verhaal opleveren. Ze worden belicht door verslaggevers uit de regio's.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>38</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>5</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341588668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">BinnensteBuiten</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">BinnensteBuiten</Title>
+          <Synopsis xml:lang="NL" length="long">Een gepassioneerde en duurzame dosis huis en interieur, tuin en natuur, eten en drinken.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het huis van Corien zit vol gekkigheden en grapjes, onze nieuwe gast-chef-kok Samuel Levie maakt een klassieke cottage pie en imposante landgeiten fungeren als natuurbeheerders in Abcoude.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In het huis van de Zwolse Corien en haar gezin is niets te gek. Zo hangt er een discobol op het toilet en staat er een flipperkast in de woonkamer. Corien houdt wel van een geintje. * Onze nieuwe gast-chef-kok Samuel Levie bereidt in de BinnensteBuiten-buitenkeuken een winters gerecht. Hij gaat terug naar zijn Engelse roots met een klassieke cottage pie; mals stoofvlees met aardappelpuree uit de oven en een frisse salade erbij. * Robert-Jan zet al minstens 20 jaar landgeiten in voor agrarisch natuurbeheer. Inmiddels heeft hij 24 geiten en bokken die in verschillende gebieden rondom Abcoude de alles overwoekerende bramen en wilgen opeten.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het programma biedt inspiratie binnen- en buitenshuis op het gebied van duurzaamheid, huis en interieur, tuin en natuur en ambachtelijk gemaakte producten. Chef-koks Alain Caron, Ramon Brugman, Leon Mazairac, Sharon de Miranda en Nadia Zerouali bereiden een lekkere maaltijd. Sommelier Lendl Mijnhijmer verzorgt de drank. Interieurstylist Theo-Bert Pot en architectuurhistoricus Valentijn Carbo veranderen/bespreken huizen. Tuinspecialist Martin Stuger tovert een tuin om en boswachter Marieke Schatteleijn en vogelaar Camilla Dreef bespreken de fascinerende Nederlandse natuur.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>104</TotalEpisodes>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>12</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341416668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Alle Journaal uitzendingen van de NOS.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341613668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kook mee met MAX</Title>
+          <Title xml:lang="NL" type="episodeTitle">Gestoofde witte bonen met makreel en wintergroenten</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kook mee met MAX</Title>
+          <Synopsis xml:lang="NL" length="long">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0723" type="secondary">
+            <Name xml:lang="NL">Koken/eten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0723" type="secondary">
+            <Name xml:lang="NL">Koken/eten</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1414495690517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>84</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>8</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2544457154668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Andere Tijden Kort</Title>
+          <Title xml:lang="NL" type="episodeTitle">Big Buurman</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Andere Tijden Kort</Title>
+          <Synopsis xml:lang="NL" length="long">Het kleine zusje van het geschiedenisprogramma Andere Tijden. Met onderwerpen uit de recente geschiedenis, een relatie met de actualiteit of op zoek naar onbekende en opmerkelijke verhalen. Maar dan kort.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het kleine zusje van het geschiedenisprogramma Andere Tijden. Met onderwerpen uit de recente geschiedenis, een relatie met de actualiteit of op zoek naar onbekende en opmerkelijke verhalen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het kleine zusje van het geschiedenisprogramma Andere Tijden. Met onderwerpen uit de recente geschiedenis, een relatie met de actualiteit of op zoek naar onbekende en opmerkelijke verhalen. Maar dan kort.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0730" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0730" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0730" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </GenreParentSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="2520926509517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="1758559638517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="630539012517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="2530453003517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2025</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>80</TotalEpisodes>
+          <EpisodeNumber>55</EpisodeNumber>
+          <Season>24</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341393668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Alle Journaal uitzendingen van de NOS.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341396668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Sportjournaal</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341425668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Junglepiloten - Verhalen van hoop</Title>
+          <Title xml:lang="NL" type="episodeTitle">Grote hoogte</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Junglepiloten - Verhalen van hoop</Title>
+          <Synopsis xml:lang="NL" length="long">We volgen drie Nederlandse gezinnen die hun leven in Nederland achterlieten om als piloten voor Mission Aviation Fellowship (MAF) hulp te bieden in moeilijk bereikbare gebieden. Vanuit Papoea-Nieuw-Guinea, Suriname en Tsjaad zetten deze gezinnen zich in voor mensen in nood.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">In Tsjaad oefent Joost zijn eerste Arabische woordjes tijdens de aankoop van een geit op de markt. Anke vindt langzaamaan haar draai in haar nieuwe leven. Ze ontdekt een nieuwe passie: volleyballen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het examenmoment is daar: David wordt beoordeeld door een strenge Surinaamse instructeur. Lukt het David om te laten zien dat hij alle veiligheidsprotocollen in de vingers heeft? Dochter Fien beleeft een belangrijke mijlpaal: haar kleuterdiploma-examen. Terwijl de zomervakantie nadert, vieren de pilotengezinnen op de compound in Goroka in Papoea-Nieuw-Guinea het einde van het schooljaar. In Tsjaad oefent Joost zijn eerste Arabische woordjes tijdens de aankoop van een geit op de markt. Anke vindt langzaamaan haar draai in haar nieuwe leven. Ze gaat paardrijden en ontdekt een nieuwe passie: volleyballen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">We volgen drie Nederlandse gezinnen die hun leven in Nederland achterlieten om als piloten voor Mission Aviation Fellowship (MAF) hulp te bieden in moeilijk bereikbare gebieden. Vanuit Papoea-Nieuw-Guinea, Suriname en Tsjaad zetten deze gezinnen zich in voor mensen in nood.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4099" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4099" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:4099" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreParentSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="1387612350517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2025</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>1</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341358668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Het Uur van de Wolf: De jacht op mijn vader</Title>
+          <Synopsis xml:lang="NL" length="short">In 'De jacht op mijn vader' onderzoekt regisseur Gülsah Dogan het spanningsveld tussen vader en dochter.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Eric Lie is een levende legende in Suriname. Hij is berucht vanwege zijn grote liefde voor vrouwen en zijn jachtpartijen in het regenwoud en geniet veel aanzien als een van de hoogstopgeleide Taekwondo-grootmeesters van de wereld. Maar voor schrijfster Karin Amatmoekrim is hij vooral de vader die in haar leven schitterde door afwezigheid. Ze ontmoette hem voor het eerst toen zij 22 was, maar durfde hem nooit echt toe te laten.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0824" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1866168890517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>In 'De jacht op mijn vader' onderzoekt regisseur Gülsah Dogan het spanningsveld tussen vader en dochter.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2544704186668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">AVROTROS Concert</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341369668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Alle Journaal uitzendingen van de NOS.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2544659082668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kook mee met MAX</Title>
+          <Title xml:lang="NL" type="episodeTitle">Spaanse rijstschotel met chorizo en boerenkool</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kook mee met MAX</Title>
+          <Synopsis xml:lang="NL" length="long">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat eten we vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze bereiden makkelijke en verrassende gerechten.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0723" type="secondary">
+            <Name xml:lang="NL">Koken/eten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0723" type="secondary">
+            <Name xml:lang="NL">Koken/eten</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1414495686517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>84</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>8</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341450668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Per Seconde Wijzer</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Per Seconde Wijzer</Title>
+          <Synopsis xml:lang="NL" length="long">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>32</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>64</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542565545668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Politieke Partijen</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542566806668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Politieke Partijen</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341483668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Wild Scandinavia</Title>
+          <Title xml:lang="NL" type="episodeTitle">Leven op het randje</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Wild Scandinavia</Title>
+          <Synopsis xml:lang="NL" length="long">Ontdek de dramatische landschappen, prachtige natuur en unieke cultuur van Scandinavië.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De ruige en onvoorspelbare Scandinavische kust is van een onvergetelijke schoonheid, maar kent ook gevaarlijke uitersten. Je vindt er temperamentvolle papegaaiduikers, orka's en arenden.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De ruige en onvoorspelbare Scandinavische kust is van een onvergetelijke schoonheid, maar kent ook gevaarlijke uitersten. Door weer en wind geteisterde eilanden vol zeehondenpups worden afgewisseld met duizend meter steile rotswanden in de fjorden, waar basejumpers en zeearenden door de lucht zweven. In het uiterste noorden komen de warme Golfstroom en Noordelijke IJszee samen, waardoor het daar wemelt van het leven. Orka's en bultrugwalvissen jagen op de miljarden haringen en het is de thuisbasis van duizenden zeevogels. Waar land en zee elkaar ontmoeten, zijn alleen doorzetters en probleemoplossers in staat om te overleven.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Ontdek de dramatische landschappen, prachtige natuur en unieke cultuur van Scandinavië.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0825" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0825" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>true</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="2397266591517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="2410833928517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="FirstInSeason"/>
+          <TotalEpisodes>3</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341470668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Alle Journaal uitzendingen van de NOS.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>8</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341591668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal Regio</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Journaal Regio</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">NOS Journaal Regio</Title>
+          <Synopsis xml:lang="NL" length="long">Regionaal nieuws met landelijke uitstraling, gemaakt door de NOS en de regionale omroepen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Regionaal nieuws met landelijke uitstraling, gemaakt door de NOS en de regionale omroepen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Regionaal nieuws met landelijke uitstraling, gemaakt door de NOS en de regionale omroepen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Regionaal nieuws met landelijke uitstraling, gemaakt door de NOS en de regionale omroepen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>8</EpisodeNumber>
+          <Season>26</Season>
+          <HD>HD</HD>
+          <TwitterAccount>@NOS</TwitterAccount>
+          <TwitterHashTag>#NOS</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341623668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Noord-Zuid-Oost-West</Title>
+          <Title xml:lang="NL" type="episodeTitle">Koken met Kok - De Verdwenen Stad</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Noord-Zuid-Oost-West</Title>
+          <Synopsis xml:lang="NL" length="short">In koken met Kok bezoekt Pieter veehouder Jan-Willem, terwijl Stephan met Sabien zilte planten zoekt. In De Verdwenen Stad: het Stadionplein, waar in 1914 het eerste stenen voetbalstadion opende.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In Koken met Kok gaat Pieter langs bij veehouder Jan-Willem Bakker, waar hij schapenkaas haalt. Ondertussen gaat Stephan met natuurgids Sabien Bosman op zoek naar zilte planten die samen een oester vormen. Pieter maakt met deze ingrediënten op locatie een gerecht. In De Verdwenen Stad; het Stadionplein. De plek waar in 1914 het allereerste stenen voetbalstadion van Nederland werd geopend.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">De etalage voor het beste van de regionale omroepen met de mooiste documentaires, achtergrondprogramma's en persoonlijke verhalen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreParentSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>179</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341598668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">BinnensteBuiten</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">BinnensteBuiten</Title>
+          <Synopsis xml:lang="NL" length="long">Een gepassioneerde en duurzame dosis huis en interieur, tuin en natuur, eten en drinken.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Een gepassioneerde en duurzame dosis huis en interieur, tuin en natuur, eten en drinken.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Een gepassioneerde en duurzame dosis huis en interieur, tuin en natuur, eten en drinken.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het programma biedt inspiratie binnen- en buitenshuis op het gebied van duurzaamheid, huis en interieur, tuin en natuur en ambachtelijk gemaakte producten. Chef-koks Alain Caron, Ramon Brugman, Leon Mazairac, Sharon de Miranda en Nadia Zerouali bereiden een lekkere maaltijd. Sommelier Lendl Mijnhijmer verzorgt de drank. Interieurstylist Theo-Bert Pot en architectuurhistoricus Valentijn Carbo veranderen/bespreken huizen. Tuinspecialist Martin Stuger tovert een tuin om en boswachter Marieke Schatteleijn en vogelaar Camilla Dreef bespreken de fascinerende Nederlandse natuur.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:4031" type="secondary">
+            <Name xml:lang="NL">Wonen/tuin</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>104</TotalEpisodes>
+          <EpisodeNumber>7</EpisodeNumber>
+          <Season>12</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341364668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Per Seconde Wijzer</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Per Seconde Wijzer</Title>
+          <Synopsis xml:lang="NL" length="long">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Twee kandidaten testen onder hoge druk hun kennis in verschillende categorieën. Hoe zetten zij hun jokers in, hoeveel rondes zullen de spelers het volhouden en met welk bedrag gaan de spelers uiteindelijk naar huis? Met elke dag aan het begin van de uitzending de kijkersvraag.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0619" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>32</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>64</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341439668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onbekend en wereldberoemd: Gebroeders van Lymborch</Title>
+          <Title xml:lang="NL" type="episodeTitle">De inspiratie en de cultuur</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Onbekend en wereldberoemd: Gebroeders van Lymborch</Title>
+          <Synopsis xml:lang="NL" length="long">De Gebroeders van Lymborch, drie broers uit Nijmegen, waren wereldberoemde pioniers in de middeleeuwse schilderkunst. Hun werk wordt wereldwijd bewonderd, maar in Nederland kent bijna niemand hun naam. Sinan Can en Pieter Roelofs ontdekken hun onterecht vergeten geschiedenis.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Sinan en Pieter reizen door Frankrijk langs plekken die de jonge Nijmeegse broers inspireerden. Pieter focust op hun techniek, terwijl Sinan sporen van verre culturen ontdekt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Sinan Can en Pieter Roelofs vervolgen hun reis door Frankrijk om te ontdekken waar de Gebroeders van Lymborch, drie jonge kunstenaars uit het laat veertiende-eeuwse Nijmegen, hun inspiratie vandaan haalden. Waar Pieter geraakt wordt door hun technische perfectie en realistische schilderkunst, ontdekt Sinan sporen van verre culturen die hem doen denken aan zijn eigen afkomst.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">De Gebroeders van Lymborch, drie broers uit Nijmegen, waren wereldberoemde pioniers in de middeleeuwse schilderkunst. Hun werk wordt wereldwijd bewonderd, maar in Nederland kent bijna niemand hun naam. Sinan Can en Pieter Roelofs ontdekken hun onterecht vergeten geschiedenis.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </GenreParentSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>4</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>1</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341385668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nu te Zien!</Title>
+          <Title xml:lang="NL" type="episodeTitle">Edith van Leckwyck</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nu te Zien!</Title>
+          <Synopsis xml:lang="NL" length="short">Directeur van Musea Zutphen Paulo Martina bekijkt de tentoonstelling met werk van Edith van Leckwyck (1890-1987) in Museum Drachten.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Directeur van Musea Zutphen Paulo Martina bekijkt de tentoonstelling met werk van Edith van Leckwyck (1890-1987) in Museum Drachten. Toen zij in 1927 debuteerde met haar expressieve landschappen en dorpsgezichten prezen kunstcritici haar talent om met kleuren een sfeer te scheppen. Tijdens haar huwelijk stopte zij lange tijd met schilderen en na haar dood in 1987 werd zij vergeten. Haar werk is te zien naast dat van kunstenaars uit haar omgeving.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Museumdirecteuren reizen het hele land door om niet te missen tentoonstellingen te laten zien.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>28</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>10</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341513668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Focus</Title>
+          <Title xml:lang="NL" type="episodeTitle">Borstkanker</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Focus</Title>
+          <Synopsis xml:lang="NL" length="short">In Nederland krijgt 1 op de 7 vrouwen borstkanker. Naast de heftige confrontatie met deze ziekte moeten deze vrouwen al heel snel kiezen welke soort borstreconstructie ze willen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In Nederland krijgt 1 op de 7 vrouwen borstkanker. Naast de heftige confrontatie met de ziekte zelf moeten patiënten snel kiezen of, en zo ja, welke soort borstreconstructie ze willen. Wetenschappers zijn bezig met nieuwe technieken om de huidige borstreconstructies te verbeteren of zelfs te voorkomen. We volgen een unieke microchirurgische operatie om oedeem na een amputatie te behandelen. In een ander lab werken ze aan mini-stellages van oplosbaar biomateriaal, om borstcellen succesvoller te transplanteren.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wetenschapsprogramma dat op zoek gaat naar wetenschappelijke oplossingen voor de problemen van deze tijd. Presentatie: Petra Grijzen</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0727" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0727" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </GenreSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList/>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>16</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>13</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341498668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwsuur</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het nieuws met achtergronden, duiding en analyse.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>352</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>18</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341524668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Advocaat van de onderwereld</Title>
+          <Title xml:lang="NL" type="episodeTitle">De getuige die niet dood wil</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Advocaat van de onderwereld</Title>
+          <Title xml:lang="NL" type="translatedtitle">The Black Swan</Title>
+          <Synopsis xml:lang="NL" length="long">De Deense bedrijfsjuriste Amira Smajic werkte jaren in een wereld van misdaad en fraude. Nu opent ze haar consultancybureau opnieuw met verborgen camera's. Zes maanden lang onthult ze een netwerk van criminelen, advocaten en zakenlieden en doorbreekt ze de mythe van een corruptievrij Denemarken.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Deense bedrijven zoeken juridisch advies om faillissementen te verdoezelen, terwijl een cliënt vanuit Pakistan dreigt een getuige uit de weg te ruimen. Onderwereld en elite raken verstrengeld.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De banden tussen het Deense criminele circuit en het Deense establishment worden steeds hechter wanneer bedrijven juridisch advies zoeken om faillissementen zo te regelen dat ze geen argwaan wekken. Ondertussen belt een andere cliënt van Smajic vanuit Pakistan: hij beweert dat hij van plan is een getuige uit de weg te ruimen die tegen hem zal getuigen in de rechtbank.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">De Deense bedrijfsjuriste Amira Smajic werkte jaren in een wereld van misdaad en fraude. Nu opent ze haar consultancy bureau opnieuw met verborgen camera's. Zes maanden lang onthult ze een netwerk van criminelen, advocaten en zakenlieden en doorbreekt ze de mythe van een corruptievrij Denemarken.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0844" type="secondary">
+            <Name xml:lang="NL">Politiek</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0844" type="secondary">
+            <Name xml:lang="NL">Politiek</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0844" type="secondary">
+            <Name xml:lang="NL">Politiek</Name>
+          </GenreParentSeries>
+          <Language>DA</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1900651003517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="DK"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2025</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>4</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341577668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">VPRO Boeken</Title>
+          <Title xml:lang="NL" type="episodeTitle">Emma Doude van Troostwijk en Mensje van Keulen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">VPRO Boeken</Title>
+          <Synopsis xml:lang="NL" length="long">Lotje IJzermans interviewt schrijvers van de beste en meest spraakmakende literaire fictie en non-fictie van het moment vanuit Bibliotheek Neude in Utrecht.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Mensen van de dag van Emma Doude van Troostwijk gaat over een familie van Nederlandse predikanten in de Elzas. En Mensje van Keulen vertelt over Omgeslagen dagen, het vierde deel van haar dagboeken.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het romandebuut Mensen van de dag van de in Frankrijk opgegroeide Emma Doude van Troostwijk gaat over een familie van Nederlandse predikanten in de Elzas. De verteller keert terug naar huis om de intrede van haar oudere broer bij te wonen, terwijl hij steeds meer twijfelt of hij de roeping tot predikant wel moet volgen. En Mensje van Keulen vertelt over Omgeslagen dagen, het vierde deel van haar dagboeken, waarin het immer woelige schrijversleven in de jaren tachtig centraal staat. Inmiddels gescheiden werkt Van Keulen stug door, ook al gaat het schrijven bepaald niet vanzelf.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Boekenprogramma waarin wisselende gasten worden ontvangen, met gesprekken over boeken, discussies naar aanleiding van boeken of interviews met auteurs.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </GenreSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreParentSeries>
+          <GenreParentSeries href="urn:tva:metadata:cs:2004:0724" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </GenreParentSeries>
+          <Language>NL</Language>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="2436890583517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>12</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>20</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341634668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Nachtzoen</Title>
+          <Title xml:lang="NL" type="episodeTitle">Gary (2/4)</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">De Nachtzoen</Title>
+          <Synopsis xml:lang="NL" length="long">Een wonderlijk verhaal voor het slapengaan.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Nadat ze gered is uit de brand in Café De Hemel wordt Gary verzorgd door haar moeder.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Nadat ze gered is uit de brand in Café De Hemel wordt Gary verzorgd door haar moeder.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Een wonderlijk verhaal voor het slapengaan.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:4099" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:40">
+            <Name xml:lang="NL">Human Interest</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:4099" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </GenreSeries>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1081713142517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2025</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>120</TotalEpisodes>
+          <EpisodeNumber>75</EpisodeNumber>
+          <Season>16</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341552668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwsuur</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het nieuws met achtergronden, duiding en analyse.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>352</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>18</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2542341455668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwsuur</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het nieuws met achtergronden, duiding en analyse.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <GenreSeries href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </GenreSeries>
+          <GenreSeries href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </GenreSeries>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2026</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>352</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>18</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="NED2" start="2026-01-13T07:00:00+01:00" end="2026-01-14T01:10:00+01:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341480668"/>
+          <PublishedStartTime>2026-01-13T07:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05972210</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl0700n2Geb</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaalgebarentolk</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341620668"/>
+          <PublishedStartTime>2026-01-13T07:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H41M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05999790</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_05999784</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03108338</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341652668"/>
+          <PublishedStartTime>2026-01-13T08:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H34M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KN_1738091</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1737656</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1676732</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341607668"/>
+          <PublishedStartTime>2026-01-13T08:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06001529</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06001523</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03108298</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341585668"/>
+          <PublishedStartTime>2026-01-13T09:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05973468</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl0900n2Geb</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaalgebarentolk</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341492668"/>
+          <PublishedStartTime>2026-01-13T09:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06001809</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06001803</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03108318</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341536668"/>
+          <PublishedStartTime>2026-01-13T09:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>21-03-2025</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KN_1736708</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1736329</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1734395</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2543682593668"/>
+          <PublishedStartTime>2026-01-13T09:55:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H36M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368078</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368067</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1246712</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2543706784668"/>
+          <PublishedStartTime>2026-01-13T10:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06000193</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06000191</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_05349873</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341588668"/>
+          <PublishedStartTime>2026-01-13T11:20:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H34M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KN_1738095</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1737656</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1676732</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341416668"/>
+          <PublishedStartTime>2026-01-13T12:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05974574</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl1200n2</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341613668"/>
+          <PublishedStartTime>2026-01-13T12:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M35S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06003879</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06003873</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03619681</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2544457154668"/>
+          <PublishedStartTime>2026-01-13T12:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M35S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368836</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368781</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1369405</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341393668"/>
+          <PublishedStartTime>2026-01-13T13:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05975152</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl1300n2</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341396668"/>
+          <PublishedStartTime>2026-01-13T13:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M05S</PublishedDuration>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341425668"/>
+          <PublishedStartTime>2026-01-13T13:20:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M40S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1365638</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1365632</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1365631</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341358668"/>
+          <PublishedStartTime>2026-01-13T13:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M18S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1369539</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2544704186668"/>
+          <PublishedStartTime>2026-01-13T15:05:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M35S</PublishedDuration>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341369668"/>
+          <PublishedStartTime>2026-01-13T16:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <Net code="Nederland 2"/>
+          <OtherIdentifier type="ProductID">POW_05975972</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl1600n2</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2544659082668"/>
+          <PublishedStartTime>2026-01-13T16:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06003875</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06003873</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03619681</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341450668"/>
+          <PublishedStartTime>2026-01-13T16:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">BV_101413673</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101413672</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VARA_101377772</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542565545668"/>
+          <PublishedStartTime>2026-01-13T16:56:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M30S</PublishedDuration>
+          <Net code="Nederland 2"/>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542566806668"/>
+          <PublishedStartTime>2026-01-13T16:57:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H02M05S</PublishedDuration>
+          <Net code="Nederland 2"/>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341483668"/>
+          <PublishedStartTime>2026-01-13T17:05:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M14S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05649672</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_05649667</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_05649666</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341470668"/>
+          <PublishedStartTime>2026-01-13T18:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05976615</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26Jnl1800n2</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341591668"/>
+          <PublishedStartTime>2026-01-13T18:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_05978450</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">26JnlRegio</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJrnlRegio</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341623668"/>
+          <PublishedStartTime>2026-01-13T18:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_06000021</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_06000015</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_05039552</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341598668"/>
+          <PublishedStartTime>2026-01-13T19:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H34M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KN_1738097</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1737656</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1676732</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341364668"/>
+          <PublishedStartTime>2026-01-13T19:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">BV_101413674</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101413672</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VARA_101377772</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341439668"/>
+          <PublishedStartTime>2026-01-13T20:25:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H42M14S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">BV_101413551</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101413549</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101413548</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341385668"/>
+          <PublishedStartTime>2026-01-13T21:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">AT_300024957</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">AT_300024955</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">AT_2070267</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341513668"/>
+          <PublishedStartTime>2026-01-13T21:20:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368051</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368049</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1289481</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341498668"/>
+          <PublishedStartTime>2026-01-13T22:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H36M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368079</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368067</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1246712</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341524668"/>
+          <PublishedStartTime>2026-01-13T22:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H56M34S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1369577</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1369575</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1371466</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341577668"/>
+          <PublishedStartTime>2026-01-13T23:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1370057</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1370055</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1250374</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341634668"/>
+          <PublishedStartTime>2026-01-14T00:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M07S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>04-11-2025</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1362815</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1362740</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1257894</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341552668"/>
+          <PublishedStartTime>2026-01-14T00:25:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368079</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368067</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1246712</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2542341455668"/>
+          <PublishedStartTime>2026-01-14T01:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M35S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1368079</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1368067</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1246712</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="2424504547517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Jolijn</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bruijnaers</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1414495690517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Mounir</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Toub</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1758559638517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Astrid</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Sy</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="630539012517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Hans</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Goedkoop</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2530453003517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Bas</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Brouwer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1387612350517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Boris</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van der Ham</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1866168890517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Gulsah</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Dogan</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1414495686517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Sandra</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ysbrandy</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2397266591517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Rebecca</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ferguson</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2410833928517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tuppence</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stone</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1900651003517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Mads</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Brugger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2436890583517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Lotje</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">IJzermans</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1081713142517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Marleen</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stelling</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

@@ -825,6 +825,13 @@ public class TVATransformerTest {
 
         }
     }
+    @Test
+    public void emptyPerson() {
+        String xml = transform("pd/pd/NED220260113P.xml");
+        log.info(xml);
+
+
+    }
 
 
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
