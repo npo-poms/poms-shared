@@ -211,23 +211,22 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
         this.portals = Collections.unmodifiableList(media.getPortals());
         this.thirdParties = Collections.unmodifiableList(media.getThirdParties());
 
-        if(media instanceof Program) {
-            // proxy's...
-            this.mediaClass = Program.class.getName();
-            SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
-            if(!scheduleEvents.isEmpty()) {
-                this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
-                this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, true).orElse(null);
-                this.lastScheduleEvent= ScheduleEvents.getLastScheduleEvent(scheduleEvents, false).orElse(null);
-                this.lastScheduleEventNoRerun = ScheduleEvents.getLastScheduleEvent(scheduleEvents, true).orElse(null);
-                this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
+        switch (media) {
+            case Program program -> {
+                // proxy's...
+                this.mediaClass = Program.class.getName();
+                SortedSet<ScheduleEvent> scheduleEvents = program.getScheduleEvents();
+                if (!scheduleEvents.isEmpty()) {
+                    this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
+                    this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, true).orElse(null);
+                    this.lastScheduleEvent = ScheduleEvents.getLastScheduleEvent(scheduleEvents, false).orElse(null);
+                    this.lastScheduleEventNoRerun = ScheduleEvents.getLastScheduleEvent(scheduleEvents, true).orElse(null);
+                    this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
+                }
             }
-        } else if(media instanceof Group) {
-            this.mediaClass = Group.class.getName();
-        } else if(media instanceof Segment) {
-            this.mediaClass = Segment.class.getName();
-        } else {
-            this.mediaClass = getClass().getName();
+            case Group group -> this.mediaClass = Group.class.getName();
+            case Segment segment -> this.mediaClass = Segment.class.getName();
+            default -> this.mediaClass = getClass().getName();
         }
         this.mediaType = media.getType().getMediaType();
         this.sortDate = media.getSortInstant();
@@ -318,7 +317,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     @NonNull
     @Override
     public MediaListItem setPublishStartInstant(Instant stop) {
-        return (MediaListItem) super.setPublishStartInstant(stop);
+        return super.setPublishStartInstant(stop);
     }
 
     @Override
@@ -335,7 +334,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     @NonNull
     @Override
     public MediaListItem setPublishStopInstant(Instant stop) {
-        return (MediaListItem) super.setPublishStopInstant(stop);
+        return super.setPublishStopInstant(stop);
     }
 
     @Override
