@@ -255,7 +255,42 @@ public class TVATransformerTest {
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         validate(table);
+
+        Set<String> mids = table.getGroupTable().stream().map(g -> g.getType() + ":" + g.getMid() + ":" + g.getMainTitle())
+            .collect(Collectors.toCollection(TreeSet::new));
+
+        assertThat(mids).containsExactly(
+            "SEASON:15Jnl1300n2za1:NOS Journaal",
+            "SEASON:15Jnl1700:NOS Journaal",
+            "SEASON:15ROFza:Fryslân DOK:",
+            "SEASON:AT_2033152:Krabbé zoekt Van Gogh",
+            "SEASON:KN_1665953:Schepper & co",
+            "SEASON:POW_00974481:Tekst-TV",
+            "SEASON:POW_00992530:OHM Magazine",
+            "SEASON:POW_01006071:Detectives: The Fall",
+            "SEASON:POW_01120182:Natuur op 2: Galapagos",
+            "SEASON:POW_02942555:Tijd voor Meldpunt! & Hallo Nederland",
+            "SEASON:RKK_1673029:Bodar op zoek naar Benedictus",
+            "SEASON:VARA_101372855:Vroege Vogels",
+            "SEASON:VARA_101372976:2 voor 12",
+            "SEASON:VPWON_1233644:Grensland",
+            "SEASON:VPWON_1235891:Dit is de dag",
+            "SEASON:VPWON_1236065:Blauw Bloed",
+            "SEASON:VPWON_1236541:De Nachtzoen",
+            "SEASON:VPWON_1236775:MO Actueel",
+            "SEASON:VPWON_1241384:Nieuwsuur",
+            "SEASON:VPWON_1241874:Landinwaarts",
+            "SEASON:VPWON_1241915:Andere Tijden",
+            "SEASON:VPWON_1242702:De Verandering",
+            "SEASON:VPWON_1242892:Nederland Zingt",
+            "SEASON:VPWON_1246587:Metterdaad",
+            "SEASON:VPWON_1248820:Moslimpredikant online",
+            "SERIES:AT_2033151:Krabbé zoekt Van Gogh",
+            "SERIES:POW_01006080:The Fall",
+            "SERIES:VPWON_1246433:Grensland"
+        );
         assertThat(table.getGroupTable()).hasSize(30);
+
         assertThat(table.getGroupTable().stream().filter(g -> g.getType() == GroupType.SEASON).collect(Collectors.toList())).hasSize(27);
         assertThat(table.getGroupTable().stream().filter(g -> g.getType() == GroupType.SERIES).collect(Collectors.toList())).hasSize(3);
 
