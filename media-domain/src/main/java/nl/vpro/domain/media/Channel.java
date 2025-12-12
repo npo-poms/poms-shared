@@ -2826,7 +2826,7 @@ public enum Channel implements Displayable, XmlValued {
     XXXX(VIDEO) {
         @Override
         public String toString() {
-            return "TEST CHANNEL";
+            return "TEST CHANNEL (tv)";
         }
     },
     /**
@@ -2838,7 +2838,7 @@ public enum Channel implements Displayable, XmlValued {
     XXXY(AUDIO) {
         @Override
         public String toString() {
-            return "TEST CHANNEL 2";
+            return "TEST CHANNEL (radio)";
         }
     }
     ;
