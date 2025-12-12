@@ -204,7 +204,7 @@
         <CreditsInformationTable>
           <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person" group-by="@externalId">
             <xsl:if test="starts-with(@externalId, $personExternalIdPrefix)">
-              <xsl:for-each select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]">
+              <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]" group-by="@externalId">
                 <PersonName personNameId="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}">
                   <mpeg7:GivenName xml:lang="NL" initial="">
                     <xsl:value-of select="givenName" />
@@ -213,7 +213,7 @@
                     <xsl:value-of select="familyName" />
                   </mpeg7:FamilyName>
                 </PersonName>
-              </xsl:for-each>
+              </xsl:for-each-group>
             </xsl:if>
           </xsl:for-each-group>
         </CreditsInformationTable>
