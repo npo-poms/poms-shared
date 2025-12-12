@@ -94,7 +94,6 @@ jobs:
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
   branch:
     runs-on: ubuntu-latest
-    needs: build
     environment: branch-main
     if: github.ref == 'refs/heads/main'
     env:
@@ -126,7 +125,6 @@ jobs:
           git commit -am "Updated revision to ${DEVELOPMENT_REVISION} for next development iteration"
           git push origin main
   release:
-    needs: build
     runs-on: ubuntu-latest
     env:
       MAVEN_ARGS: '--no-transfer-progress'
