@@ -23,6 +23,12 @@
   <!-- root: map mediaInformation -> tva:TVAMain -->
   <xsl:template match="/mediaInformation">
     <TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001">
+      <xsl:comment>
+        This is experimental since poms 8.12.
+        It is produced from POMS MediaTable XML (see https://poms.omroep.nl/schema/vproMedia.xsd).
+
+        It is mainly used to generate test data for the integration tests.
+      </xsl:comment>
       <!-- ProgramDescription with ProgramInformationTable and ProgramLocationTable -->
       <ProgramDescription>
         <ProgramInformationTable>
@@ -57,12 +63,12 @@
                   </Title>
                 </xsl:for-each>
                 <xsl:for-each select="episodeOf[1]">
-               <!--   <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
-                    <Title>
-                      <xsl:attribute name="type">main</xsl:attribute>
-                      <xsl:value-of select="normalize-space(title[@type='MAIN' and @owner = 'MIS'])"/>
-                    </Title>
-                  </xsl:for-each>-->
+                  <!--   <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
+                       <Title>
+                         <xsl:attribute name="type">main</xsl:attribute>
+                         <xsl:value-of select="normalize-space(title[@type='MAIN' and @owner = 'MIS'])"/>
+                       </Title>
+                     </xsl:for-each>-->
                   <xsl:for-each select="memberOf[1]">
                     <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
                       <Title>
@@ -82,19 +88,21 @@
                 </xsl:for-each>
 
                 <!-- descriptions -->
-                <xsl:for-each select="description[@owner = 'MIS']">
-                  <Synopsis>
-                    <xsl:attribute name="length">
-                      <xsl:choose>
-                        <xsl:when test="@type='SHORT'">short</xsl:when>
-                        <xsl:when test="@type='LONG'">long</xsl:when>
-                        <xsl:otherwise>medium</xsl:otherwise>
-                      </xsl:choose>
-                    </xsl:attribute>
+                <xsl:for-each select="description[@owner = 'MIS' and @type='SHORT']">
+                  <Synopsis length="short">
                     <xsl:value-of select="normalize-space(.)"/>
                   </Synopsis>
                 </xsl:for-each>
-
+                <xsl:for-each select="description[@owner = 'MIS' and @type='LONG']">
+                  <Synopsis length="long">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </Synopsis>
+                </xsl:for-each>
+                <xsl:for-each select="description[@owner = 'MIS' and @type='MAIN']">
+                  <Synopsis length="medium">
+                    <xsl:value-of select="normalize-space(.)"/>
+                  </Synopsis>
+                </xsl:for-each>
                 <!-- other identifiers: map poProgID / poSeriesID -->
                 <xsl:for-each select="poProgID">
                   <OtherIdentifier>
@@ -150,11 +158,11 @@
               <xsl:if test="@channel"><xsl:attribute name="serviceIDRef"><xsl:value-of select="@channel"/></xsl:attribute></xsl:if>
 
 
-              <xsl:for-each select="scheduleEvent">
+              <xsl:for-each-group select="scheduleEvent" group-by="@midRef">
                 <xsl:variable name="mid"><xsl:value-of select="@midRef" /></xsl:variable>
                 <xsl:variable name="crid"><xsl:value-of select="/mediaInformation/programTable/program[@mid=$mid]/crid[1]" /></xsl:variable>
 
-              <!-- each scheduleEvent -->
+                <!-- each scheduleEvent -->
                 <ScheduleEvent>
                   <Program crid="{$crid}" />
 
@@ -175,20 +183,20 @@
                       <xsl:value-of select="normalize-space(.)"/>
                     </OtherIdentifier>
                   </xsl:for-each>
-                  <xsl:for-each select="/mediaInformation/programTable/program[@mid=$mid]/episodeOf[1]">
+                  <xsl:for-each-group select="/mediaInformation/programTable/program[@mid=$mid]/episodeOf[1]" group-by="@midRef">
                     <OtherIdentifier>
                       <xsl:attribute name="type">SeriesID</xsl:attribute>
                       <xsl:value-of select="normalize-space(@midRef)"/>
                     </OtherIdentifier>
-                    <xsl:for-each select="memberOf[1]">
+                    <xsl:for-each-group select="memberOf[@type='SERIES'][1]" group-by="@midRef">
                       <OtherIdentifier>
                         <xsl:attribute name="type">ParentSeriesID</xsl:attribute>
                         <xsl:value-of select="normalize-space(@midRef)"/>
                       </OtherIdentifier>
-                    </xsl:for-each>
-                  </xsl:for-each>
+                    </xsl:for-each-group>
+                  </xsl:for-each-group>
                 </ScheduleEvent>
-              </xsl:for-each>
+              </xsl:for-each-group>
             </Schedule>
           </xsl:for-each>
         </ProgramLocationTable>
@@ -196,7 +204,7 @@
         <CreditsInformationTable>
           <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person" group-by="@externalId">
             <xsl:if test="starts-with(@externalId, $personExternalIdPrefix)">
-              <xsl:for-each select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]">
+              <xsl:for-each-group select="/mediaInformation/programTable/program/credits/person[@externalId = current()/@externalId][1]" group-by="@externalId">
                 <PersonName personNameId="{substring(@externalId, string-length($personExternalIdPrefix) + 1)}">
                   <mpeg7:GivenName xml:lang="NL" initial="">
                     <xsl:value-of select="givenName" />
@@ -205,7 +213,7 @@
                     <xsl:value-of select="familyName" />
                   </mpeg7:FamilyName>
                 </PersonName>
-              </xsl:for-each>
+              </xsl:for-each-group>
             </xsl:if>
           </xsl:for-each-group>
         </CreditsInformationTable>

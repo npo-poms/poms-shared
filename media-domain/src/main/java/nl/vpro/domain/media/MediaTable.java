@@ -34,11 +34,11 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @XmlRootElement(name = "mediaInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaTableType",
-         propOrder = {
-             "programTable",
-             "groupTable",
-             "locationTable",
-             "schedule"}
+    propOrder = {
+        "programTable",
+        "groupTable",
+        "locationTable",
+        "schedule"}
 )
 @lombok.Builder
 @AllArgsConstructor
@@ -120,6 +120,29 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         for (Group g : mo.getGroupTable()) {
             addGroup(g);
         }
+        return this;
+    }
+
+    public MediaTable fillFrom(Schedule schedule) {
+        this.schedule = schedule;
+        schedule.getScheduleEvents().forEach(e -> {
+            addProgram(e.getParent());
+            for (MemberRef g : e.getParent().getEpisodeOf()) {
+                if (g.getGroup() instanceof Group group) {
+                    if (group.getType() == GroupType.SERIES) {
+                        addGroup(group);
+                    } else if (group.getType() == GroupType.SEASON) {
+                        addGroup(group);
+                        for (MemberRef gg : group.getMemberOf()) {
+                            if (gg.getGroup() instanceof Group series && series.getType() == GroupType.SERIES) {
+                                addGroup(series);
+                            }
+                        }
+                    }
+                }
+
+            }
+        });
         return this;
     }
 
