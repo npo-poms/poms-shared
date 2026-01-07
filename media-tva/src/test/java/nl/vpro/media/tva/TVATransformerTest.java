@@ -24,8 +24,6 @@ import jakarta.xml.bind.JAXB;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.test.appender.ListAppender;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,6 +38,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.Validation;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
+import nl.vpro.logging.log4j2.CaptureListFromLogger;
 import nl.vpro.media.tva.saxon.extension.*;
 import nl.vpro.validation.ValidationLevel;
 
@@ -62,12 +61,9 @@ public class TVATransformerTest {
     static final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
 
-    static ListAppender appender = new ListAppender("List");
+    static CaptureListFromLogger appender = new CaptureListFromLogger(false );
 
     static {
-        var loggerContext = LoggerContext.getContext(false);
-        appender.start();
-        loggerContext.getConfiguration().addLoggerAppender(loggerContext.getRootLogger(), appender);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
 
@@ -79,6 +75,11 @@ public class TVATransformerTest {
         genreFunction.setNotFound(NotFound.FATAL);
         genreFunction.setMatchOnValuePrefix("");
         genreFunction.setIgnore(Set.of());
+    }
+
+    @AfterAll
+    public static void shutdown() {
+        appender.close();
     }
 
 
