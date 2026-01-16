@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.validation.NoHtml;
 
 @Getter
