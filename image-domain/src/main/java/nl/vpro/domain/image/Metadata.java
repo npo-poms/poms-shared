@@ -10,7 +10,7 @@ import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.Trackable;
 import nl.vpro.domain.support.License;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.validation.CRID;
 import nl.vpro.validation.URI;
 

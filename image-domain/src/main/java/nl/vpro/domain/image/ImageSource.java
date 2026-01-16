@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 
 import static nl.vpro.domain.image.ImageFormat.*;
 
