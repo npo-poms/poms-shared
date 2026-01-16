@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,8 +16,8 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.time.DurationMin;
 import org.meeuw.functional.TriFunction;
 
@@ -30,6 +29,7 @@ import com.google.common.collect.Range;
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.jackson.Views;
 import nl.vpro.jackson2.*;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.xml.bind.*;
@@ -159,12 +159,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Deprecated
     protected ScheduleEventType type;
 
+    @Getter
     @Setter
     @Embedded
     @Column(name = "primary")
     @XmlElement
     protected Lifestyle primaryLifestyle;
 
+    @Getter
     @Setter
     @Embedded
     @Column(name = "secondary")
@@ -620,14 +622,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
             this.mediaObject.removeScheduleEvent(this);
             this.mediaObject = null;
         }
-    }
-
-    public Lifestyle getPrimaryLifestyle() {
-        return primaryLifestyle;
-    }
-
-    public SecondaryLifestyle getSecondaryLifestyle() {
-        return secondaryLifestyle;
     }
 
     @Override
