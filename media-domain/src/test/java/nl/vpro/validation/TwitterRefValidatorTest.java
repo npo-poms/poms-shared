@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.12
  */
+@SuppressWarnings("deprecation")
 public class TwitterRefValidatorTest {
 
     @Test
