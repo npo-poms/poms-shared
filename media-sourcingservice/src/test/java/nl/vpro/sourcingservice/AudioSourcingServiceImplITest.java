@@ -80,6 +80,7 @@ class AudioSourcingServiceImplITest {
             Files.size(file),
             "audio/mpeg",
             cachingInputStream,
+            null,
             "m.meeuwissen.vpro@gmail.com"
         ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);

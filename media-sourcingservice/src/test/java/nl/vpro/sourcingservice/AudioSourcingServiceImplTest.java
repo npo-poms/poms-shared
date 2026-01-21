@@ -50,7 +50,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException, ExecutionException {
+    public void uploadAudio() throws InterruptedException, ExecutionException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -68,6 +68,7 @@ class AudioSourcingServiceImplTest {
             bytes.length,
             "audio/mpeg",
             cachingInputStream,
+            null,
             "m.meeuwissen.vpro@gmail.com"
         ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);

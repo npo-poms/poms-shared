@@ -42,7 +42,7 @@ public class NEPGatekeeperServiceImplITest {
 
     }
 
-    String mid = "POMS_VPRO_139817";
+    String mid = "WO_NTR_20302449";
 
     @Test
     public void transcode() {
@@ -51,7 +51,7 @@ public class NEPGatekeeperServiceImplITest {
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
             .platforms(Collections.singletonList("internetvod"))
-            .file(gatekeeperService.getFtpUserName(), "digitaal@vpro.nl/test.mp4")
+            .file(gatekeeperService.getFtpUserName(), "WO_NTR_20302449_2025-12-03T181249570_sj_aflevering24_2025_met_ad.mp4")
             .build()
             ;
 
@@ -66,12 +66,13 @@ public class NEPGatekeeperServiceImplITest {
     @Test
     @Disabled
     public void retranscode() {
+        String mid = "WO_BV_20310248";
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
-            .mid("POMS_BV_16593726")
+            .mid(mid)
             .encryption(EncryptionType.DRM)
             .priority(PriorityType.LOW)
             .platforms(Collections.singletonList("internetvod"))
-            .file(null, "/npoweb-bnnvara/20210809-blend-aflevering8-hq.mp4")
+            .file("npoweb-vpro", "/bnnvara-api/%s.mp4".formatted(mid))
             .build()
             ;
 

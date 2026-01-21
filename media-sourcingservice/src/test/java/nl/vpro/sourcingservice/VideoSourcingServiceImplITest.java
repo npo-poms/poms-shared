@@ -60,6 +60,7 @@ class VideoSourcingServiceImplITest {
             Files.size(file),
             "video/mp4",
             Files.newInputStream(file),
+            null,
             "michiel.meeuwissen@gmail.com"
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
