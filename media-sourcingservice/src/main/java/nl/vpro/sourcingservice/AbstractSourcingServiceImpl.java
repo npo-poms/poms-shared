@@ -108,13 +108,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         long fileSize,
         String contentType,
         InputStream inputStream,
+        @Nullable String profile,
         @Nullable String errors
-    )  {
+    ) {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
-        body.addChannel(FILE,  fileName,
+        body.addChannel(FILE, fileName,
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
@@ -130,6 +131,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .build(),
             contentType
         );
+        if (profile != null) {
+            body.add("profile", profile);
+        }
+        String callbackUrl = getCallbackUrl(mid);
+        if (callbackUrl != null) {
+            body.add("callback_url", callbackUrl);
+        }
 
         final HttpRequest post = uploadRequestBuilder
             .header("Content-Type", body.contentType())
