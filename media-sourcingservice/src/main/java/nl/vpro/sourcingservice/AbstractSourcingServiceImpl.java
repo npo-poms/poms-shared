@@ -132,10 +132,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             contentType
         );
         if (profile != null) {
+            logger.info("Profile for {}: {}", mid, profile);
             body.add("profile", profile);
         }
         String callbackUrl = getCallbackUrl(mid);
         if (callbackUrl != null) {
+            logger.info("Callback URL for {}: {}", mid, URLUtils.hidePassword(callbackUrl));
             body.add("callback_url", callbackUrl);
         }
 
