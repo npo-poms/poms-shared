@@ -82,7 +82,7 @@ public class UploadUtils {
             Phase prevPhase = PHASE.get();
             PHASE.set(phase);
             PHASE_LISTENER.get().accept(phase);
-            log.info("Upload phase set to {}->{}", prevPhase, phase);
+            log.debug("Upload phase set to {}->{}", prevPhase, phase);
         }
         MDC.put(UPLOAD_PHASE_MDC_KEY, phase.name());
     }

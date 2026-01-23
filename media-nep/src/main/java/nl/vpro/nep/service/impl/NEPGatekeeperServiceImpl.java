@@ -174,9 +174,10 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         try (CloseableHttpResponse response = client.execute(httpPost, clientContext);
               InputStream content =  response.getEntity().getContent()) {
             if (response.getStatusLine().getStatusCode() >= 300) {
-                ByteArrayOutputStream body = new ByteArrayOutputStream();
-                IOUtils.copy(content, body);
-                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+                try (ByteArrayOutputStream body = new ByteArrayOutputStream()) {
+                    IOUtils.copy(content, body);
+                    throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+                }
             }
             return MAPPER.readValue(content, WorkflowExecution.class);
         }
