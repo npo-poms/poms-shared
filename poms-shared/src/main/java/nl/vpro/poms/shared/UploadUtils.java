@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.slf4j.MDC;
 
+import nl.vpro.i18n.Displayable;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 import nl.vpro.util.FileSizeFormatter;
@@ -15,15 +16,47 @@ import static nl.vpro.i18n.MultiLanguageString.en;
  */
 public class UploadUtils {
 
-    public enum Phase {
+    public enum Phase implements Displayable {
+        /**
+         * Receiving from client is busy
+         */
         receiving,
+        /**
+         * Receiving from client is done.
+         */
         receiving_done,
+        /**
+         * Determining media info about the received asset now
+         */
         mediainfo,
+        /**
+         * Determining media info about the received asset is done now
+         */
         mediainfo_conclusion,
+        /**
+         * Announcing the upload. Making prediction in poms.
+         */
         announcing,
+
+        /**
+         * Now uploading the received asset (ftp to NEP)
+         */
         uploading,
+        /**
+         * Other actions in preparation for transcoding
+         */
         transcode_preparing,
+
+        /**
+         * Receiving/uploading all done, and transcoding is requested
+         */
         transcode_requested
+        ;
+
+        @Override
+        public String getDisplayName() {
+            return name();
+        }
     }
 
     /**
