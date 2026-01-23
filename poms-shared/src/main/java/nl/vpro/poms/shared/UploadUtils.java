@@ -1,5 +1,7 @@
 package nl.vpro.poms.shared;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.function.Consumer;
 
 import org.slf4j.MDC;
@@ -14,7 +16,10 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 /**
  * @since 8.10 (Used to be in SourcingService)
  */
+@Slf4j
 public class UploadUtils {
+
+    public static final String UPLOAD_PHASE_MDC_KEY = "uploadPhase";
 
     public enum Phase implements Displayable {
         /**
@@ -50,7 +55,10 @@ public class UploadUtils {
         /**
          * Receiving/uploading all done, and transcoding is requested
          */
-        transcode_requested
+        transcode_requested,
+
+        error,
+        transcode_error
         ;
 
         @Override
@@ -67,11 +75,16 @@ public class UploadUtils {
 
     private static final Consumer<Phase> SET_PHASE = PHASE::set;
 
-    public static final ThreadLocal<Consumer<Phase>> PHASE_LISTENER = ThreadLocal.withInitial(() -> SET_PHASE);
+    public static final ThreadLocal<Consumer<Phase>> PHASE_LISTENER = ThreadLocal.withInitial(() -> (p) -> {});
 
     public static void setPhase(Phase phase) {
-        PHASE_LISTENER.get().accept(phase);
-        MDC.put("uploadPhase", phase.name());
+        if (phase != PHASE.get()) {
+            Phase prevPhase = PHASE.get();
+            PHASE.set(phase);
+            PHASE_LISTENER.get().accept(phase);
+            log.info("Upload phase set to {}->{}", prevPhase, phase);
+        }
+        MDC.put(UPLOAD_PHASE_MDC_KEY, phase.name());
     }
 
     public static Phase getPhase() {
@@ -85,7 +98,7 @@ public class UploadUtils {
     public static void remove() {
         PHASE.remove();
         PHASE_LISTENER.remove();
-        MDC.remove("uploadPhase");
+        MDC.remove(UPLOAD_PHASE_MDC_KEY);
     }
 
     /**
