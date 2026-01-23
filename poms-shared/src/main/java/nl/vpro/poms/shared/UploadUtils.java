@@ -2,6 +2,8 @@ package nl.vpro.poms.shared;
 
 import java.util.function.Consumer;
 
+import org.slf4j.MDC;
+
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 import nl.vpro.util.FileSizeFormatter;
@@ -13,12 +15,45 @@ import static nl.vpro.i18n.MultiLanguageString.en;
  */
 public class UploadUtils {
 
+    public enum Phase {
+        receiving,
+        receiving_done,
+        mediainfo,
+        mediainfo_conclusion,
+        announcing,
+        uploading,
+        transcode_preparing,
+        transcode_requested
+    }
 
     /**
      * The current phase of the upload, used to log the phase in which the upload is.
      * This is also included in the id of the html message that is sent to the GUI.
      */
-    public static final ThreadLocal<String> PHASE = ThreadLocal.withInitial(() -> null);
+    private static final ThreadLocal<Phase> PHASE = ThreadLocal.withInitial(() -> null);
+
+    private static final Consumer<Phase> SET_PHASE = PHASE::set;
+
+    public static final ThreadLocal<Consumer<Phase>> PHASE_LISTENER = ThreadLocal.withInitial(() -> SET_PHASE);
+
+    public static void setPhase(Phase phase) {
+        PHASE_LISTENER.get().accept(phase);
+        MDC.put("uploadPhase", phase.name());
+    }
+
+    public static Phase getPhase() {
+        return PHASE.get();
+    }
+    public static String getPhaseName() {
+        Phase phase =  PHASE.get();
+        return phase == null ? "" : phase.name();
+    }
+
+    public static void remove() {
+        PHASE.remove();
+        PHASE_LISTENER.remove();
+        MDC.remove("uploadPhase");
+    }
 
     /**
      * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'receive'.

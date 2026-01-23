@@ -43,6 +43,7 @@ import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.nep.service.NEPGatekeeperService;
 import nl.vpro.nep.service.exception.NEPException;
+import nl.vpro.poms.shared.UploadUtils;
 import nl.vpro.util.*;
 
 import static nl.vpro.util.TimeUtils.parseDuration;
@@ -158,7 +159,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     @Override
     public WorkflowExecution transcode(
         @NonNull  WorkflowExecutionRequest request) throws IOException {
-
+        UploadUtils.setPhase(UploadUtils.Phase.transcode_preparing);
         CloseableHttpClient client = getHttpClient();
         String json = MAPPER.writeValueAsString(request);
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);

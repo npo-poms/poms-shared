@@ -14,7 +14,8 @@ import nl.vpro.mediainfo.MediaInfoService;
 import nl.vpro.nep.service.NEPUploadService;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
-import static nl.vpro.poms.shared.UploadUtils.PHASE;
+import static nl.vpro.poms.shared.UploadUtils.Phase.*;
+import static nl.vpro.poms.shared.UploadUtils.setPhase;
 
 /**
  * @since 8.10
@@ -39,14 +40,14 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
 
     @Override
     public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path incomingFile, boolean replaces)  {
-        PHASE.set("mediainfo");
+        setPhase(mediainfo);
 
         MediaInfo mediaInfo = mediainfoService.apply(incomingFile);
         logger.info(
             en("Mediainfo for %s: %s")
                 .nl("Mediainformatie voor %s: %s")
                 .formatted(nepFile, mediaInfo).build());
-        PHASE.set("mediainfo-conclusion");
+        setPhase(mediainfo_conclusion);
 
         final  NEPUploadService service;
 
@@ -66,7 +67,7 @@ public class NEPUploadServiceSwitcher implements NEPUploadService {
             service = nepftpUploadService;
         }
         try {
-            PHASE.set("upload");
+            setPhase(uploading);
             return service.upload(logger, nepFile, size, incomingFile, replaces).withMediaInfo(mediaInfo);
         } catch (IOException e) {
             logger.error("Error uploading {} with {} : {}", nepFile, service, e.getMessage(), e);

@@ -27,6 +27,8 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
+import nl.vpro.poms.shared.UploadUtils;
+import nl.vpro.poms.shared.UploadUtils.Phase;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.TimeUtils;
 
@@ -108,6 +110,7 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
 
         final Instant start = Instant.now();
         final long infoBatch = 1;
+        UploadUtils.setPhase(Phase.receiving);
 
         FTPClient client = new FTPClient();
         try (ObservableInputStream observableInputStream = new ObservableInputStream(incomingStream)) {
@@ -133,7 +136,7 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
                     }
                 }
                 @Override
-                public void data(int value) throws IOException {
+                public void data(int value) {
                     numberOfBytes.incrementAndGet();
                 }
                 @Override
@@ -171,6 +174,8 @@ public class NEPFTPSUploadServiceImpl implements NEPUploadService {
 
             return numberOfBytes.get();
         } finally {
+            UploadUtils.setPhase(Phase.receiving_done);
+
             IOUtils.closeQuietly(incomingStream);
              try {
                  client.logout();
