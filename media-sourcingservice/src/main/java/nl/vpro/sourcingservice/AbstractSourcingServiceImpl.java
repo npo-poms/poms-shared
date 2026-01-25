@@ -152,14 +152,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final CompletableFuture<HttpResponse<String>> asyncSend = client.sendAsync(post, HttpResponse.BodyHandlers.ofString());
 
 
-        return asyncSend.thenApply((send) -> {
-            final boolean success = send.statusCode() >= 200 && send.statusCode() < 300;
+        return asyncSend.thenApply((response) -> {
+            final boolean success = response.statusCode() >= 200 && response.statusCode() < 300;
 
 
             if (!success) {
-                logger.warn("Status code for {}: {}", post.uri(), send.statusCode());
+                logger.warn("Status code for {}: {}", post.uri(), response.statusCode());
             }  else {
-                logger.info("Status code for {}: {}", post.uri(), send.statusCode());
+                logger.info("Status code for {}: {}", post.uri(), response.statusCode());
 
             }
             Long count = null;
@@ -168,15 +168,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             }
 
             String status;
-            String response;
+            String responseBody;
             try {
-                final JsonNode bodyNode = JSONREADER.readTree(send.body());
+                final JsonNode bodyNode = JSONREADER.readTree(response.body());
                 logger.info("{} {}", mid, bodyNode);
-
                 status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
-                response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+                responseBody = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
                 if (!success) {
-                    throw new SourcingServiceException(send.statusCode(), bodyNode);
+                    throw new SourcingServiceException(response.statusCode(), bodyNode);
                 }
             } catch (SourcingServiceException sse) {
                 throw sse;
@@ -185,24 +184,24 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                     logger.error(e.getClass() + " " + e.getMessage(), e);
                 }
                 status = null;
-                response = null;
+                responseBody = null;
 
             }
 
             logger.log(success ? Level.INFO : Level.ERROR,
-                "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
+                "{} uploaded: {} ({}) {} {}", mid, status, response.statusCode(), FileSizeFormatter.DEFAULT.format(count), response.body());
 
             boolean retryable = true;
-            if (send.statusCode() == 404) {
+            if (response.statusCode() == 404) {
                 retryable = false;
             }
 
 
             return new UploadResponse(
                 mid,
-                send.statusCode(),
+                response.statusCode(),
                 status,
-                response,
+                responseBody,
                 count,
                 "2:" + configuration.get().cleanBaseUrl(),
                 retryable
