@@ -5,13 +5,15 @@
          "http://www.springframework.org/schema/beans   https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-  <bean id="audioConfiguration" class="nl.vpro.sourcingservice.ConfigurationService">
+  <bean id="srcsAudioConfiguration"
+
+        class="nl.vpro.sourcingservice.ConfigurationService">
     <constructor-arg name="version" value="2"/>
     <constructor-arg name="configurations">
       <list>
         <bean class="nl.vpro.sourcingservice.Configuration">
           <constructor-arg name="baseUrl" value="${sourcingservice.v2.baseUrl}"/>
-          <constructor-arg name="callbackBaseUrl" value="#{null}"/>
+          <constructor-arg name="callbackBaseUrl" value="${sourcingservice.v2.callbackBaseUrl:#{null}}"/>
           <constructor-arg name="token" value="${sourcingservice.v2.token}"/>
           <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
           <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
@@ -20,6 +22,24 @@
       </list>
     </constructor-arg>
   </bean>
+
+
+  <bean id="srcsVideoConfiguration" class="nl.vpro.sourcingservice.ConfigurationService">
+    <constructor-arg name="version" value="2"/>
+    <constructor-arg name="configurations">
+      <list>
+        <bean class="nl.vpro.sourcingservice.Configuration">
+          <constructor-arg name="baseUrl" value="${sourcingservice.v2.baseUrl}"/>
+          <constructor-arg name="callbackBaseUrl" value="${sourcingservice.v2.callbackBaseUrl:#{null}}"/>
+          <constructor-arg name="token" value="${sourcingservice.v2.token}"/>
+          <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
+          <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
+          <constructor-arg name="version" value="2"/>
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+
   <bean class="nl.vpro.sourcingservice.AudioSourcingServiceImpl" />
   <bean class="nl.vpro.sourcingservice.VideoSourcingServiceImpl" />
 </beans>

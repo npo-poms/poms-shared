@@ -29,6 +29,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.*;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
+import static nl.vpro.i18n.MultiLanguageString.nl;
 
 
 /**
@@ -181,7 +182,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 throw sse;
             } catch (Exception e) {
                 if (success) {
-                    logger.error(e.getClass() + " " + e.getMessage(), e);
+                    logger.error(response.uri() + ":" + e.getClass() + " " + e.getMessage(), e);
                 }
                 status = null;
                 responseBody = null;
@@ -189,7 +190,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             }
 
             logger.log(success ? Level.INFO : Level.ERROR,
-                "{} uploaded: {} ({}) {} {}", mid, status, response.statusCode(), FileSizeFormatter.DEFAULT.format(count), response.body());
+                nl("{} {} geüpload: {} ({}) {} {}")
+                    .en("{} {} uploaded: {} ({}) {} {}")
+                        .slf4jArgs(
+                            mid, response.uri(),  status == null ? "no status" : status, response.statusCode(),
+                            FileSizeFormatter.DEFAULT.format(count), response.body()).toString());
 
             boolean retryable = true;
             if (response.statusCode() == 404) {

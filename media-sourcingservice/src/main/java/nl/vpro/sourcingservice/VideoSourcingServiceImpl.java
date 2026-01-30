@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.function.Supplier;
 
+import jakarta.inject.Named;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.AVFileFormat;
@@ -18,7 +20,7 @@ import nl.vpro.domain.media.AVFileFormat;
 public class VideoSourcingServiceImpl extends AbstractSourcingServiceImpl implements VideoSourcingService {
 
     public VideoSourcingServiceImpl(
-        @NonNull Supplier<Configuration> configuration,
+        @NonNull @Named("srcsVideoConfiguration") Supplier<Configuration> configuration,
         MeterRegistry meterRegistry
        ) {
         super(configuration, meterRegistry);

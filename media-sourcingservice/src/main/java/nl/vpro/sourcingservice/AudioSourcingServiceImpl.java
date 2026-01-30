@@ -23,7 +23,7 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
 
     @Inject
     public AudioSourcingServiceImpl(
-        @NonNull @Named("audioConfiguration") Supplier<Configuration> configuration,
+        @NonNull @Named("srcsAudioConfiguration") Supplier<Configuration> configuration,
         MeterRegistry meterRegistry
        ) {
         super(configuration, meterRegistry);
