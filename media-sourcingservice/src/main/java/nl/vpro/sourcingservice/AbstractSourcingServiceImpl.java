@@ -203,7 +203,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 status,
                 responseBody,
                 count,
-                "2:" + configuration.get().cleanBaseUrl(),
+                "v2:" + configuration.get().cleanBaseUrl(),
                 retryable
             );
         });
