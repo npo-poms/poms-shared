@@ -38,13 +38,13 @@ class AudioSourcingServiceImplTest {
         Configuration configuration = new Configuration(
             wireMock.getHttpBaseUrl(),
             null,
+            null,
             "token",
             1000,
-            null,
-            2
+            null
         );
         impl = new AudioSourcingServiceImpl(
-            () -> configuration,
+             configuration,
             new LoggingMeterRegistry()
         );
     }

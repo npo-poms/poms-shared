@@ -49,13 +49,13 @@ class AudioSourcingServiceImplITest {
         Configuration configuration = new Configuration(
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
+            PROPERTIES.getProperty("sourcingservice.callbackAuthentication"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
-            "m.meeuwissen.vpro@gmail.com",
-            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2"))
+            "m.meeuwissen.vpro@gmail.com"
         );
         impl = new AudioSourcingServiceImpl(
-            () -> configuration,
+            configuration,
             new LoggingMeterRegistry()
         );
     }

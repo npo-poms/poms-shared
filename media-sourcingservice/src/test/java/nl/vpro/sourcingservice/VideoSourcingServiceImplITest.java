@@ -38,13 +38,13 @@ class VideoSourcingServiceImplITest {
         Configuration configuration = new Configuration(
             PROPERTIES.getProperty("sourcingservice.video.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
+            PROPERTIES.getProperty("sourcingservice.callbackAuthentication"),
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
-            "m.meeuwissen.vpro@gmail.com",
-            2
+            "m.meeuwissen.vpro@gmail.com"
         );
         impl = new VideoSourcingServiceImpl(
-            () -> configuration,
+            configuration,
             new LoggingMeterRegistry()
         );
     }
@@ -60,7 +60,7 @@ class VideoSourcingServiceImplITest {
             Files.size(file),
             "video/mp4",
             Files.newInputStream(file),
-            null,
+            "portrait",
             "michiel.meeuwissen@gmail.com"
         );
         log.info("Took {}", Duration.between(start, Instant.now()));

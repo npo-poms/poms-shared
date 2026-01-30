@@ -11,7 +11,6 @@ import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -61,12 +60,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
 
-    private final Supplier<Configuration> configuration;
+    private final Configuration configuration;
 
     private final MeterRegistry meterRegistry;
 
     AbstractSourcingServiceImpl(
-        Supplier<Configuration> configuration,
+        Configuration configuration,
         MeterRegistry meterRegistry) {
 
         this.configuration = configuration;
@@ -120,14 +119,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
-                .batchSize((long) configuration.get().chunkSize())
+                .batchSize((long) configuration.chunkSize())
                 .consumer(l -> logger.info(
                     en("Uploaded %s/%s to %s")
                         .nl("Geüpload %s/%s naar %s")
                         .formatted(
                             FileSizeFormatter.DEFAULT.format(l),
                             FileSizeFormatter.DEFAULT.format(fileSize),
-                            configuration.get().cleanBaseUrl()))
+                            configuration.cleanBaseUrl()))
                 )
                 .build(),
             contentType
@@ -138,6 +137,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
         String callbackUrl = getCallbackUrl(mid);
         if (callbackUrl != null) {
+            String authentication = configuration.callbackAuthentication();
+            if (authentication != null) {
+                callbackUrl = URLUtils.addAuthentication(callbackUrl, authentication);
+            }
             logger.info("Callback URL for {}: {}", mid, URLUtils.hidePassword(callbackUrl));
             body.add("callback_url", callbackUrl);
         }
@@ -208,7 +211,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 status,
                 responseBody,
                 count,
-                "v2:" + configuration.get().cleanBaseUrl(),
+                "v2:" + configuration.cleanBaseUrl(),
                 retryable
             );
         });
@@ -257,7 +260,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Nullable
     protected String getCallbackUrl(String mid) {
-        return configuration.get().callBackUrl(mid);
+        return configuration.callBackUrl(mid);
     }
 
 
@@ -283,13 +286,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest.Builder request(String path) {
         return HttpRequest.newBuilder()
             .header("Authorization", "Bearer " +
-                Optional.ofNullable(configuration.get().token()).orElseThrow(() -> new IllegalStateException("No token configured")))
+                Optional.ofNullable(configuration.token()).orElseThrow(() -> new IllegalStateException("No token configured")))
             .uri(URI.create(forPath(path)));
     }
 
 
     String forPath(String path) {
-        return configuration.get().cleanBaseUrl() + "api/" + path;
+        return configuration.cleanBaseUrl() + "api/" + path;
     }
 
 
@@ -305,7 +308,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @ManagedAttribute
     public String getBaseUrl() {
-        return configuration.get().cleanBaseUrl();
+        return configuration.cleanBaseUrl();
     }
 
 

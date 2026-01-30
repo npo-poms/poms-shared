@@ -5,10 +5,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public record Configuration(
     String baseUrl,
     @Nullable String callbackBaseUrl,
+    @Nullable String callbackAuthentication,
     String token,
     int chunkSize,
-    String defaultEmail,
-    int version) {
+    String defaultEmail) {
 
     public String cleanBaseUrl() {
         return  baseUrl.replaceAll("([^/])$","$1/");
