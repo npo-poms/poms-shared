@@ -45,6 +45,8 @@ import static nl.vpro.i18n.MultiLanguageString.nl;
 @Log4j2
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
+    public static final String NAME = "NPO Sourcing Service";
+
     private static final String FILE   = "file";
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -365,7 +367,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Override
     public String name() {
-        return "NPO Sourcing Service (" + implName().toUpperCase() + ")";
+        return NAME + " (" + implName().toUpperCase() + ")";
     }
 
 
