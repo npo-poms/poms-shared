@@ -359,4 +359,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return getUploadString();
     }
 
+    @Override
+    public String name() {
+        return "NPO Sourcing Service (" + implName().toUpperCase() + ")";
+    }
+
+
+
 }
