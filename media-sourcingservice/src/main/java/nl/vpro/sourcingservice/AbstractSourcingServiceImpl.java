@@ -241,9 +241,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                             FileSizeFormatter.DEFAULT.format(count),
                             httpBody).build());
 
-            boolean retryable = true;
+            Boolean retryable;
             if (response.statusCode() == 404) {
                 retryable = false;
+            } else if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                retryable = null;
+            } else {
+                retryable = true;
             }
 
 
