@@ -14,6 +14,8 @@ import java.util.concurrent.CompletableFuture;
 
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import com.fasterxml.jackson.core.StreamReadFeature;
@@ -100,6 +102,24 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected abstract AVFileFormat defaultFormat();
 
+    @Override
+    public CompletableFuture<UploadResponse> upload(
+        SimpleLogger logger,
+        String mid,
+        long fileSize,
+        String mimeType,
+        InputStream inputStream,
+        @Nullable String profile,
+        @Nullable String errors
+    ) {
+        if (inputStream instanceof FileCachingInputStream fileCachingInputStream) {
+            return upload(logger, mid, fileSize, mimeType, fileCachingInputStream, profile, errors);
+        } else {
+            logger.warn("InputStream is not a FileCachingInputStream, falling back to non-caching upload for {}", mid);
+            return upload(logger, mid, fileSize, mimeType, inputStream, profile, errors, null);
+        }
+    }
+
 
     @Override
     public CompletableFuture<UploadResponse> upload(
@@ -107,9 +127,23 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String mid,
         long fileSize,
         String contentType,
-        InputStream inputStream,
+        FileCachingInputStream inputStream,
         @Nullable String profile,
         @Nullable String errors
+    ) {
+        return upload(logger, mid, fileSize, contentType, inputStream, profile, errors, inputStream.getCount());
+    }
+
+
+    protected CompletableFuture<UploadResponse> upload(
+        SimpleLogger logger,
+        String mid,
+        long fileSize,
+        String contentType,
+        InputStream inputStream,
+        @Nullable String profile,
+        @Nullable String errors,
+        Long count
     ) {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
@@ -166,10 +200,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 logger.info("Status code for {}: {}", post.uri(), response.statusCode());
 
             }
-            Long count = null;
-            if (inputStream instanceof FileCachingInputStream fc) {
-                count = fc.getCount();
-            }
+
 
             String status;
             String responseBody;
@@ -192,12 +223,23 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
             }
 
+            final String httpBody;
+            if (response.headers().firstValue("content-type").orElse("text/plain").startsWith("text/html")) {
+                // Silly sourcing service gives HTML back on 404's. This is unpresentable.
+                httpBody = "HTML:" + Jsoup.clean(response.body(), Safelist.none());
+            } else {
+                httpBody = response.body();
+            }
+
             logger.log(success ? Level.INFO : Level.ERROR,
                 nl("{} {} geüpload: {} ({}) {} {}")
                     .en("{} {} uploaded: {} ({}) {} {}")
                         .slf4jArgs(
-                            mid, response.uri(),  status == null ? "no status" : status, response.statusCode(),
-                            FileSizeFormatter.DEFAULT.format(count), response.body()).toString());
+                            mid,
+                            response.uri(),
+                            status == null ? "no status" : status, response.statusCode(),
+                            FileSizeFormatter.DEFAULT.format(count),
+                            httpBody).build());
 
             boolean retryable = true;
             if (response.statusCode() == 404) {
@@ -209,7 +251,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 mid,
                 response.statusCode(),
                 status,
-                responseBody,
+                responseBody == null ? httpBody : responseBody,
                 count,
                 "v2:" + configuration.cleanBaseUrl(),
                 retryable

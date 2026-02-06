@@ -8,8 +8,13 @@ import java.nio.file.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.Test;
+
+import nl.vpro.domain.media.update.UploadResponse;
+import nl.vpro.util.FileCachingInputStream;
 
 import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
 
@@ -50,19 +55,22 @@ class VideoSourcingServiceImplITest {
     }
 
     @Test
-    public void uploadVideo() throws IOException, InterruptedException {
+    public void uploadVideo() throws IOException, ExecutionException, InterruptedException {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "portrait.mp4");
 
-        impl.upload(
+        CompletableFuture<UploadResponse> upload = impl.upload(
             simple(log),
-            "WO_VPRO_20286719",
+            "POMS_EO_723602_bestaatniet",
             Files.size(file),
             "video/mp4",
-            Files.newInputStream(file),
+            FileCachingInputStream.builder()
+                .simpleLogger(simple(log))
+                .input(Files.newInputStream(file)).build(),
             "portrait",
             "michiel.meeuwissen@gmail.com"
         );
+        upload.get();
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
