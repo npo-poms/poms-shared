@@ -57,5 +57,7 @@ public interface SourcingService {
      */
     String getUploadString();
 
+    String name();
+
 
 }

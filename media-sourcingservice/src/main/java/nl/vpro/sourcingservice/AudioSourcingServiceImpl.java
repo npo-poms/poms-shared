@@ -3,8 +3,6 @@ package nl.vpro.sourcingservice;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.function.Supplier;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
