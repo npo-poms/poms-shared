@@ -21,10 +21,11 @@ public class TranscodeStatusTest {
             .mid("mid_123")
             .broadcasters(Arrays.asList("VPRO", "EO"))
             .crids(List.of("crid://bnnvara.mema.media_item/26e81510-e430-40a4-8df1-964c92c86a72"))
+            .transcodeService("NEP")
             .build();
 
         JAXBTestUtil.roundTripAndSimilar(status, """
-            <transcodeStatus mid="mid_123" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+            <transcodeStatus mid="mid_123" transcodeService="NEP" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
                 <broadcasters>
                     <broadcaster>VPRO</broadcaster>
                     <broadcaster>EO</broadcaster>
