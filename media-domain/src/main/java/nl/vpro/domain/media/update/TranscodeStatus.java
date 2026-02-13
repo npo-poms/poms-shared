@@ -62,7 +62,7 @@ public class TranscodeStatus {
 
 
     @XmlAttribute
-    String transcodeService;
+    TranscodeService transcodeService;
 
     public TranscodeStatus() {
     }
@@ -86,5 +86,11 @@ public class TranscodeStatus {
             this.description = description;
             this.endStatus = endStatus;
         }
+    }
+
+    public enum TranscodeService {
+        NEP,
+        SRCS_AUDIO,
+        SRCS_VIDEO
     }
 }
