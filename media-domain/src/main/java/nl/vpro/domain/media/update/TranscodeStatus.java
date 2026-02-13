@@ -91,6 +91,7 @@ public class TranscodeStatus {
     public enum TranscodeService {
         NEP,
         SRCS_AUDIO,
-        SRCS_VIDEO
+        SRCS_VIDEO,
+        CDN
     }
 }
