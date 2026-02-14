@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.i18n.Displayable;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -88,10 +89,16 @@ public class TranscodeStatus {
         }
     }
 
-    public enum TranscodeService {
-        NEP,
-        SRCS_AUDIO,
-        SRCS_VIDEO,
-        CDN
+    public enum TranscodeService implements Displayable {
+        NEP("NEP"),
+        SRCS_AUDIO("Sourcing Service Audio"),
+        SRCS_VIDEO("Sourcing Service Video"),
+        CDN("CDN");
+        @Getter
+        private final String displayName;
+
+        TranscodeService(String displayName) {
+            this.displayName = displayName;
+        }
     }
 }
