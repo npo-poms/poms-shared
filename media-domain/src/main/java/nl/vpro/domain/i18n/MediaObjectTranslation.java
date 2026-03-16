@@ -102,26 +102,23 @@ public class MediaObjectTranslation implements
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"),
     })
-    @Valid
     @XmlElement(name = "title", required = true)
     @JsonProperty("titles")
     @SortNatural
-    protected Set<TitleTranslation> titles = new TreeSet<>();
+    protected Set<@Valid TitleTranslation> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
-    @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
     @SortNatural
-    protected Set<DescriptionTranslation> descriptions = new TreeSet<>();
+    protected Set<@Valid DescriptionTranslation> descriptions = new TreeSet<>();
 
     @ManyToMany
-    @Valid
     @JoinTable
     @XmlElement(name = "tag")
     @JsonProperty("tags")
-    protected Set<Tag> tags = new TreeSet<>();
+    protected Set<@Valid Tag> tags = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
@@ -129,15 +126,14 @@ public class MediaObjectTranslation implements
     @OrderColumn(name = "list_index")
     @XmlElement(name = "website")
     @JsonProperty("websites")
-    protected List<WebsiteTranslation> websites = new ArrayList<>();
+    protected List<@Valid WebsiteTranslation> websites = new ArrayList<>();
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index")
-    @Valid
     @XmlElement(name = "twitter")
     @JsonProperty("twitter")
-    protected List<SocialRefTranslation> twitterRefs = new ArrayList<>();
+    protected List<@Valid SocialRefTranslation> twitterRefs = new ArrayList<>();
 
     public MediaObjectTranslation(String mid, Locale locale) {
         this.mid = mid;

@@ -25,8 +25,7 @@ import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
 public class DateRangeMatcherList extends MatcherList<Instant, DateRangeMatcher> implements Predicate<Instant> {
 
     @XmlElement(name = "matcher")
-    @Valid
-    protected List<DateRangeMatcher> matchers = new ArrayList<>();
+    protected List<@Valid DateRangeMatcher> matchers = new ArrayList<>();
 
     public DateRangeMatcherList() {
     }

@@ -22,8 +22,7 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
     extends MatcherList<String, T>
     implements Predicate<String> {
 
-    @Valid
-    protected List<T> matchers = new ArrayList<>();
+    protected List<@Valid T> matchers = new ArrayList<>();
 
     protected AbstractTextMatcherList() {}
 

@@ -28,9 +28,8 @@ public class TitleFacetList
     @Valid
     private TitleSearch subSearch;
 
-    @Valid
     @XmlElement(name = "title")
-    protected List<TitleFacet> facets;
+    protected List<@Valid TitleFacet> facets;
 
     public TitleFacetList() {
         super(null, null, null);

@@ -282,10 +282,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @ManyToMany
     @OrderColumn(name = "list_index",
         nullable = false)
-    @Valid
+
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor bij imports.
-    protected List<@NotNull Broadcaster> broadcasters;
+    protected List<@NotNull  @Valid Broadcaster> broadcasters;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
@@ -329,21 +329,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
-    @Valid
     @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=RedundantValidatorGroup.class)
-    protected Set<@NotNull Title> titles;
+    protected Set<@NotNull @Valid Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected Set<@NotNull Description> descriptions;
+    protected Set<@NotNull @Valid Description> descriptions;
 
     @ManyToMany(cascade = {DETACH, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this is odd.
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected SortedSet<@NotNull Genre> genres;
+    protected SortedSet<@NotNull @Valid Genre> genres;
 
     @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -470,7 +467,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JoinColumn(name = "mediaobject_id", nullable = true)
     @OrderColumn(name = "list_index", nullable = true /* hibernate sucks */)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected @Valid List<@NotNull @Valid Email> email;
+    protected List<@NotNull @Valid Email> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -479,7 +476,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // Did I mention that hibernate sucks?
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected @Valid List<@NotNull @Valid Website> websites;
+    protected List<@NotNull @Valid Website> websites;
 
     @OneToMany(cascade = ALL, targetEntity = SocialRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
