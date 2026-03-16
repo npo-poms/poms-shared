@@ -289,16 +289,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Nullable
-    protected List<@NotNull Portal> portals;
+    protected List<@NotNull @Valid Portal> portals;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull  ThirdParty> thirdParties;
+    protected List<@NotNull  @Valid ThirdParty> thirdParties;
 
     @Setter
     @OneToMany(cascade = ALL, orphanRemoval = true)
@@ -306,8 +304,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
-    @Valid
-    protected List<@NotNull PortalRestriction> portalRestrictions;
+    protected List<@NotNull @Valid PortalRestriction> portalRestrictions;
 
     @Setter
     @OneToMany(orphanRemoval = true, cascade = ALL)
@@ -315,8 +312,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
-    @Valid
-    protected Set<@NotNull GeoRestriction> geoRestrictions;
+    protected Set<@NotNull @Valid GeoRestriction> geoRestrictions;
 
 
     /**
@@ -351,32 +347,29 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
-    protected SortedSet<@NotNull Tag> tags;
+    protected SortedSet<@NotNull @Valid Tag> tags;
 
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement(name = "intentions")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull Intentions> intentions;
+    protected SortedSet<@NotNull @Valid Intentions> intentions;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull TargetGroups> targetGroups;
+    protected SortedSet<@NotNull @Valid TargetGroups> targetGroups;
 
     @Setter
     protected String source;
