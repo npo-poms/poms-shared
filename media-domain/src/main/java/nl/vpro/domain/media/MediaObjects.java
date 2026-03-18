@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.Hibernate;
+import org.slf4j.event.Level;
 
 import com.google.common.collect.*;
 
@@ -31,8 +32,6 @@ import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.logging.Slf4jHelper;
-import nl.vpro.logging.simple.Level;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
@@ -1370,7 +1369,7 @@ public class MediaObjects {
                      ) {
                          prediction.setState(Prediction.State.REALIZED);
                          realized = true;
-                         Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
+                         log.atLevel(level).log("Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
                          onChange.accept(prevState, prediction);
                          String reason = PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name());
                          if (prediction.getPreviousState() == prediction.getState()) {
@@ -1383,7 +1382,7 @@ public class MediaObjects {
                  }
                  if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
                      prediction.setState(Prediction.State.REVOKED);
-                         Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
+                         log.atLevel(level).log("Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
                      onChange.accept(prevState, prediction);
                      String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
                      if (prediction.getPreviousState() == prediction.getState()) {
@@ -1408,7 +1407,7 @@ public class MediaObjects {
                          .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                          .filter(l -> PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
                          .toList();
-                     Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
+                     log.atLevel(withoutFilter.isEmpty() ? org.slf4j.event.Level.INFO: org.slf4j.event.Level.WARN).log("Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
                      onChange.accept(prevState, prediction);
                      String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(Optional.ofNullable(prediction.getPlatform()).map(Platform::name).orElse("<NULL>"));
