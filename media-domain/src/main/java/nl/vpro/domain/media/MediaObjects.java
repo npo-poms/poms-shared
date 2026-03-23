@@ -1346,6 +1346,7 @@ public class MediaObjects {
         }
     }
 
+
     protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
         final Prediction.State prevState = prediction.getState();
         switch (prevState) {

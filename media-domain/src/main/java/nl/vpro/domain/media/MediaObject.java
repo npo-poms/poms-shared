@@ -238,7 +238,8 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
     type = {TextualType.MAIN}
 )
 @AVTypeValidation(groups = PrePersistValidatorGroup.class)
-public abstract class MediaObject extends PublishableObject<MediaObject>
+public abstract class
+MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
     //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
@@ -2220,21 +2221,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             if (! location.isDeleted()) {
                 log.debug("No prediction for {}", location);
                 findOrCreatePrediction(platform, true, (c) ->
-                    MediaObjects.correctPrediction(c, this, Level.DEBUG, instant(), (ps, p) -> {
+                    MediaObjects.correctPrediction(c, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {
                 }));
             }
         } else {
             if (!location.isDeleted()) {
                 prediction.setPlannedAvailability(true);
             }
-            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {});
         }
     }
 
     void correctPrediction(Platform platform) {
         Prediction prediction = getPredictionWithoutFixing(platform);
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {});
         }
     }
 
