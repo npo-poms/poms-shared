@@ -65,7 +65,6 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     protected LocationTable locationTable;
 
     @XmlElement
-    @Valid
     protected Schedule schedule;
 
     @XmlAttribute
