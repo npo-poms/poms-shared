@@ -6,6 +6,8 @@ package nl.vpro.domain.user.validation;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -53,7 +55,7 @@ public class BroadcasterValidator implements ConstraintValidator<BroadcasterVali
             value  = b.getId();
         }
         if (value instanceof CharSequence cs) {
-            BroadcasterService.IdType idType = annotation.idType();
+            BroadcasterService.IdType idType = Optional.ofNullable(annotation).map(BroadcasterValidation::idType).orElse(BroadcasterService.IdType.POMS);
             return broadcasterService.findFor(idType, cs.toString()).isPresent();
         }
         throw new IllegalArgumentException("Cannot validate " + value);
