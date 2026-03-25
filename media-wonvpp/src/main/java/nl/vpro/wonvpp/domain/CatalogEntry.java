@@ -9,8 +9,10 @@ import jakarta.validation.constraints.NotNull;
 
 import org.meeuw.i18n.languages.ISO_639_Code;
 
-import nl.vpro.wonvpp.domain.validation.ValidCatalogEntry;
 import nl.vpro.domain.user.validation.BroadcasterValidation;
+import nl.vpro.wonvpp.domain.validation.ValidCatalogEntry;
+
+import static nl.vpro.domain.user.BroadcasterService.IdType.WON;
 
 @lombok.Builder
 @ValidCatalogEntry
@@ -28,7 +30,7 @@ public record CatalogEntry(
     @Nullable SynopsisType synopsis,
     @Nullable GenreType genre,
     @Nullable RatingType rating,
-    @Nullable  List<@BroadcasterValidation String> broadcasters,
+    @Nullable  List<@BroadcasterValidation(idType = WON) String> broadcasters,
     @Nullable ISO_639_Code productionCountry,
     @Nullable Short productionYear,
     @Nullable Integer episodeNumber,

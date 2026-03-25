@@ -44,9 +44,21 @@ public class Mapper {
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
             .broadcasters(entry.broadcasters() == null ? new String[0] : entry.broadcasters().toArray(new String[0]))
             .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
-            .ageRating(entry.rating() == null ? null : AgeRating.xmlValueOf(entry.rating().age()))
+            .ageRating(mapToRating(entry.rating()))
             //.contentRatings(entry.rating().advisories())
             .mainTitle(entry.title());
+    }
+
+    protected static AgeRating mapToRating(RatingType rating) {
+        if (rating == null) {
+            return null;
+        }
+        String ageRating = rating.age();
+        if ("AL".equalsIgnoreCase(ageRating)) {
+            return AgeRating.ALL;
+        }
+        return AgeRating.xmlValueOf(ageRating);
+
     }
 
 
