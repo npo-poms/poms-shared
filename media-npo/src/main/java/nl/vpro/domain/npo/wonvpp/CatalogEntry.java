@@ -10,13 +10,14 @@ import jakarta.validation.constraints.NotNull;
 import org.meeuw.i18n.languages.ISO_639_Code;
 
 import nl.vpro.domain.npo.wonvpp.validation.ValidCatalogEntry;
+import nl.vpro.domain.user.validation.BroadcasterValidation;
 
 @lombok.Builder
 @ValidCatalogEntry
 public record CatalogEntry(
     @NotNull String prid,
     @Nullable Instant publicationTimestamp,
-    @NotNull String mediaType,
+    @NotNull MediaTypeEnum mediaType,
     @NotNull ContentTypeEnum contentType,
     @NotNull String title,
     @Nullable String displayTitle,
@@ -25,9 +26,9 @@ public record CatalogEntry(
     @Nullable Boolean isDubbed,
     @Nullable List<@Valid CaptionType> captions,
     @Nullable SynopsisType synopsis,
-    @NotNull GenreType genre,
+    @Nullable GenreType genre,
     @Nullable RatingType rating,
-    @NotNull  List<String> broadcasters,
+    @Nullable  List<@BroadcasterValidation String> broadcasters,
     @Nullable ISO_639_Code productionCountry,
     @Nullable Short productionYear,
     @Nullable Integer episodeNumber,

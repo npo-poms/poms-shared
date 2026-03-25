@@ -1,0 +1,78 @@
+[
+  {
+    "prid" : "POW_06213692",
+    "publicationTimestamp" : "2026-03-05T10:59:04.696+01:00",
+    "mediaType" : "video",
+    "contentType" : "episode",
+    "title" : "BusinessTime",
+    "displayTitle" : "",
+    "originalTitle" : "BusinessTime",
+    "synopsis" : {
+      "short" : "",
+      "long" : ""
+    },
+    "languages" : [
+      {
+        "language" : ""
+      }
+    ],
+    "isDubbed" : false,
+    "broadcasters" : [
+      "EO"
+    ],
+    "productionCountry" : "NLD",
+    "productionYear" : 2026,
+    "episodeNumber" : 48,
+    "relations" : {
+      "season" : {
+        "prid" : "POW_06207575"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "POW_06213692_manually",
+    "publicationTimestamp" : "2026-03-05T10:59:04.696+01:00",
+    "mediaType" : "video",
+    "contentType" : "episode",
+    "title" : "BusinessTime",
+    "displayTitle" : "",
+    "originalTitle" : "BusinessTime",
+    "synopsis" : {
+      "short" : "",
+      "long" : ""
+    },
+    "languages" : [
+      {
+        "language" : "nl"
+      }
+    ],
+    "isDubbed" : false,
+    "broadcasters" : [
+      "EO"
+    ],
+    "productionCountry" : "NLD",
+    "productionYear" : 2026,
+    "episodeNumber" : 48,
+    "relations" : {
+      "season" : {
+        "prid" : "POW_06207575"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "POW_06207575",
+    "publicationTimestamp" : "",
+    "mediaType" : "video",
+    "contentType" : "season",
+    "seasonNumber" : "26",
+    "title" : "Seizoen 26",
+    "displayTitle" : " Seizoen 26",
+    "synopsis" : {
+      "short" : "",
+      "long" : ""
+    },
+    "metadataSource" : "WONVPP"
+  }
+]

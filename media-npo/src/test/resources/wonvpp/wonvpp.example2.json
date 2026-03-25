@@ -1,0 +1,156 @@
+[
+  {
+    "prid": "POW_02934251",
+    "publicationTimestamp": "2024-03-28T15:42:21.995+01:00",
+    "mediaType": "video",
+    "contentType": "episode",
+    "title": "Raad eens hoeveel ik van je hou",
+    "displayTitle": "Raad eens hoeveel ik van je hou",
+    "originalTitle": "Guess how much I love you",
+    "synopsis": {
+      "short": "Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren met eikels.",
+      "long": "Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren, maar dat had hij beter niet met eikels kunnen doen..."
+    },
+    "genre": {
+      "primary": "Jeugd",
+      "secondary": "Animatie"
+    },
+    "rating": {
+      "system": "NICAM",
+      "age": "AL", // AL 6 9 12 14 16 18
+      "advisories": [
+        {"g": "Geweld"},
+        {"a": "Angst"},
+        {"t": "Grof taalgebruik"}
+      ],
+      "pictograms": "2gat", // 1 - 7 gasdht
+    },
+    "broadcasters": [
+      "BV",
+      "VPRO"
+    ],
+    "productionCountry": "AUS",
+    "productionYear": 2015,
+    "episodeNumber": 11,
+    "castAndCrew": [
+      {
+        "person": {
+          "givenName": "Eva",
+          "familyName": "Jinek",
+          "id": 1076709938517
+        },
+        "function": "Host"
+      },
+      {
+        "person": {
+          "givenName": "Karel",
+          "familyName": "Appel",
+          "id": 9001626517
+        },
+        "function": "Actor",
+        "role": "Hazeltje"
+      }
+    ],
+    "relations": {
+      "series": {
+        "prid": "POW_00890603"
+      },
+      "season": {
+        "prid": "POW_02934240"
+      }
+    },
+    "availability": [
+      {
+        "platform": "npo-svod",
+        "availabilityPeriods": [
+          {
+            "transmissionId": "324324932668",
+            "onDemandTransmissionId": "324324932812",
+            "publicationId": "254324932668",
+            "geoIpRestriction": "NL",
+            "drm": true,
+            "start": "2023-01-27T15:14:05.000Z",
+            "stop": "2023-01-31T15:14:05.000Z"
+          }
+        ]
+      },
+      {
+        "platform": "npo-vod",
+        "availabilityPeriods": [
+          {
+            "transmissionId": "324324932668",
+            "onDemandTransmissionId": "324324932812",
+            "publicationId": "254324932668",
+            "geoIpRestriction": "NL",
+            "drm": true,
+            "start": "2023-01-27T15:14:05.000Z",
+            "stop": "2023-01-31T15:14:05.000Z"
+          }
+        ]
+      }
+    ],
+    "metadataSource": "WONVPP"
+  },
+  {
+    "prid": "VPWON_02934252",
+    "publicationTimestamp": "2024-03-28T15:42:21.995+01:00",
+    "version": 4,
+    "mediaType": "video",
+    "contentType": "episode",
+    "title": "Raad eens hoeveel ik van je hou",
+    "displayTitle": "Raad eens hoeveel ik van je hou",
+    "originalTitle": "Guess how much I love you",
+    "synopsis": {
+      "short": "Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren met eikels.",
+      "long": "Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren, maar dat had hij beter niet met eikels kunnen doen..."
+    },
+    "genre": {
+      "primary": "Jeugd",
+      "secondary": "Animatie"
+    },
+    "rating": {
+      "system": "NICAM",
+      "classification": "6",
+      "advisories": [
+        "G",
+        "A",
+        "T"
+      ]
+    },
+    "broadcasters": [
+      "BV",
+      "VPRO"
+    ],
+    "productionCountry": "AUS",
+    "productionYear": 2015,
+    "episodeNumber": 11,
+    "castAndCrew": [
+      {
+        "person": {
+          "givenName": "Eva",
+          "familyName": "Jinek",
+          "id": 1076709938517
+        },
+        "function": "Host"
+      },
+      {
+        "person": {
+          "givenName": "Karel",
+          "familyName": "Appel",
+          "id": 9001626517
+        },
+        "function": "Actor",
+        "role": "Hazeltje"
+      }
+    ],
+    "relations": {
+      "series": {
+        "prid": "POW_00890603"
+      },
+      "season": {
+        "prid": "POW_02934240"
+      }
+    },
+    "metadataSource": "WONVPP"
+  }
+]

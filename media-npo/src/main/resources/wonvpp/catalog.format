@@ -1,0 +1,70 @@
+[
+  {
+    "prid": string,
+    "publicationTimestamp": string,
+    "mediaType": string,
+    "contentType": string,
+    "title": string,
+    "displayTitle": string | null,
+    "originalTitle": string | null,
+    "languages": [
+      {
+        "language": string,
+        "usage": string | null,
+      }
+    ] | null,
+    "isDubbed": boolean | null,
+    "captions": [
+      {
+        "closed": boolean | null,
+        "language": string | null,
+        "supplemental": boolean | null
+      }
+    ] | null,
+    "synopsis": {
+      "short": string,
+      "long": string
+    } | null,
+    "genre": {
+      "primary": string,
+      "secondary": string,
+    },
+    "rating": {
+      "system": string,
+      "age": "string,
+      "advisories" : [
+        {g | null: string},
+        {a | null: string},
+        {s | null: string},
+        {d | null: string},
+        {t | null: string},
+        {l | null: string}
+      ]
+      "pictograms": string
+    } | null,
+    "broadcasters": string[],
+  "productionCountry": string | null,
+  "productionYear": number | null,
+  "episodeNumber": number | null,
+  "castAndCrew": [
+  {
+    "person": {
+      "givenName": string,
+      "familyName": string,
+      "id": number
+    },
+    "function": string,
+  },
+] | null,
+  "relations": {
+  "series": {
+    "prid": string,
+  } | null,
+  "season": {
+    "prid": string,
+  } | null
+} | null,
+  "metadataSource": string | null
+  },
+  {...}
+]
