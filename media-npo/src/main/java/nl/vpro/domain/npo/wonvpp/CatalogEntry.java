@@ -35,6 +35,7 @@ public record CatalogEntry(
     @Nullable Integer seasonNumber,
     @Nullable List<@Valid CreditsType> castAndCrew,
     @Nullable RelationType relations,
+    @Nullable List<@Valid AvailabilityType> availability,
     @Nullable String metadataSource
 ) {
 }

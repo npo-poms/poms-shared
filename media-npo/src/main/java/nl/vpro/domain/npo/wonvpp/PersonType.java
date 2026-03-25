@@ -3,8 +3,8 @@ package nl.vpro.domain.npo.wonvpp;
 import jakarta.validation.constraints.NotNull;
 
 public record PersonType(
-    @NotNull String giveName,
+    @NotNull String givenName,
     @NotNull String familyName,
-    @NotNull Integer number
+    @NotNull Long id
 ) {
 }

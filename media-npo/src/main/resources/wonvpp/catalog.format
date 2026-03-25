@@ -54,6 +54,7 @@
       "id": number
     },
     "function": string,
+    "role": string
   },
 ] | null,
   "relations": {
