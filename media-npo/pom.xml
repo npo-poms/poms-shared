@@ -62,9 +62,5 @@
       <artifactId>vpro-shared-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-organizations</artifactId>
-    </dependency>
   </dependencies>
 </project>
