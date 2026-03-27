@@ -950,7 +950,7 @@
   <xs:simpleType name="scheduleEventTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="STRAND"/>
-      <xs:enumeration value="VOD"/>
+      <xs:enumeration value="ON_DEMAND"/>
     </xs:restriction>
   </xs:simpleType>
 

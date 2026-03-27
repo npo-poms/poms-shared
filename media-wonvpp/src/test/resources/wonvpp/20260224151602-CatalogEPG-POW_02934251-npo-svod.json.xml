@@ -18,7 +18,7 @@
       <locations/>
       <images/>
       <scheduleEvents>
-        <scheduleEvent channel="NVOD" midRef="POW_02934251">
+        <scheduleEvent channel="NVOD" midRef="POW_02934251" type="ON_DEMAND">
           <guideDay>2026-02-24+01:00</guideDay>
           <start>2026-02-24T15:16:02.394+01:00</start>
           <poProgID>POW_02934251</poProgID>
@@ -49,7 +49,7 @@
     </group>
   </groupTable>
   <schedule channel="NVOD" start="2026-02-24T06:00:00+01:00" stop="2026-02-25T06:00:00+01:00">
-    <scheduleEvent channel="NVOD" midRef="POW_02934251">
+    <scheduleEvent channel="NVOD" midRef="POW_02934251" type="ON_DEMAND">
       <guideDay>2026-02-24+01:00</guideDay>
       <start>2026-02-24T15:16:02.394+01:00</start>
       <poProgID>POW_02934251</poProgID>

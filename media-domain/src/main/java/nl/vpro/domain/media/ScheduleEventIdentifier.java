@@ -89,7 +89,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         if(channel == null || that.channel == null || channel != that.channel) {
             return false;
         }
-        if (type == ScheduleEventType.VOD || that.type == ScheduleEventType.VOD ) {
+        if (type == ScheduleEventType.ON_DEMAND || that.type == ScheduleEventType.ON_DEMAND) {
             if (!Objects.equals(type, that.type)) {
                 return false;
             }

@@ -24,7 +24,8 @@ public enum ScheduleEventType {
     /**
      * @since 8.13
      */
-    VOD;
+    ON_DEMAND
+    ;
 
     public String value() {
         return name();

@@ -588,6 +588,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEventIdentifier id = new ScheduleEventIdentifier(); // avoid @NonNull validation
         id.start = start;
         id.channel = channel;
+        id.midRef = midRef;
+        id.type = type;
         return id;
     }
 
@@ -640,6 +642,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
         if (repeat != null && repeat.isRerun) {
             sb.append(", RERUN");
+        }
+        if (type != null){
+            sb.append(", type=").append(type);
         }
         sb.append('}');
         return sb.toString();
