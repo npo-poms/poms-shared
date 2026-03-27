@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Clock;
 import java.util.*;
 
 import jakarta.inject.Inject;
@@ -23,6 +24,8 @@ public class WonToPomsMapper {
     static final OwnerType OWNER = OwnerType.MIS;
 
     private final BroadcasterService broadcasterService;
+
+    Clock clock = Clock.systemUTC();
 
     @Inject
     public WonToPomsMapper(BroadcasterService broadcasterService) {
@@ -74,20 +77,31 @@ public class WonToPomsMapper {
 
         return builder
             .mid(entry.prid())
+            .creationDate(clock.instant())
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
-            .broadcasters(entry.broadcasters() == null ? Collections.emptyList() : entry.broadcasters().stream().map(this::mapToBroadcaster).toList())
+            .broadcasters(entry.broadcasters() == null ? Collections.emptyList() :
+                entry.broadcasters().stream()
+                .map(this::mapToBroadcaster)
+                .toList()
+            )
             .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
             .mainTitle(entry.title(), OWNER)
             .originalTitle(entry.originalTitle(), OWNER)
             .subTitle(entry.displayTitle(), OWNER)
-            //.languages(entry.languages() == null ? new Locale[0] : entry.languages().stream().map(LanguageType::language).toArray(LanguageCode))
+            .languages(entry.languages() == null ? new UsedLanguage[0] :
+                entry.languages().stream()
+                .map(this::mapToLanguageCode)
+                .filter(Objects::nonNull) // sloppyness
+                .toArray(UsedLanguage[]::new))
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
             .dubbed(entry.isDubbed())
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
-                entry.captions().stream().map(this::mapToAvailableSubtitles).toArray(AvailableSubtitles[]::new))
+                entry.captions().stream()
+                .map(this::mapToAvailableSubtitles)
+                .toArray(AvailableSubtitles[]::new))
             ;
     }
     protected Broadcaster mapToBroadcaster(String broadcaster) {
@@ -118,6 +132,15 @@ public class WonToPomsMapper {
             return AgeRating.ALL;
         }
         return AgeRating.xmlValueOf(ageRating);
+    }
+
+    protected UsedLanguage  mapToLanguageCode(LanguageType languageType) {
+        if (languageType == null || languageType.language() == null) {
+            return null;
+        }
+        Locale locale = languageType.language();
+        UsedLanguage.Usage usage = UsedLanguage.Usage.valueOf(languageType.usage() == null ? "AUDIODESCRIPTION" : languageType.usage().toUpperCase());
+        return new UsedLanguage(locale, usage);
 
     }
 

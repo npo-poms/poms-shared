@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" source="WONVPP">
+  <programTable>
+    <program type="BROADCAST" avType="VIDEO" embeddable="true" mid="POW_06213692" sortDate="2026-03-05T10:59:04.696+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_06213692</crid>
+      <broadcaster id="EO">EO</broadcaster>
+      <title owner="MIS" type="MAIN">BusinessTime</title>
+      <title owner="MIS" type="ORIGINAL">BusinessTime</title>
+      <isDubbed>false</isDubbed>
+      <releaseYear>2026</releaseYear>
+      <credits/>
+      <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+      <locations/>
+      <images/>
+      <scheduleEvents>
+        <scheduleEvent channel="NVOD" midRef="POW_06213692">
+          <guideDay>2026-03-05+01:00</guideDay>
+          <start>2026-03-05T10:59:04.696+01:00</start>
+          <poProgID>POW_06213692</poProgID>
+        </scheduleEvent>
+      </scheduleEvents>
+      <segments/>
+    </program>
+  </programTable>
+  <groupTable>
+    <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_06207575" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_06207575</crid>
+      <title owner="MIS" type="MAIN">Seizoen 26</title>
+      <title owner="MIS" type="SUB"> Seizoen 26</title>
+      <credits/>
+      <locations/>
+      <images/>
+    </group>
+  </groupTable>
+  <schedule channel="NVOD"/>
+</mediaInformation>

@@ -9,10 +9,12 @@ import jakarta.validation.Validator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.meeuw.time.TestClock;
 
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.media.MediaTable;
 import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +26,7 @@ class WonToPomsMapperTest {
     static WonToPomsMapper  mapper;
     static {
         mapper = new WonToPomsMapper(BroadcasterServiceLocator.getInstance(false, true));
+        mapper.clock = TestClock.twentyTwenty();
     }
 
 
@@ -40,6 +43,8 @@ class WonToPomsMapperTest {
         MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
         log.info("" + table);
         assertThat(validator.validate(table)).isEmpty();
+
+        JAXBTestUtil.assertThatXml(table).isSimilarTo(getClass().getResourceAsStream("/wonvpp/%s.xml".formatted(file)));
     }
 
 }
