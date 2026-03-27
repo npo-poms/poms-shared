@@ -113,7 +113,8 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public String asString() {
-        return channel.getXmlValue() + ":" + start;
+        return channel.getXmlValue() + ":" + start + (type == ScheduleEventType.ON_DEMAND ? (":" + midRef) : "");
+
     }
 
     public static ScheduleEventIdentifier parse(CharSequence id) {

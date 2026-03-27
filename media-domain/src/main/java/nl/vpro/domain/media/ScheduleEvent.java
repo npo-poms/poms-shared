@@ -594,7 +594,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute
-    @Deprecated
     public ScheduleEventType getType() {
         return type;
     }
