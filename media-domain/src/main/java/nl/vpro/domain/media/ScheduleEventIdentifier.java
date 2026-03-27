@@ -106,7 +106,11 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, start, type, midRef);
+        if (type == ScheduleEventType.ON_DEMAND) {
+            return Objects.hash(channel, start, type, midRef);
+        } else {
+            return Objects.hash(channel, start);
+        }
     }
 
     @Override
