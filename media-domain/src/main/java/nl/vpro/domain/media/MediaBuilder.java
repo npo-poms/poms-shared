@@ -723,6 +723,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+    /**
+     * @since 8.13
+     */
+    default B dubbed(Boolean dubbed) {
+        mediaObject().setIsDubbed(dubbed);
+        return (B) this;
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B availableSubtitles(AvailableSubtitles... availableSubtitles) {
+        mediaObject().setAvailableSubtitles(new TreeSet<>(Set.of(availableSubtitles)));
+        return (B) this;
+    }
+
 
     @SuppressWarnings("unchecked")
     default B contentRatings(ContentRating... contentRatings) {
@@ -1055,6 +1071,33 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         public T scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, ScheduleEventTitle... titles) {
             return scheduleEvent(c, time, duration, e->e, titles);
         }
+
+        /**
+         * @since 8.13
+         * @param titles
+
+         */
+        public T vodEvent(ScheduleEventTitle... titles) {
+            return vodEvent(mid, null, titles);
+        }
+
+        /**
+         * @since 8.13
+         * @param titles
+         */
+        public T vodEvent(String midRef, java.time.Instant start, ScheduleEventTitle... titles) {
+            ScheduleEvent event = ScheduleEvent.builder()
+                .channel(Channel.NVOD)
+                .start(start)
+                .midRef(midRef == null ? mid : midRef)
+                .build();
+            event.setParent(mediaObject());
+            for (ScheduleEventTitle title : titles) {
+                event.addTitle(title);
+            }
+            return (T) this;
+        }
+
 
 
         @SuppressWarnings("unchecked")

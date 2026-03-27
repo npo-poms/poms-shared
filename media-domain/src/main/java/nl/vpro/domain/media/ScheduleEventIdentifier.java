@@ -11,6 +11,8 @@ import java.util.Objects;
 
 import jakarta.persistence.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.util.TimeUtils;
 
 import static java.util.Comparator.comparing;
@@ -32,6 +34,13 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     @Column
     protected Instant start;
 
+    @Column
+    protected ScheduleEventType type;
+
+    @Column
+    protected String midRef;
+
+
     public ScheduleEventIdentifier() {
         // to help hibernate
     }
@@ -39,6 +48,26 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start) {
         this.start = start;
         this.channel = channel;
+        if (channel == Channel.NVOD) {
+            throw new IllegalArgumentException("NVOD events should have a mid");
+        }
+    }
+
+
+    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, String midRef) {
+        this.start = start;
+        this.channel = channel;
+        if (channel != Channel.NVOD) {
+            throw new IllegalArgumentException("Only NVOD events should have a mid");
+        }
+        this.midRef = midRef;
+    }
+
+    private ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @Nullable ScheduleEventType type, @Nullable String midRef) {
+        this.start = start;
+        this.channel = channel;
+        this.type = type;
+        this.midRef = midRef;
     }
 
     public Instant getStartInstant() {
@@ -59,6 +88,12 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         if(channel == null || that.channel == null || channel != that.channel) {
             return false;
         }
+        if (type == ScheduleEventType.VOD || that.type == ScheduleEventType.VOD ) {
+            if (!Objects.equals(type, that.type)) {
+                return false;
+            }
+            return  Objects.equals(midRef, that.midRef);
+        }
         if(start == null || that.start == null || (start.toEpochMilli() != that.start.toEpochMilli())) {
             return false;
         }
@@ -68,7 +103,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, start);
+        return Objects.hash(channel, start, midRef);
     }
 
     @Override
@@ -81,8 +116,20 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public static ScheduleEventIdentifier parse(CharSequence id) {
-        String[] split = id.toString().split(":", 2);
-        return new ScheduleEventIdentifier(Channel.valueOf(split[0]), TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)));
+        String[] split = id.toString().split(":", 3);
+        if (split.length == 2) {
+            return new ScheduleEventIdentifier(
+                Channel.valueOf(split[0]),
+                TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)
+                ));
+
+        } else {
+            return new ScheduleEventIdentifier(
+                Channel.valueOf(split[0]),
+                TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)),
+                split[2]
+            );
+        }
 
     }
 

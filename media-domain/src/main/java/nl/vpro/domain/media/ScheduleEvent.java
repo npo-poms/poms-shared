@@ -138,7 +138,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @DurationMin // negative durations don't make sense
+    @DurationMin(inclusive = false, millis = 0) // negative durations don't make sense
     protected Duration duration;
 
     @Setter
@@ -156,7 +156,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Setter
     @Enumerated(EnumType.STRING)
-    @Deprecated
+    @Id
+    @Nullable
     protected ScheduleEventType type;
 
     @Getter
@@ -174,14 +175,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected SecondaryLifestyle secondaryLifestyle;
 
     @Setter
-    @Transient
+    @Nullable // only needs to be filled for type == VOD
+    @Id
     protected String midRef;
 
     @Setter
     protected String poSeriesID;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
-    @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
     @SortNatural
@@ -189,7 +190,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
-    @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
     @SortNatural
@@ -243,7 +243,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable  LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
-        String midRef,
+        @Nullable String midRef,
         @Nullable Program media,
         @Nullable Repeat repeat,
         @Nullable Lifestyle primaryLifestyle,

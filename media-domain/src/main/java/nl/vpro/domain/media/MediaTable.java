@@ -59,6 +59,8 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     @XmlElement(name = "group")
     protected List<@Valid Group> groupTable;
 
+
+
     @XmlElement
     @Getter
     @Valid
