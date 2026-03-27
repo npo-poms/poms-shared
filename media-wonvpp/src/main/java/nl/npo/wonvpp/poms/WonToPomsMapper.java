@@ -4,11 +4,10 @@ import java.util.List;
 
 import nl.npo.wonvpp.domain.*;
 import nl.vpro.domain.media.*;
-import nl.npo.wonvpp.domain.*;
 
 import static nl.vpro.domain.media.MediaBuilder.*;
 
-public class Mapper {
+public class WonToPomsMapper {
 
 
     public static MediaTable mapToPoms(List<CatalogEntry> entries) {
@@ -21,9 +20,9 @@ public class Mapper {
 
     public static MediaObject mapToPoms(CatalogEntry entry) {
         return switch (entry.contentType()) {
-            case ContentTypeEnum.episode -> mapToBroadcast(entry);
-            case ContentTypeEnum.season ->  mapToSeason(entry);
-            case ContentTypeEnum.serie -> mapToSeries(entry);
+            case episode -> mapToBroadcast(entry);
+            case season ->  mapToSeason(entry);
+            case serie -> mapToSeries(entry);
         };
     }
     protected static Program mapToBroadcast(CatalogEntry entry) {

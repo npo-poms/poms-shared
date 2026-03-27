@@ -18,7 +18,7 @@ import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class MapperTest {
+class WonToPomsMapperTest {
 
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
@@ -37,7 +37,7 @@ class MapperTest {
 
     public void map(String file) throws IOException {
 
-        MediaTable table = Mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
+        MediaTable table = WonToPomsMapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
         log.info("" + table);
         assertThat(validator.validate(table)).isEmpty();
     }

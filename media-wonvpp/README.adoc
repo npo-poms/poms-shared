@@ -1,0 +1,26 @@
+
+= Catalog.json WONVPP data model
+
+See https://publiekeomroep.atlassian.net/wiki/spaces/MS/pages/3982753860/Catalog.json+WONVPP+data+model[wiki] for more information.
+
+Also see https://publiekeomroep.atlassian.net/browse/P0MS-319[jira]
+
+
+== java bindings for wonvpp data model json
+
+These are link:src/main/main/java/nl/npo/wonvpp/domain/CatalogEntry.java[manually created jackson bindings] for the wonvpp data model JSON.
+
+There is also a link:src/main/java/nl/npo/wonvpp/poms/WonToPomsMapper.java['poms' mapper] that maps the resulting POJO to the 'poms' data model.
+
+=== usage
+
+[source, java]
+----
+import nl.npo.wonvpp.domain.*;
+
+void main() {
+  List<CatalogEntry> entries = Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file)));
+  IO.println(entries);
+}
+----
+
