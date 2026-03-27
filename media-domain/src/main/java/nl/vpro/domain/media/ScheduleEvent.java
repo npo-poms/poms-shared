@@ -644,6 +644,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
         if (type != null){
             sb.append(", type=").append(type);
+            if (type == ScheduleEventType.ON_DEMAND) {
+                sb.append(", midRef=").append(midRef);
+            }
         }
         sb.append('}');
         return sb.toString();
@@ -683,7 +686,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (getId() != null) {
             return getId().hashCode();
         } else {
-            return Objects.hash(channel, start, duration, net, imi);
+            return Objects.hash(channel, start, duration, net, imi, type, midRef);
         }
     }
 
