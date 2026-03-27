@@ -823,6 +823,16 @@
   <xs:simpleType name="scheduleEventTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="STRAND"/>
+      <xs:enumeration value="VOD">
+        <xs:annotation>
+          <xs:documentation>
+            This type is used for schedule events which are not broadcasted, but only available as VOD. This is used for example for NPO Start.
+
+            New since poms 8.13
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
     </xs:restriction>
   </xs:simpleType>
 
