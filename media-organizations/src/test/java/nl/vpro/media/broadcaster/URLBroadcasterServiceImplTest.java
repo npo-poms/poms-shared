@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @WireMockTest
-public class BroadcasterServiceImplTest {
+public class URLBroadcasterServiceImplTest {
 
 
     BroadcasterService broadcasterService = new URLBroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
@@ -71,7 +71,7 @@ public class BroadcasterServiceImplTest {
 
     @Test
     public void string() {
-        assertThat(broadcasterService.toString()).isEqualTo("BroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
+        assertThat(broadcasterService.toString()).isEqualTo("URLBroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
 
     }
 
