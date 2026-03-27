@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Clock;
+import java.time.LocalDate;
 import java.util.*;
 
 import jakarta.inject.Inject;
@@ -40,13 +41,13 @@ public class WonToPomsMapper {
 
     public MediaTable mapToPoms(List<CatalogEntry> entries) {
         MediaTable table = new MediaTable();
-        Schedule schedule = new Schedule();
-        table.setSchedule(schedule);
         table.setSource("WONVPP");
-        schedule.setChannel(Channel.NVOD);
         for (CatalogEntry entry : entries) {
             table.add(mapToPoms(entry));
         }
+        table.setScheduleIfNeeded();
+        LocalDate localDate = Schedule.guideDay(table.getSchedule().getStart());
+        table.getSchedule().setGuideDate(localDate);
         return table;
     }
 

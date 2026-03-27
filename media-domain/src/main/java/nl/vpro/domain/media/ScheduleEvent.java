@@ -474,11 +474,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public Instant getStopInstant() {
-        return start.plus(getDuration());
+
+        return getDuration() == null ? null : start.plus(getDuration());
     }
 
     public void setStopInstant(Instant stop) {
-        this.duration = Duration.between(start, stop);
+        this.duration = stop == null ? null : Duration.between(start, stop);
     }
 
 

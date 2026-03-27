@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 public record RatingType(
     @NotNull RatingSystem system,
     @NotNull String age,
-    @NotNull List<@Size(min= 1, max=1) Map<AdvisoryType, @NotNull String>> advisories,
+    @Nullable List<@Size(min= 1, max=1) Map<AdvisoryType, @NotNull String>> advisories,
     @Nullable String pictograms
 ) {
 }
