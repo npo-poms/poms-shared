@@ -15,26 +15,32 @@ import nl.vpro.jackson2.LocaleDeserializer;
 
 public class Utils {
 
-    private static final ObjectMapper mapper = Utils.createObjectMapper();
+    private static final ObjectMapper MAPPER = Utils.createObjectMapper();
 
 
     public static ObjectMapper createObjectMapper() {
         ObjectMapper mapper = Jackson2Mapper.getStrictInstance();
 
-        // The jsons can be a bi sloppy
+        // The JSON can be a bit sloppy, so some leniency features
         mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
         mapper.configure(JsonReadFeature.ALLOW_TRAILING_COMMA.mappedFeature(), true);
 
         SimpleModule localeModule = new SimpleModule();
-        localeModule.addDeserializer(Locale.class, new LocaleDeserializer());
+        localeModule.addDeserializer(Locale.class, new LocaleDeserializer()); // supports accept empty as null
         mapper.registerModule(localeModule);
 
         return mapper;
     }
 
+    /**
+     * Read a top-level JSON array into a List<CatalogEntry>
+     * @param stream
+     * @return
+     * @throws IOException
+     */
     public static List<CatalogEntry> unmarshal(InputStream stream) throws IOException {
-        // Read a top-level JSON array into a List<CatalogEntry>
-        return mapper.readerForListOf(CatalogEntry.class)
+        //
+        return MAPPER.readerForListOf(CatalogEntry.class)
             .readValue(stream);
 
     }

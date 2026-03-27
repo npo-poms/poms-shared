@@ -1,5 +1,7 @@
 package nl.npo.wonvpp.poms;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import nl.npo.wonvpp.domain.*;
@@ -9,6 +11,9 @@ import static nl.vpro.domain.media.MediaBuilder.*;
 
 public class WonToPomsMapper {
 
+    public static MediaTable mapToPoms(InputStream entries) throws IOException {
+        return mapToPoms(Utils.unmarshal(entries));
+    }
 
     public static MediaTable mapToPoms(List<CatalogEntry> entries) {
         MediaTable table = new MediaTable();
