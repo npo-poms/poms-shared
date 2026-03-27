@@ -1,5 +1,8 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mediaInformation source="WONVPP" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd"
+                  source="WONVPP">
   <programTable>
     <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_02934251" sortDate="2026-02-24T15:16:02.394+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_02934251</crid>
@@ -13,6 +16,7 @@
       <availableSubtitles language="nl" type="CAPTION"/>
       <releaseYear>2015</releaseYear>
       <credits/>
+      <descendantOf midRef="POW_02934240"/>
       <ageRating>ALL</ageRating>
       <prediction state="ANNOUNCED">INTERNETVOD</prediction>
       <locations/>
@@ -24,6 +28,7 @@
           <poProgID>POW_02934251</poProgID>
         </scheduleEvent>
       </scheduleEvents>
+      <episodeOf highlighted="false" midRef="POW_02934240"/>
       <segments/>
     </program>
   </programTable>
@@ -33,6 +38,8 @@
       <title owner="MIS" type="MAIN">Seizoen 2</title>
       <title owner="MIS" type="SUB">Raad eens hoeveel ik van je hou Seizoen 2</title>
       <credits/>
+      <descendantOf midRef="POW_00890603"/>
+      <memberOf highlighted="false" midRef="POW_00890603"/>
       <locations/>
       <images/>
     </group>

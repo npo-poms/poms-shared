@@ -768,6 +768,7 @@
     <xs:attribute name="start" type="xs:dateTime"/>
     <xs:attribute name="stop" type="xs:dateTime"/>
     <xs:attribute name="reruns" type="xs:boolean"/>
+    <xs:attribute type="xs:string" name="source"/>
   </xs:complexType>
 
   <xs:complexType name="scheduleEventsType">

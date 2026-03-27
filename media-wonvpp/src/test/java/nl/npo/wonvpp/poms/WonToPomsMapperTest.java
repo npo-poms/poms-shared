@@ -44,6 +44,10 @@ class WonToPomsMapperTest {
         log.info("" + table);
         assertThat(validator.validate(table)).isEmpty();
 
+        JAXBTestUtil.registerNamespace(
+            "urn:vpro:media:2009", "https://poms-test.omroep.nl/schema/vproMedia.xsd"
+        );
+
         JAXBTestUtil.assertThatXml(table).isSimilarTo(getClass().getResourceAsStream("/wonvpp/%s.xml".formatted(file)));
     }
 

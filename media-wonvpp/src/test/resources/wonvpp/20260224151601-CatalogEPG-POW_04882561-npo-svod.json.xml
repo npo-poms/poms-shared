@@ -10,6 +10,7 @@
       <isDubbed>false</isDubbed>
       <releaseYear>2020</releaseYear>
       <credits/>
+      <descendantOf midRef="POW_04882558"/>
       <ageRating>9</ageRating>
       <contentRating>ANGST</contentRating>
       <contentRating>GROF_TAALGEBRUIK</contentRating>
@@ -23,6 +24,7 @@
           <poProgID>POW_04882561</poProgID>
         </scheduleEvent>
       </scheduleEvents>
+      <episodeOf highlighted="false" midRef="POW_04882558"/>
       <segments/>
     </program>
   </programTable>
@@ -32,6 +34,8 @@
       <title owner="MIS" type="MAIN">Seizoen 1</title>
       <title owner="MIS" type="SUB">The Investigation Seizoen 1</title>
       <credits/>
+      <descendantOf midRef="POW_04882557"/>
+      <memberOf highlighted="false" midRef="POW_04882557"/>
       <locations/>
       <images/>
     </group>

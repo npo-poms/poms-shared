@@ -9,6 +9,8 @@ import java.util.*;
 
 import jakarta.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.npo.wonvpp.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
@@ -59,12 +61,13 @@ public class WonToPomsMapper {
         return map(entry, broadcast())
             .vodEvent(entry.prid(), entry.publicationTimestamp())
             .plannedAvailability()
-
+            .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null)
             .build();
 
     }
     protected Group mapToSeason(CatalogEntry entry) {
         return map(entry, season())
+            .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null)
             .build();
     }
     protected Group mapToSeries(CatalogEntry entry) {
@@ -72,9 +75,17 @@ public class WonToPomsMapper {
             .build();
     }
 
+    protected String toMid(PridReference pridReference) {
+        if (pridReference == null) {
+            return null;
+        }
+        if (StringUtils.isEmpty(pridReference.prid())) {
+            return null;
+        }
+        return pridReference.prid();
+    }
+
     protected <B extends MediaBuilder<B, T>, T extends MediaObject> B map(CatalogEntry entry, B builder) {
-
-
         return builder
             .mid(entry.prid())
             .creationDate(clock.instant())
@@ -97,6 +108,7 @@ public class WonToPomsMapper {
                 .toArray(UsedLanguage[]::new))
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
+            //.genres(entry.relations() == null ? new String[0] : mapToGenres(entry.relations().toArray(new String[0]))
             .dubbed(entry.isDubbed())
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()

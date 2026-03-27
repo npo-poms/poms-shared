@@ -712,11 +712,17 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     default B memberOf(String mid, Integer number) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
         return memberOf(new MemberRef(mid, number));
     }
 
 
     default B memberOf(String mid) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
         return memberOf(new MemberRef(mid));
     }
     default B clearMemberOf() {
@@ -1170,10 +1176,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T episodeOf(String mid, Integer number) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid, number));
         }
 
         public T episodeOf(String mid) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid));
         }
 

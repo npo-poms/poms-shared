@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mediaInformation source="WONVPP" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+﻿<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" source="WONVPP">
   <programTable>
     <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_05880359" sortDate="2026-02-24T15:16:02.222+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_05880359</crid>
@@ -12,6 +11,7 @@
       <availableSubtitles language="nl" type="CAPTION"/>
       <releaseYear>2025</releaseYear>
       <credits/>
+      <descendantOf midRef="25Jeugd1900Geb"/>
       <prediction state="ANNOUNCED">INTERNETVOD</prediction>
       <locations/>
       <images/>
@@ -22,6 +22,7 @@
           <poProgID>POW_05880359</poProgID>
         </scheduleEvent>
       </scheduleEvents>
+      <episodeOf highlighted="false" midRef="25Jeugd1900Geb"/>
       <segments/>
     </program>
   </programTable>
@@ -31,6 +32,8 @@
       <title owner="MIS" type="MAIN">Seizoen 25</title>
       <title owner="MIS" type="SUB">NOS Jeugdjournaal Seizoen 25</title>
       <credits/>
+      <descendantOf midRef="NOSJeugdjournaal"/>
+      <memberOf highlighted="false" midRef="NOSJeugdjournaal"/>
       <locations/>
       <images/>
     </group>
