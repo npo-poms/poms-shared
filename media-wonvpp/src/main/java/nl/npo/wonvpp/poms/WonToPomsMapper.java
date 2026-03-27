@@ -97,7 +97,7 @@ public class WonToPomsMapper {
 
     protected List<Credits> mapToCredits(List<CreditsType> castAndCrew) {
         if (castAndCrew == null) {
-            return null;
+            return Collections.emptyList();
         }
         List<Credits> credits = new ArrayList<>();
         for (CreditsType creditsType : castAndCrew) {
