@@ -23,7 +23,7 @@ import nl.vpro.util.URLResource;
  * @since 3.0
  */
 @Slf4j
-public class BroadcasterServiceImpl implements BroadcasterService {
+public class URLBroadcasterServiceImpl implements BroadcasterService {
 
 
     private Map<String, Broadcaster> broadcasterMap = new TreeMap<>();
@@ -32,13 +32,13 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     private URLResource<Map<String, String>> whatsonResource;
 
 
-    public BroadcasterServiceImpl(String configFile) {
+    public URLBroadcasterServiceImpl(String configFile) {
         this(configFile, true, true);
     }
 
     @Inject
     @lombok.Builder
-    public BroadcasterServiceImpl(
+    public URLBroadcasterServiceImpl(
         @Named("broadcasters.repository.location") String configFile,
         @Named("broadcasters.repository.async") boolean async,
         @Named("broadcasters.repository.needsOtherIDs") boolean needsOtherIds) {

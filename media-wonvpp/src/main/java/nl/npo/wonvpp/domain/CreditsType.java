@@ -2,7 +2,7 @@ package nl.npo.wonvpp.domain;
 
 public record CreditsType(
     PersonType person,
-    String function,
+    FunctionType function,
     String role
     ) {
 }

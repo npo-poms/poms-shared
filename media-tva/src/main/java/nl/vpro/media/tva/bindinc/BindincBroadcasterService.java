@@ -11,15 +11,15 @@ import jakarta.inject.Inject;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
+import nl.vpro.media.broadcaster.URLBroadcasterServiceImpl;
 
 /**
- * Extends {@link BroadcasterServiceImpl} but adds some overrides for bindinc.
+ * Extends {@link URLBroadcasterServiceImpl} but adds some overrides for bindinc.
  * @author Michiel Meeuwissen
  * @since 5.33
  */
 @Slf4j
-public class BindincBroadcasterService extends BroadcasterServiceImpl {
+public class BindincBroadcasterService extends URLBroadcasterServiceImpl {
 
 
     private final Set<String> warned = new CopyOnWriteArraySet<>();

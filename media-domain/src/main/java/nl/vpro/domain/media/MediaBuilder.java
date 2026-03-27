@@ -363,6 +363,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return titles(new Title(title, owner, TextualType.MAIN));
     }
 
+    /**
+     * @since 8.13
+     */
+    default B originalTitle(@Nullable String title, @NonNull OwnerType owner) {
+        if (title == null) {
+            mediaObject().removeTitle(owner,  TextualType.ORIGINAL);
+            return (B) this;
+        } else {
+            return titles(new Title(title, owner, TextualType.ORIGINAL));
+        }
+    }
+
     default B mainTitle(@NonNull String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
@@ -386,6 +398,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
         } else {
+            mediaObject().removeTitle(owner, TextualType.SUB);
             return (B) this;
         }
     }

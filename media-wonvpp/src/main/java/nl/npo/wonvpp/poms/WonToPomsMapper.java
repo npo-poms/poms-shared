@@ -4,37 +4,55 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.*;
+
+import jakarta.inject.Inject;
 
 import nl.npo.wonvpp.domain.*;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.BroadcasterService;
 
 import static nl.vpro.domain.media.MediaBuilder.*;
 
 @Log4j2
 public class WonToPomsMapper {
 
-    public static MediaTable mapToPoms(InputStream entries) throws IOException {
+    static final OwnerType OWNER = OwnerType.MIS;
+
+    private final BroadcasterService broadcasterService;
+
+    @Inject
+    public WonToPomsMapper(BroadcasterService broadcasterService) {
+        this.broadcasterService = broadcasterService;
+    }
+
+    public MediaTable mapToPoms(InputStream entries) throws IOException {
         return mapToPoms(Utils.unmarshal(entries));
     }
 
-    public static MediaTable mapToPoms(List<CatalogEntry> entries) {
+    public MediaTable mapToPoms(List<CatalogEntry> entries) {
         MediaTable table = new MediaTable();
+        Schedule schedule = new Schedule();
+        table.setSchedule(schedule);
+        table.setSource("WONVPP");
+        schedule.setChannel(Channel.NVOD);
         for (CatalogEntry entry : entries) {
             table.add(mapToPoms(entry));
         }
         return table;
     }
 
-    public static MediaObject mapToPoms(CatalogEntry entry) {
+    public MediaObject mapToPoms(CatalogEntry entry) {
         return switch (entry.contentType()) {
             case episode -> mapToBroadcast(entry);
             case season ->  mapToSeason(entry);
             case serie -> mapToSeries(entry);
         };
     }
-    protected static Program mapToBroadcast(CatalogEntry entry) {
+    protected Program mapToBroadcast(CatalogEntry entry) {
         return map(entry, broadcast())
             .vodEvent(entry.prid(), entry.publicationTimestamp())
             .plannedAvailability()
@@ -42,33 +60,56 @@ public class WonToPomsMapper {
             .build();
 
     }
-    protected static Group mapToSeason(CatalogEntry entry) {
+    protected Group mapToSeason(CatalogEntry entry) {
         return map(entry, season())
             .build();
     }
-    protected static Group mapToSeries(CatalogEntry entry) {
+    protected Group mapToSeries(CatalogEntry entry) {
         return map(entry, series())
             .build();
     }
 
-    protected static <B extends MediaBuilder<B, T>, T extends MediaObject> B map(CatalogEntry entry, B builder) {
+    protected <B extends MediaBuilder<B, T>, T extends MediaObject> B map(CatalogEntry entry, B builder) {
 
 
         return builder
             .mid(entry.prid())
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
-            .broadcasters(entry.broadcasters() == null ? new String[0] : entry.broadcasters().toArray(new String[0]))
+            .broadcasters(entry.broadcasters() == null ? Collections.emptyList() : entry.broadcasters().stream().map(this::mapToBroadcaster).toList())
             .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
-            .mainTitle(entry.title())
+            .mainTitle(entry.title(), OWNER)
+            .originalTitle(entry.originalTitle(), OWNER)
+            .subTitle(entry.displayTitle(), OWNER)
+            //.languages(entry.languages() == null ? new Locale[0] : entry.languages().stream().map(LanguageType::language).toArray(LanguageCode))
+            .releaseYear(entry.productionYear())
+            .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
             .dubbed(entry.isDubbed())
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
-                entry.captions().stream().map(WonToPomsMapper::mapToAvailableSubtitles).toArray(AvailableSubtitles[]::new))
+                entry.captions().stream().map(this::mapToAvailableSubtitles).toArray(AvailableSubtitles[]::new))
             ;
     }
+    protected Broadcaster mapToBroadcaster(String broadcaster) {
+        return broadcasterService.findFor(BroadcasterService.IdType.WON, broadcaster).orElseThrow();
 
-    protected static AgeRating mapToRating(RatingType rating) {
+    }
+
+    protected List<Credits> mapToCredits(List<CreditsType> castAndCrew) {
+        if (castAndCrew == null) {
+            return null;
+        }
+        List<Credits> credits = new ArrayList<>();
+        for (CreditsType creditsType : castAndCrew) {
+            PersonType person = creditsType.person();
+            switch (creditsType.function()) {
+                case Director -> new Person(person.givenName(), person.familyName(), RoleType.DIRECTOR);
+                case Actor -> new Person(person.givenName(), person.familyName(), RoleType.ACTOR);
+            }
+        }
+        return credits;
+    }
+    protected  AgeRating mapToRating(RatingType rating) {
         if (rating == null) {
             return null;
         }
@@ -83,7 +124,7 @@ public class WonToPomsMapper {
     protected static ContentRating mapToRating(AdvisoryType type) {
         return ContentRating.valueOf(type.name().charAt(0));
     }
-    protected static ContentRating[] mapToRatings(CatalogEntry entry) {
+    protected  ContentRating[] mapToRatings(CatalogEntry entry) {
         if (entry.rating() == null || entry.rating().advisories() == null) {
             return new ContentRating[0];
         }
@@ -92,7 +133,7 @@ public class WonToPomsMapper {
     }
 
 
-    protected static AvailableSubtitles mapToAvailableSubtitles(CaptionType captionType) {
+    protected  AvailableSubtitles mapToAvailableSubtitles(CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
             log.warn("{}", captionType);
         }

@@ -12,8 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.media.MediaTable;
-import nl.vpro.domain.user.ServiceLocator;
-import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
+import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +21,9 @@ class WonToPomsMapperTest {
 
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
+    static WonToPomsMapper  mapper;
     static {
-        ServiceLocator.setBroadcasterService(new BroadcasterServiceImpl("https://poms.omroep.nl/broadcasters"));
+        mapper = new WonToPomsMapper(BroadcasterServiceLocator.getInstance(false, true));
     }
 
 
@@ -37,7 +37,7 @@ class WonToPomsMapperTest {
 
     public void map(String file) throws IOException {
 
-        MediaTable table = WonToPomsMapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
+        MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
         log.info("" + table);
         assertThat(validator.validate(table)).isEmpty();
     }

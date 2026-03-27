@@ -35,6 +35,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     protected Instant start;
 
     @Column
+    @Enumerated(EnumType.STRING)
     protected ScheduleEventType type;
 
     @Column

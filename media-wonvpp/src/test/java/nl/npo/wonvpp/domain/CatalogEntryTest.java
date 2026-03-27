@@ -11,10 +11,8 @@ import jakarta.validation.Validator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import nl.npo.wonvpp.domain.CatalogEntry;
-import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.user.ServiceLocator;
-import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
+import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +22,7 @@ class CatalogEntryTest {
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     static {
-        ServiceLocator.setBroadcasterService(new BroadcasterServiceImpl("https://poms.omroep.nl/broadcasters"));
+        ServiceLocator.setBroadcasterService(BroadcasterServiceLocator.getInstance(false, true));
     }
 
     @ParameterizedTest
