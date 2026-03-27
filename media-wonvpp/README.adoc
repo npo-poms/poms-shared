@@ -8,7 +8,7 @@ Also see https://publiekeomroep.atlassian.net/browse/P0MS-319[jira]
 
 == java bindings for wonvpp data model json
 
-These are link:src/main/main/java/nl/npo/wonvpp/domain/CatalogEntry.java[manually created jackson bindings] for the wonvpp data model JSON.
+These are link:src/main/java/nl/npo/wonvpp/domain/CatalogEntry.java[manually created jackson bindings] for the wonvpp data model JSON.
 
 There is also a link:src/main/java/nl/npo/wonvpp/poms/WonToPomsMapper.java['poms' mapper] that maps the resulting POJO to the 'poms' data model.
 
