@@ -93,9 +93,11 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
             if (!Objects.equals(type, that.type)) {
                 return false;
             }
-            return  Objects.equals(midRef, that.midRef);
+            if (!Objects.equals(midRef, that.midRef)) {
+                return false;
+            }
         }
-        if(start == null || that.start == null || (start.toEpochMilli() != that.start.toEpochMilli())) {
+        if(start == null || that.start == null || start.equals(that.start)) {
             return false;
         }
 
@@ -104,7 +106,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, start, midRef);
+        return Objects.hash(channel, start, type, midRef);
     }
 
     @Override
@@ -121,13 +123,13 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         String[] split = id.toString().split(":", 3);
         if (split.length == 2) {
             return new ScheduleEventIdentifier(
-                Channel.valueOf(split[0]),
+                Channel.valueOfXml(split[0]),
                 TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)
                 ));
 
         } else {
             return new ScheduleEventIdentifier(
-                Channel.valueOf(split[0]),
+                Channel.valueOfXml(split[0]),
                 TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)),
                 split[2]
             );
