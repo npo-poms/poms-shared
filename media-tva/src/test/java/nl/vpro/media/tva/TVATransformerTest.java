@@ -61,7 +61,7 @@ public class TVATransformerTest {
     static final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
 
-    static CaptureListFromLogger appender = new CaptureListFromLogger(false );
+    static CaptureListFromLogger appender = new CaptureListFromLogger(true);
 
     static {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
