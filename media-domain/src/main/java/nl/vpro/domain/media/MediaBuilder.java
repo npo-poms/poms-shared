@@ -1108,6 +1108,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             ScheduleEvent event = ScheduleEvent.builder()
                 .channel(Channel.NVOD)
                 .start(start)
+                .type(ScheduleEventType.VOD)
                 .midRef(midRef == null ? mid : midRef)
                 .build();
             event.setParent(mediaObject());

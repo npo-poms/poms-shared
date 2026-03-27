@@ -129,10 +129,13 @@ public class WonToPomsMapper {
         List<Credits> credits = new ArrayList<>();
         for (CreditsType creditsType : castAndCrew) {
             PersonType person = creditsType.person();
-            switch (creditsType.function()) {
+            Person c  = switch (creditsType.function()) {
                 case Director -> new Person(person.givenName(), person.familyName(), RoleType.DIRECTOR);
                 case Actor -> new Person(person.givenName(), person.familyName(), RoleType.ACTOR);
-            }
+            };
+            c.setExternalId("won:" + person.id());
+            credits.add(c);
+
         }
         return credits;
     }
