@@ -829,6 +829,12 @@ public class MediaObjects {
         Embargos.copy(embargo, prediction);
         return prediction;
     }
+    public static Prediction updatePrediction(MediaObject media, Prediction incoming) {
+        Prediction prediction = media.findOrCreatePrediction(incoming.getPlatform());
+        prediction.copyFrom(incoming);
+        return prediction;
+    }
+
 
 
 

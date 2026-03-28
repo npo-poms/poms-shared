@@ -43,6 +43,7 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @lombok.Builder
 @AllArgsConstructor
 @Slf4j
+@Valid
 public class MediaTable implements Iterable<MediaObject>, Serializable, Streamable<MediaObject> {
 
     @Serial
@@ -59,15 +60,11 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     @XmlElement(name = "group")
     protected List<@Valid Group> groupTable;
 
-
-
     @XmlElement
     @Getter
-    @Valid
     protected LocationTable locationTable;
 
     @XmlElement
-    @Valid
     protected Schedule schedule;
 
     @XmlAttribute

@@ -20,6 +20,7 @@ import jakarta.xml.bind.annotation.*;
 @XmlType(name = "locationTableType",
          propOrder = {"locations",
                       "scheduleEvents" })
+@Valid
 public class LocationTable implements Serializable {
 
     @Serial

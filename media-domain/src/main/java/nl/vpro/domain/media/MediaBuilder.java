@@ -1216,16 +1216,28 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             }
             return (T) this;
         }
-
         public  T prediction(Platform platform, Encryption encryption) {
-            return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
+            return prediction(platform, encryption, Authority.USER);
+        }
+
+        public  T prediction(Platform platform, Encryption encryption, Authority authority) {
+            return predictions(
+                Prediction.builder()
+                    .platform(platform)
+                    .encryption(encryption)
+                    .authority(authority)
+                    .build()
+            );
         }
 
         /**
          * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
          */
+        public T plannedAvailability(Authority authority) {
+            return prediction(Platform.INTERNETVOD, null, authority);
+        }
         public T plannedAvailability() {
-            return prediction(Platform.INTERNETVOD, null);
+            return plannedAvailability(Authority.USER);
         }
 
 
