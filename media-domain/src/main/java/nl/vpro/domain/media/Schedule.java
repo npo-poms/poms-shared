@@ -511,7 +511,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         @NonNull
         @Override
         public Iterator<ScheduleEvent> iterator() {
-            return new UnmodifiableIterator<ScheduleEvent>() {
+            return new UnmodifiableIterator<>() {
                 final Iterator<ScheduleEvent> it = events.iterator();
                 ScheduleEvent next = null;
 

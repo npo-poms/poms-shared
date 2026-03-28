@@ -622,7 +622,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public void setPoProgID(String poProgID) {
-        //setMidRef(poProgID);
+        setMidRefAttr(poProgID);
     }
 
     @XmlTransient
