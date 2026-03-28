@@ -142,6 +142,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     @XmlAttribute
     protected Integer releaseVersion;
 
+    @Setter
     @XmlTransient
     protected boolean filtered = false;
 
@@ -394,10 +395,6 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
      */
     public boolean isFiltered() {
         return filtered;
-    }
-
-    public void setFiltered(boolean filtered) {
-        this.filtered = filtered;
     }
 
     @Override

@@ -14,7 +14,6 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.*;
@@ -113,9 +112,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Getter
     @Setter
     @Column(nullable = false)
-    protected String midRef;
-
-
+    protected String onDemandMid = "";
 
     protected Instant effectiveStart;
 
@@ -192,6 +189,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlElement
     protected SecondaryLifestyle secondaryLifestyle;
 
+    @Setter
+    @Transient
+    protected String midRef;
 
     @Setter
     protected String poSeriesID;
@@ -257,7 +257,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable  LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
-        @Nullable String midRef,
+        @Nullable @ValidMid String midRef,
         @Nullable Program media,
         @Nullable Repeat repeat,
         @Nullable Lifestyle primaryLifestyle,
@@ -278,7 +278,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
-        this.midRef = midRef == null ? "" : midRef;
+        this.midRef = midRef;
+        this.onDemandMid = type == ScheduleEventType.ON_DEMAND ? midRef : "";
         this.primaryLifestyle = primaryLifestyle;
         this.secondaryLifestyle = secondaryLifestyle;
         if (titles != null) {
@@ -348,6 +349,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.poSeriesID = source.poSeriesID;
         this.effectiveStart = source.effectiveStart;
         this.midRef = source.midRef;
+        this.onDemandMid = source.onDemandMid;
         if (ownerType == null) {
             TextualObjects.copyAndRemove(source, this);
         } else {
@@ -480,6 +482,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
     public void setStartInstant(Instant start) {
         this.start = start;
+        if (this.guideDay == null && start != null) {
+            this.guideDay = guideLocalDate(start);
+        }
     }
 
 
@@ -562,16 +567,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return urnRef;
     }
 
-    @XmlAttribute(required = true, name = "midRef")
-    public String getMidRefAttr() {
-        if (StringUtils.isEmpty(this.midRef) && mediaObject != null) {
+    @XmlAttribute(required = true)
+    @ValidMid
+    public String getMidRef() {
+        if (this.midRef == null && mediaObject != null) {
             return mediaObject.getMid();
         }
-        return StringUtils.isEmpty(midRef) ? null : midRef;
-    }
-
-    public void setMidRefAttr(String midRefAttr) {
-        this.midRef = midRefAttr == null ? "": midRefAttr;
+        return midRef;
     }
 
 
@@ -607,7 +609,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEventIdentifier id = new ScheduleEventIdentifier(); // avoid @NonNull validation
         id.start = start;
         id.channel = channel;
-        id.midRef = midRef;
+        id.onDemandMid = onDemandMid;
         return id;
     }
 
@@ -616,13 +618,22 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return type;
     }
 
+    public void setType(@Nullable ScheduleEventType type) {
+        this.type = type;
+        if (type != ScheduleEventType.ON_DEMAND) {
+            this.onDemandMid = "";
+        } else {
+            this.onDemandMid = getMidRef();
+        }
+    }
+
     @XmlElement
     public String getPoProgID() {
-        return getMidRefAttr();
+        return getMidRef();
     }
 
     public void setPoProgID(String poProgID) {
-        setMidRefAttr(poProgID);
+        setMidRef(poProgID);
     }
 
     @XmlTransient
@@ -663,7 +674,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (type != null){
             sb.append(", type=").append(type);
             if (type == ScheduleEventType.ON_DEMAND) {
-                sb.append(", midRef=").append(midRef);
+                sb.append(", on demand mid=").append(onDemandMid);
             }
         }
         sb.append('}');
@@ -693,7 +704,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEvent that = (ScheduleEvent) o;
 
         if (getId() != null) {
-            return Objects.equals(getId(), that.getId());
+            boolean e = Objects.equals(getId(), that.getId());
+            return e;
         } else {
             return hashCode() == that.hashCode();
         }
@@ -709,18 +721,21 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if (parent instanceof Program) {
-            this.mediaObject = (Program) parent;
+        if (parent instanceof Program p) {
+            this.mediaObject = p;
         }
-
+        // guideDay is set in setStartInstant
+        // onDemandMid is set in setType
         if (guideDay == null && start != null) {
             guideDay = guideLocalDate(start);
         }
         if (type != ScheduleEventType.ON_DEMAND) {
-            midRef = "";
-
+            onDemandMid = "";
+        } else {
+            onDemandMid = getMidRef();
         }
     }
+
 
     /**
      * The titles associated with the schedule event.

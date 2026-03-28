@@ -74,7 +74,6 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                 String epgValue;
                 if (StringUtils.isNotEmpty(matchOnValuePrefix)) {
                     try (SequenceIterator si = arguments[1].iterate()) {
-
                         TinyElementImpl next = (TinyElementImpl) si.next();
                         epgValue = (matchOnValuePrefix + next.getStringValue());
                     }

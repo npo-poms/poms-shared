@@ -6,7 +6,6 @@ import lombok.NonNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -36,7 +35,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     protected Instant start;
 
     @Column(nullable = false)
-    protected String midRef;
+    protected String onDemandMid;
 
 
 
@@ -46,23 +45,23 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
     public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start) {
         // Normalize to milliseconds to match typical database timestamp precision
-        this.start = start.truncatedTo(ChronoUnit.MILLIS);
+        this.start = start;
         this.channel = channel;
         if (channel.isOnDemand()) {
             throw new IllegalArgumentException("NVOD events should have a mid");
         }
-        this.midRef = "";
+        this.onDemandMid = "";
     }
 
 
-    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @NonNull @ValidMid String midRef) {
+    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @NonNull @ValidMid String onDemandMid) {
         // Normalize to milliseconds to match typical database timestamp precision
-        this.start = start.truncatedTo(ChronoUnit.MILLIS);
+        this.start = start;
         this.channel = channel;
         if (! channel.isOnDemand()) {
             throw new IllegalArgumentException("Only NVOD events should have a mid");
         }
-        this.midRef = midRef;
+        this.onDemandMid = onDemandMid;
     }
 
     public Instant getStartInstant() {
@@ -82,16 +81,13 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         // channel must match
         return  Objects.equals(channel, that.channel) &&
             Objects.equals(this.start, that.start) &&
-            Objects.equals(midRef, that.midRef);
+            Objects.equals(onDemandMid, that.onDemandMid);
 
     }
 
     @Override
     public int hashCode() {
-        // Include all relevant fields. This is safe because equals compares a subset of these
-        // fields depending on the identity mode (midRef/type vs start), and including them here
-        // ensures equal objects (per equals) will have equal hashCodes.
-        return Objects.hash(channel, start, midRef);
+        return Objects.hash(channel, start, onDemandMid);
     }
 
     @Override
@@ -100,7 +96,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public String asString() {
-        return channel.getXmlValue() + ":" + start + (StringUtils.isEmpty(midRef) ? "" : (":" + midRef));
+        return channel.getXmlValue() + ":" + start + (StringUtils.isEmpty(onDemandMid) ? "" : (":" + onDemandMid));
 
     }
 
@@ -131,7 +127,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         return Comparator
             .comparing(ScheduleEventIdentifier::getStartInstant, Comparator.nullsFirst(Comparator.naturalOrder()))
             .thenComparing((ScheduleEventIdentifier s) -> s.channel, Comparator.nullsFirst(Comparator.naturalOrder()))
-            .thenComparing(s -> s.midRef, Comparator.nullsFirst(Comparator.naturalOrder()))
+            .thenComparing(s -> s.onDemandMid, Comparator.nullsFirst(Comparator.naturalOrder()))
             .compare(this, o);
 
     }

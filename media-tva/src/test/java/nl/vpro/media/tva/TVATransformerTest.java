@@ -61,7 +61,7 @@ public class TVATransformerTest {
     static final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
 
-    static CaptureListFromLogger appender = new CaptureListFromLogger(true);
+    CaptureListFromLogger appender = new CaptureListFromLogger(Level.WARN, true) ;
 
     static {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
@@ -75,11 +75,6 @@ public class TVATransformerTest {
         genreFunction.setNotFound(NotFound.FATAL);
         genreFunction.setMatchOnValuePrefix("");
         genreFunction.setIgnore(Set.of());
-    }
-
-    @AfterAll
-    public static void shutdown() {
-        appender.close();
     }
 
 
@@ -613,6 +608,7 @@ public class TVATransformerTest {
 
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        log.info("HOI");
         String xml = bindinc("bindinc/20201124021653000dayZDF_20201123.xml");
 
         //log.info(xml);
@@ -655,6 +651,7 @@ public class TVATransformerTest {
             }
         }
 
+        log.info("events: {}", appender.getEvents());
         // No such term with reference urn:bindinc:genre:AmusementCHANGED
         assertThat(appender.getEvents().stream().filter(e ->  e.getLevel().compareTo(Level.WARN) <= 0)).hasSize(1);
     }
