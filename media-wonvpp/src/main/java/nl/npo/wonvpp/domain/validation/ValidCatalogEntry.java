@@ -7,7 +7,7 @@ import jakarta.validation.Payload;
 
 @Documented
 @Constraint(validatedBy = CatalogEntryValidator.class)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR })
+@Target({ ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR })
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 public @interface ValidCatalogEntry {
     /** Message used when this composed constraint is reported as a single violation. */

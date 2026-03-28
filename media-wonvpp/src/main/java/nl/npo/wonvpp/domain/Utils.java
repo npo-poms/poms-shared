@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,7 +40,7 @@ public class Utils {
      * @return
      * @throws IOException
      */
-    public static List<CatalogEntry> unmarshal(InputStream stream) throws IOException {
+    public static List<CatalogEntry> unmarshal(@NonNull InputStream stream) throws IOException {
         //
         return MAPPER.readerForListOf(CatalogEntry.class)
             .readValue(stream);

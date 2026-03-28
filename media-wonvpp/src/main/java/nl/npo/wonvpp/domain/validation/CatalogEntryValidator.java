@@ -11,8 +11,11 @@ public class CatalogEntryValidator  implements ConstraintValidator<ValidCatalogE
 
      }
 
+    @SuppressWarnings("ConstantValue")
     @Override
     public boolean isValid(CatalogEntry value, ConstraintValidatorContext context) {
+         if (value == null) return true;
+         if (value.contentType() == null) return false;
          return switch(value.contentType()) {
              case episode ->
                  value.seasonNumber() == null;
