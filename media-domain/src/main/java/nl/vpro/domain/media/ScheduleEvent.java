@@ -5,6 +5,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.*;
@@ -91,11 +93,20 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Id
     @Enumerated(EnumType.STRING)
     @NotNull
+    @Column(nullable = false)
     protected Channel channel;
 
     @Id
-    @NotNull
+    @Column(nullable = false)
     protected Instant start;
+
+
+    @Id
+    @Getter
+    @Setter
+    @Column(nullable = false)
+    protected String midRef;
+
 
 
     protected Instant effectiveStart;
@@ -156,7 +167,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Setter
     @Enumerated(EnumType.STRING)
-    @Id
     @Nullable
     protected ScheduleEventType type;
 
@@ -174,10 +184,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlElement
     protected SecondaryLifestyle secondaryLifestyle;
 
-    @Setter
-    @Nullable // only needs to be filled for type == VOD
-    @Id
-    protected String midRef;
 
     @Setter
     protected String poSeriesID;
@@ -261,10 +267,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
-        this.start = start;
+        this.start = start.truncatedTo(ChronoUnit.MILLIS);;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
-        this.midRef = midRef;
+        this.midRef = midRef == null ? "" : midRef;
         this.primaryLifestyle = primaryLifestyle;
         this.secondaryLifestyle = secondaryLifestyle;
         if (titles != null) {
@@ -333,6 +339,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.secondaryLifestyle = SecondaryLifestyle.copy(source.secondaryLifestyle);
         this.poSeriesID = source.poSeriesID;
         this.effectiveStart = source.effectiveStart;
+        this.midRef = source.midRef;
         if (ownerType == null) {
             TextualObjects.copyAndRemove(source, this);
         } else {
@@ -548,13 +555,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return urnRef;
     }
 
-    @XmlAttribute(required = true)
-    public String getMidRef() {
-        if (this.midRef == null && mediaObject != null) {
+    @XmlAttribute(required = true, name = "midRef")
+    public String getMidRefAttr() {
+        if (StringUtils.isEmpty(this.midRef) && mediaObject != null) {
             return mediaObject.getMid();
         }
         return midRef;
     }
+
 
     @Override
     @XmlTransient
@@ -589,7 +597,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         id.start = start;
         id.channel = channel;
         id.midRef = midRef;
-        id.type = type;
         return id;
     }
 
@@ -600,11 +607,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @XmlElement
     public String getPoProgID() {
-        return getMidRef();
+        return getMidRefAttr();
     }
 
     public void setPoProgID(String poProgID) {
-        setMidRef(poProgID);
+        //setMidRef(poProgID);
     }
 
     @XmlTransient
