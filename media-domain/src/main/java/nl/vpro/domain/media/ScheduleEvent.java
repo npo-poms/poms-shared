@@ -571,6 +571,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return midRef;
     }
 
+    public void setMidRefAttr(String midRefAttr) {
+        this.midRef = midRefAttr;
+    }
+
 
     @Override
     @XmlTransient
@@ -712,6 +716,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
         if (guideDay == null && start != null) {
             guideDay = guideLocalDate(start);
+        }
+        if (type != ScheduleEventType.ON_DEMAND) {
+            midRef = "";
+
         }
     }
 
