@@ -67,6 +67,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     protected LocationTable locationTable;
 
     @XmlElement
+    @Valid
     protected Schedule schedule;
 
     @XmlAttribute
@@ -340,7 +341,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
                         && StringUtils.isNotEmpty(scheduleEvent.getUrnRef())
                         && program.getCrids().contains(scheduleEvent.getUrnRef())) {
 
-                        // MIS TVAnytime stores poProgId's under events. Therefore MIS deliveries may contain two or more
+                        // MIS TVAnytime stores poProgId's under events. Therefore, MIS deliveries may contain two or more
                         // ScheduleEvents referencing the same program on crid with different poProgId's.
                         // See test case.
 

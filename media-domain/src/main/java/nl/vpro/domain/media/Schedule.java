@@ -9,7 +9,6 @@ import java.time.*;
 import java.util.*;
 import java.util.function.Predicate;
 
-import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -39,7 +38,6 @@ import static nl.vpro.domain.Changeables.instant;
     "scheduleEvents"
 })
 @Slf4j
-@Valid
 public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicate<ScheduleEvent> {
 
     @Serial

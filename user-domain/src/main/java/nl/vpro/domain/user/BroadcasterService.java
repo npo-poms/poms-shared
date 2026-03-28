@@ -24,11 +24,15 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
             .orElse(Instant.now());
     }
 
-    default Optional<Broadcaster> findFor(IdType idType, String id) throws NotFoundException {
-         return Optional.ofNullable(switch(idType) {
-             case POMS ->  find(id);
-             case WON -> findForWhatsOnId(id);
-         });
+    default Optional<Broadcaster> findFor(IdType idType, String id)  {
+        try {
+            return Optional.ofNullable(switch (idType) {
+                case POMS -> find(id);
+                case WON -> findForWhatsOnId(id);
+            });
+        } catch (NotFoundException e) {
+            return Optional.empty();
+        }
     }
 
     default Broadcaster findForMisId(String id) throws NotFoundException {
