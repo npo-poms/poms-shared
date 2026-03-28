@@ -5,7 +5,6 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import jakarta.persistence.*;
@@ -276,7 +275,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
-        this.start = start.truncatedTo(ChronoUnit.MILLIS);;
+        this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
         this.midRef = midRef == null ? "" : midRef;
@@ -568,11 +567,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (StringUtils.isEmpty(this.midRef) && mediaObject != null) {
             return mediaObject.getMid();
         }
-        return midRef;
+        return StringUtils.isEmpty(midRef) ? null : midRef;
     }
 
     public void setMidRefAttr(String midRefAttr) {
-        this.midRef = midRefAttr;
+        this.midRef = midRefAttr == null ? "": midRefAttr;
     }
 
 

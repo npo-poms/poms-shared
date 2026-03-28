@@ -130,8 +130,8 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
         // Compare by channel, then by start instant (nulls first), then by midRef (nulls first)
         return Comparator
-            .comparing((ScheduleEventIdentifier s) -> s.channel, Comparator.nullsFirst(Comparator.naturalOrder()))
-            .thenComparing(ScheduleEventIdentifier::getStartInstant, Comparator.nullsFirst(Comparator.naturalOrder()))
+            .comparing(ScheduleEventIdentifier::getStartInstant, Comparator.nullsFirst(Comparator.naturalOrder()))
+            .thenComparing((ScheduleEventIdentifier s) -> s.channel, Comparator.nullsFirst(Comparator.naturalOrder()))
             .thenComparing(s -> s.midRef, Comparator.nullsFirst(Comparator.naturalOrder()))
             .compare(this, o);
 
