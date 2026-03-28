@@ -118,7 +118,7 @@ public class WonToPomsMapper {
             ;
     }
     protected Broadcaster mapToBroadcaster(String broadcaster) {
-        return broadcasterService.findFor(BroadcasterService.IdType.WON, broadcaster).orElseThrow();
+        return broadcasterService.findFor(BroadcasterService.IdType.WON, broadcaster).orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
 
     }
 

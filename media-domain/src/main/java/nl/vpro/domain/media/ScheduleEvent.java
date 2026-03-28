@@ -16,8 +16,8 @@ import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.time.DurationMin;
@@ -40,6 +40,13 @@ import static jakarta.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
 
+/**
+ * A schedule event classically represent one schedule entry on a radio or TV channel.
+ * So, it bundles a {@link Channel} with a {@link Instant} (at what moment in time it was planned to start) and is a child of a {@link #getParent() program}
+ *
+ * From 8.13 onwards it can also represent a 'Video On Demand' item. The channel must then be {@link Channel#getOnlineOnly()} and the type must be {@link ScheduleEventType#ON_DEMAND}}
+ *
+ */
 @Entity
 @IdClass(ScheduleEventIdentifier.class)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -92,16 +99,18 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     private static final long serialVersionUID = 2107980433596776633L;
     @Id
     @Enumerated(EnumType.STRING)
-    @NotNull
+    @MonotonicNonNull
     @Column(nullable = false)
     protected Channel channel;
 
     @Id
+    @MonotonicNonNull
     @Column(nullable = false)
     protected Instant start;
 
 
     @Id
+    @MonotonicNonNull
     @Getter
     @Setter
     @Column(nullable = false)
@@ -512,7 +521,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return offset;
     }
 
-
     /**
      * @since 4.3
      */
@@ -524,7 +532,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute
-    public Channel getChannel() {
+    public @NonNull Channel getChannel() {
         return channel;
     }
 

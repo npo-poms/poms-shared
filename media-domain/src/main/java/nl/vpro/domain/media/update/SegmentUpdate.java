@@ -87,8 +87,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @XmlAttribute
     private ChapterType chapterType;
 
-
+    @ValidMid
     private String midRef;
+
     private ProgramUpdate parent;
 
     public SegmentUpdate() {

@@ -48,18 +48,18 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         // Normalize to milliseconds to match typical database timestamp precision
         this.start = start.truncatedTo(ChronoUnit.MILLIS);
         this.channel = channel;
-        if (channel == Channel.NVOD) {
+        if (channel.isOnDemand()) {
             throw new IllegalArgumentException("NVOD events should have a mid");
         }
         this.midRef = "";
     }
 
 
-    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @NonNull String midRef) {
+    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @NonNull @ValidMid String midRef) {
         // Normalize to milliseconds to match typical database timestamp precision
         this.start = start.truncatedTo(ChronoUnit.MILLIS);
         this.channel = channel;
-        if (channel != Channel.NVOD) {
+        if (! channel.isOnDemand()) {
             throw new IllegalArgumentException("Only NVOD events should have a mid");
         }
         this.midRef = midRef;
