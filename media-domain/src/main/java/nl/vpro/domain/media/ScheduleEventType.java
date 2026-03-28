@@ -14,12 +14,15 @@ import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author roekoe
- * @deprecated Last 'STRAND' is from 2014
  */
 @XmlEnum
 @XmlType(name = "scheduleEventTypeEnum")
 public enum ScheduleEventType {
 
+    /*
+     * @deprecated Last 'STRAND' is from 2014
+     */
+    @Deprecated
     STRAND,
     /**
      * @since 8.13
