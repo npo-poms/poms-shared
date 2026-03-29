@@ -8,10 +8,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      MAVEN_ARGS: '--no-transfer-progress'
+      MAVEN_ARGS: '--no-transfer-progress --color always'
     if: startsWith(github.ref, 'refs/heads/REL-')
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-java@v5
         with:
           distribution: 'temurin'

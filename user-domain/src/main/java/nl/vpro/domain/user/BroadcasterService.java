@@ -12,11 +12,27 @@ import nl.vpro.domain.NotFoundException;
 
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
 
+    enum IdType {
+        POMS,
+        WON
+    }
+
     default Instant getLastModification() {
         return findAll().stream()
             .map(Broadcaster::getLastModified)
             .max(Comparator.naturalOrder())
             .orElse(Instant.now());
+    }
+
+    default Optional<Broadcaster> findFor(IdType idType, String id)  {
+        try {
+            return Optional.ofNullable(switch (idType) {
+                case POMS -> find(id);
+                case WON -> findForWhatsOnId(id);
+            });
+        } catch (NotFoundException e) {
+            return Optional.empty();
+        }
     }
 
     default Broadcaster findForMisId(String id) throws NotFoundException {

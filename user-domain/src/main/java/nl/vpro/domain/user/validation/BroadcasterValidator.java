@@ -6,8 +6,13 @@ package nl.vpro.domain.user.validation;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.user.*;
 
@@ -18,6 +23,12 @@ import nl.vpro.domain.user.*;
 public class BroadcasterValidator implements ConstraintValidator<BroadcasterValidation, Object> {
 
     private static boolean warned = false;
+    private  BroadcasterValidation annotation;
+    @EnsuresNonNull({"annotation"})
+    public void initialize(@NonNull BroadcasterValidation constraintAnnotation) {
+        this.annotation = constraintAnnotation;
+    }
+
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -44,7 +55,8 @@ public class BroadcasterValidator implements ConstraintValidator<BroadcasterVali
             value  = b.getId();
         }
         if (value instanceof CharSequence cs) {
-            return broadcasterService.find(cs.toString()) != null;
+            BroadcasterService.IdType idType = Optional.ofNullable(annotation).map(BroadcasterValidation::idType).orElse(BroadcasterService.IdType.POMS);
+            return broadcasterService.findFor(idType, cs.toString()).isPresent();
         }
         throw new IllegalArgumentException("Cannot validate " + value);
     }

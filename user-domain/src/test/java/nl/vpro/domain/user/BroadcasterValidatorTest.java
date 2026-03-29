@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.user;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ public class BroadcasterValidatorTest {
     public void init() {
         Mockito.when(broadcasterService.findAll()).thenReturn(Arrays.asList(Broadcaster.of("VPRO"), Broadcaster.of("EO")));
         Broadcaster vpro = new Broadcaster("VPRO", "VPRO");
-        Mockito.when(broadcasterService.find("VPRO")).thenReturn(vpro);
+        Mockito.when(broadcasterService.findFor(BroadcasterService.IdType.POMS, "VPRO")).thenReturn(Optional.of(vpro));
         validator.initialize(null);
 
         ServiceLocator.setBroadcasterService(broadcasterService);

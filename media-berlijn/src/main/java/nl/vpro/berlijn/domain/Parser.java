@@ -9,8 +9,7 @@ import java.util.Map;
 
 import jakarta.inject.Singleton;
 
-import org.meeuw.i18n.languages.ISO_639;
-import org.meeuw.i18n.languages.LanguageCode;
+import org.meeuw.i18n.languages.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -83,21 +82,20 @@ public class Parser {
     // For some reason Whatson simply does not conform to standard.
     private static final Map<String, LanguageCode> FALLBACKS = Map.of(
         "XX", languageCode("zxx"),
-        "ZZ", LanguageCode.UNKNOWN
+        "ZZ", ISO_639_3_Code.UND
         // SEE https://publiekeomroep.atlassian.net/browse/VPPM-2238
         ///"", languageCode(null)
     );
 
+    @SuppressWarnings("resource")
     @SneakyThrows
     public ProductMetadata parseProductMetadata(byte[] json) {
-        try {
-            LanguageCode.setFallbacks(FALLBACKS);
+        try (AutoCloseable autoCloseable = LanguageCode.setFallbacks(FALLBACKS)) {
             if (!mapper.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)) {
                 ISO_639.setIgnoreNotFound();
             }
             return mapper.readValue(json, ProductMetadata.class);
         } finally {
-            LanguageCode.resetFallBacks();
             ISO_639.removeIgnoreNotFound();
 
         }

@@ -43,6 +43,7 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @lombok.Builder
 @AllArgsConstructor
 @Slf4j
+@Valid
 public class MediaTable implements Iterable<MediaObject>, Serializable, Streamable<MediaObject> {
 
     @Serial
@@ -61,11 +62,9 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
 
     @XmlElement
     @Getter
-    @Valid
     protected LocationTable locationTable;
 
     @XmlElement
-    @Valid
     protected Schedule schedule;
 
     @XmlAttribute
@@ -223,11 +222,15 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     public boolean setScheduleIfNeeded() {
         if (schedule == null) {
             this.schedule = getSchedule();
+            Instant latestStart = null;
             for (ScheduleEvent e : this.schedule) {
                 if (this.schedule.getChannel() != null && ! Objects.equals(e.getChannel(), this.schedule.getChannel())) {
                     throw new IllegalStateException("Schedule events are not all from same channel");
                 }
                 this.schedule.setChannel(e.getChannel());
+                if (latestStart == null || e.start.isAfter(latestStart)) {
+                    latestStart = e.start;
+                }
                 if (this.schedule.start == null || this.schedule.start.isAfter(e.start)) {
                     this.schedule.start = e.start;
                 }
@@ -236,6 +239,10 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
                     this.schedule.stop = stop;
                 }
             }
+            if (schedule.stop == null && latestStart != null) {
+                schedule.stop = Schedule.guideDay(latestStart).plusDays(1).atTime(Schedule.START_OF_SCHEDULE).atZone(Schedule.ZONE_ID).toInstant();
+            }
+
             return true;
         } else {
             return false;
@@ -331,7 +338,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
                         && StringUtils.isNotEmpty(scheduleEvent.getUrnRef())
                         && program.getCrids().contains(scheduleEvent.getUrnRef())) {
 
-                        // MIS TVAnytime stores poProgId's under events. Therefore MIS deliveries may contain two or more
+                        // MIS TVAnytime stores poProgId's under events. Therefore, MIS deliveries may contain two or more
                         // ScheduleEvents referencing the same program on crid with different poProgId's.
                         // See test case.
 

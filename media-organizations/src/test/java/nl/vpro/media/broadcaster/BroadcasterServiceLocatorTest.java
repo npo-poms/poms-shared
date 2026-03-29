@@ -11,7 +11,7 @@ import nl.vpro.domain.user.BroadcasterService;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BroadcasterServiceLocatorTest {
-    private final BroadcasterService broadcasterService = new BroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
+    private final BroadcasterService broadcasterService = new URLBroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
 
 
     @Test

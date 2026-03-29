@@ -20,10 +20,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @WireMockTest
-public class BroadcasterServiceImplTest {
+public class URLBroadcasterServiceImplTest {
 
 
-    BroadcasterService broadcasterService = new BroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
+    BroadcasterService broadcasterService = new URLBroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
 
     @Test
     public void testFind() {
@@ -53,7 +53,7 @@ public class BroadcasterServiceImplTest {
                     .withHeader("Cache-Control", "public, max-age: 3600")
                     .withHeader("Last-Modified", "Wed, 24 Apr 2019 05:55:21 GMT")
             ));
-        BroadcasterService broadcasterService = new BroadcasterServiceImpl(wireMockRuntimeInfo.getHttpBaseUrl() + "/broadcasters/", false, true);
+        BroadcasterService broadcasterService = new URLBroadcasterServiceImpl(wireMockRuntimeInfo.getHttpBaseUrl() + "/broadcasters/", false, true);
         assertThat(broadcasterService.find("RTUT")).isNotNull();
         assertThat(broadcasterService.find("RTUT").getMisId()).isEqualTo("RTV Utrecht");
     }
@@ -71,7 +71,7 @@ public class BroadcasterServiceImplTest {
 
     @Test
     public void string() {
-        assertThat(broadcasterService.toString()).isEqualTo("BroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
+        assertThat(broadcasterService.toString()).isEqualTo("URLBroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
 
     }
 

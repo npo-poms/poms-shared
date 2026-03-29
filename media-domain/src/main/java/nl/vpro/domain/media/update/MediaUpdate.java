@@ -211,6 +211,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     @Valid
     protected MediaObject mediaObjectToValidate;
 
+    @ValidMid
     protected String mid;
 
     @Deprecated(since = "7.7")

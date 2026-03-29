@@ -48,6 +48,17 @@
       <groupId>org.meeuw.util</groupId>
       <artifactId>kafkadumpreader</artifactId>
     </dependency>
+    <!-- this avoids some compiler warnings about missing enums (but they are only used in annotations) -->
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
 </project>

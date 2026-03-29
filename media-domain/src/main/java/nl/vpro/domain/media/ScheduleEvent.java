@@ -14,8 +14,8 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.time.DurationMin;
@@ -38,6 +38,13 @@ import static jakarta.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
 
+/**
+ * A schedule event classically represent one schedule entry on a radio or TV channel.
+ * So, it bundles a {@link Channel} with a {@link Instant} (at what moment in time it was planned to start) and is a child of a {@link #getParent() program}
+ *
+ * From 8.13 onwards it can also represent a 'Video On Demand' item. The channel must then be {@link Channel#getOnlineOnly()} and the type must be {@link ScheduleEventType#ON_DEMAND}}
+ *
+ */
 @Entity
 @IdClass(ScheduleEventIdentifier.class)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -90,13 +97,22 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     private static final long serialVersionUID = 2107980433596776633L;
     @Id
     @Enumerated(EnumType.STRING)
-    @NotNull
+    @MonotonicNonNull
+    @Column(nullable = false)
     protected Channel channel;
 
     @Id
-    @NotNull
+    @MonotonicNonNull
+    @Column(nullable = false)
     protected Instant start;
 
+
+    @Id
+    @MonotonicNonNull
+    @Getter
+    @Setter
+    @Column(nullable = false)
+    protected String onDemandMid = "";
 
     protected Instant effectiveStart;
 
@@ -138,7 +154,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @DurationMin // negative durations don't make sense
+    @DurationMin(inclusive = false, millis = 0) // negative durations don't make sense
     protected Duration duration;
 
     @Setter
@@ -156,7 +172,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Setter
     @Enumerated(EnumType.STRING)
-    @Deprecated
+    @Nullable
     protected ScheduleEventType type;
 
     @Getter
@@ -181,7 +197,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected String poSeriesID;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
-    @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
     @SortNatural
@@ -189,7 +204,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
-    @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
     @SortNatural
@@ -233,7 +247,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null, null, null, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -243,7 +257,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable  LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
-        String midRef,
+        @Nullable @ValidMid String midRef,
         @Nullable Program media,
         @Nullable Repeat repeat,
         @Nullable Lifestyle primaryLifestyle,
@@ -255,7 +269,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable String textSubtitles,
         @Nullable String guci,
         @Nullable Instant effectiveStart,
-        @Nullable Duration offset
+        @Nullable Duration offset,
+        @Nullable ScheduleEventType type
         ) {
         this.channel = channel;
         this.net = net;
@@ -264,6 +279,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
         this.midRef = midRef;
+        this.onDemandMid = type == ScheduleEventType.ON_DEMAND ? midRef : "";
         this.primaryLifestyle = primaryLifestyle;
         this.secondaryLifestyle = secondaryLifestyle;
         if (titles != null) {
@@ -289,6 +305,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         } else {
             this.offset = offset;
         }
+        this.type = type;
         setParent(media);
     }
 
@@ -331,6 +348,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.secondaryLifestyle = SecondaryLifestyle.copy(source.secondaryLifestyle);
         this.poSeriesID = source.poSeriesID;
         this.effectiveStart = source.effectiveStart;
+        this.midRef = source.midRef;
+        this.onDemandMid = source.onDemandMid;
         if (ownerType == null) {
             TextualObjects.copyAndRemove(source, this);
         } else {
@@ -463,6 +482,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
     public void setStartInstant(Instant start) {
         this.start = start;
+        if (this.guideDay == null && start != null) {
+            this.guideDay = guideLocalDate(start);
+        }
     }
 
 
@@ -474,11 +496,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public Instant getStopInstant() {
-        return start.plus(getDuration());
+
+        return getDuration() == null ? null : start.plus(getDuration());
     }
 
     public void setStopInstant(Instant stop) {
-        this.duration = Duration.between(start, stop);
+        this.duration = stop == null ? null : Duration.between(start, stop);
     }
 
 
@@ -502,7 +525,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return offset;
     }
 
-
     /**
      * @since 4.3
      */
@@ -514,7 +536,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute
-    public Channel getChannel() {
+    public @NonNull Channel getChannel() {
         return channel;
     }
 
@@ -546,12 +568,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute(required = true)
+    @ValidMid
     public String getMidRef() {
         if (this.midRef == null && mediaObject != null) {
             return mediaObject.getMid();
         }
         return midRef;
     }
+
 
     @Override
     @XmlTransient
@@ -585,13 +609,22 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEventIdentifier id = new ScheduleEventIdentifier(); // avoid @NonNull validation
         id.start = start;
         id.channel = channel;
+        id.onDemandMid = onDemandMid;
         return id;
     }
 
     @XmlAttribute
-    @Deprecated
     public ScheduleEventType getType() {
         return type;
+    }
+
+    public void setType(@Nullable ScheduleEventType type) {
+        this.type = type;
+        if (type != ScheduleEventType.ON_DEMAND) {
+            this.onDemandMid = "";
+        } else {
+            this.onDemandMid = getMidRef();
+        }
     }
 
     @XmlElement
@@ -638,6 +671,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (repeat != null && repeat.isRerun) {
             sb.append(", RERUN");
         }
+        if (type != null){
+            sb.append(", type=").append(type);
+            if (type == ScheduleEventType.ON_DEMAND) {
+                sb.append(", on demand mid=").append(onDemandMid);
+            }
+        }
         sb.append('}');
         return sb.toString();
     }
@@ -665,7 +704,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEvent that = (ScheduleEvent) o;
 
         if (getId() != null) {
-            return Objects.equals(getId(), that.getId());
+            boolean e = Objects.equals(getId(), that.getId());
+            return e;
         } else {
             return hashCode() == that.hashCode();
         }
@@ -676,19 +716,26 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (getId() != null) {
             return getId().hashCode();
         } else {
-            return Objects.hash(channel, start, duration, net, imi);
+            return Objects.hash(channel, start, duration, net, imi, type, midRef);
         }
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if (parent instanceof Program) {
-            this.mediaObject = (Program) parent;
+        if (parent instanceof Program p) {
+            this.mediaObject = p;
         }
-
+        // guideDay is set in setStartInstant
+        // onDemandMid is set in setType
         if (guideDay == null && start != null) {
             guideDay = guideLocalDate(start);
         }
+        if (type != ScheduleEventType.ON_DEMAND) {
+            onDemandMid = "";
+        } else {
+            onDemandMid = getMidRef();
+        }
     }
+
 
     /**
      * The titles associated with the schedule event.

@@ -9,6 +9,7 @@ import java.time.*;
 import java.util.*;
 import java.util.function.Predicate;
 
+import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -38,6 +39,7 @@ import static nl.vpro.domain.Changeables.instant;
     "scheduleEvents"
 })
 @Slf4j
+@Valid
 public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicate<ScheduleEvent> {
 
     @Serial
@@ -142,6 +144,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     @XmlAttribute
     protected Integer releaseVersion;
 
+    @Setter
     @XmlTransient
     protected boolean filtered = false;
 
@@ -182,7 +185,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this.channel = channel;
         this.start = start;
         this.stop = stop;
-        if (scheduleEvents != null && scheduleEvents.size() > 0) {
+        if (scheduleEvents != null && !scheduleEvents.isEmpty()) {
             this.scheduleEvents = new TreeSet<>(scheduleEvents);
         }
     }
@@ -365,7 +368,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getStop() {
-        if (filtered || scheduleEvents == null || scheduleEvents.size() == 0 || scheduleEvents.last().getStartInstant() == null) {
+        if (filtered || scheduleEvents == null || scheduleEvents.isEmpty() || scheduleEvents.last().getStartInstant() == null) {
             return stop;
         }
 
@@ -394,10 +397,6 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
      */
     public boolean isFiltered() {
         return filtered;
-    }
-
-    public void setFiltered(boolean filtered) {
-        this.filtered = filtered;
     }
 
     @Override
@@ -509,7 +508,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         @NonNull
         @Override
         public Iterator<ScheduleEvent> iterator() {
-            return new UnmodifiableIterator<ScheduleEvent>() {
+            return new UnmodifiableIterator<>() {
                 final Iterator<ScheduleEvent> it = events.iterator();
                 ScheduleEvent next = null;
 

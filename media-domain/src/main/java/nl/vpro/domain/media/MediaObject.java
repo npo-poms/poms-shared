@@ -55,7 +55,6 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson.Views;
-import nl.vpro.logging.simple.Level;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -249,11 +248,7 @@ MediaObject extends PublishableObject<MediaObject>
     private static final long serialVersionUID = -9095662256792069374L;
 
     @Column(name = "mid", nullable = false, unique = true)
-    @Size(max = 255, min = 4)
-    @Pattern(
-        regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
-        flags = {
-            Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
+    @ValidMid
     @NotNull(groups = PrePersistValidatorGroup.class)
     @MonotonicNonNull
     protected String mid;

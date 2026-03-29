@@ -142,19 +142,23 @@
                 </xsl:element>
               </xsl:for-each>
               <xsl:for-each select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:OtherIdentifier[@type = 'SeriesID']">
-                <descendantOf type="SEASON">
-                  <xsl:attribute name="midRef">
-                    <xsl:value-of select="normalize-space(text())" />
-                  </xsl:attribute>
-                </descendantOf>
+                  <xsl:if test="normalize-space(text()) != ''">
+                    <descendantOf type="SEASON">
+                      <xsl:attribute name="midRef">
+                        <xsl:value-of select="normalize-space(text())" />
+                      </xsl:attribute>
+                  </descendantOf>
+                </xsl:if>
               </xsl:for-each>
               <xsl:for-each
                   select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:OtherIdentifier[@type = 'ParentSeriesID']">
-                <descendantOf type="SERIES">
-                  <xsl:attribute name="midRef">
-                    <xsl:value-of select="normalize-space(text())"/>
-                  </xsl:attribute>
-                </descendantOf>
+                <xsl:if test="normalize-space(text()) != ''">
+                  <descendantOf type="SERIES">
+                    <xsl:attribute name="midRef">
+                      <xsl:value-of select="normalize-space(text())"/>
+                    </xsl:attribute>
+                  </descendantOf>
+                </xsl:if>
               </xsl:for-each>
               <xsl:if test="$poSeriesId != ''">
                 <episodeOf type="SEASON">
@@ -423,9 +427,11 @@
               </xsl:for-each>
               <!-- poProgId -->
               <xsl:for-each select="tva:OtherIdentifier[@type = 'ProductID']">
-                <xsl:element name="poProgID">
-                  <xsl:value-of select="normalize-space(text())"/>
-                </xsl:element>
+                <xsl:if test="normalize-space(text()) != ''">
+                  <xsl:element name="poProgID">
+                    <xsl:value-of select="normalize-space(text())"/>
+                  </xsl:element>
+                </xsl:if>
               </xsl:for-each>
               <!-- poSeriesId -->
               <xsl:for-each select="tva:OtherIdentifier[@type = 'SeriesID']">

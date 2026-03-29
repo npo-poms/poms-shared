@@ -363,6 +363,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return titles(new Title(title, owner, TextualType.MAIN));
     }
 
+    /**
+     * @since 8.13
+     */
+    default B originalTitle(@Nullable String title, @NonNull OwnerType owner) {
+        if (title == null) {
+            mediaObject().removeTitle(owner,  TextualType.ORIGINAL);
+            return (B) this;
+        } else {
+            return titles(new Title(title, owner, TextualType.ORIGINAL));
+        }
+    }
+
     default B mainTitle(@NonNull String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
@@ -386,6 +398,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
         } else {
+            mediaObject().removeTitle(owner, TextualType.SUB);
             return (B) this;
         }
     }
@@ -699,11 +712,17 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     default B memberOf(String mid, Integer number) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
         return memberOf(new MemberRef(mid, number));
     }
 
 
     default B memberOf(String mid) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
         return memberOf(new MemberRef(mid));
     }
     default B clearMemberOf() {
@@ -720,6 +739,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (mediaObject().getAgeRating() == null) {
             mediaObject().setAgeRating(AgeRating.ALL);
         }
+        return (B) this;
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B dubbed(Boolean dubbed) {
+        mediaObject().setIsDubbed(dubbed);
+        return (B) this;
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B availableSubtitles(AvailableSubtitles... availableSubtitles) {
+        mediaObject().setAvailableSubtitles(new TreeSet<>(Set.of(availableSubtitles)));
         return (B) this;
     }
 
@@ -1056,6 +1091,34 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return scheduleEvent(c, time, duration, e->e, titles);
         }
 
+        /**
+         * @since 8.13
+         * @param titles
+
+         */
+        public T vodEvent(ScheduleEventTitle... titles) {
+            return vodEvent(mid, null, titles);
+        }
+
+        /**
+         * @since 8.13
+         * @param titles
+         */
+        public T vodEvent(String midRef, java.time.Instant start, ScheduleEventTitle... titles) {
+            ScheduleEvent event = ScheduleEvent.builder()
+                .channel(Channel.NVOD)
+                .start(start)
+                .type(ScheduleEventType.ON_DEMAND)
+                .midRef(midRef == null ? mid : midRef)
+                .build();
+            event.setParent(mediaObject());
+            for (ScheduleEventTitle title : titles) {
+                event.addTitle(title);
+            }
+            return (T) this;
+        }
+
+
 
         @SuppressWarnings("unchecked")
         public T firstScheduleEventTitles(ScheduleEventTitle... titles) {
@@ -1114,10 +1177,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T episodeOf(String mid, Integer number) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid, number));
         }
 
         public T episodeOf(String mid) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid));
         }
 
@@ -1147,16 +1216,28 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             }
             return (T) this;
         }
-
         public  T prediction(Platform platform, Encryption encryption) {
-            return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
+            return prediction(platform, encryption, Authority.USER);
+        }
+
+        public  T prediction(Platform platform, Encryption encryption, Authority authority) {
+            return predictions(
+                Prediction.builder()
+                    .platform(platform)
+                    .encryption(encryption)
+                    .authority(authority)
+                    .build()
+            );
         }
 
         /**
          * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
          */
+        public T plannedAvailability(Authority authority) {
+            return prediction(Platform.INTERNETVOD, null, authority);
+        }
         public T plannedAvailability() {
-            return prediction(Platform.INTERNETVOD, null);
+            return plannedAvailability(Authority.USER);
         }
 
 
