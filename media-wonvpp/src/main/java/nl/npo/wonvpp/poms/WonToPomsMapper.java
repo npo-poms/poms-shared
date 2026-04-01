@@ -35,11 +35,19 @@ import static nl.vpro.domain.media.MediaBuilder.*;
 public class WonToPomsMapper {
 
     /**
-     * For ownable fields, this owner type is assigned. Since this will be
+     * For ownable fields, this owner type is assigned.
      */
     OwnerType owner = OwnerType.AUTHORITY;
 
+    /**
+     * This is used to map 'WON' ids to POMS ids.
+     */
     private final BroadcasterService broadcasterService;
+
+    /**
+     * To match the primary/secondary string to actual term ids as are leading in POMS.
+     * @see MediaClassificationService
+     */
     private final ClassificationService classificationService;
 
     /**
