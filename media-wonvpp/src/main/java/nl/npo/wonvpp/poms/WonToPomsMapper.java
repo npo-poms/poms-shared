@@ -62,7 +62,8 @@ public class WonToPomsMapper {
         return map(entry, broadcast())
             .vodEvent(entry.prid(), entry.publicationTimestamp())
             .plannedAvailability(Authority.SYSTEM)
-            .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null)
+            .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null,
+                entry.episodeNumber())
             .build();
 
     }

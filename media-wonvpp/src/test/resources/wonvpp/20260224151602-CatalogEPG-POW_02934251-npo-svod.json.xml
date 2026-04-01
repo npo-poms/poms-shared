@@ -24,7 +24,7 @@
           <poProgID>POW_02934251</poProgID>
         </scheduleEvent>
       </scheduleEvents>
-      <episodeOf highlighted="false" midRef="POW_02934240"/>
+      <episodeOf highlighted="false" midRef="POW_02934240" index="11"/>
       <segments/>
     </program>
   </programTable>
