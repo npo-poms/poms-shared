@@ -170,7 +170,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonBackReference
     protected Program mediaObject;
 
-    @Setter
     @Enumerated(EnumType.STRING)
     @Nullable
     protected ScheduleEventType type;
@@ -657,6 +656,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
     }
 
+    @SuppressWarnings("ConstantValue")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -704,8 +704,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         ScheduleEvent that = (ScheduleEvent) o;
 
         if (getId() != null) {
-            boolean e = Objects.equals(getId(), that.getId());
-            return e;
+            return Objects.equals(getId(), that.getId());
         } else {
             return hashCode() == that.hashCode();
         }

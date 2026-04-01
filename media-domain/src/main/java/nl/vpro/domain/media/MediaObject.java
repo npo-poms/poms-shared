@@ -3175,12 +3175,7 @@ MediaObject extends PublishableObject<MediaObject>
             if (thisId != null) {
                 id = ", id=[" + this.getId() + "]"; // bracket signals that not  persistent
             } else {
-                if (Workflow.API.contains(workflow)) {
-                    // probably testing ES or so.
-                    id = "";
-                } else {
-                    id = " (not persistent)";
-                }
+                id = "";
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
