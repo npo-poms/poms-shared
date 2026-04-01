@@ -9,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -33,9 +34,10 @@ import static nl.vpro.domain.media.MediaBuilder.*;
 @Log4j2
 public class WonToPomsMapper {
 
-    static final OwnerType OWNER = OwnerType.MIS;
-
-
+    /**
+     * For ownable fields, this owner type is assigned. Since this will be
+     */
+    OwnerType owner = OwnerType.AUTHORITY;
 
     private final BroadcasterService broadcasterService;
     private final ClassificationService classificationService;
@@ -73,9 +75,12 @@ public class WonToPomsMapper {
     Clock clock = Clock.systemUTC();
 
     @Inject
-    public WonToPomsMapper(BroadcasterService broadcasterService, ClassificationService classificationService) {
+    public WonToPomsMapper(BroadcasterService broadcasterService,
+                           ClassificationService classificationService,
+                           @Named("won.to.poms.owner") OwnerType ownerType) {
         this.broadcasterService = broadcasterService;
         this.classificationService = classificationService;
+        this.owner = ownerType;
     }
 
     public MediaTable mapToPoms(InputStream entries) throws IOException {
@@ -146,9 +151,9 @@ public class WonToPomsMapper {
             .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
-            .mainTitle(entry.title(), OWNER)
-            .originalTitle(entry.originalTitle(), OWNER)
-            .subTitle(entry.displayTitle(), OWNER)
+            .mainTitle(entry.title(), owner)
+            .originalTitle(entry.originalTitle(), owner)
+            .subTitle(entry.displayTitle(), owner)
             .languages(entry.languages() == null ? new UsedLanguage[0] :
                 entry.languages().stream()
                 .map(this::mapToLanguageCode)
