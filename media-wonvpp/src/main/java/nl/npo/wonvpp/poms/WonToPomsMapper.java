@@ -12,7 +12,11 @@ import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.cache.*;
+
 import nl.npo.wonvpp.domain.*;
+import nl.vpro.domain.classification.ClassificationService;
+import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -26,13 +30,47 @@ public class WonToPomsMapper {
 
     static final OwnerType OWNER = OwnerType.MIS;
 
+
+
     private final BroadcasterService broadcasterService;
+    private final ClassificationService classificationService;
+
+    /**
+     * Ad hoc logic to properly try to map genre?
+     */
+    private final LoadingCache<GenreType, Genre> genreCache = CacheBuilder.newBuilder()
+        .build(new CacheLoader<>() {
+            @Override
+            public Genre load(final GenreType key) {
+                var primary = key.primary();
+                var secondary = key.secondary();
+                Term primaryTerm = classificationService.values().stream()
+                    .filter(t -> t.depth() == 4)
+                    .filter(k -> k.getName().equals(primary)).findFirst().orElseThrow();
+
+                Optional<Term> secondaryTerm = classificationService.values().stream()
+                    .filter(t -> primaryTerm.equals(t.getParent()))
+                    .filter(k -> k.getName().equals(secondary))
+                    .findFirst();
+
+                if (secondaryTerm.isPresent()) {
+                    return Genre.of(secondaryTerm.get());
+                } else {
+                    if (StringUtils.isNotEmpty(secondary)) {
+                        throw new NoSuchElementException("No such term "  + secondary + " for " + primaryTerm);
+                    }
+                }
+                return Genre.of(primaryTerm);
+            }
+        });
+
 
     Clock clock = Clock.systemUTC();
 
     @Inject
-    public WonToPomsMapper(BroadcasterService broadcasterService) {
+    public WonToPomsMapper(BroadcasterService broadcasterService, ClassificationService classificationService) {
         this.broadcasterService = broadcasterService;
+        this.classificationService = classificationService;
     }
 
     public MediaTable mapToPoms(InputStream entries) throws IOException {
@@ -113,18 +151,17 @@ public class WonToPomsMapper {
                 .toArray(UsedLanguage[]::new))
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
-            //.genres(entry.relations() == null ? new String[0] : mapToGenres(entry.relations().toArray(new String[0]))
+            .genres(entry.genre() == null ? new Genre[0] : new Genre[] {mapToGenre(entry.genre())})
             .dubbed(entry.isDubbed())
-
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()
                 .map(this::mapToAvailableSubtitles)
                 .toArray(AvailableSubtitles[]::new))
             ;
     }
+
     protected Broadcaster mapToBroadcaster(String broadcaster) {
         return broadcasterService.findFor(BroadcasterService.IdType.WON, broadcaster).orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
-
     }
 
     protected List<Credits> mapToCredits(List<CreditsType> castAndCrew) {
@@ -162,12 +199,12 @@ public class WonToPomsMapper {
         Locale locale = languageType.language();
         UsedLanguage.Usage usage = UsedLanguage.Usage.valueOf(languageType.usage() == null ? "AUDIODESCRIPTION" : languageType.usage().toUpperCase());
         return new UsedLanguage(locale, usage);
-
     }
 
     protected static ContentRating mapToRating(AdvisoryType type) {
         return ContentRating.valueOf(type.name().charAt(0));
     }
+
     protected  ContentRating[] mapToRatings(CatalogEntry entry) {
         if (entry.rating() == null || entry.rating().advisories() == null) {
             return new ContentRating[0];
@@ -184,7 +221,10 @@ public class WonToPomsMapper {
         return new AvailableSubtitles(
             captionType.language(),
             captionType.closed() != null && captionType.closed()? SubtitlesType.CAPTION : SubtitlesType.TRANSLATION);
+    }
 
+    protected Genre mapToGenre(GenreType genre) {
+        return genreCache.getUnchecked(genre);
     }
 
 

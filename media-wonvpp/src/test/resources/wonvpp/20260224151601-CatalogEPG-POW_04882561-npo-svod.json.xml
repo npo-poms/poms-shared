@@ -6,6 +6,10 @@
       <title owner="MIS" type="MAIN">Crime: The Investigation</title>
       <title owner="MIS" type="SUB">The Investigation</title>
       <title owner="MIS" type="ORIGINAL">Crime: The Investigation</title>
+      <genre id="3.0.1.3.10">
+        <term>Serie</term>
+        <term>Spanning</term>
+      </genre>
       <language code="da">Deens</language>
       <isDubbed>false</isDubbed>
       <releaseYear>2020</releaseYear>

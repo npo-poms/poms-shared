@@ -6,6 +6,10 @@
       <title owner="MIS" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
       <title owner="MIS" type="SUB">NOS Jeugdjournaal</title>
       <title owner="MIS" type="ORIGINAL">NOS Jeugdjournaal met gebarentaal</title>
+      <genre id="3.0.1.1.7">
+        <term>Jeugd</term>
+        <term>Informatief</term>
+      </genre>
       <language code="nl">Nederlands</language>
       <isDubbed>false</isDubbed>
       <availableSubtitles language="nl" type="CAPTION"/>

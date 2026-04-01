@@ -79,6 +79,9 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
     public static Genre epg(String id) {
         return new Genre(MediaClassificationService.getTermByEpgCode(id).getTermId());
     }
+    public static Genre of(Term term) {
+        return new Genre(term);
+    }
 
     public Collection<String> getMisGenres() {
         return MediaClassificationService.getLegacyMisGenres(termId);

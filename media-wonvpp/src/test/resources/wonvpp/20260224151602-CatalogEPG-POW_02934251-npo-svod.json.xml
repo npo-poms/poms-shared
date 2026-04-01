@@ -6,6 +6,10 @@
       <title owner="MIS" type="MAIN">Raad eens hoeveel ik van je hou</title>
       <title owner="MIS" type="SUB">Raad eens hoeveel ik van je hou</title>
       <title owner="MIS" type="ORIGINAL">Guess how much I love you</title>
+      <genre id="3.0.1.1.11">
+        <term>Jeugd</term>
+        <term>Animatie</term>
+      </genre>
       <language code="en">Engels</language>
       <language code="nl" usage="DUBBED">Nederlands</language>
       <isDubbed>true</isDubbed>

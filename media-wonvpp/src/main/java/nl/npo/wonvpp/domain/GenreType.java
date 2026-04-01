@@ -2,9 +2,11 @@ package nl.npo.wonvpp.domain;
 
 import jakarta.validation.constraints.NotNull;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 public record GenreType(
     @NotNull String primary,
-    @NotNull String secondary
+    @Nullable String secondary
 ) {
 
 }
