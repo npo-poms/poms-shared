@@ -10,7 +10,7 @@ import nl.vpro.domain.classification.*;
 
 /**
  * ClassificationService for media genres, based on the EBU Content Genre Classification Scheme (ebu_ContentGenreCS).
- *
+ * <p>
  * See <a href="https://poms.omroep.nl/schema/classification/ebu_ContentGenreCS.xml">NPO Epg genres</a>
  * @author Michiel Meeuwissen
  * @since 3.2
