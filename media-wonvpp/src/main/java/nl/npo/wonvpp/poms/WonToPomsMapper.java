@@ -25,6 +25,10 @@ import nl.vpro.domain.user.BroadcasterService;
 
 import static nl.vpro.domain.media.MediaBuilder.*;
 
+/**
+ * See <a href="https://github.com/npo-poms/poms-shared/tree/main/media-wonvpp">README for this module</a>
+ * @since 8.13
+ */
 @Log4j2
 public class WonToPomsMapper {
 
