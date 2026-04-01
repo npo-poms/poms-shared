@@ -3,9 +3,9 @@
     <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_05880359" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_05880359</crid>
       <broadcaster id="NOS">NOS</broadcaster>
-      <title owner="MIS" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
-      <title owner="MIS" type="SUB">NOS Jeugdjournaal</title>
-      <title owner="MIS" type="ORIGINAL">NOS Jeugdjournaal met gebarentaal</title>
+      <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
+      <title owner="AUTHORITY" type="ORIGINAL">NOS Jeugdjournaal met gebarentaal</title>
       <genre id="3.0.1.1.7">
         <term>Jeugd</term>
         <term>Informatief</term>
@@ -33,8 +33,8 @@
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="25Jeugd1900Geb" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/25Jeugd1900Geb</crid>
-      <title owner="MIS" type="MAIN">Seizoen 25</title>
-      <title owner="MIS" type="SUB">NOS Jeugdjournaal Seizoen 25</title>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 25</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal Seizoen 25</title>
       <credits/>
       <descendantOf midRef="NOSJeugdjournaal"/>
       <memberOf highlighted="false" midRef="NOSJeugdjournaal"/>
@@ -43,8 +43,8 @@
     </group>
     <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="NOSJeugdjournaal" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/NOSJeugdjournaal</crid>
-      <title owner="MIS" type="MAIN">NOS Jeugdjournaal</title>
-      <title owner="MIS" type="SUB">NOS Jeugdjournaal</title>
+      <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
       <credits/>
       <locations/>
       <images/>

@@ -3,9 +3,9 @@
     <program type="BROADCAST" avType="VIDEO" embeddable="true" mid="POW_04882561" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_04882561</crid>
       <broadcaster id="KRNC">KRO-NCRV</broadcaster>
-      <title owner="MIS" type="MAIN">Crime: The Investigation</title>
-      <title owner="MIS" type="SUB">The Investigation</title>
-      <title owner="MIS" type="ORIGINAL">Crime: The Investigation</title>
+      <title owner="AUTHORITY" type="MAIN">Crime: The Investigation</title>
+      <title owner="AUTHORITY" type="SUB">The Investigation</title>
+      <title owner="AUTHORITY" type="ORIGINAL">Crime: The Investigation</title>
       <genre id="3.0.1.3.10">
         <term>Serie</term>
         <term>Spanning</term>
@@ -56,8 +56,8 @@
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_04882558" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_04882558</crid>
-      <title owner="MIS" type="MAIN">Seizoen 1</title>
-      <title owner="MIS" type="SUB">The Investigation Seizoen 1</title>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 1</title>
+      <title owner="AUTHORITY" type="SUB">The Investigation Seizoen 1</title>
       <credits/>
       <descendantOf midRef="POW_04882557"/>
       <memberOf highlighted="false" midRef="POW_04882557"/>
@@ -66,8 +66,8 @@
     </group>
     <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="POW_04882557" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_04882557</crid>
-      <title owner="MIS" type="MAIN">The Investigation</title>
-      <title owner="MIS" type="SUB">The Investigation</title>
+      <title owner="AUTHORITY" type="MAIN">The Investigation</title>
+      <title owner="AUTHORITY" type="SUB">The Investigation</title>
       <credits/>
       <locations/>
       <images/>

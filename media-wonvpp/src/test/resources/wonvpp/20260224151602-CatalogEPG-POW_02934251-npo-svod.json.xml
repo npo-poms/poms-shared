@@ -3,9 +3,9 @@
     <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_02934251" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_02934251</crid>
       <broadcaster id="NTR">NTR</broadcaster>
-      <title owner="MIS" type="MAIN">Raad eens hoeveel ik van je hou</title>
-      <title owner="MIS" type="SUB">Raad eens hoeveel ik van je hou</title>
-      <title owner="MIS" type="ORIGINAL">Guess how much I love you</title>
+      <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="ORIGINAL">Guess how much I love you</title>
       <genre id="3.0.1.1.11">
         <term>Jeugd</term>
         <term>Animatie</term>
@@ -35,8 +35,8 @@
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_02934240" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_02934240</crid>
-      <title owner="MIS" type="MAIN">Seizoen 2</title>
-      <title owner="MIS" type="SUB">Raad eens hoeveel ik van je hou Seizoen 2</title>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 2</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou Seizoen 2</title>
       <credits/>
       <descendantOf midRef="POW_00890603"/>
       <memberOf highlighted="false" midRef="POW_00890603"/>
@@ -45,8 +45,8 @@
     </group>
     <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="POW_00890603" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_00890603</crid>
-      <title owner="MIS" type="MAIN">Raad eens hoeveel ik van je hou</title>
-      <title owner="MIS" type="SUB">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
       <credits/>
       <locations/>
       <images/>

@@ -15,6 +15,7 @@ import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.media.MediaTable;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -28,7 +29,7 @@ class WonToPomsMapperTest {
     static WonToPomsMapper  mapper;
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
-        mapper = new WonToPomsMapper(BroadcasterServiceLocator.getInstance(false, true), MediaClassificationService.getInstance());
+        mapper = new WonToPomsMapper(BroadcasterServiceLocator.getInstance(false, true), MediaClassificationService.getInstance(), OwnerType.AUTHORITY);
         mapper.clock = TestClock.twentyTwenty();
     }
 
