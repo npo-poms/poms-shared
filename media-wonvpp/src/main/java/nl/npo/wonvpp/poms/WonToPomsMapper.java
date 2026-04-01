@@ -11,6 +11,7 @@ import java.util.*;
 import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.google.common.cache.*;
 
@@ -45,7 +46,7 @@ public class WonToPomsMapper {
     private final LoadingCache<GenreType, Genre> genreCache = CacheBuilder.newBuilder()
         .build(new CacheLoader<>() {
             @Override
-            public Genre load(final GenreType key) {
+            public @NonNull Genre load(final @NonNull GenreType key) {
                 var primary = key.primary();
                 var secondary = key.secondary();
                 Term primaryTerm = classificationService.values().stream()
