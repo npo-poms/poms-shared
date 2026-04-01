@@ -1219,12 +1219,17 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         public  T prediction(Platform platform, Encryption encryption) {
             return prediction(platform, encryption, Authority.USER);
         }
-
         public  T prediction(Platform platform, Encryption encryption, Authority authority) {
+            return prediction(platform, encryption, authority, null);
+
+        }
+
+        public  T prediction(Platform platform, Encryption encryption, Authority authority, Instant publishStart) {
             return predictions(
                 Prediction.builder()
                     .platform(platform)
                     .encryption(encryption)
+                    .publishStart(publishStart)
                     .authority(authority)
                     .build()
             );
@@ -1234,7 +1239,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
          * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
          */
         public T plannedAvailability(Authority authority) {
-            return prediction(Platform.INTERNETVOD, null, authority);
+            return plannedAvailability(authority, null);
+        }
+        public T plannedAvailability(Authority authority, Instant publishStart) {
+            return prediction(Platform.INTERNETVOD, null, authority, publishStart);
         }
         public T plannedAvailability() {
             return plannedAvailability(Authority.USER);

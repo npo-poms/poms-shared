@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" source="WONVPP" xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd">
   <programTable>
-    <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_05880359" sortDate="2026-02-24T15:16:02.222+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+    <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_05880359" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_05880359</crid>
       <broadcaster id="NOS">NOS</broadcaster>
       <title owner="MIS" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
@@ -12,13 +12,13 @@
       <releaseYear>2025</releaseYear>
       <credits/>
       <descendantOf midRef="25Jeugd1900Geb"/>
-      <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+      <prediction state="ANNOUNCED" publishStart="2026-02-24T15:16:02.222+01:00">INTERNETVOD</prediction>
       <locations/>
       <images/>
       <scheduleEvents>
         <scheduleEvent channel="NVOD" midRef="POW_05880359" type="ON_DEMAND">
           <guideDay>2026-02-24+01:00</guideDay>
-          <start>2026-02-24T15:16:02.222+01:00</start>
+          <start>2026-02-24T15:17:00+01:00</start>
           <poProgID>POW_05880359</poProgID>
         </scheduleEvent>
       </scheduleEvents>
@@ -49,7 +49,7 @@
   <schedule channel="NVOD" start="2026-02-24T06:00:00+01:00" stop="2026-02-25T06:00:00+01:00">
     <scheduleEvent channel="NVOD" midRef="POW_05880359" type="ON_DEMAND">
       <guideDay>2026-02-24+01:00</guideDay>
-      <start>2026-02-24T15:16:02.222+01:00</start>
+      <start>2026-02-24T15:17:00+01:00</start>
       <poProgID>POW_05880359</poProgID>
     </scheduleEvent>
   </schedule>

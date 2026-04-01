@@ -4,8 +4,8 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Clock;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import jakarta.inject.Inject;
@@ -60,8 +60,11 @@ public class WonToPomsMapper {
     }
     protected Program mapToBroadcast(CatalogEntry entry) {
         return map(entry, broadcast())
-            .vodEvent(entry.prid(), entry.publicationTimestamp())
-            .plannedAvailability(Authority.SYSTEM)
+            .vodEvent(entry.prid(),
+                Optional.ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
+                    .plusSeconds(60).truncatedTo(ChronoUnit.MINUTES) // round to next minute
+                )
+            .plannedAvailability(Authority.SYSTEM, entry.publicationTimestamp())
             .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null,
                 entry.episodeNumber())
             .build();
@@ -112,6 +115,7 @@ public class WonToPomsMapper {
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
             //.genres(entry.relations() == null ? new String[0] : mapToGenres(entry.relations().toArray(new String[0]))
             .dubbed(entry.isDubbed())
+
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()
                 .map(this::mapToAvailableSubtitles)
