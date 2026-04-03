@@ -117,6 +117,7 @@ public class WonToPomsMapper {
         };
     }
     protected Program mapToBroadcast(CatalogEntry entry) {
+        assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, broadcast())
             .vodEvent(entry.prid(),
                 Optional.ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
@@ -129,11 +130,23 @@ public class WonToPomsMapper {
 
     }
     protected Group mapToSeason(CatalogEntry entry) {
+
+
+        Integer seasonNumber = null;
+        if (entry.seasonNumber() != null) {
+            try {
+                seasonNumber = Integer.parseInt(entry.seasonNumber());
+            } catch (NumberFormatException e) {
+                log.warn("Could not parse season number {} for entry {}, skipping season number", entry.seasonNumber(), entry.prid());
+            }
+        }
         return map(entry, season())
-            .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null)
+
+            .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null, seasonNumber)
             .build();
     }
     protected Group mapToSeries(CatalogEntry entry) {
+        assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, series())
             .build();
     }

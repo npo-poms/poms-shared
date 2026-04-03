@@ -734,6 +734,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (mid == null){
             return (B) this;
         }
+
         return memberOf(new MemberRef(mid, number));
     }
 

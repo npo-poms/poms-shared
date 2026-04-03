@@ -65,7 +65,7 @@
       <description owner="AUTHORITY" type="SHORT">Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.</description>
       <credits/>
       <descendantOf midRef="POW_04882557"/>
-      <memberOf highlighted="false" midRef="POW_04882557"/>
+      <memberOf highlighted="false" midRef="POW_04882557" index="1"/>
       <locations/>
       <images/>
     </group>

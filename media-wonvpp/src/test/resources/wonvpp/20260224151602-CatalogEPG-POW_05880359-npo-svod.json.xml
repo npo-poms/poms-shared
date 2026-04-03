@@ -42,7 +42,7 @@
       <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
       <credits/>
       <descendantOf midRef="NOSJeugdjournaal"/>
-      <memberOf highlighted="false" midRef="NOSJeugdjournaal"/>
+      <memberOf highlighted="false" midRef="NOSJeugdjournaal" index="25"/>
       <locations/>
       <images/>
     </group>

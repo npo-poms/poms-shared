@@ -44,7 +44,7 @@
       <description owner="AUTHORITY" type="SHORT">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
       <credits/>
       <descendantOf midRef="POW_00890603"/>
-      <memberOf highlighted="false" midRef="POW_00890603"/>
+      <memberOf highlighted="false" midRef="POW_00890603" index="2"/>
       <locations/>
       <images/>
     </group>

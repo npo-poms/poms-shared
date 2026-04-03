@@ -35,7 +35,7 @@ public record CatalogEntry(
     @Nullable @ValidCountry Country productionCountry,
     @Nullable Short productionYear,
     @Nullable Integer episodeNumber,
-    @Nullable Integer seasonNumber,
+    @Nullable String seasonNumber,
     @Nullable List<@Valid CreditsType> castAndCrew,
     @Nullable RelationType relations,
     @Nullable List<@Valid AvailabilityType> availability,
