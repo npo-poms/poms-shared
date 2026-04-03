@@ -19,6 +19,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -63,7 +64,7 @@ import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 @Slf4j
 public class OpenskosRepository implements GTAARepository {
 
-    public static final MediaType RDF_TYPE = MediaType.parseMediaType("application/rdf+xml");
+    public static final MediaType RDF_TYPE = MediaType.parse("application/rdf+xml");
 
     public static final String CONFIG_FILE = "openskosrepository.properties";
 
@@ -208,24 +209,28 @@ public class OpenskosRepository implements GTAARepository {
                     .adapterCodec(adapterCodec)
                     .baseUri(baseUrl)
                     .defaultHeader("Accept", "application/xml")
-                   /* .interceptor(new Methanol.Interceptor() {
+                    .interceptor(new Methanol.Interceptor() {
                         @Override
                         public <T> HttpResponse<T> intercept(HttpRequest request, Chain<T> chain) throws IOException, InterruptedException {
 
-                            HttpResponse<T> response = chain.forward(request);
-                            if (!HttpStatus.isSuccessful(response)) {
-                                log.warn("{} has error: {}", request, response.statusCode());
-                            } else {
-                                Post_RDF.remove();
+                            try {
+                                HttpResponse<T> response = chain.forward(request);
+                                if (!HttpStatus.isSuccessful(response)) {
+                                    log.warn("{} has error: {}", request, response.statusCode());
+                                } else {
+                                    Post_RDF.remove();
+                                }
+                                return response;
+                            } catch (Throwable throwable) {
+                                throw new GTAAError(500, throwable.toString(), "");
                             }
-                            return response;
                         }
 
                         @Override
                         public <T> CompletableFuture<HttpResponse<T>> interceptAsync(HttpRequest request, Chain<T> chain) {
                             return null;
                         }
-                    })*/
+                    })
                     .build();
 
 
@@ -337,6 +342,10 @@ public class OpenskosRepository implements GTAARepository {
 
         if (response != null && response.body() != null) {
 
+            if (response.statusCode() == 409) {
+                log.warn("Conflicting or duplicate label: {}", prefLabel);
+                throw new GTAAConflict("Conflicting or duplicate label: " + prefLabel);
+            }
             Source doc = response.body();
             logSource(doc);
 
@@ -603,12 +612,15 @@ public class OpenskosRepository implements GTAARepository {
     private static final Pattern NOT_FOUND = Pattern.compile(".*The requested resource .* was not found.*", Pattern.DOTALL);
 
     @Override
-    public Optional<Description> retrieveConceptStatus(String id) {
+    public Optional<Description> retrieveConceptStatus(String id) throws IOException, InterruptedException {
         String url = "api/find-concepts?id=" + id;
         try {
 
-
-            RDF rdf = null;// client.send(url, url, RDF.class);
+            HttpRequest get = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create(gtaaUrl + url))
+                .build();
+            RDF rdf = client.send(get, RDF.class).body();
             meterRegistry.counter("gtaa.retrieve", "id", id).increment();
 
             List<Description> descriptions = descriptions(rdf);

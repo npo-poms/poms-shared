@@ -6,6 +6,7 @@ package nl.vpro.domain.gtaa;
 
 import lombok.Getter;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public interface GTAARepository {
 
     List<Description> findForSchemes(String input, Integer max, SchemeOrNot... schemes);
 
-    Optional<Description> retrieveConceptStatus(String id);
+    Optional<Description> retrieveConceptStatus(String id) throws IOException, InterruptedException;
 
     Optional<GTAAConcept> get(String id);
 
