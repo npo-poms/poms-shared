@@ -2114,8 +2114,9 @@ MediaObject extends PublishableObject<MediaObject>
     /**
      * Implicitly create predictions for all platforms that have a location, but no prediction yet.
      */
-    public boolean  implicitPredictions() {
+    public Set<Platform>  implicitPredictions() {
         if (! DELETES.contains(workflow)) {
+            Set<Platform> implicitPredictions = new HashSet<>();
             final Map<Platform, List<Location>> locations = new HashMap<>();
             getLocations().stream()
                 .filter(Location::hasPlatform)
@@ -2127,7 +2128,6 @@ MediaObject extends PublishableObject<MediaObject>
                     ).add(l)
                 );
 
-            AtomicBoolean atomicBoolean = new AtomicBoolean(false);
             for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
                 findOrCreatePrediction(entry.getKey(), true, (created) -> {
                     for (Location l : entry.getValue()) {
@@ -2136,13 +2136,13 @@ MediaObject extends PublishableObject<MediaObject>
                     }
                     created.setState(Prediction.State.of(created));
                     log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
-                    atomicBoolean.set(true);
+                    implicitPredictions.add(created.getPlatform());
                 });
             }
-            return atomicBoolean.get();
+            return implicitPredictions;
         } else {
             log.debug("Not creating implicit predictions for {} because it is deleted", this);
-            return false;
+            return Collections.emptySet();
         }
     }
 
@@ -2245,9 +2245,17 @@ MediaObject extends PublishableObject<MediaObject>
     }
 
     public boolean correctPredictions() {
-        boolean change = implicitPredictions();
+        Set<Platform> implicited = implicitPredictions();
+        if (! implicited.isEmpty()) {
+            log.info("Added implicit predictions to {}: {}", getMid(), implicited);
+        }
+        boolean change = ! implicited.isEmpty();
         for (Platform p : Platform.values()) {
-            change |= correctPrediction(p);
+            boolean c = correctPrediction(p);
+            if (c) {
+                log.info("Corrected {}/{}", getMid(), p);
+                change = true;
+            }
         }
         return change;
     }
