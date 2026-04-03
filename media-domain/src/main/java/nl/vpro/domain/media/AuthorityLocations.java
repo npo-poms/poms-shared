@@ -107,16 +107,18 @@ public class AuthorityLocations {
             Optional<RealizeResult> realizeResult = checkExistingPrediction(existingPredictionForPlatform, mediaObject, platform);
             if (realizeResult.isPresent()) { // no need to realize
                 return realizeResult.get();
+            } else {
+                final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
+
+                mediaObject.correctPredictions();
+                return RealizeResult.builder()
+                    .needed(true)
+                    .locations(authorityLocations)
+                    .program(mediaObject)
+                    .reason("Realized")
+                    .build();
             }
         }
-        final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
-
-        mediaObject.correctPredictions();
-        return RealizeResult.builder()
-            .needed(true)
-            .locations(authorityLocations)
-            .program(mediaObject)
-            .build();
      }
 
 
