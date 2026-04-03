@@ -10,6 +10,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +20,8 @@ import jakarta.validation.constraints.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.slf4j.helpers.MessageFormatter;
+import org.hibernate.Hibernate;
+import org.slf4j.event.Level;
 
 import com.google.common.collect.*;
 
@@ -31,8 +33,6 @@ import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.logging.Slf4jHelper;
-import nl.vpro.logging.simple.Level;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
@@ -226,7 +226,7 @@ public class MediaObjects {
 
         to.setTags(from.getTags());
         to.setTeletext(from.getTeletext());
-        to.setTwitterRefs(from.getTwitterRefs());
+        to.setSocialRefs(from.getSocialRefs());
         to.setTargetGroups(from.getTargetGroups());
 
         to.setWebsites(from.getWebsites());
@@ -381,18 +381,18 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterHash(@NonNull  MediaObject object) {
-        for (TwitterRef ref : object.getTwitterRefs()) {
-            if (ref.getType() == TwitterRef.Type.HASHTAG) {
+    public static SocialRef getSocialHash(@NonNull  MediaObject object) {
+        for (SocialRef ref : object.getSocialRefs()) {
+            if (ref.getType() == SocialRef.Type.HASHTAG) {
                 return ref;
             }
         }
         return null;
     }
 
-    public static TwitterRef getTwitterAccount(@NonNull MediaObject object) {
-        for (TwitterRef ref : object.getTwitterRefs()) {
-            if (ref.getType() == TwitterRef.Type.ACCOUNT) {
+    public static SocialRef getSocialAccount(@NonNull MediaObject object) {
+        for (SocialRef ref : object.getSocialRefs()) {
+            if (ref.getType() == SocialRef.Type.ACCOUNT) {
                 return ref;
             }
         }
@@ -563,6 +563,9 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * @param args for reason, see {@link String#format(String, Object...)}.
+     */
     public static boolean markForRepublication(
         @NonNull MediaObject media,
         String reason,
@@ -597,9 +600,13 @@ public class MediaObjects {
             return false;
         }
     }
+
+    /**
+     * @param args for reason, see {@link String#format(String, Object...)}.
+     */
     protected static void appendReason(MediaObject media, String reason, Object... args) {
         if (StringUtils.isNotBlank(reason)) {
-            final String formattedReason =  MessageFormatter.arrayFormat(reason, args).getMessage();
+            final String formattedReason =  reason.formatted(args);
             final String existingReason = media.getRepubReason();
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
@@ -823,6 +830,12 @@ public class MediaObjects {
         Embargos.copy(embargo, prediction);
         return prediction;
     }
+    public static Prediction updatePrediction(MediaObject media, Prediction incoming) {
+        Prediction prediction = media.findOrCreatePrediction(incoming.getPlatform());
+        prediction.copyFrom(incoming);
+        return prediction;
+    }
+
 
 
 
@@ -1213,7 +1226,7 @@ public class MediaObjects {
      * @return An {@link Optional} of a {@link Range} of {@link Instant}. The optional is empty if the mediaobject was never announced, and is, was and probably will be unplayable.
      * @since 5.31
      */
-    public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+    public static Optional<Range<@NonNull Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         List<Location> locations = mediaObject.getLocations().stream()
             .filter(l -> platform.matches(l.getPlatform()))
             .filter(MediaObjects::locationFilter)
@@ -1225,7 +1238,7 @@ public class MediaObjects {
             if (prediction == null) {
                 return Optional.empty();
             } else {
-                Range<Instant> range = prediction.asRange();
+                Range<@NonNull Instant> range = prediction.asRange();
                 if (range.contains(instant())) {
                     // no playable locations, but still the prediction is not under embargo
                     // this means that the available locations are unfit because of ::locationFilter
@@ -1237,9 +1250,9 @@ public class MediaObjects {
             }
         } else {
             // we found relevant locations. So, it is playable in the span of their ranges (unless they don't overlap, but that cannot be covered by a single range)
-            Range<Instant> result = null;
+            Range<@NonNull Instant> result = null;
             for (Location location : locations) {
-                Range<Instant> range = location.asRange();
+                Range<@NonNull Instant> range = location.asRange();
                 if (result == null) {
                     result = range;
                 } else {
@@ -1256,7 +1269,7 @@ public class MediaObjects {
      * @param zoneId The timezone for which this must be evaluated or {@code null}, to fall back to {@link Schedule#ZONE_ID}
      * @since 5.31
      */
-    public static Map<Platform, Range<LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
+    public static Map<Platform, Range<@NonNull LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
         final ZoneId finalZoneId = zoneId== null? Schedule.ZONE_ID : zoneId;
         return playableRanges(mediaObject).entrySet()
             .stream()
@@ -1271,8 +1284,8 @@ public class MediaObjects {
      * @see #playableRanges(MediaObject, ZoneId)
      * @since 5.31
      */
-    public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
-        final Map<Platform, Range<Instant>> result = new TreeMap<>();
+    public static Map<Platform, Range<@NonNull Instant>> playableRanges(@NonNull MediaObject mediaObject) {
+        final Map<Platform, Range<@NonNull Instant>> result = new TreeMap<>();
         Arrays.stream(Platform.values()).forEach(p ->
             playableRange(p, mediaObject)
                 .ifPresent(r -> result.put(p, r)
@@ -1334,86 +1347,158 @@ public class MediaObjects {
      *  // TODO: I think is is a bit odd that this kind of logic happens here.
      *  It ensures consistency, that's the good thing, but it seems a patch any way!
      */
-    protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
+    protected static boolean autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {});
+            AtomicBoolean result = new AtomicBoolean();
+            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {result.set(true);});
+            return result.get();
+        } else {
+            return false;
         }
     }
+
 
     protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
         final Prediction.State prevState = prediction.getState();
         switch (prevState) {
             case ANNOUNCED, REVOKED -> {
                 boolean allInPast = true;
-                 boolean hasLocations = false;
-                 boolean realized = false;
-                 for (Location location : mediaObject.getLocations()) {
-                     if ( ! prediction.getPlatform().matches(location.getPlatform())) {
-                         continue;
-                     }
-                     if (location.isDeleted()) {
-                         continue;
-                     }
-                     hasLocations = true;
-                     if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
-                         allInPast = false;
-                     }
-                     if (Workflow.PUBLICATIONS_OR_NULL.contains(location.getWorkflow())
-                         && location.inPublicationWindow(now)
-                     ) {
-                         prediction.setState(Prediction.State.REALIZED);
-                         realized = true;
-                         Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
-                         onChange.accept(prevState, prediction);
-                         String reason = PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name());
-                         if (prediction.getPreviousState() == prediction.getState()) {
-                             unappendReason(mediaObject, (r) -> r.equals(reason));
-                         } else {
-                             appendReason(mediaObject, reason);
-                         }
-                         break;
-                     }
-                 }
-                 if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
-                     prediction.setState(Prediction.State.REVOKED);
-                         Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
-                     onChange.accept(prevState, prediction);
-                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
-                     if (prediction.getPreviousState() == prediction.getState()) {
-                         unappendReason(mediaObject, (r) -> r.equals(reason));
-                     } else {
-                         appendReason(mediaObject, reason);
-                     }
-                 }
-             }
-             case REALIZED -> {
-                 // Are there any 'REALIZED' prediction without locations that can be played anyway?
-                 // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
-                 // -> no
+                boolean hasLocations = false;
+                boolean realized = false;
+                for (Location location : mediaObject.getLocations()) {
+                    if ( ! prediction.getPlatform().matches(location.getPlatform())) {
+                        continue;
+                    }
+                    if (location.isDeleted()) {
+                        continue;
+                    }
+                    hasLocations = true;
+                    if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
+                        allInPast = false;
+                    }
+                    if (Workflow.PUBLICATIONS_OR_NULL.contains(location.getWorkflow())
+                        && location.inPublicationWindow(now)
+                    ) {
+                        prediction.setState(Prediction.State.REALIZED);
+                        realized = true;
+                        log.atLevel(level).log("Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
+                        onChange.accept(prevState, prediction);
+                        String reason = PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name());
+                        if (prediction.getPreviousState() == prediction.getState()) {
+                            unappendReason(mediaObject, (r) -> r.equals(reason));
+                        } else {
+                            appendReason(mediaObject, reason);
+                        }
+                        break;
+                    }
+                }
+                if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
+                    prediction.setState(Prediction.State.REVOKED);
+                    log.atLevel(level).log("Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
+                    onChange.accept(prevState, prediction);
+                    String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                    if (prediction.getPreviousState() == prediction.getState()) {
+                        unappendReason(mediaObject, (r) -> r.equals(reason));
+                    } else {
+                        appendReason(mediaObject, reason);
+                    }
+                }
+            }
+            case REALIZED -> {
+                // Are there any 'REALIZED' prediction without locations that can be played anyway?
+                // select * from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
+                // -> no
 
-                 Optional<Location> matchingLocation = mediaObject.getLocations().stream()
-                     .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                     .filter(l -> l.getWorkflow() == null ||  PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
-                     .filter(l -> l.inPublicationWindow(now))
-                     .findFirst();
-                 if (matchingLocation.isEmpty()) {
-                     final List<Location> withoutFilter = mediaObject.getLocations().stream()
-                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                         .filter(l -> PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
-                         .toList();
-                     Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
-                     prediction.setState(Prediction.State.REVOKED);
-                     onChange.accept(prevState, prediction);
-                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(Optional.ofNullable(prediction.getPlatform()).map(Platform::name).orElse("<NULL>"));
-                     if (prediction.getPreviousState() == prediction.getState()) {
-                         unappendReason(mediaObject, (r) -> r.equals(reason));
-                     } else {
-                         appendReason(mediaObject, reason);
-                     }
-                 }
-             }
-             default -> log.debug("Ignoring prediction {}", prediction);
-         }
+                Optional<Location> matchingLocation = mediaObject.getLocations().stream()
+                    .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                    .filter(l -> l.getWorkflow() == null || PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
+                    .filter(l -> l.inPublicationWindow(now))
+                    .findFirst();
+                if (matchingLocation.isEmpty()) {
+                    final List<Location> withoutFilter = mediaObject.getLocations().stream()
+                        .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                        .filter(l -> PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
+                        .toList();
+                    log.atLevel(withoutFilter.isEmpty() ? org.slf4j.event.Level.INFO : org.slf4j.event.Level.WARN).log("Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
+                    prediction.setState(Prediction.State.REVOKED);
+                    onChange.accept(prevState, prediction);
+                    String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(Optional.ofNullable(prediction.getPlatform()).map(Platform::name).orElse("<NULL>"));
+                    if (prediction.getPreviousState() == prediction.getState()) {
+                        unappendReason(mediaObject, (r) -> r.equals(reason));
+                    } else {
+                        appendReason(mediaObject, reason);
+                    }
+                }
+            }
+            default -> {
+                log.debug("Ignoring prediction {}", prediction);
+            }
+        }
     }
 
+    public static Generation getParents(MediaObject mediaObject) {
+        Set<RecursiveParentChildRelation> values = new HashSet<>();
+
+        if (mediaObject instanceof Program p) {
+            values.addAll(p.getEpisodeOf());
+        }
+        if (mediaObject instanceof Segment s) {
+            values.add(MemberRef.builder().parent(s.getParent()).member(s).build());
+
+        }
+        values.addAll(mediaObject.getMemberOf());
+        return new Generation(values, 1);
+
+    }
+
+    public static Stream<Generation> getAncestorGenerations(MediaObject mediaObject) {
+        Generation start = getParents(mediaObject);
+        return Stream.iterate(start,
+            Generation::isNotEmpty,
+            Generation::up
+        );
+
+    }
+
+    /**
+     * Calculates the 'effective targetgroups' for a Mediaobject. This is mainly for use in the GUI.
+     * If no targetgroups are found, the parent groups will be checked, and if _those_ have it, then implicitely an 'INHERITED' value will be
+     * added. This will be arranged also by the {@code UpdateInheritedValuesService} in the database. But because that may occur only after a
+     * certain delay, that may be confusing without this.
+     *
+     * @since 8.10
+     */
+    public static Optional<TargetGroups> getEffectiveTargetGroups(MediaObject media, OwnerType owner, MediaProvider mediaService) {
+
+        TargetGroups tg =  OwnableLists.filterByOwnerOrFirst(
+                media.getTargetGroups(), owner).orElse(null);
+        if (media instanceof Program program) {
+            if (tg == null || tg.getOwner() == OwnerType.INHERITED) {
+                TargetGroups original = tg;
+                tg = getAncestorGenerations(program)
+                    .flatMap(g -> g.members().stream())
+                    .map(RecursiveParentChildRelation::getMidRef)
+                    .map(mediaService)
+                    .map(Hibernate::unproxy)
+                    .filter(Group.class::isInstance)
+                    .map(Group.class::cast)
+                    .map(group ->
+                        group.getTargetGroups().stream()
+                            .findFirst()
+                            .orElse(null))
+                    .filter(Objects::nonNull)
+                    .peek(fromUp ->
+                        log.debug("Inheriting from {}", fromUp)
+                    )
+                    .map(fromUp -> fromUp.withOwner(OwnerType.INHERITED).withParent(program))
+                    .findFirst()
+                    .orElse(null);
+                if (original != null && tg != null && ! Objects.equals(original.getValues(), tg.getValues())) {
+                    log.info("Implicitly upgraded TargetGroups of {} {} -> {}", media.getMid(), original, tg);
+
+                }
+            }
+        }
+        return Optional.ofNullable(tg);
+    }
 }

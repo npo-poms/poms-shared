@@ -11,10 +11,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.functional.ThrowAnyConsumer;
+import org.meeuw.functional.ThrowAnyFunction;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
@@ -24,6 +25,8 @@ import nl.vpro.logging.mdc.MDCConstants;
 import nl.vpro.logging.simple.SimpleLogger;
 
 import static nl.vpro.logging.mdc.MDCConstants.ON_BEHALF_OF;
+import static org.meeuw.functional.Functions.ignoreArg1;
+import static org.meeuw.functional.Functions.withNull;
 
 
 /**
@@ -36,6 +39,13 @@ public interface UserService<T extends User> {
         600L, TimeUnit.SECONDS,
         new SynchronousQueue<>());
 
+
+    /**
+     * @since 8.10
+     */
+    default String getDisplayId(Principal principal) {
+        return principal.getName();
+    }
 
     /**
      * Given an existing user, and a user obtained from sso or so, determins whether calling {@link #update(User)} is important now.
@@ -253,6 +263,34 @@ public interface UserService<T extends User> {
         @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
+        // just wrap it in ta function, and then back, because we implemented it for functions already
+        return withNull(wrap(ignoreArg1(callable), logger, throwExceptions,clearMDC));
+    }
+
+     /**
+     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, SimpleLogger)} and {@link #async(Callable, SimpleLogger)}. This means that current user and {@link MDC} will be restored
+     * before {@link Callable#call()}
+     * @since 5.6
+     */
+    default <A> ThrowAnyConsumer<A> wrap(
+        @NonNull  Consumer<A> callable,
+        @Nullable SimpleLogger logger,
+        @Nullable Boolean throwExceptions,
+        boolean clearMDC) {
+        ThrowAnyFunction<A, Void> function = (a) -> {
+            callable.accept(a);
+            return null;
+        };
+        ThrowAnyFunction<A, Void> wrapped = wrap(function, logger, throwExceptions, clearMDC);
+        return wrapped::apply;
+    }
+
+
+    default <A, R> ThrowAnyFunction<A, R> wrap(
+        @NonNull  Function<A, R> function,
+        @Nullable SimpleLogger logger,
+        @Nullable Boolean throwExceptions,
+        boolean clearMDC) {
 
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
         Principal authentication;
@@ -264,12 +302,12 @@ public interface UserService<T extends User> {
         }
         final Principal onBehalfOf = authentication;
         final Map<String, String> copy =  MDC.getCopyOfContextMap();
-        if (logger != null) {
-            logger.info("Executing on behalf of {}", onBehalfOf);
+        if (logger != null && onBehalfOf != null) {
+            logger.info("Executing on behalf of {}", getDisplayId(onBehalfOf));
         }
         final Locale currentLocale = Locales.getDefault();
 
-        return () -> {
+        return (object) -> {
             MDC.clear(); // Running in an unknown thread, making sure MDC is clean
             try (AutoCloseable restore = Locales.with(currentLocale)){
                 if (onBehalfOf != null) {
@@ -277,25 +315,25 @@ public interface UserService<T extends User> {
                         restoreAuthentication(onBehalfOf);
                     } catch (Exception e) {
                         if (logger != null) {
-                            logger.error(e.getMessage());
+                            logger.error(e.getMessage(), e);
+                        } else {
+                            LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                         }
-                        LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                     }
                 }
                 if (copy != null) {
                     // and make sure that
                     copy.forEach(MDC::put);
                 }
-                return callable.call();
+                return function.apply(object);
             } catch (Exception e) {
                 if (logger != null) {
                     logger.error(e.getMessage(), e);
                 }
                 if (throwExceptionsBoolean) {
                     throw e;
-                } else {
-                    return null;
                 }
+                return null;
             } finally {
                 dropAuthentication();
             }
@@ -333,7 +371,7 @@ public interface UserService<T extends User> {
     abstract class  Logout<S extends User> implements AutoCloseable {
 
         public static <T extends User> Logout<T> nop() {
-            return new Logout<T>() {
+            return new Logout<>() {
                 @Override
                 public void close() {
 

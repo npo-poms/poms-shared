@@ -3,20 +3,15 @@ package nl.vpro.sourcingservice;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
-import nl.vpro.util.FileSizeFormatter;
-
-import static nl.vpro.i18n.MultiLanguageString.en;
 
 public interface SourcingService {
-
-
 
 
      /**
@@ -27,14 +22,27 @@ public interface SourcingService {
      * @param inputStream The inputStream for the asset. Will be implicitly closed when consumed (or when an exception occurs)
      * @param errors email address to associate with mishaps
      */
-    UploadResponse upload(
+     @Deprecated
+     CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
         String mimeType,
         InputStream inputStream,
+        @Nullable String profile,
         @Nullable String errors
-    ) throws IOException, InterruptedException, SourcingServiceException;
+    );
+
+
+    CompletableFuture<UploadResponse> upload(
+        SimpleLogger logger,
+        String mid,
+        long fileSize,
+        String contentType,
+        FileCachingInputStream inputStream,
+        @Nullable String profile,
+        @Nullable String errors
+    );
 
 
 
@@ -49,25 +57,7 @@ public interface SourcingService {
      */
     String getUploadString();
 
+    String name();
 
-    /**
-     * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'receive'.
-     */
-    static Consumer<FileCachingInputStream> loggingConsumer(final SimpleLogger logger, String impl) {
-        return fci -> {
-            if (fci.isReady()) {
-                if (fci.getException().isEmpty()) {
-                    logger.info(en("Received {} {}")
-                        .nl("Ontvangen {} {}")
-                        .slf4jArgs(impl, FileSizeFormatter.DEFAULT.format(fci.getCount())));
-                } else {
-                    logger.warn(en("Upload error ({}): {}")
-                        .nl("Upload fout ({}) : {}")
-                        .slf4jArgs(impl, fci.getException().get().getMessage())
-                    );
-                }
-            }
-        };
-    }
 
 }

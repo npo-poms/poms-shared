@@ -19,13 +19,13 @@ import jakarta.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.functional.TriConsumer;
+import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.logging.simple.Level;
 import nl.vpro.util.HttpConnectionUtils;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -107,16 +107,18 @@ public class AuthorityLocations {
             Optional<RealizeResult> realizeResult = checkExistingPrediction(existingPredictionForPlatform, mediaObject, platform);
             if (realizeResult.isPresent()) { // no need to realize
                 return realizeResult.get();
+            } else {
+                final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
+
+                mediaObject.correctPredictions();
+                return RealizeResult.builder()
+                    .needed(true)
+                    .locations(authorityLocations)
+                    .program(mediaObject)
+                    .reason("Realized")
+                    .build();
             }
         }
-        final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
-
-        mediaObject.correctPredictions();
-        return RealizeResult.builder()
-            .needed(true)
-            .locations(authorityLocations)
-            .program(mediaObject)
-            .build();
      }
 
 
@@ -196,6 +198,7 @@ public class AuthorityLocations {
 
                         String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
                         Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+
                         log.debug("matched {}", authorityLocation);
                         makeLocationPublishable(authorityLocation);
                         result.add(authorityLocation);

@@ -12,8 +12,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.groups.Default;
 
 import nl.vpro.domain.media.update.Validation;
-import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +21,15 @@ public class ValidationTestHelper {
 
 
 
-     public static <T> java.util.Set<jakarta.validation.ConstraintViolation<T>> validate(T o, boolean warnings, int expected) {
+    public static <T> java.util.Set<jakarta.validation.ConstraintViolation<T>> validate(T o, boolean warnings, int expected) {
         Set<ConstraintViolation<T>> validate = validate(o, warnings);
+        assertThat(validate).hasSize(expected);
+        log.info("{}", validate);
+        return validate;
+    }
+
+    public static <T> java.util.Set<jakarta.validation.ConstraintViolation<T>> dbValidate(T o, int expected) {
+        Set<ConstraintViolation<T>> validate = dbValidate(o);
         assertThat(validate).hasSize(expected);
         log.info("{}", validate);
         return validate;
@@ -51,7 +57,7 @@ public class ValidationTestHelper {
 
 
     public static <T> java.util.Set<jakarta.validation.ConstraintViolation<T>> dbValidate(T o) {
-        return Validation.getValidator().validate(o, Default.class);
+        return Validation.getValidator().validate(o, Default.class, PrePersistValidatorGroup.class);
     }
 
 

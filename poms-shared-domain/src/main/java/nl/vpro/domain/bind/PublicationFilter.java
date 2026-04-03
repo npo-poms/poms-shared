@@ -8,7 +8,8 @@ import com.fasterxml.jackson.databind.ser.PropertyWriter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 
 import nl.vpro.domain.Embargo;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
+
 
 /**
  * This jackson filter is enabled when using poms domain classes.

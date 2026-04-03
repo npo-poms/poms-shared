@@ -115,7 +115,7 @@ public record UsedLanguage (
         }
 
         public AbstractWrapper(String code){
-            this.code = new Locale(code);
+            this.code = Locale.of(code);
             this.usage = null;
         }
 

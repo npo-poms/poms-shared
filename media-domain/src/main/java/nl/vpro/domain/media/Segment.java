@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;

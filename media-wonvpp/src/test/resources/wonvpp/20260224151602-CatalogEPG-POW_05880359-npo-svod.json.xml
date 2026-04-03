@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" source="WONVPP" xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd">
+  <programTable>
+    <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_05880359" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_05880359</crid>
+      <broadcaster id="NOS">NOS</broadcaster>
+      <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
+      <title owner="AUTHORITY" type="ORIGINAL">NOS Jeugdjournaal met gebarentaal</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <genre id="3.0.1.1.7">
+        <term>Jeugd</term>
+        <term>Informatief</term>
+      </genre>
+      <country code="NL">Nederland</country>
+      <language code="nl">Nederlands</language>
+      <isDubbed>false</isDubbed>
+      <availableSubtitles language="nl" type="CAPTION"/>
+      <releaseYear>2025</releaseYear>
+      <credits/>
+      <descendantOf midRef="25Jeugd1900Geb"/>
+      <prediction state="ANNOUNCED" publishStart="2026-02-24T15:16:02.222+01:00">INTERNETVOD</prediction>
+      <locations/>
+      <images/>
+      <scheduleEvents>
+        <scheduleEvent channel="NVOD" midRef="POW_05880359" type="ON_DEMAND">
+          <guideDay>2026-02-24+01:00</guideDay>
+          <start>2026-02-24T15:17:00+01:00</start>
+          <poProgID>POW_05880359</poProgID>
+        </scheduleEvent>
+      </scheduleEvents>
+      <episodeOf highlighted="false" midRef="25Jeugd1900Geb" index="239"/>
+      <segments/>
+    </program>
+  </programTable>
+  <groupTable>
+    <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="25Jeugd1900Geb" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/25Jeugd1900Geb</crid>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 25</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal Seizoen 25</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <credits/>
+      <descendantOf midRef="NOSJeugdjournaal"/>
+      <memberOf highlighted="false" midRef="NOSJeugdjournaal" index="25"/>
+      <locations/>
+      <images/>
+    </group>
+    <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="NOSJeugdjournaal" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/NOSJeugdjournaal</crid>
+      <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal</title>
+      <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</description>
+      <credits/>
+      <locations/>
+      <images/>
+    </group>
+  </groupTable>
+  <schedule channel="NVOD" start="2026-02-24T06:00:00+01:00" stop="2026-02-25T06:00:00+01:00">
+    <scheduleEvent channel="NVOD" midRef="POW_05880359" type="ON_DEMAND">
+      <guideDay>2026-02-24+01:00</guideDay>
+      <start>2026-02-24T15:17:00+01:00</start>
+      <poProgID>POW_05880359</poProgID>
+    </scheduleEvent>
+  </schedule>
+</mediaInformation>

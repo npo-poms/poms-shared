@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rdf:RDF xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:oai="http://www.openarchives.org/OAI/2.0/" xmlns:gtaa="urn:vpro:gtaa:2017" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skosxl:prefLabel>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2008/05/skos-xl#Label"/>
+                <skosxl:literalForm xml:lang="nl">Lutjebroek</skosxl:literalForm>
+                <openskos:tenant>beng</openskos:tenant>
+            </rdf:Description>
+        </skosxl:prefLabel>
+        <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+        <dc:creator>poms_test</dc:creator>
+        <openskos:tenant>beng</openskos:tenant>
+        <dcterms:dateSubmitted>2025-04-25T15:52:57.461+02:00</dcterms:dateSubmitted>
+        <skos:scopeNote xml:lang="nl">Buurtschap binnen de gemeente Nijkerk</skos:scopeNote>
+    </rdf:Description>
+</rdf:RDF>

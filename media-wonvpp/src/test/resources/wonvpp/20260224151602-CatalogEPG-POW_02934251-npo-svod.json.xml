@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" source="WONVPP" xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd">
+  <programTable>
+    <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="POW_02934251" sortDate="2026-02-24T15:17:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_02934251</crid>
+      <broadcaster id="NTR">NTR</broadcaster>
+      <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="ORIGINAL">Guess how much I love you</title>
+      <description owner="AUTHORITY" type="MAIN">Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren, maar dat had hij beter niet met eikels kunnen doen.</description>
+      <description owner="AUTHORITY" type="SHORT">Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren met eikels.</description>
+      <genre id="3.0.1.1.11">
+        <term>Jeugd</term>
+        <term>Animatie</term>
+      </genre>
+      <country code="AU">Australië</country>
+      <language code="en">Engels</language>
+      <language code="nl" usage="DUBBED">Nederlands</language>
+      <isDubbed>true</isDubbed>
+      <availableSubtitles language="nl" type="CAPTION"/>
+      <releaseYear>2015</releaseYear>
+      <credits/>
+      <descendantOf midRef="POW_02934240"/>
+      <ageRating>ALL</ageRating>
+      <prediction state="ANNOUNCED" publishStart="2026-02-24T15:16:02.394+01:00">INTERNETVOD</prediction>
+      <locations/>
+      <images/>
+      <scheduleEvents>
+        <scheduleEvent channel="NVOD" midRef="POW_02934251" type="ON_DEMAND">
+          <guideDay>2026-02-24+01:00</guideDay>
+          <start>2026-02-24T15:17:00+01:00</start>
+          <poProgID>POW_02934251</poProgID>
+        </scheduleEvent>
+      </scheduleEvents>
+      <episodeOf highlighted="false" midRef="POW_02934240" index="11"/>
+      <segments/>
+    </program>
+  </programTable>
+  <groupTable>
+    <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_02934240" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_02934240</crid>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 2</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou Seizoen 2</title>
+      <description owner="AUTHORITY" type="MAIN">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
+      <description owner="AUTHORITY" type="SHORT">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
+      <credits/>
+      <descendantOf midRef="POW_00890603"/>
+      <memberOf highlighted="false" midRef="POW_00890603" index="2"/>
+      <locations/>
+      <images/>
+    </group>
+    <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="POW_00890603" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/POW_00890603</crid>
+      <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
+      <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
+      <description owner="AUTHORITY" type="MAIN">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden.</description>
+      <description owner="AUTHORITY" type="SHORT">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden.</description>
+      <credits/>
+      <locations/>
+      <images/>
+    </group>
+  </groupTable>
+  <schedule channel="NVOD" start="2026-02-24T06:00:00+01:00" stop="2026-02-25T06:00:00+01:00">
+    <scheduleEvent channel="NVOD" midRef="POW_02934251" type="ON_DEMAND">
+      <guideDay>2026-02-24+01:00</guideDay>
+      <start>2026-02-24T15:17:00+01:00</start>
+      <poProgID>POW_02934251</poProgID>
+    </scheduleEvent>
+  </schedule>
+</mediaInformation>

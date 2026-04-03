@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.validation.NoHtml;
 
 @Getter
@@ -76,7 +76,7 @@ public class Person extends Credits implements PersonInterface {
     @Setter
     protected EmbeddablePerson gtaaInfo;
 
-    @XmlTransient
+    @XmlAttribute
     @Getter
     @Setter
     protected String externalId;
@@ -108,6 +108,7 @@ public class Person extends Credits implements PersonInterface {
     public Person(Person source, MediaObject parent) {
         this(source.getGivenName(), source.getFamilyName(), source.getRole());
         this.gtaaInfo = source.gtaaInfo;
+        this.externalId = source.getExternalId();
         this.mediaObject = parent;
     }
 
@@ -122,7 +123,8 @@ public class Person extends Credits implements PersonInterface {
         GTAAStatus gtaaStatus,
         URI uri,
         Boolean gtaaKnownAs,
-        String name
+        String name,
+        String externalId
         ) {
         this.id = id;
         this.role = role;
@@ -133,6 +135,7 @@ public class Person extends Credits implements PersonInterface {
         if (familyName != null) {
             this.familyName = familyName;
         }
+        this.externalId = externalId;
         this.mediaObject = mediaObject;
         if (uri != null) {
             this.gtaaInfo = new EmbeddablePerson();
@@ -144,6 +147,21 @@ public class Person extends Credits implements PersonInterface {
         } else {
             if (gtaaStatus != null) {
                 throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    @Override
+    public void fillFrom(Credits credits) {
+        super.fillFrom(credits);
+        if (credits instanceof Person person) {
+            this.givenName = person.givenName;
+            this.familyName = person.familyName;
+            this.externalId = person.externalId;
+            if (person.getGtaaInfo() != null) {
+                this.setGtaaKnownAs(person.getGtaaKnownAs());
+                this.setGtaaStatus(person.getGtaaStatus());
+                this.setGtaaUri(person.getGtaaUri());
             }
         }
     }
@@ -243,16 +261,16 @@ public class Person extends Credits implements PersonInterface {
 
         if (considerGtaa) {
             return Objects.equals(getGtaaUri(), person.getGtaaUri());
-        } else {
-            if(! Objects.equals(familyName, person.getFamilyName())) {
-                return false;
-            }
-            if(! Objects.equals(givenName, person.getGivenName())) {
-                return false;
-            }
         }
 
-        return true;
+        boolean considerExternalId = getExternalId() != null && person.getExternalId() != null;
+        if (considerExternalId) {
+            return Objects.equals(getExternalId(), person.getExternalId());
+        }
+
+        return
+            Objects.equals(familyName, person.getFamilyName()) &&
+                Objects.equals(givenName, person.getGivenName());
     }
 
     @Override

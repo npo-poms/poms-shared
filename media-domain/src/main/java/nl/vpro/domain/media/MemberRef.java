@@ -30,7 +30,7 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static java.util.Comparator.comparing;
@@ -461,7 +461,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlAttribute(name = "index")
     @XmlSchemaType(name = "nonNegativeInteger")
     public Integer getNumber() {
-        if (group instanceof Group g && ! g.isOrdered()) {
+        if (group instanceof Group g && (g.isOrdered() == null || ! g.isOrdered())) {
             return null;
         }
         return number;
@@ -587,6 +587,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         hash = 53 * hash + (this.member != null ? this.member.hashCode() : 0);
         hash = 53 * hash + (this.getMediaRef() != null ? this.getMediaRef().hashCode() : 0);
         hash = 53 * hash + (this.number != null ? this.number.hashCode() : 0);
+        hash = 53 * hash + (this.owner != null ? this.owner.hashCode() : 0);
         return hash;
     }
 

@@ -16,11 +16,14 @@ import jakarta.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
 
+/**
+ * Collects, for a certain {@link OwnerType owner}, a list of {@link TargetGroup target groups}, which are connected to a {@link MediaObject media object}.
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupsType")
@@ -40,23 +43,68 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     @lombok.Builder(builderClassName = "Builder")
     private TargetGroups(
         @NonNull @Singular  List<TargetGroupType> values,
-        @NonNull OwnerType owner) {
-        this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());
+        @NonNull OwnerType owner,
+        MediaObject parent) {
+        this.values = values.stream()
+            .map(TargetGroup::new)
+            .collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
+        this.parent = parent;
     }
 
-    @Override
-    @NonNull
+
+    @JsonSetter("values")
     @XmlElement(name="targetGroup")
-    @JsonIgnore
-    public List<TargetGroup> getValues() {
+    public void setValues(List<TargetGroup> list) {
+        this.values = list;
+        if (list != null) {
+            list.forEach(v -> v.setParent(this));
+        }
+    }
+
+    public TargetGroups withOwner(OwnerType owner) {
+        return TargetGroups.builder()
+            .values(
+                values.stream()
+                    .map(TargetGroup::getValue)
+                    .collect(Collectors.toList())
+            )
+            .owner(owner)
+            .parent(getParent())
+            .build();
+    }
+
+     public TargetGroups withParent(MediaObject parent) {
+        return TargetGroups.builder()
+            .values(
+                values.stream()
+                    .map(TargetGroup::getValue)
+                    .collect(Collectors.toList())
+            )
+            .owner(getOwner())
+            .parent(parent)
+            .build();
+    }
+
+
+
+    @Override
+    @XmlElement(name="targetGroup")
+    @JsonGetter("values")
+    public List<TargetGroup> getFilteredValues() {
+        if (owner == OwnerType.INHERITED && getParent() != null) {
+            AgeRating a = getParent().getAgeRating();
+            if (a != null) {
+                return values.stream()
+                    .filter(tg -> tg.value.getAgeRatings().contains(a))
+                    .collect(Collectors.toList());
+            }
+        }
         return values;
     }
 
-    public void setValues(List<TargetGroup> list) {
-        this.values = list;
-    }
+
 }

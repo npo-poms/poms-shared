@@ -155,11 +155,10 @@ public class PomsMapper {
 
         streamNullable(contents.signLanguages())
             .map(SignLanguage::type)
-            .forEach(lc -> {
+            .forEach(lc ->
                 mo.getLanguages()
-                    .add(new UsedLanguage(lc.toLocale(), UsedLanguage.Usage.SIGNING)
-                    );
-        });
+                    .add(new UsedLanguage(lc.toLocale(), UsedLanguage.Usage.SIGNING))
+            );
 
         mapAvailableSubtitles(contents, mo);
         optionalSynopsisToDescription(ofNullable(contents.synopsis()), mo);
@@ -213,9 +212,7 @@ public class PomsMapper {
             // https://publiekeomroep.atlassian.net/browse/VPPM-2246
             optionalSynopsisToDescription(ofNullable(p.synopsis()), event);
             },
-            () -> {
-                log.debug("No synopisis overide for {}", entry);
-            }
+            () -> log.debug("No synopisis overide for {}", entry)
         );
         return event;
     }
@@ -288,7 +285,7 @@ public class PomsMapper {
          SortedSet<AvailableSubtitles> incomingSubtitles = streamNullable(contents.captionLanguages())
             .map(l ->
                 AvailableSubtitles.builder()
-                    .language(new Locale(l.language().code()))
+                    .language(Locale.of(l.language().code()))
                     .type(l.closed() ? SubtitlesType.CAPTION : SubtitlesType.TRANSLATION)
                     .workflow(SubtitlesWorkflow.MISSING)
                     .build()

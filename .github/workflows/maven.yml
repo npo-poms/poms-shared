@@ -6,7 +6,16 @@ on:
   push:
     branches: [main, "REL-*"]
   workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Skip tests'
+        required: false
+        default: false
+        type: boolean
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     strategy:
@@ -17,58 +26,70 @@ jobs:
         # also check (once) on latest
         include:
           - os: ubuntu-latest
-            java: 23
+            java: 25
     runs-on: ${{ matrix.os }}
     env:
-      MAVEN_ARGS: '--no-transfer-progress'
+      MAVEN_ARGS: '--no-transfer-progress --color always'
     steps:
-      - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.12.1
-        continue-on-error: true # for act
-      - uses: actions/checkout@v4.2.0
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
           cache: maven
-          server-id: vpro-ossrh
-          server-username: SONATYPE_USERNAME
-          server-password: SONATYPE_PASSWORD
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
-          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
-      - name: Build and deploy with Maven (Linux, java 21)
-        run:  mvn -B -P"deploy,ossrh,npm" -U -fae deploy
-        if: runner.os == 'Linux' && matrix.java == '21'
+      - name: Determine target
+        id: set_target
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" && "${RUNNER_OS}" == "Linux" && "${{ matrix.java }}" == "21" ]]; then
+             echo "target=deploy" >> $GITHUB_OUTPUT
+             echo "profile=deploy," >> $GITHUB_OUTPUT
+             echo "mainbuild=true" >> $GITHUB_OUTPUT
+          else
+             echo "target=" >> $GITHUB_OUTPUT
+             echo "profile=" >> $GITHUB_OUTPUT
+          fi
+      - name: Build  with Maven
+        shell: bash
+        run:  |
+          if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests ${{ steps.set_target.outputs.target}}
+          else
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -D"maven.test.failure.ignore=true"  ${{ steps.set_target.outputs.target}}
+          fi
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
-      - name: Show dependency updates
-        run: mvn versions:display-dependency-updates
-        if: runner.os == 'Linux' && matrix.java == '21'
-      - name: Build with Maven (Other os)
-        run: mvn -B  -U -fae package
-        if: "! (runner.os == 'Linux' && matrix.java == '21')"
-        continue-on-error: true
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - uses: MMProgrami/after-maven-action@v2
+        with:
+          determine_version: 'false'
+          coverage: 'true'
       - name: Publish to codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
           #files: "**/target/surefire-reports/*.xml"
-        if: "! cancelled() && github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == '21'"
+        if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-        if: always() && runner.os == 'Linux'
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (success() || failure()) && runner.os == 'Linux'
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2.18.0
-        if: always()  && runner.os == 'Windows'
+        uses: EnricoMi/publish-unit-test-result-action/windows/bash@v2
+        if: (success() || failure())  && runner.os == 'Windows'
         with:
           files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
+
+
 
 
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="won.to.poms.owner" class="nl.vpro.domain.media.support.OwnerType" factory-method="valueOf">
+    <constructor-arg value="${pd.wonvpp.owner:AUTHORITY}" />
+  </bean>
+
+
+  <bean class="nl.npo.wonvpp.poms.WonToPomsMapper" />
+
+</beans>

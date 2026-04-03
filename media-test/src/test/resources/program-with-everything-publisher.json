@@ -1131,6 +1131,7 @@
       "givenName" : "Hans",
       "familyName" : "Goedkoop",
       "role" : "PRESENTER",
+      "externalId" : "whatson:12345",
       "name" : "Goedkoop, Hans"
     }, {
       "objectType" : "person",
@@ -1172,6 +1173,7 @@
     "givenName" : "Hans",
     "familyName" : "Goedkoop",
     "role" : "PRESENTER",
+    "externalId" : "whatson:12345",
     "name" : "Goedkoop, Hans"
   }, {
     "objectType" : "person",

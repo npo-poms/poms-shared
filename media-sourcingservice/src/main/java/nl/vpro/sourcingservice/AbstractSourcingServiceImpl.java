@@ -10,10 +10,12 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import com.fasterxml.jackson.core.StreamReadFeature;
@@ -28,6 +30,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.*;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
+import static nl.vpro.i18n.MultiLanguageString.nl;
 
 
 /**
@@ -42,6 +45,8 @@ import static nl.vpro.i18n.MultiLanguageString.en;
 @Log4j2
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
+    public static final String NAME = "NPO Sourcing Service";
+
     private static final String FILE   = "file";
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -49,7 +54,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private static final ObjectReader JSONREADER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
-        V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+        V2READER = MAPPER.readerFor(StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
         JSONREADER = MAPPER.readerFor(ObjectNode.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
 
     }
@@ -59,12 +64,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
 
-    private final Supplier<Configuration> configuration;
+    private final Configuration configuration;
 
     private final MeterRegistry meterRegistry;
 
     AbstractSourcingServiceImpl(
-        Supplier<Configuration> configuration,
+        Configuration configuration,
         MeterRegistry meterRegistry) {
 
         this.configuration = configuration;
@@ -78,8 +83,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         try {
 
             MimeType tika = MimeTypes.getDefaultMimeTypes().getRegisteredMimeType(mimeType);
-            if (tika== null) {
-                tika= MimeTypes.getDefaultMimeTypes().forName(mimeType);
+            if (tika == null) {
+                tika = MimeTypes.getDefaultMimeTypes().forName(mimeType);
             }
             if (!tika.getExtensions().isEmpty()) {
                 if (tika.getExtensions().contains(defaultExt)) {
@@ -99,102 +104,161 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected abstract AVFileFormat defaultFormat();
 
+    @Override
+    public CompletableFuture<UploadResponse> upload(
+        SimpleLogger logger,
+        String mid,
+        long fileSize,
+        String mimeType,
+        InputStream inputStream,
+        @Nullable String profile,
+        @Nullable String errors
+    ) {
+        if (inputStream instanceof FileCachingInputStream fileCachingInputStream) {
+            return upload(logger, mid, fileSize, mimeType, fileCachingInputStream, profile, errors);
+        } else {
+            logger.warn("InputStream is not a FileCachingInputStream, falling back to non-caching upload for {}", mid);
+            return upload(logger, mid, fileSize, mimeType, inputStream, profile, errors, null);
+        }
+    }
+
 
     @Override
-    public UploadResponse upload(
+    public CompletableFuture<UploadResponse> upload(
+        SimpleLogger logger,
+        String mid,
+        long fileSize,
+        String contentType,
+        FileCachingInputStream inputStream,
+        @Nullable String profile,
+        @Nullable String errors
+    ) {
+        return upload(logger, mid, fileSize, contentType, inputStream, profile, errors, inputStream.getCount());
+    }
+
+
+    protected CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
         String contentType,
         InputStream inputStream,
-        @Nullable String errors
-    ) throws SourcingServiceException {
-
-        return uploadv2(logger, mid, contentType, inputStream);
-
-
-    }
-
-
-
-    @SneakyThrows
-    protected UploadResponse uploadv2(
-       SimpleLogger logger,
-       final String mid,
-       final String contentType,
-       final InputStream inputStream) throws SourcingServiceException {
-
+        @Nullable String profile,
+        @Nullable String errors,
+        Long count
+    ) {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
-        body.addChannel(FILE,  fileName,
+        body.addChannel(FILE, fileName,
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
-                .batchSize((long) configuration.get().chunkSize())
+                .batchSize((long) configuration.chunkSize())
                 .consumer(l -> logger.info(
-                    en("Uploaded %s to %s")
-                        .nl("Geüpload %s naar %s")
-                        .formatted(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
+                    en("Uploaded %s/%s to %s")
+                        .nl("Geüpload %s/%s naar %s")
+                        .formatted(
+                            FileSizeFormatter.DEFAULT.format(l),
+                            FileSizeFormatter.DEFAULT.format(fileSize),
+                            configuration.cleanBaseUrl()))
                 )
                 .build(),
             contentType
         );
+        if (profile != null) {
+            logger.info("Profile for {}: {}", mid, profile);
+            body.add("profile", profile);
+        }
+        String callbackUrl = getCallbackUrl(mid);
+        if (callbackUrl != null) {
+            String authentication = configuration.callbackAuthentication();
+            if (authentication != null) {
+                callbackUrl = URLUtils.addAuthentication(callbackUrl, authentication);
+            }
+            logger.info("Callback URL for {}: {}", mid, URLUtils.hidePassword(callbackUrl));
+            body.add("callback_url", callbackUrl);
+        }
 
         final HttpRequest post = uploadRequestBuilder
             .header("Content-Type", body.contentType())
             .POST(body)
-
             .build();
 
         logger.info(en("Posting {} for {} to {}")
             .nl("Posting {} voor {} naar {}").slf4jArgs(fileName, mid, post.uri()));
 
-        final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
+        final CompletableFuture<HttpResponse<String>> asyncSend = client.sendAsync(post, HttpResponse.BodyHandlers.ofString());
 
 
-        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
-        Long count = null;
-        if (inputStream instanceof FileCachingInputStream fc) {
-            count = fc.getCount();
-        }
+        return asyncSend.thenApply((response) -> {
+            final boolean success = response.statusCode() >= 200 && response.statusCode() < 300;
 
-        String status ;
-        String response ;
-        try {
-            final JsonNode bodyNode = JSONREADER.readTree(send.body());
-            logger.info("{} {}", mid, bodyNode);
 
-            status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
-            response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
             if (!success) {
-                throw new SourcingServiceException(send.statusCode(), bodyNode);
+                logger.warn("Status code for {}: {}", post.uri(), response.statusCode());
+            }  else {
+                logger.info("Status code for {}: {}", post.uri(), response.statusCode());
+
             }
-        } catch (SourcingServiceException sse) {
-            throw sse;
-        } catch (Exception e) {
-            if (success) {
-                logger.error(e.getMessage(), e);
+
+
+            String status;
+            String responseBody;
+            try {
+                final JsonNode bodyNode = JSONREADER.readTree(response.body());
+                logger.info("{} {}", mid, bodyNode);
+                status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
+                responseBody = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+                if (!success) {
+                    throw new SourcingServiceException(response.statusCode(), bodyNode);
+                }
+            } catch (SourcingServiceException sse) {
+                throw sse;
+            } catch (Exception e) {
+                if (success) {
+                    logger.error(response.uri() + ":" + e.getClass() + " " + e.getMessage(), e);
+                }
+                status = null;
+                responseBody = null;
+
             }
-            status = null;
-            response = null;
 
-        }
+            final String httpBody;
+            if (response.headers().firstValue("content-type").orElse("text/plain").startsWith("text/html")) {
+                // Silly sourcing service gives HTML back on 404's. This is unpresentable.
+                httpBody = "HTML:" + Jsoup.clean(response.body(), Safelist.none());
+            } else {
+                httpBody = response.body();
+            }
 
-        logger.log(success?  Level.INFO : Level.ERROR,
-            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
+            logger.log(success ? Level.INFO : Level.ERROR,
+                nl("{} {} geüpload: {} ({}) {} {}")
+                    .en("{} {} uploaded: {} ({}) {} {}")
+                        .slf4jArgs(
+                            mid,
+                            response.uri(),
+                            status == null ? "no status" : status, response.statusCode(),
+                            FileSizeFormatter.DEFAULT.format(count),
+                            httpBody).build());
+
+            boolean retryable = true;
+            if (response.statusCode() == 404) {
+                retryable = false;
+            }
 
 
-        return new UploadResponse(
-            mid,
-            send.statusCode(),
-            status,
-            response,
-            count,
-            "2:"+  configuration.get().cleanBaseUrl()
+            return new UploadResponse(
+                mid,
+                response.statusCode(),
+                status,
+                responseBody == null ? httpBody : responseBody,
+                count,
+                "v2:" + configuration.cleanBaseUrl(),
+                retryable
             );
-
+        });
    }
 
 
@@ -210,8 +274,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
 
-        return Optional.of(V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize());
-
+        return Optional.of(V2READER.readValue(statusResponse.body(), StatusResponse.class));
     }
 
     @Override
@@ -241,7 +304,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Nullable
     protected String getCallbackUrl(String mid) {
-        return configuration.get().callBackUrl(mid);
+        return configuration.callBackUrl(mid);
     }
 
 
@@ -251,7 +314,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     protected HttpRequest.Builder uploadRequestBuilder(String mid) {
-        return request("ingest/" + mid + "/upload");
+        return request(getUploadPath().formatted(mid));
     }
 
     @SneakyThrows
@@ -267,26 +330,42 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest.Builder request(String path) {
         return HttpRequest.newBuilder()
             .header("Authorization", "Bearer " +
-                Optional.ofNullable(configuration.get().token()).orElseThrow(() -> new IllegalStateException("No token configured")))
+                Optional.ofNullable(configuration.token()).orElseThrow(() -> new IllegalStateException("No token configured")))
             .uri(URI.create(forPath(path)));
     }
 
 
     String forPath(String path) {
-        return configuration.get().cleanBaseUrl() + "api/" + path;
+        return configuration.cleanBaseUrl() + "api/" + path;
     }
 
 
     @ManagedAttribute
     @Override
     public String getUploadString() {
-        return forPath(uploadRequestBuilder("%s").toString());
+        return forPath(getUploadPath());
+    }
+
+    public String getUploadPath() {
+        return "ingest/%s/upload";
     }
 
     @ManagedAttribute
     public String getBaseUrl() {
-        return configuration.get().cleanBaseUrl();
+        return configuration.cleanBaseUrl();
     }
+
+
+    @Override
+    public String toString() {
+        return getUploadString();
+    }
+
+    @Override
+    public String name() {
+        return NAME + " (" + implName().toUpperCase() + ")";
+    }
+
 
 
 }

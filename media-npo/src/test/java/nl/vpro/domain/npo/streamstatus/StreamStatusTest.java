@@ -51,7 +51,7 @@ class StreamStatusTest {
     @MethodSource("xmls")
     public void xml(String xml) throws JAXBException {
         StreamStatus status = (StreamStatus) CONTEXT.unmarshal(new StringReader(xml));
-        log.info("{}\n->{}", xml,status);
+        log.debug("{}\n->{}", xml,status);
         assertThat(VALIDATOR.validate(status)).isEmpty();
     }
 }

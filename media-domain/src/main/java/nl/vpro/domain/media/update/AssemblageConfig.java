@@ -1,6 +1,8 @@
 package nl.vpro.domain.media.update;
 
 import lombok.*;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.meeuw.functional.*;
 import org.slf4j.helpers.MessageFormatter;
 
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.logging.simple.*;
@@ -31,6 +34,7 @@ import static org.meeuw.functional.Predicates.*;
 @Data
 @EqualsAndHashCode
 @ToString
+@Log4j2
 public class AssemblageConfig implements Serializable {
 
     @Serial
@@ -72,7 +76,7 @@ public class AssemblageConfig implements Serializable {
     boolean ratingsUpdate = true;
 
     @lombok.Builder.Default
-    Boolean copyTwitterRefs = null;
+    Boolean copySocialRefs = null;
 
     @lombok.Builder.Default
     boolean copyIntentions = true;
@@ -190,6 +194,10 @@ public class AssemblageConfig implements Serializable {
 
 
     @lombok.Builder.Default
+    Predicate<TypedText> removeTextIf =  Predicates.alwaysFalse();
+
+
+    @lombok.Builder.Default
     Predicate<MemberRef> createTemporaryGroups = alwaysFalse();
 
 
@@ -235,7 +243,7 @@ public class AssemblageConfig implements Serializable {
             guessEpisodePosition,
             memberOfUpdate,
             ratingsUpdate,
-            copyTwitterRefs,
+            copySocialRefs,
             copyIntentions,
             copyTargetGroups,
             copyGeoLocations,
@@ -262,6 +270,7 @@ public class AssemblageConfig implements Serializable {
             implicitUndelete,
             cleaner,
             multilineCleaner,
+            removeTextIf,
             createTemporaryGroups,
             logger);
     }
@@ -300,7 +309,7 @@ public class AssemblageConfig implements Serializable {
             .guessEpisodePosition(true)
             .memberRefMatchOwner()
             .ratingsUpdate(true)
-            .copyTwitterRefs(true)
+            .copySocialRefs(true)
             .copyIntentions(true)
             .copyTargetGroups(true)
             .copyGeoLocations(true)
@@ -335,8 +344,8 @@ public class AssemblageConfig implements Serializable {
         if (copyPredictions == null) {
             setCopyPredictions(version == null || version.isNotBefore(5, 6));
         }
-        if (copyTwitterRefs == null) {
-            setCopyTwitterRefs(version == null || version.isNotBefore(5, 10));
+        if (copySocialRefs == null) {
+            setCopySocialRefs(version == null || version.isNotBefore(5, 10));
         }
     }
 
@@ -348,12 +357,37 @@ public class AssemblageConfig implements Serializable {
         return copyPredictions != null && copyPredictions;
     }
 
-    public boolean isCopyTwitterRefs() {
-        return copyTwitterRefs != null && copyTwitterRefs;
+    public boolean isCopySocialRefs() {
+        return copySocialRefs != null && copySocialRefs;
     }
 
     public boolean isCopyLanguageAndCountry() {
         return copyLanguageAndCountry != null && copyLanguageAndCountry;
+    }
+
+    /**
+     * Applies {@link #getCleaner()}, {@link #getMultilineCleaner()} and {@link #getRemoveTextIf()}
+     * @since 8.11
+     */
+    public <T extends TypedText, D extends TypedText> void clean(TextualObjectUpdate<T, D, ?> incomingObject) {
+        if (getCleaner() != null) {
+            for (T title : new ArrayList<>(incomingObject.getTitles())) {
+                title.set(getCleaner().apply(title.get()));
+                if (getRemoveTextIf().test(title)) {
+                    log.info("Implicitly removed title '{}' from {}", title, incomingObject);
+                    incomingObject.removeTitle(title);
+                }
+            }
+        }
+        if (getMultilineCleaner() != null) {
+            for (D description : new ArrayList<>(incomingObject.getDescriptions())) {
+                description.set(getMultilineCleaner().apply(description.get()));
+                if (getRemoveTextIf().test(description)) {
+                    log.info("Implicitly removed description '{}' from {}", description, incomingObject);
+                    incomingObject.removeDescription(description);
+                }
+            }
+        }
     }
 
     public static class Builder {

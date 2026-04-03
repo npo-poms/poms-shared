@@ -464,13 +464,16 @@
 
   <xs:simpleType name="targetGroupEnum">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="EVERYONE"/>
       <xs:enumeration value="KIDS_6"/>
+      <xs:enumeration value="KIDS_9"/>
       <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="KIDS_14"/>
+      <xs:enumeration value="KIDS_16"/>
       <xs:enumeration value="YOUNG_ADULTS"/>
       <xs:enumeration value="ADULTS"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
-      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -603,6 +606,11 @@
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
     <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
+    <xs:attribute name="externalId" type="xs:string">
+       <xs:annotation>
+          <xs:documentation>Contains the id of this person in some exernalt system.</xs:documentation>
+       </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <xs:complexType name="nameType">
@@ -729,6 +737,12 @@
             <xs:restriction base="xs:string">
               <xs:enumeration value="ACCOUNT"/>
               <xs:enumeration value="HASHTAG"/>
+              <xs:enumeration value="BSKY"/>
+              <xs:enumeration value="LINKEDIN"/>
+              <xs:enumeration value="FACEBOOK"/>
+              <xs:enumeration value="INSTAGRAM"/>
+              <xs:enumeration value="MASTODON"/>
+              <xs:enumeration value="OTHER"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:attribute>
@@ -754,6 +768,7 @@
     <xs:attribute name="start" type="xs:dateTime"/>
     <xs:attribute name="stop" type="xs:dateTime"/>
     <xs:attribute name="reruns" type="xs:boolean"/>
+    <xs:attribute type="xs:string" name="source"/>
   </xs:complexType>
 
   <xs:complexType name="scheduleEventsType">
@@ -784,7 +799,7 @@
     <xs:attribute type="xs:string" name="net"/>
     <xs:attribute type="xs:date" name="guideDay"/>
     <xs:attribute type="midType" name="midRef" use="required"/>
-    <xs:attribute type="xs:anyURI" name="urnRef" use="required"/>
+    <xs:attribute type="xs:anyURI" name="urnRef" />
     <xs:attribute type="scheduleEventTypeEnum" name="type"/>
   </xs:complexType>
 
@@ -809,6 +824,16 @@
   <xs:simpleType name="scheduleEventTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="STRAND"/>
+      <xs:enumeration value="ON_DEMAND">
+        <xs:annotation>
+          <xs:documentation>
+            This type is used for schedule events which are not broadcasted, but only available as VOD. This is used for example for NPO Start.
+
+            New since poms 8.13
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
     </xs:restriction>
   </xs:simpleType>
 

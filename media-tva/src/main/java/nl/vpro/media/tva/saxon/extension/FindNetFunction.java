@@ -25,7 +25,6 @@ import jakarta.inject.Named;
 import org.slf4j.event.Level;
 
 import nl.vpro.domain.media.Net;
-import nl.vpro.logging.Slf4jHelper;
 
 /**
  * @author Michiel Meeuwissen
@@ -80,7 +79,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                     boolean acknowledge = ACKNOWLEDGED.contains(value);
                     Level level = occurrence.incrementAndGet() % 100 == 1 ?
                         acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
-                    Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}", value, occurrence.get(), acknowledge ? " (acknowledge)" : "");
+                    log.atLevel(level).log("No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}", value, occurrence.get(), acknowledge ? " (acknowledge)" : "");
                     return new StringValue("");
                 }
             }

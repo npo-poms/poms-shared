@@ -78,7 +78,7 @@ final class SSHClientFactory {
 
 
     @ToString
-    static class ClientHolder implements Supplier<SSHClient>, AutoCloseable {
+    public static class ClientHolder implements Supplier<SSHClient>, AutoCloseable {
         final SSHClient client;
         @Getter
         final Instant creationTime;

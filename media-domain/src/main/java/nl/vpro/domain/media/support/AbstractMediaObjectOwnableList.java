@@ -1,14 +1,16 @@
 package nl.vpro.domain.media.support;
 
 
-import jakarta.persistence.*;
-import jakarta.xml.bind.annotation.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.util.*;
 
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
+
 import org.apache.commons.lang3.ObjectUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -42,6 +44,7 @@ public abstract class AbstractMediaObjectOwnableList<
     protected MediaObject parent;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "owner_type") // PostgreSQL enum type
     @XmlAttribute
     @Setter(AccessLevel.PRIVATE)
     @Getter
@@ -49,8 +52,8 @@ public abstract class AbstractMediaObjectOwnableList<
 
     @OneToMany(orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "parent_id")
-    @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
+    @Getter
     protected List<I> values = new ArrayList<>();
 
 
@@ -97,5 +100,6 @@ public abstract class AbstractMediaObjectOwnableList<
             throw new RuntimeException(cnse);
         }
     }
+
 
 }

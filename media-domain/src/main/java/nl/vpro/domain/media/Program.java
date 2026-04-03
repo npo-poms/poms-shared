@@ -74,7 +74,7 @@ public final class Program extends MediaObject {
 
 
     @OneToMany(mappedBy = "mediaObject",
-        orphanRemoval = false, // When true, 'hijacking' events doesn't work properly. (see RCRS integeration test in api-tests)
+        orphanRemoval = false, // When true, 'hijacking' events doesn't work properly. (see RCRS integration test in api-tests)
         cascade={MERGE})
     @SortNatural
     // Caching doesn't work properly because ScheduleEventRepository may touch this
@@ -321,7 +321,7 @@ public final class Program extends MediaObject {
     }
 
     public boolean isEpisode() {
-        return episodeOf != null && episodeOf.size() > 0;
+        return episodeOf != null && !episodeOf.isEmpty();
     }
 
     public boolean isEpisodeOf(MediaObject owner) {

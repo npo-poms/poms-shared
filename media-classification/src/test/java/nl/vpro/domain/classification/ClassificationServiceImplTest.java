@@ -51,6 +51,8 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetTermByIdOnDoubleDigits() {
         assertThat(classificationService.getTerm("3.0.1.2.10").getName()).isEqualTo("Spanning");
+        assertThat(classificationService.getTerm("3.0.1.2.10").depth()).isEqualTo(5);
+
     }
 
     @Test

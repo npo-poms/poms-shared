@@ -8,6 +8,7 @@ import java.nio.file.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
 import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
-import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
+import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
+
 
 @Log4j2
 @Disabled("This does actual stuff, need actual token.")
@@ -47,19 +49,19 @@ class AudioSourcingServiceImplITest {
         Configuration configuration = new Configuration(
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
+            PROPERTIES.getProperty("sourcingservice.callbackAuthentication"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
-            "m.meeuwissen.vpro@gmail.com",
-            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2"))
+            "m.meeuwissen.vpro@gmail.com"
         );
         impl = new AudioSourcingServiceImpl(
-            () -> configuration,
+            configuration,
             new LoggingMeterRegistry()
         );
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException {
+    public void uploadAudio() throws IOException, InterruptedException, ExecutionException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
@@ -78,8 +80,9 @@ class AudioSourcingServiceImplITest {
             Files.size(file),
             "audio/mpeg",
             cachingInputStream,
+            null,
             "m.meeuwissen.vpro@gmail.com"
-        );
+        ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
     }
 

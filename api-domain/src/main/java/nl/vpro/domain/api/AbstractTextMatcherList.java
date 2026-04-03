@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Setter;
+
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -14,13 +16,13 @@ import jakarta.xml.bind.annotation.XmlTransient;
  * @author rico
  * @since 4.6
  */
+@Setter
 @XmlTransient
 public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType>
     extends MatcherList<String, T>
     implements Predicate<String> {
 
-    @Valid
-    protected List<T> matchers = new ArrayList<>();
+    protected List<@Valid T> matchers = new ArrayList<>();
 
     protected AbstractTextMatcherList() {}
 
@@ -41,11 +43,6 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
     public List<T> getMatchers() {
         return matchers;
     }
-
-    public void setMatchers(List<T> matchers) {
-        this.matchers = matchers;
-    }
-
 
 
     public boolean searchEquals(AbstractTextMatcherList<T, S> b) {
@@ -92,10 +89,6 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
         }
         return a.searchEquals(b);
     }
-
-
-
-
 
     @Override
     public boolean equals(Object o) {

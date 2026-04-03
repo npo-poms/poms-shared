@@ -3,11 +3,13 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.*;
 
 import jakarta.annotation.PreDestroy;
@@ -33,6 +35,8 @@ import nl.vpro.util.FileMetadata;
 public class NEPServiceImpl implements NEPService {
 
     private final Provider<NEPGatekeeperService> gatekeeperService;
+    private final Provider<NEPSourcingService>  sourceServiceIngestService;
+
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
@@ -42,12 +46,14 @@ public class NEPServiceImpl implements NEPService {
     @Inject
     public NEPServiceImpl(
         @Named("NEPGatekeeperService") Provider<NEPGatekeeperService> gatekeeperService,
+        @Named("NEPSourceServiceIngestService") Provider<NEPSourcingService> sourceServiceIngestService,
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
         @Named("NEPSAMService") Provider<NEPSAMService> samService,
         @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService     ) {
         this.gatekeeperService = gatekeeperService;
+        this.sourceServiceIngestService = sourceServiceIngestService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
@@ -144,7 +150,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path stream, boolean replaces) throws IOException {
+    public UploadResult upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
 
@@ -153,6 +159,11 @@ public class NEPServiceImpl implements NEPService {
     public String getUploadString() {
         return nepftpUploadService.get().getUploadString();
 
+    }
+
+    @Override
+    public boolean isUploadEnabled() {
+        return nepftpUploadService.get().isUploadEnabled();
     }
 
     @Override
@@ -225,8 +236,8 @@ public class NEPServiceImpl implements NEPService {
         } catch (Exception ignored) {
 
         }
-           try {
-               builder.append("tokens:").append(tokenService.get().toString()).append(",");
+        try {
+            builder.append("tokens:").append(tokenService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
@@ -235,13 +246,22 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     @PreDestroy
-    public void close() throws Exception {
+    public void close() {
         closeQuietly(
             gatekeeperService,
             itemizeService,
             samService,
             tokenService
         );
+    }
+
+    /**
+     * This ingest version must be used for vertical video's. It's a bit absurd.
+     */
+    @Override
+    public CompletableFuture<HttpResponse<RequestResult>> ingest(Payload payload) {
+
+        return sourceServiceIngestService.get().ingest(payload);
     }
 
     @SafeVarargs

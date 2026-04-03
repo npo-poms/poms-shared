@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
+import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
@@ -37,19 +38,19 @@ class AudioSourcingServiceImplTest {
         Configuration configuration = new Configuration(
             wireMock.getHttpBaseUrl(),
             null,
+            null,
             "token",
             1000,
-            null,
-            2
+            null
         );
         impl = new AudioSourcingServiceImpl(
-            () -> configuration,
+             configuration,
             new LoggingMeterRegistry()
         );
     }
 
     @Test
-    public void uploadAudio() {
+    public void uploadAudio() throws InterruptedException, ExecutionException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -67,8 +68,9 @@ class AudioSourcingServiceImplTest {
             bytes.length,
             "audio/mpeg",
             cachingInputStream,
+            null,
             "m.meeuwissen.vpro@gmail.com"
-        );
+        ).get();
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
 
         List<ServeEvent> allServeEvents = getAllServeEvents();

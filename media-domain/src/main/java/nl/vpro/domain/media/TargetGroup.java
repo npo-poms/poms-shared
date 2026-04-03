@@ -18,6 +18,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 
+
+/**
+ * Represents one target group {@link TargetGroupType} in a {@link TargetGroups} list.
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupType")
@@ -93,7 +97,11 @@ public class TargetGroup extends DomainObject implements SimpleValueMediaObjectO
     public static class Deserializer extends JsonDeserializer<TargetGroup> {
         @Override
         public TargetGroup deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-            return new TargetGroup(TargetGroupType.valueOf(p.getValueAsString()));
+            try {
+                return new TargetGroup(TargetGroupType.valueOf(p.getValueAsString()));
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
         }
     }
 }

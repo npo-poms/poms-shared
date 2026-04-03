@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.languages.LanguageCode;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -363,6 +364,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return titles(new Title(title, owner, TextualType.MAIN));
     }
 
+    /**
+     * @since 8.13
+     */
+    default B originalTitle(@Nullable String title, @NonNull OwnerType owner) {
+        if (title == null) {
+            mediaObject().removeTitle(owner,  TextualType.ORIGINAL);
+            return (B) this;
+        } else {
+            return titles(new Title(title, owner, TextualType.ORIGINAL));
+        }
+    }
+
     default B mainTitle(@NonNull String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
@@ -386,6 +399,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
         } else {
+            mediaObject().removeTitle(owner, TextualType.SUB);
             return (B) this;
         }
     }
@@ -419,8 +433,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B mainDescription(@Nullable String description, @NonNull OwnerType owner) {
+        return description(description, TextualType.MAIN, owner);
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B description(@Nullable String description, @NonNull TextualType type, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(description)) {
-            return descriptions(new Description(description, owner, TextualType.MAIN));
+            return descriptions(new Description(description, owner, type));
         } else {
             return (B) this;
         }
@@ -480,7 +501,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B countries(String... countries) {
         for(String country : countries) {
-            mediaObject().addCountry(country);
+            if (country != null) {
+                mediaObject().addCountry(country);
+            }
+        }
+        return (B)this;
+    }
+    @SuppressWarnings("unchecked")
+    default B countries(org.meeuw.i18n.regions.Region... countries) {
+        for(org.meeuw.i18n.regions.Region country : countries) {
+            if (country != null) {
+                mediaObject().addCountry(country);
+            }
         }
         return (B)this;
     }
@@ -554,6 +586,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         mediaObject().setReleaseYear(y);
         return (B)this;
     }
+
+    /**
+     * @since 8.12
+     */
+    default B releaseYear(Year y) {
+        return releaseYear((short) y.getValue());
+    }
+
 
     default B persons(Person... persons) {
         return persons(Arrays.asList(persons));
@@ -691,11 +731,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     default B memberOf(String mid, Integer number) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
+
         return memberOf(new MemberRef(mid, number));
     }
 
 
     default B memberOf(String mid) throws CircularReferenceException {
+        if (mid == null){
+            return (B) this;
+        }
         return memberOf(new MemberRef(mid));
     }
     default B clearMemberOf() {
@@ -712,6 +759,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         if (mediaObject().getAgeRating() == null) {
             mediaObject().setAgeRating(AgeRating.ALL);
         }
+        return (B) this;
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B dubbed(Boolean dubbed) {
+        mediaObject().setIsDubbed(dubbed);
+        return (B) this;
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B availableSubtitles(AvailableSubtitles... availableSubtitles) {
+        mediaObject().setAvailableSubtitles(new TreeSet<>(Set.of(availableSubtitles)));
         return (B) this;
     }
 
@@ -750,22 +813,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    default B twitterRefs(String... twitter) {
-        List<TwitterRef> reference = new ArrayList<>();
+    default B socialRefs(String... twitter) {
+        List<SocialRef> reference = new ArrayList<>();
         for(String t : twitter) {
-            reference.add(new TwitterRef(t));
+            reference.add(new SocialRef(t));
         }
-        mediaObject().getTwitterRefs().addAll(reference);
+        mediaObject().getSocialRefs().addAll(reference);
         return (B)this;
     }
 
-    default B twitterRefs(TwitterRef... twitter) {
-        List<TwitterRef> reference = new ArrayList<>(Arrays.asList(twitter));
-        mediaObject().getTwitterRefs().addAll(reference);
+    default B socialRefs(SocialRef... twitter) {
+        List<SocialRef> reference = new ArrayList<>(Arrays.asList(twitter));
+        mediaObject().getSocialRefs().addAll(reference);
         return (B) this;
     }
-    default B clearTwitterRefs() {
-        mediaObject().getTwitterRefs().clear();
+    default B clearSocialRefs() {
+        mediaObject().getSocialRefs().clear();
         return (B) this;
     }
     @SuppressWarnings("unchecked")
@@ -1048,6 +1111,34 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return scheduleEvent(c, time, duration, e->e, titles);
         }
 
+        /**
+         * @since 8.13
+         * @param titles
+
+         */
+        public T vodEvent(ScheduleEventTitle... titles) {
+            return vodEvent(mid, null, titles);
+        }
+
+        /**
+         * @since 8.13
+         * @param titles
+         */
+        public T vodEvent(String midRef, java.time.Instant start, ScheduleEventTitle... titles) {
+            ScheduleEvent event = ScheduleEvent.builder()
+                .channel(Channel.NVOD)
+                .start(start)
+                .type(ScheduleEventType.ON_DEMAND)
+                .midRef(midRef == null ? mid : midRef)
+                .build();
+            event.setParent(mediaObject());
+            for (ScheduleEventTitle title : titles) {
+                event.addTitle(title);
+            }
+            return (T) this;
+        }
+
+
 
         @SuppressWarnings("unchecked")
         public T firstScheduleEventTitles(ScheduleEventTitle... titles) {
@@ -1106,10 +1197,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T episodeOf(String mid, Integer number) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid, number));
         }
 
         public T episodeOf(String mid) {
+            if (mid == null){
+                return (T) this;
+            }
             return episodeOf(new MemberRef(mid));
         }
 
@@ -1139,16 +1236,36 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             }
             return (T) this;
         }
-
         public  T prediction(Platform platform, Encryption encryption) {
-            return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
+            return prediction(platform, encryption, Authority.USER);
+        }
+        public  T prediction(Platform platform, Encryption encryption, Authority authority) {
+            return prediction(platform, encryption, authority, null);
+
+        }
+
+        public  T prediction(Platform platform, Encryption encryption, Authority authority, Instant publishStart) {
+            return predictions(
+                Prediction.builder()
+                    .platform(platform)
+                    .encryption(encryption)
+                    .publishStart(publishStart)
+                    .authority(authority)
+                    .build()
+            );
         }
 
         /**
          * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
          */
+        public T plannedAvailability(Authority authority) {
+            return plannedAvailability(authority, null);
+        }
+        public T plannedAvailability(Authority authority, Instant publishStart) {
+            return prediction(Platform.INTERNETVOD, null, authority, publishStart);
+        }
         public T plannedAvailability() {
-            return prediction(Platform.INTERNETVOD, null);
+            return plannedAvailability(Authority.USER);
         }
 
 

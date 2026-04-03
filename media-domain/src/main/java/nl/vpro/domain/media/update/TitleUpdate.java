@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Setter;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
@@ -26,11 +28,13 @@ public class TitleUpdate implements TypedText {
 
     @XmlValue
     @NoHtml(aggressive = false)
+
     private String value;
 
     @NotNull
     private TextualType type;
 
+    @Setter
     private MediaUpdate<?> media;
 
     private TitleUpdate() {
@@ -65,10 +69,6 @@ public class TitleUpdate implements TypedText {
     @XmlTransient
     public MediaUpdate<?>getMedia() {
         return media;
-    }
-
-    public void setMedia(MediaUpdate<?> media) {
-        this.media = media;
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {

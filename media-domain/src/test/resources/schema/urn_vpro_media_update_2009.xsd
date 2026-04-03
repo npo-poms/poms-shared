@@ -610,6 +610,7 @@
       <xs:element name="response" type="xs:string" minOccurs="0"/>
       <xs:element name="bytes" type="xs:long" minOccurs="0"/>
       <xs:element name="version" type="xs:string" minOccurs="0"/>
+      <xs:element name="retryable" type="xs:boolean" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="statusCode" type="xs:int" use="required"/>
     <xs:attribute name="mid" type="xs:string"/>
@@ -651,6 +652,7 @@
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
     <xs:attribute name="missingMedia" type="xs:boolean"/>
+    <xs:attribute name="transcodeService" type="transcodeService"/>
   </xs:complexType>
 
   <xs:complexType name="itemizeType">
@@ -716,6 +718,15 @@
       <xs:enumeration value="TIMED_OUT"/>
       <xs:enumeration value="TERMINATED"/>
       <xs:enumeration value="PAUSED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="transcodeService">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEP"/>
+      <xs:enumeration value="SRCS_AUDIO"/>
+      <xs:enumeration value="SRCS_VIDEO"/>
+      <xs:enumeration value="CDN"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

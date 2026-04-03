@@ -56,7 +56,7 @@ public class PortalUpdate implements Serializable{
         return new PortalUpdate(portal.getId(), portal.getUrl());
     }
 
-	@XmlAttribute(required = true)
+    @XmlAttribute(required = true)
     public String getId() {
         return id;
     }

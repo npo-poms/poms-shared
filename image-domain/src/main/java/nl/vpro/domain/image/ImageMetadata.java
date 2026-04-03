@@ -5,7 +5,8 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
 
 import com.fasterxml.jackson.annotation.*;
 
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
+
 
 /**
  *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()} which may be calculated from other properties.

@@ -140,6 +140,10 @@ public class Term implements Comparable<Term>, TermContainer {
         Collections.sort(terms);
     }
 
+    public int depth() {
+        return TermId.of(termId).getParts().length;
+    }
+
 
     @Override
     public String toString() {

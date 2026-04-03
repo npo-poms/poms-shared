@@ -11,8 +11,7 @@ import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -58,8 +57,8 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
     @Override
     @NonNull
     @XmlElement(name="intention")
-    @JsonIgnore
-    public List<Intention> getValues() {
+    @JsonProperty("values")
+    public List<Intention> getFilteredValues() {
         return values;
     }
 

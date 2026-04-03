@@ -21,10 +21,10 @@ public class HasTitleValidator implements ConstraintValidator<HasTitle, TextualO
 
     HasTitle annotation;
 
-	@Override
+    @Override
     public void initialize(HasTitle constraintAnnotation) {
         this.annotation = constraintAnnotation;
-	}
+    }
 
 
     @Override

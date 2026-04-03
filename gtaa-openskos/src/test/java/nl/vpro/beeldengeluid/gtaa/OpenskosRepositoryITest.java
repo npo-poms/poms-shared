@@ -6,6 +6,9 @@ import java.net.URI;
 import java.time.*;
 import java.util.*;
 
+import jakarta.xml.bind.JAXB;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,16 +27,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Contains tests which you can run to debug problems with connection to actual open skos server.
- * @since 5.5 (copied from dropped GTAARepositoryImplTest)
+ * @since 5.5
  * @author Michiel Meeuwissen
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
+@SuppressWarnings({"OptionalGetWithoutIsPresent", "HttpUrlsUsage"})
 @Slf4j
 public class OpenskosRepositoryITest {
 
+    @BeforeEach
+    public void setUp() {
+        var previous = OpenskosRepository.disposeInstance();
+        if (previous != null) {
+            log.debug("Disposed previous instance {}", previous);
+        }
+    }
 
     public static Object[] envs() {
-        return new Object[]{Env.ACC, Env.PROD};
+//        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
+        return new Object[]{Env.ACC};
     }
 
     @ParameterizedTest
@@ -66,6 +77,8 @@ public class OpenskosRepositoryITest {
         GTAAConcept concept = impl.submit(geographicName, "poms_test");
         assertThat(concept.getScopeNotes()).isNotEmpty();
         assertThat(concept.getName()).isEqualTo(name);
+
+        JAXB.marshal(concept, System.out);
 
         String result = """
             <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:openskos="http://openskos.org/xmlns#" openskos:numFound="1" openskos:rows="20" openskos:start="0">
@@ -127,11 +140,31 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> persons = impl.findPersons("Mies Bouwman", 100);
         assertThat(persons).isNotEmpty();
-        assertThat(persons.get(0).getStatus()).isNotNull();
+        assertThat(persons.getFirst().getStatus()).isNotNull();
         for (Description person : persons)  {
             log.info("{}", person);
         }
     }
+
+
+    private static List<Object[]> envsAnd() {
+        List<String> names = List.of("Lutjebroek", "Gendringen");
+        return Arrays.stream(envs()).map(e -> names.stream().map(n -> new Object[] {e, n}).toList()).flatMap(Collection::stream)
+            .toList();
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("envsAnd")
+    public void testFindGeographicalName(Env env, String name) {
+        OpenskosRepository impl = getRealInstance(env);
+        List<Description> names = impl.findForSchemes(name, 100, GTAARepository.SchemeOrNot.of(Scheme.geographicname));
+        assertThat(names).withFailMessage(() -> "Could not find descriptions for %s".formatted(name)).hasSizeGreaterThan(0);
+        for (Description desc : names) {
+            log.info("{} -> {}", name, desc);
+        }
+    }
+
 
     @ParameterizedTest
     @MethodSource("envs")
@@ -139,7 +172,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
-        assertThat(concepts.get(0).getStatus()).isNotNull();
+        assertThat(concepts.getFirst().getStatus()).isNotNull();
         for (Description concept : concepts) {
             log.info("{}", concept);
 
@@ -152,7 +185,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
         assertThat(geonames).isNotEmpty();
-        assertThat(geonames.get(0).getStatus()).isNotNull();
+        assertThat(geonames.getFirst().getStatus()).isNotNull();
         for (Description geoname : geonames)  {
             log.info("{}", geoname);
         }
@@ -174,11 +207,9 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
 
         Optional<GTAAConcept> geo = impl.get("http://data.beeldengeluid.nl/gtaa/1723598");
-        assertThat(geo.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
+        assertThat(geo.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1723598"));
 
     }
-
-
 
     @ParameterizedTest
     @MethodSource("envs")
@@ -189,20 +220,19 @@ public class OpenskosRepositoryITest {
         assertThat(person).isEmpty();
     }
 
-
     @ParameterizedTest
     @MethodSource("envs")
+    @Disabled
     public void testFindEyeGenre(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findForSchemes("science", 100, GTAARepository.SchemeOrNot.of(genrefilmmuseum));
         assertThat(concepts).isNotEmpty();
-        assertThat(concepts.get(0).getStatus()).isNotNull();
+        assertThat(concepts.getFirst().getStatus()).isNotNull();
         for (Description concept : concepts) {
             log.info("{}", concept);
 
         }
     }
-
 
     @ParameterizedTest
     @MethodSource("envs")

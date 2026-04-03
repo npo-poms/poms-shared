@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.search.*;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
@@ -154,6 +153,13 @@ public class SchemaTest extends AbstractSchemaTest {
     public void testTargetGroup() {
         testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
+
+
+    @Test
+    public void testOwnerType() {
+        testSharedEnum("ownerTypeEnum", OwnerType.class);
+    }
+
 
     @Test
     public void testRegion() {

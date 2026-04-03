@@ -1,5 +1,7 @@
 package nl.vpro.nep.domain.workflow;
 
+import io.openapitools.jackson.dataformat.hal.HALMapper;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -17,10 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WorkflowExecutionTest {
 
 
+    HALMapper MAPPER = NEPGatekeeperServiceImpl.createMapper();
     @Test
     public void unmarshal() throws IOException {
         WorkflowExecution workflowExecution =
-        NEPGatekeeperServiceImpl.MAPPER.readValue("""
+        MAPPER.readValue("""
             {
                   "workflowId" : "01680e99-134d-43ee-af29-c514e6fc1f66",
                   "status" : "FAILED",

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
@@ -31,6 +32,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
 import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.RegionService;
 
 import com.fasterxml.jackson.annotation.*;
@@ -39,7 +41,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Collections2;
-import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.bind.CollectionOfPublishable;
@@ -54,8 +55,7 @@ import nl.vpro.domain.validation.NoDuplicateOwner;
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
-import nl.vpro.logging.simple.Level;
+import nl.vpro.jackson.Views;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -93,7 +93,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
  *
  * @author roekoe
  */
-@SuppressWarnings({"WSReferenceInspection", "JpaDataSourceORMInspection"})
+@SuppressWarnings({"JpaDataSourceORMInspection"})
 
 // jpa
 @Entity
@@ -135,7 +135,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
         "contentRatings",
         "email",
         "websites",
-        "twitterRefs",
+        "socialRefs",
         "teletext",
         "predictionsForXml",
         "_Locations",
@@ -237,8 +237,9 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
     groups = WarningValidatorGroup.class,
     type = {TextualType.MAIN}
 )
-@AVTypeValidation
-public abstract class MediaObject extends PublishableObject<MediaObject>
+@AVTypeValidation(groups = PrePersistValidatorGroup.class)
+public abstract class
+MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
     //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
@@ -248,11 +249,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     private static final long serialVersionUID = -9095662256792069374L;
 
     @Column(name = "mid", nullable = false, unique = true)
-    @Size(max = 255, min = 4)
-    @Pattern(
-        regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
-        flags = {
-            Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
+    @ValidMid
     @NotNull(groups = PrePersistValidatorGroup.class)
     @MonotonicNonNull
     protected String mid;
@@ -282,23 +279,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @ManyToMany
     @OrderColumn(name = "list_index",
         nullable = false)
-    @Valid
+
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor bij imports.
-    protected List<@NotNull Broadcaster> broadcasters;
+    protected List<@NotNull  @Valid Broadcaster> broadcasters;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Nullable
-    protected List<@NotNull Portal> portals;
+    protected List<@NotNull @Valid Portal> portals;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull  ThirdParty> thirdParties;
+    protected List<@NotNull  @Valid ThirdParty> thirdParties;
 
     @Setter
     @OneToMany(cascade = ALL, orphanRemoval = true)
@@ -306,8 +301,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
-    @Valid
-    protected List<@NotNull PortalRestriction> portalRestrictions;
+    protected List<@NotNull @Valid PortalRestriction> portalRestrictions;
 
     @Setter
     @OneToMany(orphanRemoval = true, cascade = ALL)
@@ -315,12 +309,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
-    @Valid
-    protected Set<@NotNull GeoRestriction> geoRestrictions;
+    protected Set<@NotNull @Valid GeoRestriction> geoRestrictions;
 
 
     /**
-     * There seems to be a difference between {@link #ageRating} and {@link #ageRestriction}.
+     * There seems to be a difference between {@link #ageRating} and {@code ageRestriction}.
      * @since 7.11
      */
     @Enumerated(EnumType.STRING)
@@ -333,50 +326,44 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
-    @Valid
     @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=RedundantValidatorGroup.class)
-    protected Set<@NotNull Title> titles;
+    protected Set<@NotNull @Valid Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected Set<@NotNull Description> descriptions;
+    protected Set<@NotNull @Valid Description> descriptions;
 
     @ManyToMany(cascade = {DETACH, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this is odd.
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected SortedSet<@NotNull Genre> genres;
+    protected SortedSet<@NotNull @Valid Genre> genres;
 
     @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
-    protected SortedSet<@NotNull Tag> tags;
+    protected SortedSet<@NotNull @Valid Tag> tags;
 
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement(name = "intentions")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull Intentions> intentions;
+    protected SortedSet<@NotNull @Valid Intentions> intentions;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull TargetGroups> targetGroups;
+    protected SortedSet<@NotNull @Valid TargetGroups> targetGroups;
 
     @Setter
     protected String source;
@@ -477,7 +464,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JoinColumn(name = "mediaobject_id", nullable = true)
     @OrderColumn(name = "list_index", nullable = true /* hibernate sucks */)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected @Valid List<@NotNull @Valid Email> email;
+    protected List<@NotNull @Valid Email> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -486,16 +473,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // Did I mention that hibernate sucks?
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected @Valid List<@NotNull @Valid Website> websites;
+    protected List<@NotNull @Valid Website> websites;
 
-    @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
+    @OneToMany(cascade = ALL, targetEntity = SocialRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
     @OrderColumn(name = "list_index",
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull @Valid TwitterRef> twitterRefs;
+    protected List<@NotNull @Valid SocialRef> twitterRefs;
 
     @Setter
     protected Short teletext;
@@ -543,6 +530,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @PublicationFilter
     protected List<@NotNull @Valid Image> images;
 
+    @Setter
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
     protected boolean isEmbeddable = true;
@@ -553,7 +541,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Instant sortInstant;
 
     // Used for monitoring publication delay. Not exposed via java.
-    // Set its value in sql to now() when unmodified media is republished.
+    // Set its value in sql to now() when unmodified media is republishd.
     @Column(name = "repubDate", unique = false)
     protected Instant repubDate;
 
@@ -686,7 +674,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getWebsites().forEach(website ->
             this.addWebsite(Website.copy(website))
         );
-        source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
+        source.getSocialRefs().forEach(ref -> this.addSocialRef(SocialRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getEncryption());
@@ -732,14 +720,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public void setAvailableSubtitles(SortedSet<AvailableSubtitles> incoming)  {
-        this.availableSubtitles = (SortedSet<AvailableSubtitles>) updateSortedSet(this.availableSubtitles, incoming);
+        this.availableSubtitles = updateSortedSet(this.availableSubtitles, incoming);
     }
 
     @Override
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<String> getCrids() {
+    public @NonNull List<@NonNull String> getCrids() {
         if (crids == null) {
             crids = new ArrayList<>();
         }
@@ -1001,7 +989,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * <p>
      * Only in the {@link Views.Publisher} version of the json.
      */
-    @JsonView({Views.ForwardPublisher.class})
+    @JsonView(Views.ForwardPublisher.class)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Title> getExpandedTitles() {
         return TextualObjects.expandTitlesMajorOwnerTypes(this);
@@ -1906,7 +1894,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement(name = "twitter")
     @JsonProperty("twitter")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<TwitterRef> getTwitterRefs() {
+    public List<SocialRef> getSocialRefs() {
         if (twitterRefs == null) {
             twitterRefs = new ArrayList<>();
         }
@@ -1914,7 +1902,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public void setTwitterRefs(List<@NonNull  TwitterRef> twitterRefs) {
+    public void setSocialRefs(List<@NonNull SocialRef> twitterRefs) {
         this.twitterRefs = updateList(this.twitterRefs, twitterRefs);
     }
 
@@ -2034,6 +2022,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
+    /**
+     * Return a set of all ancestors. Sorted set, sorted on id..
+     */
     public SortedSet<MediaObject> getAncestors() {
         SortedSet<MediaObject> set = new TreeSet<>((mediaObject, mediaObject1) -> {
             if (mediaObject == null || mediaObject1 == null) {
@@ -2123,8 +2114,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     /**
      * Implicitly create predictions for all platforms that have a location, but no prediction yet.
      */
-    public void implicitPredictions() {
+    public Set<Platform>  implicitPredictions() {
         if (! DELETES.contains(workflow)) {
+            Set<Platform> implicitPredictions = new HashSet<>();
             final Map<Platform, List<Location>> locations = new HashMap<>();
             getLocations().stream()
                 .filter(Location::hasPlatform)
@@ -2144,10 +2136,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                     }
                     created.setState(Prediction.State.of(created));
                     log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
+                    implicitPredictions.add(created.getPlatform());
                 });
             }
+            return implicitPredictions;
         } else {
             log.debug("Not creating implicit predictions for {} because it is deleted", this);
+            return Collections.emptySet();
         }
     }
 
@@ -2225,31 +2220,44 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (prediction == null) {
             if (! location.isDeleted()) {
                 log.debug("No prediction for {}", location);
-                findOrCreatePrediction(platform, true, (c) -> {
-                    MediaObjects.correctPrediction(c, this, Level.DEBUG, instant(), (ps, p) -> {
-                    });
-                });
+                findOrCreatePrediction(platform, true, (c) ->
+                    MediaObjects.correctPrediction(c, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {
+                }));
             }
         } else {
             if (!location.isDeleted()) {
                 prediction.setPlannedAvailability(true);
             }
-            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {});
         }
     }
 
-    void correctPrediction(Platform platform) {
+    boolean correctPrediction(Platform platform) {
         Prediction prediction = getPredictionWithoutFixing(platform);
+        AtomicBoolean change = new AtomicBoolean(false);
+
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {
+                change.set(true);
+            });
         }
+        return change.get();
     }
 
-    public void correctPredictions() {
-        implicitPredictions();
-        for (Platform p : Platform.values()) {
-            correctPrediction(p);
+    public boolean correctPredictions() {
+        Set<Platform> implicited = implicitPredictions();
+        if (! implicited.isEmpty()) {
+            log.info("Added implicit predictions to {}: {}", getMid(), implicited);
         }
+        boolean change = ! implicited.isEmpty();
+        for (Platform p : Platform.values()) {
+            boolean c = correctPrediction(p);
+            if (c) {
+                log.info("Corrected {}/{}", getMid(), p);
+                change = true;
+            }
+        }
+        return change;
     }
 
     public boolean removePrediction(Platform platform) {
@@ -2589,7 +2597,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Nullable
     public Image getMainImage() {
         if (images != null && !images.isEmpty()) {
-            return images.get(0);
+            return images.getFirst();
         }
         return null;
     }
@@ -2682,10 +2690,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
         return isEmbeddable;
-    }
-
-    public void setEmbeddable(boolean embeddable) {
-        isEmbeddable = embeddable;
     }
 
     /**
@@ -3190,12 +3194,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             if (thisId != null) {
                 id = ", id=[" + this.getId() + "]"; // bracket signals that not  persistent
             } else {
-                if (Workflow.API.contains(workflow)) {
-                    // probably testing ES or so.
-                    id = "";
-                } else {
-                    id = " (not persistent)";
-                }
+                id = "";
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",

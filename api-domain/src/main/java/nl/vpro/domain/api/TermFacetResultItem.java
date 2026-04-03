@@ -7,9 +7,11 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlType;
+import java.util.Collection;
+
+import jakarta.xml.bind.annotation.*;
+
+import nl.vpro.util.XmlValued;
 
 /**
  * @author rico
@@ -40,6 +42,22 @@ public class TermFacetResultItem extends FacetResultItem {
     @Override
     public String toString() {
         return id + ":" + count;
+    }
+
+    /**
+     * @since 8.12
+     */
+    public static <T extends TermFacetResultItem> T find(XmlValued xmlValued, Collection<T> collection) {
+        return find(xmlValued.getXmlValue(), collection);
+    }
+    /**
+     * @since 8.12
+     */
+    public static <T extends TermFacetResultItem> T find(String id, Collection<T> collection) {
+        return collection.stream()
+            .filter(item -> item.getId().equals(id))
+            .findFirst()
+            .orElseThrow();
     }
 
 }

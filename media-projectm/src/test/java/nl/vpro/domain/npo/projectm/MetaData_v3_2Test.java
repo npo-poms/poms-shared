@@ -128,7 +128,7 @@ public class MetaData_v3_2Test {
             .ageRating(AgeRating._12).contentRatings(ContentRating.GEWELD)
             .emails("bla@foo.bar")
             .websites(new Website("http://www.vpro.nl"))
-            .twitterRefs("@account", "#hash")
+            .socialRefs("@account", "#hash")
             .genres(new Genre("3.0.1.1.8"))
             .broadcasters(new Broadcaster("VPRO"), new Broadcaster("NCRV"))
             .persons(new Person("Pietje", "Puk", RoleType.COMPOSER), new Person("Jan", "Jansen", RoleType.DIRECTOR))

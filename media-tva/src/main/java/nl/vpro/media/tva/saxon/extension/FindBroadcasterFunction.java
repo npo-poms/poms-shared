@@ -20,10 +20,9 @@ import jakarta.inject.Inject;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.logging.Slf4jHelper;
 
-import static nl.vpro.logging.simple.Level.DEBUG;
-import static nl.vpro.logging.simple.Level.WARN;
+import static org.slf4j.event.Level.*;
+
 
 /**
  * @author Roelof Jan Koekoek
@@ -39,6 +38,8 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
     private final BroadcasterService broadcasterService;
 
     private static final Set<String> warned = Collections.synchronizedSet(new HashSet<>());
+    private static final Set<String> warnedMis = Collections.synchronizedSet(new HashSet<>());
+
 
     @Inject
     public FindBroadcasterFunction(BroadcasterService broadcasterService) {
@@ -73,7 +74,11 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
                     if (broadcaster != null) {
                         if (! broadcaster.getWhatsOnId().equalsIgnoreCase(value)) {
-                            Slf4jHelper.log(log, warned.add(broadcaster.getId()) ? WARN : DEBUG, "Broadcaster {} did not match on whatson id {}", broadcaster, value);
+                            if (broadcaster.getMisId().equalsIgnoreCase(value)) {
+                                log.atLevel(warnedMis.add(broadcaster.getId()) ? INFO : DEBUG).log("Broadcaster {} did not match on whatson id {} but on mis id", broadcaster, value);
+                            } else {
+                                log.atLevel(warned.add(broadcaster.getId()) ? WARN : DEBUG).log("Broadcaster {} did not match on whatson id {}", broadcaster, value);
+                            }
                         }
                         return new StringValue(broadcaster.getId());
                     }

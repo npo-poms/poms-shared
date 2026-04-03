@@ -113,6 +113,21 @@ public class MediaObjectLocker {
     }
 
     /**
+     * @since 8.10.3
+     */
+    public static void assertMidLock(String mid) {
+        List<String> collect = ObjectLocker.currentLocks()
+            .stream()
+            .filter(f -> f.key instanceof MediaIdentifiable.Correlation)
+            .map(c -> c.key)
+            .map(key  -> ((MediaIdentifiable.Correlation) key).getId())
+            .toList();
+
+        assert collect.size() == 1 && collect.contains(mid) : "There should be one lock on " + mid + " but we found " + collect;
+    }
+
+
+    /**
      * Run in a new transaction, but before that lock the mid.
      * <p>
      * Make sure not to be in a transaction already.

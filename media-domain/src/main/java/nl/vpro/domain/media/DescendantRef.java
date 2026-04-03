@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -25,11 +28,16 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
     private static final long serialVersionUID = 2305207507673462765L;
 
     @XmlAttribute
+    @Getter
     protected String urnRef;
 
+    @Setter
+    @Getter
     @XmlAttribute
     protected String midRef;
 
+    @Setter
+    @Getter
     @XmlAttribute
     protected MediaType type;
 
@@ -54,18 +62,6 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
 
     public static DescendantRef forOwner(MediaObject media) {
         return new DescendantRef(media.getMid(), media.getUrn(), MediaType.getMediaType(media));
-    }
-
-    public String getUrnRef() {
-        return urnRef;
-    }
-
-    public MediaType getType() {
-        return type;
-    }
-
-    public void setType(MediaType type) {
-        this.type = type;
     }
 
     @Override
@@ -96,14 +92,6 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
             return false;
         }
         return urnRef == null || urnRef.equals(that.urnRef);
-    }
-
-    public String getMidRef() {
-        return midRef;
-    }
-
-    public void setMidRef(String midRef) {
-        this.midRef = midRef;
     }
 
     @Override

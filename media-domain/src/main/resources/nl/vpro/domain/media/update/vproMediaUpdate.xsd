@@ -694,7 +694,8 @@
     </xs:sequence>
      <xs:attribute name="mid" type="xs:string"/>
      <xs:attribute name="missingMedia" type="xs:boolean"/>
-  </xs:complexType>
+     <xs:attribute name="transcodeService" type="transcodeService"/>
+   </xs:complexType>
 
   <xs:simpleType name="priorityType">
     <xs:restriction base="xs:string">
@@ -778,6 +779,15 @@
     </xs:simpleContent>
 
   </xs:complexType>
+
+  <xs:simpleType name="transcodeService">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEP"/>
+      <xs:enumeration value="SRCS_AUDIO"/>
+      <xs:enumeration value="SRCS_VIDEO"/>
+      <xs:enumeration value="CDN"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 
 </xs:schema>

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.*;
 import static nl.vpro.domain.media.support.PublishableObject.SERIALIZING;
 
 /**
+ * Represents a 'memberref' but in json/xml binding only, where it is used to show all descendants
  * @since 5.13
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -75,13 +76,13 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     protected RecursiveMemberRef segmentOf;
 
     @XmlAttribute
-	@Getter
-	Integer index;
+    @Getter
+    Integer index;
 
-	@XmlAttribute
-	Boolean highlighted;
+    @XmlAttribute
+    Boolean highlighted;
 
-	@XmlAttribute
+    @XmlAttribute
     Boolean circular;
 
     public RecursiveMemberRef() {
@@ -107,7 +108,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         this.midRef = parentMid;
         this.type = parentType;
         this.index = index;
-        this.highlighted = highlighted == null || ! highlighted ? null : Boolean.TRUE;
+        this.highlighted = highlighted == null || !highlighted ? null : Boolean.TRUE;
         this.memberOf = memberOf;
         this.episodeOf = episodeOf;
         this.segmentOf = segmentOf;
@@ -117,13 +118,13 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     private static RecursiveMemberRef.Builder builderOf(
         @Nullable String childMid, MediaObject parent, Set<StackElement> memberStack) {
-        RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
+        RecursiveMemberRef.Builder builder = RecursiveMemberRef.builder()
             .childMid(childMid);
 
         if (parent != null) {
             builder.parentMid(parent.getMid())
                 .parentType(parent.getMediaType())
-                .memberOf(of(parent.getMemberOf(), memberStack,  MemberRefType.memberOf))
+                .memberOf(of(parent.getMemberOf(), memberStack, MemberRefType.memberOf))
                 .episodeOf(parent instanceof Program parentProgram ? of(parentProgram.getEpisodeOf(), memberStack, MemberRefType.episodeOf) : null)
                 .segmentOf(
                     parent instanceof Segment parentSegment ?
@@ -209,7 +210,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
                 .circular(true)
                 .build();
         }
-     }
+    }
 
     /**
      * For certain memberRef, create a set of recursive Members representing the 'memberOf' of the parent of this memberRef
@@ -220,7 +221,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
             SortedSet<MemberRef> memberOf = group.getMemberOf();
 
             Set<StackElement> stack = new LinkedHashSet<>();
-            if (! SERIALIZING.get()) {
+            if (!SERIALIZING.get()) {
                 stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
             }
             return of(memberOf, stack, MemberRefType.memberOf);
@@ -238,7 +239,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         if (group instanceof Program program) {
             SortedSet<MemberRef> episodeOf = program.getEpisodeOf();
             Set<StackElement> stack = new LinkedHashSet<>();
-            if (! SERIALIZING.get()) {
+            if (!SERIALIZING.get()) {
                 stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
             }
             return of(episodeOf, stack, MemberRefType.episodeOf);
@@ -259,7 +260,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @SuppressWarnings("unused")
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if(parent instanceof ParentChildRelation) {
+        if (parent instanceof ParentChildRelation) {
             this.parent = (ParentChildRelation) parent;
         }
     }
@@ -286,11 +287,11 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @Override
     public int compareTo(@NonNull RecursiveMemberRef memberRef) {
 
-        if(this.index != null && memberRef.index != null && !this.index.equals(memberRef.index)) {
+        if (this.index != null && memberRef.index != null && !this.index.equals(memberRef.index)) {
             return this.index - memberRef.index;
         }
 
-        if(this.getParentMid() != null
+        if (this.getParentMid() != null
             && memberRef.getParentMid() != null) {
             return getParentMid().compareTo(memberRef.getParentMid());
         }
@@ -301,7 +302,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (! (o instanceof RecursiveMemberRef that)) {
+        if (!(o instanceof RecursiveMemberRef that)) {
             return false;
         }
 
@@ -354,7 +355,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
         @Override
         public String toString() {
-            return (child == null ? "" : child) + " -" + type + (number != null ?  (":" + number) : "")  + "-> " + parent;
+            return (child == null ? "" : child) + " -" + type + (number != null ? (":" + number) : "") + "-> " + parent;
         }
     }
 

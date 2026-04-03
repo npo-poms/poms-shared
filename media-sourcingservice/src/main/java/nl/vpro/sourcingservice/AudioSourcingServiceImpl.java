@@ -3,8 +3,6 @@ package nl.vpro.sourcingservice;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.function.Supplier;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -23,7 +21,7 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
 
     @Inject
     public AudioSourcingServiceImpl(
-        @NonNull @Named("audioConfiguration") Supplier<Configuration> configuration,
+        @NonNull @Named("srcsAudioConfiguration") Configuration configuration,
         MeterRegistry meterRegistry
        ) {
         super(configuration, meterRegistry);

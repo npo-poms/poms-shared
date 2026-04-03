@@ -15,6 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -62,8 +63,8 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
     @Override
     @NonNull
     @XmlElement(name="geoLocation")
-    @JsonIgnore
-    public List<GeoLocation> getValues() {
+    @JsonProperty("values")
+    public List<GeoLocation> getFilteredValues() {
         return values;
     }
 

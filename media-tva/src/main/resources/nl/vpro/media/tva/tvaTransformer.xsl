@@ -35,6 +35,9 @@
   If a person uri prefix is specified then person ids will be filled in the 'gtaaUri' attribute
   -->
   <xsl:param name="personUriPrefix" select="''" />
+
+  <xsl:param name="personExternalIdPrefix" select="'whatson:'" />
+
   <!--
   The workflow of the new object. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if
   the resulting object will be published as is.
@@ -139,19 +142,23 @@
                 </xsl:element>
               </xsl:for-each>
               <xsl:for-each select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:OtherIdentifier[@type = 'SeriesID']">
-                <descendantOf type="SEASON">
-                  <xsl:attribute name="midRef">
-                    <xsl:value-of select="normalize-space(text())" />
-                  </xsl:attribute>
-                </descendantOf>
+                  <xsl:if test="normalize-space(text()) != ''">
+                    <descendantOf type="SEASON">
+                      <xsl:attribute name="midRef">
+                        <xsl:value-of select="normalize-space(text())" />
+                      </xsl:attribute>
+                  </descendantOf>
+                </xsl:if>
               </xsl:for-each>
               <xsl:for-each
                   select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:OtherIdentifier[@type = 'ParentSeriesID']">
-                <descendantOf type="SERIES">
-                  <xsl:attribute name="midRef">
-                    <xsl:value-of select="normalize-space(text())"/>
-                  </xsl:attribute>
-                </descendantOf>
+                <xsl:if test="normalize-space(text()) != ''">
+                  <descendantOf type="SERIES">
+                    <xsl:attribute name="midRef">
+                      <xsl:value-of select="normalize-space(text())"/>
+                    </xsl:attribute>
+                  </descendantOf>
+                </xsl:if>
               </xsl:for-each>
               <xsl:if test="$poSeriesId != ''">
                 <episodeOf type="SEASON">
@@ -188,8 +195,10 @@
             <xsl:value-of select="." />
           </xsl:for-each>
         </xsl:variable>
-        <xsl:for-each
-            select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'SeriesID' and contains($seriesIDs, text())][1]">
+        <xsl:for-each-group
+            select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'SeriesID' and contains($seriesIDs, text())][1]"
+            group-by="."
+        >
           <xsl:variable name="programCrid">
             <xsl:value-of select="../tva:Program/@crid"/>
           </xsl:variable>
@@ -258,7 +267,7 @@
             </xsl:for-each>
 
           </group>
-        </xsl:for-each>
+        </xsl:for-each-group>
 
         <xsl:variable name="parentSeriesIDS">
           <xsl:for-each select="distinct-values(tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID']/text())">
@@ -270,7 +279,9 @@
         </xsl:variable>
 
 
-        <xsl:for-each select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID' and contains($parentSeriesIDS, text())][1]">
+        <xsl:for-each-group select="tva:ProgramDescription/tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent/tva:OtherIdentifier[@type = 'ParentSeriesID' and contains($parentSeriesIDS, text())][1]"
+                            group-by="."
+        >
           <xsl:variable name="programCrid">
             <xsl:value-of select="../tva:Program/@crid" />
           </xsl:variable>
@@ -308,7 +319,7 @@
               </xsl:for-each>
             </xsl:for-each>
           </group>
-        </xsl:for-each>
+        </xsl:for-each-group>
       </groupTable>
       <!-- <schedule> -->
       <xsl:element name="schedule">
@@ -416,9 +427,11 @@
               </xsl:for-each>
               <!-- poProgId -->
               <xsl:for-each select="tva:OtherIdentifier[@type = 'ProductID']">
-                <xsl:element name="poProgID">
-                  <xsl:value-of select="normalize-space(text())"/>
-                </xsl:element>
+                <xsl:if test="normalize-space(text()) != ''">
+                  <xsl:element name="poProgID">
+                    <xsl:value-of select="normalize-space(text())"/>
+                  </xsl:element>
+                </xsl:if>
               </xsl:for-each>
               <!-- poSeriesId -->
               <xsl:for-each select="tva:OtherIdentifier[@type = 'SeriesID']">
@@ -697,6 +710,9 @@
         <!-- <person> -->
         <xsl:for-each select="tva:CreditsItem/tva:PersonNameIDRef">
           <xsl:element name="person">
+            <xsl:attribute name="externalId">
+              <xsl:value-of select="$personExternalIdPrefix" /><xsl:value-of select="current()/@ref" />
+            </xsl:attribute>
             <xsl:attribute name="role">
               <xsl:call-template name="roles">
                 <xsl:with-param name="id">

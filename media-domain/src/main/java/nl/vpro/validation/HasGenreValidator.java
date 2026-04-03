@@ -24,10 +24,10 @@ public class HasGenreValidator implements ConstraintValidator<HasGenre, MidIdent
 
     HasGenre annotation;
 
-	@Override
+    @Override
     public void initialize(HasGenre constraintAnnotation) {
         this.annotation = constraintAnnotation;
-	}
+    }
 
     @Override
     public boolean isValid(MidIdentifiable hasType, ConstraintValidatorContext context) {

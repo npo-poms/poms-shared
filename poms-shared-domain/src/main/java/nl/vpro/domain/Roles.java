@@ -30,6 +30,13 @@ public class Roles {
     public static final String USER = MEDIA + "USER";
     public static final String USER_ROLE = ROLE + USER;
 
+
+    /**
+     * This is the default role of normal users. They have access, and can only write content of their own broadcaster(s)
+     */
+    public static final String KEYUSER = MEDIA + "KEYUSER";
+    public static final String KEYUSER_ROLE = ROLE + KEYUSER;
+
     /**
      * A super-user has user access to nodes of every broadcaster.
      */
@@ -51,7 +58,7 @@ public class Roles {
 
 
     /**
-     * An authority may do very specific things, like creating broadcasts for radio channels. See {@link nl.vpro.domain.media.update.UpdateSupplier}.
+     * An authority may do very specific things, like creating broadcasts for radio channels. See {@code nl.vpro.domain.media.update.UpdateSupplier}.
      * <p>
      * Basically it is a superuser too, but it may be restricted to certain aspects.
      */
@@ -218,12 +225,14 @@ public class Roles {
 
 
 
-    public static final Set<String> PRIVILEGED = Set.of(SUPERADMIN_ROLE, SUPERPROCESS_ROLE, PUBLISHER_ROLE, SUPPORT_ROLE, SYSTEM_ROLE);
+    public static final Set<String> PRIVILEGED = Set.of(
+        SUPERADMIN_ROLE, SUPERPROCESS_ROLE, PUBLISHER_ROLE, SUPPORT_ROLE, SYSTEM_ROLE
+    );
 
-    public static final Set<String> CAN_CHOOSE_OWNER_TYPE = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+    public static final Set<String> CAN_CHOOSE_OWNER_TYPE = Set.of(
         MIS_ROLE,
         SUPERADMIN_ROLE
-    )));
+    );
 
     public static Set<String> allRoles() {
         Set<String> set = new LinkedHashSet<>();

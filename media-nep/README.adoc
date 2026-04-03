@@ -8,13 +8,30 @@ NEP makes several API's available, which we make use of in POMS. It's a bit mess
 == REST APIs
 
 === NEPGatekeeperService
-Intake for transcoding jobs. No call back. Poll NEPDownloadService
+Intake for transcoding jobs. Poll the 'getTranscodeStatuses' endpoints./. Or it is called by via the 'postkantoor', as a streaming status call.
 
 `nep.gatekeeper-api.baseUrl=https://npo-webonly-gatekeeper.nepworldwide.nl`
 
 http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
 
 http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
+
+Only for landscape video.
+
+=== NEPSourceServiceIngestService
+
+
+WIP
+
+Absurdly, if you need to upload a video with a portrait aspect ratio, you need to use this (new) API. We were not provided much documentation, and it is not clear how it relates to the NEPGatekeeperService. I presume it is a rewrite.
+
+See https://publiekeomroep.atlassian.net/browse/P0MS-251
+
+`nep.source-service.baseUrl=https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/ingest/`
+
+
+It is currently unknown how to monitor this.
+
 
 === NEPItemizeService
 Intake for 'itemize' and 'grab screen'.
@@ -44,15 +61,17 @@ widevine token, playready tokens
 
 == FTP Services
 
-There are two relevant FTP servers of which we wrap the relevant function into the following interfaces
+There are tree relevant FTP servers of which we wrap the relevant function into the following interfaces
 
 === NEPUploadService
-If you want to upload something for trancoding upload it here.
+If you want to upload something for transcoding upload it to one of the following FTP servers.
 
-`nep.gatekeeper-upload.host=ftp.nepworldwide.nl`
+`nep.gatekeeper-upload.host=ftp.nepworldwide.nl` (for landscape video)
+
+`nep.sourcing-service-upload.host=ftp1.cdn1.usvc.nepworldwide.nl` (for portrait video)
 
 === NEPDownloadService
 If you want to download transcoded item, or itemized item. (iirc)
 
 `nep.itemizer-download.host=sftp-itemizer.nepworldwide.nl`
-`
+

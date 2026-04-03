@@ -1,5 +1,8 @@
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 
@@ -10,6 +13,8 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class FacetResultItem {
 
+    @Setter
+    @Getter
     protected long count;
 
     private Boolean selected = null;
@@ -24,14 +29,6 @@ public abstract class FacetResultItem {
     public abstract String getValue();
 
     public abstract void setValue(String name);
-
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long l) {
-        this.count = l;
-    }
 
 
     public boolean isSelected() {

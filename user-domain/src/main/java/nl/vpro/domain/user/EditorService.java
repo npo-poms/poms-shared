@@ -70,8 +70,8 @@ public interface EditorService extends UserService<Editor> {
             String principalId = e.getPrincipalId();
             if  ("mis-importer".equals(principalId)) {
                 return OwnerType.MIS;
-            } else if ("radiobox-importer".equals(principalId)) {
-                return OwnerType.RADIOBOX;
+           /* } else if ("radiobox-importer".equals(principalId)) { // radiobox is gone since 2020.
+                return OwnerType.RADIOBOX;*/
             } else if (currentUserCanChooseOwnerType()) {
                 return OwnerType.NPO;
             } else {

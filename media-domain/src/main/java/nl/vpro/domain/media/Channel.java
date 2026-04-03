@@ -107,7 +107,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("SENJ")
-    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz"   , true) { // voorheen radio 6?
+    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz", false, true) { // voorheen radio 6?
         @Override
         public String toString() {
             return "NPO Soul & Jazz";
@@ -135,7 +135,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("R3AL")
-    R3AL(AUDIO, Range.atMost(Year.of(2022)), "https://www.npo3fm.nl/kx/programmas/kx-alternative", true) {
+    R3AL(AUDIO, Range.atMost(Year.of(2022)), "https://www.npo3fm.nl/kx/programmas/kx-alternative", false, true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Alternative";
@@ -143,7 +143,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("KXFM")
-    KXFM(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", true) {
+    KXFM(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", false, true) {
         @Override
         public String toString() {
             return "NPO Campus Radio";
@@ -164,7 +164,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R4CO")
-    R4CO(AUDIO, null, null, true) {
+    R4CO(AUDIO, null, null, false, true) {
         @Override
         public String toString() {
             return "NPO Radio 4 Concerten";
@@ -181,7 +181,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("STNL")
-    STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", true) {
+    STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", false, true) {
         @Override
         public String toString() {
             return "NPO Sterren NL";
@@ -2228,7 +2228,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNA")
-    FUNA(AUDIO, null, null, true) {
+    FUNA(AUDIO, null, null, false, true) {
         @Override
         public String toString() {
             return "FunX Amsterdam";
@@ -2237,7 +2237,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("FUNB")
-    FUNB(AUDIO, null, null, true)  {
+    FUNB(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX Arab";
@@ -2246,7 +2246,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("FUND")
-    FUND(AUDIO, Range.atMost(Year.of(2020)), null, true)  {
+    FUND(AUDIO, Range.atMost(Year.of(2020)), null, false, true)  {
         @Override
         public String toString() {
             return "FunX Dance";
@@ -2254,28 +2254,28 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNH")
-    FUNH(AUDIO, null, null, true)  {
+    FUNH(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX HipHop";
         }
     },
      @XmlEnumValue("FUNL")
-    FUNL(AUDIO, null, null, true)  {
+    FUNL(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX Latin";
         }
     },
     @XmlEnumValue("FUNJ")
-    FUNJ(AUDIO, Range.atMost(Year.of(2023)), null, true)  {
+    FUNJ(AUDIO, Range.atMost(Year.of(2023)), null, false, true)  {
         @Override
         public String toString() {
             return "FunX Reggae";
         }
     },
     @XmlEnumValue("FUNS")
-    FUNS(AUDIO, null, null, true)  {
+    FUNS(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX SlowJamz";
@@ -2283,7 +2283,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNR")
-    FUNR(AUDIO, null, null, true)  {
+    FUNR(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX Rotterdam";
@@ -2291,7 +2291,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNU")
-    FUNU(AUDIO, null, null, true)  {
+    FUNU(AUDIO, null, null, false, true)  {
         @Override
         public String toString() {
             return "FunX Utrecht";
@@ -2299,7 +2299,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNG")
-    FUNG(AUDIO, null, "https://www.funx.nl/denhaag/online-radio-luisteren", true)  {
+    FUNG(AUDIO, null, "https://www.funx.nl/denhaag/online-radio-luisteren", false, true)  {
         @Override
         public String toString() {
             return "FunX Den Haag";
@@ -2311,7 +2311,7 @@ public enum Channel implements Displayable, XmlValued {
      * @since 5.27
      */
     @XmlEnumValue("FUNF")
-    FUNF(AUDIO, null, "https://www.funx.nl/fissa/online-radio-luisteren", true)  {
+    FUNF(AUDIO, null, "https://www.funx.nl/fissa/online-radio-luisteren", false, true)  {
         @Override
         public String toString() {
             return "FunX Fissa";
@@ -2322,7 +2322,7 @@ public enum Channel implements Displayable, XmlValued {
      * @since 7.11
      */
     @XmlEnumValue("FUNO")
-    FUNO(AUDIO, null, "https://www.funx.nl/afro/online-radio-luisteren", true)  {
+    FUNO(AUDIO, null, "https://www.funx.nl/afro/online-radio-luisteren", false, true)  {
         @Override
         public String toString() {
             return "FunX Afro";
@@ -2775,7 +2775,7 @@ public enum Channel implements Displayable, XmlValued {
      * @since 5.30
      */
     @XmlEnumValue("SPID")
-    SPID(VIDEO, Range.closed(Year.of(2014), Year.of(2022)), "https://www.spiketv.nl/", null) {
+    SPID(VIDEO, Range.closed(Year.of(2014), Year.of(2022)), "https://www.spiketv.nl/", false, null) {
         @Override
         public String toString() {
             return "Spike Nederland";
@@ -2810,7 +2810,7 @@ public enum Channel implements Displayable, XmlValued {
      * @since 8.4
      */
     @XmlEnumValue("NVOD")
-    NVOD(VIDEO, Range.atLeast(Year.of(2003)), "https://npostart.nl", true) {
+    NVOD(VIDEO, Range.atLeast(Year.of(2003)), "https://npostart.nl", true, true) {
         @Override
         public String toString() {
             return "NPO Start";
@@ -2826,7 +2826,7 @@ public enum Channel implements Displayable, XmlValued {
     XXXX(VIDEO) {
         @Override
         public String toString() {
-            return "TEST CHANNEL";
+            return "TEST CHANNEL (tv)";
         }
     },
     /**
@@ -2838,7 +2838,7 @@ public enum Channel implements Displayable, XmlValued {
     XXXY(AUDIO) {
         @Override
         public String toString() {
-            return "TEST CHANNEL 2";
+            return "TEST CHANNEL (radio)";
         }
     }
     ;
@@ -2854,11 +2854,15 @@ public enum Channel implements Displayable, XmlValued {
     @Getter
     private final Boolean onlineOnly;
 
+    @Getter
+    private final boolean onDemand;
+
     Channel(AVType avType) {
         this.avType = avType;
         this.range = null;
         this.website = null;
         this.onlineOnly = null;
+        this.onDemand = false;
     }
 
     Channel(AVType avType, String website, int from) {
@@ -2866,6 +2870,7 @@ public enum Channel implements Displayable, XmlValued {
         this.range = Range.atLeast(Year.of(from));
         this.website = website;
         this.onlineOnly = null;
+        this.onDemand = false;
     }
 
     Channel(AVType avType, int from) {
@@ -2874,14 +2879,20 @@ public enum Channel implements Displayable, XmlValued {
 
 
     Channel(AVType avType, int from , int until) {
-        this(avType, Range.closed(Year.of(from), Year.of(until)), null, null);
+        this(avType, Range.closed(Year.of(from), Year.of(until)), null, false, null);
     }
 
-    Channel(AVType avType, Range<Year> range, String website, Boolean onlineOnly) {
+    Channel(AVType avType, Range<Year> range, String website, boolean onDemand, Boolean onlineOnly) {
         this.avType = avType;
         this.range = range;
         this.website = website;
-        this.onlineOnly = onlineOnly;
+        this.onDemand = onDemand;
+        if (onDemand) {
+            assert onlineOnly == null || onlineOnly;
+            this.onlineOnly = true;
+        } else {
+            this.onlineOnly = onlineOnly;
+        }
     }
 
 

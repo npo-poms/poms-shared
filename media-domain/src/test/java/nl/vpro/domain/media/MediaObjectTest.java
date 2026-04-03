@@ -585,8 +585,32 @@ public class MediaObjectTest {
                 invalid.add(c);
             }
         });
-        log.info("Invalid countries: {}", invalid.stream().map(c -> c == null ? "null" : (c.getCode() + ":" + c.getName(Locales.NETHERLANDISH))).collect(Collectors.joining("\n")));
-        assertThat(invalid).hasSize(25);
+
+        assertThat(invalid.stream().map(c -> c == null ? "null" : (c.getCode() + ":" + c.getName(Locales.NETHERLANDISH))).collect(Collectors.joining("\n"))).isEqualTo("""
+                AC:Ascension Island
+                AN:Nederlandse Antillen
+                BU:Burma
+                CP:Clipperton Island
+                CS:Serbia and Montenegro
+                DG:Diego Garcia
+                EA:Ceuta, Melilla
+                EU:European Union
+                EZ:Eurozone
+                FX:France, Metropolitan
+                IC:Canary Islands
+                NT:Neutral Zone
+                SF:Finland
+                SU:USSR
+                TA:Tristan da Cunha
+                TP:East Timor
+                UK:United Kingdom
+                YU:Yugoslavia
+                ZR:Zaire
+                XN:Nordic Patent Institute
+                null""");
+
+
+
         log.info("Valid countries: {}", valid.stream().map(c -> c.getCode() + ":" + c.getName(Locales.NETHERLANDISH)).collect(Collectors.joining("\n")));
         assertThat(valid).hasSize(287);
 
@@ -610,6 +634,7 @@ public class MediaObjectTest {
     @Test
     public void testWebsiteValidation() {
         Program p = new Program();
+        p.setMid("mid_123");
         p.addGenre(new Genre("3.0.1.1.4"));
         p.setType(ProgramType.BROADCAST);
         p.addWebsite(new Website("bla"));
@@ -654,6 +679,7 @@ public class MediaObjectTest {
     @Test
     public void getAVTypeValidation() {
         Program p = new Program();
+        p.setMid("mid_123");
         p.setType(ProgramType.TRACK);
         p.setAVType(AVType.AUDIO);
         p.setAgeRating(AgeRating.ALL);
@@ -661,7 +687,7 @@ public class MediaObjectTest {
         validate(p, true, 0);
 
         p.setAVType(AVType.MIXED);
-        validate(p, true, 1);
+        dbValidate(p, 1);
     }
 
 
@@ -673,7 +699,7 @@ public class MediaObjectTest {
     @Disabled
     public void testTwitterRefValidationProperty() {
         Program p = new Program();
-        p.getTwitterRefs().add(new TwitterRef("aa"));
+        p.getSocialRefs().add(new SocialRef("aa"));
         Set<ConstraintViolation<Program>> validate = validate(p, true);
         assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().equals("twitterRefs[0].value"))).hasSize(1);
         {

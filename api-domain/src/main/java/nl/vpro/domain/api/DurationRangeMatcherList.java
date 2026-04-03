@@ -24,8 +24,7 @@ import nl.vpro.domain.api.media.DurationRangeMatcher;
 public class DurationRangeMatcherList extends MatcherList<Duration, DurationRangeMatcher> implements Predicate<Duration> {
 
     @XmlElement(name = "matcher")
-    @Valid
-    protected List<DurationRangeMatcher> matchers = new ArrayList<>();
+    protected List<@Valid DurationRangeMatcher> matchers = new ArrayList<>();
 
     public DurationRangeMatcherList() {
     }

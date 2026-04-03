@@ -16,18 +16,18 @@ package nl.vpro.domain.media;
  */
 public interface ParentChildRelation {
 
-	default String getParentMid() {
-		return getMidRef();
-	}
+    default String getParentMid() {
+        return getMidRef();
+    }
 
-	String getMidRef();
+    String getMidRef();
 
-	String getChildMid();
+    String getChildMid();
 
-	/**
-	 * The type of the parent
-	 */
-	MediaType getType();
+    /**
+     * The type of the parent
+     */
+    MediaType getType();
 
 
 }

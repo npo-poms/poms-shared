@@ -27,8 +27,7 @@ import nl.vpro.domain.media.Relation;
 public class RelationSearchList implements Predicate<Relation>, Iterable<RelationSearch> {
 
     @XmlElement(name = "relationSearch")
-    @Valid
-    protected List<RelationSearch> relationSearches = new ArrayList<>();
+    protected List<@Valid RelationSearch> relationSearches = new ArrayList<>();
 
     public RelationSearchList() {
         // jaxb needs empty constructor

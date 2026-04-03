@@ -32,7 +32,7 @@ import nl.vpro.domain.page.util.Urls;
 import nl.vpro.domain.page.validation.ValidGenre;
 import nl.vpro.domain.user.validation.BroadcasterValidation;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson.Views;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -355,28 +355,28 @@ public class PageUpdate implements Serializable {
 
         if (type != that.type) return false;
         if (!Objects.equals(url, that.url)) return false;
-        if (publishStart != null ? !publishStart.equals(that.publishStart) : that.publishStart != null) return false;
-        if (crids != null ? !crids.equals(that.crids) : that.crids != null) return false;
-        if (alternativeUrls != null ? !alternativeUrls.equals(that.alternativeUrls) : that.alternativeUrls != null)
+        if (!Objects.equals(publishStart, that.publishStart)) return false;
+        if (!Objects.equals(crids, that.crids)) return false;
+        if (!Objects.equals(alternativeUrls, that.alternativeUrls))
             return false;
         if (!Objects.equals(broadcasters, that.broadcasters)) return false;
-        if (portal != null ? !portal.equals(that.portal) : that.portal != null) return false;
+        if (!Objects.equals(portal, that.portal)) return false;
         if (!Objects.equals(title, that.title)) return false;
-        if (subtitle != null ? !subtitle.equals(that.subtitle) : that.subtitle != null) return false;
-        if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
-        if (summary != null ? !summary.equals(that.summary) : that.summary != null) return false;
-        if (paragraphs != null ? !paragraphs.equals(that.paragraphs) : that.paragraphs != null) return false;
-        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
-        if (genres != null ? !genres.equals(that.genres) : that.genres != null) return false;
-        if (links != null ? !links.equals(that.links) : that.links != null) return false;
-        if (embeds != null ? !embeds.equals(that.embeds) : that.embeds != null) return false;
-        if (statRefs != null ? !statRefs.equals(that.statRefs) : that.statRefs != null) return false;
-        if (images != null ? !images.equals(that.images) : that.images != null) return false;
-        if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
-        if (lastPublished != null ? !lastPublished.equals(that.lastPublished) : that.lastPublished != null)
+        if (!Objects.equals(subtitle, that.subtitle)) return false;
+        if (!Objects.equals(keywords, that.keywords)) return false;
+        if (!Objects.equals(summary, that.summary)) return false;
+        if (!Objects.equals(paragraphs, that.paragraphs)) return false;
+        if (!Objects.equals(tags, that.tags)) return false;
+        if (!Objects.equals(genres, that.genres)) return false;
+        if (!Objects.equals(links, that.links)) return false;
+        if (!Objects.equals(embeds, that.embeds)) return false;
+        if (!Objects.equals(statRefs, that.statRefs)) return false;
+        if (!Objects.equals(images, that.images)) return false;
+        if (!Objects.equals(relations, that.relations)) return false;
+        if (!Objects.equals(lastPublished, that.lastPublished))
             return false;
-        if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
-        return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
+        if (!Objects.equals(creationDate, that.creationDate)) return false;
+        return Objects.equals(lastModified, that.lastModified);
     }
 
     @Override

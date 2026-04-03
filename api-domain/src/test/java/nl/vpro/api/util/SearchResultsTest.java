@@ -2,8 +2,7 @@ package nl.vpro.api.util;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import jakarta.xml.bind.JAXB;
 
@@ -64,14 +63,14 @@ public class SearchResultsTest {
         facetResultItems.add(DateFacetResultItem.builder().value("range2").begin(Instant.ofEpochMilli(100000)).end(Instant.ofEpochMilli(2000000)).count(50).build());
         List<DateFacetResultItem> selected = new ArrayList<>();
 
-        SearchResults.setSelectedDateFacets(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new);
+        SearchResults.setSelectedDateFacets(searches, new DateRangeFacets<>(), facetResultItems, selected, DateFacetResultItem::new);
 
         assertThat(facetResultItems).hasSize(2);
         assertThat(facetResultItems.get(0).isSelected()).isTrue();
         assertThat(facetResultItems.get(1).isSelected()).isFalse();
 
         assertThat(selected).hasSize(2);
-        assertThat(selected.get(0).isSelected()).isTrue();
+        assertThat(selected.getFirst().isSelected()).isTrue();
         assertThat(selected.get(0).getCount()).isEqualTo(100);
         assertThat(selected.get(0).getValue()).isEqualTo("range1");
         assertThat(selected.get(1).isSelected()).isTrue();
@@ -127,36 +126,36 @@ public class SearchResultsTest {
         MediaSearchResults.setSelectedRelationFacets(searches, relationFacetList, facetResultItems, selected);
 
         assertThat(facetResultItems.size()).isEqualTo(1);
-        assertThat(facetResultItems.get(0).getName()).isEqualTo("labels");
-        assertThat(facetResultItems.get(0).getFacets().size()).isEqualTo(2);
-        assertThat(facetResultItems.get(0).getFacets().get(0).getId()).isEqualTo("LABEL1");
-        assertThat(facetResultItems.get(0).getFacets().get(0).getCount()).isEqualTo(10);
-        assertThat(facetResultItems.get(0).getFacets().get(0).isSelected()).isFalse();
-        assertThat(facetResultItems.get(0).getFacets().get(1).getId()).isEqualTo("Een label");
-        assertThat(facetResultItems.get(0).getFacets().get(1).getCount()).isEqualTo(5);
-        assertThat(facetResultItems.get(0).getFacets().get(1).isSelected()).isTrue();
+        assertThat(facetResultItems.getFirst().getName()).isEqualTo("labels");
+        assertThat(facetResultItems.getFirst().getFacets().size()).isEqualTo(2);
+        assertThat(facetResultItems.getFirst().getFacets().getFirst().getId()).isEqualTo("LABEL1");
+        assertThat(facetResultItems.getFirst().getFacets().get(0).getCount()).isEqualTo(10);
+        assertThat(facetResultItems.getFirst().getFacets().get(0).isSelected()).isFalse();
+        assertThat(facetResultItems.getFirst().getFacets().get(1).getId()).isEqualTo("Een label");
+        assertThat(facetResultItems.getFirst().getFacets().get(1).getCount()).isEqualTo(5);
+        assertThat(facetResultItems.getFirst().getFacets().get(1).isSelected()).isTrue();
 
 
-        assertThat(selected.get(0).getName()).isEqualTo("labels");
-        assertThat(selected.get(0).getFacets().size()).isEqualTo(2);
+        assertThat(selected.getFirst().getName()).isEqualTo("labels");
+        assertThat(selected.getFirst().getFacets().size()).isEqualTo(2);
 
-        assertThat(selected.get(0).getFacets().get(0).getId()).isEqualTo("Een label");
-        assertThat(selected.get(0).getFacets().get(0).getCount()).isEqualTo(5);
-        assertThat(selected.get(0).getFacets().get(1).getId()).isEqualTo("Nog een label");
-        assertThat(selected.get(0).getFacets().get(1).getCount()).isEqualTo(0);
+        assertThat(selected.getFirst().getFacets().get(0).getId()).isEqualTo("Een label");
+        assertThat(selected.getFirst().getFacets().get(0).getCount()).isEqualTo(5);
+        assertThat(selected.getFirst().getFacets().get(1).getId()).isEqualTo("Nog een label");
+        assertThat(selected.getFirst().getFacets().get(1).getCount()).isEqualTo(0);
     }
 
     @Test
     public void unmarshalJson() throws IOException {
-        MediaSearchResult result = Jackson2Mapper.getInstance().readValue(getClass().getResource("/related.json"), MediaSearchResult.class);
-        MediaObject o = result.asList().get(0);
-        assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
+        MediaSearchResult result = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/related.json"), MediaSearchResult.class);
+        MediaObject o = result.asList().getFirst();
+        assertThat(o.getDescendantOf().getFirst().getMidRef()).isEqualTo("VPRO_1154287");
     }
 
     @Test
     public void unmarshalXml() {
-        MediaSearchResult result = JAXB.unmarshal(getClass().getResource("/related.xml"), MediaSearchResult.class);
-        MediaObject o = result.asList().get(0);
-        assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
+        MediaSearchResult result = JAXB.unmarshal(Objects.requireNonNull(getClass().getResource("/related.xml")), MediaSearchResult.class);
+        MediaObject o = result.asList().getFirst();
+        assertThat(o.getDescendantOf().getFirst().getMidRef()).isEqualTo("VPRO_1154287");
     }
 }

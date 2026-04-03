@@ -220,7 +220,6 @@ class ImageMetadataTest {
         JsonSchema schema = schemaGen.generateSchema(ImageMetadataImpl.class);
 
         assertThatJson(schema).isSimilarTo(
-            // text blocks only in java 15....
             """
                 {
                   "type" : "object",
@@ -254,8 +253,8 @@ class ImageMetadataTest {
                           },
                           "format" : {
                             "type" : "string",
-                            "enum" : [ "BMP", "GIF", "IEF", "IFF", "JPG", "JFIF", "PNG", "PBM", "PGM", "PNM", "PPM", "SVG", "RAS", "RGB", "TIF", "XBM", "XPM", "WEBP" ]
-                          },
+                            "enum" : [ "BMP", "GIF", "IEF", "IFF", "JPG", "JFIF", "PNG", "PBM", "PGM", "PNM", "PPM", "SVG", "RAS", "RGB", "TIF", "XBM", "XPM", "WEBP", "UNKNOWN" ]
+                                                                                                                },
                           "dimension" : {
                             "type" : "object",
                             "id" : "urn:jsonschema:nl:vpro:domain:image:Dimension",

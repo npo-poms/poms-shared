@@ -54,13 +54,13 @@ public enum ImageType implements Displayable {
     PROMO_LANDSCAPE("Promotie landschap") {
         @Override
         public String getDisplayName() {
-            return "Landschap";
+            return "Promo (landschap)";
         }
     },
     PROMO_PORTRAIT("Promotie portrait") {
         @Override
         public String getDisplayName() {
-            return "Portrait";
+            return "Promo (portrait)";
         }
     },
     BACKGROUND("Background picture") {

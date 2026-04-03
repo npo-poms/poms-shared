@@ -26,6 +26,13 @@ import nl.vpro.i18n.Displayable;
 @JsonDeserialize(using = AgeRatingToString.Deserializer.class)
 public enum AgeRating implements Displayable, XmlValued {
 
+    ALL("Alle leeftijden", 0) {
+        @Override
+        public String getDescription() {
+            return getDisplayName();
+        }
+    },
+
     @XmlEnumValue("6")
     _6(6),
     @XmlEnumValue("9")
@@ -49,13 +56,6 @@ public enum AgeRating implements Displayable, XmlValued {
      */
     @XmlEnumValue("18")
     _18(18),
-
-    ALL("Alle leeftijden", 0) {
-        @Override
-        public String getDescription() {
-            return getDisplayName();
-        }
-    },
 
     @Beta
     NOT_YET_RATED("Nog niet beoordeeld", -1) {

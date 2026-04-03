@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Log4j2
 class DeploymentTest {
 
-	@ParameterizedTest
+    @ParameterizedTest
     @EnumSource(Deployment.class)
-	void getBaseUrl(Deployment deployment) {
+    void getBaseUrl(Deployment deployment) {
         for (Env env : List.of(Env.PROD, Env.ACC, Env.TEST, Env.LOCALHOST)) {
             String baseUrl = deployment.getBaseUrl(env);
             log.info("{} {} {}", deployment, env, baseUrl);

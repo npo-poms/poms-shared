@@ -140,11 +140,11 @@ public class NEPItemizeServiceImplITest {
 
     @Test
     public void getJobsStatus404() {
-        ItemizerStatusException foobar = catchThrowableOfType(() -> {
+        ItemizerStatusException foobar = catchThrowableOfType(ItemizerStatusException.class, () -> {
             try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
                 ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");
             }
-        }, ItemizerStatusException.class);
+        });
         assertThat(foobar).isInstanceOf(ItemizerStatusException.class);
         assertThat(foobar.getStatusCode()).isEqualTo(404);
         assertThat(foobar.getResponse()).isNotNull();

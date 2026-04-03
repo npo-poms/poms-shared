@@ -1,0 +1,127 @@
+﻿[
+  {
+    "prid" : "POW_04882561",
+    "publicationTimestamp" : "2026-02-24T15:16:01.932+01:00",
+    "mediaType" : "video",
+    "contentType" : "episode",
+    "title" : "Crime: The Investigation",
+    "displayTitle" : "The Investigation",
+    "originalTitle" : "Crime: The Investigation",
+    "synopsis" : {
+      "short" : "De duikboot is terecht, maar de journaliste is nog altijd spoorloos. Het forensisch team onderzoekt bloedsporen in de geborgen duikboot. De kans dat ze levend wordt gevonden, slinkt zienderogen.",
+      "long" : "De duikboot is terecht, maar de vermiste Zweedse journaliste is nog altijd spoorloos. Ondertussen wordt hoofdrechercheur Jens Møller op de huid gezeten door de pers om met een verklaring te komen. Forensisch onderzoek moet uitwijzen of de bloedsporen in de geborgen duikboot van de journaliste zijn. De kans dat ze levend wordt gevonden, slinkt met de minuut."
+    },
+    "languages" : [
+      {
+        "language" : "DA"
+      }
+    ],
+    "isDubbed" : false,
+    "genre" : {
+      "primary" : "Serie",
+      "secondary" : "Spanning"
+    },
+    "rating" : {
+      "system" : "NICAM",
+      "age" : "9",
+      "advisories" : [
+        {
+          "a" : "Angst"
+        },
+        {
+          "t" : "Grof taalgebruik"
+        }
+      ],
+      "pictograms" : "3at"
+    },
+    "broadcasters" : [
+      "KN"
+    ],
+    "productionCountry" : "DNK",
+    "productionYear" : 2020,
+    "episodeNumber" : 2,
+    "castAndCrew" : [
+      {
+        "person" : {
+          "givenName" : "Søren",
+          "familyName" : "Malling",
+          "id" : 1303997314517
+        },
+        "function" : "Actor"
+      },
+      {
+        "person" : {
+          "givenName" : "Pilou",
+          "familyName" : "Asbæk",
+          "id" : 579366946517
+        },
+        "function" : "Actor"
+      },
+      {
+        "person" : {
+          "givenName" : "Rolf",
+          "familyName" : "Lassgård",
+          "id" : 619768148517
+        },
+        "function" : "Actor"
+      },
+      {
+        "person" : {
+          "givenName" : "Laura",
+          "familyName" : "Christensen",
+          "id" : 1904622605517
+        },
+        "function" : "Actor"
+      },
+      {
+        "person" : {
+          "givenName" : "Tobias",
+          "familyName" : "Lindholm",
+          "id" : 1904622803517
+        },
+        "function" : "Director"
+      }
+    ],
+    "relations" : {
+      "series" : {
+        "prid" : "POW_04882557"
+      },
+      "season" : {
+        "prid" : "POW_04882558"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "POW_04882558",
+    "publicationTimestamp" : "",
+    "mediaType" : "video",
+    "contentType" : "season",
+    "seasonNumber" : "1",
+    "title" : "Seizoen 1",
+    "displayTitle" : "The Investigation Seizoen 1",
+    "synopsis" : {
+      "short" : "Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.",
+      "long" : "Jens Møller, hoofdrechercheur bij de Kopenhaagse politie, krijgt een lastige zaak op zijn bord. Een zelfgebouwde duikboot, met aan boord de maker en een Zweedse journaliste, wordt vermist. Wanneer de gezonken duikboot uiteindelijk kan worden geborgen, zorgt dat voor meer vragen dan antwoorden."
+    },
+    "relations" : {
+      "series" : {
+        "prid" : "POW_04882557"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "POW_04882557",
+    "publicationTimestamp" : "",
+    "mediaType" : "video",
+    "contentType" : "serie",
+    "title" : "The Investigation",
+    "displayTitle" : "The Investigation",
+    "synopsis" : {
+      "short" : "Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.",
+      "long" : "Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden."
+    },
+    "metadataSource" : "WONVPP"
+  }
+]

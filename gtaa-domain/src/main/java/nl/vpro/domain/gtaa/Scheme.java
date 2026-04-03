@@ -46,8 +46,11 @@ public enum Scheme implements Displayable {
     }
     ;
 
+    private static final Scheme[] displayables;
+
     static {
         GTAAConceptIdResolver.init();
+        displayables = Arrays.stream(values()).filter(Scheme::display).toArray(Scheme[]::new);
     }
     @Getter
     private final String url;
@@ -121,6 +124,11 @@ public enum Scheme implements Displayable {
     @SuppressWarnings("unchecked")
     public static Class<?>[] classesAndNew() {
         return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
+    }
+
+
+    public static Scheme[] displayableValues() {
+        return displayables;
     }
 
     public static Scheme fromString(String value) {

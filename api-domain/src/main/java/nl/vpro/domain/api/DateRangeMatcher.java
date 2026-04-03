@@ -40,7 +40,7 @@ public class DateRangeMatcher extends SimpleRangeMatcher<Instant> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @XmlDocumentation(("Json representation is millis since epoch, but supports natty parsing too"))
+    @XmlDocumentation("Json representation is millis since epoch, but supports natty parsing too")
     private Instant begin;
 
 
@@ -52,7 +52,7 @@ public class DateRangeMatcher extends SimpleRangeMatcher<Instant> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @XmlDocumentation(("Json representation is millis since epoch, but supports natty parsing too"))
+    @XmlDocumentation("Json representation is millis since epoch, but supports natty parsing too")
     private Instant end;
 
 

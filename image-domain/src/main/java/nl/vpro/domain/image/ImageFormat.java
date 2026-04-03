@@ -32,7 +32,13 @@ public enum ImageFormat {
     TIF("image/tiff", "tif", "tiff"),
     XBM("image/x-xbitmap", "xbm"),
     XPM("image/x-xpixmap", "xpm"),
-    WEBP("image/webp",  "W", false, "webp")
+    WEBP("image/webp",  "W", false, "webp"),
+    /**
+     * The image format could not be determined. May be the image is corrupt?
+     * @since 8.9
+     *
+     */
+    UNKNOWN("application/octet-stream", "image");
     ;
 
 

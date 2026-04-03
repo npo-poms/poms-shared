@@ -63,6 +63,8 @@ import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 @Slf4j
 public class OpenskosRepository implements GTAARepository {
 
+    public static final MediaType RDF_TYPE = MediaType.parseMediaType("application/rdf+xml");
+
     public static final String CONFIG_FILE = "openskosrepository.properties";
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
@@ -79,6 +81,18 @@ public class OpenskosRepository implements GTAARepository {
         }
         return instance;
     }
+
+    /**
+     * There should be only {@link #getInstance() one instance} of this class, but if you want to dispose of it, you can use this.
+     * This is useful for (integreation) testing purposes, to avoid the warning.
+     * @return the previous instance, or null if there was no instance.
+     */
+    public static OpenskosRepository disposeInstance() {
+        OpenskosRepository oldInstance = instance;
+        instance = null;
+        return oldInstance;
+    }
+
 
     private final String gtaaUrl;
     private final String gtaaKey;

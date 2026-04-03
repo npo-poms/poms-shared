@@ -13,8 +13,7 @@ import nl.vpro.metis.IdClass;
 import nl.vpro.validation.ValidationLevel;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_XML;
-import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
-import static nl.vpro.rs.media.MediaBackendRestService.ID;
+import static nl.vpro.rs.media.MediaBackendRestService.*;
 
 /**
  * See <a href="https://jira.vpro.nl/browse/MSE-5484">MSE-5484</a>, <a href="https://publiekeomroep.atlassian.net/browse/P0MS-8">POMS-8</a>
@@ -55,7 +54,8 @@ public interface AuthorityRestService {
         @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors,
-        @QueryParam(VALIDATION_LEVEL) @DefaultValue("WARNING") ValidationLevel level
+        @QueryParam(VALIDATION_LEVEL) @DefaultValue("WARNING") ValidationLevel level,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") boolean validateInput
     );
 
     @GET

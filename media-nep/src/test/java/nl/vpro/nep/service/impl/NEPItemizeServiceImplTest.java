@@ -38,9 +38,9 @@ public class NEPItemizeServiceImplTest {
                         status(404).withBody("{\"success\":false,\"status\":\"error\",\"errors\":\"No job found for token [foobar] and provider [npo]\"}")
                     )
             );
-            ItemizerStatusException statusException = catchThrowableOfType(() -> {
+            ItemizerStatusException statusException = catchThrowableOfType(ItemizerStatusException.class, () -> {
                 ItemizerStatusResponse job = itemizer.getLiveItemizerJobStatus("foobar");
-            }, ItemizerStatusException.class);
+            });
             assertThat(statusException).isInstanceOf(ItemizerStatusException.class);
             assertThat(statusException.getStatusCode()).isEqualTo(404);
             assertThat(statusException.getResponse()).isNotNull();

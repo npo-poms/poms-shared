@@ -1,0 +1,79 @@
+﻿[
+  {
+    "prid" : "POW_05880359",
+    "publicationTimestamp" : "2026-02-24T15:16:02.222+01:00",
+    "mediaType" : "video",
+    "contentType" : "episode",
+    "title" : "NOS Jeugdjournaal met gebarentaal",
+    "displayTitle" : "NOS Jeugdjournaal",
+    "originalTitle" : "NOS Jeugdjournaal met gebarentaal",
+    "synopsis" : {
+      "short" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.",
+      "long" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal."
+    },
+    "languages" : [
+      {
+        "language" : "NL"
+      }
+    ],
+    "isDubbed" : false,
+    "captions" : [
+      {
+        "closed" : true,
+        "language" : "NL",
+        "supplemental" : true
+      }
+    ],
+    "genre" : {
+      "primary" : "Jeugd",
+      "secondary" : "Informatief"
+    },
+    "broadcasters" : [
+      "NOS"
+    ],
+    "productionCountry" : "NLD",
+    "productionYear" : 2025,
+    "episodeNumber" : 239,
+    "relations" : {
+      "series" : {
+        "prid" : "NOSJeugdjournaal"
+      },
+      "season" : {
+        "prid" : "25Jeugd1900Geb"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "25Jeugd1900Geb",
+    "publicationTimestamp" : "",
+    "mediaType" : "video",
+    "contentType" : "season",
+    "seasonNumber" : "25",
+    "title" : "Seizoen 25",
+    "displayTitle" : "NOS Jeugdjournaal Seizoen 25",
+    "synopsis" : {
+      "short" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.",
+      "long" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal."
+    },
+    "relations" : {
+      "series" : {
+        "prid" : "NOSJeugdjournaal"
+      }
+    },
+    "metadataSource" : "WONVPP"
+  },
+  {
+    "prid" : "NOSJeugdjournaal",
+    "publicationTimestamp" : "",
+    "mediaType" : "video",
+    "contentType" : "serie",
+    "title" : "NOS Jeugdjournaal",
+    "displayTitle" : "NOS Jeugdjournaal",
+    "synopsis" : {
+      "short" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.",
+      "long" : "Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker."
+    },
+    "metadataSource" : "WONVPP"
+  }
+]

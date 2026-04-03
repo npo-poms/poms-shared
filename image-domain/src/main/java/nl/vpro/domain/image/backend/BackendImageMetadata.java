@@ -82,8 +82,7 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
     default ChangeReport copyFrom(MutableMetadata<?> metadata) {
         ChangeReport change = MutableMetadata.super.copyFrom(metadata);
 
-        if (metadata instanceof BackendImageMetadata) {
-            BackendImageMetadata<?> imageMetadata = (BackendImageMetadata<?>) metadata;
+        if (metadata instanceof BackendImageMetadata<?> imageMetadata) {
             if (!Objects.equals(getHeightInMm(), imageMetadata.getHeightInMm())) {
                 setHeightInMm(imageMetadata.getHeightInMm());
                 change.change();
@@ -120,8 +119,7 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
     default ChangeReport copyFromIfTargetUnset(MutableMetadata<?> source) {
          ChangeReport change = MutableMetadata.super.copyFromIfTargetUnset(source);
 
-        if (source instanceof BackendImageMetadata) {
-            BackendImageMetadata<?> image = (BackendImageMetadata<?>) source;
+        if (source instanceof BackendImageMetadata<?> image) {
             if ((getHeightInMm() == null || getHeightInMm() < 0f) && !Objects.equals(getHeightInMm(), image.getHeightInMm())) {
                 setHeightInMm(image.getHeightInMm());
                 change.change();
@@ -159,8 +157,7 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
     default  ChangeReport  copyFromIfSourceSet(MutableMetadata<?> metadata) {
         ChangeReport change = MutableMetadata.super.copyFromIfSourceSet(metadata);
 
-        if (metadata instanceof BackendImageMetadata) {
-            BackendImageMetadata<?> source = (BackendImageMetadata<?>) metadata;
+        if (metadata instanceof BackendImageMetadata<?> source) {
             if (source.getHeightInMm() != null && source.getHeightInMm() >= 0f && !Objects.equals(getHeightInMm(), source.getHeightInMm())) {
                 setHeightInMm(source.getHeightInMm());
                 change.change();

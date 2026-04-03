@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.subtitles;
 
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.function.Predicate;
 
 import jakarta.validation.Valid;
@@ -18,11 +21,13 @@ import nl.vpro.domain.subtitles.StandaloneCue;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
+@Setter
 @XmlRootElement(name = "subtitlesForm")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesFormType",
     propOrder = {
         "searches"})
+@ToString
 public class SubtitlesForm implements Form, Predicate<StandaloneCue> {
 
 
@@ -43,10 +48,6 @@ public class SubtitlesForm implements Form, Predicate<StandaloneCue> {
 
     public SubtitlesSearch getSearches() {
         return searches;
-    }
-
-    public void setSearches(SubtitlesSearch searches) {
-        this.searches = searches;
     }
 
     @Override

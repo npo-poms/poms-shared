@@ -11,7 +11,9 @@
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-npo</artifactId>
+  <name>media-npo</name>
   <description>Java bindings of several types of NPO related XML formats that POMS supports. Mainly in import processes</description>
+
 
   <dependencies>
     <dependency>
@@ -53,6 +55,11 @@
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>jakarta.el</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

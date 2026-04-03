@@ -7,8 +7,7 @@ package nl.vpro.media.odi.handler;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +21,7 @@ import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.LocationResult;
 
 /**
- * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
+ * See <a href="https://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
  */
 @ToString(exclude = "streamAAPISecret")
 @Slf4j
@@ -53,7 +52,7 @@ public class DeeplinkProtectionLocationHandler implements LocationProducer {
                 programUrl = programUrl.substring(STREAM_API_SCHEME_PREFIX.length());
             }
 
-            URL url = new URL(programUrl);
+            URL url = URI.create(programUrl).toURL();
             String server = url.getProtocol() + "://" + url.getHost() + (url.getPort() < 0 ? "" : ":" + url.getPort());
             String path = url.getPath();
             String timehex = String.format("%08x", ((new Date()).getTime() / 1000));
@@ -61,7 +60,7 @@ public class DeeplinkProtectionLocationHandler implements LocationProducer {
             odiUrl = String.format("%s/secure/%s/%s%s?md5=%s&t=%s",
                 server, token, timehex, path, token, timehex);
         } catch(MalformedURLException e) {
-            log.error("Invalid url " + programUrl + " " + e.getMessage());
+            log.error("Invalid url {} {}", programUrl, e.getMessage());
         }
 
         if(odiUrl != null) {
@@ -72,16 +71,14 @@ public class DeeplinkProtectionLocationHandler implements LocationProducer {
     }
 
     private static String md5(String data) {
-        String digestHex = null;
-
         try {
             MessageDigest digester = MessageDigest.getInstance("MD5");
             byte[] digest = digester.digest(data.getBytes(StandardCharsets.UTF_8));
-            digestHex = hexBinaryAdapter.marshal(digest).toLowerCase();
+            return hexBinaryAdapter.marshal(digest).toLowerCase();
         } catch(NoSuchAlgorithmException e) {
-            log.error("Can't get MD5 " + e.getMessage());
+            log.error("Can't get MD5 {}", e.getMessage());
+            return null;
         }
-        return digestHex;
     }
 
     public void setStreamAPISecret(String streamAAPISecret) {

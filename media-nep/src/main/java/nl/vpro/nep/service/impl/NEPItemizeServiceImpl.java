@@ -112,7 +112,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         HttpPost httpPost = new HttpPost(playerUrl);
         authenticate(httpPost, itemizeKey);
         httpPost.addHeader(new BasicHeader(HttpHeaders.ACCEPT, JSON.toString()));
-        log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON.toString(), itemizeUrl, json);
+        log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON, itemizeUrl, json);
         httpPost.setEntity(entity);
         try (CloseableHttpResponse response = httpClient.execute(httpPost, clientContext)) {
             if (response.getStatusLine().getStatusCode() >= 300) {
@@ -167,7 +167,9 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         }
     }
 
-    private static final Set<String> GRAB_SCREEN_HEADERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
+    private static final Set<String> GRAB_SCREEN_HEADERS = Set.of(
+        HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase()
+    );
 
     protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers, @NonNull OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
         HttpClientContext clientContext = HttpClientContext.create();

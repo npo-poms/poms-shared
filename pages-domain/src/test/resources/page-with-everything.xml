@@ -128,7 +128,7 @@
           <media:givenName>Bregtje</media:givenName>
           <media:familyName>van der Haak</media:familyName>
         </media:person>
-        <media:person role="PRESENTER">
+        <media:person externalId="whatson:12345" role="PRESENTER">
           <media:givenName>Hans</media:givenName>
           <media:familyName>Goedkoop</media:familyName>
         </media:person>
@@ -402,7 +402,7 @@
               <media:givenName>Bregtje</media:givenName>
               <media:familyName>van der Haak</media:familyName>
             </media:person>
-            <media:person role="PRESENTER">
+            <media:person  externalId="whatson:12345" role="PRESENTER">
               <media:givenName>Hans</media:givenName>
               <media:familyName>Goedkoop</media:familyName>
             </media:person>

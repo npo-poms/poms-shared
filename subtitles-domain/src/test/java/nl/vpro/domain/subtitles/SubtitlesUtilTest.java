@@ -24,7 +24,7 @@ public class SubtitlesUtilTest {
     public void basic() throws IOException {
         List<Cue> list = SubtitlesUtil.parse(getSubtitles(), true).collect(Collectors.toList());
         assertThat(list).hasSize(403);
-        assertThat(list.get(0).getContent()).isEqualTo("888");
+        assertThat(list.getFirst().getContent()).isEqualTo("888");
         assertThat(list.get(199).getContent()).isEqualTo(
             "Nee? Nee.\nHoe ziet-ie eruit?");
 
@@ -38,7 +38,7 @@ public class SubtitlesUtilTest {
     }
     protected static Subtitles getSubtitlesAr() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POMS_VPRO_4981202.vtt");
-        return SubtitlesUtil.vtt("POMS_VPRO_4981202", Duration.ofMinutes(2), new Locale("ar"), example);
+        return SubtitlesUtil.vtt("POMS_VPRO_4981202", Duration.ofMinutes(2), Locale.of("ar"), example);
     }
 
     @Test

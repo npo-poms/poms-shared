@@ -40,7 +40,7 @@ import nl.vpro.util.TimeUtils;
 @Slf4j
 public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
-    public static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private final String baseUrl;// =
 
@@ -125,7 +125,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
             return out.toByteArray();
         } catch (Exception e) {
             log.error("POST {}: {} , response '{}': {}", url, json, out, e.getMessage());
-            throw new NEPException(e, "POST " + url + ": " + json + ", response: " + out.toString());
+            throw new NEPException(e, "POST " + url + ": " + json + ", response: " + out);
         }
 
     }
