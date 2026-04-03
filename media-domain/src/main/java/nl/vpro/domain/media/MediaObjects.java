@@ -10,6 +10,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1346,9 +1347,13 @@ public class MediaObjects {
      *  // TODO: I think is is a bit odd that this kind of logic happens here.
      *  It ensures consistency, that's the good thing, but it seems a patch any way!
      */
-    protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
+    protected static boolean autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {});
+            AtomicBoolean result = new AtomicBoolean();
+            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {result.set(true);});
+            return result.get();
+        } else {
+            return false;
         }
     }
 
