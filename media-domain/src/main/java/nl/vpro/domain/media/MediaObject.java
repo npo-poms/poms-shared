@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
@@ -2113,7 +2114,7 @@ MediaObject extends PublishableObject<MediaObject>
     /**
      * Implicitly create predictions for all platforms that have a location, but no prediction yet.
      */
-    public void implicitPredictions() {
+    public boolean  implicitPredictions() {
         if (! DELETES.contains(workflow)) {
             final Map<Platform, List<Location>> locations = new HashMap<>();
             getLocations().stream()
@@ -2126,6 +2127,7 @@ MediaObject extends PublishableObject<MediaObject>
                     ).add(l)
                 );
 
+            AtomicBoolean atomicBoolean = new AtomicBoolean(false);
             for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
                 findOrCreatePrediction(entry.getKey(), true, (created) -> {
                     for (Location l : entry.getValue()) {
@@ -2134,10 +2136,13 @@ MediaObject extends PublishableObject<MediaObject>
                     }
                     created.setState(Prediction.State.of(created));
                     log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
+                    atomicBoolean.set(true);
                 });
             }
+            return atomicBoolean.get();
         } else {
             log.debug("Not creating implicit predictions for {} because it is deleted", this);
+            return false;
         }
     }
 
@@ -2227,18 +2232,24 @@ MediaObject extends PublishableObject<MediaObject>
         }
     }
 
-    void correctPrediction(Platform platform) {
+    boolean correctPrediction(Platform platform) {
         Prediction prediction = getPredictionWithoutFixing(platform);
+        AtomicBoolean change = new AtomicBoolean(false);
+
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {
+                change.set(true);
+            });
         }
+        return change.get();
     }
 
-    public void correctPredictions() {
-        implicitPredictions();
+    public boolean correctPredictions() {
+        boolean change = implicitPredictions();
         for (Platform p : Platform.values()) {
-            correctPrediction(p);
+            change |= correctPrediction(p);
         }
+        return change;
     }
 
     public boolean removePrediction(Platform platform) {
