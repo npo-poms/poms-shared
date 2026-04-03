@@ -6,31 +6,34 @@
       <title owner="AUTHORITY" type="MAIN">Crime: The Investigation</title>
       <title owner="AUTHORITY" type="SUB">The Investigation</title>
       <title owner="AUTHORITY" type="ORIGINAL">Crime: The Investigation</title>
+      <description owner="AUTHORITY" type="MAIN">De duikboot is terecht, maar de vermiste Zweedse journaliste is nog altijd spoorloos. Ondertussen wordt hoofdrechercheur Jens Møller op de huid gezeten door de pers om met een verklaring te komen. Forensisch onderzoek moet uitwijzen of de bloedsporen in de geborgen duikboot van de journaliste zijn. De kans dat ze levend wordt gevonden, slinkt met de minuut.</description>
+      <description owner="AUTHORITY" type="SHORT">De duikboot is terecht, maar de journaliste is nog altijd spoorloos. Het forensisch team onderzoekt bloedsporen in de geborgen duikboot. De kans dat ze levend wordt gevonden, slinkt zienderogen.</description>
       <genre id="3.0.1.3.10">
         <term>Serie</term>
         <term>Spanning</term>
       </genre>
+      <country code="DK">Denemarken</country>
       <language code="da">Deens</language>
       <isDubbed>false</isDubbed>
       <releaseYear>2020</releaseYear>
       <credits>
-        <person externalId="won:1303997314517" role="ACTOR">
+        <person externalId="whatson:1303997314517" role="ACTOR">
           <givenName>Søren</givenName>
           <familyName>Malling</familyName>
         </person>
-        <person externalId="won:579366946517" role="ACTOR">
+        <person externalId="whatson:579366946517" role="ACTOR">
           <givenName>Pilou</givenName>
           <familyName>Asbæk</familyName>
         </person>
-        <person externalId="won:619768148517" role="ACTOR">
+        <person externalId="whatson:619768148517" role="ACTOR">
           <givenName>Rolf</givenName>
           <familyName>Lassgård</familyName>
         </person>
-        <person externalId="won:1904622605517" role="ACTOR">
+        <person externalId="whatson:1904622605517" role="ACTOR">
           <givenName>Laura</givenName>
           <familyName>Christensen</familyName>
         </person>
-        <person externalId="won:1904622803517" role="DIRECTOR">
+        <person externalId="whatson:1904622803517" role="DIRECTOR">
           <givenName>Tobias</givenName>
           <familyName>Lindholm</familyName>
         </person>
@@ -58,6 +61,8 @@
       <crid>crid://WONVPP/POW_04882558</crid>
       <title owner="AUTHORITY" type="MAIN">Seizoen 1</title>
       <title owner="AUTHORITY" type="SUB">The Investigation Seizoen 1</title>
+      <description owner="AUTHORITY" type="MAIN">Jens Møller, hoofdrechercheur bij de Kopenhaagse politie, krijgt een lastige zaak op zijn bord. Een zelfgebouwde duikboot, met aan boord de maker en een Zweedse journaliste, wordt vermist. Wanneer de gezonken duikboot uiteindelijk kan worden geborgen, zorgt dat voor meer vragen dan antwoorden.</description>
+      <description owner="AUTHORITY" type="SHORT">Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.</description>
       <credits/>
       <descendantOf midRef="POW_04882557"/>
       <memberOf highlighted="false" midRef="POW_04882557"/>
@@ -68,6 +73,8 @@
       <crid>crid://WONVPP/POW_04882557</crid>
       <title owner="AUTHORITY" type="MAIN">The Investigation</title>
       <title owner="AUTHORITY" type="SUB">The Investigation</title>
+      <description owner="AUTHORITY" type="MAIN">Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.</description>
+      <description owner="AUTHORITY" type="SHORT">Een zelfgebouwde duikboot, met aan boord de maker en een journaliste, wordt vermist. Hoofdrechercheur Jens Møller start een onderzoek, en stuit daarbij op meer vragen dan antwoorden.</description>
       <credits/>
       <locations/>
       <images/>

@@ -6,10 +6,13 @@
       <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal met gebarentaal</title>
       <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
       <title owner="AUTHORITY" type="ORIGINAL">NOS Jeugdjournaal met gebarentaal</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
       <genre id="3.0.1.1.7">
         <term>Jeugd</term>
         <term>Informatief</term>
       </genre>
+      <country code="NL">Nederland</country>
       <language code="nl">Nederlands</language>
       <isDubbed>false</isDubbed>
       <availableSubtitles language="nl" type="CAPTION"/>
@@ -35,6 +38,8 @@
       <crid>crid://WONVPP/25Jeugd1900Geb</crid>
       <title owner="AUTHORITY" type="MAIN">Seizoen 25</title>
       <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal Seizoen 25</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers, met gebarentaal.</description>
       <credits/>
       <descendantOf midRef="NOSJeugdjournaal"/>
       <memberOf highlighted="false" midRef="NOSJeugdjournaal"/>
@@ -45,6 +50,8 @@
       <crid>crid://WONVPP/NOSJeugdjournaal</crid>
       <title owner="AUTHORITY" type="MAIN">NOS Jeugdjournaal</title>
       <title owner="AUTHORITY" type="SUB">NOS Jeugdjournaal</title>
+      <description owner="AUTHORITY" type="MAIN">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</description>
+      <description owner="AUTHORITY" type="SHORT">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</description>
       <credits/>
       <locations/>
       <images/>

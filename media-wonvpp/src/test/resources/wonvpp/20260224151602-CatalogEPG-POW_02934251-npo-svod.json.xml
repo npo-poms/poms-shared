@@ -6,10 +6,13 @@
       <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
       <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
       <title owner="AUTHORITY" type="ORIGINAL">Guess how much I love you</title>
+      <description owner="AUTHORITY" type="MAIN">Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren, maar dat had hij beter niet met eikels kunnen doen.</description>
+      <description owner="AUTHORITY" type="SHORT">Kleine Veldmuis wil herfstblaadjes van een heel bijzondere boom hebben voor haar verzameling, maar ze weet niet precies waar die is. Hazeltje besluit voor de zekerheid de weg te markeren met eikels.</description>
       <genre id="3.0.1.1.11">
         <term>Jeugd</term>
         <term>Animatie</term>
       </genre>
+      <country code="AU">Australië</country>
       <language code="en">Engels</language>
       <language code="nl" usage="DUBBED">Nederlands</language>
       <isDubbed>true</isDubbed>
@@ -37,6 +40,8 @@
       <crid>crid://WONVPP/POW_02934240</crid>
       <title owner="AUTHORITY" type="MAIN">Seizoen 2</title>
       <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou Seizoen 2</title>
+      <description owner="AUTHORITY" type="MAIN">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
+      <description owner="AUTHORITY" type="SHORT">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
       <credits/>
       <descendantOf midRef="POW_00890603"/>
       <memberOf highlighted="false" midRef="POW_00890603"/>
@@ -47,6 +52,8 @@
       <crid>crid://WONVPP/POW_00890603</crid>
       <title owner="AUTHORITY" type="MAIN">Raad eens hoeveel ik van je hou</title>
       <title owner="AUTHORITY" type="SUB">Raad eens hoeveel ik van je hou</title>
+      <description owner="AUTHORITY" type="MAIN">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden.</description>
+      <description owner="AUTHORITY" type="SHORT">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden.</description>
       <credits/>
       <locations/>
       <images/>

@@ -7,7 +7,8 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-import org.meeuw.i18n.languages.ISO_639_Code;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.ValidCountry;
 
 import nl.vpro.domain.user.validation.BroadcasterValidation;
 import nl.npo.wonvpp.domain.validation.ValidCatalogEntry;
@@ -31,7 +32,7 @@ public record CatalogEntry(
     @Nullable GenreType genre,
     @Nullable RatingType rating,
     @Nullable  List<@BroadcasterValidation(idType = WON) String> broadcasters,
-    @Nullable ISO_639_Code productionCountry,
+    @Nullable @ValidCountry Country productionCountry,
     @Nullable Short productionYear,
     @Nullable Integer episodeNumber,
     @Nullable Integer seasonNumber,

@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.languages.LanguageCode;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -432,8 +433,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B mainDescription(@Nullable String description, @NonNull OwnerType owner) {
+        return description(description, TextualType.MAIN, owner);
+    }
+
+    /**
+     * @since 8.13
+     */
+    default B description(@Nullable String description, @NonNull TextualType type, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(description)) {
-            return descriptions(new Description(description, owner, TextualType.MAIN));
+            return descriptions(new Description(description, owner, type));
         } else {
             return (B) this;
         }
@@ -493,7 +501,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B countries(String... countries) {
         for(String country : countries) {
-            mediaObject().addCountry(country);
+            if (country != null) {
+                mediaObject().addCountry(country);
+            }
+        }
+        return (B)this;
+    }
+    @SuppressWarnings("unchecked")
+    default B countries(org.meeuw.i18n.regions.Region... countries) {
+        for(org.meeuw.i18n.regions.Region country : countries) {
+            if (country != null) {
+                mediaObject().addCountry(country);
+            }
         }
         return (B)this;
     }

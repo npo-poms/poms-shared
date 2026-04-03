@@ -11,6 +11,8 @@ import java.util.*;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import nl.vpro.domain.media.support.TextualType;
+
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -161,12 +163,15 @@ public class WonToPomsMapper {
             .contentRatings(mapToRatings(entry))
             .mainTitle(entry.title(), owner)
             .originalTitle(entry.originalTitle(), owner)
+            .mainDescription(mainDescription(entry.synopsis()), owner)
+            .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
             .subTitle(entry.displayTitle(), owner)
             .languages(entry.languages() == null ? new UsedLanguage[0] :
                 entry.languages().stream()
                 .map(this::mapToLanguageCode)
                 .filter(Objects::nonNull) // sloppyness
                 .toArray(UsedLanguage[]::new))
+            .countries(entry.productionCountry())
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
             .genres(entry.genre() == null ? new Genre[0] : new Genre[] {mapToGenre(entry.genre())})
@@ -176,6 +181,19 @@ public class WonToPomsMapper {
                 .map(this::mapToAvailableSubtitles)
                 .toArray(AvailableSubtitles[]::new))
             ;
+    }
+
+    protected String mainDescription(SynopsisType synopsis) {
+        if (synopsis == null) {
+            return null;
+        }
+        return StringUtils.isNotEmpty(synopsis.longValue()) ? synopsis.longValue() : null;
+    }
+    protected String shortDescription(SynopsisType synopsis) {
+        if (synopsis == null) {
+            return null;
+        }
+        return StringUtils.isNotEmpty(synopsis.shortValue()) ? synopsis.shortValue() : null;
     }
 
     protected Broadcaster mapToBroadcaster(String broadcaster) {
@@ -193,7 +211,7 @@ public class WonToPomsMapper {
                 case Director -> new Person(person.givenName(), person.familyName(), RoleType.DIRECTOR);
                 case Actor -> new Person(person.givenName(), person.familyName(), RoleType.ACTOR);
             };
-            c.setExternalId("won:" + person.id());
+            c.setExternalId("whatson:" + person.id());
             credits.add(c);
 
         }

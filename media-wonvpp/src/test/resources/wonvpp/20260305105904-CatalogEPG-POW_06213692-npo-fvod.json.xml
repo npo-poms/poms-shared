@@ -5,6 +5,7 @@
       <broadcaster id="EO">EO</broadcaster>
       <title owner="AUTHORITY" type="MAIN">BusinessTime</title>
       <title owner="AUTHORITY" type="ORIGINAL">BusinessTime</title>
+      <country code="NL">Nederland</country>
       <isDubbed>false</isDubbed>
       <releaseYear>2026</releaseYear>
       <credits/>
