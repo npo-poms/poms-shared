@@ -96,11 +96,20 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         this.value = strip(s);
     }
 
-    protected static String strip(String s) {
+    public static String strip(String s) {
         if (s == null) {
             return null;
         }
         return s.replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", "\n");
+    }
+
+    private static boolean needsStrip(String s) {
+        return s.indexOf('\f') >= 0
+            || s.indexOf('\r') >= 0
+            || s.indexOf('\n') >= 0
+            || s.indexOf('\u0085') >= 0
+            || s.indexOf('\u2028') >= 0
+            || s.indexOf('\u2029') >= 0;
     }
 
     @Override
@@ -142,7 +151,9 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     }
 
     void beforeMarshal(Marshaller marshaller) {
-        this.value = strip(this.value);
+        if (value != null && needsStrip(value)) {
+            this.value = strip(this.value);
+        }
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {

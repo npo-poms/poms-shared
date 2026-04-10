@@ -176,7 +176,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     }
 
 
-    protected static String strip(String s) {
+    public static String strip(String s) {
         if (s == null){
             return null;
         }
