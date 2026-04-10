@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * This class verifies JAXB XML output format and whether this format complies to the vproMedia.xsd schema definitions.
  * It's located here because then it can use the test data builder for more concise code.
  */
-@SuppressWarnings({"UnnecessaryLocalVariable"})
+@SuppressWarnings({"UnnecessaryLocalVariable", "DataFlowIssue"})
 @Slf4j
 public class MediaObjectXmlSchemaTest {
 
@@ -99,7 +99,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -161,7 +161,7 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().creationInstant(Instant.EPOCH).lastModified(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -172,7 +172,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -188,7 +188,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse( diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse( diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -204,7 +204,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -220,7 +220,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -231,7 +231,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -271,7 +271,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -325,7 +325,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -336,7 +336,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -410,7 +410,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -426,7 +426,7 @@ public class MediaObjectXmlSchemaTest {
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertFalse(diff.hasDifferences(), diff + " " + actual);
     }
 
     @Test
@@ -469,10 +469,10 @@ public class MediaObjectXmlSchemaTest {
 
         List<MemberRef> refsAsList = new ArrayList<>(program.getMemberOf()); // make accessible by index
 
-        refsAsList.get(0).getGroup().setMid(null);
-        refsAsList.get(0).getGroup().setMid("AVRO_7777777");
-        refsAsList.get(0).getGroup().getMemberOf().first().getGroup().setMid(null);
-        refsAsList.get(0).getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
+        refsAsList.getFirst().getGroup().setMid(null);
+        refsAsList.getFirst().getGroup().setMid("AVRO_7777777");
+        refsAsList.getFirst().getGroup().getMemberOf().first().getGroup().setMid(null);
+        refsAsList.getFirst().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         refsAsList.get(0).setAdded(Instant.EPOCH);
 
 
@@ -1003,7 +1003,7 @@ public class MediaObjectXmlSchemaTest {
         intentions.setParent(null);
         Intentions intentionsWithoutParent = intentions;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat((Object) programExpected.getIntentions().iterator().next()).isEqualTo(intentionsWithoutParent);
+        assertThat((Object) programExpected.getIntentions().getFirst()).isEqualTo(intentionsWithoutParent);
     }
 
     @Test
@@ -1011,7 +1011,7 @@ public class MediaObjectXmlSchemaTest {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, UTF_8);
         String expected = segment.toString();
-        log.info("Expected: " + expected);
+        log.info("Expected: {}", expected);
 
         Program program = program().lean().withGeoLocations()
                 .mid("9").avType(AVType.AUDIO)
@@ -1030,7 +1030,7 @@ public class MediaObjectXmlSchemaTest {
         geoLocations.setParent(null);
         GeoLocations geoLocationsWithoutParent = geoLocations;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat((Object) programExpected.getGeoLocations().iterator().next()).isEqualTo(geoLocationsWithoutParent);
+        assertThat((Object) programExpected.getGeoLocations().getFirst()).isEqualTo(geoLocationsWithoutParent);
     }
 
     @Test
@@ -1191,9 +1191,6 @@ public class MediaObjectXmlSchemaTest {
 
         //[org.xml.sax.SAXParseException; lineNumber: 6; columnNumber: 273; An invalid XML character (Unicode: 0xf) was found in the element content of the document.]
         assertThatThrownBy( () -> JAXB.unmarshal(new StringReader(segmentXml), Segment.class)).isInstanceOf(DataBindingException.class);
-
-
-
     }
 
     protected String toXml(Object o) throws JAXBException {
