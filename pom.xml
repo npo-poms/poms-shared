@@ -63,8 +63,9 @@
     <module>media-npo</module>
     <module>media-wonvpp</module>
     <module>media-tva</module>
+    <!--
     <module>media-berlijn</module>
-
+-->
   </modules>
 
   <build>
