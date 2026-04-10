@@ -37,7 +37,7 @@ public class ScheduleEventTitle extends AbstractTitleEntity<ScheduleEventTitle, 
     @JoinColumns({
         @JoinColumn(name = "parent_channel", referencedColumnName = "channel"),
         @JoinColumn(name = "parent_start", referencedColumnName = "start"),
-        @JoinColumn(name = "parent_onDemandMid", referencedColumnName = "ondDemandMid")
+        @JoinColumn(name = "parent_onDemandMid", referencedColumnName = "onDemandMid")
 
     })
     ScheduleEvent parent;
