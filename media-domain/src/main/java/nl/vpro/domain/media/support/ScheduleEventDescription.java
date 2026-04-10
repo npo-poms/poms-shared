@@ -35,9 +35,9 @@ public class ScheduleEventDescription extends AbstractDescriptionEntity<Schedule
     @ManyToOne
     @NotNull
     @JoinColumns({
-       @JoinColumn(name = "parent_channel", referencedColumnName = "channel"),
-       @JoinColumn(name = "parent_start", referencedColumnName = "start")
-
+        @JoinColumn(name = "parent_channel", referencedColumnName = "channel"),
+        @JoinColumn(name = "parent_start", referencedColumnName = "start"),
+        @JoinColumn(name = "parent_onDemandMid", referencedColumnName = "ondDemandMid")
     })
     ScheduleEvent parent;
 
