@@ -103,14 +103,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return s.replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", "\n");
     }
 
-    private static boolean needsStrip(String s) {
-        return s.indexOf('\f') >= 0
-            || s.indexOf('\r') >= 0
-            || s.indexOf('\n') >= 0
-            || s.indexOf('\u0085') >= 0
-            || s.indexOf('\u2028') >= 0
-            || s.indexOf('\u2029') >= 0;
-    }
 
     @Override
     @XmlTransient
@@ -148,12 +140,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
         return owner == desc.getOwner() && type == desc.getType() && parent.equals(desc.getParent());
 
-    }
-
-    void beforeMarshal(Marshaller marshaller) {
-        if (value != null && needsStrip(value)) {
-            this.value = strip(this.value);
-        }
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
