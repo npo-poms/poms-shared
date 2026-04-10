@@ -44,6 +44,7 @@ import nl.vpro.validation.NoHtml;
  * @see OwnerType
  * @since 0.4
  */
+@SuppressWarnings("ConfusingMainMethod")
 @Entity
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
@@ -179,7 +180,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
         if (s == null){
             return null;
         }
-        return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", " ");
+        return s.replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", " ");
     }
 
 

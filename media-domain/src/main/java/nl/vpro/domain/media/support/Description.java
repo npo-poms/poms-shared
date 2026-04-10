@@ -6,6 +6,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
@@ -99,7 +100,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         if (s == null) {
             return null;
         }
-        return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", "\n");
+        return s.replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", "\n");
     }
 
     @Override
@@ -138,6 +139,10 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
         return owner == desc.getOwner() && type == desc.getType() && parent.equals(desc.getParent());
 
+    }
+
+    void beforeMarshal(Marshaller marshaller) {
+        this.value = strip(this.value);
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
