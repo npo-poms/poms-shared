@@ -55,7 +55,6 @@
 
     <module>api-domain</module>
     <module>api-rs-services</module>
-    <module>poms-npoplayer</module>
 
     <module>media-nep</module>
     <module>media-sourcingservice</module>
@@ -64,6 +63,8 @@
     <module>media-wonvpp</module>
     <module>media-tva</module>
     <!--
+        <module>poms-npoplayer</module>
+
     <module>media-berlijn</module>
 -->
   </modules>
