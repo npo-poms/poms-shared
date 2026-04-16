@@ -11,10 +11,8 @@ import java.util.*;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import nl.vpro.domain.media.support.TextualType;
-
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 import com.google.common.cache.*;
 
@@ -23,6 +21,7 @@ import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -93,11 +92,11 @@ public class WonToPomsMapper {
         this.owner = ownerType;
     }
 
-    public MediaTable mapToPoms(InputStream entries) throws IOException {
+    public @NonNull MediaTable mapToPoms(@NonNull InputStream entries) throws IOException {
         return mapToPoms(Utils.unmarshal(entries));
     }
 
-    public MediaTable mapToPoms(List<CatalogEntry> entries) {
+    public @NonNull MediaTable mapToPoms(@NonNull List<@NonNull CatalogEntry> entries) {
         MediaTable table = new MediaTable();
         table.setSource("WONVPP");
         for (CatalogEntry entry : entries) {
@@ -109,14 +108,14 @@ public class WonToPomsMapper {
         return table;
     }
 
-    public MediaObject mapToPoms(CatalogEntry entry) {
+    public @NonNull MediaObject mapToPoms(@NonNull CatalogEntry entry) {
         return switch (entry.contentType()) {
             case episode -> mapToBroadcast(entry);
-            case season ->  mapToSeason(entry);
-            case serie -> mapToSeries(entry);
+            case season  -> mapToSeason(entry);
+            case serie   -> mapToSeries(entry);
         };
     }
-    protected Program mapToBroadcast(CatalogEntry entry) {
+    protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry) {
         assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, broadcast())
             .vodEvent(entry.prid(),
@@ -130,8 +129,6 @@ public class WonToPomsMapper {
 
     }
     protected Group mapToSeason(CatalogEntry entry) {
-
-
         Integer seasonNumber = null;
         if (entry.seasonNumber() != null) {
             try {
@@ -145,13 +142,14 @@ public class WonToPomsMapper {
             .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null, seasonNumber)
             .build();
     }
-    protected Group mapToSeries(CatalogEntry entry) {
+
+    protected @NonNull Group mapToSeries(@NonNull CatalogEntry entry) {
         assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, series())
             .build();
     }
 
-    protected String toMid(PridReference pridReference) {
+    protected @Nullable String toMid(@Nullable PridReference pridReference) {
         if (pridReference == null) {
             return null;
         }
@@ -161,7 +159,7 @@ public class WonToPomsMapper {
         return pridReference.prid();
     }
 
-    protected <B extends MediaBuilder<B, T>, T extends MediaObject> B map(CatalogEntry entry, B builder) {
+    protected <B extends MediaBuilder<B, T>, T extends MediaObject> @NonNull B map(@NonNull CatalogEntry entry, @NonNull B builder) {
         return builder
             .mid(entry.prid())
             .creationDate(clock.instant())
@@ -179,11 +177,13 @@ public class WonToPomsMapper {
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
             .subTitle(entry.displayTitle(), owner)
-            .languages(entry.languages() == null ? new UsedLanguage[0] :
+            .languages(entry.languages() == null ?
+                new UsedLanguage[0] :
                 entry.languages().stream()
                 .map(this::mapToLanguageCode)
                 .filter(Objects::nonNull) // sloppyness
-                .toArray(UsedLanguage[]::new))
+                .toArray(UsedLanguage[]::new)
+            )
             .countries(entry.productionCountry())
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
@@ -192,17 +192,18 @@ public class WonToPomsMapper {
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()
                 .map(this::mapToAvailableSubtitles)
-                .toArray(AvailableSubtitles[]::new))
+                .toArray(AvailableSubtitles[]::new)
+            )
             ;
     }
 
-    protected String mainDescription(SynopsisType synopsis) {
+    protected @Nullable String mainDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
         }
         return StringUtils.isNotEmpty(synopsis.longValue()) ? synopsis.longValue() : null;
     }
-    protected String shortDescription(SynopsisType synopsis) {
+    protected  @Nullable String shortDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
         }
@@ -210,10 +211,12 @@ public class WonToPomsMapper {
     }
 
     protected Broadcaster mapToBroadcaster(String broadcaster) {
-        return broadcasterService.findFor(BroadcasterService.IdType.WON, broadcaster).orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
+        return broadcasterService
+            .findFor(BroadcasterService.IdType.WON, broadcaster)
+            .orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
     }
 
-    protected List<Credits> mapToCredits(List<CreditsType> castAndCrew) {
+    protected @NonNull List<Credits> mapToCredits( @Nullable List<@NonNull CreditsType> castAndCrew) {
         if (castAndCrew == null) {
             return Collections.emptyList();
         }
@@ -230,7 +233,7 @@ public class WonToPomsMapper {
         }
         return credits;
     }
-    protected  AgeRating mapToRating(RatingType rating) {
+    protected @PolyNull AgeRating mapToRating(@PolyNull RatingType rating) {
         if (rating == null) {
             return null;
         }
@@ -241,7 +244,7 @@ public class WonToPomsMapper {
         return AgeRating.xmlValueOf(ageRating);
     }
 
-    protected UsedLanguage  mapToLanguageCode(LanguageType languageType) {
+    protected @Nullable UsedLanguage mapToLanguageCode(@Nullable LanguageType languageType) {
         if (languageType == null || languageType.language() == null) {
             return null;
         }
@@ -250,11 +253,11 @@ public class WonToPomsMapper {
         return new UsedLanguage(locale, usage);
     }
 
-    protected static ContentRating mapToRating(AdvisoryType type) {
+    protected static @NonNull ContentRating mapToRating(@NonNull AdvisoryType type) {
         return ContentRating.valueOf(type.name().charAt(0));
     }
 
-    protected  ContentRating[] mapToRatings(CatalogEntry entry) {
+    protected  @NonNull ContentRating[] mapToRatings(@NonNull CatalogEntry entry) {
         if (entry.rating() == null || entry.rating().advisories() == null) {
             return new ContentRating[0];
         }
@@ -263,7 +266,7 @@ public class WonToPomsMapper {
     }
 
 
-    protected  AvailableSubtitles mapToAvailableSubtitles(CaptionType captionType) {
+    protected  @NonNull AvailableSubtitles mapToAvailableSubtitles(@NonNull CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
             log.warn("{}", captionType);
         }
@@ -275,7 +278,5 @@ public class WonToPomsMapper {
     protected Genre mapToGenre(GenreType genre) {
         return genreCache.getUnchecked(genre);
     }
-
-
 
 }
