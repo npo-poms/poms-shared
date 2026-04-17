@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -37,14 +35,15 @@ class NotifyEnvelopeTest {
          assertThat(envelope.version()).isEqualTo("1.0");
          assertThat(envelope.timestamp()).isEqualTo(Instant.parse("2026-04-14T05:44:08.000Z"));
          assertThat(envelope.metadata()).containsEntry("fileName", "epg/catalog/20260414074323-CatalogEPG-AT_300022362-npo-svod.json");
+         assertThat(envelope.simpleFileName()).contains("20260414074323-CatalogEPG-AT_300022362-npo-svod.json");
+
          assertThat(envelope.type()).isEqualTo("notify");
          assertThat(envelope.contents()).isNotBlank();
          byte[] bytes = envelope.bytes();
          assertThat(new String(bytes)).startsWith("[{");
-         JsonNode json = envelope.json();
-         log.info("{}", json);
 
-         List<CatalogEntry> entries = envelope.unwrapJsonArray(Utils.createObjectMapper(), CatalogEntry.class);
+
+         List<CatalogEntry> entries = Utils.unmarshal(envelope);
          log.info("{}", entries);
 
 

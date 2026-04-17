@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import nl.npo.envelope.NotifyEnvelope;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.jackson2.LocaleDeserializer;
 
@@ -44,6 +45,10 @@ public class Utils {
         //
         return MAPPER.readerForListOf(CatalogEntry.class)
             .readValue(stream);
+    }
 
+    public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws IOException {
+        return MAPPER.readerForListOf(CatalogEntry.class)
+            .readValue(envelope.bytes());
     }
 }
