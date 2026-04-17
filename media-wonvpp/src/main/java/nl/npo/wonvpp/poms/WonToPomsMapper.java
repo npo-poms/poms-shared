@@ -268,7 +268,7 @@ public class WonToPomsMapper {
 
     protected  @NonNull AvailableSubtitles mapToAvailableSubtitles(@NonNull CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
-            log.warn("{}", captionType);
+            log.warn("Don't know what to do with supplemental {}", captionType);
         }
         return new AvailableSubtitles(
             captionType.language(),
