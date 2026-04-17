@@ -268,7 +268,11 @@ public class WonToPomsMapper {
 
     protected  @NonNull AvailableSubtitles mapToAvailableSubtitles(@NonNull CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
-            log.warn("Don't know what to do with supplemental {}", captionType);
+            if (captionType.closed() != null && captionType.closed()) {
+                log.debug("I guess closed captions are 'supplemental', since they just represent the audio");
+            } else {
+                log.warn("Don't know what to do with supplemental {}", captionType);
+            }
         }
         return new AvailableSubtitles(
             captionType.language(),
