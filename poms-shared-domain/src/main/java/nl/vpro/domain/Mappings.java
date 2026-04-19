@@ -1,6 +1,5 @@
 package nl.vpro.domain;
 
-import jakarta.xml.bind.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +8,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 
@@ -16,11 +16,11 @@ import javax.xml.XMLConstants;
 import javax.xml.transform.Result;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import jakarta.xml.bind.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -45,32 +45,38 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public abstract class Mappings implements BiFunction<String, SchemaType, File>, LSResourceResolver {
 
 
-    protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
+    protected final static Map<String, URI> KNOWN_LOCATIONS = new ConcurrentHashMap<>();
 
     protected static final long startTime = System.currentTimeMillis();
 
-    protected static Path tempDir;
+    protected static volatile Path tempDir;
 
     protected final Map<String, Class<?>[]> MAPPING = new LinkedHashMap<>();
 
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
-    private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    private final Map<String, JAXBContext> jaxbContextCache = new ConcurrentHashMap<>();
+
+    private final Map<String, Schema> schemaCache = new ConcurrentHashMap<>();
 
     @Getter
     @Setter
     protected boolean generateDocumentation = false;
 
-    private boolean inited = false;
+    private volatile boolean inited = false;
 
     @NonNull
     public static File getTempDir() {
         if (tempDir == null) {
-            try {
-                tempDir = Files.createTempDirectory("schemas");
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-                throw new RuntimeException(e);
+            synchronized (Mappings.class) {
+                if (tempDir == null) {
+                    try {
+                        tempDir = Files.createTempDirectory("schemas");
+                    } catch (IOException e) {
+                        log.error(e.getMessage(), e);
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }
         return tempDir.toFile();
@@ -86,29 +92,28 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
         return Collections.unmodifiableMap(SYSTEM_MAPPING);
     }
 
-    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, String namespace) {
+    public Unmarshaller getUnmarshaller(boolean validate, String namespace) {
         init();
-        return ThreadLocal.withInitial(() -> {
-            try {
-                Class<?>[] classes = MAPPING.get(namespace);
-                if (classes == null) {
-                    throw new IllegalArgumentException("No mapping found for " + namespace);
-                }
-                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
-                if (validate) {
-                    File xsd = getXsdFile(namespace);
-                    if (xsd.exists()) {
-                        Schema schema = SCHEMA_FACTORY.newSchema(xsd);
-                        result.setSchema(schema);
-                    } else {
-                        log.warn("Not found for {}: {}", namespace, xsd);
-                    }
-                }
-                return result;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        try {
+            Class<?>[] classes = MAPPING.get(namespace);
+            if (classes == null) {
+                throw new IllegalArgumentException("No mapping found for " + namespace);
             }
-        });
+            JAXBContext context = jaxbContextCache.computeIfAbsent(namespace, n -> createJaxbContext(classes));
+            Unmarshaller result = context.createUnmarshaller();
+            if (validate) {
+                File xsd = getXsdFile(namespace);
+                if (xsd.exists()) {
+                    Schema schema = schemaCache.computeIfAbsent(namespace, n -> createSchema(xsd));
+                    result.setSchema(schema);
+                } else {
+                    log.warn("Not found for {}: {}", namespace, xsd);
+                }
+            }
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SneakyThrows
@@ -183,8 +188,14 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
     }
 
     protected void init() {
-        if (!inited) {
-            inited = true;
+        if (inited) {
+            return;
+        }
+        synchronized (this) {
+            if (inited) {
+                return;
+            }
+            inited = true;  // set before fillMappings/generateXSDs to prevent re-entrant stack overflow
             SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
             KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
 
@@ -195,7 +206,6 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
             } catch (JAXBException | IOException e) {
                 log.error(e.getMessage(), e);
             }
-            SCHEMA_FACTORY.setResourceResolver(new ResourceResolver());
         }
     }
 
@@ -251,34 +261,22 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
 
 
     }
-
-    private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?>... classes) {
-        return ThreadLocal.withInitial(() -> {
-            try {
-                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
-                if (validate) {
-                    result.setSchema(getSchema(classes));
-                }
-                return result;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+    private JAXBContext createJaxbContext(Class<?>... classes) {
+        try {
+            return JAXBContext.newInstance(classes);
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
-        JAXBContext context = JAXBContext.newInstance(classesToRead);
-        final List<DOMResult> result = new ArrayList<>();
-        context.generateSchema(new SchemaOutputResolver() {
-            @Override
-            public Result createOutput(String namespaceUri, String suggestedFileName) {
-                DOMResult dom = new DOMResult();
-                dom.setSystemId(namespaceUri);
-                result.add(dom);
-                return dom;
-            }
-        });
-        return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
+    private Schema createSchema(File xsd) {
+        try {
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            schemaFactory.setResourceResolver(new ResourceResolver());
+            return schemaFactory.newSchema(xsd);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void deleteIfOld(File file) {
