@@ -515,8 +515,8 @@ MediaObject extends PublishableObject<MediaObject>
     @Setter
     @OneToMany(
         orphanRemoval = true,
-            mappedBy = "mediaObject",
-            cascade = {ALL}
+        mappedBy = "mediaObject",
+        cascade = {ALL}
     )
     @OrderColumn(
         name = "list_index",

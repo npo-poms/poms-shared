@@ -1,7 +1,7 @@
 package nl.vpro.api.util;
 
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.net.URL;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-@Slf4j
+@Log4j2
 public class ApiMappingsTest {
 
 
@@ -106,7 +106,7 @@ public class ApiMappingsTest {
     public void testUnmarshallers() {
         ApiMappings mappings = createMappings();
         for (String ns : mappings.knownNamespaces()) {
-            Unmarshaller schema = mappings.getUnmarshaller(true, ns).get();
+            Unmarshaller schema = mappings.getUnmarshaller(true, ns);
         }
     }
 
@@ -114,7 +114,7 @@ public class ApiMappingsTest {
     @SneakyThrows
     protected void testNamespace(ApiMappings mappings, String xmlns)  {
 
-        mappings.getUnmarshaller(true, xmlns).get();
+        mappings.getUnmarshaller(true, xmlns);
 
         File file = mappings.getXsdFile(xmlns);
         InputStream control = getClass().getResourceAsStream("/xsds/" + file.getName());
@@ -131,11 +131,11 @@ public class ApiMappingsTest {
             .ignoreComments()
             .checkForIdentical()
             .build();
-        diff.getDifferences();
+        log.info(diff.getDifferences());
 
         URL resource = getClass().getResource("/xsds/" + file.getName());
-        log.info("Checking workspace file " + resource);
-        log.info("And classpath file " + file);
+        log.info("Checking workspace file {}", resource);
+        log.info("And classpath file {}", file);
         assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + resource + " " + diff.toString()).isFalse();
         log.info("Identical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
 
