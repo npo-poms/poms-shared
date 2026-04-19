@@ -1,11 +1,13 @@
 package nl.vpro.domain.api.page;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.*;
 import java.time.LocalDateTime;
 
+import javax.xml.transform.stream.StreamSource;
 import jakarta.xml.bind.JAXB;
 import jakarta.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
 import org.xmlunit.builder.DiffBuilder;
@@ -31,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
+@Log4j2
 public class PageFormTest {
 
     @Test
@@ -60,7 +63,7 @@ public class PageFormTest {
             .sortDate(null, LocalDateTime.of(2017, 6, 12, 15, 0).atZone(Schedule.ZONE_ID).toInstant());
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getInstance().writeValue(writer, builder.build());
-        System.out.println(writer.toString());
+        log.info(writer.toString());
         assertThatJson(writer.toString())
             .isEqualTo("{\"searches\":{\"sortDates\":[{\"end\":1497272400000,\"inclusiveEnd\":false}]},\"sort\":{\"lastModified\":\"DESC\"}}");
     }
@@ -74,7 +77,7 @@ public class PageFormTest {
             .sortDate(null, LocalDateTime.of(2017, 6, 12, 15, 0).atZone(Schedule.ZONE_ID).toInstant());
         StringWriter writer = new StringWriter();
         JAXB.marshal(builder.build(), writer);
-        System.out.println(writer.toString());
+        log.info(writer);
         assertThatXml(writer.toString())
             .isSimilarTo("""
                 <api:pagesForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
@@ -159,7 +162,7 @@ public class PageFormTest {
                     </api:facets>
                 </api:pagesForm>""";
 
-        System.out.println(out.toString());
+        log.info(out.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(out.toString()).build();
         if (diff.hasDifferences()) {
             assertThat(out.toString()).isEqualTo(expected);
@@ -173,9 +176,9 @@ public class PageFormTest {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);
-        System.out.println(out.toString());
+        log.info(out.toString());
         ApiMappings mappings = new ApiMappings(null);
-        PageForm validated = (PageForm) mappings.getUnmarshaller(true, Xmlns.API_NAMESPACE).get().unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())));
+        PageForm validated = (PageForm) mappings.getUnmarshaller(true, Xmlns.API_NAMESPACE).unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())));
     }
 
     @Test
@@ -185,7 +188,7 @@ public class PageFormTest {
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
-        assertThat(rounded.getSearches().getReferrals().asList().get(0).getTypes().asList().get(0).getValue()).isEqualTo("TOP_STORY");
+        assertThat(rounded.getSearches().getReferrals().asList().getFirst().getTypes().asList().getFirst().getValue()).isEqualTo("TOP_STORY");
     }
 
 
@@ -196,7 +199,7 @@ public class PageFormTest {
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
-        assertThat(rounded.getSearches().getReferrals().asList().get(0).getTypes().asList().get(0).getValue()).isEqualTo("TOP_STORY");
+        assertThat(rounded.getSearches().getReferrals().asList().getFirst().getTypes().asList().getFirst().getValue()).isEqualTo("TOP_STORY");
     }
 
 
@@ -218,7 +221,7 @@ public class PageFormTest {
 
         PageForm rounded = JAXBTestUtil.roundTripAndSimilar(form, xml);
 
-        assertThat(rounded.getSearches().getReferrals().asList().get(0).getTypes().asList().get(0).getValue()).isEqualTo("TOP_STORY");
+        assertThat(rounded.getSearches().getReferrals().asList().getFirst().getTypes().asList().getFirst().getValue()).isEqualTo("TOP_STORY");
     }
 
     @Test
@@ -228,7 +231,7 @@ public class PageFormTest {
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
-        assertThat(rounded.getSearches().getLinks().asList().get(0).getTypes().asList().get(0).getValue()).isEqualTo("TOP_STORY");
+        assertThat(rounded.getSearches().getLinks().asList().getFirst().getTypes().asList().getFirst().getValue()).isEqualTo("TOP_STORY");
     }
 
 
