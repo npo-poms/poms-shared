@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.databind.*;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.core.json.JsonReadFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import nl.npo.envelope.NotifyEnvelope;
@@ -27,6 +27,8 @@ public class Utils {
         // The JSON can be a bit sloppy, so some leniency features
         mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
         mapper.configure(JsonReadFeature.ALLOW_TRAILING_COMMA.mappedFeature(), true);
+        mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
+
 
         SimpleModule localeModule = new SimpleModule();
         localeModule.addDeserializer(Locale.class, new LocaleDeserializer()); // supports accept empty as null
