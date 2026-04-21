@@ -1,7 +1,6 @@
 package nl.npo.wonvpp.domain;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,16 +38,39 @@ public class Utils {
      * Read a top-level JSON array into a List<CatalogEntry>
      * @param stream
      * @return
-     * @throws IOException
+     * @throws UncheckedIOException
      */
-    public static List<CatalogEntry> unmarshal(@NonNull InputStream stream) throws IOException {
-        //
-        return MAPPER.readerForListOf(CatalogEntry.class)
-            .readValue(stream);
+    public static List<CatalogEntry> unmarshal(@NonNull InputStream stream)  {
+        try {
+            return MAPPER.readerForListOf(CatalogEntry.class)
+                .readValue(stream);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
-    public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws IOException {
-        return MAPPER.readerForListOf(CatalogEntry.class)
-            .readValue(envelope.bytes());
+    /**
+     * Read a top-level JSON array into a List<CatalogEntry>
+     * @param stream
+     * @return
+     * @throws UncheckedIOException
+     */
+    public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream)  {
+        try {
+            NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
+                .readValue(stream);
+            return unmarshal(envelope);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) {
+        try {
+            return MAPPER.readerForListOf(CatalogEntry.class)
+                .readValue(envelope.bytes());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 }

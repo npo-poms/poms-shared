@@ -28,6 +28,16 @@
       <artifactId>media-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.meeuw.util</groupId>
+      <artifactId>kafkadumpreader</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-csv</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
     </dependency>
