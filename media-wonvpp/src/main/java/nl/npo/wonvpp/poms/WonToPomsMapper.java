@@ -224,8 +224,12 @@ public class WonToPomsMapper {
         for (CreditsType creditsType : castAndCrew) {
             PersonType person = creditsType.person();
             Person c  = switch (creditsType.function()) {
+                case Presenter -> new Person(person.givenName(), person.familyName(), RoleType.PRESENTER);
                 case Director -> new Person(person.givenName(), person.familyName(), RoleType.DIRECTOR);
                 case Actor -> new Person(person.givenName(), person.familyName(), RoleType.ACTOR);
+                case Scriptwriter -> new Person(person.givenName(), person.familyName(), RoleType.SCRIPTWRITER);
+                case Commentator -> new Person(person.givenName(), person.familyName(), RoleType.COMMENTATOR);
+                case Guest -> new Person(person.givenName(), person.familyName(), RoleType.GUEST);
             };
             c.setExternalId("whatson:" + person.id());
             credits.add(c);
