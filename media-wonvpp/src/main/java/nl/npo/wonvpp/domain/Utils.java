@@ -1,14 +1,14 @@
 package nl.npo.wonvpp.domain;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
-
-import com.fasterxml.jackson.databind.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import nl.npo.envelope.NotifyEnvelope;
@@ -61,7 +61,11 @@ public class Utils {
         try {
             NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
                 .readValue(stream);
-            return unmarshal(envelope);
+            try {
+                return unmarshal(envelope);
+            } catch (UncheckedIOException e) {
+                throw new UncheckedIOException(new String(envelope.bytes(), StandardCharsets.UTF_8), e.getCause());
+            }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }

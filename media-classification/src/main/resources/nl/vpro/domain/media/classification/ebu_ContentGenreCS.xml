@@ -454,6 +454,7 @@
         </Term>
         <Term termID="3.0.1.6.9">
           <Name xml:lang="nl">Komisch/Satire</Name>
+          <Name xml:lang="nl--vpp">Komisch</Name>
           <Name xml:lang="en">Comedy</Name>
           <Reference>urn:tva:metadata:cs:2004:0609</Reference>
           <Reference>urn:mis:genre:COMEDY</Reference>
@@ -718,7 +719,6 @@
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-
       </Term>
       <Term termID="3.0.1.40">
         <Name xml:lang="nl">Human Interest</Name>
