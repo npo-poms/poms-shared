@@ -2,15 +2,22 @@ package nl.npo.wonvpp.poms;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.meeuw.time.TestClock;
+import org.meeuw.util.kafka.KafkaDumpReader;
 
+import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.MediaClassificationService;
@@ -42,7 +49,7 @@ class WonToPomsMapperTest {
         "20260305105904-CatalogEPG-POW_06213692-npo-fvod.json"
     })
 
-    public void map(String file) throws IOException {
+    public void map(String file) {
 
         MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
         log.info("" + table);
@@ -53,6 +60,25 @@ class WonToPomsMapperTest {
         );
 
         JAXBTestUtil.assertThatXml(table).isSimilarTo(getClass().getResourceAsStream("/wonvpp/%s.xml".formatted(file)));
+    }
+
+
+    public static Stream<List<CatalogEntry>> alloutput() throws IOException {
+
+        return KafkaDumpReader.readTSV(WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/output.tsv"))
+            .map(KafkaDumpReader.Record::value)
+            .map(v -> new ByteArrayInputStream(v.getBytes(StandardCharsets.UTF_8)))
+            .map(Utils::unmarshalEnvelop);
+    }
+
+    @ParameterizedTest
+    @MethodSource("alloutput")
+    public void testAlls(List<CatalogEntry> entries) {
+        mapper.mapToPoms(entries)
+            .forEach(table -> {
+                log.info("{}", table);
+                assertThat(validator.validate(table)).isEmpty();
+            });
     }
 
 }
