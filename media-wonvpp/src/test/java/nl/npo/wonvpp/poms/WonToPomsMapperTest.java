@@ -66,14 +66,22 @@ class WonToPomsMapperTest {
     public static Stream<List<CatalogEntry>> alloutput() throws IOException {
 
         return KafkaDumpReader.readTSV(WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/output.tsv"))
+            .peek(r -> log.info("{}", r))
             .map(KafkaDumpReader.Record::value)
-            .map(v -> new ByteArrayInputStream(v.getBytes(StandardCharsets.UTF_8)))
-            .map(Utils::unmarshalEnvelop);
+            .map(b -> {
+                try {
+                    return Utils.unmarshalEnvelop(new ByteArrayInputStream(b.getBytes(StandardCharsets.UTF_8)));
+                } catch (Exception e) {
+                    log.error(b+ ":" + e.getMessage(), e);
+                    return null;
+                }
+            });
     }
 
     @ParameterizedTest
     @MethodSource("alloutput")
     public void testAlls(List<CatalogEntry> entries) {
+        log.info(entries);
         mapper.mapToPoms(entries)
             .forEach(table -> {
                 log.info("{}", table);

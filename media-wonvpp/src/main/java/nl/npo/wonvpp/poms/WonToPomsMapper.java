@@ -35,6 +35,8 @@ import static nl.vpro.domain.media.MediaBuilder.*;
 @Log4j2
 public class WonToPomsMapper {
 
+    Locale nl_vpp = Locale.of("nl", "", "vpp");
+
     /**
      * For ownable fields, this owner type is assigned.
      */
@@ -62,18 +64,22 @@ public class WonToPomsMapper {
                 var secondary = key.secondary();
                 Term primaryTerm = classificationService.values().stream()
                     .filter(t -> t.depth() == 4)
-                    .filter(k -> k.getName().equals(primary)).findFirst().orElseThrow();
+                    .filter(k -> k.getName(nl_vpp).equals(primary)).findFirst().orElseThrow();
 
-                Optional<Term> secondaryTerm = classificationService.values().stream()
-                    .filter(t -> primaryTerm.equals(t.getParent()))
-                    .filter(k -> k.getName().equals(secondary))
-                    .findFirst();
+                final Optional<Term> secondaryTerm = classificationService.values().stream()
+                        .filter(t -> primaryTerm.equals(t.getParent()))
+                        .filter(k -> k.getName(nl_vpp).equals(secondary))
+                        .findFirst();
+
 
                 if (secondaryTerm.isPresent()) {
                     return Genre.of(secondaryTerm.get());
                 } else {
+
                     if (StringUtils.isNotEmpty(secondary)) {
-                        throw new NoSuchElementException("No such term "  + secondary + " for " + primaryTerm);
+                        if (! "Overig".equalsIgnoreCase(secondary)) {
+                            throw new NoSuchElementException("No such term " + secondary + " for " + primaryTerm);
+                        }
                     }
                 }
                 return Genre.of(primaryTerm);
