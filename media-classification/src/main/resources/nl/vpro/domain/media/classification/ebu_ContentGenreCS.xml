@@ -20,6 +20,12 @@
       Contact: evain@ebu.ch
       ##################################################################### -->
 
+  <!-- This files is modified from the original file we once got from NPO
+      - new genres were added manually (at request of NPO iirc). Recognizable by FirstVersionDate.
+      - some references were added manually
+       *   to support 'legacy' MID import XMLs  (urn:mis:genre:*)
+       *   to support XMLss that the VPRO receives from bindinc for non NPO1/3 (urn:bindinc:genre:*)
+  -->
 
   <Alias>EBUContentGenre</Alias>
 
