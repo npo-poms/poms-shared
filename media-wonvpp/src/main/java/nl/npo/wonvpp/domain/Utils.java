@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -57,26 +58,34 @@ public class Utils {
      * @return
      * @throws UncheckedIOException
      */
-    public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream)  {
+    public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream) throws JacksonException {
         try {
             NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
                 .readValue(stream);
+
             try {
                 return unmarshal(envelope);
+            } catch (JacksonException jsonMappingException) {
+                throw jsonMappingException;
             } catch (UncheckedIOException e) {
                 throw new UncheckedIOException(new String(envelope.bytes(), StandardCharsets.UTF_8), e.getCause());
             }
+        } catch (JsonMappingException jsonMappingException) {
+            throw jsonMappingException;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
-    public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) {
+    public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws JacksonException {
         try {
             return MAPPER.readerForListOf(CatalogEntry.class)
                 .readValue(envelope.bytes());
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
+        } catch (JacksonException jsonMappingException) {
+            throw jsonMappingException;
+        } catch (IOException ioe) {
+            throw new UncheckedIOException(ioe);
         }
+
     }
 }
