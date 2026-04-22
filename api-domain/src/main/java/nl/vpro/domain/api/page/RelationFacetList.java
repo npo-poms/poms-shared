@@ -9,6 +9,7 @@ import lombok.*;
 import java.util.*;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -24,25 +25,27 @@ import nl.vpro.domain.api.jackson.page.RelationFacetListJson;
  * @author Michiel Meeuwissen
  * @since 4.1
  */
+@Setter
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageRelationFacetListType", propOrder = {"filter", "subSearch", "facets"})
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
 public class RelationFacetList extends AbstractFacet<PageSearch> implements SearchableFacet<PageSearch, RelationSearch>, Iterable<RelationFacet> {
 
-    @Getter
-    @Setter
     @Valid
     private PageSearch filter;
 
-    @Getter
-    @Setter
     @Valid
     private RelationSearch subSearch;
 
+    /**
+     * -- GETTER --
+     *  Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
+     *  this is optional
+     */
     @XmlElement(name = "facet")
-    @Valid
-    protected List<RelationFacet> facets;
+    protected List<@Valid @NotNull RelationFacet> facets;
 
     public RelationFacetList() {
     }
@@ -64,18 +67,6 @@ public class RelationFacetList extends AbstractFacet<PageSearch> implements Sear
         this.subSearch = subSearch;
     }
 
-
-    /**
-     * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
-     * this is optional
-     */
-    public List<RelationFacet> getFacets() {
-        return facets;
-    }
-
-    public void setFacets(List<RelationFacet> facets) {
-        this.facets = facets;
-    }
 
     public boolean isEmpty() {
         return facets == null || facets.isEmpty();

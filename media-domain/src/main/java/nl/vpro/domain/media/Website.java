@@ -19,6 +19,7 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.URI;
 
+@Setter
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -29,6 +30,15 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     @Serial
     private static final long serialVersionUID = 6568968749798696389L;
 
+    /**
+     * -- SETTER --
+     *  Under normal operation this should not be used!
+     *  <p/>
+     *  While testing, it sometimes comes in handy to be able to set an Id to simulate
+     *  a persisted object.
+     *
+     * @param id
+     */
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +49,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     @XmlValue
     @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
     @Getter
-    @Setter
     @URI(
         mustHaveScheme = true,
         minHostParts = 2,
@@ -50,7 +59,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
 
     @XmlTransient
     @Getter
-    @Setter
     @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
@@ -78,18 +86,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         return new Website(source);
     }
 
-
-    /**
-     * Under normal operation this should not be used!
-     * <p/>
-     * While testing, it sometimes comes in handy to be able to set an Id to simulate
-     * a persisted object.
-     *
-     * @param id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public void update(Website from) {

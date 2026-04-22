@@ -4,17 +4,20 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Arrays;
 
 import jakarta.validation.Valid;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Roelof Jan Koekoek
  * @since 3.3
  */
+@Setter
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "termSearchType")
 public class TermSearch extends AbstractSearch<String> {
@@ -36,14 +39,6 @@ public class TermSearch extends AbstractSearch<String> {
         TextMatcherList _ids) {
         super(match);
         this.ids = _ids;
-    }
-
-    public TextMatcherList getIds() {
-        return ids;
-    }
-
-    public void setIds(TextMatcherList ids) {
-        this.ids = ids;
     }
 
     @Override

@@ -110,28 +110,24 @@ public class Page implements MutableEmbargo<Page>, Serializable {
     @Setter
     protected String url;
 
-    @Valid
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @Getter
     @Setter
     protected List<@CRID String> crids;
 
-    @Valid
-    @URI
     @XmlElement(name = "alternativeUrl")
     @JsonProperty("alternativeUrls")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Getter
     @Setter
-    protected List<String> alternativeUrls;
+    protected List<@URI String> alternativeUrls;
 
-    @Valid
     @XmlElement(name = "broadcaster", required=true)
     @JsonProperty("broadcasters")
     @Getter
     @Setter
-    protected List<Broadcaster> broadcasters;
+    protected List<@Valid Broadcaster> broadcasters;
 
     @XmlElement(name = "portal")
     @JsonProperty("portal")
@@ -153,7 +149,6 @@ public class Page implements MutableEmbargo<Page>, Serializable {
     protected List<@NoHtml String> keywords;
 
     @Setter
-    @Valid
     protected SortedSet<@Valid Genre> genres;
 
     @Setter
@@ -185,7 +180,6 @@ public class Page implements MutableEmbargo<Page>, Serializable {
     protected List<@Valid Image> images;
 
     @Setter
-    @Valid
     protected SortedSet<@Valid Relation> relations;
 
     @Setter

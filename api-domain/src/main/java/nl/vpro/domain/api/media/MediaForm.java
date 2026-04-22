@@ -5,6 +5,7 @@
 package nl.vpro.domain.api.media;
 
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
 import java.util.function.Predicate;
 
@@ -25,6 +26,7 @@ import nl.vpro.domain.media.MediaObject;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
+@Setter
 @XmlRootElement(name = "mediaForm")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaFormType",
@@ -63,17 +65,9 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return facets;
     }
 
-    public void setFacets(MediaFacets facets) {
-        this.facets = facets;
-    }
-
     @JsonProperty("sort")
     public MediaSortOrderList getSortFields() {
         return sortFields;
-    }
-
-    public void setSortFields(MediaSortOrderList sortFields) {
-        this.sortFields = sortFields;
     }
 
     @Override

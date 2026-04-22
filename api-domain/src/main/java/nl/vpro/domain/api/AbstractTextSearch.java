@@ -30,14 +30,8 @@ import nl.vpro.domain.api.page.PageSearch;
 public abstract class AbstractTextSearch<V> extends AbstractSearch<V> {
 
     @Valid
+    @Getter
+    @Setter
     protected SimpleTextMatcher text;
-
-    public SimpleTextMatcher getText() {
-        return text;
-    }
-
-    public void setText(SimpleTextMatcher text) {
-        this.text = text;
-    }
 
 }

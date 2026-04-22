@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -26,7 +27,7 @@ public class AssociationSearchList implements Predicate<Association>, Iterable<A
 
 
     @XmlElement(name = "search")
-    protected List<@Valid AssociationSearch> associationSearches = new ArrayList<>();
+    protected List<@Valid @NotNull AssociationSearch> associationSearches = new ArrayList<>();
 
     public AssociationSearchList() {
     }

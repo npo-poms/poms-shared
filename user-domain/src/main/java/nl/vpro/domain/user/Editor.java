@@ -47,21 +47,18 @@ public class Editor extends AbstractUser {
     private static final long serialVersionUID = -4381169912123229285L;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
-    @Valid
     @XmlTransient
-    Set<BroadcasterEditor> broadcasters = new TreeSet<>();
+    Set<@Valid BroadcasterEditor> broadcasters = new TreeSet<>();
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
-    @Valid
     @XmlTransient
-    protected Set<PortalEditor> portals = new TreeSet<>();
+    protected Set<@Valid PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
-    @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
-    protected Set<ThirdPartyEditor> thirdParties = new TreeSet<>();
+    protected Set<@Valid ThirdPartyEditor> thirdParties = new TreeSet<>();
 
     @Transient
     @Nullable
