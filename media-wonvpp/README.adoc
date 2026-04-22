@@ -26,7 +26,7 @@ void main() {
 
 == Remarks
 
-This is about 'on demand' data, but it still is associated with a channel. The 'type' on the schedule events is undeprecated, and can have the new value 'ON_DEMAND' (the only other value was 'STRAND' which has not been in use for years any more).
+This is about 'on demand' scheduling, but it still is associated with a channel. The 'type' on the schedule events is undeprecated, and can have the new value 'ON_DEMAND' (the only other value was 'STRAND' which has not been in use for years any more).
 
 This indicates that the given 'start' date is just indicative, since the program is on demand.
 
