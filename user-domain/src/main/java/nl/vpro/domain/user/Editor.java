@@ -30,10 +30,10 @@ import nl.vpro.domain.Accountable;
  * 'process' that is performing the actions (e.g. the person who is logged in in the GUI) . It contains authentication and authorization information (like {@link #getRoles()} , {@link #getEmployer()} and {@link #getAllowedBroadcasters()}) about this person or user.
  *</p>
  * <p>
- * In the poms database it is the database entity that is linked to objects to indicate meta data like {@link Accountable#getCreatedBy()} and {@link Accountable#getLastModifiedBy()}
+ * In the poms database it is the database entity that is linked to objects to indicate metadata like {@link Accountable#getCreatedBy()} and {@link Accountable#getLastModifiedBy()}
  * </p>
  * <p>
- * It serves as the main information source to determin whether certain actions are permitted or not (e.g. implemented in a  <code>nl.vpro.spring.security.acl.MediaPermissionEvaluator</code>
+ * It serves as the main information source to determine whether certain actions are permitted or not (e.g. implemented in a  <code>nl.vpro.spring.security.acl.MediaPermissionEvaluator</code>
  *</p>
  */
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -406,7 +406,7 @@ public class Editor extends AbstractUser {
 
     public boolean addPortal(Portal portal) {
         if (portal == null) {
-            log.warn("Cannot add null to {}", this);
+            log.warn("Cannot add null portal to {}", this);
             return false;
         }
         PortalEditor toAdd = new PortalEditor(this, portal);
@@ -446,7 +446,7 @@ public class Editor extends AbstractUser {
 
     public boolean addThirdParty(ThirdParty thirdParty) {
         if (thirdParty == null) {
-            log.warn("Cannot add null to {}", this);
+            log.warn("Cannot add null thirdparty to {}", this);
             return false;
         }
         ThirdPartyEditor toAdd = new ThirdPartyEditor(this, thirdParty);
@@ -480,12 +480,12 @@ public class Editor extends AbstractUser {
     }
 
     void addOrganization(Organization organization) {
-        if (organization instanceof Broadcaster) {
-            addBroadcaster((Broadcaster) organization);
-        } else if (organization instanceof Portal) {
-            addPortal((Portal) organization);
-        } else if (organization instanceof ThirdParty) {
-            addThirdParty((ThirdParty) organization);
+        if (organization instanceof Broadcaster broadcaster) {
+            addBroadcaster(broadcaster);
+        } else if (organization instanceof Portal portal) {
+            addPortal(portal);
+        } else if (organization instanceof ThirdParty thirdParty) {
+            addThirdParty(thirdParty);
         } else {
             throw new IllegalArgumentException("Unknown organization type: " + organization);
         }
@@ -500,18 +500,16 @@ public class Editor extends AbstractUser {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Editor");
-        sb.append("{principalId='").append(principalId).append('\'');
-        sb.append(", displayName='").append(displayName).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", version='").append(version).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Editor" +
+            "{principalId='" + principalId + '\'' +
+            ", displayName='" + displayName + '\'' +
+            ", email='" + email + '\'' +
+            ", version='" + version + '\'' +
+            '}';
     }
 
     @PreUpdate
-    protected void preupdate() {
+    protected void preUpdate() {
         this.version++;
     }
 
