@@ -261,7 +261,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     protected List<@NotNull @Valid GeoLocationUpdate> geoLocations;
 
-    private List<@Valid TopicUpdate> topics;
+    private List<@NotNull @Valid TopicUpdate> topics;
 
     @Valid
     protected Asset asset;
@@ -962,15 +962,14 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "exclusive")
-    @Valid
-    public List<PortalRestrictionUpdate> getPortalRestrictions() {
+    public List<@Valid@NotNull PortalRestrictionUpdate> getPortalRestrictions() {
         if (portalRestrictions == null) {
             portalRestrictions = new ArrayList<>();
         }
         return portalRestrictions;
     }
 
-    public void setPortalRestrictions(List<PortalRestrictionUpdate> restrictions) {
+    public void setPortalRestrictions(List<@Valid@NotNull PortalRestrictionUpdate> restrictions) {
         this.portalRestrictions = restrictions;
     }
 
@@ -981,26 +980,23 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "region")
-    @Valid
     @NonNull
-    public SortedSet<GeoRestrictionUpdate> getGeoRestrictions() {
+    public SortedSet<@Valid@NotNull GeoRestrictionUpdate> getGeoRestrictions() {
          if (geoRestrictions == null) {
              geoRestrictions = new TreeSet<>();
          }
         return geoRestrictions;
     }
 
-    public void setGeoRestrictions(SortedSet<GeoRestrictionUpdate> restrictions) {
+    public void setGeoRestrictions(SortedSet<@Valid@NotNull GeoRestrictionUpdate> restrictions) {
         this.geoRestrictions = restrictions;
     }
 
     @Override
     @XmlElement(name = "title", required = true)
-    @Valid
-    @NotNull
     @NonNull
     @Size(min = 1, groups = RedundantValidatorGroup.class)
-    public SortedSet<TitleUpdate> getTitles() {
+    public SortedSet<@Valid @NotNull  TitleUpdate> getTitles() {
         if (titles == null) {
             titles = new TreeSet<>();
         }
@@ -1008,7 +1004,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @Override
-    public void setTitles(SortedSet<TitleUpdate> titles) {
+    public void setTitles(SortedSet<@Valid @NotNull TitleUpdate> titles) {
         this.titles = titles;
     }
     @XmlTransient
@@ -1018,9 +1014,8 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @Override
     @XmlElement(name = "description")
-    @Valid
     @NonNull
-    public SortedSet<DescriptionUpdate> getDescriptions() {
+    public SortedSet<@Valid @NotNull DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
             descriptions = new TreeSet<>();
          }
@@ -1028,11 +1023,11 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @Override
-    public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
+    public void setDescriptions(SortedSet<@Valid@NotNull DescriptionUpdate> descriptions) {
         this.descriptions = descriptions;
     }
     @XmlTransient
-    public void setDescriptions(DescriptionUpdate... descriptions) {
+    public void setDescriptions(@Valid@NotNull DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
@@ -1067,14 +1062,14 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "country")
     @XmlJavaTypeAdapter(Code.class)
-    public List<org.meeuw.i18n.regions.Region> getCountries() {
+    public List<org.meeuw.i18n.regions.@Valid@NotNull Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<org.meeuw.i18n.regions.Region> countries) {
+    public void setCountries(List<org.meeuw.i18n.regions.@Valid@NotNull Region> countries) {
         this.countries = countries;
     }
 
@@ -1082,14 +1077,14 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     @XmlJavaTypeAdapter(value = UsedLanguageUpdateAdapter.class)
     @JsonSerialize(using = LanguageList.Serializer.class)
     @JsonDeserialize(using = LanguageList.Deserializer.class)
-    public List<UsedLanguage> getLanguages() {
+    public List<@Valid@NotNull UsedLanguage> getLanguages() {
          if (languages == null) {
             languages = new ArrayList<>();
          }
         return languages;
     }
 
-    public void setLanguages(List<UsedLanguage> languages) {
+    public void setLanguages(List<@Valid@NotNull UsedLanguage> languages) {
         this.languages = languages;
     }
 
@@ -1103,7 +1098,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return genres;
     }
 
-    public void setGenres(SortedSet<String> genres) {
+    public void setGenres(SortedSet<@NotNull String> genres) {
         this.genres = genres;
     }
 
@@ -1126,11 +1121,11 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "targetGroups")
     @XmlElement(name = "targetGroup")
     @NonNull
-    public List<TargetGroupType> getTargetGroups() {
+    public List<@NotNull TargetGroupType> getTargetGroups() {
         return targetGroups;
     }
 
-    public void setTargetGroups(List<TargetGroupType> targetGroups) {
+    public void setTargetGroups(List<@NotNull TargetGroupType> targetGroups) {
         this.targetGroups = targetGroups;
     }
 
@@ -1139,7 +1134,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return avAttributes;
     }
 
-    public void setAvAttributes(AVAttributesUpdate avAttributes) {
+    public void setAvAttributes(@Valid AVAttributesUpdate avAttributes) {
         this.avAttributes = avAttributes;
     }
 
@@ -1167,21 +1162,20 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         @XmlElement(name = "person", type = PersonUpdate.class),
         @XmlElement(name = "name", type = NameUpdate.class)
     })
-    @Valid
     @NonNull
-    public List<CreditsUpdate> getCredits() {
+    public List<@Valid @NotNull CreditsUpdate> getCredits() {
         if (credits == null) {
             credits = new ArrayList<>();
         }
         return credits;
     }
 
-    public void setCredits(List<CreditsUpdate> credits) {
+    public void setCredits(List<@Valid @NotNull CreditsUpdate> credits) {
         this.credits = credits;
     }
 
     @XmlTransient
-    public void setCredits(CreditsUpdate... credits){
+    public void setCredits(@Valid @NotNull CreditsUpdate... credits){
         setCredits(new ArrayList<>(Arrays.asList(credits)));
     }
 
@@ -1292,9 +1286,8 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
      * @since 5.6
      */
     @XmlElement(name = "prediction")
-    @Valid
     @NonNull
-    public SortedSet<PredictionUpdate> getPredictions() {
+    public SortedSet<@Valid @NotNull PredictionUpdate> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
         }
@@ -1304,61 +1297,59 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     /**
      * @since 5.6
      */
-    public void setPredictions(SortedSet<PredictionUpdate> predictions) {
+    public void setPredictions(SortedSet<@Valid @NotNull PredictionUpdate> predictions) {
         this.predictions = predictions;
     }
 
     @XmlElementWrapper(name = "locations")
     @XmlElement(name = "location")
-    @Valid
     @NonNull
-    public SortedSet<LocationUpdate> getLocations() {
+    public SortedSet<@Valid @NotNull LocationUpdate> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
         }
         return locations;
     }
 
-    public void setLocations(SortedSet<LocationUpdate> locations) {
+    public void setLocations(SortedSet<@Valid @NonNull LocationUpdate> locations) {
         this.locations = locations;
     }
 
     @XmlTransient
-    public void setLocations(LocationUpdate... locations) {
+    public void setLocations(@Valid @NotNull LocationUpdate... locations) {
         setLocations(new TreeSet<>(Arrays.asList(locations)));
     }
 
     @XmlElement(name = "relation")
     @NonNull
-    public SortedSet<RelationUpdate> getRelations() {
+    public SortedSet<@Valid @NotNull RelationUpdate> getRelations() {
         if (relations == null) {
             relations = new TreeSet<>();
         }
         return relations;
     }
 
-    public void setRelations(SortedSet<RelationUpdate> relations) {
+    public void setRelations(SortedSet<@Valid @NotNull RelationUpdate> relations) {
         this.relations = relations;
     }
 
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image")
-    @Valid
     @NonNull
-    public List<ImageUpdate> getImages() {
+    public List<@Valid @NotNull ImageUpdate> getImages() {
         if (images == null) {
             images = new ArrayList<>();
         }
         return images;
     }
 
-    public void setImages(List<ImageUpdate> images) {
+    public void setImages(List<@Valid @NonNull ImageUpdate> images) {
         // Leave builder.images to the fetch(ImageImporter) method
         this.images = images;
     }
 
     @XmlTransient
-    public void setImages(ImageUpdate... images) {
+    public void setImages(@Valid @NotNull ImageUpdate... images) {
         setImages(new ArrayList<>());
         this.images.addAll(Arrays.asList(images));
     }
@@ -1381,13 +1372,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "geoLocations")
     @XmlElement(name = "geoLocation")
-    @Valid
     @NonNull
-    public List<GeoLocationUpdate> getGeoLocations() {
+    public List<@Valid @NotNull GeoLocationUpdate> getGeoLocations() {
         return geoLocations;
     }
 
-    public void setGeoLocations(List<GeoLocationUpdate> geoLocationUpdates) {
+    public void setGeoLocations(List<@Valid @NotNull GeoLocationUpdate> geoLocationUpdates) {
         this.geoLocations = geoLocationUpdates;
     }
 
@@ -1398,13 +1388,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "topics")
     @XmlElement(name = "topic")
-    @Valid
     @NonNull
-    public List<TopicUpdate> getTopics() {
+    public List<@Valid@NotNull TopicUpdate> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<TopicUpdate> topicUpdates) {
+    public void setTopics(List<@Valid@NotNull TopicUpdate> topicUpdates) {
         this.topics = topicUpdates;
     }
 
