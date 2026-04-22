@@ -198,17 +198,17 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @Override
     @XmlElementWrapper(name = "titles", required = false)
     @XmlElement(name = "title")
-    public SortedSet<TitleUpdate> getTitles() {
+    public SortedSet<@Valid @NotNull TitleUpdate> getTitles() {
         return titles;
     }
 
     @Override
-    public void setTitles(SortedSet<TitleUpdate> titles) {
+    public void setTitles(SortedSet<@Valid @NotNull TitleUpdate> titles) {
         this.titles = titles;
     }
 
     @XmlTransient
-    public void setTitles(TitleUpdate... titles) {
+    public void setTitles(@Valid @NotNull TitleUpdate... titles) {
         this.titles = new TreeSet<>(Arrays.asList(titles));
     }
 
@@ -231,17 +231,17 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @Override
     @XmlElementWrapper(name = "descriptions", required = false)
     @XmlElement(name = "description")
-    public SortedSet<DescriptionUpdate> getDescriptions() {
+    public SortedSet<@Valid @NotNull DescriptionUpdate> getDescriptions() {
         return descriptions;
     }
 
     @Override
-    public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
+    public void setDescriptions(SortedSet<@Valid @NotNull DescriptionUpdate> descriptions) {
         this.descriptions = descriptions;
     }
 
     @XmlTransient
-    public void setDescriptions(DescriptionUpdate... descriptions) {
+    public void setDescriptions(@Valid @NotNull DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
