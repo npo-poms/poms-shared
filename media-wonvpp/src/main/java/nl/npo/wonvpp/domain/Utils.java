@@ -43,10 +43,12 @@ public class Utils {
      * @return
      * @throws UncheckedIOException
      */
-    public static List<CatalogEntry> unmarshal(@NonNull InputStream stream)  {
+    public static List<CatalogEntry> unmarshal(@NonNull InputStream stream) throws JacksonException {
         try {
             return MAPPER.readerForListOf(CatalogEntry.class)
                 .readValue(stream);
+        } catch (JacksonException jacksonException) {
+            throw jacksonException;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -78,14 +80,6 @@ public class Utils {
     }
 
     public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws JacksonException {
-        try {
-            return MAPPER.readerForListOf(CatalogEntry.class)
-                .readValue(envelope.bytes());
-        } catch (JacksonException jsonMappingException) {
-            throw jsonMappingException;
-        } catch (IOException ioe) {
-            throw new UncheckedIOException(ioe);
-        }
-
+        return unmarshal(new ByteArrayInputStream(envelope.bytes()));
     }
 }
