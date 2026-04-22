@@ -1,7 +1,8 @@
 package nl.npo.wonvpp.domain;
 
+import lombok.SneakyThrows;
+
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,42 +42,23 @@ public class Utils {
      * Read a top-level JSON array into a List<CatalogEntry>
      * @param stream
      * @return
-     * @throws UncheckedIOException
      */
+    @SneakyThrows(IOException.class)
     public static List<CatalogEntry> unmarshal(@NonNull InputStream stream) throws JacksonException {
-        try {
-            return MAPPER.readerForListOf(CatalogEntry.class)
-                .readValue(stream);
-        } catch (JacksonException jacksonException) {
-            throw jacksonException;
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return MAPPER.readerForListOf(CatalogEntry.class)
+            .readValue(stream);
     }
 
     /**
      * Read a top-level JSON array into a List<CatalogEntry>
      * @param stream
      * @return
-     * @throws UncheckedIOException
      */
+    @SneakyThrows(IOException.class)
     public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream) throws JacksonException {
-        try {
-            NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
-                .readValue(stream);
-
-            try {
-                return unmarshal(envelope);
-            } catch (JacksonException jsonMappingException) {
-                throw jsonMappingException;
-            } catch (UncheckedIOException e) {
-                throw new UncheckedIOException(new String(envelope.bytes(), StandardCharsets.UTF_8), e.getCause());
-            }
-        } catch (JsonMappingException jsonMappingException) {
-            throw jsonMappingException;
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
+            .readValue(stream);
+        return unmarshal(envelope);
     }
 
     public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws JacksonException {
