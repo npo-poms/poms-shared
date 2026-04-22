@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -79,7 +82,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     SortedSet<T> getTitles();
 
-    void setTitles(SortedSet<T> titles);
+    void setTitles(SortedSet<@Valid @NotNull T> titles);
 
 
     /**
@@ -87,7 +90,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      * the object (it is e.g. required by jaxb that this will never return <code>null</code>
      */
     default boolean hasTitles() {
-        return getTitles() != null && getTitles().size() > 0;
+        return getTitles() != null && !getTitles().isEmpty();
     }
 
     default TO addTitle(T title) {
@@ -220,7 +223,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     SortedSet<D> getDescriptions();
 
-    void setDescriptions(SortedSet<D> descriptions);
+    void setDescriptions(SortedSet<@Valid @NotNull D> descriptions);
 
 
     /**
@@ -228,7 +231,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      * the object (it is e.g. required by hibernate that this will never return <code>null</code>
      */
     default boolean hasDescriptions() {
-        return getDescriptions() != null && getDescriptions().size() > 0;
+        return getDescriptions() != null && !getDescriptions().isEmpty();
     }
 
     default TO addDescription(D description) {
