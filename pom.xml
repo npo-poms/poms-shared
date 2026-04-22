@@ -23,7 +23,6 @@
     <revision>8.14</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <vpro.shared.version>5.15.2</vpro.shared.version>
   </properties>
 
    <scm>
