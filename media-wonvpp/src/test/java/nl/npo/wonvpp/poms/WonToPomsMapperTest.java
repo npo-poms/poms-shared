@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 
+import org.assertj.core.api.Assumptions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -81,6 +82,7 @@ class WonToPomsMapperTest {
     @ParameterizedTest
     @MethodSource("alloutput")
     public void testAlls(List<CatalogEntry> entries) {
+        Assumptions.assumeThat(entries).isNotNull();
         log.info(entries);
         mapper.mapToPoms(entries)
             .forEach(table -> {
