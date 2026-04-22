@@ -1,18 +1,14 @@
 package nl.vpro.domain.api.page;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import jakarta.validation.Valid;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,8 +27,7 @@ import nl.vpro.jackson2.IterableJson;
 public class RelationSearchList implements Predicate<Relation>, Iterable<RelationSearch> {
 
     @XmlElement(name = "relationSearch")
-    @Valid
-    protected List<RelationSearch> relationSearches = new ArrayList<>();
+    protected List<@Valid @NotNull RelationSearch> relationSearches = new ArrayList<>();
 
     public RelationSearchList() {
         // jaxb needs empty constructor

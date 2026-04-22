@@ -105,12 +105,9 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @DurationMin
     private Duration duration;
 
+    private SortedSet<@Valid @NotNull TitleUpdate> titles;
 
-    @Valid
-    private SortedSet<TitleUpdate> titles;
-
-    @Valid
-    private SortedSet<DescriptionUpdate> descriptions;
+    private SortedSet<@Valid @NotNull DescriptionUpdate> descriptions;
 
 
     @XmlTransient

@@ -84,15 +84,13 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "crid")
     @JsonProperty("crids")
-    @Valid
     @Setter
     protected List<@CRID String> crids;
 
     @XmlElement(name = "alternativeUrl")
     @JsonProperty("alternativeUrls")
-    @Valid
     @Setter
-    protected List<String> alternativeUrls;
+    protected List<@URI String> alternativeUrls;
 
     @NotNull
     @Size(min = 1)
@@ -132,9 +130,8 @@ public class PageUpdate implements Serializable {
     @XmlElementWrapper(name = "paragraphs")
     @XmlElement(name = "paragraph")
     @JsonProperty("paragraphs")
-    @Valid
     @Setter
-    protected List<ParagraphUpdate> paragraphs;
+    protected List<@Valid ParagraphUpdate> paragraphs;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
@@ -151,16 +148,14 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "link")
     @JsonProperty("links")
-    @Valid
     @Setter
-    private List<LinkUpdate> links;
+    private List<@Valid LinkUpdate> links;
 
     @XmlElementWrapper(name = "embeds")
     @XmlElement(name = "embed")
     @JsonProperty("embeds")
-    @Valid
     @Setter
-    private List<EmbedUpdate> embeds;
+    private List<@Valid EmbedUpdate> embeds;
 
     @XmlElement(name = "statRef")
     @JsonProperty("statRefs")
@@ -170,16 +165,14 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "image")
     @JsonProperty("images")
-    @Valid
     @Setter
-    protected List<ImageUpdate> images;
+    protected List<@Valid ImageUpdate> images;
 
 
     @XmlElement(name = "relation")
     @JsonProperty("relations")
-    @Valid
     @Setter
-    protected List<RelationUpdate> relations;
+    protected List<@Valid RelationUpdate> relations;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)

@@ -8,6 +8,8 @@
 
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,21 +28,18 @@ public class LocationTable implements Serializable {
     @Serial
     private static final long serialVersionUID = 7215068410057727467L;
 
+    @Setter
     @XmlElement(name = "location")
     protected List<@Valid Location> locations;
     @XmlElement(name = "scheduleEvent")
     protected List<@Valid ScheduleEvent> scheduleEvents;
 
 
-    public List<Location> getLocations() {
+    public List<@Valid Location> getLocations() {
         if(locations == null) {
             locations = new ArrayList<>();
         }
         return locations;
-    }
-
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
     }
 
     public List<ScheduleEvent> getSchedule() {

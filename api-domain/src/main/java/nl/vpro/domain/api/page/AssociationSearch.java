@@ -1,5 +1,8 @@
 package nl.vpro.domain.api.page;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
@@ -11,6 +14,8 @@ import nl.vpro.domain.page.LinkType;
  * @author Michiel Meeuwissen
  * @since 4.3
  */
+@Setter
+@Getter
 @XmlType(name = "associationSearchType")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AssociationSearch extends AbstractSearch<Association>  {
@@ -34,22 +39,6 @@ public class AssociationSearch extends AbstractSearch<Association>  {
     @Valid
     private TextMatcherList types;
 
-
-    public TextMatcherList getUrls() {
-        return urls;
-    }
-
-    public void setUrls(TextMatcherList url) {
-        this.urls = urls;
-    }
-
-    public TextMatcherList getTypes() {
-        return types;
-    }
-
-    public void setTypes(TextMatcherList type) {
-        this.types = type;
-    }
 
     @Override
     public boolean test(Association association) {

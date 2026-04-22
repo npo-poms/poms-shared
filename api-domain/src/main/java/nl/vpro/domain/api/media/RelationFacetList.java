@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.util.*;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -25,6 +26,8 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
  * @author Roelof Jan Koekoek
  * @since 3.3
  */
+@Setter
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaRelationFacetListType", propOrder = {"filter", "subSearch", "facets"})
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
@@ -32,13 +35,15 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
 public class RelationFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<MediaSearch, RelationSearch>, Iterable<RelationFacet> {
 
     @Valid
-    @Getter
-    @Setter
     private RelationSearch subSearch;
 
+    /**
+     * -- GETTER --
+     *  Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
+     *  this is optional
+     */
     @XmlElement(name = "facet")
-    @Valid
-    protected List<RelationFacet> facets;
+    protected List<@Valid @NotNull  RelationFacet> facets;
 
     public RelationFacetList() {
     }
@@ -67,17 +72,6 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
     @Override
     public void  setFilter(MediaSearch filter) {
         this.filter = filter;
-    }
-    /**
-     * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
-     * this is optional
-     */
-    public List<RelationFacet> getFacets() {
-        return facets;
-    }
-
-    public void setFacets(List<RelationFacet> facets) {
-        this.facets = facets;
     }
 
     public boolean isEmpty() {
