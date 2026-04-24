@@ -18,6 +18,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.meeuw.time.TestClock;
 import org.meeuw.util.kafka.KafkaDumpReader;
 
+import com.fasterxml.jackson.core.JacksonException;
+
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -50,7 +52,7 @@ class WonToPomsMapperTest {
         "20260305105904-CatalogEPG-POW_06213692-npo-fvod.json"
     })
 
-    public void map(String file) {
+    public void map(String file) throws JacksonException {
 
         MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
         log.info("" + table);
