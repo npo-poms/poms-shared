@@ -45,7 +45,7 @@ jobs:
         id: set_target
         shell: bash
         run: |
-          if [[ "${GITHUB_EVENT_NAME}" == "push" && "${RUNNER_OS}" == "Linux" && "${{ matrix.java }}" == "21" ]]; then
+          if [[ ("${GITHUB_EVENT_NAME}" == "push" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch") && "${RUNNER_OS}" == "Linux" && "${{ matrix.java }}" == "21" ]]; then
              echo "target=deploy" >> $GITHUB_OUTPUT
              echo "profile=deploy," >> $GITHUB_OUTPUT
              echo "mainbuild=true" >> $GITHUB_OUTPUT
@@ -70,7 +70,7 @@ jobs:
           determine_version: 'false'
           coverage: 'true'
       - name: Publish to codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
