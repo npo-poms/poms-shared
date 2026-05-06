@@ -40,7 +40,7 @@ public interface LocationProducer {
     default Optional<LocationResult> produceIfSupports(
         @NotNull Location location,
         HttpServletRequest request,
-        @NotNull String... pubOptions) {
+        String@NotNull ... pubOptions) {
         if (pubOptions == null) {
             pubOptions = new String[0];
         }

@@ -220,7 +220,7 @@ public class TextualObjects {
 
     public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(
         @NonNull TO media,
-        @NonNull TextualType... types) {
+        TextualType  @NonNull ... types) {
         Optional<String> opt = getOptional(media.getDescriptions(), types);
         return opt.orElse("");
     }

@@ -226,7 +226,7 @@ public class Kijkwijzer implements NicamRated, Serializable {
         this.contentRatings = Collections.unmodifiableList(contentRatings == null ? new ArrayList<>() : new ArrayList<>(contentRatings));
     }
 
-    public Kijkwijzer(@Nullable AgeRating ageRating, @NonNull ContentRating... contentRatings) {
+    public Kijkwijzer(@Nullable AgeRating ageRating, ContentRating  @NonNull... contentRatings) {
         this(ageRating, Arrays.asList(contentRatings));
     }
 
