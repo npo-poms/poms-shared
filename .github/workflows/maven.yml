@@ -27,6 +27,8 @@ jobs:
         include:
           - os: ubuntu-latest
             java: 25
+          - os: ubuntu-latest
+            java: 26
     runs-on: ${{ matrix.os }}
     env:
       MAVEN_ARGS: '--no-transfer-progress --color always'
