@@ -74,7 +74,7 @@ jobs:
       - name: Publish to codecov
         uses: codecov/codecov-action@v6
         with:
-          verbose: true
+          verbose: false
           token: ${{ secrets.CODECOV_TOKEN }} # required
           #files: "**/target/surefire-reports/*.xml"
         if: ${{ steps.set_target.outputs.mainbuild == 'true' }}
