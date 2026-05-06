@@ -934,12 +934,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return broadcasters;
     }
 
-    public void setBroadcasters(List<String> broadcasters) {
+    public void setBroadcasters(List<@BroadcasterValidation String> broadcasters) {
         this.broadcasters = broadcasters;
     }
 
     @XmlTransient
-    public void setBroadcasters(String... broadcasters) {
+    public void setBroadcasters(String @BroadcasterValidation... broadcasters) {
         this.broadcasters = Arrays.asList(broadcasters);
     }
 
@@ -974,7 +974,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setPortalRestrictions(String... restrictions) {
+    public void setPortalRestrictions(String@NotNull... restrictions) {
         List<PortalRestrictionUpdate> updates = getPortalRestrictions();
         Stream.of(restrictions).forEach(r -> updates.add(PortalRestrictionUpdate.of(r)));
     }
@@ -1008,7 +1008,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         this.titles = titles;
     }
     @XmlTransient
-    public void setTitles(TitleUpdate... titles) {
+    public void setTitles(TitleUpdate@Valid@NotNull... titles) {
         setTitles(new TreeSet<>(Arrays.asList(titles)));
     }
 
@@ -1027,7 +1027,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         this.descriptions = descriptions;
     }
     @XmlTransient
-    public void setDescriptions(@Valid@NotNull DescriptionUpdate... descriptions) {
+    public void setDescriptions(DescriptionUpdate @Valid@NotNull ... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
@@ -1051,12 +1051,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return tags;
     }
 
-    public void setTags(SortedSet<String> tags) {
+    public void setTags(SortedSet<@NotNull String> tags) {
         this.tags = tags;
     }
 
     @XmlTransient
-    public void setTags(String... tags) {
+    public void setTags(String@NotNull... tags) {
         setTags(new TreeSet<>(Arrays.asList(tags)));
     }
 
@@ -1103,7 +1103,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setGenres(String... genres) {
+    public void setGenres(String@NotNull... genres) {
         setGenres(new TreeSet<>(Arrays.asList(genres)));
     }
 
@@ -1175,7 +1175,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setCredits(@Valid @NotNull CreditsUpdate... credits){
+    public void setCredits(CreditsUpdate @Valid @NotNull... credits){
         setCredits(new ArrayList<>(Arrays.asList(credits)));
     }
 
@@ -1234,12 +1234,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return email;
     }
 
-    public void setEmail(List<String> emails) {
+    public void setEmail(List<@NotNull String> emails) {
         this.email = emails;
     }
 
     @XmlTransient
-    public void setEmail(String... emails) {
+    public void setEmail(String@NotNull... emails) {
         setEmail(new ArrayList<>(Arrays.asList(emails)));
     }
 
@@ -1316,7 +1316,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setLocations(@Valid @NotNull LocationUpdate... locations) {
+    public void setLocations(LocationUpdate@Valid @NotNull ... locations) {
         setLocations(new TreeSet<>(Arrays.asList(locations)));
     }
 
@@ -1349,7 +1349,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setImages(@Valid @NotNull ImageUpdate... images) {
+    public void setImages(ImageUpdate@Valid @NotNull... images) {
         setImages(new ArrayList<>());
         this.images.addAll(Arrays.asList(images));
     }
@@ -1382,7 +1382,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setGeoLocations(GeoLocationUpdate... geoLocationUpdates) {
+    public void setGeoLocations(GeoLocationUpdate@Valid @NotNull... geoLocationUpdates) {
         setGeoLocations(Arrays.asList(geoLocationUpdates));
     }
 
@@ -1398,7 +1398,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlTransient
-    public void setTopics(TopicUpdate... topicUpdates) {
+    public void setTopics(TopicUpdate@Valid@NotNull... topicUpdates) {
         setTopics(Arrays.asList(topicUpdates));
     }
 
