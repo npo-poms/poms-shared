@@ -26,6 +26,11 @@ public class ClassificationServiceWrapper implements ClassificationService {
         this.service = getService(url);
     }
 
+    @Override
+    public void close() throws Exception {
+        service.close();
+    }
+
     private static ClassificationService getService(String url) {
         if (url.startsWith("http")) {
             return new CachedURLClassificationServiceImpl(URI.create(url));
