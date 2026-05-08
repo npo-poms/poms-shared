@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import nl.vpro.util.ThreadPools;
+
 /**
  * @author Roelof Jan Koekoek
  * @since 3.0
@@ -119,7 +121,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @PreDestroy
     public void cleanUp() {
-        executorService.shutdownNow();
+        ThreadPools.shutdownAndWait(true, "classification service", executorService);
     }
 
     protected synchronized  SortedMap<TermId, Term> getTermsMap() {
