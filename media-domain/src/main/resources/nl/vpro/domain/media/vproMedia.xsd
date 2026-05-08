@@ -690,7 +690,7 @@
         </xs:sequence>
         <xs:attribute name="chapterType" type="chapterType"/>
         <xs:attribute type="midType" name="midRef" use="required"/>
-        <xs:attribute type="xs:anyURI" name="urnRef" use="required"/>
+        <xs:attribute type="xs:anyURI" name="urnRef" />
         <xs:attribute type="segmentTypeEnum" name="type" use="required"/>
       </xs:extension>
     </xs:complexContent>
@@ -940,7 +940,7 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute type="xs:anyURI" name="urnRef" use="optional">
+    <xs:attribute type="xs:anyURI" name="urnRef" >
       <xs:annotation>
         <xs:documentation>
           Reference to the URN of the parent of this object. URN's are no longer actively used, but the attribute is
