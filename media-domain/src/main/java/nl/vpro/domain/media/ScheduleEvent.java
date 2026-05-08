@@ -558,7 +558,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return imi;
     }
 
-    @XmlAttribute(required = true)
+    @XmlAttribute(required = false)
     public String getUrnRef() {
         if (urnRef == null && mediaObject != null) {
             return mediaObject.getUrn();
