@@ -11,7 +11,7 @@ import java.util.List;
  * @author Michiel Meeuwissen
  * @since 3.2
  */
-public interface ClassificationService {
+public interface ClassificationService extends AutoCloseable{
 
     /**
      * Returns the Term with the given id.

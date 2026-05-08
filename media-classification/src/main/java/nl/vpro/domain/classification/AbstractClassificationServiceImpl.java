@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.classification;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -18,8 +20,6 @@ import jakarta.xml.bind.JAXB;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -29,10 +29,9 @@ import nl.vpro.util.ThreadPools;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@Slf4j
 public abstract class AbstractClassificationServiceImpl implements ClassificationService {
 
-
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -240,6 +239,11 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                 .map(t -> t.getTermId() + ":" + t.getName())
                 .collect(Collectors.joining(", ")) + ")";
         }
+    }
+
+    @Override
+    public void close() {
+        cleanUp();
     }
 }
 
