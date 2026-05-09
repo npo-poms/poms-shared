@@ -44,7 +44,7 @@ public class Transform {
     // Cached JAXBContext
     private static final JAXBContext MEDIA_TABLE_CONTEXT ;
     static {
-        JAXBContext jaxbContext = null;
+        final JAXBContext jaxbContext;
         try {
             jaxbContext = JAXBContext.newInstance(MediaTable.class);
         } catch (JAXBException e) {
@@ -88,15 +88,19 @@ public class Transform {
         return toMediaTable(input, Map.of());
     }
 
-    public static Transformer mediaTableToTVA() throws TransformerConfigurationException {
+    public static Transformer mediaTableToTVA(String... properties) throws TransformerConfigurationException {
         ensureMediaTableTemplates();
         Transformer transformer = MEDIATABLE_TEMPLATES.newTransformer();
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        assert properties.length % 2 == 0;
+        for (int i = 0; i < properties.length; i += 2) {
+            transformer.setParameter(properties[i], properties[i + 1]);
+        }
         return  transformer;
     }
 
-    public static void toTVA(MediaTable mediaTable, Result result) throws JAXBException, TransformerException {
-        mediaTableToTVA().transform(new JAXBSource(JAXBContext.newInstance(MediaTable.class), mediaTable), result);
+    public static void toTVA(MediaTable mediaTable, Result result, String... properties) throws JAXBException, TransformerException {
+        mediaTableToTVA(properties).transform(new JAXBSource(JAXBContext.newInstance(MediaTable.class), mediaTable), result);
     }
 
 
