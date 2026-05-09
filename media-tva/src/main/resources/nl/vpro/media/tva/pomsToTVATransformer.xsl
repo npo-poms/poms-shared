@@ -19,6 +19,9 @@
 
   <xsl:param name="personExternalIdPrefix" select="'whatson:'" />
 
+  <xsl:param name="owner" select="''" />
+
+
 
   <!-- root: map mediaInformation -> tva:TVAMain -->
   <xsl:template match="/mediaInformation">
@@ -50,13 +53,14 @@
 
               <BasicDescription>
                 <!-- main title -->
-                <xsl:for-each select="title[@type='MAIN' and @owner = 'MIS']">
+
+                <xsl:for-each select="title[@type='MAIN'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Title>
                     <xsl:attribute name="type">main</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
                   </Title>
                 </xsl:for-each>
-                <xsl:for-each select="title[@type='SUB' and @owner = 'MIS']">
+                <xsl:for-each select="title[@type='SUB'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Title>
                     <xsl:attribute name="type">episodeTitle</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
@@ -73,14 +77,14 @@
                     <xsl:for-each select="/mediaInformation/groupTable/group[@mid=current()/@midRef]">
                       <Title>
                         <xsl:attribute name="type">parentSeriesTitle</xsl:attribute>
-                        <xsl:value-of select="normalize-space(title[@type='MAIN' and @owner = 'MIS'])"/>
+                        <xsl:value-of select="normalize-space((title[@type='MAIN'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1])[1])"/>
                       </Title>
                     </xsl:for-each>
                   </xsl:for-each>
                 </xsl:for-each>
 
                 <!-- original title -->
-                <xsl:for-each select="title[@type='ORIGINAL' and @owner = 'MIS']">
+                <xsl:for-each select="title[@type='ORIGINAL'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Title>
                     <xsl:attribute name="type">translatedtitle</xsl:attribute>
                     <xsl:value-of select="normalize-space(.)"/>
@@ -88,17 +92,17 @@
                 </xsl:for-each>
 
                 <!-- descriptions -->
-                <xsl:for-each select="description[@owner = 'MIS' and @type='SHORT']">
+                <xsl:for-each select="description[@type='SHORT'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Synopsis length="short">
                     <xsl:value-of select="normalize-space(.)"/>
                   </Synopsis>
                 </xsl:for-each>
-                <xsl:for-each select="description[@owner = 'MIS' and @type='LONG']">
+                <xsl:for-each select="description[@type='LONG'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Synopsis length="long">
                     <xsl:value-of select="normalize-space(.)"/>
                   </Synopsis>
                 </xsl:for-each>
-                <xsl:for-each select="description[@owner = 'MIS' and @type='MAIN']">
+                <xsl:for-each select="description[@type='MAIN'][if (normalize-space($owner) != '') then @owner = $owner else position() = 1]">
                   <Synopsis length="medium">
                     <xsl:value-of select="normalize-space(.)"/>
                   </Synopsis>
