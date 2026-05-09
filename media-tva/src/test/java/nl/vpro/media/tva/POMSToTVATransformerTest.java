@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since 5.12
+ * @since 8.12
  */
 @Log4j2
 public class POMSToTVATransformerTest {
