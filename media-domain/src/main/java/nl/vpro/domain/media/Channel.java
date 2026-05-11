@@ -84,7 +84,7 @@ public enum Channel implements Displayable, XmlValued {
     RAD1(AUDIO,   "https://www.nporadio1.nl/", 1947) { // voorheen Hilversum 2
         @Override
         public String toString() {
-            return "Radio 1";
+            return "NPO Radio 1";
         }
 
         @Override
@@ -97,7 +97,7 @@ public enum Channel implements Displayable, XmlValued {
     RAD2(AUDIO, "https://www.nporadio2.nl/", 1947) { // voorheen Hilversum 1
         @Override
         public String toString() {
-            return "Radio 2";
+            return "NPO Radio 2";
         }
 
         @Override
@@ -123,7 +123,7 @@ public enum Channel implements Displayable, XmlValued {
     RAD3(AUDIO,  "https://www.npo3fm.nl/", 1965) {
         @Override
         public String toString() {
-            return "3FM";
+            return "NPO 3FM";
         }
 
         @Override
@@ -154,7 +154,7 @@ public enum Channel implements Displayable, XmlValued {
     RAD4(AUDIO, 1975) {
         @Override
         public String toString() {
-            return "Radio 4";
+            return "NPO Radio 4";
         }
 
         @Override
@@ -175,7 +175,7 @@ public enum Channel implements Displayable, XmlValued {
     RAD5(AUDIO, 1983) {
         @Override
         public String toString() {
-            return "Radio 5";
+            return "NPO Radio 5";
         }
 
     },
