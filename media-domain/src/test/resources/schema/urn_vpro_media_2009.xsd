@@ -140,7 +140,7 @@
     <xs:attribute name="midRef" type="xs:string" use="required"/>
     <xs:attribute name="net" type="net"/>
     <xs:attribute name="type" type="scheduleEventTypeEnum"/>
-    <xs:attribute name="urnRef" type="xs:string" use="required"/>
+    <xs:attribute name="urnRef" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="scheduleEventTitle">
@@ -589,6 +589,7 @@
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="ABBREVIATION"/>
+      <xs:enumeration value="VISUAL"/>
     </xs:restriction>
   </xs:simpleType>
 

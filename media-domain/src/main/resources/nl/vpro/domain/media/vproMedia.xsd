@@ -446,6 +446,7 @@
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="ABBREVIATION"/>
+      <xs:enumeration value="VISUAL" />
     </xs:restriction>
   </xs:simpleType>
 
