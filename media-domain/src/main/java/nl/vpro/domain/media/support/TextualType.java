@@ -67,7 +67,13 @@ public enum TextualType {
     KICKER,
     LEXICO,
     WORK,
-    ABBREVIATION;
+    ABBREVIATION,
+
+    /**
+     * Markdown
+     * @since 8.13
+     */
+    MARKDOWN;
 
     private final boolean isDeprecated;
 
