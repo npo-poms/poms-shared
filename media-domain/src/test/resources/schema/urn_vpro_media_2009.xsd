@@ -589,7 +589,7 @@
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="ABBREVIATION"/>
-      <xs:enumeration value="VISUAL"/>
+      <xs:enumeration value="STYLED"/>
     </xs:restriction>
   </xs:simpleType>
 
