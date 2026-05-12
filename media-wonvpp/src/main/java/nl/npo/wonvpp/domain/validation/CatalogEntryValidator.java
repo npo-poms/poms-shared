@@ -17,7 +17,7 @@ public class CatalogEntryValidator  implements ConstraintValidator<ValidCatalogE
          if (value == null) return true;
          if (value.contentType() == null) return false;
          return switch(value.contentType()) {
-             case episode ->
+             case programme, episode ->
                  value.seasonNumber() == null;
              case season ->
                  value.episodeNumber() == null;
