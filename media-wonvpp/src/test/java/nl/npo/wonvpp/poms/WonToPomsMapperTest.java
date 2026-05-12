@@ -2,8 +2,7 @@ package nl.npo.wonvpp.poms;
 
 import lombok.extern.log4j.Log4j2;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Stream;
@@ -67,15 +66,21 @@ class WonToPomsMapperTest {
 
 
     public static Stream<List<CatalogEntry>> alloutput() throws IOException {
+        //return alloutput("output2.tsv");
+        return Stream.concat(alloutput("output.tsv"), alloutput("output2.tsv"));
 
-        return KafkaDumpReader.readTSV(WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/output.tsv"))
+    }
+    public static Stream<List<CatalogEntry>> alloutput(String output) throws IOException {
+        InputStream in = WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/%s".formatted(output));
+        return KafkaDumpReader.readTSV(in)
             .peek(r -> log.info("{}", r))
             .map(KafkaDumpReader.Record::value)
             .map(b -> {
+                byte[] bytes= b.getBytes(StandardCharsets.UTF_8);
                 try {
-                    return Utils.unmarshalEnvelop(new ByteArrayInputStream(b.getBytes(StandardCharsets.UTF_8)));
+                    return Utils.unmarshalEnvelop(new ByteArrayInputStream(bytes));
                 } catch (Exception e) {
-                    log.error(b+ ":" + e.getMessage(), e);
+                    log.error(b + ":" +  new String(bytes) + " " + e.getMessage(), e);
                     return null;
                 }
             });

@@ -1,6 +1,7 @@
 package nl.npo.wonvpp.domain;
 
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.util.List;
@@ -17,6 +18,7 @@ import nl.npo.envelope.NotifyEnvelope;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.jackson2.LocaleDeserializer;
 
+@Log4j2
 public class Utils {
 
     private static final ObjectMapper MAPPER = Utils.createObjectMapper();
@@ -62,6 +64,11 @@ public class Utils {
     }
 
     public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws JacksonException {
-        return unmarshal(new ByteArrayInputStream(envelope.bytes()));
+        try {
+            return unmarshal(new ByteArrayInputStream(envelope.bytes()));
+        } catch (IOException e) {
+            log.warn(new String(envelope.bytes()));
+            throw new RuntimeException(e);
+        }
     }
 }

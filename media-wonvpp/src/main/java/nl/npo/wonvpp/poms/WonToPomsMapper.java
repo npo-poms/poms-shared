@@ -64,11 +64,11 @@ public class WonToPomsMapper {
                 var secondary = key.secondary();
                 Term primaryTerm = classificationService.values().stream()
                     .filter(t -> t.depth() == 4)
-                    .filter(k -> k.getName(nl_vpp).equals(primary)).findFirst().orElseThrow();
+                    .filter(k -> k.getName(nl_vpp).equalsIgnoreCase(primary)).findFirst().orElseThrow();
 
                 final Optional<Term> secondaryTerm = classificationService.values().stream()
                         .filter(t -> primaryTerm.equals(t.getParent()))
-                        .filter(k -> k.getName(nl_vpp).equals(secondary))
+                        .filter(k -> k.getName(nl_vpp).equalsIgnoreCase(secondary))
                         .findFirst();
 
 
@@ -116,7 +116,7 @@ public class WonToPomsMapper {
 
     public @NonNull MediaObject mapToPoms(@NonNull CatalogEntry entry) {
         return switch (entry.contentType()) {
-            case episode -> mapToBroadcast(entry);
+            case programme, episode -> mapToBroadcast(entry);
             case season  -> mapToSeason(entry);
             case serie   -> mapToSeries(entry);
         };
