@@ -73,7 +73,7 @@ public enum TextualType {
      * Markdown
      * @since 8.13
      */
-    VISUAL;
+    STYLED;
 
     private final boolean isDeprecated;
 
