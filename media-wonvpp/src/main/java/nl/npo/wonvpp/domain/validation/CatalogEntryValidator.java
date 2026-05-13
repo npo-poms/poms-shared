@@ -21,7 +21,7 @@ public class CatalogEntryValidator  implements ConstraintValidator<ValidCatalogE
                  value.seasonNumber() == null;
              case season ->
                  value.episodeNumber() == null;
-             case serie ->
+             case serie, series ->
                  value.episodeNumber() == null && value.seasonNumber() == null;
          };
     }

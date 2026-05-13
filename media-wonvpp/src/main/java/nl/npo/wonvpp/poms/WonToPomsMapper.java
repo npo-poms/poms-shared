@@ -40,7 +40,7 @@ public class WonToPomsMapper {
     /**
      * For ownable fields, this owner type is assigned.
      */
-    OwnerType owner = OwnerType.AUTHORITY;
+    OwnerType owner;
 
     /**
      * This is used to map 'WON' ids to POMS ids.
@@ -95,7 +95,7 @@ public class WonToPomsMapper {
                            @Named("won.to.poms.owner") OwnerType ownerType) {
         this.broadcasterService = broadcasterService;
         this.classificationService = classificationService;
-        this.owner = ownerType;
+        this.owner = ownerType == null ? OwnerType.AUTHORITY : ownerType;
     }
 
     public @NonNull MediaTable mapToPoms(@NonNull InputStream entries) throws IOException {
@@ -114,11 +114,12 @@ public class WonToPomsMapper {
         return table;
     }
 
+    @SuppressWarnings("deprecation")
     public @NonNull MediaObject mapToPoms(@NonNull CatalogEntry entry) {
         return switch (entry.contentType()) {
             case programme, episode -> mapToBroadcast(entry);
             case season  -> mapToSeason(entry);
-            case serie   -> mapToSeries(entry);
+            case serie, series   -> mapToSeries(entry);
         };
     }
     protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry) {
