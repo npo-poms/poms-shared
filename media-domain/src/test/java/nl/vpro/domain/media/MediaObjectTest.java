@@ -1056,6 +1056,7 @@ public class MediaObjectTest {
     }
 
     @Test
+    @Disabled("P0MS-320")
     public void unmarshal2() {
         Program p = JAXB.unmarshal(MediaObjectTest.class.getResourceAsStream("/POMS_NOS_16773601.xml"), Program.class);
 

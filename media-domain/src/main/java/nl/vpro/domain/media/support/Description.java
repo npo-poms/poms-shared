@@ -61,7 +61,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
     public Description(@NonNull String description, OwnerType owner, TextualType type) {
         super(owner, type);
-        this.value = description;
+        this.value = strip(description);
     }
 
     public Description(Description source) {
