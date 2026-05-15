@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="CLIP" avType="AUDIO" embeddable="true" mid="POMS_NOS_16773601" sortDate="2022-01-26T13:13:41.349+01:00" workflow="PUBLISHED" creationDate="2022-01-26T13:13:41.349+01:00" lastModified="2025-09-05T11:05:32.147+02:00" publishDate="2026-05-15T00:09:08.749+02:00" urn="urn:vpro:media:program:122838531">
+  <broadcaster id="NOS">NOS</broadcaster>
+  <title owner="BROADCASTER" type="MAIN">NOS Met het Oog op Morgen</title>
+  <title owner="AUTHORITY" type="MAIN">NOS Met het Oog op Morgen</title>
+  <title owner="BROADCASTER" type="SUB">Met het Oog op Morgen 04-03-2020</title>
+  <title owner="AUTHORITY" type="SUB">Met het Oog op Morgen 04-03-2020</title>
+  <description owner="BROADCASTER" type="MAIN">Met vandaag: Italië en corona | Nieuwe staatssecretarissen | Zwart in Rembrandts tijd | Schorem. &#1359
+    Presentatie: Mieke van der Weij.</description>
+  <description owner="AUTHORITY" type="MAIN">Met vandaag: Itali en corona | Nieuwe staatssecretarissen | Zwart in Rembrandts tijd | Schorem. Presentatie: Mieke van der Weij.</description>
+  <geoLocations owner="BROADCASTER"/>
+  <geoLocations owner="AUTHORITY"/>
+  <topics owner="BROADCASTER"/>
+  <topics owner="AUTHORITY"/>
+  <duration>P0DT0H54M30.000S</duration>
+  <credits/>
+  <descendantOf urnRef="urn:vpro:media:group:122807287" midRef="POMS_S_NPO_16769520" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:122807318" midRef="POMS_NOS_16769541" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:122817794" midRef="POMS_S_NOS_16771844" type="PLAYLIST"/>
+  <memberOf added="2025-08-25T09:24:04.171+02:00" highlighted="false" midRef="POMS_NOS_16769541" index="8811" type="PLAYLIST" urnRef="urn:vpro:media:group:122807318">
+    <memberOf midRef="POMS_S_NPO_16769520" type="PLAYLIST" index="198791"/>
+  </memberOf>
+  <memberOf added="2025-08-25T09:24:04.228+02:00" highlighted="false" midRef="POMS_S_NOS_16771844" index="5707" type="PLAYLIST" urnRef="urn:vpro:media:group:122817794">
+    <memberOf midRef="POMS_NOS_16769541" type="PLAYLIST" index="12016">
+      <memberOf midRef="POMS_S_NPO_16769520" type="PLAYLIST" index="198791"/>
+    </memberOf>
+  </memberOf>
+  <prediction state="REALIZED">INTERNETVOD</prediction>
+  <locations>
+    <location owner="AUTHORITY" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2025-09-05T11:05:32.075+02:00" lastModified="2025-09-05T11:05:32.146+02:00" urn="urn:vpro:media:location:138538581">
+      <programUrl>https://entry.cdn.npoaudio.nl/handle/POMS_NOS_16773601.mp3</programUrl>
+      <avAttributes>
+        <byteSize>104651675</byteSize>
+        <avFileFormat>MP3</avFileFormat>
+      </avAttributes>
+    </location>
+  </locations>
+  <images>
+    <shared:image owner="AUTHORITY" type="LOGO" highlighted="false" workflow="PUBLISHED" creationDate="2022-01-26T13:13:41.352+01:00" lastModified="2022-01-26T13:13:41.352+01:00" urn="urn:vpro:media:image:122838534">
+      <shared:title>Met het Oog op Morgen 04-03-2020</shared:title>
+      <shared:description>NOS Met het Oog op Morgen</shared:description>
+      <shared:imageUri>urn:vpro:image:1662593</shared:imageUri>
+      <shared:credits>NPO</shared:credits>
+      <shared:source>https://npoaudio.nl</shared:source>
+      <shared:sourceName>NPO Audio</shared:sourceName>
+      <shared:license>COPYRIGHTED</shared:license>
+      <shared:date>2022</shared:date>
+    </shared:image>
+  </images>
+  <scheduleEvents/>
+  <segments/>
+</program>

@@ -46,7 +46,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @NotNull(message = "description not set")
     @NoHtml(aggressive = false)
     @XmlValue
-    @JsonProperty("value")
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 64000, message = "{nl.vpro.constraints.text.Size.max}")
@@ -88,10 +87,14 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     }
 
     @Override
+    @JsonProperty("value")
     public String get() {
+        // Keep JSON output normalized like JAXB beforeMarshal does.
+        this.value = strip(this.value);
         return value;
     }
     @Override
+    @JsonProperty("value")
     public void set(String s) {
         this.value = strip(s);
     }
@@ -145,6 +148,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     void beforeMarshal(Marshaller marshaller) {
         this.value = strip(this.value);
     }
+
 
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {

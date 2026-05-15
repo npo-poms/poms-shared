@@ -28,6 +28,7 @@ import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.ValidationLevel;
 
@@ -999,6 +1000,7 @@ public class MediaObjectTest {
     public void testUnmarshal() {
         final Program program = MediaBuilder.program()
             .id(1L)
+            .mainDescription("foo\r\nbar")
             .build();
 
         Prediction unPlanned = program.findOrCreatePrediction(Platform.INTERNETVOD);
@@ -1019,9 +1021,47 @@ public class MediaObjectTest {
         assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull();
         assertThat(result.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.ANNOUNCED);
         assertThat(result.getPrediction(Platform.INTERNETVOD).isPlannedAvailability()).isTrue();
+        assertThat(result.getMainDescription()).isEqualTo("foo\nbar");
+    }
+
+    @Test
+    public void testUnmarshalJson() throws Exception {
+        final Program program = MediaBuilder.program()
+            .id(1L)
+            .mainDescription("foo\r\nbar")
+            .build();
+
+        Prediction unPlanned = program.findOrCreatePrediction(Platform.INTERNETVOD);
+        unPlanned.setState(Prediction.State.ANNOUNCED);
+        assertThat(unPlanned.isPlannedAvailability()).isFalse();
+
+
+        Program result = Jackson2TestUtil.roundTrip(program);
+
+
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNull(); // it's not available , so status is irrelevant, and not exposed.
+
+        program.findOrCreatePrediction(Platform.INTERNETVOD).setPlannedAvailability(true);
+
+        result = Jackson2TestUtil.roundTrip(program);
+
+
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull();
+        assertThat(result.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(result.getPrediction(Platform.INTERNETVOD).isPlannedAvailability()).isTrue();
+        assertThat(result.getMainDescription()).isEqualTo("foo\nbar");
+
 
 
     }
+
+    @Test
+    public void unmarshal2() {
+        Program p = JAXB.unmarshal(MediaObjectTest.class.getResourceAsStream("/POMS_NOS_16773601.xml"), Program.class);
+
+        log.info("{}", p);
+    }
+
 
     @Test
     public void testHash() {
