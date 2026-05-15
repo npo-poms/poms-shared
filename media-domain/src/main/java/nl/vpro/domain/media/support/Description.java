@@ -6,6 +6,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
@@ -140,6 +141,11 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return owner == desc.getOwner() && type == desc.getType() && parent.equals(desc.getParent());
 
     }
+
+    void beforeMarshal(Marshaller marshaller) {
+        this.value = strip(this.value);
+    }
+
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         this.parent = (MediaObject) parent;
