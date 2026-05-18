@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -33,6 +34,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @WireMockTest
 public class OpenskosRepositoryTest {
 
+
+    static {
+        Assertions.setMaxStackTraceElementsDisplayed(20);
+    }
 
     @Test
     public void getInstance() {
@@ -79,7 +84,9 @@ public class OpenskosRepositoryTest {
     public void submitDuplicate(WireMockRuntimeInfo wmRuntimeInfo) {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
-        WireMock.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(ok("Concept 'Puk, Pietje (nl)' already exists").withStatus(409)));
+        WireMock.stubFor(post(urlPathEqualTo("/api/concept"))
+            .willReturn(ok("Concept 'Puk, Pietje (nl)' already exists")
+                .withStatus(409)));
 
         GTAANewPerson pietje = GTAANewPerson.builder()
             .givenName("Pietje")
@@ -186,7 +193,8 @@ public class OpenskosRepositoryTest {
 
         WireMock.stubFor(
             get(urlPathEqualTo("/api/find-concepts"))
-                .willReturn(status(500).withBody(f("retrieve-status-not-found.xml"))));
+                .willReturn(status(500)
+                    .withBody(f("retrieve-status-not-found.xml"))));
         Optional<Description> desc = repo.retrieveConceptStatus("blabla");
         assertThat(desc.isPresent()).isFalse();
     }
@@ -196,7 +204,8 @@ public class OpenskosRepositoryTest {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         assertThatThrownBy(() -> {
-            WireMock.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
+            WireMock.stubFor(get(urlPathEqualTo("/api/find-concepts"))
+                .willReturn(status(500).withBody("Random error")));
             Optional<Description> desc = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
         }).isInstanceOf(GTAAError.class);
     }

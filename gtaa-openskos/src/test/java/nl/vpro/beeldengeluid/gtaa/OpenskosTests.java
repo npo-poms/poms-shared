@@ -2,6 +2,7 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
@@ -163,7 +164,7 @@ public class OpenskosTests {
     }
 
     @Test
-    public void testStatus() {
+    public void testStatus() throws IOException, InterruptedException {
         GTAARepository impl = getRealInstance();
         impl.retrieveConceptStatus("bla");
     }

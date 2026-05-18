@@ -2,6 +2,7 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.net.URI;
 import java.time.*;
 import java.util.*;
@@ -375,7 +376,7 @@ public class OpenskosRepositoryITest {
     @ParameterizedTest
     @MethodSource("envs")
 //    @Disabled("This is not a junit test")
-    public void retrieveItemStatus(Env env) {
+    public void retrieveItemStatus(Env env) throws IOException, InterruptedException {
         OpenskosRepository impl = getRealInstance(env);
         Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");
         log.info("{} ", description.get());
