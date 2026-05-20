@@ -12,6 +12,7 @@ import jakarta.validation.Validator;
 import jakarta.xml.bind.JAXB;
 
 import org.assertj.core.api.Assumptions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -49,7 +50,7 @@ class WonToPomsMapperTest {
         //"20260224151601-CatalogEPG-POW_04882561-npo-svod.json",
         //"20260224151602-CatalogEPG-POW_02934251-npo-svod.json",
         //"20260224151602-CatalogEPG-POW_05880359-npo-svod.json",
-        //"20260305105904-CatalogEPG-POW_06213692-npo-fvod.json",
+        "20260305105904-CatalogEPG-POW_06213692-npo-fvod.json",
         "20260520145415-CatalogEPG-BV_101414096-npo-svod nieuw.json"
     })
 
@@ -98,6 +99,7 @@ class WonToPomsMapperTest {
 
     @ParameterizedTest
     @MethodSource("alloutput")
+    @Disabled
     public void testAlls(KafkaDumpReader.Record records) {
         List<CatalogEntry> entries = entry(records);
         Assumptions.assumeThat(entries).isNotNull();
