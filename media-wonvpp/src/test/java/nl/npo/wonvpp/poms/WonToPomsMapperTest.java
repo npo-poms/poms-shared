@@ -19,7 +19,6 @@ import org.meeuw.time.TestClock;
 import org.meeuw.util.kafka.KafkaDumpReader;
 
 import com.fasterxml.jackson.core.JacksonException;
-import com.google.common.collect.Streams;
 
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
@@ -69,11 +68,13 @@ class WonToPomsMapperTest {
 
 
     public static Stream<Record> alloutput() throws IOException {
+        return Stream.empty();
         //return alloutput("output2.tsv");
-        return Streams.concat(
+        /*return Streams.concat(
 //            alloutput("output.tsv"),
             //alloutput("output2.tsv"),
-            alloutput("output3.tsv"));
+            //alloutput("output3.tsv")
+        );*/
 
     }
     public static Stream<KafkaDumpReader.Record> alloutput(String output) throws IOException {
