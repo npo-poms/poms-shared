@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import jakarta.xml.bind.JAXB;
 
 import org.assertj.core.api.Assumptions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,6 +19,7 @@ import org.meeuw.time.TestClock;
 import org.meeuw.util.kafka.KafkaDumpReader;
 
 import com.fasterxml.jackson.core.JacksonException;
+import com.google.common.collect.Streams;
 
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
@@ -45,10 +47,11 @@ class WonToPomsMapperTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "20260224151601-CatalogEPG-POW_04882561-npo-svod.json",
-        "20260224151602-CatalogEPG-POW_02934251-npo-svod.json",
-        "20260224151602-CatalogEPG-POW_05880359-npo-svod.json",
-        "20260305105904-CatalogEPG-POW_06213692-npo-fvod.json"
+        //"20260224151601-CatalogEPG-POW_04882561-npo-svod.json",
+        //"20260224151602-CatalogEPG-POW_02934251-npo-svod.json",
+        //"20260224151602-CatalogEPG-POW_05880359-npo-svod.json",
+        //"20260305105904-CatalogEPG-POW_06213692-npo-fvod.json",
+        "20260520145415-CatalogEPG-BV_101414096-npo-svod nieuw.json"
     })
 
     public void map(String file) throws JacksonException {
@@ -65,35 +68,42 @@ class WonToPomsMapperTest {
     }
 
 
-    public static Stream<List<CatalogEntry>> alloutput() throws IOException {
+    public static Stream<Record> alloutput() throws IOException {
         //return alloutput("output2.tsv");
-        return Stream.concat(alloutput("output.tsv"), alloutput("output2.tsv"));
+        return Streams.concat(
+//            alloutput("output.tsv"),
+            //alloutput("output2.tsv"),
+            alloutput("output3.tsv"));
 
     }
-    public static Stream<List<CatalogEntry>> alloutput(String output) throws IOException {
+    public static Stream<KafkaDumpReader.Record> alloutput(String output) throws IOException {
         InputStream in = WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/%s".formatted(output));
         return KafkaDumpReader.readTSV(in)
-            .peek(r -> log.info("{}", r))
-            .map(KafkaDumpReader.Record::value)
-            .map(b -> {
-                byte[] bytes= b.getBytes(StandardCharsets.UTF_8);
-                try {
-                    return Utils.unmarshalEnvelop(new ByteArrayInputStream(bytes));
-                } catch (Exception e) {
-                    log.error(b + ":" +  new String(bytes) + " " + e.getMessage(), e);
-                    return null;
-                }
+            .peek(r -> log.info("{}", r));
+
+    }
+
+    List<CatalogEntry> entry(KafkaDumpReader.Record record) {
+        byte[] bytes = record.value().getBytes(StandardCharsets.UTF_8);
+        try {
+            return Utils.unmarshalEnvelop(new ByteArrayInputStream(bytes), (b) -> {
+                log.info("{}", new String(b, StandardCharsets.UTF_8));
             });
+        } catch (Exception e) {
+            log.error(":" +  new String(bytes) + " " + e.getMessage(), e);
+            return null;
+        }
     }
 
     @ParameterizedTest
     @MethodSource("alloutput")
-    public void testAlls(List<CatalogEntry> entries) {
+    public void testAlls(KafkaDumpReader.Record records) {
+        List<CatalogEntry> entries = entry(records);
         Assumptions.assumeThat(entries).isNotNull();
         log.info(entries);
         mapper.mapToPoms(entries)
             .forEach(table -> {
-                log.info("{}", table);
+                JAXB.marshal(table, System.out);
                 assertThat(validator.validate(table)).isEmpty();
             });
     }

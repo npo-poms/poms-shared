@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 public record GenreType(
-    @NotNull String primary,
-    @Nullable String secondary
+    @NotNull SubGenreType primary,
+    @Nullable SubGenreType secondary
 ) {
 
 }

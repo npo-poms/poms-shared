@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><mediaInformation xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" source="WONVPP" xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd">
+  <programTable>
+    <program type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="BV_101414096" sortDate="2026-05-20T14:48:00+02:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/BV_101414096</crid>
+      <broadcaster id="AVTR">AVROTROS</broadcaster>
+      <broadcaster id="BNVA">BNNVARA</broadcaster>
+      <title owner="AUTHORITY" type="MAIN">Sluipschutters</title>
+      <title owner="AUTHORITY" type="SUB">Sluipschutters</title>
+      <description owner="AUTHORITY" type="MAIN">Sluipschutters is een vlijmscherp, humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten. 4 vrienden. 100 verschillende gezichten. 325 scenes. 224 locaties.</description>
+      <description owner="AUTHORITY" type="SHORT">Vlijmscherp, humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten.</description>
+      <genre id="3.0.1.6.9">
+        <term>Amusement</term>
+        <term>Comedy</term>
+      </genre>
+      <country code="NL">Nederland</country>
+      <language code="en">Engels</language>
+      <language code="nl" usage="SUPPLEMENTAL">Nederlands</language>
+      <language code="nl" usage="DUBBED">Nederlands</language>
+      <availableSubtitles language="nl" type="CAPTION"/>
+      <releaseYear>2021</releaseYear>
+      <credits>
+        <person externalId="whatson:1036571603517" role="ACTOR">
+          <givenName>Ronald</givenName>
+          <familyName>Goedemondt</familyName>
+        </person>
+        <person externalId="whatson:746231638517" role="ACTOR">
+          <givenName>Leo</givenName>
+          <familyName>Alkemade</familyName>
+        </person>
+        <person externalId="whatson:13019094517" role="ACTOR">
+          <givenName>Bas</givenName>
+          <familyName>Hoeflaak</familyName>
+        </person>
+        <person externalId="whatson:1036573739517" role="ACTOR">
+          <givenName>Jochen</givenName>
+          <familyName>Otten</familyName>
+        </person>
+      </credits>
+      <descendantOf midRef="BV_101414089"/>
+      <ageRating>9</ageRating>
+      <contentRating>ANGST</contentRating>
+      <contentRating>GROF_TAALGEBRUIK</contentRating>
+      <prediction state="ANNOUNCED" publishStart="2026-05-20T14:47:06.662+02:00">INTERNETVOD</prediction>
+      <locations/>
+      <images/>
+      <scheduleEvents>
+        <scheduleEvent channel="NVOD" midRef="BV_101414096" type="ON_DEMAND">
+          <guideDay>2026-05-20+02:00</guideDay>
+          <start>2026-05-20T14:48:00+02:00</start>
+          <poProgID>BV_101414096</poProgID>
+        </scheduleEvent>
+      </scheduleEvents>
+      <episodeOf highlighted="false" midRef="BV_101414089" index="7"/>
+      <segments/>
+    </program>
+  </programTable>
+  <groupTable>
+    <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="BV_101414089" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/BV_101414089</crid>
+      <title owner="AUTHORITY" type="MAIN">Sluipschutters</title>
+      <title owner="AUTHORITY" type="SUB">Sluipschutters Seizoen 5</title>
+      <description owner="AUTHORITY" type="MAIN">Een humoristisch sketchprogramma waarin de Sluipschutters zich in moordend tempo verplaatsen. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen.</description>
+      <credits/>
+      <descendantOf midRef="BNN_101378789"/>
+      <memberOf highlighted="false" midRef="BNN_101378789" index="5"/>
+      <locations/>
+      <images/>
+    </group>
+    <group isOrdered="true" type="SERIES" avType="VIDEO" embeddable="true" mid="BNN_101378789" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
+      <crid>crid://WONVPP/BNN_101378789</crid>
+      <title owner="AUTHORITY" type="MAIN">Sluipschutters</title>
+      <title owner="AUTHORITY" type="SUB">Sluipschutters</title>
+      <description owner="AUTHORITY" type="MAIN">De Sluipschutters verplaatsen zich in moordend tempo. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen. Een humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten</description>
+      <credits/>
+      <locations/>
+      <images/>
+    </group>
+  </groupTable>
+  <schedule channel="NVOD" start="2026-05-20T06:00:00+02:00" stop="2026-05-21T06:00:00+02:00">
+    <scheduleEvent channel="NVOD" midRef="BV_101414096" type="ON_DEMAND">
+      <guideDay>2026-05-20+02:00</guideDay>
+      <start>2026-05-20T14:48:00+02:00</start>
+      <poProgID>BV_101414096</poProgID>
+    </scheduleEvent>
+  </schedule>
+</mediaInformation>

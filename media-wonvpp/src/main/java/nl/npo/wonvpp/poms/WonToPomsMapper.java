@@ -62,25 +62,12 @@ public class WonToPomsMapper {
             public @NonNull Genre load(final @NonNull GenreType key) {
                 var primary = key.primary();
                 var secondary = key.secondary();
-                Term primaryTerm = classificationService.values().stream()
-                    .filter(t -> t.depth() == 4)
-                    .filter(k -> k.getName(nl_vpp).equalsIgnoreCase(primary)).findFirst().orElseThrow();
+                Term primaryTerm = classificationService.getTermsByReference(primary.code()).getFirst();
 
-                final Optional<Term> secondaryTerm = classificationService.values().stream()
-                        .filter(t -> primaryTerm.equals(t.getParent()))
-                        .filter(k -> k.getName(nl_vpp).equalsIgnoreCase(secondary))
-                        .findFirst();
-
+                final Optional<Term> secondaryTerm = classificationService.getTermsByReference(secondary.code()).stream().findFirst();
 
                 if (secondaryTerm.isPresent()) {
                     return Genre.of(secondaryTerm.get());
-                } else {
-
-                    if (StringUtils.isNotEmpty(secondary)) {
-                        if (! "Overig".equalsIgnoreCase(secondary)) {
-                            throw new NoSuchElementException("No such term " + secondary + " for " + primaryTerm);
-                        }
-                    }
                 }
                 return Genre.of(primaryTerm);
             }
@@ -219,7 +206,7 @@ public class WonToPomsMapper {
 
     protected Broadcaster mapToBroadcaster(String broadcaster) {
         return broadcasterService
-            .findFor(BroadcasterService.IdType.WON, broadcaster)
+            .findForIds( broadcaster)
             .orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
     }
 

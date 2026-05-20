@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import java.io.*;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -57,14 +58,18 @@ public class Utils {
      * @return
      */
     @SneakyThrows(IOException.class)
-    public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream) throws JacksonException {
+    public static List<CatalogEntry> unmarshalEnvelop(@NonNull InputStream stream, Consumer<byte[]> consumer) throws JacksonException {
         NotifyEnvelope envelope = MAPPER.readerFor(NotifyEnvelope.class)
             .readValue(stream);
+        if (consumer != null) {
+            consumer.accept(envelope.bytes());
+        }
         return unmarshal(envelope);
     }
 
     public static List<CatalogEntry> unmarshal(@NonNull NotifyEnvelope envelope) throws JacksonException {
         try {
+
             return unmarshal(new ByteArrayInputStream(envelope.bytes()));
         } catch (IOException e) {
             log.warn(new String(envelope.bytes()));

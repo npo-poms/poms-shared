@@ -1,0 +1,121 @@
+[
+  {
+    "broadcasters": [
+      "AVROTROS",
+      "BV"
+    ],
+    "captions": [
+      {
+        "closed": true,
+        "language": "NL",
+        "supplemental": true
+      }
+    ],
+    "castAndCrew": [
+      {
+        "function": "Actor",
+        "person": {
+          "familyName": "Goedemondt",
+          "givenName": "Ronald",
+          "id": 1036571603517
+        }
+      },
+      {
+        "function": "Actor",
+        "person": {
+          "familyName": "Alkemade",
+          "givenName": "Leo",
+          "id": 746231638517
+        }
+      },
+      {
+        "function": "Actor",
+        "person": {
+          "familyName": "Hoeflaak",
+          "givenName": "Bas",
+          "id": 13019094517
+        }
+      },
+      {
+        "function": "Actor",
+        "person": {
+          "familyName": "Otten",
+          "givenName": "Jochen",
+          "id": 1036573739517
+        }
+      }
+    ],
+    "contentType": "episode",
+    "displayTitle": "Sluipschutters",
+    "episodeNumber": 7,
+    "genre": {
+      "primary": {
+        "code": "urn:tva:metadata:cs:2004:06",
+        "name": "Amusement"
+      },
+      "secondary": {
+        "code": "urn:tva:metadata:cs:2004:0609",
+        "name": "Komisch"
+      }
+    },
+    "languages": [
+      {"language": "EN"},
+      {
+        "language": "NL",
+        "usage": "supplemental"
+      },
+      {
+        "language": "NL",
+        "usage": "dubbed"
+      }
+    ],
+    "mediaType": "video",
+    "metadataSource": "WONVPP",
+    "prid": "BV_101414096",
+    "productionCountry": "NL",
+    "productionYear": 2021,
+    "publicationTimestamp": "2026-05-20T14:47:06.662+02:00",
+    "rating": {
+      "advisories": [
+        {"a": "Angst"},
+        {"t": "Grof taalgebruik"}
+      ],
+      "age": "9",
+      "pictograms": "3at",
+      "system": "NICAM"
+    },
+    "relations": {
+      "season": {"prid": "BV_101414089"},
+      "series": {"prid": "BNN_101378789"}
+    },
+    "synopsis": {
+      "long": "Sluipschutters is een vlijmscherp, humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten. 4 vrienden. 100 verschillende gezichten. 325 scenes. 224 locaties.",
+      "short": "Vlijmscherp, humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten."
+    },
+    "title": "Sluipschutters"
+  },
+  {
+    "contentType": "season",
+    "displayTitle": "Sluipschutters Seizoen 5",
+    "mediaType": "video",
+    "metadataSource": "WONVPP",
+    "prid": "BV_101414089",
+    "publicationTimestamp": "2026-05-20T14:47:06.662+02:00",
+    "relations": {
+      "series": {"prid": "BNN_101378789"}
+    },
+    "seasonNumber": "5",
+    "synopsis": {"long": "Een humoristisch sketchprogramma waarin de Sluipschutters zich in moordend tempo verplaatsen. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen."},
+    "title": "Sluipschutters"
+  },
+  {
+    "contentType": "series",
+    "displayTitle": "Sluipschutters",
+    "mediaType": "video",
+    "metadataSource": "WONVPP",
+    "prid": "BNN_101378789",
+    "publicationTimestamp": "2026-05-20T14:47:06.662+02:00",
+    "synopsis": {"long": "De Sluipschutters verplaatsen zich in moordend tempo. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen. Een humoristisch sketchprogramma met Ronald Goedemondt, Bas Hoeflaak, Leo Alkemade en Jochen Otten"},
+    "title": "Sluipschutters"
+  }
+]
