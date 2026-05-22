@@ -174,6 +174,15 @@ public class Roles {
 
 
     /**
+     * The readonly role
+     * @sinced 8.13
+     */
+    public static final String READONLY = MEDIA + "READONLY";
+    public static final String READONLY_ROLE = ROLE + READONLY;
+
+
+
+    /**
      * Unused, I think
      */
     public static final String TVVOD = API + "TVVOD";
