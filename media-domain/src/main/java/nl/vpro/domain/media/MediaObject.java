@@ -853,6 +853,11 @@ MediaObject extends PublishableObject<MediaObject>
         return thirdParties;
     }
 
+    public void setThirdParties(List<ThirdParty> thirdParties) {
+        this.thirdParties = thirdParties == null ? null : updateList(this.thirdParties, thirdParties.stream().distinct().collect(Collectors.toList()));
+    }
+
+
     public MediaObject addThirdParty(ThirdParty thirdParty) {
         if (thirdParty == null) {
             return this;
