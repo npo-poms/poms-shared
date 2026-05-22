@@ -14,6 +14,7 @@
       <xsd:element name="pager" type="tns:mediaPagerType"/>
       <xsd:element name="broadcaster" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="portal" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="thirdParties" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="organization" type="organizationType" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="text" type="tns:mediaFormText" minOccurs="0"/>
       <xsd:element name="title" type="tns:titleFormType" minOccurs="0" maxOccurs="unbounded"/>
