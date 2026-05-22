@@ -181,6 +181,13 @@ public class Roles {
     public static final String READONLY_ROLE = ROLE + READONLY;
 
 
+    /**
+     * The readonly role
+     * @sinced 8.14
+     */
+    public static final String KNIPPER = MEDIA + "KNIPPER";
+    public static final String KNIPPER_ROLE = ROLE + KNIPPER;
+
 
     /**
      * Unused, I think
