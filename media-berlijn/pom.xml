@@ -9,7 +9,7 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-berlijn</artifactId>
   <name>media-berlijn</name>
-  <description>Json bindings for project berlijn topics consumed by poms</description>
+  <description>Json bindings for project berlijn topics consumed by poms. Archived. Never used.</description>
   <dependencies>
     <dependency>
       <groupId>nl.vpro.media</groupId>

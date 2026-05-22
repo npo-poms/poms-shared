@@ -33,6 +33,7 @@ import nl.vpro.domain.user.Organization;
     "pager",
     "broadcasters",
     "portals",
+    "thirdParties",
     "organizations",
     "text_",
     "titles",
@@ -90,6 +91,14 @@ public class MediaForm {
     @XmlElement(name = "portal")
     @JsonProperty("portals")
     private Collection<String> portals;
+
+
+    @Getter
+    @Setter
+    @XmlElement(name = "thirdParties")
+    @JsonProperty("thirdParties")
+    private Collection<String> thirdParties;
+
 
     /**
      * To search on any of the organizations (so both broadcasters and portals)
@@ -404,6 +413,10 @@ public class MediaForm {
 
     public boolean hasPortals() {
         return has(portals);
+    }
+
+    public boolean hasThirdParties() {
+        return has(thirdParties);
     }
 
     public MediaForm setText(String text) {
