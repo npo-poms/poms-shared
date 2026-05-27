@@ -98,7 +98,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public String asString() {
-        return channel.getXmlValue() + ":" + start + (StringUtils.isEmpty(onDemandMid) ? "" : (":" + onDemandMid));
+        return channel.getXmlValue() + ":" + start + (StringUtils.isEmpty(onDemandMid) ? "" : ("\t" + onDemandMid));
 
     }
 
@@ -115,7 +115,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     @Override
-    public int compareTo(@NonNull ScheduleEventIdentifier o) {
+    public int compareTo(ScheduleEventIdentifier o) {
         if (this == o) {
             return 0;
         }
