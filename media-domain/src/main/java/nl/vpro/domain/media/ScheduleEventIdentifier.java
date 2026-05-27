@@ -1,7 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.NonNull;
+
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -44,12 +44,12 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         // to help hibernate
     }
 
-    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start) {
+    public ScheduleEventIdentifier(@NotNull Channel channel, @NotNull Instant start) {
         this(channel, start, null);
     }
 
 
-    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @Nullable @ValidMid String onDemandMid) {
+    public ScheduleEventIdentifier(@NotNull Channel channel, @NotNull Instant start, @Nullable @ValidMid String onDemandMid) {
         // Normalize to milliseconds to match typical database timestamp precision
         this.start = start;
         this.channel = channel;
