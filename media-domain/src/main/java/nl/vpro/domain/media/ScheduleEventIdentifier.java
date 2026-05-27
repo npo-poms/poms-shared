@@ -13,6 +13,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.util.TimeUtils;
 
@@ -44,22 +45,23 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start) {
-        // Normalize to milliseconds to match typical database timestamp precision
-        this.start = start;
-        this.channel = channel;
-        if (channel.isOnDemand()) {
-            throw new IllegalArgumentException("NVOD events should have a mid");
-        }
-        this.onDemandMid = "";
+        this(channel, start, null);
     }
 
 
-    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @NonNull @ValidMid String onDemandMid) {
+    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start, @Nullable @ValidMid String onDemandMid) {
         // Normalize to milliseconds to match typical database timestamp precision
         this.start = start;
         this.channel = channel;
-        if (! channel.isOnDemand()) {
-            throw new IllegalArgumentException("Only NVOD events should have a mid");
+        if (onDemandMid == null) {
+            if (channel.isOnDemand()) {
+                throw new IllegalArgumentException("NVOD events should have a mid");
+            }
+            onDemandMid = "";
+        } else {
+            if (! channel.isOnDemand()) {
+                throw new IllegalArgumentException("Only NVOD events should have a mid");
+            }
         }
         this.onDemandMid = onDemandMid;
     }
@@ -101,20 +103,14 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public static ScheduleEventIdentifier parse(CharSequence id) {
-        String[] split = id.toString().split(":", 3);
-        if (split.length == 2) {
-            return new ScheduleEventIdentifier(
-                Channel.valueOfXml(split[0]),
-                TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)
-                ));
-
-        } else {
-            return new ScheduleEventIdentifier(
-                Channel.valueOfXml(split[0]),
-                TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)),
-                split[2]
-            );
-        }
+        String[] split0 = id.toString().split("\t", 2);
+        final String[] split = split0[0].split(":", 2);
+        final String onDemandMid = split0.length == 1 ? null : split0[1];
+        return new ScheduleEventIdentifier(
+            Channel.valueOfXml(split[0]),
+            TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)),
+            onDemandMid
+        );
 
     }
 
