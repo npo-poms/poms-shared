@@ -50,17 +50,16 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
 
 
     public ScheduleEventIdentifier(@NotNull Channel channel, @NotNull Instant start, @Nullable @ValidMid String onDemandMid) {
-        // Normalize to milliseconds to match typical database timestamp precision
         this.start = start;
         this.channel = channel;
         if (onDemandMid == null) {
             if (channel.isOnDemand()) {
-                throw new IllegalArgumentException("NVOD events should have a mid");
+                throw new IllegalArgumentException("On demand events should have a mid"); // (because otherwise the key may not be unique)
             }
             onDemandMid = "";
         } else {
             if (! channel.isOnDemand()) {
-                throw new IllegalArgumentException("Only NVOD events should have a mid");
+                throw new IllegalArgumentException("Only on demand events should have a mid");
             }
         }
         this.onDemandMid = onDemandMid;
