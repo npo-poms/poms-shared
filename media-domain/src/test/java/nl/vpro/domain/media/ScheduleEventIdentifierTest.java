@@ -39,7 +39,7 @@ class ScheduleEventIdentifierTest implements ComparableTheory<ScheduleEventIdent
     void parseOnDemand() {
         assertThatThrownBy(() -> ScheduleEventIdentifier.parse("NVOD:2026-04-16T05:38:00Z"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("NVOD events should have a mid");
+            .hasMessageContaining("On demand events should have a mid");
 
         ScheduleEventIdentifier ev = ScheduleEventIdentifier.parse("NVOD:2026-04-16T05:38:00Z\tMID_123");
         assertThat(ev.getChannel()).isEqualTo(Channel.NVOD);
