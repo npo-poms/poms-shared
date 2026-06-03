@@ -12,7 +12,6 @@ import jakarta.validation.Validator;
 import jakarta.xml.bind.JAXB;
 
 import org.assertj.core.api.Assumptions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,6 +19,7 @@ import org.meeuw.time.TestClock;
 import org.meeuw.util.kafka.KafkaDumpReader;
 
 import com.fasterxml.jackson.core.JacksonException;
+import com.google.common.collect.Streams;
 
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
@@ -69,13 +69,11 @@ class WonToPomsMapperTest {
 
 
     public static Stream<Record> alloutput() throws IOException {
-        return Stream.empty();
-        //return alloutput("output2.tsv");
-        /*return Streams.concat(
-//            alloutput("output.tsv"),
+        return Streams.concat(
+            alloutput("output.tsv")
             //alloutput("output2.tsv"),
             //alloutput("output3.tsv")
-        );*/
+        );
 
     }
     public static Stream<KafkaDumpReader.Record> alloutput(String output) throws IOException {
@@ -92,14 +90,13 @@ class WonToPomsMapperTest {
                 log.info("{}", new String(b, StandardCharsets.UTF_8));
             });
         } catch (Exception e) {
-            log.error(":" +  new String(bytes) + " " + e.getMessage(), e);
+            log.error(":{} {}", new String(bytes), e.getMessage(), e);
             return null;
         }
     }
 
     @ParameterizedTest
     @MethodSource("alloutput")
-    @Disabled
     public void testAlls(KafkaDumpReader.Record records) {
         List<CatalogEntry> entries = entry(records);
         Assumptions.assumeThat(entries).isNotNull();
