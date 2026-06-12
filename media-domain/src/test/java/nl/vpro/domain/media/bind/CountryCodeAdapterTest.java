@@ -44,8 +44,7 @@ public class CountryCodeAdapterTest {
             .or((c) -> c instanceof UserAssignedCountrySubdivision)
         ).forEach((c) -> {
             result.put(c.getCode(), cca.unmarshal(c.getCode()));
-            if (c instanceof Country) {
-                Country cc = (Country) c;
+            if (c instanceof Country cc) {
                 String a2 = cc.getCode();
                 String a3 = cc instanceof CurrentCountry ?  ((CurrentCountry) cc).getAlpha3() : null;
                 if (a2 != null) {
@@ -60,7 +59,7 @@ public class CountryCodeAdapterTest {
         System.out.println("||code||name in english||assignment||");
         for (Map.Entry<String, Region> e : result.entrySet()) {
             Region c = e.getValue();
-            CountryCode.Assignment a = (c instanceof CurrentCountry) ? ((CurrentCountry) c).getAssignment() : null;
+            var a = (c instanceof CurrentCountry currentCountry) ? currentCountry.getAssignment() : null;
             System.out.println("|" + e.getKey() + "|" + e.getValue().getName() + "|" + a + "|");
         }
     }
