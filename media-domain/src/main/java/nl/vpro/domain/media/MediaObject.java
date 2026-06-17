@@ -1411,7 +1411,7 @@ MediaObject extends PublishableObject<MediaObject>
         @XmlElement(name = "name", type = Name.class)
     })
     @JsonIgnore
-    public List<Credits> getCredits() {
+    public List<@NonNull Credits> getCredits() {
         if (credits == null) {
             credits = new ArrayList<>();
         }
