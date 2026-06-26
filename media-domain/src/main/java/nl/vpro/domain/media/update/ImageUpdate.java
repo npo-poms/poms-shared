@@ -60,7 +60,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "credits",
     "date",
     "offset",
-    "image",
+    "imageData",
+    "imageLocation",
+    "imageUrn",
     "crids"
 })
 @Slf4j
@@ -172,12 +174,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      * It can also be an {@link ImageData} or an {@link ImageLocation} in which case this object describes a <em>new</em> image.
      * </p>
      */
-    @XmlElement
+    @XmlElement(name = "imageData")
     private ImageData imageData;
 
 
-    @XmlElement
-    private ImageLocation imagelocation;
+    @XmlElement(name = "imageLocation")
+    private ImageLocation imageLocation;
 
 
     @XmlElement(name = "urn")
@@ -212,7 +214,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imagelocation = image;
+        this.imageLocation = image;
     }
 
     /**
@@ -280,7 +282,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imagelocation = imageLocation;
+        this.imageLocation = imageLocation;
         this.imageData = imageData;
         this.imageUrn = imageUrn;
         if (!imageDataValid()) {
@@ -310,7 +312,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
                 this.imageUrn = uri;
             } else {
-                this.imagelocation = new ImageLocation(uri);
+                this.imageLocation = new ImageLocation(uri);
             }
         }
         date = image.getDate();
@@ -335,7 +337,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         result.setUrn(urn);
         if (imageUrn != null) {
             result.setImageUri(imageUrn);
-        } else if (imagelocation  != null) {
+        } else if (imageLocation  != null) {
             //result.setImageUri(((ImageLocation) image).getUrl());
         }
         result.setCrids(crids);
@@ -395,7 +397,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
      */
     public void setImage(ImageLocation image) {
-        this.imagelocation = image;
+        this.imageLocation = image;
     }
 
     /**
@@ -424,8 +426,8 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     }
 
     protected Object getImage() {
-        if (imagelocation != null) {
-            return imageData;
+        if (imageLocation != null) {
+            return imageLocation;
         }
         if (imageData != null) {
             return imageData;
@@ -437,7 +439,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @AssertTrue
     protected boolean imageDataValid() {
         int count = 0;
-        if (imagelocation != null) {
+        if (imageLocation != null) {
             count++;
         }
         if (imageData != null) {
