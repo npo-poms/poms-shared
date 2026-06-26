@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.image.ImageType;
@@ -93,6 +94,18 @@ public class ImageUpdateTest {
 
         assertThat(update.violations(WeakWarningValidatorGroup.class)).isNotEmpty();
         log.info("v:{}", update.violations(WeakWarningValidatorGroup.class));
+
+    }
+
+    @Test
+    public void wrappedValidate() {
+        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null,  "urn:vpro:image:xxx");
+
+        assertThat(Validation.getValidator().validate(update))
+            .hasSize(1)
+            .has(new Condition<>(violations ->
+                violations.stream().anyMatch(v -> v.getMessage().equals("must contain a valid URI (urn:vpro:image:xxx isn't)")), "Contains 'xxx'"));
+
 
     }
 
