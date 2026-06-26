@@ -7,6 +7,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.validation.URI;
 
 /**
  * @since 8.14
@@ -18,21 +21,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class ImageWrapper {
 
     @Valid
-    ImageData imageData;
+    @JsonProperty("imageData")
+    ImageData data;
     @Valid
-    ImageLocation imageLocation;
+    @JsonProperty("imageLocation")
+    ImageLocation location;
 
+    @URI(schemes = "urn", patterns = {"urn:vpro:image:\\d+"})
     String urn;
 
-    static ImageWrapper withImageData(ImageData imageData) {
+    static ImageWrapper withData(ImageData imageData) {
         ImageWrapper result = new ImageWrapper();
-        result.imageData = imageData;
+        result.data = imageData;
         return result;
     }
 
-    static ImageWrapper withImageLocation(ImageLocation imageLocation) {
+    static ImageWrapper withLocation(ImageLocation imageLocation) {
         ImageWrapper result = new ImageWrapper();
-        result.imageLocation = imageLocation;
+        result.location = imageLocation;
         return result;
     }
 
@@ -44,8 +50,8 @@ public class ImageWrapper {
 
     static ImageWrapper of(ImageLocation imageLocation, ImageData imageData, String urn) {
         ImageWrapper result = new ImageWrapper();
-        result.imageLocation = imageLocation;
-        result.imageData = imageData;
+        result.location = imageLocation;
+        result.data = imageData;
         result.urn = urn;
         return result;
     }
@@ -55,10 +61,10 @@ public class ImageWrapper {
             return null;
         }
         if (xmlImage instanceof ImageLocation imageLocation) {
-            return withImageLocation(imageLocation);
+            return withLocation(imageLocation);
         }
         if (xmlImage instanceof ImageData imageData) {
-            return withImageData(imageData);
+            return withData(imageData);
         }
         if (xmlImage instanceof String urn) {
             return withUrn(urn);
@@ -67,11 +73,11 @@ public class ImageWrapper {
     }
 
     Object asXmlValue() {
-        if (imageLocation != null) {
-            return imageLocation;
+        if (location != null) {
+            return location;
         }
-        if (imageData != null) {
-            return imageData;
+        if (data != null) {
+            return data;
         }
         return urn;
     }
@@ -79,10 +85,10 @@ public class ImageWrapper {
     @AssertTrue
     protected boolean isValid() {
         int count = 0;
-        if (imageLocation != null) {
+        if (location != null) {
             count++;
         }
-        if (imageData != null) {
+        if (data != null) {
             count++;
         }
         if (urn != null) {

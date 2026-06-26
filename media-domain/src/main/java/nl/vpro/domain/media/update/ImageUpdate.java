@@ -177,7 +177,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @XmlTransient
     @JsonIgnore
     @Valid
-    private ImageWrapper imageWrapper;
+    private ImageWrapper wrapper;
 
 
     @XmlElement(name = "crid")
@@ -200,22 +200,29 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        setImageWrapper(image);
+        setImage(image);
     }
 
     public ImageUpdate(@NonNull ImageType type, @NonNull String title, String description, ImageLocation image) {
         this.description = description;
         this.title = title;
         this.type = type;
-        setImageWrapper(image);
+        setImage(image);
+    }
+
+    public ImageUpdate(@NonNull ImageType type, @NonNull String title, String description, @URI(schemes = "urn", patterns = {"urn:vpro:image:\\d+"}) String urn) {
+        this.description = description;
+        this.title = title;
+        this.type = type;
+        setImage(urn);
     }
 
     /**
      */
     @Override
     public String getImageUri() {
-        if (imageWrapper != null) {
-            return imageWrapper.getUrn();
+        if (wrapper != null) {
+            return wrapper.getUrn();
         }
         return null;
     }
@@ -275,7 +282,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imageWrapper = ImageWrapper.of(imageLocation, imageData, imageUrn);
+        this.wrapper = ImageWrapper.of(imageLocation, imageData, imageUrn);
         if (!imageDataValid()) {
             throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
         }
@@ -298,12 +305,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
             if (uri
                 .replace('.', ':') // See MSE-865
                 .startsWith(BackendImage.BASE_URN)) {
-                setImageWrapper(uri);
+                setImage(uri);
             } else if (uri.startsWith("urn:")) {
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
-                setImageWrapper(uri);
+                setImage(uri);
             } else {
-                setImageWrapper(new ImageLocation(uri));
+                setImage(new ImageLocation(uri));
             }
         }
         date = image.getDate();
@@ -326,9 +333,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urn);
-        if (imageWrapper != null && imageWrapper.urn != null) {
-            result.setImageUri(imageWrapper.urn);
-        } else if (imageWrapper != null && imageWrapper.imageLocation != null) {
+        if (wrapper != null && wrapper.urn != null) {
+            result.setImageUri(wrapper.urn);
+        } else if (wrapper != null && wrapper.location != null) {
             //result.setImageUri(((ImageLocation) image).getUrl());
         }
         result.setCrids(crids);
@@ -380,45 +387,34 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     /**
      * Sets the image as an {@link ImageData} object. I.e. the actual blob
      */
-    public void setImageWrapper(ImageData image) {
-        this.imageWrapper = image == null ? null : ImageWrapper.withImageData(image);
+    public void setImage(ImageData image) {
+        this.wrapper = image == null ? null : ImageWrapper.withData(image);
     }
 
     /**
      * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
      */
-    public void setImageWrapper(ImageLocation image) {
-        this.imageWrapper = image == null ? null : ImageWrapper.withImageLocation(image);
+    public void setImage(ImageLocation image) {
+        this.wrapper = image == null ? null : ImageWrapper.withLocation(image);
     }
 
     /**
      * Sets the image as an urn, i.e. a reference to the image database
      */
-    public void setImageWrapper(String urn) {
-        this.imageWrapper = urn == null ? null : ImageWrapper.withUrn(urn);
+    public void setImage(String urn) {
+        this.wrapper = urn == null ? null : ImageWrapper.withUrn(urn);
     }
 
     @JsonProperty("image")
     public ImageWrapper getImage() {
-        return imageWrapper;
+        return wrapper;
     }
 
     @JsonProperty("image")
     public void setImage(ImageWrapper image) {
-        this.imageWrapper = image;
+        this.wrapper = image;
     }
 
-    public void setImage(ImageData image) {
-        setImageWrapper(image);
-    }
-
-    public void setImage(ImageLocation image) {
-        setImageWrapper(image);
-    }
-
-    public void setImage(String urn) {
-        setImageWrapper(urn);
-    }
 
     @XmlElements(value = {
         @XmlElement(name = "imageData", type = ImageData.class),
@@ -427,12 +423,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     })
     @JsonIgnore
     protected Object getXmlImage() {
-        return imageWrapper == null ? null : imageWrapper.asXmlValue();
+        return wrapper == null ? null : wrapper.asXmlValue();
     }
 
     @JsonIgnore
     protected void setXmlImage(Object xmlImage) {
-        imageWrapper = ImageWrapper.fromXmlValue(xmlImage);
+        wrapper = ImageWrapper.fromXmlValue(xmlImage);
     }
 
     @Override
@@ -443,7 +439,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @Override
     public String toString() {
         return "ImageUpdate{" +
-            "image=" + imageWrapper +
+            "image=" + wrapper +
             ", type=" + type +
             ", title=" + title +
             '}';
@@ -455,7 +451,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
 
     @AssertTrue
     protected boolean imageDataValid() {
-        return imageWrapper != null && imageWrapper.isValid();
+        return wrapper != null && wrapper.isValid();
     }
 
 }
