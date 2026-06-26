@@ -1,7 +1,6 @@
 package nl.vpro.domain.page.update;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -17,14 +16,15 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.page.*;
 import nl.vpro.domain.support.License;
-import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.*;
+import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.serialize.SerializeTestUtil;
 
 import static java.util.Collections.singletonList;
 import static java.util.Objects.requireNonNull;
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -91,15 +91,27 @@ public class PageUpdateTest {
 
 
     @Test
-    public void unmarshal() {
-        String xml = """
-            <page type="ARTICLE" url="http://www.vpro.nl/article/123"  xmlns="urn:vpro:pages:update:2013">
+    public void xml() {
+        PageUpdateBuilder builder = PageUpdate.builder(PageType.ARTICLE, "http://www.test.vpro.nl/123")
+            .broadcasters("VPRO")
+            .crids("crid://bla/123")
+            .title("Hoi2")
+            .images(ImageUpdate.builder().imageUrl("https://www.vpro.nl/plaatje").build());
+
+        PageUpdate update= assertThatXml(builder.build()).isSimilarTo("""
+            <page type="ARTICLE" url="http://www.test.vpro.nl/123"  xmlns="urn:vpro:pages:update:2013">
               <crid>crid://bla/123</crid>
               <broadcaster>VPRO</broadcaster>
               <title>Hoi2</title>
-            </page>""";
-        PageUpdate update = JAXB.unmarshal(new StringReader(xml), PageUpdate.class);
+              <image>
+                 <imageLocation>
+                    <url>https://www.vpro.nl/plaatje</url>
+                  </imageLocation>
+              </image>
+            </page>""").actual();
+
         assertThat(update.getTitle()).isEqualTo("Hoi2");
+        assertThat(update.getImages().getFirst().getImageLocation().getUrl()).isEqualTo("https://www.vpro.nl/plaatje");
     }
 
     private static final RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
