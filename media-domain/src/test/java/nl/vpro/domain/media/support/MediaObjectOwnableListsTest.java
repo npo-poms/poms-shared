@@ -36,7 +36,7 @@ public class MediaObjectOwnableListsTest {
             GeoLocation.builder().name("Utrecht").scopeNote("City").uri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
-        GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
+        GeoLocations g2 = GeoLocations.builder().owner(OwnerType.AUTHORITY).values(geoLocation2).build();
         SortedSet<GeoLocations> set = new TreeSet<>(Arrays.asList(g2, g1));
 
         final SortedSet<GeoLocations> result = MediaObjectOwnableLists.expandExistingOwnedList(set,
@@ -44,8 +44,8 @@ public class MediaObjectOwnableListsTest {
                 OwnerType.ENTRIES
         );
         assertThat(result.size()).isEqualTo(4);
-        assertThat(result.stream().map(v -> v.getOwner() + ":" + v.getValues().get(0).getName()).collect(Collectors.toList()))
-                .isEqualTo(Arrays.asList("BROADCASTER:Amsterdam", "NPO:Amsterdam", "MIS:Amsterdam", "WHATS_ON:Utrecht"));
+        assertThat(result.stream().map(v -> v.getOwner() + ":" + v.getValues().getFirst().getName()).collect(Collectors.toList()))
+                .isEqualTo(Arrays.asList("BROADCASTER:Amsterdam", "NPO:Amsterdam", "MIS:Amsterdam", "AUTHORITY:Utrecht"));
 
         for (GeoLocations value : result) {
             log.info(value.toString());
@@ -62,7 +62,7 @@ public class MediaObjectOwnableListsTest {
             GeoLocation.builder().id(2L).name("Utrecht").scopeNote("City").uri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
-        GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
+        GeoLocations g2 = GeoLocations.builder().owner(OwnerType.AUTHORITY).values(geoLocation2).build();
         SortedSet<GeoLocations> set = new TreeSet<>(Arrays.asList(g2, g1));
         program.setGeoLocations(set);
 
@@ -100,7 +100,7 @@ public class MediaObjectOwnableListsTest {
         //I expect the second item to override the previous one
         assertThat(program.getGeoLocations()).hasSize(1);
         assertThat(program.getGeoLocations().first().getValues()).hasSize(1);
-        assertThat(program.getGeoLocations().first().getValues().get(0).getGtaaUri()).isEqualTo("https://wikipedia/lll");
+        assertThat(program.getGeoLocations().first().getValues().getFirst().getGtaaUri()).isEqualTo("https://wikipedia/lll");
 
         // but actually the object should not have been changed
         assertThat(program.getGeoLocations().first() == geoLocations1).isTrue();
