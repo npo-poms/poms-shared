@@ -16,6 +16,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Image;
 import nl.vpro.domain.support.License;
@@ -33,7 +35,7 @@ import nl.vpro.validation.WarningValidatorGroup;
     "sourceName",
     "license",
     "credits",
-    "image",
+    "imageLocation"
 })
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor
@@ -97,14 +99,9 @@ public class ImageUpdate implements Serializable {
     private License license;
 
 
-    @XmlElements(value = {
-//        @XmlElement(name = "imageData", namespace = Xmlns.UPDATE_NAMESPACE, type = ImageData.class),
-//        @XmlElement(name = "urn", namespace = Xmlns.UPDATE_NAMESPACE, type = String.class),
-        @XmlElement(name = "imageLocation", type = ImageLocation.class)
-    })
     @NotNull
     @Valid
-    private Object image;
+    private ImageLocation imageLocation;
 
     public ImageUpdate() {
     }
@@ -118,18 +115,18 @@ public class ImageUpdate implements Serializable {
     }
 */
 
-    public ImageUpdate(ImageType type, String title, String description, ImageLocation image) {
+    public ImageUpdate(@NonNull ImageType type, String title, String description, @NonNull ImageLocation image) {
         this.description = description;
         this.title = title;
         this.type = type;
-        this.image = image;
+        this.imageLocation = image;
     }
 
     public ImageUpdate(Image image) {
         type = image.getType();
         title = image.getTitle();
         description = image.getDescription();
-        this.image = new ImageLocation(image.getUrl());
+        this.imageLocation = new ImageLocation(image.getUrl());
     }
 
     public Image toImage() {
@@ -141,12 +138,7 @@ public class ImageUpdate implements Serializable {
         result.setSourceName(sourceName);
         result.setCredits(credits);
         result.setLicense(license);
-        if(image instanceof ImageLocation) {
-            result.setUrl(((ImageLocation)image).getUrl());
-        } else {
-            throw new UnsupportedOperationException("We only support image locations for now");
-        }
-
+        result.setUrl(imageLocation.getUrl());
         return result;
     }
 
@@ -161,20 +153,25 @@ public class ImageUpdate implements Serializable {
 
         ImageUpdate that = (ImageUpdate)o;
 
-        return Objects.equals(image, that.image);
+        return Objects.equals(imageLocation, that.imageLocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(image);
+        return Objects.hashCode(imageLocation);
     }
 
 
     public static class Builder {
 
         public Builder imageUrl(String imageLocation) {
-            return image(new ImageLocation(imageLocation));
+            return imageLocation(new ImageLocation(imageLocation));
         }
+
+        public Builder image(ImageLocation imageLocation) {
+            return imageLocation(imageLocation);
+        }
+
 
     }
 }
