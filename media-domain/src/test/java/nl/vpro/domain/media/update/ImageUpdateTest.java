@@ -4,10 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.Locale;
 
-import org.assertj.core.api.Condition;
+import jakarta.validation.ConstraintViolation;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
@@ -24,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.0
  */
 @Slf4j
+@Isolated
 public class ImageUpdateTest {
 
     static {
@@ -107,14 +111,10 @@ public class ImageUpdateTest {
     public void wrappedValidate() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null,  "urn:vpro:image:xxx");
 
-        assertThat(Validation.getValidator().validate(update))
+        Collection<? extends ConstraintViolation<ImageUpdate>> actual = assertThat(Validation.getValidator().validate(update))
             .hasSize(1)
-            .has(new Condition<>(
-                violations -> violations.stream().anyMatch(v -> v.getMessage().equals("must contain a valid URI (urn:vpro:image:xxx isn't)")),
-                "proper validation message")
-            );
-
-
+            .actual();
+        assertThat(actual.iterator().next().getMessage()).isEqualTo("must contain a valid URI (urn:vpro:image:xxx isn't)");
     }
 
 
