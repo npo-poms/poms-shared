@@ -31,8 +31,9 @@ import nl.vpro.validation.WarningValidatorGroup;
 
 import static java.time.Instant.ofEpochMilli;
 import static nl.vpro.domain.media.MediaBuilder.program;
-import static nl.vpro.domain.media.Region.BENELUX;
+
 import static nl.vpro.domain.media.Region.NL;
+import static nl.vpro.domain.media.Region.NLBES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -185,7 +186,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testInvalidBecauseNoSubOrMain() throws NoSuchFieldException, IllegalAccessException {
+    public void testInvalidBecauseNoSubOrMain() {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
@@ -223,12 +224,12 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         ProgramUpdate programUpdate = ProgramUpdate.create();
         programUpdate.setMid("program_mid");
-        programUpdate.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+        programUpdate.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.ORIGINAL))));
         programUpdate.setSegments(new TreeSet<>(Collections.singletonList(segment)));
 
         String expected = """
             <program embeddable="true" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009" mid="program_mid">
-                <title type="EPISODE">title</title>
+                <title type="ORIGINAL">title</title>
                 <intentions/>
                 <targetGroups/>
                 <geoLocations/>
@@ -260,7 +261,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(result, """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true" workflow="FOR PUBLICATION" mid="program_mid">
-                <title owner="MIS" type="EPISODE">title</title>
+                <title owner="MIS" type="ORIGINAL">title</title>
                 <intentions owner="MIS"/>
                 <targetGroups owner="MIS"/>
                 <geoLocations owner="MIS"/>
@@ -300,7 +301,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
         ProgramUpdate program = ProgramUpdate.create();
-        program.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+        program.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.ORIGINAL))));
 
         program.setSegments(new TreeSet<>(Collections.singletonList(segment)));
 
@@ -459,11 +460,11 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         rounded.getBroadcasters().add("VPRO");
         assertThat(rounded.fetch().getBroadcasters()).hasSize(2);
-        rounded.getBroadcasters().remove(0);
+        rounded.getBroadcasters().removeFirst();
         assertThat(rounded.fetch().getBroadcasters()).hasSize(1);
-        assertThat(rounded.fetch().getBroadcasters().get(0).getId()).isEqualTo("VPRO");
+        assertThat(rounded.fetch().getBroadcasters().getFirst().getId()).isEqualTo("VPRO");
         rounded.setBroadcasters(Collections.singletonList("EO"));
-        assertThat(rounded.fetch().getBroadcasters().get(0).getId()).isEqualTo("EO");
+        assertThat(rounded.fetch().getBroadcasters().getFirst().getId()).isEqualTo("EO");
 
 
     }
@@ -491,14 +492,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
-    @SuppressWarnings("deprecation")
     @Test
     public void testGetGeoRestrictions() {
         ProgramUpdate update = programUpdate();
         update.setGeoRestrictions(
             new TreeSet<>(Arrays.asList(
                 new GeoRestrictionUpdate(
-                    new GeoRestriction(BENELUX)),
+                    new GeoRestriction(NLBES)),
                 new GeoRestrictionUpdate(
                     new GeoRestriction(NL, ofEpochMilli(0), ofEpochMilli((1000000)))))
             )
@@ -508,7 +508,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <program embeddable="true" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
                 <region start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:16:40+01:00" platform="INTERNETVOD">NL</region>
-                <region platform="INTERNETVOD">BENELUX</region>
+                <region platform="INTERNETVOD">NLBES</region>
                 <geoLocations/>
                 <topics/>
                 <credits/>
@@ -772,9 +772,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = JAXBTestUtil.roundTripAndSimilar(update, expected).fetch();
 
         assertThat(program.getCredits().size()).isEqualTo(1);
-        assertThat(program.getPersons().get(0).getGivenName()).isEqualTo("Pietje");
-        assertThat(program.getPersons().get(0).getFamilyName()).isEqualTo("Puk");
-        assertThat(program.getCredits().get(0).getRole()).isEqualTo(RoleType.DIRECTOR);
+        assertThat(program.getPersons().getFirst().getGivenName()).isEqualTo("Pietje");
+        assertThat(program.getPersons().getFirst().getFamilyName()).isEqualTo("Puk");
+        assertThat(program.getCredits().getFirst().getRole()).isEqualTo(RoleType.DIRECTOR);
     }
 
     @Test
