@@ -30,10 +30,11 @@ public class OwnerTypeTest {
         assertThat(OwnerType.IMMIX.isDeprecated()).isTrue();
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void after() {
         assertThat(OwnerType.after((OwnerType.BROADCASTER))).isEqualTo(OwnerType.values());
-        assertThat(OwnerType.after((OwnerType.NEBO))).isEqualTo(Arrays.asList(OwnerType.values()).subList(1, OwnerType.values().length).toArray());
+        assertThat(OwnerType.after((OwnerType.NEBO))).isEqualTo(Arrays.copyOfRange(OwnerType.values(), 1, OwnerType.values().length, Object[].class));
 
     }
 
