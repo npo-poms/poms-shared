@@ -111,7 +111,7 @@ public class PageUpdateTest {
             </page>""").actual();
 
         assertThat(update.getTitle()).isEqualTo("Hoi2");
-        assertThat(update.getImages().getFirst().getImageLocation().getUrl()).isEqualTo("https://www.vpro.nl/plaatje");
+        assertThat(((ImageLocation) update.getImages().getFirst().getImage()).getUrl()).isEqualTo("https://www.vpro.nl/plaatje");
     }
 
     private static final RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
