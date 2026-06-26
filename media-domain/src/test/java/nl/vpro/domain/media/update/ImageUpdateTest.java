@@ -84,9 +84,7 @@ public class ImageUpdateTest {
               "sourceName" : "placeholdit",
               "license" : "CC_BY",
               "credits" : "nl.vpro.domain.media.update.ImageUpdateTest",
-              "image" : {
-                  "urn" : "urn:vpro:image:678454"
-              },
+              "image" : "urn:vpro:image:678454",
               "type" : "PICTURE",
               "highlighted" : false
             }""");
