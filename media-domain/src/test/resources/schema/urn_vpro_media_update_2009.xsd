@@ -354,9 +354,11 @@
       <xs:element name="credits" type="xs:string" minOccurs="0"/>
       <xs:element name="date" type="xs:string" minOccurs="0"/>
       <xs:element name="offset" type="xs:duration" minOccurs="0"/>
-      <xs:element name="imageData" type="imageDataType" minOccurs="0"/>
-      <xs:element name="imageLocation" type="imageLocationType" minOccurs="0"/>
-      <xs:element name="urn" type="xs:string" minOccurs="0"/>
+      <xs:choice minOccurs="0">
+        <xs:element name="imageData" type="imageDataType"/>
+        <xs:element name="imageLocation" type="imageLocationType"/>
+        <xs:element name="urn" type="xs:string"/>
+      </xs:choice>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>

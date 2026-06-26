@@ -24,6 +24,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -60,9 +62,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "credits",
     "date",
     "offset",
-    "imageData",
-    "imageLocation",
-    "imageUrn",
+    "xmlImage",
     "crids"
 })
 @Slf4j
@@ -174,17 +174,10 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      * It can also be an {@link ImageData} or an {@link ImageLocation} in which case this object describes a <em>new</em> image.
      * </p>
      */
-    @XmlElement(name = "imageData")
-    private ImageData imageData;
-
-
-    @XmlElement(name = "imageLocation")
-    private ImageLocation imageLocation;
-
-
-    @XmlElement(name = "urn")
-    private String imageUrn;
-
+    @XmlTransient
+    @JsonIgnore
+    @Valid
+    private ImageWrapper imageWrapper;
 
 
     @XmlElement(name = "crid")
@@ -207,22 +200,22 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imageData = image;
+        setImageWrapper(image);
     }
 
     public ImageUpdate(@NonNull ImageType type, @NonNull String title, String description, ImageLocation image) {
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imageLocation = image;
+        setImageWrapper(image);
     }
 
     /**
      */
     @Override
     public String getImageUri() {
-        if (imageUrn != null) {
-            return imageUrn;
+        if (imageWrapper != null) {
+            return imageWrapper.getUrn();
         }
         return null;
     }
@@ -282,9 +275,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        this.imageLocation = imageLocation;
-        this.imageData = imageData;
-        this.imageUrn = imageUrn;
+        this.imageWrapper = ImageWrapper.of(imageLocation, imageData, imageUrn);
         if (!imageDataValid()) {
             throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
         }
@@ -307,12 +298,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
             if (uri
                 .replace('.', ':') // See MSE-865
                 .startsWith(BackendImage.BASE_URN)) {
-                this.imageUrn = uri;
+                setImageWrapper(uri);
             } else if (uri.startsWith("urn:")) {
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
-                this.imageUrn = uri;
+                setImageWrapper(uri);
             } else {
-                this.imageLocation = new ImageLocation(uri);
+                setImageWrapper(new ImageLocation(uri));
             }
         }
         date = image.getDate();
@@ -335,9 +326,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urn);
-        if (imageUrn != null) {
-            result.setImageUri(imageUrn);
-        } else if (imageLocation  != null) {
+        if (imageWrapper != null && imageWrapper.urn != null) {
+            result.setImageUri(imageWrapper.urn);
+        } else if (imageWrapper != null && imageWrapper.imageLocation != null) {
             //result.setImageUri(((ImageLocation) image).getUrl());
         }
         result.setCrids(crids);
@@ -389,22 +380,59 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     /**
      * Sets the image as an {@link ImageData} object. I.e. the actual blob
      */
-    public void setImage(ImageData image) {
-        this.imageData = image;
+    public void setImageWrapper(ImageData image) {
+        this.imageWrapper = image == null ? null : ImageWrapper.withImageData(image);
     }
 
     /**
      * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
      */
-    public void setImage(ImageLocation image) {
-        this.imageLocation = image;
+    public void setImageWrapper(ImageLocation image) {
+        this.imageWrapper = image == null ? null : ImageWrapper.withImageLocation(image);
     }
 
     /**
      * Sets the image as an urn, i.e. a reference to the image database
      */
+    public void setImageWrapper(String urn) {
+        this.imageWrapper = urn == null ? null : ImageWrapper.withUrn(urn);
+    }
+
+    @JsonProperty("image")
+    public ImageWrapper getImage() {
+        return imageWrapper;
+    }
+
+    @JsonProperty("image")
+    public void setImage(ImageWrapper image) {
+        this.imageWrapper = image;
+    }
+
+    public void setImage(ImageData image) {
+        setImageWrapper(image);
+    }
+
+    public void setImage(ImageLocation image) {
+        setImageWrapper(image);
+    }
+
     public void setImage(String urn) {
-        this.imageUrn = urn;
+        setImageWrapper(urn);
+    }
+
+    @XmlElements(value = {
+        @XmlElement(name = "imageData", type = ImageData.class),
+        @XmlElement(name = "imageLocation", type = ImageLocation.class),
+        @XmlElement(name = "urn", type = String.class)
+    })
+    @JsonIgnore
+    protected Object getXmlImage() {
+        return imageWrapper == null ? null : imageWrapper.asXmlValue();
+    }
+
+    @JsonIgnore
+    protected void setXmlImage(Object xmlImage) {
+        imageWrapper = ImageWrapper.fromXmlValue(xmlImage);
     }
 
     @Override
@@ -415,7 +443,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @Override
     public String toString() {
         return "ImageUpdate{" +
-            "image=" + getImage() +
+            "image=" + imageWrapper +
             ", type=" + type +
             ", title=" + title +
             '}';
@@ -425,29 +453,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         return Validation.validate(this, groups);
     }
 
-    protected Object getImage() {
-        if (imageLocation != null) {
-            return imageLocation;
-        }
-        if (imageData != null) {
-            return imageData;
-        }
-        return imageUrn;
-
-    }
-
     @AssertTrue
     protected boolean imageDataValid() {
-        int count = 0;
-        if (imageLocation != null) {
-            count++;
-        }
-        if (imageData != null) {
-            count++;
-        }
-        if (imageUrn != null) {
-            count++;
-        }
-        return count == 1;
+        return imageWrapper != null && imageWrapper.isValid();
     }
+
 }
