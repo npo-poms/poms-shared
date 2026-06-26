@@ -161,6 +161,14 @@ public class ImageUpdate implements Serializable {
         return Objects.hashCode(imageLocation);
     }
 
+    /**
+     * @deprecated
+     */
+    @Deprecated
+    public Object getImage() {
+        return getImageLocation();
+    }
+
 
     public static class Builder {
 
