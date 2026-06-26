@@ -409,9 +409,16 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.wrapper = urn == null ? null : ImageWrapper.withUrn(urn);
     }
 
+    public Object getImage() {
+        if (wrapper == null) {
+            return null;
+        }
+        return wrapper.asXmlValue();
+    }
+
     @JsonProperty("image")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Object getImage() {
+    Object getJsonImage() {
         if (wrapper == null) {
             return null;
         }
@@ -431,7 +438,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     }
 
     @JsonProperty("image")
-    void setImage(JsonNode image) {
+    void setJsonImage(JsonNode image) {
         if (image == null || image.isNull()) {
             this.wrapper = null;
             return;
