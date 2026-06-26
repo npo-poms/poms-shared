@@ -9,8 +9,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -172,12 +171,12 @@ public class ImageUpdate implements Serializable {
      * @deprecated
      */
     @Deprecated
-    public ImageLocation getImage() {
+    public Object getImage() {
         return getImageLocation();
     }
 
     @JsonProperty("image")
-    Object getImageJson() {
+    Map<String, ImageLocation> getImageJson() {
         return getImageLocation() == null ? null : Collections.singletonMap("imageLocation", getImageLocation());
     }
 
