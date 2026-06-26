@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.stream.Stream;
 
 import jakarta.activation.DataHandler;
 import jakarta.persistence.Temporal;
@@ -173,13 +172,18 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      * It can also be an {@link ImageData} or an {@link ImageLocation} in which case this object describes a <em>new</em> image.
      * </p>
      */
-    @XmlElements(value = {
-        @XmlElement(name = "imageData", type = ImageData.class),
-        @XmlElement(name = "imageLocation", type = ImageLocation.class),
-        @XmlElement(name = "urn", type = String.class)
-    })
-    @Valid
-    private Object image;
+    @XmlElement
+    private ImageData imageData;
+
+
+    @XmlElement
+    private ImageLocation imagelocation;
+
+
+    @XmlElement(name = "urn")
+    private String imageUrn;
+
+
 
     @XmlElement(name = "crid")
     private List<@NotNull @CRID String> crids;
@@ -197,26 +201,26 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     public ImageUpdate() {
     }
 
-    public ImageUpdate(ImageType type, String title, String description, ImageData image) {
+    public ImageUpdate(@NonNull ImageType type, @NonNull String title, String description, ImageData image) {
         this.description = description;
         this.title = title;
         this.type = type;
-        this.image = image;
+        this.imageData = image;
     }
 
-    public ImageUpdate(ImageType type, String title, String description, ImageLocation image) {
+    public ImageUpdate(@NonNull ImageType type, @NonNull String title, String description, ImageLocation image) {
         this.description = description;
         this.title = title;
         this.type = type;
-        this.image = image;
+        this.imagelocation = image;
     }
 
     /**
      */
     @Override
     public String getImageUri() {
-        if (image instanceof String) {
-            return (String) image;
+        if (imageUrn != null) {
+            return imageUrn;
         }
         return null;
     }
@@ -258,16 +262,16 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
 
     @lombok.Builder(builderClassName = "Builder")
     private ImageUpdate(
-        ImageType type,
-        String title,
+        @NonNull ImageType type,
+        @NonNull String title,
         String description,
         ImageLocation imageLocation,
         ImageData imageData,
         String imageUrn,
-        License license,
-        String source,
-        String sourceName,
-        String credits,
+        @NonNull License license,
+        @NonNull String source,
+        @NonNull String sourceName,
+        @NonNull String credits,
         Instant publishStart,
         Instant publishStop,
         List<String> crids,
@@ -276,13 +280,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.description = description;
         this.title = title;
         this.type = type;
-        Stream.of(imageLocation, imageData, imageUrn).filter(Objects::nonNull).forEach(o -> {
-            if (this.image != null) {
-                throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
-            }
-            this.image = o;
-            }
-        );
+        this.imagelocation = imageLocation;
+        this.imageData = imageData;
+        this.imageUrn = imageUrn;
+        if (!imageDataValid()) {
+            throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
+        }
         this.license = license;
         this.sourceName = sourceName;
         this.source = source;
@@ -302,15 +305,14 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
             if (uri
                 .replace('.', ':') // See MSE-865
                 .startsWith(BackendImage.BASE_URN)) {
-                this.image = uri;
+                this.imageUrn = uri;
             } else if (uri.startsWith("urn:")) {
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
-                this.image = uri;
+                this.imageUrn = uri;
             } else {
-                this.image = new ImageLocation(uri);
+                this.imagelocation = new ImageLocation(uri);
             }
         }
-
         date = image.getDate();
         offset = image.getOffset();
         urn = image.getUrn();
@@ -331,9 +333,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urn);
-        if (image instanceof String) {
-            result.setImageUri((String) image);
-        } else if (image instanceof ImageLocation) {
+        if (imageUrn != null) {
+            result.setImageUri(imageUrn);
+        } else if (imagelocation  != null) {
             //result.setImageUri(((ImageLocation) image).getUrl());
         }
         result.setCrids(crids);
@@ -386,21 +388,21 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      * Sets the image as an {@link ImageData} object. I.e. the actual blob
      */
     public void setImage(ImageData image) {
-        this.image = image;
+        this.imageData = image;
     }
 
     /**
      * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
      */
     public void setImage(ImageLocation image) {
-        this.image = image;
+        this.imagelocation = image;
     }
 
     /**
      * Sets the image as an urn, i.e. a reference to the image database
      */
     public void setImage(String urn) {
-        this.image = urn;
+        this.imageUrn = urn;
     }
 
     @Override
@@ -411,7 +413,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @Override
     public String toString() {
         return "ImageUpdate{" +
-            "image=" + image +
+            "image=" + getImage() +
             ", type=" + type +
             ", title=" + title +
             '}';
@@ -419,5 +421,31 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
 
     public Set<ConstraintViolation<ImageUpdate>> violations(Class<?>... groups) {
         return Validation.validate(this, groups);
+    }
+
+    protected Object getImage() {
+        if (imagelocation != null) {
+            return imageData;
+        }
+        if (imageData != null) {
+            return imageData;
+        }
+        return imageUrn;
+
+    }
+
+    @AssertTrue
+    protected boolean imageDataValid() {
+        int count = 0;
+        if (imagelocation != null) {
+            count++;
+        }
+        if (imageData != null) {
+            count++;
+        }
+        if (imageUrn != null) {
+            count++;
+        }
+        return count == 1;
     }
 }
