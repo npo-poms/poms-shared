@@ -26,6 +26,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -37,6 +38,7 @@ import nl.vpro.domain.image.backend.BackendImageMetadata;
 import nl.vpro.domain.media.Deletable;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.support.License;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.*;
@@ -68,6 +70,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Slf4j
 @Getter
 public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate>, Deletable {
+
+    private static final Jackson2Mapper unwrapper = Jackson2Mapper.getLenientInstance();
 
     @XmlAttribute(required = true)
     @NotNull
@@ -406,13 +410,49 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     }
 
     @JsonProperty("image")
-    public ImageWrapper getImage() {
-        return wrapper;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Object getImage() {
+        if (wrapper == null) {
+            return null;
+        }
+        if (wrapper.getUrn() != null && wrapper.getData() == null && wrapper.getLocation() == null) {
+            return wrapper.getUrn();
+        }
+        if (wrapper.getLocation() != null) {
+            return Collections.singletonMap("imageLocation", wrapper.getLocation());
+        }
+        if (wrapper.getData() != null) {
+            return Collections.singletonMap("imageData", wrapper.getData());
+        }
+        if (wrapper.getUrn() != null) {
+            return Collections.singletonMap("urn", wrapper.getUrn());
+        }
+        return null;
     }
 
     @JsonProperty("image")
-    public void setImage(ImageWrapper image) {
-        this.wrapper = image;
+    void setImage(JsonNode image) {
+        if (image == null || image.isNull()) {
+            this.wrapper = null;
+            return;
+        }
+        if (image.isTextual()) {
+            setImage(image.textValue());
+            return;
+        }
+        if (image.has("imageLocation")) {
+            setImage(unwrapper.convertValue(image.get("imageLocation"), ImageLocation.class));
+            return;
+        }
+        if (image.has("imageData")) {
+            setImage(unwrapper.convertValue(image.get("imageData"), ImageData.class));
+            return;
+        }
+        if (image.has("urn")) {
+            setImage(unwrapper.convertValue(image.get("urn"), String.class));
+            return;
+        }
+        throw new IllegalArgumentException("Expected imageLocation, imageData, urn or string value");
     }
 
 

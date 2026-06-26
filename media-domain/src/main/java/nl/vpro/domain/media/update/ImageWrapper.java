@@ -6,8 +6,7 @@ import lombok.Setter;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.validation.URI;
 
@@ -15,16 +14,13 @@ import nl.vpro.validation.URI;
  * @since 8.14
  * @author Michiel Meeuwissen
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
 public class ImageWrapper {
 
     @Valid
-    @JsonProperty("imageData")
     ImageData data;
     @Valid
-    @JsonProperty("imageLocation")
     ImageLocation location;
 
     @URI(schemes = "urn", patterns = {"urn:vpro:image:\\d+"})
