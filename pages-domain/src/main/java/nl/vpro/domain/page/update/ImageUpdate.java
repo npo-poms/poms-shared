@@ -112,15 +112,6 @@ public class ImageUpdate implements Serializable {
     public ImageUpdate() {
     }
 
-/*
-    public ImageUpdate(ImageType type, String title, String description, ImageData image) {
-        this.description = description;
-        this.title = title;
-        this.type = type;
-        this.image = image;
-    }
-*/
-
     public ImageUpdate(@NonNull ImageType type, String title, String description, @NonNull ImageLocation image) {
         this.description = description;
         this.title = title;
@@ -153,12 +144,9 @@ public class ImageUpdate implements Serializable {
         if(this == o) {
             return true;
         }
-        if(!(o instanceof ImageUpdate)) {
+        if(!(o instanceof ImageUpdate that)) {
             return false;
         }
-
-        ImageUpdate that = (ImageUpdate)o;
-
         return Objects.equals(imageLocation, that.imageLocation);
     }
 
@@ -175,11 +163,13 @@ public class ImageUpdate implements Serializable {
         return getImageLocation();
     }
 
+    @SuppressWarnings("ConstantValue")
     @JsonProperty("image")
     Map<String, ImageLocation> getImageJson() {
         return getImageLocation() == null ? null : Collections.singletonMap("imageLocation", getImageLocation());
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @JsonProperty("image")
     void setImageJson(JsonNode image) {
         if (image == null || image.isNull()) {
