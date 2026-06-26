@@ -71,6 +71,32 @@ public class ImageUpdateTest {
 
     }
 
+    @Test
+    public void jsonUrn() {
+        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null,  "urn:vpro:image:678454");
+        update.setLicense(License.CC_BY);
+        update.setSourceName("placeholdit");
+        update.setCredits(getClass().getName());
+        assertThat(Validation.getValidator().validate(update)).isEmpty();
+        Jackson2TestUtil.roundTripAndSimilar(update, """
+            {
+              "title" : "title",
+              "sourceName" : "placeholdit",
+              "license" : "CC_BY",
+              "credits" : "nl.vpro.domain.media.update.ImageUpdateTest",
+              "image" : "urn:vpro:image:678454",
+              "type" : "PICTURE",
+              "highlighted" : false
+            }""");
+
+        assertThat(update.violations(WarningValidatorGroup.class)).isEmpty();
+
+        assertThat(update.violations(WeakWarningValidatorGroup.class)).isNotEmpty();
+        log.info("v:{}", update.violations(WeakWarningValidatorGroup.class));
+
+    }
+
+
 
     @Test
     public void xmlBackwards() {

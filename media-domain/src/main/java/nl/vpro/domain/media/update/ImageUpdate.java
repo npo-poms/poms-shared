@@ -211,6 +211,13 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.image = image;
     }
 
+    public ImageUpdate(ImageType type, String title, String description, String image) {
+        this.description = description;
+        this.title = title;
+        this.type = type;
+        this.image = image;
+    }
+
     /**
      */
     @Override
