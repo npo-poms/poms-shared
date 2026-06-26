@@ -98,7 +98,7 @@ public class PageUpdateTest {
             .title("Hoi2")
             .images(ImageUpdate.builder().imageUrl("https://www.vpro.nl/plaatje").build());
 
-        PageUpdate update= assertThatXml(builder.build()).isSimilarTo("""
+        PageUpdate update = assertThatXml(builder.build()).isSimilarTo("""
             <page type="ARTICLE" url="http://www.test.vpro.nl/123"  xmlns="urn:vpro:pages:update:2013">
               <crid>crid://bla/123</crid>
               <broadcaster>VPRO</broadcaster>

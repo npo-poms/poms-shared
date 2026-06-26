@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
 
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
+import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -23,6 +25,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 public class ImageUpdateTest {
+
+    static {
+        Locales.setDefault(Locale.US);
+    }
 
     @Test
     public void xml() {
@@ -103,8 +109,10 @@ public class ImageUpdateTest {
 
         assertThat(Validation.getValidator().validate(update))
             .hasSize(1)
-            .has(new Condition<>(violations ->
-                violations.stream().anyMatch(v -> v.getMessage().equals("must contain a valid URI (urn:vpro:image:xxx isn't)")), "Contains 'xxx'"));
+            .has(new Condition<>(
+                violations -> violations.stream().anyMatch(v -> v.getMessage().equals("must contain a valid URI (urn:vpro:image:xxx isn't)")),
+                "proper validation message")
+            );
 
 
     }
