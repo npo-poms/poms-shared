@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
@@ -18,12 +19,15 @@ import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
+
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Image;
 import nl.vpro.domain.support.License;
-import nl.vpro.validation.NoHtml;
-import nl.vpro.validation.URI;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.validation.*;
 
 
 @XmlRootElement(name = "image")
@@ -41,6 +45,8 @@ import nl.vpro.validation.WarningValidatorGroup;
 @AllArgsConstructor
 @Data
 public class ImageUpdate implements Serializable {
+
+    private static final Jackson2Mapper LENIENT = Jackson2Mapper.getLenientInstance();
 
     @Serial
     private static final long serialVersionUID = -8902321923389277697L;
@@ -101,6 +107,7 @@ public class ImageUpdate implements Serializable {
 
     @NotNull
     @Valid
+    @JsonIgnore
     private ImageLocation imageLocation;
 
     public ImageUpdate() {
@@ -165,8 +172,30 @@ public class ImageUpdate implements Serializable {
      * @deprecated
      */
     @Deprecated
-    public Object getImage() {
+    public ImageLocation getImage() {
         return getImageLocation();
+    }
+
+    @JsonProperty("image")
+    Object getImageJson() {
+        return getImageLocation() == null ? null : Collections.singletonMap("imageLocation", getImageLocation());
+    }
+
+    @JsonProperty("image")
+    void setImageJson(JsonNode image) {
+        if (image == null || image.isNull()) {
+            this.imageLocation = null;
+            return;
+        }
+        if (image.has("imageLocation")) {
+            this.imageLocation = LENIENT.convertValue(image.get("imageLocation"), ImageLocation.class);
+            return;
+        }
+        if (image.isObject()) {
+            this.imageLocation = LENIENT.convertValue(image, ImageLocation.class);
+            return;
+        }
+        throw new IllegalArgumentException("Expected imageLocation object");
     }
 
 
