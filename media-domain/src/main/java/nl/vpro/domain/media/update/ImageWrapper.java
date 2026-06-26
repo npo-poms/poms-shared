@@ -16,7 +16,7 @@ import nl.vpro.validation.URI;
  */
 @Getter
 @Setter
-public class ImageWrapper {
+class ImageWrapper {
 
     @Valid
     ImageData data;
