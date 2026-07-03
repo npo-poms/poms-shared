@@ -154,7 +154,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @DurationMin(inclusive = false, millis = 0) // negative durations don't make sense
+    @DurationMin(inclusive = true, millis = 0) // negative durations don't make sense
     protected Duration duration;
 
     @Setter
