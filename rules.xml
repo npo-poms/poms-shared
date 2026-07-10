@@ -18,6 +18,7 @@
       <!-- for camel, odd minor versions are not LTS -->
       <ignoreVersions>
         <ignoreVersion type="regex">^\d+\.\d?[13579]\..*$</ignoreVersion>
+        <ignoreVersion type="regex">^(?:4\.(?:2\d|[3-9]\d)|[5-9]\d*)(?:\..*)?$</ignoreVersion>
       </ignoreVersions>
     </rule>
   </rules>
