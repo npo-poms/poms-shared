@@ -224,6 +224,7 @@ public class WonToPomsMapper {
                 case Scriptwriter -> new Person(person.givenName(), person.familyName(), RoleType.SCRIPTWRITER);
                 case Commentator -> new Person(person.givenName(), person.familyName(), RoleType.COMMENTATOR);
                 case Guest -> new Person(person.givenName(), person.familyName(), RoleType.GUEST);
+                case Host -> new Person(person.givenName(), person.familyName(), RoleType.PRESENTER);
             };
             c.setExternalId("whatson:" + person.id());
             credits.add(c);
