@@ -100,7 +100,7 @@ public enum RoleType  implements Displayable {
      * Coming in from won VPP
      * @since 8.15
      */
-    Host("Host", "Host", "Host", true),
+    HOST("Host", "Host", "Host", true),
 
     UNDEFINED("Overig", "Overig", "Overig")
 
