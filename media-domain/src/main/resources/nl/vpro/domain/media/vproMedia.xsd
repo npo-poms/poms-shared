@@ -662,6 +662,7 @@
       <xs:enumeration value="STUNT" />
       <xs:enumeration value="VISUAL_EFFECTS" />
 
+      <xs:enumeration value="HOST" />
 
        <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
