@@ -96,6 +96,12 @@ public enum RoleType  implements Displayable {
      */
     VISUAL_EFFECTS("Visual Effects", "Visual effects", "Special effects editor", false),
 
+    /**
+     * Coming in from won VPP
+     * @since 8.15
+     */
+    Host("Host", "Host", "Host", true),
+
     UNDEFINED("Overig", "Overig", "Overig")
 
 
