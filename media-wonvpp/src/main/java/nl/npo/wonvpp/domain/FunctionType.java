@@ -7,4 +7,5 @@ public enum FunctionType {
     Scriptwriter,
     Commentator,
     Guest,
+    Host,
 }
