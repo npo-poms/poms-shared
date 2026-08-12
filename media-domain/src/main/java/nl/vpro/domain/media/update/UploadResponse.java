@@ -29,6 +29,7 @@ public class UploadResponse {
 
     Boolean retryable;
 
+    @lombok.Builder
     public UploadResponse(String mid, int statusCode, String status, String response, Long bytes, String version, Boolean retryable) {
         this.statusCode = statusCode;
         this.status = status;
