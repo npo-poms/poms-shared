@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.i18n.Displayable;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -87,6 +89,20 @@ public class TranscodeStatus {
             this.description = description;
             this.endStatus = endStatus;
         }
+    }
+
+    public String guiStatus() {
+        String result = "";
+        if (status != null) {
+            result = status.name();
+        }
+        if (StringUtils.isNotBlank(statusMessage)) {
+            if(!result.isEmpty()) {
+                result += ":";
+            }
+            result += statusMessage;
+        }
+        return result;
     }
 
     public enum TranscodeService implements Displayable {

@@ -1,13 +1,17 @@
 package nl.vpro.sourcingservice;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import nl.vpro.domain.media.update.TranscodeStatus;
+
 @Getter
+@Slf4j
 public class StatusResponse {
 
     final String status;
@@ -35,6 +39,19 @@ public class StatusResponse {
         String filename;
         String original_filename;
         String prid;
+
+        public TranscodeStatus.Status transcodeStatus() {
+            if (status == null) {
+                return null;
+            }
+            switch (status.toLowerCase()) {
+                case "pending":
+                    return TranscodeStatus.Status.RUNNING;
+                default:
+                    log.warn("Unknown srcs status: " + status);
+                    return null;
+            }
+        }
     }
 
 }
