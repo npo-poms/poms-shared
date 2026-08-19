@@ -37,7 +37,7 @@ public interface SourcingService {
     CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
-        long fileSize,
+        Long fileSize,
         String contentType,
         FileCachingInputStream inputStream,
         @Nullable String profile,

@@ -127,7 +127,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     public CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
-        long fileSize,
+        Long fileSize,
         String contentType,
         FileCachingInputStream inputStream,
         @Nullable String profile,
@@ -140,7 +140,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
-        long fileSize,
+        Long fileSize,
         String contentType,
         InputStream inputStream,
         @Nullable String profile,
@@ -151,6 +151,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
+
         body.addChannel(FILE, fileName,
             () -> WrappedReadableByteChannel
                 .builder()
@@ -161,7 +162,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                         .nl("Geüpload %s/%s naar %s")
                         .formatted(
                             FileSizeFormatter.DEFAULT.format(l),
-                            FileSizeFormatter.DEFAULT.format(fileSize),
+                            fileSize == null ? "?" : FileSizeFormatter.DEFAULT.format(fileSize),
                             configuration.cleanBaseUrl()))
                 )
                 .build(),
