@@ -1,7 +1,6 @@
 package nl.vpro.sourcingservice;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -22,18 +21,6 @@ public interface SourcingService {
      * @param inputStream The inputStream for the asset. Will be implicitly closed when consumed (or when an exception occurs)
      * @param errors email address to associate with mishaps
      */
-     @Deprecated
-     CompletableFuture<UploadResponse> upload(
-        SimpleLogger logger,
-        String mid,
-        long fileSize,
-        String mimeType,
-        InputStream inputStream,
-        @Nullable String profile,
-        @Nullable String errors
-    );
-
-
     CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,

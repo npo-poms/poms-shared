@@ -104,23 +104,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected abstract AVFileFormat defaultFormat();
 
-    @Override
-    public CompletableFuture<UploadResponse> upload(
-        SimpleLogger logger,
-        String mid,
-        long fileSize,
-        String mimeType,
-        InputStream inputStream,
-        @Nullable String profile,
-        @Nullable String errors
-    ) {
-        if (inputStream instanceof FileCachingInputStream fileCachingInputStream) {
-            return upload(logger, mid, fileSize, mimeType, fileCachingInputStream, profile, errors);
-        } else {
-            logger.warn("InputStream is not a FileCachingInputStream, falling back to non-caching upload for {}", mid);
-            return upload(logger, mid, fileSize, mimeType, inputStream, profile, errors, null);
-        }
-    }
+
 
 
     @Override

@@ -65,7 +65,7 @@ class AudioSourcingServiceImplTest {
             .batchConsumer(loggingConsumer(logger, "audio"))
             .build();
         final UploadResponse upload = impl.upload(logger, "mid",
-            bytes.length,
+            (long) bytes.length,
             "audio/mpeg",
             cachingInputStream,
             null,
