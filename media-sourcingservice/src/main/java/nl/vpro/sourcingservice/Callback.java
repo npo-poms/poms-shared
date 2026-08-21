@@ -12,6 +12,7 @@ public class Callback {
     final String media_id;
     final String status;
     final String asset_url;
+
     final JsonNode raw_data;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
