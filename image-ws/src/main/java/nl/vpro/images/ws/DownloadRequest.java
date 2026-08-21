@@ -1,0 +1,67 @@
+/*
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.images.ws;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import jakarta.xml.bind.annotation.*;
+
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.OwnerType;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "downloadRequest", namespace = IMAGE_WS_NAMESPACE)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "downloadRequestType", propOrder = {
+    "owner",
+    "title",
+    "description",
+    "type",
+    "url",
+    "imageMetadata"
+})
+
+@Setter
+@Getter
+public class DownloadRequest {
+
+    @XmlElement(name = "owner", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private OwnerType owner;
+
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String title;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String description;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private ImageType type;
+
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private Boolean imageMetadata;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String url;
+
+
+
+    public DownloadRequest() {
+        // nothing
+    }
+
+    public DownloadRequest(String title, String description, ImageType type, Boolean imageMetadata, String url) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.imageMetadata = imageMetadata;
+        this.url = url;
+    }
+
+
+}

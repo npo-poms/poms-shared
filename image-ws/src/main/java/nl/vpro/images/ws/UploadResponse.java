@@ -1,0 +1,47 @@
+/*
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.images.ws;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import jakarta.xml.bind.annotation.*;
+
+import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "uploadResponse", namespace = IMAGE_WS_NAMESPACE)
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(name = "uploadResponseType", propOrder = {
+    "urn",
+    "imageMetadata"
+})
+@Getter
+@Setter
+@ToString
+public class UploadResponse {
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String urn;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private BasicBackendImageMetadata imageMetadata;
+
+    public UploadResponse() {
+    }
+
+    public UploadResponse(String urn) {
+        this.urn = urn;
+    }
+
+    public UploadResponse(String urn, BasicBackendImageMetadata imageMetadata) {
+        this.urn = urn;
+        this.imageMetadata = imageMetadata;
+    }
+
+
+}

@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.images.ws;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import jakarta.activation.DataHandler;
+import jakarta.xml.bind.annotation.*;
+
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.OwnerType;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "uploadRequest", namespace = IMAGE_WS_NAMESPACE)
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(name = "uploadRequestType", propOrder = {
+    "owner",
+    "title",
+    "description",
+    "type",
+    "imageMetadata",
+    "data"})
+@Setter
+@Getter
+public class UploadRequest {
+
+    @XmlElement(name = "owner", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private OwnerType owner;
+
+
+    @XmlElement(name = "title", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String title;
+
+    @XmlElement(name = "description", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String description;
+
+    @XmlElement(name = "type", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private ImageType type;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private Boolean imageMetadata;
+
+    @XmlElement(name = "data", namespace = IMAGE_WS_NAMESPACE, required = true)
+    @XmlMimeType("application/octet-stream")
+    private DataHandler data;
+
+
+
+    public UploadRequest() {
+    }
+
+    public UploadRequest(String title, String description, ImageType type, Boolean imageMetaData, DataHandler data) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.imageMetadata = imageMetaData;
+        this.data = data;
+    }
+
+}

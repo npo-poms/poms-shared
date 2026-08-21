@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.images.ws;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "imageNotFound", namespace = IMAGE_WS_NAMESPACE)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "imageNotFoundType", propOrder = {"message"})
+@Getter
+@Setter
+public class ImageNotFound  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 0L;
+
+    private String message;
+
+    public ImageNotFound() {
+    }
+
+    public ImageNotFound(String message) {
+        this.message = message;
+    }
+
+
+}
