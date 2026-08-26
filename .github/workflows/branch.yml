@@ -11,18 +11,14 @@ jobs:
     env:
       MAVEN_ARGS: '--no-transfer-progress --color always'
     steps:
-      - uses: actions/checkout@v6
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          global: true
-          name: 'github $GITHUB_ACTOR'
-          email: 'github@mmprogrami.nl'
-          token: '${{ secrets.GITHUB_TOKEN  }}'
+      - uses: actions/checkout@v7
       - name: Release branch with Maven
         # We are in a kind of hybrid situation
         # For main we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
         # For release branches this is overridden by the release:branch plugin
         run: |
+          git config --global user.name 'github actions'
+          git config --global user.email 'github@mmprogrami.nl'
           VERSION=`mvn -B help:evaluate -Dexpression=project.version -q -DforceStdout`
           RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
           REVISION=`mvn -B help:evaluate -Dexpression=revision -q -DforceStdout`
