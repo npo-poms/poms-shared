@@ -47,6 +47,8 @@ public class StatusResponse {
             switch (status.toLowerCase()) {
                 case "pending":
                     return TranscodeStatus.Status.RUNNING;
+                case "online":
+                    return TranscodeStatus.Status.COMPLETED;
                 default:
                     log.warn("Unknown srcs status: " + status);
                     return null;
