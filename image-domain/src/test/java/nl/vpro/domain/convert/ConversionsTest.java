@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -37,6 +38,7 @@ class ConversionsTest {
     }
 
     @Test
+    @Disabled("This was probably just meant to generate magnolia configuration. No assertions done")
     void yaml() {
         Pattern pa = Pattern.compile(".*?(\\d+).*");
         for (Map.Entry<ImageSource.Key, String[]> entry : Conversions.MAPPING.entrySet()) {
