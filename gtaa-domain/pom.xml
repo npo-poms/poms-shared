@@ -37,6 +37,10 @@
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-i18n</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.util</groupId>
+      <artifactId>mihxil-collections</artifactId>
+    </dependency>
     <!--
     the following dependency is for things like 'Displayable' and 'PersonInterface'
     -->

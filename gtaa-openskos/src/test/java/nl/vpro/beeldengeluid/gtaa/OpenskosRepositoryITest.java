@@ -12,10 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.meeuw.collections.CountedIterator;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.CountedIterator;
+
 import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 

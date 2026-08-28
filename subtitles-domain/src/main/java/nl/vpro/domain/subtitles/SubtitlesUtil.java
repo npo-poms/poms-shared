@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.util.BasicWrappedIterator;
-import nl.vpro.util.CountedIterator;
+import org.meeuw.collections.BasicWrappedIterator;
+import org.meeuw.collections.CountedIterator;
 
 import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 

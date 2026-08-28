@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.junit.jupiter.api.Test;
+import org.meeuw.collections.CountedIterator;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
@@ -20,7 +21,7 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.CountedIterator;
+
 import nl.vpro.w3.rdf.Description;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;

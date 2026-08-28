@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.collections.CountedIterator;
 
 import nl.vpro.logging.Log4j2OutputStream;
-import nl.vpro.util.CountedIterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -37,6 +37,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.collections.BatchedReceiver;
+import org.meeuw.collections.CountedIterator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
@@ -52,8 +54,7 @@ import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.BatchedReceiver;
-import nl.vpro.util.CountedIterator;
+
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;
 

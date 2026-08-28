@@ -10,8 +10,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import org.meeuw.collections.CountedIterator;
+
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 
 /**

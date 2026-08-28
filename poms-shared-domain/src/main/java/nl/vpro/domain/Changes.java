@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.util.CloseableIterator;
+import org.meeuw.collections.CloseableIterator;
 
 /**
  * Represent an iterable of {@link Change}'s.
