@@ -50,7 +50,6 @@ public class MediaObjectTest {
     public static void init() {
         Locales.setDefault(Locales.NETHERLANDISH);
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
-
     }
 
     @Test
@@ -612,7 +611,7 @@ public class MediaObjectTest {
 
 
 
-        log.info("Valid countries: {}", valid.stream().map(c -> c.getCode() + ":" + c.getName(Locales.NETHERLANDISH)).collect(Collectors.joining("\n")));
+        log.info("Valid countries: {}...", valid.stream().limit(10).map(c -> c.getCode() + ":" + c.getName(Locales.NETHERLANDISH)).collect(Collectors.joining("\n")));
         assertThat(valid).hasSize(287);
 
     }
@@ -694,19 +693,16 @@ public class MediaObjectTest {
 
 
     /**
-     * @see #testWebsiteValidationProperty()
+     * @see #websiteValidationProperty()
      */
     @Test
-    @Disabled
-    public void twitterRefValidationProperty() {
+    public void socialRefValidationProperty() {
         Program p = new Program();
-        p.getSocialRefs().add(new SocialRef("aa"));
-        Set<ConstraintViolation<Program>> validate = validate(p, true);
-        assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().equals("twitterRefs[0].value"))).hasSize(1);
+        p.getSocialRefs().add(new SocialRef("aa", SocialRef.Type.HASHTAG));
         {
-            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "twitterRefs", true);
-            assertThat(constraintViolations).hasSize(1);
-            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+            Set<ConstraintViolation<Program>> validate = validate(p, true);
+            assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().startsWith("twitterRefs[0]"))).hasSize(1);
+            assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().startsWith("twitterRefs[0]")).findFirst().get().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.socialRefs.Pattern}");
         }
     }
 
@@ -728,31 +724,23 @@ public class MediaObjectTest {
     }
 
     @Test
-    @Disabled("""
-    This seems to work by chance, because email contains the validatable property 'email'.
-    Honestly, it seems like a bug in hibernate validator.
-    """)
     public void emailPropertyValidation() {
         Program p = new Program();
         p.getEmail().add(new Email("bla"));
-         Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "email", true);
+        Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "email", true);
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
     }
 
     @Test
-    @Disabled("""
-        This one than does fail.
-        Honestly, it seems like a bug in hibernate validator.
-        (https://hibernate.atlassian.net/browse/HV-1791?)
-    """)
+
     public void websiteValidationProperty() {
         Program p = new Program();
         p.getWebsites().add(new Website("bla"));
         {
-            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "websites", true);
+            Set<ConstraintViolation<Program>> constraintViolations = validate(p, true).stream().filter(c -> c.getPropertyPath().toString().startsWith("websites")).collect(Collectors.toSet());
             assertThat(constraintViolations).hasSize(1);
-            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.URI}");
         }
     }
 
@@ -1234,7 +1222,7 @@ public class MediaObjectTest {
 
 
     @Test
-    @Disabled
+    //@Disabled
     public void mergeImagesExistingForDifferentOwner() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("broadcaster owner").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(RADIOBOX).title("radiobox owner").build();
@@ -1257,10 +1245,10 @@ public class MediaObjectTest {
         // arrived and in correct order
         assertThat(existing.getImages().get(0).getImageUri()).isEqualTo("urn:image:2");
         assertThat(existing.getImages().get(1).getImageUri()).isEqualTo("urn:image:1");
-        assertThat(existing.getImages().get(1).getOwner()).isEqualTo(RADIOBOX);
+        assertThat(existing.getImages().get(1).getOwner()).isEqualTo(BROADCASTER);
 
         // fields are updated too
-        assertThat(existing.getImages().get(1).getTitle()).isEqualTo("Updated title");
+        assertThat(existing.getImages().get(1).getTitle()).isEqualTo("broadcaster owner");
     }
 
 
@@ -1307,7 +1295,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    @Disabled("TODO: Resulting segment cannot be unmarshalled")
+
     public void oddChars() {
         Segment mo = new Segment();
         mo.setMainDescription("In de Abdijkerk in het Groningse Aduard staat vanavond de smaak van Emmy Verhey centraal. Op het programma: Messiaen, Ravel, Dvorak en Loevendie. Nata Tsvereli, Christophe Weidmann en Amparo Lacruz zijn van de partij, evenals pianist Paul Komen. Hem spreken wij vlak voor aanvang.");

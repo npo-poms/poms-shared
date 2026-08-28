@@ -44,6 +44,7 @@ public class ValidationTestHelper {
     }
 
     public static <T> java.util.Set<jakarta.validation.ConstraintViolation<T>> validateProperty(T o, String propertyName, boolean warnings) {
+
         if (warnings) {
             return Validation.getValidator().validateProperty(o, propertyName, PomsValidatorGroup.class, Default.class, WarningValidatorGroup.class);
         } else {

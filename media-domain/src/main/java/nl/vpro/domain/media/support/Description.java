@@ -103,7 +103,8 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         if (s == null) {
             return null;
         }
-        return s.replaceAll("\\r\\n|[\\f\\r\\u0085\\u2028\\u2029]", "\n");
+        return s.replaceAll("\\u000f", "")
+            .replaceAll("\\r\\n|[\\f\\r\\u0085\\u2028\\u2029]", "\n");
     }
 
 

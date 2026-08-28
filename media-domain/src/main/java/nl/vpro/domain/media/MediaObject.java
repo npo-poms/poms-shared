@@ -1907,7 +1907,7 @@ MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public void setSocialRefs(List<@NonNull SocialRef> twitterRefs) {
+    public void setSocialRefs(List<SocialRef> twitterRefs) {
         this.twitterRefs = updateList(this.twitterRefs, twitterRefs);
     }
 

@@ -180,7 +180,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
         if (s == null){
             return null;
         }
-        return s.replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", " ");
+        return s.replaceAll("\\u000f", "").replaceAll("[\\f\\r\\n\\u0085\\u2028\\u2029]", " ");
     }
 
 

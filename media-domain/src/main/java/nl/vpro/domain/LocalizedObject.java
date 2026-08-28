@@ -14,15 +14,15 @@ import nl.vpro.domain.media.support.Tag;
  * @param <T> The type of one title
  * @param <D> The type of one description
  * @param <WS> The type of one website object
- * @param <TR> The type of one twitter reference
+ * @param <SR> The type of one social reference
  * @param <TO> This type itself
  */
 public interface LocalizedObject<
     T extends OwnedText,
     D extends OwnedText,
     WS extends Supplier<String> & UpdatableIdentifiable<Long, WS>,
-    TR extends Supplier<String>,
-    TO extends LocalizedObject<T, D, WS, TR, TO>>
+    SR extends Supplier<String>,
+    TO extends LocalizedObject<T, D, WS, SR, TO>>
     extends TextualObject<T, D, TO> {
 
 
@@ -106,12 +106,12 @@ public interface LocalizedObject<
         return getWebsites().remove(website);
     }
 
-    List<TR> getSocialRefs();
+    List<SR> getSocialRefs();
 
-    void setSocialRefs(List<TR> twitterRefs);
+    void setSocialRefs(List<SR> twitterRefs);
 
-    default void addSocialRef(TR ref) {
-        List<TR> socialRefs = getSocialRefs();
+    default void addSocialRef(SR ref) {
+        List<SR> socialRefs = getSocialRefs();
 
         if (socialRefs == null) {
             socialRefs = new ArrayList<>();
