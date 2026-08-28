@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
 
 import nl.vpro.i18n.Locales;
+import nl.vpro.logging.simple.Level;
 
 import static nl.vpro.logging.mdc.MDCConstants.USER_NAME;
 import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
@@ -124,7 +125,7 @@ class UserServiceTest {
                     Thread.sleep(100);
                     assertThat(Locales.getDefault().getLanguage()).isEqualTo("zh");
                     return "hoi";
-                }, simple(log)));
+                }, simple(log).filter(Level.WARN)));
 
             }
         }
