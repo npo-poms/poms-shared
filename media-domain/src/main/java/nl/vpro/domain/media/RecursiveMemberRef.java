@@ -17,6 +17,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.*;
 
+import nl.vpro.validation.CRID;
+
 import static nl.vpro.domain.media.support.PublishableObject.SERIALIZING;
 
 /**
@@ -32,6 +34,7 @@ import static nl.vpro.domain.media.support.PublishableObject.SERIALIZING;
 )
 @JsonPropertyOrder({
     "midRef",
+    "cridRef",
     "type",
     "memberOf",
     "episodeOf",
@@ -46,7 +49,11 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @XmlAttribute
     @Getter
-    protected String midRef;
+    protected @ValidMid String midRef;
+
+    @XmlAttribute
+    @Getter
+    protected @CRID String cridRef;
 
     protected String childMid;
 
@@ -96,6 +103,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     private RecursiveMemberRef(
         @Nullable String childMid,
         @NonNull String parentMid,
+        @NonNull String cridRef,
         @Nullable MediaType parentType,
         Integer index,
         Boolean highlighted,
@@ -106,6 +114,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     ) {
         this.childMid = childMid;
         this.midRef = parentMid;
+        this.cridRef = cridRef;
         this.type = parentType;
         this.index = index;
         this.highlighted = highlighted == null || !highlighted ? null : Boolean.TRUE;

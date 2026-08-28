@@ -973,7 +973,8 @@
       <xs:element name="episodeOf" type="recursiveMemberRef" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="midRef" type="xs:string"/>
+   <xs:attribute name="midRef" type="xs:string"/>
+   <xs:attribute name="cridRef" type="xs:anyURI"/>
     <xs:attribute name="type" type="mediaTypeEnum"/>
     <xs:attribute name="index" type="xs:int"/>
     <xs:attribute name="highlighted" type="xs:boolean" default="false"/>

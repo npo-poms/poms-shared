@@ -23,6 +23,7 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson.Views;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.validation.CRID;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
@@ -72,6 +73,9 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
 
     @Transient
     private String midRef;
+
+    @Transient
+    private String cridRef;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -145,6 +149,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
         super(source);
         this.start = source.start;
         this.midRef = source.midRef;
+        this.cridRef = source.cridRef;
         this.urnRef = source.urnRef;
         this.chapterType = source.chapterType;
     }
@@ -216,6 +221,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
         this.parent = parent;
         invalidateSortDate();
         this.midRef = null;
+        this.cridRef = null;
     }
 
     @XmlAttribute(required = true)
@@ -250,7 +256,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     /**
      * @since 1.9
      */
-    public void setMidRef(String midRef) {
+    public void setMidRef(@ValidMid String midRef) {
         if(parent != null) {
             if (midRef != null) {
                 if (Objects.equals(parent.getMid(), midRef)) {
@@ -264,6 +270,33 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
             }
         }
         this.midRef = midRef;
+    }
+
+    /**
+     * @since 8.15
+     */
+    @XmlAttribute(required = false)
+    public String getCridRef() {
+        return cridRef;
+    }
+
+    /**
+     * @since 1.9
+     */
+    public void setCridRef(@CRID String cridRef) {
+        if(parent != null) {
+            if (cridRef != null) {
+                if (parent.getCrids().contains(cridRef)) {
+                    return;
+                } else {
+                    throw new IllegalStateException("This segments program holds the midRef for this segment");
+                }
+            }
+            if (segmentOf != null) {
+                segmentOf.setCridRef(cridRef);
+            }
+        }
+        this.cridRef = cridRef;
     }
 
     @Override

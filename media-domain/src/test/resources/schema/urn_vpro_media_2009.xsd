@@ -231,6 +231,7 @@
       <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="midRef" type="xs:string"/>
+    <xs:attribute name="cridRef" type="xs:string"/>
     <xs:attribute name="type" type="mediaTypeEnum"/>
     <xs:attribute name="index" type="xs:int"/>
     <xs:attribute name="highlighted" type="xs:boolean"/>
@@ -245,6 +246,7 @@
           <xs:element name="start" type="xs:duration"/>
         </xs:sequence>
         <xs:attribute name="chapterType" type="chapterType"/>
+        <xs:attribute name="cridRef" type="xs:string"/>
         <xs:attribute name="midRef" type="xs:string" use="required"/>
         <xs:attribute name="type" type="segmentTypeEnum" use="required"/>
         <xs:attribute name="urnRef" type="xs:string" use="required"/>

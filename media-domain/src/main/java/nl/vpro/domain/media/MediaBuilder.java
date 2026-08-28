@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.languages.LanguageCode;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -29,6 +28,7 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.LocalizedString;
+import nl.vpro.validation.CRID;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -1350,9 +1350,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return midRef(program).segmentOf(RecursiveMemberRef.builder().parentMid(program).parentType(mediaType).build());
         }
 
-        public T midRef(String midRef) {
+        public T midRef(@ValidMid String midRef) {
             mediaObject().setMidRef(midRef);
             return (T) this;
+        }
+
+        public T cridRef(@CRID String cridRef) {
+            mediaObject().setCridRef(cridRef);
+            return (T) this;
+        }
+
+        public T ref(String ref) {
+            if (ref.startsWith("crid://")) {
+                return cridRef(ref);
+            } else {
+                return midRef(ref);
+            }
         }
 
         public T type(SegmentType segmentType) {
