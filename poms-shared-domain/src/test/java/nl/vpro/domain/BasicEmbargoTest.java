@@ -27,8 +27,7 @@ class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
     }
 
     @Property
-    public void asRange(@ForAll(DATAPOINTS) Object object) {
-        BasicEmbargo basicEmbargo = (BasicEmbargo) object;
+    public void asRange(@ForAll(DATAPOINTS) BasicEmbargo basicEmbargo) {
         Range<Instant> asRange = basicEmbargo.asRange();
         log.debug("{} -> {}", basicEmbargo, asRange);
     }
