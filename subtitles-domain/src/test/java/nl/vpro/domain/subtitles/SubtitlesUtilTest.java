@@ -1,5 +1,7 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -10,6 +12,8 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.logging.Log4j2OutputStream;
+
 import static nl.vpro.i18n.Locales.DUTCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.7
  */
+@Log4j2
 public class SubtitlesUtilTest {
 
 
@@ -68,8 +73,10 @@ public class SubtitlesUtilTest {
             .content(w.toString())
             .type(SubtitlesType.CAPTION)
             .build();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles, true, false).iterator(), System.out);
+        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles, true, false).iterator(),
+            Log4j2OutputStream.debug(log)
+
+        );
     }
 
 
