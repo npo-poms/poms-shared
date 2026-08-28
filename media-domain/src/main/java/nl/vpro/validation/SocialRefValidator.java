@@ -58,4 +58,8 @@ public class SocialRefValidator implements ConstraintValidator<SocialRef , nl.vp
         return true;
     }
 
+    public static boolean isValid(String s) {
+        return HASH_PATTERN.matcher(s).matches() || TWITTER_ACCOUNT_PATTERN.matcher(s).matches();
+    }
+
 }
