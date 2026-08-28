@@ -486,6 +486,7 @@
     </xs:sequence>
     <xs:attribute name="chapterType" type="media:chapterType"/>
     <xs:attribute name="avType" type="media:avTypeEnum"/>
+    <xs:attribute name="cridRef" type="xs:string"/>
     <xs:attribute name="deleted" type="xs:boolean"/>
     <xs:attribute name="embeddable" type="xs:boolean"/>
     <xs:attribute name="mid" type="xs:string"/>
