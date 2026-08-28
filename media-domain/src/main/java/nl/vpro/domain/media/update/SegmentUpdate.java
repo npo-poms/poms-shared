@@ -280,9 +280,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @JsonProperty("cridRef")
     String getCridRefAttribute() {
         if (parent != null) {
-            if (parent.getMid() != null) {
-                return parent.getMid();
-            } else if (!parent.getCrids().isEmpty()) {
+            if (parent.getMid() == null && !parent.getCrids().isEmpty()) {
                 return parent.getCrids().get(0);
             }
         }
