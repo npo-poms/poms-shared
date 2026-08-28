@@ -54,7 +54,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddCrid() {
+    public void addCrid() {
         MediaObject mediaObject = new Program();
         mediaObject.addCrid(null);
         assertThat(mediaObject.getCrids()).isEmpty();
@@ -71,7 +71,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindCredit() {
+    public void findCredit() {
 
         Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
         Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
@@ -93,7 +93,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindPerson() {
+    public void findPerson() {
 
         Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
         Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
@@ -115,7 +115,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindName() {
+    public void findName() {
 
         Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
         Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
@@ -137,7 +137,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindGeoLocation(){
+    public void findGeoLocation(){
         GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
@@ -171,7 +171,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddGeoLocation(){
+    public void addGeoLocation(){
         GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
@@ -224,7 +224,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testRemoveGeoLocation(){
+    public void removeGeoLocation(){
         GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
@@ -251,7 +251,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindTopic() {
+    public void findTopic() {
 
         Topic topic = Topic.builder().name("kattenkwa").uri("test/123").build();
         topic.setId(1L);
@@ -284,7 +284,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddTopic() {
+    public void addTopic() {
 
         Topic topic1 = Topic.builder().name("kattenkwaad").uri("test/123").build();
         Topic topic2 = Topic.builder().name("kattenkwaad").uri("test/123").build();
@@ -334,7 +334,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testRemoveTopic() {
+    public void removeTopic() {
 
         Topic topic1 = Topic.builder().name("kattenkwaad").uri("test/123").build();
         Topic topic2 = Topic.builder().name("kattenkwaad").uri("test/1234").build();
@@ -359,7 +359,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddTitle() {
+    public void addTitle() {
         MediaObject mediaObject = new Program();
         mediaObject.addTitle(null);
         assertThat(mediaObject.getTitles()).isEmpty();
@@ -379,7 +379,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddDescription() {
+    public void addDescription() {
         MediaObject mediaObject = new Program();
         mediaObject.addDescription(null);
         assertThat(mediaObject.getDescriptions()).isEmpty();
@@ -399,7 +399,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testGetAncestors() throws CircularReferenceException {
+    public void getAncestors() throws CircularReferenceException {
         Program program = new Program();
         Group group1 = new Group(GroupType.PLAYLIST);
         Group group2 = new Group(GroupType.PLAYLIST);
@@ -415,7 +415,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testGetAncestorsForUniqueReferences() throws CircularReferenceException {
+    public void getAncestorsForUniqueReferences() throws CircularReferenceException {
         Program program = new Program();
         Group group1 = new Group(GroupType.PLAYLIST);
         Group group2 = new Group(GroupType.PLAYLIST);
@@ -432,7 +432,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testGetAncestorsForUniqueReferencesWithId() throws CircularReferenceException {
+    public void getAncestorsForUniqueReferencesWithId() throws CircularReferenceException {
         Program program = new Program();
         Group group1 = new Group(GroupType.PLAYLIST);
         group1.setId(1L);
@@ -452,7 +452,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testCreateMemberOfForSelf() throws CircularReferenceException {
+    public void createMemberOfForSelf() throws CircularReferenceException {
         assertThatThrownBy(() -> {
 
             Group g1 = new Group();
@@ -462,7 +462,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testCreateMemberOfForCircularity() throws CircularReferenceException {
+    public void createMemberOfForCircularity() throws CircularReferenceException {
         assertThatThrownBy(() -> {
             Group g1 = new Group(GroupType.PLAYLIST);
             Group g2 = new Group(GroupType.PLAYLIST);
@@ -506,7 +506,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testProgramValidation() {
+    public void programValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
@@ -515,7 +515,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testMidValidation() {
+    public void midValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.VIDEO);
@@ -529,7 +529,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testLanguageValidation() {
+    public void languageValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.VIDEO);
@@ -547,7 +547,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testLanguageWithCountryValidation() {
+    public void languageWithCountryValidation() {
         Program p = new Program();
 
         p.setType(ProgramType.BROADCAST);
@@ -618,7 +618,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testRelationValidation() {
+    public void relationValidation() {
         Relation r = new Relation(new RelationDefinition("AAAA", "a", "a"));
         r.setUriRef(":");
         Program p = new Program(AVType.AUDIO, ProgramType.BROADCAST);
@@ -633,7 +633,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testWebsiteValidation() {
+    public void websiteValidation() {
         Program p = new Program();
         p.setMid("mid_123");
         p.addGenre(new Genre("3.0.1.1.4"));
@@ -657,7 +657,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testHasGenreValidation() {
+    public void hasGenreValidation() {
         Program p = new Program();
         p.setType(ProgramType.STRAND);
         assertThat(p.getMediaType().requiresGenre()).isFalse();
@@ -698,7 +698,7 @@ public class MediaObjectTest {
      */
     @Test
     @Disabled
-    public void testTwitterRefValidationProperty() {
+    public void twitterRefValidationProperty() {
         Program p = new Program();
         p.getSocialRefs().add(new SocialRef("aa"));
         Set<ConstraintViolation<Program>> validate = validate(p, true);
@@ -713,7 +713,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testEmailValidation() {
+    public void emailValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.VIDEO);
@@ -732,7 +732,7 @@ public class MediaObjectTest {
     This seems to work by chance, because email contains the validatable property 'email'.
     Honestly, it seems like a bug in hibernate validator.
     """)
-    public void testEmailPropertyValidation() {
+    public void emailPropertyValidation() {
         Program p = new Program();
         p.getEmail().add(new Email("bla"));
          Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "email", true);
@@ -746,7 +746,7 @@ public class MediaObjectTest {
         Honestly, it seems like a bug in hibernate validator.
         (https://hibernate.atlassian.net/browse/HV-1791?)
     """)
-    public void testWebsiteValidationProperty() {
+    public void websiteValidationProperty() {
         Program p = new Program();
         p.getWebsites().add(new Website("bla"));
         {
@@ -776,7 +776,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddLocationOnDuplicates() {
+    public void addLocationOnDuplicates() {
         Location l1 = new Location("http://TEST_URL", OwnerType.NEBO);
         l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
@@ -792,7 +792,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddLocationOnDuplicatesCollisions() {
+    public void addLocationOnDuplicatesCollisions() {
         assertThatThrownBy(() -> {
             Location l1 = new Location("https://TEST_URL", OwnerType.NEBO);
             l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
@@ -810,7 +810,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddTwoLocationsWithSameAuthorityRecords() {
+    public void addTwoLocationsWithSameAuthorityRecords() {
         Program program = new Program(1L);
 
 
@@ -835,7 +835,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testAddLocationsOnlyUpdateCeresPredictions() {
+    public void addLocationsOnlyUpdateCeresPredictions() {
         Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         Program target = new Program(1L);
@@ -848,7 +848,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddLocationsOnlyUpdatePlatformPredictions() {
+    public void addLocationsOnlyUpdatePlatformPredictions() {
         Program target = new Program(1L);
         Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
@@ -862,7 +862,7 @@ public class MediaObjectTest {
 
     @Test
     // MSE-2313
-    public void testSilentlyFixStateOfPredictionIfLocationsAndOnlyAnnounced() {
+    public void silentlyFixStateOfPredictionIfLocationsAndOnlyAnnounced() {
         Location l1 = new Location("http://aaa.a/a", OwnerType.BROADCASTER);
         l1.setPlatform(Platform.INTERNETVOD);
 
@@ -880,7 +880,7 @@ public class MediaObjectTest {
 
     @Test
     // MSE-2313
-    public void testDontSilentlyFixStateOfPredictionIfLocationsAndOnlyAnnounced() {
+    public void dontSilentlyFixStateOfPredictionIfLocationsAndOnlyAnnounced() {
         Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
         l1.setPlatform(Platform.PLUSVOD);
 
@@ -897,7 +897,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testAddLocationsOnPredictionUpdate() {
+    public void addLocationsOnPredictionUpdate() {
         Program target = new Program(1L);
         target.findOrCreatePrediction(Platform.PLUSVOD).setPlannedAvailability(true);
 
@@ -935,7 +935,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testSortDateWithScheduleEvents() {
+    public void sortDateWithScheduleEvents() {
         final Program program = MediaBuilder.program()
             .creationInstant(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -949,7 +949,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testSortDateWithPublishStart() {
+    public void sortDateWithPublishStart() {
         final Program program = MediaBuilder.program()
             .creationInstant(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -959,7 +959,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testSortDateWithCreationDate() {
+    public void sortDateWithCreationDate() {
         final Program program = MediaBuilder.program()
             .creationInstant(Instant.ofEpochMilli(1))
             .build();
@@ -970,7 +970,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testRealizePrediction() {
+    public void realizePrediction() {
         final Program program = MediaBuilder.program()
             .id(1L)
             .build();
@@ -997,7 +997,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testUnmarshal() {
+    public void unmarshal() {
         final Program program = MediaBuilder.program()
             .id(1L)
             .mainDescription("foo\r\nbar")
@@ -1025,7 +1025,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testUnmarshalJson() throws Exception {
+    public void unmarshalJson() throws Exception {
         final Program program = MediaBuilder.program()
             .id(1L)
             .mainDescription("foo\r\nbar")
@@ -1065,7 +1065,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testHash() {
+    public void hash() {
         final Program program = MediaBuilder.program()
             .lastModified(instant())
             .creationInstant(Instant.ofEpochMilli(10000))
@@ -1090,7 +1090,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testHasChanges() {
+    public void hasChanges() {
         final Program program = MediaBuilder.program()
             .lastModified(instant())
             .lastPublished(instant())
@@ -1107,7 +1107,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testSetWorkflowWhenMerged() {
+    public void setWorkflowWhenMerged() {
         assertThatThrownBy(() -> {
             final Program merged = new Program();
 
@@ -1117,7 +1117,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testFindAncestry() {
+    public void findAncestry() {
         final Group grandParent = MediaBuilder.group().titles(new Title("Grand parent", OwnerType.BROADCASTER, TextualType.MAIN)).build();
         final Program parent = MediaBuilder.program().titles(new Title("Parent", OwnerType.BROADCASTER, TextualType.MAIN)).memberOf(grandParent, 1).build();
         final Program child = MediaBuilder.program().titles(new Title("Child", OwnerType.BROADCASTER, TextualType.MAIN)).memberOf(parent, 1).build();
@@ -1129,7 +1129,7 @@ public class MediaObjectTest {
     }
 
     @Test
-    public void testAddImageWithMultipleOwners() {
+    public void addImageWithMultipleOwners() {
         Image imgn1 = Image.builder().imageUri("urn:image:1").owner(NEBO).build();
         Image imgn2 = Image.builder().imageUri("urn:image:2").owner(NEBO).build();
         Image imgn3 = Image.builder().imageUri("urn:image:3").owner(NEBO).build();
@@ -1197,7 +1197,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testMergeImagesChange() {
+    public void mergeImagesChange() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("Before title").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).crid("crid://existing/2").build();
         Image existingImage3= Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
@@ -1235,7 +1235,7 @@ public class MediaObjectTest {
 
     @Test
     @Disabled
-    public void testMergeImagesExistingForDifferentOwner() {
+    public void mergeImagesExistingForDifferentOwner() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("broadcaster owner").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(RADIOBOX).title("radiobox owner").build();
 
@@ -1279,7 +1279,7 @@ public class MediaObjectTest {
 
 
     @Test
-    public void testMemberOf() {
+    public void memberOf() {
         Group group = JAXB.unmarshal(new StringReader("""
             <group xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="VPWON_1240914" sortDate="2016-09-15T09:15:00+02:00" workflow="PUBLISHED" creationDate="2015-02-18T06:51:59.964+01:00" lastModified="2016-12-21T11:20:37.369+01:00" publishDate="2016-12-21T11:23:53.445+01:00" urn="urn:vpro:media:group:51613423">
             <broadcaster id="VPRO">VPRO</broadcaster>
