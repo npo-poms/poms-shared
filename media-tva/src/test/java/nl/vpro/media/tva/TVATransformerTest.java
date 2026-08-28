@@ -794,7 +794,7 @@ public class TVATransformerTest {
     @Test
     public void MSE_5303_translatedTitle() {
         String xml = transform("pd/pd/NED320220729P.xml");
-        log.info("{}", xml);
+        log.debug("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         validate(table);
@@ -811,7 +811,7 @@ public class TVATransformerTest {
     @Test
     public void _101schedule() {
         String xml = transform("pd/pd/101_20240714P.xml");
-        log.info("{}", xml);
+        log.debug("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         validate(table);
@@ -826,9 +826,7 @@ public class TVATransformerTest {
     @Test
     public void emptyPerson() {
         String xml = transform("pd/pd/NED220260113P.xml");
-        log.info(xml);
-
-
+        log.debug(xml);
     }
 
 
