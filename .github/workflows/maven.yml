@@ -45,7 +45,7 @@ jobs:
           server-id: central
           server-username-env-var: CENTRAL_USERNAME
           server-password-env-var: CENTRAL_PASSWORD
-          gpg-private-key: ${{ (runner.os == 'Linux' && matrix.java == 21) && secrets.GPG_SECRET_KEY || '' }}
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Determine target
         id: set_target
         shell: bash
@@ -54,17 +54,19 @@ jobs:
              echo "target=deploy" >> $GITHUB_OUTPUT
              echo "profile=deploy," >> $GITHUB_OUTPUT
              echo "mainbuild=true" >> $GITHUB_OUTPUT
+             echo "gpg_skip=false" >> $GITHUB_OUTPUT
           else
              echo "target=" >> $GITHUB_OUTPUT
              echo "profile=" >> $GITHUB_OUTPUT
+             echo "gpg_skip=true" >> $GITHUB_OUTPUT
           fi
       - name: Build  with Maven
         shell: bash
         run:  |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
-            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests ${{ steps.set_target.outputs.target}}
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
           else
-            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -D"maven.test.failure.ignore=true"  ${{ steps.set_target.outputs.target}}
+            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -D"maven.test.failure.ignore=true" -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
           fi
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
