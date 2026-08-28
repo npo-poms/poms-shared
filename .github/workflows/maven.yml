@@ -29,8 +29,9 @@ jobs:
             java: 25
           - os: ubuntu-latest
             java: 26
-          - os: ubuntu-latest
-            java: 27-ea
+          #- os: ubuntu-latest
+          #  java: 27-ea
+          #[ERROR] Failed to execute goal org.bsc.maven:maven-processor-plugin:5.2:process (process) on project poms-shared-domain: Error executing: java.lang.ExceptionInInitializerError: com.sun.tools.javac.tree.EndPosTable -> [Help 1]
     runs-on: ${{ matrix.os }}
     env:
       MAVEN_ARGS: '--no-transfer-progress --color always'
