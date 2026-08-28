@@ -59,7 +59,7 @@ public class TT888Test {
         Stream<Cue> cues = TT888.parseUTF8("KN_1729896", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/KN_1729896.txt"));
         List<Cue> cueList = new ArrayList<>();
         cues.forEach(cueList::add);
-        log.info("{}", cueList);
+        log.debug("{}", cueList);
         assertThat(cueList.get(126).getContent()).startsWith("You can find ING's response on pointer.nl.");
     }
 }
