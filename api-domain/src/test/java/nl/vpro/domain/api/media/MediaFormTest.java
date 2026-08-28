@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
-    public void testGetSort() {
+    public void getSort() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -66,7 +66,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testGetSortJson() {
+    public void getSortJson() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -87,14 +87,14 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
               "highlight" : true
             }""");
         assertThat(result.getSortFields()).hasSize(3);
-        assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
+        assertThat(result.getSortFields().getFirst().getField()).isEqualTo(MediaSortField.sortDate);
         assertThat(result).isEqualTo(in);
 
     }
 
 
     @Test
-    public void testGetSortJsonBackward() {
+    public void getSortJsonBackward() {
         Compatibility.setCompatibility(Version.of(5, 4));
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
@@ -111,7 +111,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
               "highlight" : true
             }""");
         assertThat(result.getSortFields()).hasSize(2);
-        assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
+        assertThat(result.getSortFields().getFirst().getField()).isEqualTo(MediaSortField.sortDate);
         assertThat(result).isEqualTo(in);
         Compatibility.clearCompatibility();
 
@@ -131,7 +131,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testGetTags() {
+    public void getTags() {
         MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
         MediaForm out = roundTripAndSimilar(in,
             """
@@ -149,7 +149,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testGetFacets() {
+    public void getFacets() {
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
             new ScheduleEventSearch(Channel.NED3,
                 LocalDate.of(2015, 1, 26).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant(),
@@ -178,7 +178,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testGetFacetsBackwards() {
+    public void getFacetsBackwards() {
         MediaForm out = JAXB.unmarshal(new StringReader("""
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <mediaForm xmlns="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" highlight="false">
@@ -202,7 +202,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void testFilterTags() throws IOException {
+    public void filterTags() throws IOException {
         String tagForm = """
             {
                 "facets": {
@@ -235,7 +235,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testSubSearch() {
+    public void subSearch() {
         String example = """
             {
                 "facets": {
@@ -270,17 +270,17 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         assertThat(form.getFacets().getRelations()).isNotNull();
         assertNotNull(form.getFacets().getRelations().getSubSearch());
         assertNotNull(form.getFacets().getRelations().getSubSearch().getBroadcasters());
-        assertThat(form.getFacets().getRelations().getSubSearch().getBroadcasters().getMatchers().get(0).getValue()).isEqualTo("VPRO");
+        assertThat(form.getFacets().getRelations().getSubSearch().getBroadcasters().getMatchers().getFirst().getValue()).isEqualTo("VPRO");
 
         assertThat(form.getFacets().getRelations().getFacets()).hasSize(2);
-        assertNotNull(form.getFacets().getRelations().getFacets().get(0).getSubSearch());
-        assertThat(form.getFacets().getRelations().getFacets().get(0).getSubSearch().getTypes().get(0).getValue()).isEqualTo("LABEL");
+        assertNotNull(form.getFacets().getRelations().getFacets().getFirst().getSubSearch());
+        assertThat(form.getFacets().getRelations().getFacets().getFirst().getSubSearch().getTypes().get(0).getValue()).isEqualTo("LABEL");
 
 
     }
 
     @Test
-    public void testFuzzinessBinding() {
+    public void fuzzinessBinding() {
         MediaForm form = MediaForm.builder().fuzzyText("bla").build();
         roundTripAndSimilar(form, """
             <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
@@ -305,7 +305,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void testTitleSearch() {
+    public void titleSearch() {
         MediaForm form = MediaForm
             .builder()
             .fuzzyText("bla")
@@ -333,7 +333,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void testTitleSearch2() {
+    public void titleSearch2() {
         MediaForm form = MediaForm
             .builder()
             .titles(TitleSearch.builder().type(TextualType.MAIN).value("Flikken").build())
@@ -360,7 +360,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void testForm() throws IOException {
+    public void formFuzzy()  throws IOException {
         MediaForm form = MediaForm.builder()
             .types(Match.MUST, TextMatcher.not("BROADCAST"))
             .fuzzyText("wie is de mol")
@@ -411,7 +411,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         </api:mediaForm>
         """;
     @Test
-    public void testDurations() throws IOException {
+    public void durations() throws IOException {
         String json = """
             {
 
@@ -491,13 +491,13 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
             """);
     }
     @Test
-    public void testBackwards() {
+    public void backwards() {
         MediaForm form = JAXB.unmarshal(new StringReader(LUNATIC_BACKWARD_COMPATIBLE), MediaForm.class);
-        assertThat(((DurationRangeFacetItem) form.getFacets().getDurations().getRanges().get(0)).getEnd()).isEqualTo(Duration.ofMinutes(5));
+        assertThat(((DurationRangeFacetItem) form.getFacets().getDurations().getRanges().getFirst()).getEnd()).isEqualTo(Duration.ofMinutes(5));
     }
 
     @Test
-    public void testWithTitleFacet() throws IOException {
+    public void withTitleFacet() throws IOException {
         MediaForm form = Jackson2Mapper.getInstance().readValue("""
             {
                 "facets": {
@@ -557,19 +557,24 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void withEverythingJson() {
-        assertThatCode(() -> {
-            Jackson2Mapper.getPrettyInstance()
-                .writeValue(LoggerOutputStream.info(log), MediaForm.builder().withEverything().build());
-        }).doesNotThrowAnyException();
+    public void withEverythingJson() throws IOException {
+        try (LoggerOutputStream out = LoggerOutputStream.info(log)) {
+            out.setMax(30);
+            assertThatCode(() -> Jackson2Mapper.getPrettyInstance()
+                .writeValue(out, MediaForm.builder().withEverything().build())).doesNotThrowAnyException();
+
+        }
     }
 
 
     @Test
-    public void withEverythingXml() {
-        assertThatCode(() -> {
-            JAXB.marshal(MediaForm.builder().withEverything().build(), System.out);
-        }).doesNotThrowAnyException();
+    public void withEverythingXml() throws IOException {
+        try (LoggerOutputStream out = LoggerOutputStream.info(log)) {
+            out.setMax(30);
+            assertThatCode(() -> {
+                JAXB.marshal(MediaForm.builder().withEverything().build(), out);
+            }).doesNotThrowAnyException();
+        }
     }
 
 
