@@ -13,7 +13,7 @@ public class SocialRefValidator implements ConstraintValidator<SocialRef , nl.vp
 
 
     public static final Pattern HASH_PATTERN = Pattern.compile("^#\\w{1,279}$", Pattern.CASE_INSENSITIVE);
-    public static final Pattern TWITTER_ACCOUNT_PATTERN = Pattern.compile("^@\\\\w{1,50}", Pattern.CASE_INSENSITIVE);
+    public static final Pattern TWITTER_ACCOUNT_PATTERN = Pattern.compile("^@\\w{1,50}", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean isValid(nl.vpro.domain.media.SocialRef socialRef, ConstraintValidatorContext context) {
