@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import lombok.extern.log4j.Log4j2;
 import net.jqwik.api.*;
 
 import java.time.Duration;
@@ -10,6 +11,7 @@ import org.meeuw.theories.BasicObjectTheory;
 
 import com.google.common.collect.Range;
 
+@Log4j2
 class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
 
     @Override
@@ -28,6 +30,6 @@ class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
     public void asRange(@ForAll(DATAPOINTS) Object object) {
         BasicEmbargo basicEmbargo = (BasicEmbargo) object;
         Range<Instant> asRange = basicEmbargo.asRange();
-        System.out.printf("%s -> %s%n", basicEmbargo, asRange);
+        log.debug("{} -> {}", basicEmbargo, asRange);
     }
 }
