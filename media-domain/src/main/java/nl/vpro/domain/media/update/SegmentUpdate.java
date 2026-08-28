@@ -26,6 +26,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
+import nl.vpro.validation.CRID;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
@@ -90,6 +91,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @ValidMid
     private String midRef;
 
+    @CRID
+    private String cridRef;
+
     private ProgramUpdate parent;
 
     public SegmentUpdate() {
@@ -113,7 +117,11 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         this.start = mediaObject.getStart();
         this.chapterType = mediaObject.getChapterType();
         if (parent == null) {
-            this.midRef = mediaObject.getMidRef();
+            if (mediaObject.getMidRef() != null) {
+                this.midRef = mediaObject.getMidRef();
+            } else {
+                this.cridRef = mediaObject.getCridRef();
+            }
         }
     }
 
@@ -124,6 +132,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         p.setStart(start);
         p.setType(segmentType);
         p.setMidRef(midRef);
+        p.setCridRef(cridRef);
         p.setOwner(ownerType);
         p.setChapterType(chapterType);
         return p;
@@ -250,6 +259,36 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return midRef;
     }
 
+    /**
+     * The mid of the parent program. If the segment is sent as a standalone object, this can also be a crid.
+     */
+    @XmlTransient
+    public void setCridRef(String string) {
+        this.cridRef = string;
+    }
+    @JsonIgnore
+    public String getCridRef() {
+        return cridRef;
+    }
+
+
+    @XmlAttribute(name = "cridRef")
+    void setCridRefAttribute(String string) {
+        setCridRef(string);
+    }
+
+    @JsonProperty("cridRef")
+    String getCridRefAttribute() {
+        if (parent != null) {
+            if (parent.getMid() != null) {
+                return parent.getMid();
+            } else if (!parent.getCrids().isEmpty()) {
+                return parent.getCrids().get(0);
+            }
+        }
+        return cridRef;
+    }
+
 
     @Override
     public int compareTo(@NonNull SegmentUpdate segmentUpdate) {
@@ -296,8 +335,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         super.afterUnmarshal(unmarshaller, parent);
-        if(parent instanceof ProgramUpdate) {
-            this.parent = (ProgramUpdate) parent;
+        if(parent instanceof ProgramUpdate parentUpdate) {
+            this.parent = parentUpdate;
         }
     }
 

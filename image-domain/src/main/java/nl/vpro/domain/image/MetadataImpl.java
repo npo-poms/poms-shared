@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -78,7 +79,7 @@ public class MetadataImpl implements Metadata {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private final Instant creationInstant;
 
-    private final List<@CRID String> crids;
+    private final List<@NotNull @CRID String> crids;
 
     private final Area areaOfInterest;
 
@@ -99,7 +100,7 @@ public class MetadataImpl implements Metadata {
         Integer width,
         Instant lastModifiedInstant,
         Instant creationInstant,
-        List<@CRID String> crids,
+        List<@NotNull @CRID String> crids,
         @Nullable Area areaOfInterest) {
 
         this.type = type;

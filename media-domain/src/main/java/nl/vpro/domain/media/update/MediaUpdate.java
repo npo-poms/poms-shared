@@ -934,12 +934,12 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return broadcasters;
     }
 
-    public void setBroadcasters(List<@BroadcasterValidation String> broadcasters) {
+    public void setBroadcasters(List<@NotNull@BroadcasterValidation String> broadcasters) {
         this.broadcasters = broadcasters;
     }
 
     @XmlTransient
-    public void setBroadcasters(String @BroadcasterValidation... broadcasters) {
+    public void setBroadcasters(String @NotNull@BroadcasterValidation... broadcasters) {
         this.broadcasters = Arrays.asList(broadcasters);
     }
 

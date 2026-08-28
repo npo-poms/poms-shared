@@ -85,19 +85,19 @@ public class PageUpdate implements Serializable {
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @Setter
-    protected List<@CRID String> crids;
+    protected List<@NotNull @CRID String> crids;
 
     @XmlElement(name = "alternativeUrl")
     @JsonProperty("alternativeUrls")
     @Setter
-    protected List<@URI String> alternativeUrls;
+    protected List<@NotNull @URI String> alternativeUrls;
 
     @NotNull
     @Size(min = 1)
     @XmlElement(name = "broadcaster", required = true)
     @JsonProperty("broadcasters")
     @Setter
-    protected List<@BroadcasterValidation String> broadcasters;
+    protected List<@NotNull @BroadcasterValidation String> broadcasters;
 
     @Valid
     @Getter

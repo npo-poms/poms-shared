@@ -33,7 +33,9 @@ public class BroadcasterValidator implements ConstraintValidator<BroadcasterVali
     @SuppressWarnings("rawtypes")
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
-
+        if (value == null) {
+            return true;
+        }
         final BroadcasterService broadcasterService =  ServiceLocator.getBroadcasterService();
         if (broadcasterService == null || broadcasterService.findAll().isEmpty()) {
             if (! warned) {

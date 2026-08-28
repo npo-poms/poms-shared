@@ -114,7 +114,7 @@ public class Page implements MutableEmbargo<Page>, Serializable {
     @JsonProperty("crids")
     @Getter
     @Setter
-    protected List<@CRID String> crids;
+    protected List<@NotNull @CRID String> crids;
 
     @XmlElement(name = "alternativeUrl")
     @JsonProperty("alternativeUrls")
