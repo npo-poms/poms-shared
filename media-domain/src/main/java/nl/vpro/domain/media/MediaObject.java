@@ -2123,6 +2123,7 @@ MediaObject extends PublishableObject<MediaObject>
         if (! DELETES.contains(workflow)) {
             Set<Platform> implicitPredictions = new HashSet<>();
             final Map<Platform, List<Location>> locations = new HashMap<>();
+            //noinspection deprecation
             getLocations().stream()
                 .filter(Location::hasPlatform)
                 .filter(Location::isConsiderableForPublication)
@@ -2242,9 +2243,7 @@ MediaObject extends PublishableObject<MediaObject>
         AtomicBoolean change = new AtomicBoolean(false);
 
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> {
-                change.set(true);
-            });
+            MediaObjects.correctPrediction(prediction, this, org.slf4j.event.Level.DEBUG, instant(), (ps, p) -> change.set(true));
         }
         return change.get();
     }
@@ -2558,8 +2557,9 @@ MediaObject extends PublishableObject<MediaObject>
         if (images == null) {
             images = new ArrayList<>();
         }
-        // Occasionally images contains null elements due to a Hibernate
+        // Occasionally images contain null elements due to a Hibernate
         // synchronous access issue.
+        //noinspection ConstantValue
         images.removeIf(Objects::isNull);
 
         return images;
