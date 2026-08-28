@@ -76,7 +76,7 @@ class UserServiceTest {
 
         @Override
         public void delete(User object) {
-            log.info("--");
+
         }
 
         @Override
@@ -101,12 +101,12 @@ class UserServiceTest {
 
         @Override
         public void restoreAuthentication(Principal authentication) {
-            log.info("--");
+
         }
 
         @Override
         public void dropAuthentication() {
-            log.info("--");
+
         }
     };
 
