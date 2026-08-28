@@ -13,6 +13,6 @@ public class SegmentValidator implements ConstraintValidator<SegmentValidation, 
 
     @Override
     public boolean isValid(Segment value, ConstraintValidatorContext context) {
-        return value.getMidRef() != null || value.getParent() != null;
+        return value.getMidRef() != null || value.getCridRef() != null || value.getParent() != null;
     }
 }
