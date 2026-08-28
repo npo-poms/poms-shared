@@ -45,7 +45,7 @@ jobs:
           server-id: central
           server-username-env-var: CENTRAL_USERNAME
           server-password-env-var: CENTRAL_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          gpg-private-key: ${{ (runner.os == 'Linux' && matrix.java == 21) && secrets.GPG_SECRET_KEY || '' }}
       - name: Determine target
         id: set_target
         shell: bash
