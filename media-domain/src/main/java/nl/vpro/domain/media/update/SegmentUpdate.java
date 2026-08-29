@@ -385,7 +385,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
                 return true;
             }
             if (value.isStandalone()) {
-                if (StringUtils.isBlank(value.midRef)) {
+                if (StringUtils.isBlank(value.midRef) && StringUtils.isBlank(value.cridRef)) {
                     context.disableDefaultConstraintViolation();
                     context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
                         .addPropertyNode("midRef")
@@ -396,7 +396,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
                 }
             } else {
                 if (StringUtils.isNotBlank(value.midRef)) {
-                    if (! Objects.equals(value.midRef, value.parent.getMid())){
+                    if (! Objects.equals(value.midRef, value.parent.getMid())) {
                         context.disableDefaultConstraintViolation();
                         context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
                             .addPropertyNode("parent")
@@ -404,7 +404,17 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
                         return false;
                     }
                 }
-            }
+                if (StringUtils.isNotBlank(value.cridRef)) {
+                    if (! value.parent.getCrids().contains(value.cridRef)) {
+                        context.disableDefaultConstraintViolation();
+                        context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                            .addPropertyNode("parent")
+                            .addConstraintViolation();
+                        return false;
+                    }
+                }
+
+                }
             return true;
         }
     }
