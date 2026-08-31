@@ -74,6 +74,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         this.configuration = configuration;
         this.meterRegistry = meterRegistry;
+
+        log.info("Initializing {} with configuration {}", this.getClass().getSimpleName(), configuration);
     }
 
 
