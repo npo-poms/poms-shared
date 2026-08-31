@@ -166,6 +166,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             }
             logger.info("Callback URL for {}: {}", mid, URLUtils.hidePassword(callbackUrl));
             body.add("callback_url", callbackUrl);
+        } else {
+            logger.debug("No callback URL configured for {}", mid);
         }
 
         final HttpRequest post = uploadRequestBuilder
