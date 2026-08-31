@@ -1,6 +1,6 @@
 package nl.vpro.media.tva;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.23
  */
-@Slf4j
+@Log4j2
 class ConstantsTest {
 
 
