@@ -71,9 +71,7 @@ import java.util.*;
  * <li>Java 1.1 or higher</li>
  * </ul>
  * <p/>
- * The latest version can be found at <a
- * <p/>
- * href="http://schmidt.devlib.org/image-info/">http://schmidt.devlib.org/image-info/</a>.
+ * The latest version can be found at <a href="http://schmidt.devlib.org/image-info/">http://schmidt.devlib.org/image-info/</a>.
  * <p/>
  * Written by Marco Schmidt.
  * <p/>
