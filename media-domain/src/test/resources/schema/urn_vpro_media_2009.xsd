@@ -945,6 +945,7 @@
       <xs:enumeration value="PRMT"/>
       <xs:enumeration value="BLND"/>
       <xs:enumeration value="NVOD"/>
+      <xs:enumeration value="PONI"/>
       <xs:enumeration value="XXXX"/>
       <xs:enumeration value="XXXY"/>
     </xs:restriction>
