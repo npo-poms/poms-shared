@@ -107,7 +107,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("SENJ")
-    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz", false, true) { // voorheen radio 6?
+    SENJ(AUDIO, Range.closed(Year.of(2014), Year.of(2026)), "https://www.nporadio2.nl/soulenjazz", false, true) { // voorheen radio 6?
         @Override
         public String toString() {
             return "NPO Soul & Jazz";
@@ -2814,6 +2814,17 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "NPO Start";
+        }
+    },
+
+    /**
+     * @since 8.15.1
+     */
+    @XmlEnumValue("PONI")
+    PONI(AUDIO, Range.atLeast(Year.of(2026)), "https://npo.nl/aanbod/npo-politiek-nieuws", false, true) {
+        @Override
+        public String toString() {
+            return "NPO Politiek & Nieuws";
         }
     },
 
