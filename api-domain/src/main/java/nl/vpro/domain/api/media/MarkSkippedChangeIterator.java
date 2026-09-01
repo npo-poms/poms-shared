@@ -7,13 +7,14 @@ import java.time.Instant;
 import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.collections.CloseablePeekingIterator;
+import org.meeuw.collections.FilteringIterator;
 
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.util.CloseablePeekingIterator;
-import nl.vpro.util.FilteringIterator;
+
 
 /**
  * Wraps an existing Iterator of changes to allow for skipping certain values

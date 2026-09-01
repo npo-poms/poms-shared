@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.collections.CloseableIterator;
+import org.meeuw.collections.FilteringIterator;
 import org.meeuw.functional.ReasonedPredicate;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.media.*;
-import nl.vpro.util.CloseableIterator;
-import nl.vpro.util.FilteringIterator;
 
 /**
  * @author Roelof Jan Koekoek
