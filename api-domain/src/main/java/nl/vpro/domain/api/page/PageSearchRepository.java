@@ -2,11 +2,12 @@ package nl.vpro.domain.api.page;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.meeuw.collections.CloseableIterator;
+import org.meeuw.collections.FilteringIterator;
+
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.SectionRepository;
-import nl.vpro.util.CloseableIterator;
-import nl.vpro.util.FilteringIterator;
 
 /**
  * @author Michiel Meeuwissen

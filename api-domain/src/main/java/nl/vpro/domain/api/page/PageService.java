@@ -2,12 +2,13 @@ package nl.vpro.domain.api.page;
 
 import java.util.List;
 
+import org.meeuw.collections.CloseableIterator;
+import org.meeuw.collections.FilteringIterator;
+
 import nl.vpro.domain.api.IdList;
 import nl.vpro.domain.api.SuggestResult;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.page.Page;
-import nl.vpro.util.CloseableIterator;
-import nl.vpro.util.FilteringIterator;
 
 /**
  * @author Michiel Meeuwissen
