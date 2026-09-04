@@ -23,7 +23,7 @@ import nl.vpro.validation.NoHtml;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "embedUpdateType")
-@Builder
+@lombok.Builder
 public class EmbedUpdate implements Serializable {
 
     @Serial

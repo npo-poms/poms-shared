@@ -28,7 +28,7 @@ import nl.vpro.validation.PathSegment;
 @ToString(exclude = "portal")
 @JsonPropertyOrder({"path", "id", "value"})
 @AllArgsConstructor
-@Builder
+@lombok.Builder
 public class Section implements Displayable, Serializable {
 
     @Serial

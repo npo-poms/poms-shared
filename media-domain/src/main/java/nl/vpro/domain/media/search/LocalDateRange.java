@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.*;
 @ToString
 @Data
 @AllArgsConstructor
-@Builder(builderClassName = "Builder")
+@lombok.Builder(builderClassName = "Builder")
 public class LocalDateRange implements Range<ChronoLocalDate> {
 
     @XmlElement

@@ -1,7 +1,7 @@
 package nl.vpro.domain.page.update;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
@@ -21,11 +21,12 @@ import nl.vpro.domain.user.ServiceLocator;
  * @author Michiel Meeuwissen
  * @since 3.2
  */
+@Setter
 @XmlType(name = "portalUpdateType", propOrder = {"section"})
 @XmlAccessorType(XmlAccessType.NONE)
 @Slf4j
 @AllArgsConstructor
-@Builder
+@lombok.Builder
 public class PortalUpdate implements Serializable{
 
     @Serial
@@ -61,26 +62,14 @@ public class PortalUpdate implements Serializable{
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @XmlAttribute(required = true)
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     @XmlElement
     public Section getSection() {
         return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
     }
 
     public Portal toPortal() {
