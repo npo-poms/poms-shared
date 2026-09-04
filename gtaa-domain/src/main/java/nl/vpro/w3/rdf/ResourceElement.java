@@ -5,13 +5,9 @@
 package nl.vpro.w3.rdf;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Roelof Jan Koekoek
@@ -19,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlValue;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @AllArgsConstructor
-@Builder
+@lombok.Builder
 @Data
 public class ResourceElement {
 

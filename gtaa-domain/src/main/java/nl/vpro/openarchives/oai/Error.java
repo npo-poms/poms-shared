@@ -1,13 +1,9 @@
 package nl.vpro.openarchives.oai;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.NONE)
 @Data
 @AllArgsConstructor
-@Builder
+@lombok.Builder
 public class Error {
     /**
      * Code associated with this error
