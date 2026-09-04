@@ -51,11 +51,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.itemizer-download.username}") String username,
         @Value("${nep.itemizer-download.password}") String password,
         @Value("${nep.itemizer-download.hostkey}") String hostkey,
-        @Value("${nep.itemizer-download.hostKeyAlgorithms:+ssh-rsa,ssh-dss}") String hostkeyAlgorithms,
+        @Value("${nep.itemizer-download.hostKeyAlgorithms:+ssh-rsa}") String hostkeyAlgorithms,
         @Value("${nep.itemizer-download.scp.useFileCache}") boolean useFileCache,
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables,
-        @Value("${executables.scp.version:8}") int scpVersion,
+        @Value("${executables.scp.version:9}") int scpVersion,
         @Value("${nep.itemizer-download.maxDownloadRetries}") int maxDownloadRetries,
         @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh
     ) {
@@ -113,18 +113,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         };
     }
 
-
     protected NEPScpDownloadServiceImpl(Properties properties) {
         this(
             properties.getProperty("nep.itemizer-download.host"),
             properties.getProperty("nep.itemizer-download.username"),
             properties.getProperty("nep.itemizer-download.password"),
             properties.getProperty("nep.itemizer-download.hostkey"),
-            "+ssh-rsa,ssh-dss",
+            "+ssh-rsa",
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
-            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass", "/usr/local/bin/sshpass"/*brew*/),
-            8,
+            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass", "/opt/homebrew/bin/sshpass"),
+            9,
             3,
             false
         );
@@ -176,7 +175,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                                     if (StringUtils.isBlank(l)) {
                                         return null;
                                     }
-                                    if (l.contains("Warning")) {
+                                    if (StringUtils.containsIgnoreCase(l, "warning")) {
                                         return Level.WARN;
                                     }
                                     return Level.ERROR;

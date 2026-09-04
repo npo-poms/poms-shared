@@ -4,16 +4,18 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>8.15.2</version>
   </parent>
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-nep</artifactId>
   <name>media-nep</name>
   <description>Support for the several APIs of NEP that POMS is integrating with</description>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
+      <version>4.5.14</version>
     </dependency>
     <dependency>
       <groupId>commons-net</groupId>

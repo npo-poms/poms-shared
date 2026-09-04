@@ -36,7 +36,7 @@ public class NEPSSHJDownloadServiceImplTest {
     //static String fileName = "KN_1689705__000001927-002511602.mp4";
     //static String fileName = "npo-1dvr__2019-04-01T071443751-2019-04-01T071446102.mp4";
     //String fileName = "VPWON_1265965__000414370-000917470.mp4";
-    static String fileName = "POW_04596569__003141869-005019605.mp4";
+    static String fileName = "KN_1725020__000000000-002455560.mp4";
 
     static String testDest = "/tmp/test.mp4";
 

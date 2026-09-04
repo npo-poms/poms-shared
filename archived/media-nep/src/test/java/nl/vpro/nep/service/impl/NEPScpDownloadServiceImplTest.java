@@ -22,8 +22,6 @@ import nl.vpro.util.FileSizeFormatter;
 @Disabled("Download huge files")
 public class NEPScpDownloadServiceImplTest {
 
-
-
     NEPDownloadService impl = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
 
 
@@ -33,23 +31,25 @@ public class NEPScpDownloadServiceImplTest {
         Instant start = Instant.now();
 
         log.info("using {}", impl);
-        FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-        final AtomicLong size  = new AtomicLong(-1);
-        final AtomicLong count = new AtomicLong(0);
-        impl.download("", NEPSSHJDownloadServiceImplTest.fileName,
-            () -> outputStream,
-            Duration.ofSeconds(10), (fd) -> {
-            log.info("{}", fd);
-            size.set(fd.getSize());
-            if (count.incrementAndGet() < 5) {
-                log.info("Testing retry feature a few times");
-                return NEPDownloadService.Proceed.RETRY;
-            } else {
-                return NEPDownloadService.Proceed.TRUE;
-            }
+        try (FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4")) {
+            final AtomicLong size = new AtomicLong(-1);
+            final AtomicLong count = new AtomicLong(0);
+            impl.download("", NEPSSHJDownloadServiceImplTest.fileName,
+                () -> outputStream,
+                Duration.ofSeconds(10), (fd) -> {
+                    log.info("{}", fd);
+                    size.set(fd.getSize());
+                    if (count.incrementAndGet() < 5) {
+                        log.info("Testing retry feature a few times {}/5", count.get());
+                        return NEPDownloadService.Proceed.RETRY;
+                    } else {
+                        return NEPDownloadService.Proceed.TRUE;
+                    }
+                }
+            );
+
+            log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size.get(), start));
         }
-        );
-        log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size.get(), start));
 
 
     }
