@@ -32,6 +32,7 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.Log4j2OutputStream;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.TextUtil;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
@@ -1136,7 +1137,7 @@ public class MediaObjectXmlSchemaTest {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(update, out);
-        log.info(out.toString());
+        log.info(TextUtil.truncate(out.toString(), 200));
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
