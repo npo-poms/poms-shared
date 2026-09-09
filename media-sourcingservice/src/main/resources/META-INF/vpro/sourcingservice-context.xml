@@ -8,7 +8,7 @@
 
   <bean id="srcsAudioConfiguration" class="nl.vpro.sourcingservice.Configuration">
     <constructor-arg name="baseUrl" value="${sourcingservice.baseUrl}"/>
-    <constructor-arg name="callbackBaseUrl" value="${sourcingservice.callbackBaseUrl:#{null}}"/>
+    <constructor-arg name="callbackBaseUrl" value="${sourcingservice.callbackBaseUrl.audio:#{null}}"/>
     <constructor-arg name="callbackAuthentication" value="${sourcingservice.callbackAuthentication:#{null}}"/>
     <constructor-arg name="token" value="${sourcingservice.token}"/>
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
@@ -17,7 +17,7 @@
 
   <bean id="srcsVideoConfiguration" class="nl.vpro.sourcingservice.Configuration">
     <constructor-arg name="baseUrl" value="${sourcingservice.baseUrl}"/>
-    <constructor-arg name="callbackBaseUrl" value="${sourcingservice.callbackBaseUrl:#{null}}"/>
+    <constructor-arg name="callbackBaseUrl" value="${sourcingservice.callbackBaseUrl.video:#{null}}"/>
     <constructor-arg name="callbackAuthentication" value="${sourcingservice.callbackAuthentication:#{null}}"/>
     <constructor-arg name="token" value="${sourcingservice.token}"/>
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
