@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -113,43 +114,39 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     public CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
-        Long fileSize,
-        String contentType,
-        FileCachingInputStream inputStream,
-        @Nullable String profile,
-        @Nullable String errors
-    ) {
-        return upload(logger, mid, fileSize, contentType, inputStream, profile, errors, inputStream.getCount());
-    }
-
-
-    protected CompletableFuture<UploadResponse> upload(
-        SimpleLogger logger,
-        String mid,
-        Long fileSize,
+        long fileSize,
         String contentType,
         InputStream inputStream,
         @Nullable String profile,
-        @Nullable String errors,
-        Long count
+        @Nullable String errors
     ) {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
-
+        AtomicReference<FileSizeFormatter> formatter = new AtomicReference<>(FileSizeFormatter.DEFAULT.withPattern("#"));
+        AtomicReference<String> prev = new AtomicReference<>("");
         body.addChannel(FILE, fileName,
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
                 .batchSize((long) configuration.chunkSize())
-                .consumer(l -> logger.info(
-                    en("Uploaded %s/%s to %s")
-                        .nl("Geüpload %s/%s naar %s")
-                        .formatted(
-                            FileSizeFormatter.DEFAULT.format(l),
-                            fileSize == null ? "?" : FileSizeFormatter.DEFAULT.format(fileSize),
-                            configuration.cleanBaseUrl()))
+                .consumer(l -> {
+                    String progress = formatter.get().format(l);
+                    while(prev.get().equals(progress)) {
+                        formatter.set(formatter.get().withExtraDigit());
+                        progress = formatter.get().format(l);
+                    }
+                    prev.set(progress);
+                    logger.info(
+
+                        en("Uploaded %s/%s to %s")
+                            .nl("Geüpload %s/%s naar %s")
+                            .formatted(
+                                progress,
+                                FileSizeFormatter.DEFAULT.format(fileSize),
+                                configuration.cleanBaseUrl()));
+                    }
                 )
                 .build(),
             contentType
@@ -183,7 +180,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         return asyncSend.thenApply((response) -> {
             final boolean success = response.statusCode() >= 200 && response.statusCode() < 300;
-
+            meter("upload", response);
 
             if (!success) {
                 logger.warn("Status code for {}: {}", post.uri(), response.statusCode());
@@ -211,7 +208,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 }
                 status = null;
                 responseBody = null;
-
             }
 
             final String httpBody;
@@ -229,7 +225,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                             mid,
                             response.uri(),
                             status == null ? "no status" : status, response.statusCode(),
-                            FileSizeFormatter.DEFAULT.format(count),
+                            FileSizeFormatter.DEFAULT.format(fileSize),
                             httpBody).build());
 
             boolean retryable = true;
@@ -243,7 +239,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 response.statusCode(),
                 status,
                 responseBody == null ? httpBody : responseBody,
-                count,
+                fileSize,
                 "v2:" + configuration.cleanBaseUrl(),
                 retryable
             );

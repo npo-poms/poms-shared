@@ -1,6 +1,7 @@
 package nl.vpro.sourcingservice;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -8,7 +9,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.util.FileCachingInputStream;
 
 public interface SourcingService {
 
@@ -24,9 +24,9 @@ public interface SourcingService {
     CompletableFuture<UploadResponse> upload(
         SimpleLogger logger,
         String mid,
-        Long fileSize,
+        long fileSize,
         String contentType,
-        FileCachingInputStream inputStream,
+        InputStream inputStream,
         @Nullable String profile,
         @Nullable String errors
     );

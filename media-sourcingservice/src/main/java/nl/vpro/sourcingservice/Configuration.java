@@ -10,6 +10,12 @@ public record Configuration(
     int chunkSize,
     String defaultEmail) {
 
+    public Configuration {
+        if (chunkSize <= 0) {
+            throw new IllegalArgumentException("chunkSize must be positive");
+        }
+    }
+
     public String cleanBaseUrl() {
         return  baseUrl.replaceAll("([^/])$","$1/");
     }

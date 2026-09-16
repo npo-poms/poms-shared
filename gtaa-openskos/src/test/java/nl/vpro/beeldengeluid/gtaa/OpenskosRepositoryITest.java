@@ -44,8 +44,8 @@ public class OpenskosRepositoryITest {
     }
 
     public static Object[] envs() {
-//        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
-        return new Object[]{Env.ACC};
+        return new Object[]{Env.ACC, Env.PROD, Env.LOCALHOST};
+        //return new Object[]{Env.ACC};
     }
 
     @ParameterizedTest

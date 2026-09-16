@@ -1,6 +1,6 @@
 package nl.vpro.sourcingservice;
 
-import io.micrometer.core.instrument.logging.LoggingMeterRegistry;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.ByteArrayInputStream;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,12 +27,14 @@ import nl.vpro.util.FileCachingInputStream;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Log4j2
 @WireMockTest
 class AudioSourcingServiceImplTest {
 
     AudioSourcingServiceImpl impl;
+    SimpleMeterRegistry meterRegistry;
 
     @BeforeEach
     public void setUp(WireMockRuntimeInfo wireMock) {
@@ -43,10 +46,8 @@ class AudioSourcingServiceImplTest {
             1000,
             null
         );
-        impl = new AudioSourcingServiceImpl(
-             configuration,
-            new LoggingMeterRegistry()
-        );
+        meterRegistry = new SimpleMeterRegistry();
+        impl = new AudioSourcingServiceImpl(configuration, meterRegistry);
     }
 
     @Test
@@ -90,7 +91,41 @@ class AudioSourcingServiceImplTest {
 
         );
         log.info(serveEvent.toString());
+        assertThat(meterRegistry.get("sourcing.audio.upload").tag("status", "200").counter().count()).isEqualTo(1);
+    }
 
+    @Test
+    public void uploadMalformedHtmlErrorResponse() {
+        stubFor(post(UrlPattern.ANY).willReturn(aResponse()
+            .withStatus(500)
+            .withHeader("Content-Type", "Text/HTML; charset=UTF-8")
+            .withBody("<h1>Upload failed</h1>")));
+
+        assertThatThrownBy(() -> impl.upload(
+            Log4j2SimpleLogger.simple(log),
+            "mid",
+            6,
+            "audio/mpeg",
+            new ByteArrayInputStream("foobar".getBytes()),
+            null,
+            null
+        ).join())
+            .isInstanceOf(CompletionException.class)
+            .hasCauseInstanceOf(SourcingServiceException.class)
+            .hasMessageNotContaining("<h1>");
+
+    }
+
+    @Test
+    public void rejectsNonPositiveChunkSize() {
+        assertThatThrownBy(() -> new Configuration(
+            "http://localhost/",
+            null,
+            null,
+            "token",
+            0,
+            null
+        )).isInstanceOf(IllegalArgumentException.class);
     }
 
      @Test
@@ -122,7 +157,5 @@ class AudioSourcingServiceImplTest {
 
         assertThat(deleteResponse.getResponse()).isEqualTo("Already deleted?");
     }
-
-
 
 }

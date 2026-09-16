@@ -74,6 +74,25 @@ class VideoSourcingServiceImplITest {
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
+    @Test
+    public void uploadHugeVideo() throws IOException, ExecutionException, InterruptedException {
+        Instant start = Instant.now();
+        //Path file = Paths.get(System.getProperty("user.home") , "samples", "AT21022008_Den_Uyl.mp4");
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "output1.mp4");
+
+        CompletableFuture<UploadResponse> upload = impl.upload(
+            simple(log),
+            "WO_VPRO_20363164",
+            Files.size(file),
+            "video/mp4",
+            Files.newInputStream(file),
+            "landscape",
+            "michiel.meeuwissen@gmail.com"
+        );
+        upload.get();
+        log.info("Took {}", Duration.between(start, Instant.now()));
+    }
+
 
     @Test
     public void status() throws IOException, InterruptedException {
