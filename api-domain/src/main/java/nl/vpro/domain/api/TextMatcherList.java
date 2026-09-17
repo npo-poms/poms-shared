@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -23,7 +21,7 @@ import nl.vpro.domain.api.jackson.TextMatcherListJson;
 @XmlType(name = "textMatcherListType")
 @JsonSerialize(using = TextMatcherListJson.Serializer.class)
 @JsonDeserialize(using = TextMatcherListJson.Deserializer.class)
-public class TextMatcherList extends AbstractTextMatcherList<TextMatcher, StandardMatchType> {
+public class TextMatcherList extends AbstractTextMatcherList<@Valid TextMatcher, StandardMatchType> {
 
     public static TextMatcherList must(TextMatcher... values) {
         return new TextMatcherList(Match.MUST, values);

@@ -5,7 +5,6 @@ import lombok.*;
 import java.util.Collections;
 import java.util.Iterator;
 
-import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -23,22 +22,21 @@ import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
  * @since 4.2
  */
 
+@Setter
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
 public abstract class AbstractRelationSearch extends AbstractSearch<Relation> implements Iterable<AbstractTextMatcher<?>> {
 
-    @Valid
+
     private TextMatcherList types;
 
-    @Valid
     private TextMatcherList broadcasters;
 
-    @Valid
     private ExtendedTextMatcherList values;
 
-    @Valid
     private TextMatcherList uriRefs;
 
 
@@ -62,38 +60,6 @@ public abstract class AbstractRelationSearch extends AbstractSearch<Relation> im
             (that.types == null || searchEquals(types, that.types)) &&
             (that.values == null || searchEquals(values, that.values)) &&
             (that.uriRefs == null || searchEquals(uriRefs, that.uriRefs));
-    }
-
-    public TextMatcherList getTypes() {
-        return types;
-    }
-
-    public void setTypes(TextMatcherList types) {
-        this.types = types;
-    }
-
-    public TextMatcherList getBroadcasters() {
-        return broadcasters;
-    }
-
-    public void setBroadcasters(TextMatcherList broadcasters) {
-        this.broadcasters = broadcasters;
-    }
-
-    public ExtendedTextMatcherList getValues() {
-        return values;
-    }
-
-    public void setValues(ExtendedTextMatcherList values) {
-        this.values = values;
-    }
-
-    public TextMatcherList getUriRefs() {
-        return uriRefs;
-    }
-
-    public void setUriRefs(TextMatcherList uriRefs) {
-        this.uriRefs = uriRefs;
     }
 
     @NonNull

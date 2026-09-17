@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.api.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.function.Predicate;
 
@@ -42,7 +41,6 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return MediaFormBuilder.form();
     }
 
-    @Valid
     @XmlElements({
         @XmlElement(name = "sort", type = MediaSortOrder.class),
         @XmlElement(name = "titleSort", type = TitleSortOrder.class)
@@ -51,6 +49,7 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     @JsonIgnore
     private MediaSortOrderList sortFields;
 
+    @Getter
     @XmlElement
     @Valid
     private MediaFacets facets;
@@ -59,10 +58,6 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     @Override
     public boolean isFaceted() {
         return facets != null && facets.isFaceted();
-    }
-
-    public MediaFacets getFacets() {
-        return facets;
     }
 
     @JsonProperty("sort")

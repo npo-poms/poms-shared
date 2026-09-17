@@ -1,10 +1,10 @@
 package nl.vpro.domain.api.media;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.*;
+
+import jakarta.validation.Valid;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -23,9 +23,9 @@ import nl.vpro.domain.api.media.bind.MediaSortOrderListJson;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class MediaSortOrderList extends AbstractList<MediaSortOrder> implements Iterable<MediaSortOrder> {
+public class MediaSortOrderList extends AbstractList<@Valid MediaSortOrder> implements Iterable<MediaSortOrder> {
 
-    private List<MediaSortOrder> sort;
+    private List<@Valid MediaSortOrder> sort;
 
     public MediaSortOrderList() {
     }
