@@ -23,7 +23,7 @@ import static nl.vpro.poms.shared.UploadUtils.loggingConsumer;
 
 @Log4j2
 @Disabled("This does actual stuff, need actual token.")
-class AudioSourcingServiceImplITest {
+final class AudioSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
 
@@ -61,7 +61,7 @@ class AudioSourcingServiceImplITest {
     }
 
     @Test
-    public void uploadAudio() throws IOException, InterruptedException, ExecutionException {
+    void uploadAudio() throws IOException, InterruptedException, ExecutionException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
@@ -87,13 +87,13 @@ class AudioSourcingServiceImplITest {
     }
 
     @Test
-    public void status() throws IOException, InterruptedException {
+    void status() throws IOException, InterruptedException {
         StatusResponse status = impl.status(MID).orElseThrow();
         log.info("Status {}", status);
     }
 
     @Test
-    public void delete() throws IOException, InterruptedException {
+    void delete() throws IOException, InterruptedException {
         DeleteResponse status = impl.delete(MID, 1);
         log.info("Status {}", status);
     }

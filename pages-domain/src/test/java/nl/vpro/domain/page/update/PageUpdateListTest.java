@@ -7,7 +7,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 class PageUpdateListTest {
 
     @Test
-    public void xml() {
+    void xml() {
 
         PageUpdateList list = PageUpdateList.of(
             PageUpdate.builder()

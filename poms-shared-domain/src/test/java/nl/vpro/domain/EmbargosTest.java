@@ -10,10 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.7
  */
-public class EmbargosTest {
+class EmbargosTest {
 
     @Test
-    public void unrestricted() {
+    void unrestricted() {
         MutableEmbargo<BasicEmbargo> unrestrictedInstant = Embargos.unrestrictedInstance();
 
         MutableEmbargo<BasicEmbargo> of = Embargos.of(unrestrictedInstant.asRange());

@@ -32,17 +32,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SuppressWarnings({"HttpUrlsUsage", "OptionalGetWithoutIsPresent"})
 @Slf4j
 @WireMockTest
-public class OpenskosRepositoryTest {
+class OpenskosRepositoryTest {
 
 
     @Test
-    public void getInstance() {
+    void getInstance() {
         OpenskosRepository.instance = null;
         assertThatThrownBy(OpenskosRepository::getInstance).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
-    public void findPersons(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    void findPersons(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         assertThat(repo.toString()).startsWith("OpenskosRepository http://localhost:");
@@ -58,7 +58,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void testAddItem(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    void addItem(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
@@ -77,7 +77,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void submitDuplicate(WireMockRuntimeInfo wmRuntimeInfo) {
+    void submitDuplicate(WireMockRuntimeInfo wmRuntimeInfo) {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(ok("Concept 'Puk, Pietje (nl)' already exists").withStatus(409)));
@@ -94,7 +94,7 @@ public class OpenskosRepositoryTest {
 
 
     @Test
-    public void updatesNoResults(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void updatesNoResults(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("no-updates.xml"))));
@@ -105,7 +105,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void updates(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void updates(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
@@ -118,7 +118,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void getUpdatesAndApplyThem(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void getUpdatesAndApplyThem(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
@@ -132,7 +132,7 @@ public class OpenskosRepositoryTest {
 
 
     @Test
-    public void anyUpdates(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void anyUpdates(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(get(urlPathEqualTo("/oai-pmh"))
@@ -173,7 +173,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void testRetrieveItemStatus(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void retrieveItemStatus(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("retrieve-status.xml"))));
@@ -182,7 +182,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void retrieveItemStatusShouldReturnIllegalArgumentEx(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
+    void retrieveItemStatusShouldReturnIllegalArgumentEx(WireMockRuntimeInfo wmRuntimeInfo) throws Exception {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(
@@ -193,7 +193,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void retrieveItemStatusShouldReturnUnexpectedError(WireMockRuntimeInfo wmRuntimeInfo) {
+    void retrieveItemStatusShouldReturnUnexpectedError(WireMockRuntimeInfo wmRuntimeInfo) {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         assertThatThrownBy(() -> {
@@ -203,7 +203,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void getPerson(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    void getPerson(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(
@@ -217,7 +217,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void getPersonNotFoundOldImpl(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    void getPersonNotFoundOldImpl(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
          OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
          WireMock.stubFor(
@@ -229,7 +229,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void findAnyThing(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+    void findAnyThing(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         OpenskosRepository repo = create(wmRuntimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(

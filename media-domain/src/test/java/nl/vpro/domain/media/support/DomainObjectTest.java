@@ -9,50 +9,50 @@ import nl.vpro.domain.media.Program;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
-public class DomainObjectTest {
+class DomainObjectTest {
 
     @Test
-    public void testEqualsForRealIdentity() {
+    void equalsForRealIdentity() {
         Program program = new Program();
         assertThat(program).isEqualTo(program);
     }
 
     @Test
-    public void testEqualsWithIdenticalIDs() {
+    void equalsWithIdenticalIDs() {
         Program program = new Program(123L);
         Program program2 = new Program(123L);
         assertThat(program).isEqualTo(program2);
     }
 
     @Test
-    public void testEqualsWithNoIdenticalIDs() {
+    void equalsWithNoIdenticalIDs() {
         Program program = new Program(123L);
         Program program2 = new Program(124L);
         assertThat(program).isNotEqualTo(program2);
     }
 
     @Test
-    public void testEqualsWithNullIDs() {
+    void equalsWithNullIDs() {
         Program program = new Program();
         Program program2 = new Program();
         assertThat(program).isNotEqualTo(program2);
     }
 
     @Test
-    public void testEqualsWithNull() {
+    void equalsWithNull() {
         Program program = new Program();
         assertThat(program).isNotEqualTo(null);
     }
 
     @Test
-    public void testEqualsWithOtherDomainObject() {
+    void equalsWithOtherDomainObject() {
         Program program = new Program();
         Group group = new Group();
         assertThat(program).isNotEqualTo(group);
     }
 
     @Test
-    public void testEqualsWithOtherObject() {
+    void equalsWithOtherObject() {
         Program program = new Program();
         String string = "";
         assertThat(program).isNotEqualTo(string);

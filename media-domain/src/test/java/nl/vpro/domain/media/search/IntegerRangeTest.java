@@ -8,10 +8,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 1.8
  */
-public class IntegerRangeTest {
+class IntegerRangeTest {
 
     @Test
-    public void xml() {
+    void xml() {
         IntegerRange range = IntegerRange
             .builder()
             .start(IntegerRange.Value.of(1L))

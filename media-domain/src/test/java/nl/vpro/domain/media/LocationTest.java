@@ -36,7 +36,7 @@ import static nl.vpro.domain.Changeables.CLOCK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class LocationTest implements BasicObjectTheory<Location> {
+class LocationTest implements BasicObjectTheory<Location> {
 
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
 
@@ -61,7 +61,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testPublishableInvalidWhenStopBeforeStart() {
+    void publishableInvalidWhenStopBeforeStart() {
         Location invalid = new Location("http://www.bla.nl", OwnerType.BROADCASTER);
         invalid
             .setPublishStartInstant(Instant.ofEpochMilli(20))
@@ -73,7 +73,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testInvalidProgramUrl() {
+    void invalidProgramUrl() {
         Location invalid = new Location("sub+http//npo.npoplus.nl/video/mpeg2_hr/POW_00718800", OwnerType.BROADCASTER);
         Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid);
 
@@ -81,14 +81,14 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testValidProgramUrl() {
+    void validProgramUrl() {
         Location invalid = new Location("sub+http://npo.npoplus.nl/video/mpeg2_hr/POW_00718800", OwnerType.BROADCASTER);
         Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid);
 
         assertThat(constraintViolations).isEmpty();
     }
     @Test
-    public void testAddCeresRecordWhenNew() {
+    void addCeresRecordWhenNew() {
         Program program = new Program(1L);
         Prediction pred = program.findOrCreatePrediction(Platform.INTERNETVOD);
         Location location = new Location();
@@ -99,7 +99,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testEqualsNoIdDifferentURLSameOwner() {
+    void equalsNoIdDifferentURLSameOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("OTHER_URL", OwnerType.BROADCASTER);
 
@@ -107,7 +107,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testEqualsNoIdSameURLDifferentOwner() {
+    void equalsNoIdSameURLDifferentOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("URL", OwnerType.MIS);
 
@@ -115,7 +115,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testEqualsSameIdDifferentURLAndOwner() {
+    void equalsSameIdDifferentURLAndOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("OTHER_URL", OwnerType.MIS);
 
@@ -126,7 +126,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void testPresentationOrder() {
+    void presentationOrder() {
         {
             Location l1 = new Location("URL", OwnerType.BROADCASTER);
             l1.setAvFileFormat(AVFileFormat.WMP);
@@ -162,7 +162,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
 
     @Test
     //MSE-2614
-    public void testCompareTo() {
+    void compareTo() {
         Location location1 = new Location("http://cgi.omroep.nl/cgi-bin/streams?/vpro/19438306/surestream.rm?title=Interview Ruud Lubbers Wat trof hij aan in Darfur", OwnerType.BROADCASTER);
         Location location2 = new Location("http://cgi.omroep.nl/cgi-bin/streams?/vpro/19438306/surestream.rm?title=Interview Ruud Lubbers Wat trof hij aan in Darfur", OwnerType.BROADCASTER);
         assertThat(location1.compareTo(location2)).isEqualTo(0);
@@ -170,7 +170,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void fromJson() throws Exception {
+    void fromJson() throws Exception {
         String json = """
             [ {
               "programUrl" : "http://adaptive.npostreaming.nl/u/npo/promo/1P0603VD_BEDBREAK/1P0603VD_BEDBREAK.ism",
@@ -195,7 +195,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
 
 
     @Test
-    public void toJson() throws JsonProcessingException {
+    void toJson() throws JsonProcessingException {
         Location loc = JAXB.unmarshal(new StringReader("""
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <location xmlns:shared="urn:vpro:shared:2009" xmlns:ns3="urn:vpro:media:2009" owner="BROADCASTER" creationDate="2015-03-06T20:22:04.051+01:00" lastModified="2015-03-06T20:22:04.457+01:00" urn="urn:vpro:media:location:52286162" workflow="PUBLISHED">
@@ -226,13 +226,13 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void sanitize() {
+    void sanitize() {
         assertThat(Location.sanitizedProgramUrl("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen")).isEqualTo("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie%20eegie%20sanie%20-%20Onze%20eigen%20dingen");
     }
 
     @Disabled
     @Test
-    public void sanitizeAll() throws IOException {
+    void sanitizeAll() throws IOException {
         String dir = "/Users/michiel/npo/media/main/issues/MSE-5/MSE-5292/";
         HttpClient client = HttpClient.newBuilder().build();
         try (InputStream inputStream = new FileInputStream(dir + "MSE-5292.csv");
@@ -268,7 +268,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
     }
 
     @Test
-    public void builder() {
+    void builder() {
         Location location = Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build();
 
         assertThat(location.getCreationInstant()).isEqualTo(NOW);

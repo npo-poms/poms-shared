@@ -14,11 +14,11 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @WireMockTest
-public class AAPILocationHandlerTest {
+class AAPILocationHandlerTest {
 
 
     @Test
-    public void testHandle(WireMockRuntimeInfo runtimeInfo) {
+    void handle(WireMockRuntimeInfo runtimeInfo) {
 
 
         stubFor(

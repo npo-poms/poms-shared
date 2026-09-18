@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SimpleTextMatcherTest {
 
     @Test
-    public void string() {
+    void string() {
         SimpleTextMatcher matcher = new SimpleTextMatcher("foobar");
 
         assertThat(matcher.toString()).isEqualTo("SimpleTextMatcher{value='foobar', matchType=TEXT}");
@@ -17,7 +17,7 @@ class SimpleTextMatcherTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         Jackson2TestUtil.roundTripAndSimilar(SimpleTextMatcher.builder().semantic(true).value("foobar").build(), """
             {
               "value" : "foobar",

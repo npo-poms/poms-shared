@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class MetaData_v2_1Test {
+class MetaData_v2_1Test {
 
     MediaProvider provider = mock(MediaProvider.class);
 
@@ -32,7 +32,7 @@ public class MetaData_v2_1Test {
 
 
     @Test
-    public void testCreateAflevering() {
+    void createAflevering() {
         Program program = getTestProgram(provider);
 
         Aflevering aflevering = MetaData_v2_1.createAflevering(program, provider);
@@ -80,7 +80,7 @@ public class MetaData_v2_1Test {
 
     // MSE-3088
     @Test
-    public void testGetGenre() {
+    void getGenre() {
         Program program = getTestProgram(provider);
         SortedSet<Genre> genre = new TreeSet<>();
         genre.add(new Genre(ClassificationServiceLocator.getInstance().getTerm("3.0.1.7")));

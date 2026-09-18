@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public class TranscodeRequestTest {
+class TranscodeRequestTest {
 
     TranscodeRequest request = TranscodeRequest.builder()
             .mid("MID_123")
@@ -20,7 +20,7 @@ public class TranscodeRequestTest {
             .fileName("vpro/test.m4v")
             .build();
     @Test
-    public void xml() {
+    void xml() {
 
         JAXBTestUtil.roundTripAndSimilar(request, """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -32,7 +32,7 @@ public class TranscodeRequestTest {
     }
 
     @Test
-    public void testToString() {
+    void stringRepresentation() {
 
         assertThat(request.toString()).isEqualTo("TranscodeRequest(mid=MID_123, fileName=vpro/test.m4v, encryption=DRM, priority=NORMAL)");
 

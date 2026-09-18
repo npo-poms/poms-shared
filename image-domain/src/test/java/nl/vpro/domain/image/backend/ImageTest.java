@@ -27,7 +27,7 @@ class ImageTest {
     }
 
     @Test
-    public void validation() {
+    void validation() {
         BackendImage image = BackendImage.builder()
             .license(License.COPYRIGHTED)
             .title("bla")
@@ -37,7 +37,7 @@ class ImageTest {
         assertThat(validator.validate(image)).isEmpty();
     }
     @Test
-    public void invalidation() {
+    void invalidation() {
         BackendImage image = BackendImage.builder()
             .license(null)
             .title("bla")

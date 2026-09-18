@@ -36,17 +36,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @since 2.0
  */
 @Log4j2
-public class ProfileTest {
+final class ProfileTest {
 
     @Test
-    public void testGetNullValues() {
+    void getNullValues() {
         Profile in = new Profile(null);
         assertNull(in.getName());
         assertNull(in.getPageProfile());
         assertNull(in.getMediaProfile());
     }
     @Test
-    public void testGetName() {
+    void getName() {
         Profile in = new Profile("name");
         in.setTimestamp(Instant.EPOCH);
 
@@ -58,7 +58,7 @@ public class ProfileTest {
 
 
     @Test
-    public void testGetPageProfile() {
+    void getPageProfile() {
         Profile in = new Profile("media", new ProfileDefinition<>(), null);
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -71,7 +71,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testGetMediaProfile() {
+    void getMediaProfile() {
         Profile in = new Profile("media", null, new ProfileDefinition<>());
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -84,7 +84,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testAgeRatingProfile() {
+    void ageRatingProfile() {
         Profile in = new Profile("agerating", null, new ProfileDefinition<>(new Filter(new AgeRatingConstraint(AgeRating._6))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -101,7 +101,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testGenreProfile() {
+    void genreProfile() {
         Profile in = new Profile("genre", null, new ProfileDefinition<>(new Filter(new GenreConstraint("Jeugd"))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -119,7 +119,7 @@ public class ProfileTest {
 
     @Test // not (yet?) supported
     @Disabled
-    public void testJson() {
+    void json() {
         assertThatThrownBy(() -> {
             Filter filter = new Filter();
             filter.setConstraint(new HasImageConstraint());
@@ -130,7 +130,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void parseScheduleEvent() {
+    void parseScheduleEvent() {
         String in = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <profile:profile xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:profile="urn:vpro:api:profile:2013" name="test-profiel">
@@ -149,13 +149,13 @@ public class ProfileTest {
     }
 
     @Test
-    public void testHuman() {
+    void human() {
         assertThat(getHumanProfile().getMediaProfile().getName()).isEqualTo("human");
     }
 
 
     @Test
-    public void testPredicate() {
+    void predicate() {
         Program program = MediaTestDataBuilder.program().build();
         ProfileDefinition<MediaObject> predicate = getHumanProfile().getMediaProfile();
         PredicateTestResult predicateTestResult = predicate.testWithReason(program);
@@ -164,7 +164,7 @@ public class ProfileTest {
 
 
     @Test
-    public void testPredicateZapp() {
+    void predicateZapp() {
         Program program1 = MediaTestDataBuilder.program().withImages().withLocations().build();
         Program program2 = MediaTestDataBuilder.program().withImages().withLocations().ageRating(AgeRating._16).build();
         ProfileDefinition<MediaObject> predicate = getZappProfile().getMediaProfile();
@@ -177,7 +177,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void npostart() {
+    void npostart() {
         ProfileDefinition<MediaObject> mediaProfile = getNpoStartProfile().getMediaProfile();
         log.info("{}", mediaProfile);
         assertThat(mediaProfile.getFilter()).isNotNull();

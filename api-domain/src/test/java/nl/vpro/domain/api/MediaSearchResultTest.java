@@ -13,10 +13,10 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-public class MediaSearchResultTest {
+class MediaSearchResultTest {
 
     @Test
-    public void toJson() {
+    void toJson() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
         MediaSearchResult result = new MediaSearchResult(list, 0L, 10, Result.Total.EMPTY);
         MediaFacetsResult facets = new MediaFacetsResult();
@@ -36,7 +36,7 @@ public class MediaSearchResultTest {
 
 
     @Test
-    public void toXml() {
+    void toXml() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
         MediaSearchResult result = new MediaSearchResult(list, 0L, 10, Result.Total.EMPTY);
         MediaFacetsResult facets = new MediaFacetsResult();

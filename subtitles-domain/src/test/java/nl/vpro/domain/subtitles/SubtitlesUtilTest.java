@@ -22,11 +22,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.7
  */
 @Log4j2
-public class SubtitlesUtilTest {
+class SubtitlesUtilTest {
 
 
     @Test
-    public void basic() throws IOException {
+    void basic() throws IOException {
         List<Cue> list = SubtitlesUtil.parse(getSubtitles(), true).collect(Collectors.toList());
         assertThat(list).hasSize(403);
         assertThat(list.getFirst().getContent()).isEqualTo("888");
@@ -47,7 +47,7 @@ public class SubtitlesUtilTest {
     }
 
     @Test
-    public void toTT888() throws IOException {
+    void toTT888() throws IOException {
         assertThat(TT888.format(SubtitlesUtil
             .parse(getSubtitles(), true)
             .getCues()
@@ -61,7 +61,7 @@ public class SubtitlesUtilTest {
     }
 
     @Test
-    public void toWEBTTVtoTT888() throws IOException {
+    void toWEBTTVtoTT888() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, StandardCharsets.UTF_8), w);

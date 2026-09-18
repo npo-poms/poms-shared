@@ -34,10 +34,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 2.0
  */
 @Log4j2
-public class PageFormTest {
+final class PageFormTest {
 
     @Test
-    public void testGetText() {
+    void getText() {
         PageForm form = new PageForm();
         PageSearch pageSearch = new PageSearch();
         pageSearch.setText(new SimpleTextMatcher("bla bla"));
@@ -46,7 +46,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void testMarshal() throws IOException {
+    void marshal() throws IOException {
 
         PageFormBuilder builder = PageFormBuilder.form().sectionFacet().addPortals("WETENSCHAP24");
         StringWriter writer = new StringWriter();
@@ -56,7 +56,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void testMarshalWithSort() throws IOException {
+    void marshalWithSort() throws IOException {
 
         PageFormBuilder builder = PageFormBuilder.form()
             .addSortField("lastModified", Order.DESC)
@@ -70,7 +70,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testMarshalWithSortXml() {
+    void marshalWithSortXml() {
 
         PageFormBuilder builder = PageFormBuilder.form()
             .addSortField("lastModified", Order.DESC)
@@ -94,7 +94,7 @@ public class PageFormTest {
                 </api:pagesForm>""");
     }
     @Test
-    public void unmarshal() throws IOException {
+    void unmarshalsUnknownProperties() throws IOException {
         String string = """
             {
                 "facets": {
@@ -114,7 +114,7 @@ public class PageFormTest {
 
 
     @Test
-    public void unmarshalBackwards() throws IOException {
+    void unmarshalBackwards() throws IOException {
         String string = """
             {
                 "facets": {
@@ -130,7 +130,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void toXml() throws IOException {
+    void toXml() throws IOException {
         String json = """
             {
                 "searches" : {
@@ -170,7 +170,7 @@ public class PageFormTest {
 
     }
     @Test
-    public void toXmlValidated() throws IOException, JAXBException {
+    void toXmlValidated() throws IOException, JAXBException {
         String json = "{\"searches\":{\"types\":[\"PLAYER\"]},\"sort\":{\"sortDate\":\"DESC\"},\"facets\":{\"keywords\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"genres\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"sections\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"mediaForm\":{\"facets\":{\"avTypes\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"highlight\":false},\"highlight\":false}";
         PageForm form = Jackson2Mapper.getInstance().readValue(new StringReader(json), PageForm.class);
 
@@ -182,7 +182,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void testReferralsJson() {
+    void referralsJson() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
         String json = "{\"searches\":{\"referrals\":{\"types\":\"TOP_STORY\"}}}";
 
@@ -193,7 +193,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testReferralsJsonShould() {
+    void referralsJsonShould() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY, Match.SHOULD)).build();
         String json = "{\"searches\":{\"referrals\":{\"match\":\"SHOULD\",\"types\":\"TOP_STORY\"}}}";
 
@@ -204,7 +204,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testReferralsXml() {
+    void referralsXml() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
         String xml = """
             <api:pagesForm xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
@@ -225,7 +225,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void getLinksJson() {
+    void getLinksJson() {
         PageForm form = PageFormBuilder.form().links(AssociationSearch.of(LinkType.TOP_STORY)).highlight(true).build();
         String json = "{\"searches\":{\"links\":{\"types\":\"TOP_STORY\"}},  \"highlight\" : true}";
 
@@ -237,7 +237,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testUnmarshal() throws IOException {
+    void unmarshal() throws IOException {
         Jackson2Mapper.getInstance().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         PageForm form = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/NPA-281.json"), PageForm.class);
         Jackson2Mapper.getInstance().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

@@ -24,7 +24,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.*;
 
-public class CountryCodeAdapterTest {
+class CountryCodeAdapterTest {
 
     @BeforeAll
     public static void setup() {
@@ -34,7 +34,7 @@ public class CountryCodeAdapterTest {
 
     @Test
     @Disabled
-    public void wiki() {
+    void wiki() {
         Code cca = new Code();
         Map<String, Region> result = new TreeMap<>();
         RegionService.getInstance().values().filter(
@@ -65,13 +65,13 @@ public class CountryCodeAdapterTest {
     }
 
     @Test
-    public void finlandReserved() {
+    void finlandReserved() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
         assertThat(cca.marshal(CurrentCountry.of(CountryCode.SF)).getName()).isEqualTo("Finland");
     }
 
     @Test
-    public void finland() {
+    void finland() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
         assertThat(cca.marshal(CurrentCountry.of(CountryCode.FI)).getName()).isEqualTo("Finland");
     }
@@ -99,7 +99,7 @@ public class CountryCodeAdapterTest {
     }
     A empty = new A();
     @Test
-    public void xml() {
+    void xml() {
         JAXBTestUtil.roundTripAndSimilar(nl, """
             <local:a xmlns:local="uri:local" xmlns="urn:vpro:media:2009">
                 <country code="NL">Nederland</country>
@@ -109,7 +109,7 @@ public class CountryCodeAdapterTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         Jackson2TestUtil.roundTripAndSimilar(nl, """
             {
               "countries" : [ {

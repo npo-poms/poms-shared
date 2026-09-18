@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 
 @Slf4j
-public class GTAAConceptTest {
+class GTAAConceptTest {
 
 
     public static Stream<Object[]> data() {

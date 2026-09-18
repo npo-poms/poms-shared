@@ -16,7 +16,7 @@ class StandaloneMemberRefTest {
 
 
     @Test
-    public void roundTripMemberRef(){
+    void roundTripMemberRef(){
 
         MemberRef ref = MemberRef.builder()
             .midRef("parent")

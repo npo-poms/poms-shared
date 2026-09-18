@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
-public class OpenskosTests {
+class OpenskosTests {
     static OpenskosRepository create(String uri) {
         OpenskosRepository repo = new OpenskosRepository(uri + "/", "", null);
         repo.init();
@@ -33,7 +33,7 @@ public class OpenskosTests {
 
     @Disabled
     @Test
-    public void testPost1() {
+    void post1() {
         GTAARepository impl = getRealInstance();
 
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
@@ -45,7 +45,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled("Vervuilt GTAA")
-    public void test409ConflictResolution() {
+    void test409ConflictResolution() {
         GTAARepository impl = getRealInstance();
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
@@ -58,7 +58,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled("Vervuilt GTAA")
-    public void test409ConflictResolution3ShouldThrowException() {
+    void test409ConflictResolution3ShouldThrowException() {
         Assertions.assertThatThrownBy(() -> {
             GTAARepository impl = getRealInstance();
             GTAANewPerson pietjePuk = GTAANewPerson.builder()
@@ -74,7 +74,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void testFindPerson() {
+    void findPerson() {
         GTAARepository impl = getRealInstance();
         List<Description> persons = impl.findPersons("pietje", 100);
         assertThat(persons).isNotEmpty();
@@ -84,7 +84,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void testFindAnything() {
+    void findAnything() {
         GTAARepository impl = getRealInstance();
         List<Description> items = impl.findAnything("hilversum", 100);
         assertThat(items).isNotEmpty();
@@ -94,7 +94,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void testChanges() {
+    void changes() {
         GTAARepository impl = getRealInstance();
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -115,7 +115,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void testAllChanges() {
+    void allChanges() {
         GTAARepository impl = getRealInstance();
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -137,7 +137,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void addPerson() {
+    void addPerson() {
         GTAARepository impl = getRealInstance();
         GTAANewPerson p = new GTAANewPerson();
         p.setFamilyName("asdasd");
@@ -148,7 +148,7 @@ public class OpenskosTests {
 
     @Test
     @Disabled
-    public void testChangesRecent() {
+    void changesRecent() {
         GTAARepository impl = getRealInstance();
         Instant start = Instant.now().minusSeconds(3600000);
         Instant stop = Instant.now();
@@ -166,7 +166,7 @@ public class OpenskosTests {
     }
 
     @Test
-    public void testStatus() {
+    void status() {
         GTAARepository impl = getRealInstance();
         impl.retrieveConceptStatus("bla");
     }

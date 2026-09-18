@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 @Isolated
 @Execution(ExecutionMode.SAME_THREAD)
-public class MediaObjectJsonSchemaTest {
+class MediaObjectJsonSchemaTest {
 
     @BeforeEach
     public void before() {
@@ -71,7 +71,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testMidAndType() {
+    void midAndType() {
         String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",  \"type\" : \"CLIP\", \"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
 
         Program program = program()
@@ -86,7 +86,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testUnknownType() throws Exception {
+    void unknownType() throws Exception {
         String odd = "{\"objectType\":\"program\",\"type\": \"FOOBAR\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[] }";
 
         Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
@@ -94,7 +94,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testHasSubtitles() throws Exception {
+    void hasSubtitles() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":true,\"countries\":[],\"languages\":[],\"availableSubtitles\":[{\"language\":\"nl\",\"type\":\"CAPTION\"}]}";
 
         Program program = program().lean().withSubtitles().build();
@@ -104,7 +104,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testDatesCreatedAndModified() throws Exception {
+    void datesCreatedAndModified() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"creationDate\":1,\"lastModified\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().creationInstant(Instant.ofEpochMilli(1))
@@ -116,7 +116,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testCreatedAndModifiedBy() throws Exception {
+    void createdAndModifiedBy() throws Exception {
         Program program = program().lean().withCreatedBy().withLastModifiedBy().build();
 
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
@@ -126,7 +126,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testPublishStartStop() throws Exception {
+    void publishStartStop() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"publishStart\":1,\"publishStop\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().publishStart(Instant.ofEpochMilli(1))
@@ -137,7 +137,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testMergedTo() throws Exception {
+    void mergedTo() throws Exception {
         String expected = "{\"objectType\":\"program\",\"workflow\":\"MERGED\",\"mergedTo\":\"MERGE_TARGET\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean()
@@ -151,7 +151,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testCrids() throws Exception {
+    void crids() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"crids\":[\"crid://bds.tv/9876\",\"crid://tmp.fragment.mmbase.vpro.nl/1234\"],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withCrids().build();
@@ -161,7 +161,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testBroadcasters() throws Exception {
+    void broadcasters() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[{\"id\":\"BNN\",\"value\":\"BNN\"},{\"id\":\"AVRO\",\"value\":\"AVRO\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withBroadcasters().build();
@@ -172,7 +172,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testExclusives() throws Exception {
+    void exclusives() throws Exception {
         String expected = """
             {"objectType":"program","embeddable":true,"broadcasters":[],"exclusives":["STERREN24","3VOOR12_GRONINGEN"],"genres":[],"countries":[],"languages":[]}""";
 
@@ -183,7 +183,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testRegions() {
+    void regions() {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"regions\":[\"NL\",\"BENELUX\",\"TVVOD:NL\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGeoRestrictions().build();
@@ -198,7 +198,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testPredictions() throws Exception {
+    void predictions() throws Exception {
         String expected = """
             {"objectType":"program","sortDate":10,"embeddable":true,"broadcasters":[],"genres":[],"countries":[],"languages":[],"predictions":[{"state":"REALIZED","publishStart":10,"publishStop":100,"platform":"TVVOD"}]}""";
 
@@ -224,7 +224,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testUnmarshalPredictions() throws JsonProcessingException {
+    void unmarshalPredictions() throws JsonProcessingException {
         String input = """
             {
               "objectType" : "program",
@@ -257,7 +257,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testBackwardsCompatibleUnmarshalPredictions() throws IOException {
+    void backwardsCompatibleUnmarshalPredictions() throws IOException {
         String backwards = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"predictions\":[\"INTERNETVOD\"]}";
         Program program = Jackson2Mapper.getInstance().readValue(new StringReader(backwards), Program.class);
         assertThat(program.getPredictions()
@@ -268,7 +268,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testTitles() throws Exception {
+    void titles() throws Exception {
         String expected = """
             {
               "objectType" : "program",
@@ -336,7 +336,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testDescriptions() throws Exception {
+    void descriptions() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"descriptions\":[{\"value\":\"Main description\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"},{\"value\":\"Main description MIS\",\"owner\":\"MIS\",\"type\":\"MAIN\"},{\"value\":\"Short description\",\"owner\":\"BROADCASTER\",\"type\":\"SHORT\"},{\"value\":\"Episode description MIS\",\"owner\":\"MIS\",\"type\":\"EPISODE\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withDescriptions().build();
@@ -346,7 +346,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testGenres() throws Exception {
+    void genres() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[{\"id\":\"3.0.1.7.21\",\"terms\":[\"Informatief\",\"Nieuws/actualiteiten\"]},{\"id\":\"3.0.1.8.25\",\"terms\":[\"Documentaire\",\"Natuur\"]}],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGenres().build();
@@ -358,7 +358,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testReverseGenres() throws Exception {
+    void reverseGenres() throws Exception {
         String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[{\"id\":\"3.0.1.7.21\",\"terms\":[\"Informatief\",\"Nieuws/actualiteiten\"]},{\"id\":\"3.0.1.8.25\",\"terms\":[\"Documentaire\",\"Natuur\"]}]}";
 
         Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
@@ -370,7 +370,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testTags() throws Exception {
+    void tags() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withTags().build();
@@ -380,7 +380,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testPortals() throws Exception {
+    void portals() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"portals\":[{\"id\":\"3VOOR12_GRONINGEN\",\"value\":\"3voor12 Groningen\"},{\"id\":\"STERREN24\",\"value\":\"Sterren24\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withPortals().build();
@@ -390,7 +390,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testDuration() throws Exception {
+    void duration() throws Exception {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"duration\":7200000}";
 
         Program program = program().lean().withDuration().build();
@@ -400,7 +400,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testMemberOfAndDescendantOfGraph() throws Exception {
+    void memberOfAndDescendantOfGraph() throws Exception {
         String expected = """
             {
               "objectType" : "program",
@@ -486,7 +486,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testEpisodeOfAndDescendantOfGraph() throws Exception {
+    void episodeOfAndDescendantOfGraph() throws Exception {
         String expected = """
             {
               "objectType" : "program",
@@ -552,7 +552,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testScheduleEvent() {
+    void scheduleEvent() {
         String expected = """
             {
               "objectType" : "program",
@@ -618,7 +618,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testCredits() throws Exception {
+    void credits() throws Exception {
         String expected = """
             {
               "objectType" : "program",
@@ -645,7 +645,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testLocations() throws Exception {
+    void locations() throws Exception {
         String expected = """
                 {
                     "objectType" : "program",
@@ -697,7 +697,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testImages() throws Exception {
+    void images() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"images\":[{\"imageUri\":\"http://images.poms.omroep.nl/plaatje\",\"owner\":\"BROADCASTER\",\"type\":\"PICTURE\",\"highlighted\":false,\"creationDate\":1,\"workflow\":\"PUBLISHED\"}]}";
 
         Image image = new Image(OwnerType.BROADCASTER, "http://images.poms.omroep.nl/plaatje");
@@ -712,7 +712,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testTwitterRefs() throws Exception {
+    void twitterRefs() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"twitter\":[{\"type\":\"HASHTAG\",\"value\":\"#vpro\"},{\"type\":\"ACCOUNT\",\"value\":\"@twitter\"}]}";
 
         Program program = program().id(100L).lean().withTwitterRefs().build();
@@ -724,7 +724,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testLanguages() throws Exception {
+    void languages() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[{\"code\":\"nl\",\"value\":\"Nederlands\"}]}";
 
         Program program = program().id(100L).lean().languages("nl").build();
@@ -736,7 +736,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testCountries() throws Exception {
+    void countries() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[{\"code\":\"NL\",\"value\":\"Nederland\"}],\"languages\":[]}";
 
         Program program = program().id(100L).lean().countries("NL").build();
@@ -748,7 +748,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testAgeRating() throws Exception {
+    void ageRating() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"16\"}";
 
         Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
@@ -759,7 +759,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testAgeRatingAll() throws Exception {
+    void ageRatingAll() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"ALL\"}";
 
         Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
@@ -771,7 +771,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testAgeRatingUnknown() throws Exception {
+    void ageRatingUnknown() throws Exception {
         String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
 
         Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
@@ -780,7 +780,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testAspectRatio() throws Exception {
+    void aspectRatio() throws Exception {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"avAttributes\":{\"videoAttributes\":{\"aspectRatio\":\"16:9\"}}}";
 
         Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
@@ -792,7 +792,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testObjectType() throws IOException {
+    void objectType() throws IOException {
         String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
         Group group = group().id(100L).lean().build();
 
@@ -803,7 +803,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testUnMarshalGroupWithoutObjectType()  {
+    void unMarshalGroupWithoutObjectType()  {
         assertThatThrownBy(() -> {
             String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
 
@@ -815,7 +815,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithLocations() {
+    void withLocations() {
         String expected = """
                         {
                            "objectType" : "program",
@@ -889,7 +889,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithLocationsWithUnknownOwner() throws Exception {
+    void withLocationsWithUnknownOwner() throws Exception {
         String example = """
             {
               "objectType" : "program",
@@ -931,7 +931,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithIntentions() throws Exception {
+    void withIntentions() throws Exception {
 
         JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/intention-scenarios.json"));
 
@@ -946,7 +946,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithGeoLocations() throws Exception {
+    void withGeoLocations() throws Exception {
 
         JsonNode expected = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-media-with-two-geolocations.json"));
 
@@ -957,7 +957,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testMarshalWithFullGeoLocations() throws Exception {
+    void marshalWithFullGeoLocations() throws Exception {
         JsonNode expected = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-media-with-one-full-geolocations.json"));
 
         GeoLocation value = GeoLocation.builder()
@@ -972,7 +972,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testUnMarshalWithFullGeoLocations() throws Exception {
+    void unMarshalWithFullGeoLocations() throws Exception {
         String geoLocationsJson = """
           {
             "owner":"BROADCASTER",
@@ -999,7 +999,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testAvailableSubtitles() throws Exception {
+    void availableSubtitles() throws Exception {
         ObjectNode media = JsonNodeFactory.instance.objectNode();
         media.put("objectType", "program");
         media.put("urn", "urn:vpro:media:program:100");
@@ -1043,7 +1043,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithCredits() {
+    void withCredits() {
         Program program = program().lean().withCredits().build();
 
         Program rounded = Jackson2TestUtil.roundTripAndSimilar(program, """
@@ -1096,13 +1096,13 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testUnmarshalOf() throws IOException {
+    void unmarshalOf() throws IOException {
         String example = "{\"tags\":[\"gepensioneerd\",\"Nell Koppen\",\"oudere werknemers\",\"pensioen\",\"vakbond\",\"werk\",\"werknemers\",\"Wim van den Brink\"],\"mid\":\"POMS_NOS_583461\",\"titles\":[{\"value\":\"De Laatste Dag\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"}],\"avType\":\"AUDIO\",\"images\":[{\"description\":\"Pensioen\",\"imageUri\":\"urn:vpro:image:487099\",\"urn\":\"urn:vpro:media:image:43659204\",\"width\":640,\"publishStart\":1404943200000,\"type\":\"PICTURE\",\"highlighted\":false,\"title\":\"De laatste dag\",\"workflow\":\"PUBLISHED\",\"lastModified\":1404995300720,\"creationDate\":1404995300669,\"owner\":\"BROADCASTER\",\"height\":426}],\"urn\":\"urn:vpro:media:program:43659132\",\"genres\":[{\"id\":\"3.0.1.7\",\"terms\":[\"Informatief\"]},{\"id\":\"3.0.1.8\",\"terms\":[\"Documentaire\"]}],\"embeddable\":true,\"publishStart\":133916400000,\"type\":\"BROADCAST\",\"duration\":2400000,\"hasSubtitles\":false,\"countries\":[],\"objectType\":\"program\",\"locations\":[{\"programUrl\":\"http://download.omroep.nl/vpro/algemeen/woord/woord_radio/Delaatstedag1.mp3\",\"avAttributes\":{\"avFileFormat\":\"MP3\"},\"creationDate\":1404994995386,\"lastModified\":1404994995456,\"workflow\":\"PUBLISHED\",\"owner\":\"BROADCASTER\",\"urn\":\"urn:vpro:media:location:43659159\"}],\"workflow\":\"PUBLISHED\",\"lastModified\":1404995300722,\"sortDate\":133916400000,\"languages\":[],\"descriptions\":[{\"value\":\"Eerste van twee documentaires over pensionering en\\ngepensioneerden. In dit programma wordt gesproken over 'het\\nzwarte gat' waarin de 65-jarige werknemer valt na zijn\\nafscheid van het bedrijf. Als deskundigen komen aan het\\nwoord: gerontoloog prof. Schreuder, die een vrijwillige\\npensionering bepleit; voorlichter Maurice Akkermans van de\\nFederatie Bejaardenbeleid; een vakbondsman en een\\nwetenschappelijk medewerker. Afgewisseld met enkele\\nervaringen van zojuist gepensioneerden en hun vrouwen. Tevens\\neen gesprek met het acteursechtpaar Nell Koppen (62) en Wim\\nvan den Brink (65) en, onaangekondigd, een reactie door\\nprogrammamaker Bob Uschi (62). Met opnamen gemaakt tijdens\\nafscheidsrecepties.\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"}],\"creationDate\":1404994811838,\"broadcasters\":[{\"id\":\"NOS\",\"value\":\"NOS\"}]}";
         Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaObject.class);
     }
 
     @Test
-    public void segmentWithEverything() throws Exception {
+    void segmentWithEverything() throws Exception {
         Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPrettyPublisherInstance(),
             MediaTestDataBuilder
                 .segment()
@@ -1112,7 +1112,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void programWithEverything() throws Exception {
+    void programWithEverything() throws Exception {
         final Program program =  MediaTestDataBuilder
                 .program()
                 .withEverything()
@@ -1128,7 +1128,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void programWithEverythingPublisher() throws Exception {
+    void programWithEverythingPublisher() throws Exception {
         StringWriter programJson = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/program-with-everything-publisher.json"), programJson, UTF_8);
         Program program =  MediaTestDataBuilder
@@ -1141,7 +1141,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void programWithUnpublishableLocation() {
+    void programWithUnpublishableLocation() {
         PublicationFilter.ENABLED.set(true);
         Program p = MediaTestDataBuilder
             .program()
@@ -1182,7 +1182,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void withMemberOf() {
+    void withMemberOf() {
         Program program = Program.builder()
             .creationDate(LocalDateTime.of(2019, 8, 20, 21, 0))
 
@@ -1213,7 +1213,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithRelations() {
+    void withRelations() {
 
         Program program = program().lean().withRelations().build();
 
@@ -1253,7 +1253,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testAdopt() {
+    void adopt() {
         String expected = """
             {
               "objectType" : "program",

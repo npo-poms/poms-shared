@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class TextMatcherTest {
+class TextMatcherTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         TextMatcher in = new TextMatcher("title");
         TextMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:textMatcher xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:media:2009\">title</local:textMatcher>");
@@ -25,7 +25,7 @@ public class TextMatcherTest {
     }
 
     @Test
-    public void testApplyText() {
+    void applyText() {
         TextMatcher in = new TextMatcher("aaa");
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isFalse();
@@ -34,7 +34,7 @@ public class TextMatcherTest {
     }
 
     @Test
-    public void testApplyRegexp() {
+    void applyRegexp() {
         TextMatcher in = new TextMatcher("(?i)a.a.*", StandardMatchType.REGEX);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isTrue();
@@ -43,7 +43,7 @@ public class TextMatcherTest {
     }
 
     @Test
-    public void testApplyWildcard() {
+    void applyWildcard() {
         TextMatcher in = new TextMatcher("aa*bb", StandardMatchType.WILDCARD);
         assertThat(in.test("aaxxxbb")).isTrue();
         assertThat(in.test("AAxxxBB")).isFalse();
@@ -52,7 +52,7 @@ public class TextMatcherTest {
     }
 
     @Test
-    public void testApplyNot() {
+    void applyNot() {
         TextMatcher in = new TextMatcher("BB", Match.NOT);
         assertThat(in.test("BB")).isFalse();
         assertThat(in.test("AA")).isTrue();

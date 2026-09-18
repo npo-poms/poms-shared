@@ -21,10 +21,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
+class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
-    public void testTitles() {
+    void titles() {
 
         ScheduleEvent e = new ScheduleEvent();
         e.setTitle("bbb", TextualType.ABBREVIATION);
@@ -40,7 +40,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testXmlDuration() {
+    void xmlDuration() {
 
         ScheduleEvent e = new ScheduleEvent();
         e.setChannel(Channel._10TB);
@@ -53,7 +53,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testXmlDurationVeryLong() {
+    void xmlDurationVeryLong() {
 
         ScheduleEvent e = new ScheduleEvent();
         e.setDuration(Duration.ofDays(800));
@@ -65,7 +65,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testJson() {
+    void json() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
@@ -93,7 +93,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
      * We could consider changing this, bug for now it is like this.
      */
     @Test
-    public void testJsonChannelXmlValue() {
+    void jsonChannelXmlValue() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel._10TB)
@@ -110,7 +110,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testJsonVeryLong() {
+    void jsonVeryLong() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
@@ -127,7 +127,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testJsonPublisher() {
+    void jsonPublisher() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
@@ -172,7 +172,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
 
     @Test
-    public void testGuideDayBeforeCutOff() {
+    void guideDayBeforeCutOff() {
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(10));
 
         assertThat(target.getGuideDate().toString()).isEqualTo("1969-12-31");
@@ -180,7 +180,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
 
     @Test
-    public void testGuideDayAfterCutOff() {
+    void guideDayAfterCutOff() {
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli((5 * 3600 + 58 * 60) * 1000), Duration.ofMillis(10));
 
         assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
@@ -188,7 +188,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
 
     @Test
-    public void validation() {
+    void validation() {
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(-110));
         assertThat(Validation.getValidator().validate(target)).hasSize(1);
     }

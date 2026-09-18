@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.2
  */
-public class MediaClassificationServiceTest {
+class MediaClassificationServiceTest {
 
     @BeforeAll
     public static void init() {
@@ -23,23 +23,23 @@ public class MediaClassificationServiceTest {
 
 
     @Test
-    public void testGetTermByEpgCodeOnRawCode() {
+    void getTermByEpgCodeOnRawCode() {
         assertThat(MediaClassificationService.getTermByEpgCode("0311")).isNotNull();
     }
 
     @Test
-    public void testGetTermByEpgCodeWhenNameSpaced() {
+    void getTermByEpgCodeWhenNameSpaced() {
         assertThat(MediaClassificationService.getTermByEpgCode("urn:tva:metadata:cs:2004:0725").getName()).isEqualTo("Natuur");
     }
 
     @Test
-    public void testGetTermByMisCode() {
+    void getTermByMisCode() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("MUSIC")).hasSize(1);
     }
 
     @Test
     //Reproduces MSE-2472
-    public void testLegacyMisMatching() {
+    void legacyMisMatching() {
         for (EpgGenreType epg : EpgGenreType.values()) {
             List<String> example = new ArrayList<>();
             for (MisGenreType mis : epg.getLegacyGenre()) {
@@ -51,24 +51,24 @@ public class MediaClassificationServiceTest {
 
     @Test
     //MSE-2488
-    public void legacySpelQuiz() {
+    void legacySpelQuiz() {
         assertThat(MediaClassificationService.getLegacyMisGenres("3.0.1.6.19")).containsExactly("ENTERTAINMENT");
     }
 
     @Test
-    public void legacyYouthMovies() {
+    void legacyYouthMovies() {
         assertThat(MediaClassificationService.getLegacyMisGenres("3.0.1.1.2")).containsExactly("YOUTH", "MOVIE");
     }
 
     @Test
-    public void testGetTermByMisCodeOmitParent() {
+    void getTermByMisCodeOmitParent() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE")).hasSize(1);
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE").get(0).getName()).isEqualTo("Animatie");
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE").get(0).getParent().getName()).isEqualTo("Film");
     }
 
     @Test
-    public void testGetTermByMisCodes() {
+    void getTermByMisCodes() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH")).hasSize(1);
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH").get(0).getName()).isEqualTo("Animatie");
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH").get(0).getParent().getName()).isEqualTo("Jeugd");

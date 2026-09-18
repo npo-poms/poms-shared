@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.0
  */
-public class MediaFormTest {
+class MediaFormTest {
 
     MediaForm form = MediaForm.builder()
             .asc(MediaSortField.lastModified)
@@ -27,7 +27,7 @@ public class MediaFormTest {
             .build();
 
     @Test
-    public void xml() {
+    void xml() {
 
         JAXBTestUtil.roundTripAndSimilar(form, """
                 <s:mediaForm xmlns:s="urn:vpro:media:search:2012" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -45,7 +45,7 @@ public class MediaFormTest {
 
 
     @Test
-    public void json() {
+    void json() {
 
         Jackson2TestUtil.roundTripAndSimilar(form, """
                 {
@@ -63,7 +63,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void builder() {
+    void builder() {
         MediaForm form = MediaForm.builder()
             .broadcasters(null)
             .locationsCount(IntegerRange.builder()

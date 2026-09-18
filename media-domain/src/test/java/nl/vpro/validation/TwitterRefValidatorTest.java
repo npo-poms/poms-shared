@@ -9,10 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.12
  */
 @SuppressWarnings("deprecation")
-public class TwitterRefValidatorTest {
+class TwitterRefValidatorTest {
 
     @Test
-    public void isValid() {
+    void isValid() {
 
 
         assertThat(TwitterRefValidator.PATTERN.matcher("@aaaa").matches()).isTrue();

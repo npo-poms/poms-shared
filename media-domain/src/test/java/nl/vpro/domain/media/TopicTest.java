@@ -13,7 +13,7 @@ class TopicTest {
 
     @SuppressWarnings("SimplifiableJUnitAssertion")
     @Test
-    public void testEquals() {
+    void equality() {
 
         Topic topic1 = createTestTopic();
         Topic topic2 = createTestTopic();
@@ -45,7 +45,7 @@ class TopicTest {
     }
 
     @Test
-    public void testHashCode() {
+    void hashCodeConsistency() {
 
         Topic topic1 = createTestTopic();
         Topic topic2 = createTestTopic();
@@ -55,7 +55,7 @@ class TopicTest {
     }
 
     @Test
-    public void testToString() {
+    void stringRepresentation() {
 
         Topic topic = createTestTopic();
         assertEquals("Topic(gtaaRecord=GTAARecord(uri=http://data.beeldengeluid.nl/gtaa/31182, status=approved, name=kattenkwaad, scopeNotes=[blabla]))",
@@ -63,7 +63,7 @@ class TopicTest {
     }
 
     @Test
-    public void testCompareTo() {
+    void compareTo() {
 
         Topic topic1 = createTestTopic();
         Topic topic2 = createTestTopic();
@@ -81,7 +81,7 @@ class TopicTest {
     }
 
     @Test
-    public void testClone() {
+    void cloning() {
 
         Topic topic = createTestTopic();
 

@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Michiel Meeuwissen
  * @since 1.7
  */
-public class MediaListTest {
+class MediaListTest {
 
     MediaList<MediaListItem> list;
     {
@@ -59,7 +59,7 @@ public class MediaListTest {
     }
 
     @Test
-    public void xml() throws IOException, SAXException {
+    void xml() throws IOException, SAXException {
         String expected = """
             <?xml version="1.0" encoding="UTF-8"?><s:list xmlns:s="urn:vpro:media:search:2012" totalCount="1000" offset="1" max="10" sort="creationDate" order="ASC" size="1" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
@@ -97,7 +97,7 @@ public class MediaListTest {
 
 
     @Test
-    public void json() throws IOException, SAXException {
+    void json() throws IOException, SAXException {
         String expected = """
                  {
                             "totalCount" : 1000,

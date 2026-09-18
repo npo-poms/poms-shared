@@ -27,7 +27,7 @@ class MediaObjectLockerTest {
     }
 
     @Test
-    public void strictlyOne() {
+    void strictlyOne() {
         ObjectLockerAdmin.JMX_INSTANCE.setStrictlyOne(true);
         final List<String> result = new ArrayList<>();
 
@@ -40,7 +40,7 @@ class MediaObjectLockerTest {
     }
 
     @Test
-    public void strictlyOneUncertain() {
+    void strictlyOneUncertain() {
         ObjectLockerAdmin.JMX_INSTANCE.setStrictlyOne(true);
         final List<String> result = new ArrayList<>();
 

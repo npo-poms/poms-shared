@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public class PortalTest {
+class PortalTest {
 
     private Portal target;
 
@@ -26,19 +26,19 @@ public class PortalTest {
     }
 
     @Test
-    public void testGetUrl() {
+    void getUrl() {
         target.setUrl("http://tegenlicht.vpro.nl/");
         assertThat(target.getUrl()).isEqualTo("http://tegenlicht.vpro.nl");
     }
 
     @Test
-    public void testGetDisplayName() {
+    void getDisplayName() {
         target.setDisplayName("Wetenschap24");
         assertThat(target.getDisplayName()).isEqualTo("Wetenschap24");
     }
 
     @Test
-    public void testXmlBinding() {
+    void xmlBinding() {
         target.setUrl("http://tegenlicht.vpro.nl/");
         target.setDisplayName("Wetenschap24");
         target.setSection(new Section("/noorderlicht", "Noorderlicht"));

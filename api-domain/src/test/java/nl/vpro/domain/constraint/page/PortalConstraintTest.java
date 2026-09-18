@@ -15,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class PortalConstraintTest {
+class PortalConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         PortalConstraint in = new PortalConstraint("VPRONL");
         PortalConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:portalConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRONL</local:portalConstraint>\n");
@@ -26,18 +26,18 @@ public class PortalConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new PortalConstraint().getESPath()).isEqualTo("portal.id");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).portal(new Portal("VPRONL", "http://www.vpro.nl", "VproNL")).build();
         assertThat(new PortalConstraint("VPRONL").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).portal(new Portal("VPRONL", "http://www.vpro.nl", "VproNL")).build();
         assertThat(new PortalConstraint("CULTURA24").test(article)).isFalse();
     }

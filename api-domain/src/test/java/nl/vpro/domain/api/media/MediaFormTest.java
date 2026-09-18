@@ -41,10 +41,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @since 2.0
  */
 @Slf4j
-public class MediaFormTest implements BasicObjectTheory<MediaForm> {
+class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
-    public void getSort() {
+    void getSort() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -66,7 +66,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void getSortJson() {
+    void getSortJson() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -94,7 +94,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void getSortJsonBackward() {
+    void getSortJsonBackward() {
         Compatibility.setCompatibility(Version.of(5, 4));
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
@@ -119,7 +119,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void parseWithEmptySort() throws Exception {
+    void parseWithEmptySort() throws Exception {
         String example = """
             {
               "sort" : {
@@ -131,7 +131,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void getTags() {
+    void getTags() {
         MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
         MediaForm out = roundTripAndSimilar(in,
             """
@@ -149,7 +149,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void getFacets() {
+    void getFacets() {
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
             new ScheduleEventSearch(Channel.NED3,
                 LocalDate.of(2015, 1, 26).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant(),
@@ -178,7 +178,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void getFacetsBackwards() {
+    void getFacetsBackwards() {
         MediaForm out = JAXB.unmarshal(new StringReader("""
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <mediaForm xmlns="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" highlight="false">
@@ -202,7 +202,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void filterTags() throws IOException {
+    void filterTags() throws IOException {
         String tagForm = """
             {
                 "facets": {
@@ -235,7 +235,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void subSearch() {
+    void subSearch() {
         String example = """
             {
                 "facets": {
@@ -280,7 +280,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void fuzzinessBinding() {
+    void fuzzinessBinding() {
         MediaForm form = MediaForm.builder().fuzzyText("bla").build();
         roundTripAndSimilar(form, """
             <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
@@ -305,7 +305,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void titleSearch() {
+    void titleSearch() {
         MediaForm form = MediaForm
             .builder()
             .fuzzyText("bla")
@@ -333,7 +333,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void titleSearch2() {
+    void titleSearch2() {
         MediaForm form = MediaForm
             .builder()
             .titles(TitleSearch.builder().type(TextualType.MAIN).value("Flikken").build())
@@ -360,7 +360,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void formFuzzy()  throws IOException {
+    void formFuzzy()  throws IOException {
         MediaForm form = MediaForm.builder()
             .types(Match.MUST, TextMatcher.not("BROADCAST"))
             .fuzzyText("wie is de mol")
@@ -411,7 +411,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         </api:mediaForm>
         """;
     @Test
-    public void durations() throws IOException {
+    void durations() throws IOException {
         String json = """
             {
 
@@ -491,13 +491,13 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
             """);
     }
     @Test
-    public void backwards() {
+    void backwards() {
         MediaForm form = JAXB.unmarshal(new StringReader(LUNATIC_BACKWARD_COMPATIBLE), MediaForm.class);
         assertThat(((DurationRangeFacetItem) form.getFacets().getDurations().getRanges().getFirst()).getEnd()).isEqualTo(Duration.ofMinutes(5));
     }
 
     @Test
-    public void withTitleFacet() throws IOException {
+    void withTitleFacet() throws IOException {
         MediaForm form = Jackson2Mapper.getInstance().readValue("""
             {
                 "facets": {
@@ -543,7 +543,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void facetBroadcasters() {
+    void facetBroadcasters() {
         MediaForm builder = MediaForm.builder().broadcasterFacet(new MediaFacet()).build();
         Jackson2TestUtil.roundTripAndSimilar(builder, """
             {
@@ -557,7 +557,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     }
 
     @Test
-    public void withEverythingJson() throws IOException {
+    void withEverythingJson() throws IOException {
         try (LoggerOutputStream out = LoggerOutputStream.info(log)) {
             out.setMax(30);
             assertThatCode(() -> Jackson2Mapper.getPrettyInstance()
@@ -568,7 +568,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void withEverythingXml() throws IOException {
+    void withEverythingXml() throws IOException {
         try (LoggerOutputStream out = LoggerOutputStream.info(log)) {
             out.setMax(30);
             assertThatCode(() -> {
@@ -579,7 +579,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void withSort() throws Exception {
+    void withSort() throws Exception {
 
         String sortBackwards = """
             {
@@ -601,7 +601,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void listAsSingural() throws JsonProcessingException {
+    void listAsSingural() throws JsonProcessingException {
         String example = "{\n" +
             "  \"searches\" : {\n" +
             "    \"descendantOf\": {\n" +
@@ -624,14 +624,14 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     MediaForm rad2 =   MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
 
     @Test
-    public void API_593() {
+    void API_593() {
         assertThat(rad1.equals(rad1_3)).isTrue();
         assertThat(rad1.equals(rad1_2)).isFalse();
         assertThat(rad1.equals(rad2)).isFalse();
     }
 
     @Test
-    public void form() {
+    void form() {
         MediaForm form = new MediaForm();
         MediaSearch search = MediaSearch.builder()
             .locations(new TextMatcherList(Match.MUST, TextMatcher.must("https://radiobox2.*", StandardMatchType.WILDCARD)))
@@ -651,7 +651,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void form2() {
+    void form2() {
         MediaForm form = new MediaForm();
         MediaSearch search = MediaSearch.builder()
             .types(new TextMatcherList(Match.MUST, TextMatcher.should("BROADCAST"), TextMatcher.should("CLIP")))
@@ -674,7 +674,7 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
 
     @Test
-    public void formxml() {
+    void formxml() {
         MediaForm form = new MediaForm();
         MediaSearch search = MediaSearch.builder()
             .locations(new TextMatcherList(Match.MUST, TextMatcher.must("https://radiobox2.*", StandardMatchType.WILDCARD)))

@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 
-public class WorkflowExecutionRequestTest {
+class WorkflowExecutionRequestTest {
 
     @Test
-    public void testWorkflowExecutionRequest() {
+    void workflowExecutionRequest() {
         List<String> platforms = new ArrayList<>();
         platforms.add("internetvod");
         platforms.add("tvvod");

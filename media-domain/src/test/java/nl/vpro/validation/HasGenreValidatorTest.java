@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 7.8
  */
-public class HasGenreValidatorTest {
+class HasGenreValidatorTest {
 
     @Getter
     public static class A implements MediaIdentifiable {
@@ -34,7 +34,7 @@ public class HasGenreValidatorTest {
 
 
     @Test
-    public void testIsValid() {
+    void isValid() {
         HasGenreValidator validator = new HasGenreValidator();
         assertThat(validator.isValid(
             new A(MediaType.COLLECTION), null)).isTrue();

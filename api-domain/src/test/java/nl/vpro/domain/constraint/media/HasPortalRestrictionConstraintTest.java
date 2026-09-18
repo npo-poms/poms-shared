@@ -15,29 +15,29 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.3.0
  */
-public class HasPortalRestrictionConstraintTest {
+class HasPortalRestrictionConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         HasPortalRestrictionConstraint in = new HasPortalRestrictionConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasPortalRestrictionConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");
     }
 
     @Test
-    public void testApplyTrue() {
+    void applyTrue() {
         Program program = MediaTestDataBuilder.program().withPortalRestrictions().build();
         assertThat(new HasPortalRestrictionConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() {
+    void applyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasPortalRestrictionConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new HasPortalRestrictionConstraint().getESPath()).isEqualTo("exclusives");
     }
 }

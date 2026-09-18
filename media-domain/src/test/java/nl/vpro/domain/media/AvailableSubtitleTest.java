@@ -15,10 +15,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AvailableSubtitleTest implements BasicObjectTheory<AvailableSubtitles> {
+class AvailableSubtitleTest implements BasicObjectTheory<AvailableSubtitles> {
 
     @Test
-    public void test() {
+    void test() {
         JAXBTestUtil.roundTripAndSimilar(AvailableSubtitles.builder()
                 .language(Locale.ENGLISH)
                 .type(SubtitlesType.TRANSLATION)
@@ -30,7 +30,7 @@ public class AvailableSubtitleTest implements BasicObjectTheory<AvailableSubtitl
     }
 
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         var en1 = AvailableSubtitles.builder()
                 .language(Locale.ENGLISH)
                 .type(SubtitlesType.TRANSLATION)

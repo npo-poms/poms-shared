@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class OdiServiceImplTest {
+class OdiServiceImplTest {
 
     private Program program;
 
@@ -58,21 +58,21 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayMediaOnDefault() {
+    void playMediaOnDefault() {
         target.playMedia(program, request);
 
         verify(handlerMock).produce(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
 
     @Test
-    public void testPlayMediaOnOutput() {
+    void playMediaOnOutput() {
         target.playMedia(program, request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
 
     @Test
-    public void testPlayMediaOnAVFileFormat() {
+    void playMediaOnAVFileFormat() {
         target.playMedia(program, request, "H264", "HASP");
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request), eq("H264"), eq("HASP"));
@@ -80,14 +80,14 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayMediaOnPubOptions() {
+    void playMediaOnPubOptions() {
         target.playMedia(program, request, "h264_sb", "h264_bb");
 
         verify(handlerMock).produceIfSupports(eq(new Location("odi+http://odi.omroep.nl/video/h264_sb/EO_101197072", OwnerType.BROADCASTER)), eq(request), eq("h264_sb"), eq("h264_bb"));
     }
 
     @Test
-    public void testPlayLocation() {
+    void playLocation() {
 
         target.playLocation(program.getPresentationOrderLocations().first(), request);
 
@@ -95,7 +95,7 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayUrl() {
+    void playUrl() {
         target.playUrl("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));

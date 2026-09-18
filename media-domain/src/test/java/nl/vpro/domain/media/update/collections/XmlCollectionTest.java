@@ -16,10 +16,10 @@ import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class XmlCollectionTest {
+class XmlCollectionTest {
 
     @Test
-    public void marshal() {
+    void marshal() {
         XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(new LocationUpdate()));
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -37,7 +37,7 @@ public class XmlCollectionTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(LocationUpdate.builder()
             .bitrate(1000)
             .programUrl("https://www.vpro.nl/bl").build()));

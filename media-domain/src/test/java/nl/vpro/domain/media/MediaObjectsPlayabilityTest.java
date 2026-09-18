@@ -41,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"ResultOfMethodCallIgnored", "DataFlowIssue", "unchecked"})
 @Log4j2
-class MediaObjectsPlayabilityTest {
+final class MediaObjectsPlayabilityTest {
 
     @BeforeAll
     static void init() {
@@ -455,7 +455,7 @@ class MediaObjectsPlayabilityTest {
 
 
     @Test
-    public void withHasp() {
+    void withHasp() {
         Program program = JAXB.unmarshal(MediaObjects.class.getResourceAsStream("/VPWON_1322208.xml"), Program.class);
 
         Map<Platform, Range<Instant>> platformRangeMap = MediaObjects.playableRanges(program);
@@ -464,7 +464,7 @@ class MediaObjectsPlayabilityTest {
     }
 
     @Test
-    public void createJsonForJavascriptTests() {
+    void createJsonForJavascriptTests() {
         DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
         PublicationFilter.ENABLED.set(true);
         try {

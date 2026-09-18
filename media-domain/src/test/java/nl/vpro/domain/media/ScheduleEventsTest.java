@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
-public class ScheduleEventsTest {
+class ScheduleEventsTest {
 
     @Test
-    public void testEqualsHonoringOffset() {
+    void equalsHonoringOffset() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
 
@@ -32,7 +32,7 @@ public class ScheduleEventsTest {
 
 
     @Test
-    public void testEventsWithoutfilter() {
+    void eventsWithoutfilter() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"),
             Instant.ofEpochMilli(100), Duration.ofMillis(1000));
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(200), Duration.ofMillis(1000));
@@ -49,7 +49,7 @@ public class ScheduleEventsTest {
     }
 
     @Test
-    public void testEventsWithfilter() {
+    void eventsWithfilter() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"), Instant.ofEpochMilli(100), Duration.ofMillis(1000));
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(200), Duration.ofMillis(1000));
         ScheduleEvent event3 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(300), Duration.ofMillis(1000));
@@ -67,7 +67,7 @@ public class ScheduleEventsTest {
 
 
     @Test
-    public void findEventsCloseTo() {
+    void findEventsCloseTo() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(1), null);
         ScheduleEvent event3 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), null);

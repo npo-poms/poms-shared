@@ -22,14 +22,14 @@ import nl.vpro.domain.user.BroadcasterService;
 import static org.mockito.Mockito.mock;
 
 @Log4j2
-class PomsMapperTest {
+final class PomsMapperTest {
 
     BroadcasterService broadcasterService = mock(BroadcasterService.class);
     SubtitlesProvider subtitlesService = (s) -> new ArrayList<>();
     PomsMapper impl = new PomsMapper(broadcasterService, MediaClassificationService.getInstance(), subtitlesService);
 
     @Test
-    public void genre() {
+    void genre() {
 
         Set<nl.vpro.domain.media.Genre> mapped = impl.mapGenre(Stream.of(
             new Genre(null, "40"), // Human Interest

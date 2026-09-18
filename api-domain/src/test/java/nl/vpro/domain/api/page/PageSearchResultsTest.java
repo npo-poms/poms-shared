@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2.3
  */
 @Log4j2
-public class PageSearchResultsTest {
+final class PageSearchResultsTest {
 
     @Test
-    public void testSetSelectedFacetsGenresFalse() {
+    void setSelectedFacetsGenresFalse() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         GenreFacetResultItem tfr = new GenreFacetResultItem(Collections.emptyList(), "name", "foo", 100);
@@ -32,7 +32,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsGenresTrue() {
+    void setSelectedFacetsGenresTrue() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         GenreFacetResultItem tfr = new GenreFacetResultItem(Collections.emptyList(), "Foo", "foo", 100);
@@ -43,7 +43,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsBroadcastersFalse() {
+    void setSelectedFacetsBroadcastersFalse() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         TermFacetResultItem tfr = new TermFacetResultItem("name", "foo", 100);
@@ -54,7 +54,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsBroadcastersTrue() {
+    void setSelectedFacetsBroadcastersTrue() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         TermFacetResultItem tfr = new TermFacetResultItem("name", "foo", 100);
@@ -65,7 +65,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void fromXml() {
+    void fromXml() {
         String in = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                 <api:pageSearchResult xmlns:api="urn:vpro:api:2013" xmlns="urn:vpro:media:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" total="432" totalQualifier="EQUAL_TO" offset="0" max="0">

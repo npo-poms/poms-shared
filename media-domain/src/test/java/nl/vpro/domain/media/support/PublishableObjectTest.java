@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public class PublishableObjectTest implements BasicObjectTheory<PublishableObject<?>> {
+class PublishableObjectTest implements BasicObjectTheory<PublishableObject<?>> {
 
     private static final Instant NOW = Instant.now();
 

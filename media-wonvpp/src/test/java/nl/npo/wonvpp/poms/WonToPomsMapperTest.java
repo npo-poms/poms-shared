@@ -33,7 +33,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class WonToPomsMapperTest {
+final class WonToPomsMapperTest {
 
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 

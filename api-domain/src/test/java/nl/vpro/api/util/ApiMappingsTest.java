@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.3
  */
 @Log4j2
-public class ApiMappingsTest {
+final class ApiMappingsTest {
 
 
     @BeforeEach
@@ -51,22 +51,22 @@ public class ApiMappingsTest {
     }
 
     @Test
-    public void testProfileSchema() {
+    void profileSchema() {
         testNamespace(createMappings(), Xmlns.PROFILE_NAMESPACE);
     }
 
     @Test
-    public void testProfileSchemaMedia()   {
+    void profileSchemaMedia()   {
         testNamespace(createMappings(), Xmlns.MEDIA_CONSTRAINT_NAMESPACE);
     }
 
     @Test
-    public void testProfileSchemaPage() {
+    void profileSchemaPage() {
         testNamespace(createMappings(), Xmlns.PAGE_CONSTRAINT_NAMESPACE);
     }
 
     @Test
-    public void testProfileConstraint()  {
+    void profileConstraint()  {
         testNamespace(createMappings(), Xmlns.CONSTRAINT_NAMESPACE);
     }
 
@@ -75,35 +75,35 @@ public class ApiMappingsTest {
      * @TODO Tested xsd is in pages-domain
      */
     @Test
-    public void testPageSchema() {
+    void pageSchema() {
         testNamespace(createMappings(), Xmlns.PAGE_NAMESPACE);
     }
 
     @Test
-    public void testPageUpdateSchema()   {
+    void pageUpdateSchema()   {
         testNamespace(createMappings(), Xmlns.PAGEUPDATE_NAMESPACE);
     }
 
     @Test
-    public void testApiSchema()   {
+    void apiSchema()   {
         testNamespace(createMappings(), Xmlns.API_NAMESPACE);
     }
 
     @Test
-    public void testSubtitlesSchema()  {
+    void subtitlesSchema()  {
         testNamespace(createMappings(), Xmlns.MEDIA_SUBTITLES_NAMESPACE);
     }
 
     @Test
     @Disabled("no mapping for that checked in here")
-    public void testMediaSchema()  {
+    void mediaSchema()  {
         testNamespace(createMappings(), Xmlns.MEDIA_NAMESPACE);
     }
 
 
 
     @Test
-    public void testUnmarshallers() {
+    void unmarshallers() {
         ApiMappings mappings = createMappings();
         for (String ns : mappings.knownNamespaces()) {
             Unmarshaller schema = mappings.getUnmarshaller(true, ns);

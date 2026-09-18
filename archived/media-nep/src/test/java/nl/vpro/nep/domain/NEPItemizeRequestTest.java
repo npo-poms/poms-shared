@@ -9,11 +9,11 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class NEPItemizeRequestTest {
+class NEPItemizeRequestTest {
 
 
     @Test
-    public void json() {
+    void json() {
         NEPItemizeRequest request = NEPItemizeRequest.builder()
             .starttime("2018-05-09T16:03:01.121")
             .endtime("2018-05-09T16:53:01.122")
@@ -32,7 +32,7 @@ public class NEPItemizeRequestTest {
 
 
     @Test
-    public void jsonTruncated() {
+    void jsonTruncated() {
         NEPItemizeRequest request = NEPItemizeRequest.builder()
             .starttime("2018-05-09T16:00:00.000")
             .endtime("2018-05-09T16:00:00.000")

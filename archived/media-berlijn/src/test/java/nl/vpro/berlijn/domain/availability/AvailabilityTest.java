@@ -15,7 +15,7 @@ import nl.vpro.berlijn.domain.Util;
 
 
 @Log4j2
-class AvailabilityTest {
+final class AvailabilityTest {
 
 
     public static Stream<byte[]> messages() {

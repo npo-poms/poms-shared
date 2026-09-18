@@ -15,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class TextMatcherJsonTest {
+class TextMatcherJsonTest {
 
     @Test
-    public void testGetValueJson() throws Exception {
+    void getValueJson() throws Exception {
         TextMatcher in = new TextMatcher("title");
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getInstance().writeValue(writer, in);
@@ -29,14 +29,14 @@ public class TextMatcherJsonTest {
     }
 
     @Test
-    public void testGetValueFromJson() throws Exception {
+    void getValueFromJson() throws Exception {
         TextMatcher matcher = Jackson2Mapper.getInstance().readValue("\"title\"", TextMatcher.class);
 
         assertThat(matcher).isEqualTo(new TextMatcher("title"));
     }
 
     @Test
-    public void testGetValueJsonInverse() throws Exception {
+    void getValueJsonInverse() throws Exception {
         TextMatcher in = new TextMatcher("title", Match.NOT);
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getInstance().writeValue(writer, in);
@@ -48,7 +48,7 @@ public class TextMatcherJsonTest {
     }
 
     @Test
-    public void testGetValueFromJsonInverse() throws Exception {
+    void getValueFromJsonInverse() throws Exception {
         TextMatcher matcher = Jackson2Mapper.getInstance().readValue("{\"value\":\"title\",\"match\":\"not\"}", TextMatcher.class); // lowercase 'not' is working too!
 
         assertThat(matcher).isEqualTo(new TextMatcher("title", Match.NOT));

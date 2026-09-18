@@ -10,11 +10,11 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class MultiplePageEntryTest {
+class MultiplePageEntryTest {
 
 
     @Test
-    public void json() {
+    void json() {
         MultiplePageEntry entry = new MultiplePageEntry("bla", Page.builder().type(PageType.HOME).url("http://www.vpro.nl/bla").build());
 
         Jackson2TestUtil.roundTripAndSimilar(entry, """

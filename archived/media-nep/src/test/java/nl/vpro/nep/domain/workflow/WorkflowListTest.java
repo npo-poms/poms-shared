@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public class WorkflowListTest {
+class WorkflowListTest {
 
     HALMapper MAPPER = NEPGatekeeperServiceImpl.createMapper();
 
     @Test
-    public void unmarshall() throws IOException {
+    void unmarshall() throws IOException {
         WorkflowList list =  MAPPER.readValue(getClass().getResourceAsStream("/example.json"), WorkflowList.class);
         assertThat(list.getWorkflowExecutions()).hasSize(20);
         assertThat(list.getTotalResults()).isEqualTo(26);

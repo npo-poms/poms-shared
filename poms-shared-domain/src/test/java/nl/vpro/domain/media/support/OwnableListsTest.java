@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class OwnableListsTest {
+class OwnableListsTest {
 
     public static class OwnableStringSupplier implements Supplier<String>, Ownable {
         private final String string;
@@ -54,7 +54,7 @@ public class OwnableListsTest {
     }
 
     @Test
-    public void containsDuplicateOwner() {
+    void containsDuplicateOwner() {
         assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.AUTHORITY)))).isFalse();
         assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.BROADCASTER)))).isTrue();
         assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER)))).isFalse();
@@ -63,7 +63,7 @@ public class OwnableListsTest {
 
 
     @Test
-    public void copy() {
+    void copy() {
         List<OwnableStringSupplier> source = Arrays.asList(new OwnableStringSupplier("a", OwnerType.BROADCASTER), new OwnableStringSupplier("b", OwnerType.BROADCASTER));
         List<OwnableStringSupplier> dest = new ArrayList<>(Arrays.asList(new OwnableStringSupplier("a", OwnerType.MIS)));
 

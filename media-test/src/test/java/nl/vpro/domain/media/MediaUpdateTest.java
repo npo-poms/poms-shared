@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("DataFlowIssue")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @Slf4j
-public class MediaUpdateTest {
+class MediaUpdateTest {
 
     static ProgramUpdate rounded;
 
@@ -47,7 +47,7 @@ public class MediaUpdateTest {
 
     @Test
     @Tag("withEverything")
-    public void withEverything1() throws Exception {
+    void withEverything1() throws Exception {
 
         Program withEverything = MediaTestDataBuilder
             .program()
@@ -73,7 +73,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void withEverythingJson() throws Exception {
+    void withEverythingJson() throws Exception {
 
         Program withEverything = MediaTestDataBuilder
             .program()
@@ -97,7 +97,7 @@ public class MediaUpdateTest {
 
 
      @Test
-     public void withConstrainedJson() {
+     void withConstrainedJson() {
 
          ProgramUpdate rounded = Jackson2TestUtil.roundTripAndSimilar(
              Jackson2Mapper.getStrictInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
@@ -143,14 +143,14 @@ public class MediaUpdateTest {
 
 
     @Test
-    public void polyMorphJson() throws IOException {
+    void polyMorphJson() throws IOException {
         assertThat(Jackson2Mapper.getInstance()
             .readValue(getClass().getResourceAsStream("/program-from-update-with-everything.json"), MediaUpdate.class)).isInstanceOf(ProgramUpdate.class);
     }
 
     @Test
     @Tag("withEverything")
-    public void withEverything2() throws Exception {
+    void withEverything2() throws Exception {
         Assumptions.assumeTrue(rounded != null);
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
 
@@ -161,7 +161,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void deleted() {
+    void deleted() {
         Program deleted = MediaTestDataBuilder.program().workflow(Workflow.DELETED).build();
         ProgramUpdate update = ProgramUpdate.create(deleted, OwnerType.BROADCASTER);
 
@@ -184,7 +184,7 @@ public class MediaUpdateTest {
 
 
     @Test
-    public void generateCompleteProgramUpdateXMLandVerifyAgainstXSD() throws Exception {
+    void generateCompleteProgramUpdateXMLandVerifyAgainstXSD() throws Exception {
         StringWriter writer = new StringWriter();
 
         Program program = MediaTestDataBuilder.program().withEverything().build();
@@ -205,7 +205,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void testWithoutIntentions() {
+    void withoutIntentions() {
 
         String withoutIntentions = """
             <program xmlns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true">
@@ -221,7 +221,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void testWithIntentions() {
+    void withIntentions() {
 
         String withoutIntentions = """
             <program xmlns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true">
@@ -241,7 +241,7 @@ public class MediaUpdateTest {
 
 
     @Test
-    public void testWithIntentionsOfOtherOwner() {
+    void withIntentionsOfOtherOwner() {
         ProgramUpdate update  = ProgramUpdate.create(
             MediaBuilder.program().intentions(Intentions.builder().owner(OwnerType.MIS).value(IntentionType.INFORM_INDEPTH).build()).build(),
             OwnerType.BROADCASTER
@@ -251,7 +251,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void testWithIntentionsOfOwner() {
+    void withIntentionsOfOwner() {
         ProgramUpdate update  = ProgramUpdate.create(
             MediaBuilder.program().intentions(
                 Intentions.builder()
@@ -268,7 +268,7 @@ public class MediaUpdateTest {
     }
 
     @Test
-    public void testWithWarning() {
+    void withWarning() {
         ProgramUpdate update = ProgramUpdate.create(
             MediaBuilder.program()
                 .subTitle("bla")

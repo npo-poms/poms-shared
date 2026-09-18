@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class NameTest {
 
     @Test
-    public void testJson() {
+    void json() {
 
         Name name = Name.builder()
             .id(1L)
@@ -40,7 +40,7 @@ class NameTest {
     }
 
     @Test
-    public void testJsonWithoutType() throws JsonProcessingException {
+    void jsonWithoutType() throws JsonProcessingException {
 
         Name name = (Name) Jackson2Mapper.getInstance().readValue(
             "{ " +
@@ -61,7 +61,7 @@ class NameTest {
     }
 
     @Test
-    public void testXml() {
+    void xml() {
 
         Name name = Name.builder()
             .id(1L)

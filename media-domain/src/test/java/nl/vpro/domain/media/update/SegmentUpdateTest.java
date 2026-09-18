@@ -24,10 +24,10 @@ import nl.vpro.validation.WarningValidatorGroup;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class SegmentUpdateTest extends MediaUpdateTest {
+class SegmentUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void xml() {
+    void xml() {
         SegmentUpdate update = SegmentUpdate.create();
         update.setAVType(AVType.VIDEO);
         update.setMainTitle("main title");
@@ -63,7 +63,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
         log.info("{}", update.violations());
     }
     @Test
-    public void json() {
+    void json() {
         SegmentUpdate update = SegmentUpdate.create();
         update.setAVType(AVType.VIDEO);
         update.setMainTitle("main title");
@@ -105,7 +105,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void unmarshal() throws JAXBException {
+    void unmarshal() throws JAXBException {
         JAXBContext jc = JAXBContext.newInstance(SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class);
 
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
@@ -119,7 +119,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void ofProgram() {
+    void ofProgram() {
 
         String expected =
             """
@@ -159,7 +159,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
      * Naar aanleiding van slack-communicatie met de VARA.
      */
     @Test
-    public void testNamespaces() throws JAXBException, ParserConfigurationException, SAXException {
+    void namespaces() throws JAXBException, ParserConfigurationException, SAXException {
         String example = """
             <?xml version="1.0"?>
             <ns0:segment xmlns:ns0="urn:vpro:media:update:2009" avType="VIDEO" embeddable="true" mid="POMS_BV_12672829" midRef="BV_101386500"   sortDate="3333-01-24T10:12:00+00:00" urn="urn:vpro:media:segment:102562422">

@@ -11,28 +11,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.2
  */
-public class OwnerTypeTest {
+class OwnerTypeTest {
     @Test
-    public void comparator() {
+    void comparator() {
         Comparator<OwnerType> ot = OwnerType.comparator(OwnerType.NPO);
         assertThat(ot.compare(OwnerType.NPO, OwnerType.BROADCASTER)).isNegative();
     }
 
     @Test
-    public void defaultorder() {
+    void defaultorder() {
         Comparator<OwnerType> ot = OwnerType.comparator();
         assertThat(ot.compare(OwnerType.BROADCASTER, OwnerType.NPO)).isNegative();
     }
 
     @SuppressWarnings("deprecation")
     @Test
-    public void deprecated() {
+    void deprecated() {
         assertThat(OwnerType.IMMIX.isDeprecated()).isTrue();
     }
 
     @SuppressWarnings("deprecation")
     @Test
-    public void after() {
+    void after() {
         assertThat(OwnerType.after((OwnerType.BROADCASTER))).isEqualTo(OwnerType.values());
         assertThat(OwnerType.after((OwnerType.NEBO))).isEqualTo(Arrays.copyOfRange(OwnerType.values(), 1, OwnerType.values().length, Object[].class));
 

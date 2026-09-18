@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public class WorkflowExecutionTest {
+class WorkflowExecutionTest {
 
 
     HALMapper MAPPER = NEPGatekeeperServiceImpl.createMapper();
     @Test
-    public void unmarshal() throws IOException {
+    void unmarshal() throws IOException {
         WorkflowExecution workflowExecution =
         MAPPER.readValue("""
             {

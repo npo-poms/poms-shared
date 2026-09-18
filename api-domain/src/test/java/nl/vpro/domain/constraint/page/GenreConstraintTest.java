@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Machiel
  * @since 5.4
  */
-public class GenreConstraintTest {
+class GenreConstraintTest {
 
     private static CachedURLClassificationServiceImpl cs;
 
@@ -31,7 +31,7 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         GenreConstraint in = new GenreConstraint("jeugd");
         GenreConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:genreConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">jeugd</local:genreConstraint>");
@@ -39,18 +39,18 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new GenreConstraint().getESPath()).isEqualTo("genres.id");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).genres(cs.getTerm("3.0.1.1")).build();
         assertThat(new GenreConstraint("3.0.1.1").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).genres(cs.getTerm("3.0.1.1.7")).build();
         assertThat(new GenreConstraint("3.0.1.1.7").test(article)).isTrue();
         assertThat(new GenreConstraint("3.0.1.1").test(article)).isFalse();
@@ -58,7 +58,7 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testSubPath() {
+    void subPath() {
         GenreConstraint genreConstraint = new GenreConstraint("3.0.1.*");
         assertThat(genreConstraint.test(article("3.0.1.1.7"))).isTrue();
         assertThat(genreConstraint.test(article("3.0.1.1"))).isTrue();

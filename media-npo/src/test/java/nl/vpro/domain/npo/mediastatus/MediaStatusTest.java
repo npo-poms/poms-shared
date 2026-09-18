@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MediaStatusTest {
+class MediaStatusTest {
 
     String example = """
 <?xml version="1.0" encoding="UTF-8"?>
@@ -40,7 +40,7 @@ public class MediaStatusTest {
         """;
 
     @Test
-    public void xml() {
+    void xml() {
         MediaStatus status = JAXB.unmarshal(new StringReader(example), MediaStatus.class);
 
         assertThat(status.getMid()).isEqualTo("WO_NTR_20288291");

@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.4
  */
-public class EnumConstraintTest {
+class EnumConstraintTest {
 
     public enum AnEnum {
         a,
@@ -41,7 +41,7 @@ public class EnumConstraintTest {
     AnEnumConstraint anEnumConstraint = new AnEnumConstraint();
 
     @Test
-    public void getValue() {
+    void getValue() {
         anEnumConstraint.setValue("A");
         assertThat(anEnumConstraint.getEnumValue()).isEqualTo(AnEnum.a);
         assertThat(anEnumConstraint.getValue()).isEqualTo("a");

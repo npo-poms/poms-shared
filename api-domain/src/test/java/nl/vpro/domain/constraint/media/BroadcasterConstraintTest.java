@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class BroadcasterConstraintTest {
+class BroadcasterConstraintTest {
 
     @BeforeEach
     public void setup() {
@@ -27,7 +27,7 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetStringValue() {
+    void getStringValue() {
         BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
         BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:broadcasterConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">VPRO</local:broadcasterConstraint>");
@@ -35,13 +35,13 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withBroadcasters().build();
         assertThat(new BroadcasterConstraint("BNN").test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Program program = MediaTestDataBuilder.program().mid("mid_123").withBroadcasters().build();
         assertThat(new BroadcasterConstraint("Bnn").test(program)).isFalse();
         assertThat(new BroadcasterConstraint("Bnn").testWithReason(program).applies()).isFalse();
@@ -50,7 +50,7 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
     }
 }

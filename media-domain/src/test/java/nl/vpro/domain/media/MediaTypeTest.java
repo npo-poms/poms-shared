@@ -15,10 +15,10 @@ import static nl.vpro.domain.media.MediaType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class MediaTypeTest {
+class MediaTypeTest {
 
     @Test
-    public void testPreferredEpisodeTypes() {
+    void preferredEpisodeTypes() {
         assertThat(SERIES.preferredEpisodeTypes()).containsOnly(BROADCAST);
         assertThat(SEASON.preferredEpisodeTypes()).containsOnly(BROADCAST);
 
@@ -29,7 +29,7 @@ public class MediaTypeTest {
     }
 
     @Test
-    public void testAllowedEpisodeTypes() {
+    void allowedEpisodeTypes() {
         assertThat(SERIES.allowedEpisodeTypes()).containsOnly(BROADCAST);
         assertThat(SEASON.allowedEpisodeTypes()).containsOnly(BROADCAST);
 
@@ -40,7 +40,7 @@ public class MediaTypeTest {
     }
 
     @Test
-    public void testPreferredEpisodeOfTypes() {
+    void preferredEpisodeOfTypes() {
         assertThat(BROADCAST.preferredEpisodeOfTypes()).containsOnly(SERIES, SEASON);
         assertThat(STRAND.preferredEpisodeOfTypes()).containsOnly(SERIES, SEASON);
 
@@ -50,12 +50,12 @@ public class MediaTypeTest {
     }
 
     @Test
-    public void testAllowedEpisodeOfTypesOnTypeWithoutEpisodeOf() {
+    void allowedEpisodeOfTypesOnTypeWithoutEpisodeOf() {
         assertThat(SEASON.allowedEpisodeOfTypes()).isEmpty();
     }
 
     @Test
-    public void testAllowedEpisodeOfTypes() {
+    void allowedEpisodeOfTypes() {
         assertThat(STRAND.allowedEpisodeOfTypes()).containsOnly(SERIES, SEASON);
 
         assertThat(SEGMENT.allowedEpisodeOfTypes()).isEmpty();
@@ -63,23 +63,23 @@ public class MediaTypeTest {
     }
 
     @Test
-    public void testAllowedMemberType() {
+    void allowedMemberType() {
         assertThat(PLAYLIST.allowedMemberTypes()).containsOnly(MEDIA);
     }
 
     @Test
-    public void testAllowedMemberOfType() {
+    void allowedMemberOfType() {
         assertThat(SEGMENT.allowedMemberOfTypes()).containsOnly(MEDIA);
     }
 
     @Test
-    public void testAllowedEpisodeTypeOnArchive() {
+    void allowedEpisodeTypeOnArchive() {
         assertThat(COLLECTION.allowedEpisodeTypes()).isEmpty();
         //assertThat(ARCHIVE.allowedEpisodeTypes()).isEmpty(); deprecated
     }
 
     @Test
-    public void noErrors() {
+    void noErrors() {
         SimpleLogger slog = StringBuilderSimpleLogger.builder().level(Level.DEBUG).build().chain(new Slf4jSimpleLogger(log).withThreshold(Level.INFO));
         for (MediaType type : MediaType.values()) {
             slog.debug("\n\n" + type.name() + " " + type);

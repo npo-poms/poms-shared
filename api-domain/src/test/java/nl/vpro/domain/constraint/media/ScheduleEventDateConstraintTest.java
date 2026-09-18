@@ -13,10 +13,10 @@ import nl.vpro.domain.media.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ScheduleEventDateConstraintTest {
+class ScheduleEventDateConstraintTest {
 
     @Test
-    public void testApply() {
+    void apply() {
         ScheduleEventDateConstraint constraint = new ScheduleEventDateConstraint();
         constraint.setDate("tomorrow midnight");
         constraint.setOperator(Operator.LT);
@@ -28,7 +28,7 @@ public class ScheduleEventDateConstraintTest {
 
 
     @Test
-    public void testXml() {
+    void xml() {
 
         Filter filter = new Filter();
         ScheduleEventDateConstraint constraint = new ScheduleEventDateConstraint();
@@ -43,7 +43,7 @@ public class ScheduleEventDateConstraintTest {
     }
 
     @Test
-    public void testGTE() {
+    void gTE() {
         Filter filter = new Filter();
         ScheduleEventDateConstraint constraint = new ScheduleEventDateConstraint();
         constraint.setDate("2000-01-01");

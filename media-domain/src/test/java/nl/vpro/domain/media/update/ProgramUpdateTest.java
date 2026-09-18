@@ -37,10 +37,10 @@ import static nl.vpro.domain.media.Region.NLBES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class ProgramUpdateTest extends MediaUpdateTest {
+class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void create() {
+    void create() {
         MediaUpdate<Program> pu = MediaUpdate.create(
             MediaBuilder.program(ProgramType.CLIP)
                 .mainTitle("foobar")
@@ -87,7 +87,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void createUpdate() {
+    void createUpdate() {
         MediaUpdate<Program> pu = MediaUpdate.createUpdate(
             MediaBuilder.program(ProgramType.CLIP)
                 .mainTitle("foobar")
@@ -98,13 +98,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidWhenInvalid() {
+    void isValidWhenInvalid() {
         ProgramUpdate update = ProgramUpdate.create();
         assertThat(update.isValid()).isFalse();
     }
 
     @Test
-    public void testErrorsWhenInvalid() {
+    void errorsWhenInvalid() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("VPRO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
@@ -112,7 +112,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testCridValidation() {
+    void cridValidation() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("VPRO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
@@ -125,7 +125,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForImages() {
+    void isValidForImages() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("EO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
@@ -138,7 +138,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testIsValidForLocations() {
+    void isValidForLocations() {
         LocationUpdate location = LocationUpdate.builder()
             .programUrl("http:invalide.url")
             //.programUrl(null)
@@ -157,7 +157,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForTitles() {
+    void isValidForTitles() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
@@ -169,7 +169,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testInvalidBecauseTypeofTitleIsNull() throws NoSuchFieldException, IllegalAccessException {
+    void invalidBecauseTypeofTitleIsNull() throws NoSuchFieldException, IllegalAccessException {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
@@ -186,7 +186,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testInvalidBecauseNoSubOrMain() {
+    void invalidBecauseNoSubOrMain() {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
@@ -201,7 +201,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void testFetchForOwner() {
+    void fetchForOwner() {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
@@ -217,7 +217,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testFetchForMultiOwnerNullLists() {
+    void fetchForMultiOwnerNullLists() {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setMid("segment_mid");
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
@@ -293,7 +293,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testFetchForMultiOwnerEmptyLists() {
+    void fetchForMultiOwnerEmptyLists() {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setIntentions(new ArrayList<>());
         segment.setTargetGroups(new ArrayList<>());
@@ -314,7 +314,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetAVType() {
+    void getAVType() {
         ProgramUpdate update = programUpdate();
         update.setAVType(AVType.VIDEO);
 
@@ -334,7 +334,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetEmbeddable() {
+    void getEmbeddable() {
         ProgramUpdate update = programUpdate();
         update.setEmbeddable(false);
 
@@ -355,7 +355,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPublishStart() {
+    void getPublishStart() {
         ProgramUpdate update = programUpdate();
         update.setPublishStartInstant(ofEpochMilli(4444));
 
@@ -371,7 +371,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPublishStop() {
+    void getPublishStop() {
         ProgramUpdate update = programUpdate();
         update.setPublishStopInstant(ofEpochMilli(4444));
 
@@ -384,7 +384,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testGetPublishStopFromMediaObject() {
+    void getPublishStopFromMediaObject() {
         ProgramUpdate update = ProgramUpdate.create(
             program()
                 .images(
@@ -419,7 +419,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetCrids() {
+    void getCrids() {
         ProgramUpdate update = programUpdate();
         update.setCrids(Collections.singletonList("crid://bds.tv/23678459"));
 
@@ -440,7 +440,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetBroadcasters() {
+    void getBroadcasters() {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters(Collections.singletonList("MAX"));
 
@@ -470,7 +470,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPortalRestrictions() {
+    void getPortalRestrictions() {
         ProgramUpdate update = programUpdate();
         update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))),
             new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), ofEpochMilli(0), ofEpochMilli(1000000)))));
@@ -493,7 +493,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetGeoRestrictions() {
+    void getGeoRestrictions() {
         ProgramUpdate update = programUpdate();
         update.setGeoRestrictions(
             new TreeSet<>(Arrays.asList(
@@ -522,7 +522,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetGeoRestrictionsReverse() {
+    void getGeoRestrictionsReverse() {
         String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
                 "<region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
@@ -532,7 +532,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetTitles() {
+    void getTitles() {
         ProgramUpdate update = programUpdate();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("Hoofdtitel", TextualType.MAIN))));
 
@@ -557,7 +557,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetTitlesWitOwner() {
+    void getTitlesWitOwner() {
         ProgramUpdate program = ProgramUpdate.create(program().titles(
             new Title("hoofdtitel omroep", OwnerType.BROADCASTER, TextualType.MAIN),
             new Title("hoofdtitel mis", OwnerType.MIS, TextualType.MAIN)).build());
@@ -586,7 +586,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetDescriptions() {
+    void getDescriptions() {
         ProgramUpdate update = programUpdate();
         update.setDescriptions(new TreeSet<>(Collections.singletonList(new DescriptionUpdate("Beschrijving", TextualType.MAIN))));
 
@@ -606,7 +606,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetAVAttributes() {
+    void getAVAttributes() {
         ProgramUpdate update = programUpdate();
         update.setAvAttributes(avAttributes());
 
@@ -637,7 +637,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetDuration() {
+    void getDuration() {
         ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofMillis(656565));
 
@@ -649,7 +649,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetDuration2() {
+    void getDuration2() {
         ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofSeconds(3 * 3600 + 46 * 60));
 
@@ -660,7 +660,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetMemberOf() {
+    void getMemberOf() {
         ProgramUpdate update = programUpdate();
         assertThat(update.getMid()).isNull();
         update.setMemberOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
@@ -691,7 +691,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetEmail() {
+    void getEmail() {
         ProgramUpdate update = programUpdate();
         update.setEmail(Collections.singletonList("info@vpro.nl"));
 
@@ -703,7 +703,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetWebsites() {
+    void getWebsites() {
         ProgramUpdate update = programUpdate();
         update.setWebsiteObjects(Collections.singletonList(new Website("www.vpro.nl")));
 
@@ -720,7 +720,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetLocations() {
+    void getLocations() {
         ProgramUpdate update = programUpdate();
         update.setLocations(new TreeSet<>(Collections.singletonList(
             LocationUpdate.builder()
@@ -761,7 +761,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPerson() {
+    void getPerson() {
         ProgramUpdate update = programUpdate();
         update.setCredits(Collections.singletonList(new PersonUpdate("Pietje", "Puk", RoleType.DIRECTOR)));
 
@@ -778,7 +778,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetScheduleEvent() {
+    void getScheduleEvent() {
         ProgramUpdate update = programUpdate();
         update.setScheduleEvent(new ScheduleEventUpdate(
             Channel.RAD5,
@@ -806,7 +806,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetScheduleEventWithTexts() {
+    void getScheduleEventWithTexts() {
         ProgramUpdate update = programUpdate();
         ScheduleEventUpdate se = new ScheduleEventUpdate(
             Channel.RAD5,
@@ -843,7 +843,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetRelations() {
+    void getRelations() {
         ProgramUpdate update = programUpdate();
         update.setRelations(new TreeSet<>(Collections.singletonList(new RelationUpdate(
             "ARTIST",
@@ -861,7 +861,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void testGetImages() {
+    void getImages() {
 
         Image image  = Image.builder()
             .imageUri("urn:vpro.image:12345")
@@ -915,7 +915,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetEpisodeOf() {
+    void getEpisodeOf() {
         ProgramUpdate update = programUpdate();
         update.setEpisodeOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
@@ -927,7 +927,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testUnmarshalEpisodeOf() {
+    void unmarshalEpisodeOf() {
         String xml = "<program xmlns=\"urn:vpro:media:update:2009\">" +
                 "<episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf></program>";
         ProgramUpdate update = JAXB.unmarshal(new StringReader(xml), ProgramUpdate.class);
@@ -935,7 +935,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetSegments() {
+    void getSegments() {
         ProgramUpdate update = programUpdate();
         update.setVersion(Version.of(5, 12));
         update.setSegments(new TreeSet<>(Collections.singletonList(
@@ -973,7 +973,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testPortal() {
+    void portal() {
         ProgramUpdate update = programUpdate();
         update.setPortals(Collections.singletonList("STERREN24"));
 
@@ -995,7 +995,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testAgeRating() {
+    void ageRating() {
         ProgramUpdate update  = ProgramUpdate.create();
         update.setVersion(Version.of(5, 5));
         update.setAgeRating(AgeRating._6);
@@ -1020,7 +1020,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testContentRating() {
+    void contentRating() {
         ProgramUpdate update = programUpdate();
         update.setContentRatings(Arrays.asList(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL));
 
@@ -1045,7 +1045,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetTags() {
+    void getTags() {
         ProgramUpdate update = programUpdate();
         update.setId(10L);
         update.setTags(new TreeSet<>(Arrays.asList("foo", "bar")));
@@ -1073,7 +1073,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testImageWithoutCredits() {
+    void imageWithoutCredits() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setAgeRating(AgeRating._6);
         update.setImages(new ImageUpdate(ImageType.LOGO, "title", null, new ImageLocation("https://placeholdit.imgix.net/~text?txt=adsfl")));
@@ -1084,7 +1084,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testWithPredictions() {
+    void withPredictions() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setIntentions(null);
         update.setTargetGroups(null);
@@ -1108,7 +1108,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testWithPredictionsViaBuilder() {
+    void withPredictionsViaBuilder() {
         ProgramUpdate update = ProgramUpdate.create(MediaBuilder.program()
             .predictions(
                 Prediction.builder().platform(Platform.INTERNETVOD).plannedAvailability(false).build(),
@@ -1132,7 +1132,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void updateRelations() {
+    void updateRelations() {
         Program program = program().relations(Relation.ofText(RelationDefinition.of("A", "VPRO"), "aa")).build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.getRelations().first().setText("bbb");
@@ -1142,7 +1142,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testLocations() {
+    void locations() {
         final Instant now = Instant.now();
         Location expiredLocation =
             Location.builder()
@@ -1201,14 +1201,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testMid() {
+    void mid() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setMid("bla");
         assertThat(update.getMid()).isEqualTo("bla");
     }
 
     @Test
-    public void testCountriesAndLanguages() {
+    void countriesAndLanguages() {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.setIntentions(null);

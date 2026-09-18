@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8.6
  */
-public class VoorspellingenTest {
+class VoorspellingenTest {
 
 
     @Test
-    public void unmarshal() {
+    void unmarshal() {
         InputStream example = getClass().getClassLoader().getResourceAsStream("voorspel.xml");
         Voorspellingen voorspellingen = JAXB.unmarshal(example, Voorspellingen.class);
 
@@ -29,7 +29,7 @@ public class VoorspellingenTest {
     }
 
     @Test
-    public void extra() {
+    void extra() {
         InputStream example = getClass().getClassLoader().getResourceAsStream("voorspel_extra.xml");
 
         Voorspellingen voorspellingen = JAXB.unmarshal(example, Voorspellingen.class);

@@ -8,7 +8,7 @@ class HeadersTest {
 
 
     @Test
-    public void escape() {
+    void escape() {
         assertThat(Headers.escapeHeaderValue( "foo bar: 汉")).isEqualTo("foo bar: \\u6C49");
 
     }

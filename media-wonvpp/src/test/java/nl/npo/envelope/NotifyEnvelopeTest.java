@@ -15,7 +15,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class NotifyEnvelopeTest {
+final class NotifyEnvelopeTest {
 
     static String example = """
        {

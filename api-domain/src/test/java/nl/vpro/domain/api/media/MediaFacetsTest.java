@@ -19,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class MediaFacetsTest {
+class MediaFacetsTest {
 
 
     @Test
-    public void testGetSortDateXml() {
+    void getSortDateXml() {
         MediaFacets in = new MediaFacets();
         in.setSortDates(new DateRangeFacets(
             DateRangePreset.THIS_WEEK,
@@ -55,7 +55,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetSortDateJson() throws Exception {
+    void getSortDateJson() throws Exception {
         MediaFacets in = new MediaFacets();
         in.setSortDates(new DateRangeFacets(
             DateRangePreset.THIS_WEEK,
@@ -82,7 +82,7 @@ public class MediaFacetsTest {
 
 
     @Test
-    public void testGetDurationJson() throws Exception {
+    void getDurationJson() throws Exception {
         MediaFacets in = new MediaFacets();
         in.setDurations(
             new DurationRangeFacets(
@@ -113,7 +113,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetSortDateJsonNoArray() throws Exception {
+    void getSortDateJsonNoArray() throws Exception {
         String json = "{\"sortDates\": \"YEAR\"}";
 
         MediaFacets out = Jackson2Mapper.getInstance().readValue(json, MediaFacets.class);
@@ -122,7 +122,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetBroadcaster() {
+    void getBroadcaster() {
         MediaFacets in = new MediaFacets();
         in.setBroadcasters(new MediaFacet());
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -136,7 +136,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetGenre() {
+    void getGenre() {
         MediaFacets in = new MediaFacets();
         in.setGenres(new MediaSearchableTermFacet());
 
@@ -154,7 +154,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetGenreBackwards() {
+    void getGenreBackwards() {
         String backwards = """
             <local:mediaFacets xmlns="urn:vpro:api:2013" xmlns:local="uri:local" >
                 <genres sort="COUNT">
@@ -168,7 +168,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetTag() {
+    void getTag() {
         MediaFacets in = new MediaFacets();
         in.setTags(new ExtendedMediaFacet());
 
@@ -185,7 +185,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetDurations() {
+    void getDurations() {
         MediaFacets in = new MediaFacets();
         in.setDurations(new DurationRangeFacets(
             new DurationRangeInterval("YEAR")
@@ -204,7 +204,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetMediaSearchFromFacetXml() {
+    void getMediaSearchFromFacetXml() {
         MediaSearch search = new MediaSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
@@ -225,7 +225,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetMediaSearchFromFacetJson() {
+    void getMediaSearchFromFacetJson() {
         MediaSearch search = new MediaSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
@@ -241,7 +241,7 @@ public class MediaFacetsTest {
 
 
     @Test
-    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleJson() throws Exception {
+    void getMediaSearchFromFacetTitlesBackwardsCompatibleJson() throws Exception {
 
         String example = """
             {
@@ -262,7 +262,7 @@ public class MediaFacetsTest {
 
 
     @Test
-    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleXml() {
+    void getMediaSearchFromFacetTitlesBackwardsCompatibleXml() {
 
         String example = """
             <mediaForm xmlns="urn:vpro:api:2013">

@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.3
  */
 @Slf4j
-public class TT888Test {
+class TT888Test {
     @Test
-    public void parseTimeline() {
+    void parseTimeline() {
         String line = "0003 00:02:08:11 00:02:11:06";
         TimeLine timeLine = TT888.parseTimeline(line);
         assertThat(timeLine.getSequence()).isEqualTo(3);
@@ -29,7 +29,7 @@ public class TT888Test {
 
 
     @Test
-    public void readWithNewLlines() {
+    void readWithNewLlines() {
         Stream<Cue> cues = TT888.parse("NPS_1145938", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/NPS_1145938.txt"));
         List<Cue> cueList = new ArrayList<>();
         cues.forEach(cueList::add);
@@ -39,7 +39,7 @@ public class TT888Test {
     }
 
     @Test
-    public void readWithEncoding() {
+    void readWithEncoding() {
         Stream<Cue> cues = TT888.parse("POW_04322816", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/POW_04322816.txt"));
         List<Cue> cueList = new ArrayList<>();
         cues.forEach(cueList::add);
@@ -47,7 +47,7 @@ public class TT888Test {
     }
 
     @Test
-    public void readWithEncodingUTF8() {
+    void readWithEncodingUTF8() {
         Stream<Cue> cues = TT888.parseUTF8("POW_04322816", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/POW_04322816.txt"));
         List<Cue> cueList = new ArrayList<>();
         cues.forEach(cueList::add);
@@ -55,7 +55,7 @@ public class TT888Test {
     }
 
     @Test
-    public void readKN_1729896() {
+    void readKN_1729896() {
         Stream<Cue> cues = TT888.parseUTF8("KN_1729896", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/KN_1729896.txt"));
         List<Cue> cueList = new ArrayList<>();
         cues.forEach(cueList::add);

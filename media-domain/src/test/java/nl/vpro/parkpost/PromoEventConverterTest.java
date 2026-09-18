@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Michiel Meeuwissen
  * @since 1.8
  */
-public class PromoEventConverterTest {
+class PromoEventConverterTest {
 
     private PromoEvent event;
 
@@ -40,7 +40,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertWithoutMid() throws Exception {
+    void convertWithoutMid() throws Exception {
         assertThatThrownBy(() -> {
             event.setPromotedProgramProductCode(null);
             PromoEventConverter.convert(event, locationBaseUrl);
@@ -48,7 +48,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertOnNonPromoType() throws Exception {
+    void convertOnNonPromoType() throws Exception {
         assertThatThrownBy(() -> {
             event.setPromoType(ProductCode.Type.A);
             PromoEventConverter.convert(event, locationBaseUrl);
@@ -56,7 +56,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertWithEmptyTitle() throws Exception {
+    void convertWithEmptyTitle() throws Exception {
         assertThatThrownBy(() -> {
 
             event.setProgramTitle("");
@@ -65,21 +65,21 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertForProductCodeRelation() throws Exception {
+    void convertForProductCodeRelation() throws Exception {
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
         assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_PRODUCTCODE", "NPO"), null, event.getProductCode()));
     }
 
     @Test
-    public void testConvertForPromoVersionRelation() throws Exception {
+    void convertForPromoVersionRelation() throws Exception {
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
         assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_VERSION", "NPO"), null, "AK"));
     }
 
     @Test
-    public void testConvertForPromoChannelRelation() throws Exception {
+    void convertForPromoChannelRelation() throws Exception {
         event.setNet("NED1");
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
@@ -87,7 +87,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertForPromoRefererRelation() throws Exception {
+    void convertForPromoRefererRelation() throws Exception {
         event.setReferrer("Morgen");
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
@@ -95,7 +95,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertForPlacingWindowStart() throws Exception {
+    void convertForPlacingWindowStart() throws Exception {
         Instant start = Instant.ofEpochMilli(12345);
         event.setPlacingWindowStart(start);
 
@@ -105,7 +105,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testPlacingWindowEnd() throws Exception {
+    void placingWindowEnd() throws Exception {
         Instant end = Instant.ofEpochMilli(12345);
         event.setPlacingWindowEnd(end);
 
@@ -115,7 +115,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertOnLocations() throws Exception {
+    void convertOnLocations() throws Exception {
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
         event.setFrameCount(100L);
 
@@ -123,7 +123,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvert() throws Exception {
+    void convert() throws Exception {
         event.setProductCode("1P1302AK_BOEKEN4");
         event.setOrderCode("1P110213_VPR_BOEKEN______");
         event.setPromotedProgramProductCode("VPRO_1234");
@@ -147,7 +147,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertFiles() throws Exception {
+    void convertFiles() throws Exception {
         PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/BP0702VD_2_HOLLANDS.xml"), PromoEvent.class);
         ProgramUpdate update = PromoEventConverter.convert(event, locationBaseUrl);
         assertThat(update.getLocations()).hasSize(2);
@@ -157,7 +157,7 @@ public class PromoEventConverterTest {
     }
 
     @Test
-    public void testConvertFiles2() throws Exception {
+    void convertFiles2() throws Exception {
         PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/parkpost.xml"), PromoEvent.class);
         ProgramUpdate update = PromoEventConverter.convert(event, locationBaseUrl);
         assertThat(update.getLocations()).hasSize(1);

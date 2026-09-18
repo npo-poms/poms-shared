@@ -9,17 +9,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class TvaCountryTest {
+class TvaCountryTest {
 
     @Test
-    public void valueOf() {
+    void valueOf() {
         assertThatThrownBy(() ->
             TvaCountry.valueOf("BLA")
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void iso3() {
+    void iso3() {
         assertThat(TvaCountry.find("NLD")).isEqualTo(TvaCountry.NL);
     }
 }

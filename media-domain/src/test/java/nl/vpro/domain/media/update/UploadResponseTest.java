@@ -8,7 +8,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 class UploadResponseTest {
 
     @Test
-    public void xml() {
+    void xml() {
        UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L, null, true);
 
         JAXBTestUtil.assertThatXml(response).noRoundTrip().isSimilarTo("""
@@ -22,7 +22,7 @@ class UploadResponseTest {
     }
 
     @Test
-    public void json() {
+    void json() {
        UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L, null, true);
 
         Jackson2TestUtil.assertThatJson(response).isSimilarTo("""

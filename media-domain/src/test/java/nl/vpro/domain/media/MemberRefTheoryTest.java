@@ -11,7 +11,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static nl.vpro.domain.media.MediaType.CLIP;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
+class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
 
     private static final  Program member = new Program(1L);
 
@@ -28,37 +28,37 @@ public class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
 
 
     @Test
-    public void testEqualsOnDuplicates() {
+    void equalsOnDuplicates() {
         assertThat(duplicateA).isEqualTo(duplicateB);
     }
 
     @Test
-    public void testCompareToOnDuplicates() {
+    void compareToOnDuplicates() {
         assertThat(duplicateA.compareTo(duplicateB)).isEqualTo(0);
     }
 
     @Test
-    public void testEqualsOnDuplicateWithOtherNumber() {
+    void equalsOnDuplicateWithOtherNumber() {
         assertThat(duplicateA).isNotEqualTo(duplicateWithHigherPosition);
     }
 
     @Test
-    public void testCompareToOnDuplicateWithOtherNumber() {
+    void compareToOnDuplicateWithOtherNumber() {
         assertThat(duplicateA.compareTo(duplicateWithHigherPosition)).isLessThan(0);
     }
 
     @Test
-    public void testEqualsIgnoreId() {
+    void equalsIgnoreId() {
         assertThat(duplicateWithId10).isEqualTo(duplicateWithId20);
     }
 
     @Test
-    public void testCompareToIgnoreId() {
+    void compareToIgnoreId() {
         assertThat(duplicateWithId10.compareTo(duplicateWithId20)).isEqualTo(0);
     }
 
     @Test
-    public void testTypeRoundTrip() {
+    void typeRoundTrip() {
         MemberRef memberRef = new MemberRef();
         memberRef.setType(CLIP);
         MemberRef result = JAXBTestUtil.roundTripAndSimilar(memberRef, "<memberRef highlighted=\"false\" type=\"CLIP\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");

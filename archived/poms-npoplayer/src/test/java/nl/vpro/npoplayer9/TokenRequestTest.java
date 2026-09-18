@@ -9,7 +9,7 @@ class TokenRequestTest {
 
 
     @Test
-    public void json() {
+    void json() {
         TokenRequest request = Jackson2TestUtil.roundTripAndSimilar(new TokenRequest("mid_123"), """
                 {
                     "mid" : "mid_123"

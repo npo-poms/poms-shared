@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.util.DateUtils;
 
-public class WorkflowExecutionResponseTest {
+class WorkflowExecutionResponseTest {
 
     @Test
-    public void json() throws Exception {
+    void json() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
 
         WorkflowExecution workflowExecution = WorkflowExecution.builder()

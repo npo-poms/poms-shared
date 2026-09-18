@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SuppressWarnings({"DataFlowIssue", "ResultOfMethodCallIgnored"})
 @Slf4j
-public class ClassificationServiceImplTest {
+class ClassificationServiceImplTest {
 
     private final ClassificationService classificationService;
 
@@ -38,35 +38,35 @@ public class ClassificationServiceImplTest {
 
 
     @Test
-    public void testGetTermByIdOnMainGenre() {
+    void getTermByIdOnMainGenre() {
         assertThat(classificationService.getTerm("3.0.1.5")).isNotNull();
     }
 
     @Test
-    public void getTermByReference() {
+    void getTermByReference() {
         assertThat(classificationService.getTermsByReference("urn:mis:genre:MOVIE")).isNotNull();
         assertThat(classificationService.getTermsByReference("urn:mis:genre:ENTERTAINMENT")).hasSize(3);
     }
 
     @Test
-    public void testGetTermByIdOnDoubleDigits() {
+    void getTermByIdOnDoubleDigits() {
         assertThat(classificationService.getTerm("3.0.1.2.10").getName()).isEqualTo("Spanning");
         assertThat(classificationService.getTerm("3.0.1.2.10").depth()).isEqualTo(5);
 
     }
 
     @Test
-    public void testGetNext() {
+    void getNext() {
         assertThat(new TermId("3.0.1").next()).isEqualTo(new TermId("3.0.2"));
     }
 
     @Test
-    public void testReferencesUnique() {
+    void referencesUnique() {
 
     }
 
     @Test
-    public void testGetValues() {
+    void getValues() {
         assertThat(classificationService.valuesOf("3.0.1").iterator().next().getTermId()).isEqualTo("3.0.1.1");
         assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(115); // The xml of MSE-5051 has 116 lines minus header, that's 115
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
@@ -78,7 +78,7 @@ public class ClassificationServiceImplTest {
     }
 
     @Test
-    public void testMultipleDirectory() {
+    void multipleDirectory() {
         ClassificationService classificationService = ClassificationServiceImpl.fromClassPath(
             "nl/vpro/domain/classification/scan/classifications-1.xml",
             "nl/vpro/domain/classification/scan/classifications-2.xml"
@@ -89,7 +89,7 @@ public class ClassificationServiceImplTest {
     }
 
     @Test
-    public void testMultipleDirectoryScan() {
+    void multipleDirectoryScan() {
         File dir = new File(getClass().getResource("/nl/vpro/domain/classification/scan/classifications-1.xml").getFile()).getParentFile();
 
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(dir);
@@ -99,7 +99,7 @@ public class ClassificationServiceImplTest {
     }
 
     @Test
-    public void testMultipleDirectoryScanWatcher() throws IOException, InterruptedException {
+    void multipleDirectoryScanWatcher() throws IOException, InterruptedException {
         File dir = createTempDirectory("classifications").toFile();
 
         ClassificationServiceImpl classificationService = ClassificationServiceImpl.fromFiles(dir);
@@ -129,7 +129,7 @@ public class ClassificationServiceImplTest {
 
     @Test
     @Disabled
-    public void test() {
+    void test() {
 
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(
             new File("/Users/michiel/npo/pages/data/terms")
@@ -141,7 +141,7 @@ public class ClassificationServiceImplTest {
 
     @Test
     @Disabled
-    public void output() {
+    void output() {
         JAXB.marshal(classificationService.getClassificationScheme(), System.out);
     }
 }

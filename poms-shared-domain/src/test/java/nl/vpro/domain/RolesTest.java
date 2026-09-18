@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 class RolesTest {
 
     @Test
-    public  void allRoles() {
+    void allRoles() {
         Roles.allRoles().forEach(r -> {
             System.out.println(r);
         });

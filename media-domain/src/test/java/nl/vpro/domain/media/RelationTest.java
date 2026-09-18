@@ -22,23 +22,23 @@ import static nl.vpro.domain.media.update.Validation.getValidator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class RelationTest implements ComparableTheory<Relation> {
+class RelationTest implements ComparableTheory<Relation> {
 
     @Test
-    public void testGetUrnOnNull() {
+    void getUrnOnNull() {
         Relation relation = new Relation();
         assertThat(relation.getUrn()).isNull();
     }
 
     @Test
-    public void testGetUrnFormat() {
+    void getUrnFormat() {
         Relation relation = new Relation();
         relation.setId(1L);
         assertThat(relation.getUrn()).isEqualTo("urn:vpro:media:relation:1");
     }
 
     @Test
-    public void testSetUrn() {
+    void setUrn() {
         Relation relation = new Relation();
         relation.setUrn("urn:vpro:media:relation:79");
 
@@ -46,7 +46,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testSetUrnWithoutAnId() {
+    void setUrnWithoutAnId() {
         assertThatThrownBy(() -> {
 
             Relation relation = new Relation();
@@ -55,7 +55,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testSetUrnFormat() {
+    void setUrnFormat() {
         assertThatThrownBy(() -> {
             Relation relation = new Relation();
             relation.setUrn("vpro:media:relation:79");
@@ -63,7 +63,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testDefinitionValidation() {
+    void definitionValidation() {
         Relation r = new Relation();
         Set<ConstraintViolation<Relation>> constraintViolations = getValidator().validate(r);
 
@@ -71,7 +71,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testURIValidation() {
+    void uRIValidation() {
         Relation r = new Relation(getDefinition());
         r.setUriRef(":");
         Set<ConstraintViolation<Relation>> constraintViolations = getValidator().validate(r);
@@ -80,7 +80,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testUpdateOnDifferentDefinitions() {
+    void updateOnDifferentDefinitions() {
         assertThatThrownBy(() -> {
 
             Relation to = new Relation(new RelationDefinition());
@@ -90,7 +90,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testUpdateOnFieldsCopied() {
+    void updateOnFieldsCopied() {
         Relation to = new Relation(new RelationDefinition("LABEL", "VPRO"));
         Relation from = new Relation(new RelationDefinition("LABEL", "VPRO"));
         from.setId(1L);
@@ -105,7 +105,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testUpdateOnFieldsNullArgs() {
+    void updateOnFieldsNullArgs() {
         Relation to = null;
         Relation from = new Relation(new RelationDefinition());
         to = Relation.update(from, to);
@@ -120,12 +120,12 @@ public class RelationTest implements ComparableTheory<Relation> {
     }
 
     @Test
-    public void testSchemaMapping() throws Exception {
+    void schemaMapping() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, validProgramWithRelation()));
     }
 
     @Test
-    public void json() {
+    void json() {
         Jackson2TestUtil.roundTripAndSimilarAndEquals( new Relation(
                 56L,
                 new RelationDefinition("LABEL", "VPRO", "Record label"),

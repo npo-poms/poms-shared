@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  * @author Michiel Meeuwissen
  */
 @Deprecated
-public class ChangeIteratorTest {
+class ChangeIteratorTest {
 
     static Instant INSTANT = of(2021, 3, 1, 12, 0);
     @SuppressWarnings("unchecked")
@@ -66,7 +66,7 @@ public class ChangeIteratorTest {
 
 
     @Test
-    public void withoutProfile() throws Exception {
+    void withoutProfile() throws Exception {
 
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -97,7 +97,7 @@ public class ChangeIteratorTest {
 
 
     @Test
-    public void withCurrentProfile() throws Exception {
+    void withCurrentProfile() throws Exception {
 
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -117,7 +117,7 @@ public class ChangeIteratorTest {
     }
 
     @Test
-    public void sinceTooLate() throws Exception {
+    void sinceTooLate() throws Exception {
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT.plus(Duration.ofHours(1)))
@@ -135,7 +135,7 @@ public class ChangeIteratorTest {
     }
 
     @Test
-    public void withCurrentAndPreviousProfile() throws Exception {
+    void withCurrentAndPreviousProfile() throws Exception {
 
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -152,7 +152,7 @@ public class ChangeIteratorTest {
     }
 
     @Test
-    public void keepAlive() throws Exception {
+    void keepAlive() throws Exception {
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(asList(
                 change(1, 1) // not in profile

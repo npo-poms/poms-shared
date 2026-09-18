@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 @Slf4j
 @Disabled("Actual uploading, needs local file")
 @ExtendWith(TimingExtension.class)
-public class NEPSSHJUploadServiceImplITest {
+class NEPSSHJUploadServiceImplITest {
 
     SimpleLogger simpleLogger = Slf4jSimpleLogger.of(log);
 
@@ -57,7 +57,7 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
     @Test
-    public void client() throws IOException {
+    void client() throws IOException {
         log.info("{}", impl);
         try (SSHClient client = impl.createClient().get()) {
             log.info("Client {}", client);
@@ -74,7 +74,7 @@ public class NEPSSHJUploadServiceImplITest {
 
 
     @Test
-    public void upload() throws Exception {
+    void upload() throws Exception {
         byte[] example = new byte[]{1, 2, 3, 4};
         String filename = "npoweb-vpro/test.1235";
         impl.upload(new Slf4jSimpleLogger(log), filename, (long) example.length, new ByteArrayInputStream(example), true);
@@ -82,7 +82,7 @@ public class NEPSSHJUploadServiceImplITest {
 
 
     @Test
-    public void uploadHuge() throws Exception {
+    void uploadHuge() throws Exception {
         File file = new File(files[0]);
         String filename = "test.1235";
         InputStream fileInputStream = Files.newInputStream(file.toPath());
@@ -91,7 +91,7 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
     @Test
-    public void uploadHugeWithFile() throws Exception {
+    void uploadHugeWithFile() throws Exception {
         File file = new File(files[0]);
         String filename = "test.1235";
         InputStream fileInputStream = Files.newInputStream(file.toPath());
@@ -111,7 +111,7 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
     @Test
-    public void uploadHugeWithCaching() throws Exception {
+    void uploadHugeWithCaching() throws Exception {
         Locales.setDefault(Locales.DUTCH);
         File file = new File(files[0]);
         String filename = "test.1235";
@@ -156,7 +156,7 @@ public class NEPSSHJUploadServiceImplITest {
 
     @Test
     @SneakyThrows
-    public void async() {
+    void async() {
         assumeTrue(files.length % 2 == 0);
         List<ForkJoinTask<?>> tasks = new ArrayList<>();
         for (int i = 0; i < 10; i++) {

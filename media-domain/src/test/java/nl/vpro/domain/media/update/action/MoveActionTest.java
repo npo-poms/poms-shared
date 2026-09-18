@@ -9,7 +9,7 @@ class MoveActionTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         MoveAction action = MoveAction.builder()
             .from("from")
             .to("to")
@@ -27,7 +27,7 @@ class MoveActionTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         MoveAction action = MoveAction.builder()
             .from("MID_123")
             .to("MID_456")

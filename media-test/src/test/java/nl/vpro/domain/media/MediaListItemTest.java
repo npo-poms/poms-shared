@@ -10,10 +10,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 /**
  * @author Michiel Meeuwissen
  */
-public class MediaListItemTest {
+class MediaListItemTest {
 
     @Test
-    public void xml() throws IOException {
+    void xml() throws IOException {
         Program program = MediaTestDataBuilder.program().withEverything().build();
         MediaListItem item = new MediaListItem(program);
 

@@ -17,7 +17,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
  * @since 5.11
  */
 @Slf4j
-public class GTAASchemaTest extends AbstractSchemaTest {
+class GTAASchemaTest extends AbstractSchemaTest {
 
 
     @Override
@@ -26,7 +26,7 @@ public class GTAASchemaTest extends AbstractSchemaTest {
     }
 
     @Test
-    public void testGtaa() throws IOException {
+    void gtaa() throws IOException {
         testNamespace(Xmlns.GTAA_NAMESPACE);
     }
 

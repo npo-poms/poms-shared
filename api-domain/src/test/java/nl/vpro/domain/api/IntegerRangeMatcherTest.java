@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatcher<Integer, Integer>> {
+class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatcher<Integer, Integer>> {
 
     @Override
     IntegerRangeMatcher getInstance() {
@@ -21,7 +21,7 @@ public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatc
     }
 
     @Test
-    public void testApply() {
+    void apply() {
         IntegerRangeMatcher instance = getInstance();
         assertTrue(instance.test(2));
         assertTrue(instance.test(1));
@@ -33,7 +33,7 @@ public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatc
 
     @Override
     @Test
-    public void testHashCode() {
+    void hashCodeConsistency() {
         IntegerRangeMatcher instance = getInstance();
         assertEquals(34, instance.hashCode());
     }

@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.1
  */
-public class AssetTest {
+class AssetTest {
 
     private Asset target = new Asset();
 
     @Test
-    public void testResolve() throws Exception {
+    void resolve() throws Exception {
         target.setSource(new AssetLocation("file.name"));
 
         target.resolve("/absolute/path/");

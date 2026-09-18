@@ -8,7 +8,7 @@ import java.util.Properties;
 /**
  * @author Michiel Meeuwissen
  */
-public class NEPTest {
+class NEPTest {
 
     public static final Properties PROPERTIES = new Properties();
 

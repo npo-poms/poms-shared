@@ -12,11 +12,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public class PageUpdateChangeTest {
+class PageUpdateChangeTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         PageUpdateChange change =
             PageUpdateChange.builder()
                 .id("http://www.vpro.nl/pagina/1")
@@ -34,7 +34,7 @@ public class PageUpdateChangeTest {
 
 
     @Test
-    public void json() {
+    void json() {
         PageUpdateChange change =
             PageUpdateChange.builder()
                 .id("http://www.vpro.nl/pagina/1")

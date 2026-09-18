@@ -21,27 +21,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 1.5
  */
 @SuppressWarnings({"deprecation", "CodeBlock2Expr", "RedundantCast"})
-public class MediaAssertTest {
+class MediaAssertTest {
 
     @Test
-    public void testIsProgramOnNull() {
+    void isProgramOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat(null).isProgram();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testIsProgram() {
+    void isProgram() {
         mediaAssertThat((program().build())).isProgram();
     }
 
     @Test
-    public void testIsProgramOnType() {
+    void isProgramOnType() {
         mediaAssertThat((program().withType().build())).isProgram(ProgramType.BROADCAST);
     }
 
     @Test
-    public void testIsGroupOnNull() {
+    void isGroupOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).isGroup();
         }).isInstanceOf(AssertionError.class);
@@ -49,17 +49,17 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testIsGroup() {
+    void isGroup() {
         mediaAssertThat((group().build())).isGroup();
     }
 
     @Test
-    public void testIsGroupOnType() {
+    void isGroupOnType() {
         mediaAssertThat((group().withType().build())).isGroup(GroupType.PLAYLIST);
     }
 
     @Test
-    public void testHasPoSeriesIDOnOtherClass() {
+    void hasPoSeriesIDOnOtherClass() {
         assertThatThrownBy(() -> {
             mediaAssertThat((segment().build())).hasPoSeriesID("VPROWON_12345");
         }).isInstanceOf(AssertionError.class);
@@ -67,31 +67,31 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPoSeriesIDOnOtherId() {
+    void hasPoSeriesIDOnOtherId() {
         assertThatThrownBy(() -> {
             mediaAssertThat((segment().build())).hasPoSeriesID("no match");
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasPoSeriesIDOnGroup() {
+    void hasPoSeriesIDOnGroup() {
         mediaAssertThat((group().withPoSeriesID().build())).hasPoSeriesID("VPRO_12345");
     }
 
     @Test
-    public void testIsSegmentOnNull() {
+    void isSegmentOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).isSegment();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testIsSegment() {
+    void isSegment() {
         mediaAssertThat((segment().build())).isSegment();
     }
 
     @Test
-    public void testIsVideoOnNull() {
+    void isVideoOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject) null).isVideo();
         }).isInstanceOf(AssertionError.class);
@@ -99,12 +99,12 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testIsVideo() {
+    void isVideo() {
         mediaAssertThat(program().avType(AVType.VIDEO).build()).isVideo();
     }
 
     @Test
-    public void testIsAudioOnNull() {
+    void isAudioOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).isAudio();
         }).isInstanceOf(AssertionError.class);
@@ -112,50 +112,50 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testIsAudio() {
+    void isAudio() {
         mediaAssertThat(program().avType(AVType.AUDIO).build()).isAudio();
     }
 
     @Test
-    public void testIsMixedOnNull() {
+    void isMixedOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject) null).isMixed();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testIsMixed() {
+    void isMixed() {
         mediaAssertThat(program().avType(AVType.MIXED).build()).isMixed();
     }
 
     @Test
-    public void testHasWorkflowOnNull() {
+    void hasWorkflowOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasWorkflow(Workflow.PUBLISHED);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasWorkflowOnNullArgument() {
+    void hasWorkflowOnNullArgument() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().withWorkflow().build()).hasWorkflow(null);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasWorkflow() {
+    void hasWorkflow() {
         mediaAssertThat((program().withWorkflow().build())).hasWorkflow(Workflow.PUBLISHED);
     }
 
     @Test
-    public void testHasTitleOnNull() {
+    void hasTitleOnNull() {
         assertThatThrownBy(() -> {
         mediaAssertThat((MediaObject)null).hasTitles();
     }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasBroadcasterWhenEmpty() {
+    void hasBroadcasterWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasBroadcasters();
         }).isInstanceOf(AssertionError.class);
@@ -163,17 +163,17 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasBroadcaster() {
+    void hasBroadcaster() {
         mediaAssertThat(program().withBroadcasters().build()).hasBroadcasters();
     }
 
     @Test
-    public void testHasBroadcasterWithIds() {
+    void hasBroadcasterWithIds() {
         mediaAssertThat(program().withBroadcasters().build()).hasBroadcasters("AVRO");
     }
 
     @Test
-    public void testHasOnlyBroadcasterWithIdsOnFailure() {
+    void hasOnlyBroadcasterWithIdsOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().withBroadcasters().build()).hasOnlyBroadcasters("AVRO");
         }).isInstanceOf(AssertionError.class);
@@ -181,17 +181,17 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasOnlyBroadcasterWithIds() {
+    void hasOnlyBroadcasterWithIds() {
         mediaAssertThat(program().withBroadcasters().build()).hasOnlyBroadcasters("AVRO", "BNN");
     }
 
     @Test
-    public void testHasBroadcasters() {
+    void hasBroadcasters() {
         mediaAssertThat(program().withBroadcasters().build()).hasBroadcasters(new Broadcaster("AVRO", "AVRO"));
     }
 
     @Test
-    public void testHasOnlyBroadcastersOnFailure() {
+    void hasOnlyBroadcastersOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().withBroadcasters().build()).hasOnlyBroadcasters(new Broadcaster("AVRO", "AVRO"));
         }).isInstanceOf(AssertionError.class);
@@ -199,58 +199,58 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasOnlyBroadcasters() {
+    void hasOnlyBroadcasters() {
         mediaAssertThat(program().withBroadcasters().build()).hasOnlyBroadcasters(new Broadcaster("AVRO", "AVRO"), new Broadcaster("BNN", "BNN"));
     }
 
     @Test
-    public void testHasTitleWhenEmpty() {
+    void hasTitleWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasTitles();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasTitle() {
+    void hasTitle() {
         mediaAssertThat(program().withTitles().build()).hasTitles();
     }
 
     @Test
-    public void testHasTitleWithOwnerAndType() {
+    void hasTitleWithOwnerAndType() {
         mediaAssertThat(program().withTitles().build()).hasTitle(OwnerType.BROADCASTER, TextualType.SHORT);
     }
 
     @Test
-    public void testHasTitleForTextAndTypeOnFailure() {
+    void hasTitleForTextAndTypeOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withTitles().build())).hasTitle("Main title", TextualType.SUB);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasTitleForTextAndType() {
+    void hasTitleForTextAndType() {
         mediaAssertThat((program().withTitles().build())).hasTitle("Main title", TextualType.MAIN);
     }
 
     @Test
-    public void testHasTitleForTextAndOwnerOnFailure() {
+    void hasTitleForTextAndOwnerOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withTitles().build())).hasTitle("Main title", OwnerType.MIS);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasTitleForTextAndOwner() {
+    void hasTitleForTextAndOwner() {
         mediaAssertThat((program().withTitles().build())).hasTitle("Main title", OwnerType.BROADCASTER);
     }
 
     @Test
-    public void testHasTitleForAllOwners() {
+    void hasTitleForAllOwners() {
         mediaAssertThat((program().withTitles().build())).hasTitle(OwnerType.BROADCASTER, OwnerType.MIS);
     }
 
     @Test
-    public void testHasTitleOnMissingOwner() {
+    void hasTitleOnMissingOwner() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withTitles().build())).hasTitle(OwnerType.CERES);
         }).isInstanceOf(AssertionError.class);
@@ -258,24 +258,24 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasTitleForAllTypes() {
+    void hasTitleForAllTypes() {
         mediaAssertThat((program().withTitles().build())).hasTitle(TextualType.MAIN, TextualType.SHORT);
     }
 
     @Test
-    public void testHasTitleOnMissingType() {
+    void hasTitleOnMissingType() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withTitles().build())).hasTitle(TextualType.ORIGINAL);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasOnlyTitle() {
+    void hasOnlyTitle() {
         mediaAssertThat((program().withTitles().build())).hasOnlyTitles(OwnerType.BROADCASTER, OwnerType.MIS);
     }
 
     @Test
-    public void testHasOnlyTitleWithFailingOwner() {
+    void hasOnlyTitleWithFailingOwner() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withTitles().build())).hasOnlyTitles(OwnerType.BROADCASTER);
         }).isInstanceOf(AssertionError.class);
@@ -283,7 +283,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasDescriptionOnNull() {
+    void hasDescriptionOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasDescriptions();
         }).isInstanceOf(AssertionError.class);
@@ -291,24 +291,24 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasDescriptionWhenEmpty() {
+    void hasDescriptionWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasDescriptions();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasDescription() {
+    void hasDescription() {
         mediaAssertThat(program().withDescriptions().build()).hasDescriptions();
     }
 
     @Test
-    public void testHasDescriptionWithOwnerAndType() {
+    void hasDescriptionWithOwnerAndType() {
         mediaAssertThat(program().withDescriptions().build()).hasDescription(OwnerType.MIS, TextualType.MAIN);
     }
 
     @Test
-    public void testHasDescriptionForTextAndTypeOnFailure() {
+    void hasDescriptionForTextAndTypeOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withDescriptions().build())).hasDescription("Main description", TextualType.SUB);
         }).isInstanceOf(AssertionError.class);
@@ -316,29 +316,29 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasDescriptionForTextAndType() {
+    void hasDescriptionForTextAndType() {
         mediaAssertThat((program().withDescriptions().build())).hasDescription("Main description", TextualType.MAIN);
     }
 
     @Test
-    public void testHasDescriptionForTextAndOwnerOnFailure() {
+    void hasDescriptionForTextAndOwnerOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withDescriptions().build())).hasDescription("Main description", OwnerType.MIS);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasDescriptionForTextAndOwner() {
+    void hasDescriptionForTextAndOwner() {
         mediaAssertThat((program().withDescriptions().build())).hasDescription("Main description", OwnerType.BROADCASTER);
     }
 
     @Test
-    public void testHasDescriptionForAllOwners() {
+    void hasDescriptionForAllOwners() {
         mediaAssertThat((program().withDescriptions().build())).hasDescription(OwnerType.BROADCASTER, OwnerType.MIS);
     }
 
     @Test
-    public void testHasDescriptionOnMissingOwner() {
+    void hasDescriptionOnMissingOwner() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withDescriptions().build())).hasDescription(OwnerType.CERES);
         }).isInstanceOf(AssertionError.class);
@@ -346,12 +346,12 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasDescriptionForAllTypes() {
+    void hasDescriptionForAllTypes() {
         mediaAssertThat((program().withDescriptions().build())).hasDescription(TextualType.MAIN, TextualType.SHORT);
     }
 
     @Test
-    public void testHasDescriptionOnMissingType() {
+    void hasDescriptionOnMissingType() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withDescriptions().build())).hasDescription(TextualType.ORIGINAL);
         }).isInstanceOf(AssertionError.class);
@@ -359,31 +359,31 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasOnlyDescriptionWithOwner() {
+    void hasOnlyDescriptionWithOwner() {
         mediaAssertThat(program().withDescriptions().build()).hasOnlyDescriptions(OwnerType.MIS, OwnerType.BROADCASTER);
     }
 
     @Test
-    public void testHasOnlyDescriptionWithFailingOwner() {
+    void hasOnlyDescriptionWithFailingOwner() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().withDescriptions().build()).hasOnlyDescriptions(OwnerType.MIS);
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasPredictionsOnFailure() {
+    void hasPredictionsOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasPredictions();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasPredictionsOnPlatform() {
+    void hasPredictionsOnPlatform() {
         mediaAssertThat(program().withPredictions().build()).hasPredictions(Platform.TVVOD, Platform.INTERNETVOD);
     }
 
     @Test
-    public void testHasOnlyPredictionsOnFailure() {
+    void hasOnlyPredictionsOnFailure() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().withPredictions().build()).hasOnlyPredictions(Platform.TVVOD);
         }).isInstanceOf(AssertionError.class);
@@ -391,27 +391,27 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasOnlyPredictions() {
+    void hasOnlyPredictions() {
         mediaAssertThat(program().withPredictions().build()).hasOnlyPredictions(Platform.TVVOD, Platform.INTERNETVOD);
     }
 
     @Test
-    public void testHasPredictionOnPlatformAndState() {
+    void hasPredictionOnPlatformAndState() {
         mediaAssertThat(program().withPredictions().build()).hasPrediction(Platform.INTERNETVOD, Prediction.State.REVOKED);
     }
 
     @Test
-    public void testHasLocation() {
+    void hasLocation() {
         mediaAssertThat(program().withLocations().build()).hasLocations();
     }
 
     @Test
-    public void testHasLocationForAllOwners() {
+    void hasLocationForAllOwners() {
         mediaAssertThat((program().withLocations().build())).hasLocation(OwnerType.BROADCASTER, OwnerType.NEBO);
     }
 
     @Test
-    public void testHasLocationOnMissingOwner() {
+    void hasLocationOnMissingOwner() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withLocations().build())).hasLocation(OwnerType.CERES);
         }).isInstanceOf(AssertionError.class);
@@ -419,12 +419,12 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasOnlyLocationForAllOwners() {
+    void hasOnlyLocationForAllOwners() {
         mediaAssertThat((program().withLocations().build())).hasOnlyLocation(OwnerType.BROADCASTER, OwnerType.NEBO);
     }
 
     @Test
-    public void testHasOnlyLocationForFailingOwners() {
+    void hasOnlyLocationForFailingOwners() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withLocations().build())).hasOnlyLocation(OwnerType.BROADCASTER);
         }).isInstanceOf(AssertionError.class);
@@ -432,12 +432,12 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithUrl() {
+    void hasLocationWithUrl() {
         mediaAssertThat((program().withLocations().build())).hasLocations("http://player.omroep.nl/?aflID=4393288", "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf");
     }
 
     @Test
-    public void testHasLocationOnMissingUrl() {
+    void hasLocationOnMissingUrl() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withLocations().build())).hasLocations("http:missing");
         }).isInstanceOf(AssertionError.class);
@@ -445,7 +445,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestrictionOnNull() {
+    void hasLocationWithRestrictionOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat(null).hasLocationWithRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -453,7 +453,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestrictionWhenMissing() {
+    void hasLocationWithRestrictionWhenMissing() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withLocations().build())).hasLocationWithRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -461,14 +461,14 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestriction() {
+    void hasLocationWithRestriction() {
         Program program = program().withLocations().build();
         program.getLocations().first().setPublishStartInstant(Instant.now());
         mediaAssertThat(program).hasLocationWithRestriction();
     }
 
     @Test
-    public void testHasLocationWithRestrictionOnlyOnNull() {
+    void hasLocationWithRestrictionOnlyOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasOnlyLocationsWithRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -476,7 +476,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestrictionOnlyWhenMissing() {
+    void hasLocationWithRestrictionOnlyWhenMissing() {
         assertThatThrownBy(() -> {
             mediaAssertThat((program().withLocations().build())).hasOnlyLocationsWithRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -484,7 +484,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestrictionOnlyWhenNotAllSet() {
+    void hasLocationWithRestrictionOnlyWhenNotAllSet() {
         assertThatThrownBy(() -> {
             Program program = program().withLocations().build();
             program.getLocations().first().setPublishStartInstant(Instant.now());
@@ -494,7 +494,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasLocationWithRestrictionOnly() {
+    void hasLocationWithRestrictionOnly() {
         Program program = program().withLocations().build();
         for(Location location : program.getLocations()) {
             location.setPublishStartInstant(Instant.now());
@@ -503,7 +503,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPublicationWindowOnNull() {
+    void hasPublicationWindowOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasPublicationWindow();
         }).isInstanceOf(AssertionError.class);
@@ -511,7 +511,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPublicationWindow() {
+    void hasPublicationWindow() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasPublicationWindow();
         }).isInstanceOf(AssertionError.class);
@@ -519,17 +519,17 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPublicationWindowOnStart() {
+    void hasPublicationWindowOnStart() {
         mediaAssertThat(program().withPublishStart().build()).hasPublicationWindow();
     }
 
     @Test
-    public void testHasPublicationWindowOnStop() {
+    void hasPublicationWindowOnStop() {
         mediaAssertThat(program().withPublishStop().build()).hasPublicationWindow();
     }
 
     @Test
-    public void testHasPortalRestrictionOnNull() {
+    void hasPortalRestrictionOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasPortalRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -537,7 +537,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPortalRestrictionWhenEmpty() {
+    void hasPortalRestrictionWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasPortalRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -545,12 +545,12 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasPortalRestriction() {
+    void hasPortalRestriction() {
         mediaAssertThat(program().withPortalRestrictions().build()).hasPortalRestriction();
     }
 
     @Test
-    public void testHasGeoRestrictionOnNull() {
+    void hasGeoRestrictionOnNull() {
         assertThatThrownBy(() -> {
 
             mediaAssertThat((MediaObject)null).hasGeoRestriction();
@@ -558,7 +558,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasGeoRestrictionWhenEmpty() {
+    void hasGeoRestrictionWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasGeoRestriction();
         }).isInstanceOf(AssertionError.class);
@@ -566,41 +566,41 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasGeoRestriction() {
+    void hasGeoRestriction() {
         mediaAssertThat(program().withGeoRestrictions().build()).hasGeoRestriction();
     }
 
     @Test
-    public void testIsRestrictedOnNull() {
+    void isRestrictedOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).isRestricted();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testIsRestrictedWhenNotRestricted() {
+    void isRestrictedWhenNotRestricted() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).isRestricted();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testIsRestrictedWithPublishStart() {
+    void isRestrictedWithPublishStart() {
         mediaAssertThat(program().withPublishStart().build()).isRestricted();
     }
 
     @Test
-    public void testIsRestrictedWithPortalRestriction() {
+    void isRestrictedWithPortalRestriction() {
         mediaAssertThat(program().withPortalRestrictions().build()).isRestricted();
     }
 
     @Test
-    public void testIsRestrictedWithGeoRestriction() {
+    void isRestrictedWithGeoRestriction() {
         mediaAssertThat(program().withGeoRestrictions().build()).isRestricted();
     }
 
     @Test
-    public void testIsRestrictedWithRestrictedLocations() {
+    void isRestrictedWithRestrictedLocations() {
         Program program = program().withLocations().build();
         for(Location location : program.getLocations()) {
             location.setPublishStartInstant(Instant.now());
@@ -609,7 +609,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasRelationsOnNull() {
+    void hasRelationsOnNull() {
         assertThatThrownBy(() -> {
             mediaAssertThat((MediaObject)null).hasRelations();
         }).isInstanceOf(AssertionError.class);
@@ -617,19 +617,19 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasRelationsWhenEmpty() {
+    void hasRelationsWhenEmpty() {
         assertThatThrownBy(() -> {
             mediaAssertThat(program().build()).hasRelations();
         }).isInstanceOf(AssertionError.class);
     }
 
     @Test
-    public void testHasRelations() {
+    void hasRelations() {
         mediaAssertThat(program().withRelations().build()).hasRelations();
     }
 
     @Test
-    public void testHasRelationWhenMissing() {
+    void hasRelationWhenMissing() {
         assertThatThrownBy(() -> {
 
             mediaAssertThat(program().withRelations().build()).hasRelation(new Relation(new RelationDefinition("LABEL", "AVRO")));
@@ -637,7 +637,7 @@ public class MediaAssertTest {
     }
 
     @Test
-    public void testHasRelation() {
+    void hasRelation() {
         mediaAssertThat(program().withRelations().build()).hasRelation(new Relation(new RelationDefinition("LABEL", "VPRO"), "http://www.bluenote.com/", "Blue Note"));
     }
 

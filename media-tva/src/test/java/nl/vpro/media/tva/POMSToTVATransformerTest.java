@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 8.12
  */
 @Log4j2
-public class POMSToTVATransformerTest {
+final class POMSToTVATransformerTest {
     @BeforeAll
     public static void initAll() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
@@ -38,7 +38,7 @@ public class POMSToTVATransformerTest {
     }
 
     @Test
-    public void toTVAAndBack() throws TransformerException, ParserConfigurationException, SAXException, IOException, JAXBException {
+    void toTVAAndBack() throws TransformerException, ParserConfigurationException, SAXException, IOException, JAXBException {
         MediaTable table = new MediaTable();
         Group series = MediaTestDataBuilder
             .series()

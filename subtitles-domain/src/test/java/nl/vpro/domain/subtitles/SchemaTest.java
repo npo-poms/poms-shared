@@ -22,7 +22,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
  * @since 5.12
  */
 @Slf4j
-public class SchemaTest extends AbstractSchemaTest {
+class SchemaTest extends AbstractSchemaTest {
 
     @Override
     protected Class<?>[] getClasses()  {
@@ -32,7 +32,7 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     @Test
-    public void testSubtitles() throws IOException {
+    void subtitles() throws IOException {
         testNamespace(Xmlns.MEDIA_SUBTITLES_NAMESPACE);
     }
 

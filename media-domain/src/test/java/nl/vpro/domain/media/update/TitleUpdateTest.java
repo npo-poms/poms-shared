@@ -7,7 +7,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 class TitleUpdateTest {
 
     @Test
-    public void json() {
+    void json() {
         TitleUpdate up = TitleUpdate.main("hoi");
         up.isEmpty();
         Jackson2TestUtil.roundTripAndSimilar(

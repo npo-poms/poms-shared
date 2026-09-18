@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public class ImageURIValidatorTest {
+class ImageURIValidatorTest {
 
     ImageURIValidator validator = new ImageURIValidator();
 
@@ -23,19 +23,19 @@ public class ImageURIValidatorTest {
      * Legacy. Once there was a bug which distributed uri's like this
      */
     @Test
-    public void testIsValidWithDot() {
+    void isValidWithDot() {
         String uri = "urn:vpro.image:12345";
         assertThat(validator.isValid(uri, null)).isTrue();
     }
 
     @Test
-    public void testIsValidWithColon() {
+    void isValidWithColon() {
         String uri = "urn:vpro:image:12345";
         assertThat(validator.isValid(uri, null)).isTrue();
     }
 
     @Test
-    public void testIsValidWhenInvalid() {
+    void isValidWhenInvalid() {
         String uri = "urn:vpro:images:12345";
         assertThat(validator.isValid(uri, null)).isFalse();
     }

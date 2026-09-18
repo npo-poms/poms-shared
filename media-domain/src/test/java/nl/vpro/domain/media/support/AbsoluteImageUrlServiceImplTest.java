@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.11
  */
 @Slf4j
-public class AbsoluteImageUrlServiceImplTest {
+class AbsoluteImageUrlServiceImplTest {
 
     public ImageUrlService test = new AbsoluteImageUrlServiceImpl("https://images-test.poms.omroep.nl/image/");
 
     @Test
-    public void test() {
+    void test() {
         log.info("{}", test.getOriginalUrl(123L));
 
 

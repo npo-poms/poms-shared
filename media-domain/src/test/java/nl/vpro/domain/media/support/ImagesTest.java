@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 @Deprecated
 @Isolated
-public class ImagesTest {
+class ImagesTest {
     @BeforeEach
     public void init() {
         System.clearProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
@@ -31,13 +31,13 @@ public class ImagesTest {
     }
 
     @Test
-    public void testGetImageLocationOnMissingSystemProperty() {
+    void getImageLocationOnMissingSystemProperty() {
         String location = Images.getImageLocation(new Image(), null);
         assertThat(location).isNull();
     }
 
     @Test
-    public void testGetImageLocationOnNullArgument() {
+    void getImageLocationOnNullArgument() {
         assertThatThrownBy(() -> {
             System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
             Images.getImageLocation(null, null);
@@ -46,7 +46,7 @@ public class ImagesTest {
 
     @Test
     @Disabled
-    public void testGetImageLocationOnEmptyURI() {
+    void getImageLocationOnEmptyURI() {
         assertThatThrownBy(() -> {
 
             System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
@@ -55,28 +55,28 @@ public class ImagesTest {
     }
 
     @Test
-    public void testGetImageLocationOnNullExtension() {
+    void getImageLocationOnNullExtension() {
         System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:12345"), null);
         assertThat(location).isEqualTo("http://domain.com/12345");
     }
 
     @Test
-    public void testGetImageLocationOnInValidURI() {
+    void getImageLocationOnInValidURI() {
         System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:123aa"), "jpg");
         assertThat(location).isNull();
     }
 
     @Test
-    public void testGetImageLocationWhenValid() {
+    void getImageLocationWhenValid() {
         System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:12345"), "jpg");
         assertThat(location).isEqualTo("http://domain.com/12345.jpg");
     }
 
     @Test
-    public void testGetImageLocationWithConversion() {
+    void getImageLocationWithConversion() {
         System.setProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:12345"), "jpg", "s350");
         assertThat(location).isEqualTo("http://domain.com/s350/12345.jpg");

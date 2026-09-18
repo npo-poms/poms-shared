@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.9
  */
-public class ExtendedScheduleFormTest {
+class ExtendedScheduleFormTest {
 
 
     @Test
-    public void applyNet() {
+    void applyNet() {
 
         ScheduleEvent eventWithNet = new ScheduleEvent();
         eventWithNet.setNet(new Net("ZAPP"));
@@ -45,7 +45,7 @@ public class ExtendedScheduleFormTest {
     }
 
     @Test
-    public void applyDescendantOf() {
+    void applyDescendantOf() {
 
         ScheduleEvent event = new ScheduleEvent();
         event.setParent(MediaBuilder.program().descendantOf("mid123").build());

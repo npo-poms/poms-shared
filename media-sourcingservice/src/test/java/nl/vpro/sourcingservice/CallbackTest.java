@@ -12,7 +12,7 @@ class CallbackTest {
 
 
     @Test
-    public void unmarshal() throws JsonProcessingException {
+    void unmarshal() throws JsonProcessingException {
         String actual = """
         {"asset_url":"https://test.entry.cdn.npoaudio.nl/handle/WO_BV_A20011542.mp4","media_id":"WO_BV_A20011542","status":"Failed"}
         """;

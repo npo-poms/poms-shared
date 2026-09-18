@@ -13,7 +13,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class PersonResultTest {
+class PersonResultTest {
 
     PersonResult result;
     {
@@ -33,7 +33,7 @@ public class PersonResultTest {
 
 
     @Test
-    public void toJson() {
+    void toJson() {
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(result, """
             {
@@ -52,7 +52,7 @@ public class PersonResultTest {
 
 
     @Test
-    public void toXml() {
+    void toXml() {
         // TODO: It seems silly to have a dedicated result type, but then still have to rely on xsi:type
 
         JAXBTestUtil.roundTripAndSimilarAndEquals(result, """

@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.3
  */
-public class AssociationSearchListTest {
+class AssociationSearchListTest {
 
 
     @Test
-    public void testPredicate() {
+    void predicate() {
         AssociationSearchList list = new AssociationSearchList(Collections.singletonList(AssociationSearch.of(LinkType.TOP_STORY)));
 
         Association assocation1 = new Referral("http://www.vpro.nl/home.html", "Zie dit mooie artikel", LinkType.TOP_STORY);

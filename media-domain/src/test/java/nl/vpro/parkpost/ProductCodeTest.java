@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class ProductCodeTest {
+class ProductCodeTest {
 
     @Test
-    public void testParse() {
+    void parse() {
         String[] valids = {
             "2P2702MO_DEBATOP2",
             "2P2702VD_DEBATOP2",

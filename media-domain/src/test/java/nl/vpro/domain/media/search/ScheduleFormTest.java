@@ -10,10 +10,10 @@ import nl.vpro.domain.media.ScheduleEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ScheduleFormTest {
+class ScheduleFormTest {
 
     @Test
-    public void testTest() {
+    void test() {
         ScheduleForm form = ScheduleForm.builder().pager(new SchedulePager()).startRange(new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200))).build();
 
         assertThat(form.test(ev(null, 150))).isTrue();

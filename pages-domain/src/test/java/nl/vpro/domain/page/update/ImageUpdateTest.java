@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class ImageUpdateTest {
+class ImageUpdateTest {
 
 
     @Test
-    public void builder() {
+    void builder() {
         ImageUpdate.builder().credits("bla").build();
     }
 }

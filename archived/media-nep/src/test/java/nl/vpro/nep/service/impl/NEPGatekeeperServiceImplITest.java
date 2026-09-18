@@ -20,20 +20,20 @@ import nl.vpro.nep.service.exception.NEPException;
  * @since ...
  */
 @Slf4j
-public class NEPGatekeeperServiceImplITest {
+class NEPGatekeeperServiceImplITest {
 
     NEPGatekeeperServiceImpl gatekeeperService = new NEPGatekeeperServiceImpl(NEPTest.PROPERTIES);
 
 
     @Test
-    public void testGet() throws NEPException {
+    void get() throws NEPException {
         WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("ce4e4e6a-4467-4a95-b9d7-fe509d2658f8").get();
         log.info("{}", transcodeStatus);
     }
 
 
     @Test
-    public void test() throws NEPException {
+    void test() throws NEPException {
         @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofDays(3)), null);
         while (i.hasNext()) {
             WorkflowExecution workflowExecution = i.next();
@@ -45,7 +45,7 @@ public class NEPGatekeeperServiceImplITest {
     String mid = "WO_NTR_20302449";
 
     @Test
-    public void transcode() {
+    void transcode() {
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
             .mid(mid)
             .encryption(EncryptionType.NONE)
@@ -65,7 +65,7 @@ public class NEPGatekeeperServiceImplITest {
 
     @Test
     @Disabled
-    public void retranscode() {
+    void retranscode() {
         String mid = "WO_BV_20310248";
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
             .mid(mid)
@@ -85,14 +85,14 @@ public class NEPGatekeeperServiceImplITest {
     }
 
     @Test
-    public void getStatus() throws NEPException {
+    void getStatus() throws NEPException {
         gatekeeperService.getTranscodeStatuses(mid, null, null, null).forEachRemaining((we) -> {
             log.info("{}", we);
         });
     }
 
     @Test
-    public void getStatuses() throws NEPException {
+    void getStatuses() throws NEPException {
 
         List<String> mids = new ArrayList<>();
     /*    File file = new File("/Users/michiel/npo/media/trunk/player7.404");
@@ -121,7 +121,7 @@ public class NEPGatekeeperServiceImplITest {
 
     @Disabled
     @Test
-    public void hackTranscode() {
+    void hackTranscode() {
         // This is a broadcast, cannot be done via poms SYS-1178
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
             .mid("WO_HUMAN_10971551")

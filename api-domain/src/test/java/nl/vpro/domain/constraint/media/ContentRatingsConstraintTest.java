@@ -17,28 +17,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Jeroen van Vianen
  * @since 4.8
  */
-public class ContentRatingsConstraintTest {
+class ContentRatingsConstraintTest {
 
     @Test
-    public void testGetStringValue() {
+    void getStringValue() {
         ContentRatingConstraint in = new ContentRatingConstraint(ContentRating.ANGST);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:contentRatingConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:local=\"uri:local\">ANGST</local:contentRatingConstraint>\n");
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new ContentRatingConstraint().getESPath()).isEqualTo("contentRatings");
     }
 
     @Test
-    public void testContentRatingAngst()  {
+    void contentRatingAngst()  {
         Program program = MediaTestDataBuilder.program().withContentRating().build();
         assertThat(new ContentRatingConstraint(ContentRating.ANGST).test(program)).isTrue();
     }
 
     @Test
-    public void testContentRatingDiscriminatieFails() {
+    void contentRatingDiscriminatieFails() {
         Program program = MediaTestDataBuilder.program().withContentRating().build();
         assertThat(new ContentRatingConstraint(ContentRating.DISCRIMINATIE).test(program)).isFalse();
     }

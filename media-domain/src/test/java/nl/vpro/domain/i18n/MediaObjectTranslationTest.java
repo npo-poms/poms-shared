@@ -12,10 +12,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public class MediaObjectTranslationTest {
+class MediaObjectTranslationTest {
 
     @Test
-    public void xml() {
+    void xml() {
         MediaObjectTranslation trans = new MediaObjectTranslation("MID_1234", Locale.ENGLISH);
         trans.setCreationInstant(Instant.EPOCH);
         trans.setMainTitle("bla bla");
@@ -28,7 +28,7 @@ public class MediaObjectTranslationTest {
 
 
     @Test
-    public void json() {
+    void json() {
         MediaObjectTranslation trans = new MediaObjectTranslation("MID_1234", Locale.ENGLISH);
         trans.setCreationInstant(Instant.EPOCH);
         trans.setMainTitle("bla bla");

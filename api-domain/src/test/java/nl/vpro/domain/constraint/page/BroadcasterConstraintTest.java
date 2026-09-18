@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class BroadcasterConstraintTest {
+class BroadcasterConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
         BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:broadcasterConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRO</local:broadcasterConstraint>");
@@ -28,18 +28,18 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
         assertThat(new BroadcasterConstraint("BNN").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
         assertThat(new BroadcasterConstraint("Bnn").test(article)).isFalse();
     }

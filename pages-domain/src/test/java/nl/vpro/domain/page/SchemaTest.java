@@ -9,7 +9,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.page.update.*;
 import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
-public class SchemaTest extends AbstractSchemaTest {
+class SchemaTest extends AbstractSchemaTest {
 
     @Override
     // todo, how about jaxb.index, containing the same list?

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class NotTest {
+class NotTest {
 
     @BeforeEach
     public void setup() {
@@ -26,7 +26,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAndBinding() {
+    void andBinding() {
         Not in = new Not(new And());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -38,7 +38,7 @@ public class NotTest {
     }
 
     @Test
-    public void testOrBinding() {
+    void orBinding() {
         Not in = new Not(new Or());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -50,7 +50,7 @@ public class NotTest {
     }
 
     @Test
-    public void testNotBinding() {
+    void notBinding() {
         Not in = new Not(new Not());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -62,7 +62,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvTypeBinding() {
+    void avTypeBinding() {
         Not in = new Not(new AvTypeConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -74,7 +74,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() {
+    void avFileFormatBinding() {
         Not in = new Not(new AvFileFormatConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -86,7 +86,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() {
+    void avFileExtensionBinding() {
         Not in = new Not(new AVFileExtensionConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -99,7 +99,7 @@ public class NotTest {
 
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Not not = new Not(MediaConstraints.alwaysFalse());
         assertThat(not.test(new Program())).isTrue();
         assertThat(not.testWithReason(new Program()).applies()).isTrue();
@@ -108,7 +108,7 @@ public class NotTest {
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Not not = new Not(MediaConstraints.alwaysTrue());
         assertThat(not.test(new Program())).isFalse();
         assertThat(not.testWithReason(new Program()).applies()).isFalse();
@@ -118,7 +118,7 @@ public class NotTest {
 
 
     @Test
-    public void testApplyWithNull() {
+    void applyWithNull() {
         // can happen if profile contain not yet supported tags
         assertThat(new Not(null).test(new Program())).isTrue();
     }

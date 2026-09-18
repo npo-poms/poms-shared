@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TitleTest {
+class TitleTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void testCompareTo() {
+    void compareTo() {
         SortedSet<Title> set = new TreeSet<>();
         set.add(new Title("1", OwnerType.MIS, TextualType.MAIN));
         set.add(new Title("2", OwnerType.MIS, TextualType.EPISODE));

@@ -21,11 +21,11 @@ import static org.mockito.Mockito.when;
  * @author Michiel Meeuwissen
  * @since 4.5
  */
-public class FindBroadcasterFunctionTest {
+class FindBroadcasterFunctionTest {
 
 
     @Test
-    public void callExpression() throws XPathException, NotFoundException {
+    void callExpression() throws XPathException, NotFoundException {
         BroadcasterService broadcasterService = mock(BroadcasterService.class);
         FindBroadcasterFunction function = new FindBroadcasterFunction(broadcasterService);
 

@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @since 1.8
  */
 @SuppressWarnings("deprecation")
-public class PromoEventTest {
+class PromoEventTest {
 
     @Test
-    public void testBinding() {
+    void binding() {
         String input = """
             <?xml version="1.0" encoding="utf-8"?>
             <NPO_gfxwrp>
@@ -62,7 +62,7 @@ public class PromoEventTest {
     }
 
     @Test
-    public void testFiles() {
+    void files() {
         PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/BP0702VD_2_HOLLANDS.xml"), PromoEvent.class);
 
         assertThat(event.getFiles()).hasSize(2);
@@ -71,7 +71,7 @@ public class PromoEventTest {
     }
 
     @Test
-    public void testFiles2() {
+    void files2() {
         PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/parkpost.xml"), PromoEvent.class);
         assertThat(event.getFiles()).hasSize(6);
         assertThat(event.getFiles().get(0).getFileName()).isEqualTo("1P0203MO_JOCHEMMY.ismc");

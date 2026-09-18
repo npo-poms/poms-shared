@@ -13,7 +13,7 @@ class LocationUpdateTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         JAXBTestUtil.roundTripAndSimilar(
             LocationUpdate.builder()
                 .width(640)

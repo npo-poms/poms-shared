@@ -14,7 +14,7 @@ import nl.vpro.domain.media.Location;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LocationValidatorTest {
+class LocationValidatorTest {
     LocationValidator validator = new LocationValidator();
 
 
@@ -47,44 +47,44 @@ public class LocationValidatorTest {
 
 
     @Test
-    public void testValidationNull() {
+    void validationNull() {
         assertThat(validator.isValid(null, null)).isTrue();
     }
 
 
     @Test
-    public void testValidationNotUrl() {
+    void validationNotUrl() {
         String programUrl = "x";
         assertThat(validator.isValid(programUrl, null)).isFalse();
     }
 
 
     @Test
-    public void testValidationEmptyString() {
+    void validationEmptyString() {
         String programUrl = "";
         assertThat(validator.isValid(programUrl, null)).isFalse();
     }
 
     @Test
-    public void testValidationContainsSpaces() {
+    void validationContainsSpaces() {
         String programUrl = "https://download.omroep.nl/vpro/algemeen/3VOOR12/demachine/De Machine_AFL_90.mp3";
         assertThat(validator.isValid(programUrl, null)).isFalse();
     }
 
 
     @Test
-    public void testValidation() {
+    void validation() {
         assertThat(validator.isValid("http://download.omroep.nl/secure/04435df317c88b95083691e5868bfaa6/52bea4ee/portal/radiomanager/hours_archive/radio5/2013/12/25/[Radio 5] Logging Radio 5 20131225 1000.mp3", null)).isFalse();
     }
 
     @Test
-    public void testMid() {
+    void mid() {
         assertThat(validator.isValid("mid://vpro.nl/program/VPWON_1250088", null)).isTrue();
     }
 
     @Test
     @Disabled
-    public void testAll() {
+    void all() {
         List<String> invalid = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/programurls.txt")));
         reader.lines().forEach(line -> {

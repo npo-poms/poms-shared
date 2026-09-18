@@ -23,10 +23,10 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public class PageFormBuilderTest {
+class PageFormBuilderTest {
 
     @Test
-    public void testForm() {
+    void form() {
         PageForm form = PageFormBuilder.form()
             .text(Match.SHOULD, "text")
             .sortDate(Instant.EPOCH, Instant.ofEpochMilli(1000))
@@ -86,7 +86,7 @@ public class PageFormBuilderTest {
     }
 
     @Test
-    public void testFormWithMediaFacets() throws Exception {
+    void formWithMediaFacets() throws Exception {
         PageForm form = PageFormBuilder.form()
             .mediaFacet(MediaFacetsBuilder.facets()
                 .titles()

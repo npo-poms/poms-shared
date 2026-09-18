@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.8
  */
 @Slf4j
-public class FilterTest {
+class FilterTest {
 
     @BeforeEach
     public void setup() {
@@ -30,7 +30,7 @@ public class FilterTest {
     }
 
     @Test
-    public void testApply() {
+    void apply() {
         Filter filter = new Filter();
         filter.setConstraint(MediaConstraints.alwaysFalse());
 
@@ -42,7 +42,7 @@ public class FilterTest {
     }
 
     @Test
-    public void netinnl_ar() {
+    void netinnl_ar() {
         Filter filter = JAXB.unmarshal(new StringReader(
             """
                     <media:filter xmlns:media="urn:vpro:api:constraint:media:2013">

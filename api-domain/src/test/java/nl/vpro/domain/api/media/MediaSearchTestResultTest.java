@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.13
  */
-public class MediaSearchTestResultTest {
+class MediaSearchTestResultTest {
 
     static MediaSearch.TestResult mustAndFalse = new MediaSearch.TestResultImpl("mustandfalse", Match.MUST, () -> false);
     static MediaSearch.TestResult mustAndTrue = new MediaSearch.TestResultImpl("mustandtrue", Match.MUST, () -> true);

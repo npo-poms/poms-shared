@@ -25,7 +25,7 @@ import static nl.vpro.util.FileCachingInputStream.throttle;
 @Slf4j
 @Disabled("Actual uploading, needs local file")
 @ExtendWith(TimingExtension.class)
-public class NEPFTPSUploadServiceImplITest {
+class NEPFTPSUploadServiceImplITest {
 
     SimpleLogger simpleLogger = Slf4jSimpleLogger.of(log);
 
@@ -48,7 +48,7 @@ public class NEPFTPSUploadServiceImplITest {
 
 
     @Test
-    public void upload() throws Exception {
+    void upload() throws Exception {
         byte[] example = new byte[]{1, 2, 3, 4};
         String filename = "npoweb-vpro/test.1235";
         impl.upload(new Slf4jSimpleLogger(log), filename, (long) example.length, new ByteArrayInputStream(example), true);
@@ -56,7 +56,7 @@ public class NEPFTPSUploadServiceImplITest {
 
 
     @Test
-    public void uploadHuge() throws Exception {
+    void uploadHuge() throws Exception {
         File file = new File(files[0]);
         String filename = "test.1235";
         InputStream fileInputStream = Files.newInputStream(file.toPath());
@@ -65,7 +65,7 @@ public class NEPFTPSUploadServiceImplITest {
     }
 
     @Test
-    public void uploadHugeWithFile() throws Exception {
+    void uploadHugeWithFile() throws Exception {
         File file = new File(files[0]);
         String filename = "test.1235";
         InputStream fileInputStream = Files.newInputStream(file.toPath());
@@ -85,7 +85,7 @@ public class NEPFTPSUploadServiceImplITest {
     }
 
     @Test
-    public void uploadHugeWithCaching() throws Exception {
+    void uploadHugeWithCaching() throws Exception {
         Locales.setDefault(Locales.DUTCH);
         File file = new File(files[0]);
         String filename = "test.1235";

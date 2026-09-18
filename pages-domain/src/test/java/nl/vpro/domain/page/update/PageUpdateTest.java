@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 
-public class PageUpdateTest {
+class PageUpdateTest {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
@@ -56,7 +56,7 @@ public class PageUpdateTest {
 
 
     @Test
-    public void validate() {
+    void validate() {
         PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
         pageUpdate.setBroadcasters(singletonList("VPRO"));
         pageUpdate.setTitle("main title");
@@ -67,7 +67,7 @@ public class PageUpdateTest {
 
 
     @Test
-    public void validateMSE_2589() {
+    void validateMSE_2589() {
         PageUpdate pageUpdate = JAXB.unmarshal(requireNonNull(getClass().getResourceAsStream("/MSE-2589.xml")), PageUpdate.class);
 
         assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
@@ -75,7 +75,7 @@ public class PageUpdateTest {
     }
 
     @Test
-    public void validateGenres() {
+    void validateGenres() {
         PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
         pageUpdate.setTitle("foo");
         pageUpdate.setBroadcasters(singletonList("VPRO"));
@@ -91,7 +91,7 @@ public class PageUpdateTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         PageUpdateBuilder builder = PageUpdate.builder(PageType.ARTICLE, "http://www.test.vpro.nl/123")
             .broadcasters("VPRO")
             .crids("crid://bla/123")
@@ -117,7 +117,7 @@ public class PageUpdateTest {
     private static final RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
 
     @Test
-    public void json() {
+    void json() {
         PageUpdate page = PageUpdateBuilder
             .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
             .portal(PortalUpdate
@@ -196,7 +196,7 @@ public class PageUpdateTest {
     }
 
     @Test
-    public void serialize() throws IOException {
+    void serialize() throws IOException {
          PageUpdate page = PageUpdateBuilder
             .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
             .portal(PortalUpdate

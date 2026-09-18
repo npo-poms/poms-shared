@@ -21,9 +21,9 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class GTAAPersonTest {
+class GTAAPersonTest {
     @Test
-    public void json() {
+    void json() {
         GTAAPerson person = GTAAPerson
             .builder()
             .givenName("Pietje")
@@ -44,7 +44,7 @@ public class GTAAPersonTest {
 
 
     @Test
-    public void json2() throws IOException {
+    void json2() throws IOException {
         String example = """
             { "objectType" : "person", "familyName":"Puk","givenName":"Pietje","notes":[null,"vanuit POMS voor: POW_00700386"]}
             Name
@@ -55,7 +55,7 @@ public class GTAAPersonTest {
     }
 
     @Test
-    public void jsonAsThesaurusObjectReturnsPerson() throws Exception {
+    void jsonAsThesaurusObjectReturnsPerson() throws Exception {
 
 
         GTAAConcept object = Jackson2Mapper.getInstance().readValue(new StringReader("""
@@ -72,7 +72,7 @@ public class GTAAPersonTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         GTAAPerson person = GTAAPerson.builder()
             .scopeNotes(singletonList("bla"))
             .knownAs(singletonList(Names.builder().familyName("pietje").build()))
@@ -97,7 +97,7 @@ public class GTAAPersonTest {
     }
 
     @Test
-    public void create() {
+    void create() {
         GTAAPerson person = new GTAAPerson("Pietje", "Puk", Status.approved);
         assertThat(person.getGivenName()).isEqualTo("Pietje");
 

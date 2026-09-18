@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class MediaSortOrderListJsonTest {
+class MediaSortOrderListJsonTest {
 
     @Test
-    public void test() throws IOException {
+    void test() throws IOException {
         String example = """
             {
                 "searches" : {
@@ -41,7 +41,7 @@ public class MediaSortOrderListJsonTest {
 
 
     @Test
-    public void testArray() throws IOException {
+    void array() throws IOException {
         String example = """
             {
                 "searches" : {

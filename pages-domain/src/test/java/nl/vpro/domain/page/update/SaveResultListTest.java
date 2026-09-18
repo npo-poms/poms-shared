@@ -10,7 +10,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 class SaveResultListTest {
 
     @Test
-    public void xml() {
+    void xml() {
         SaveResultList result = new SaveResultList(
             List.of(
                 SaveResult.builder()

@@ -16,10 +16,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.4
  */
-public class SubtitlesSearchResultTest {
+class SubtitlesSearchResultTest {
 
     @Test
-    public void xml() {
+    void xml() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, Result.Total.equalsTo(100L));
@@ -34,7 +34,7 @@ public class SubtitlesSearchResultTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, Result.Total.equalsTo(100L));

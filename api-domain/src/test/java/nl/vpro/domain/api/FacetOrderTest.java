@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FacetOrderTest {
+class FacetOrderTest {
 
     @Test
-    public void comparator() {
+    void comparator() {
         List<TermFacetResultItem> list = Arrays.asList(
             new TermFacetResultItem("aaa", "id1", 0),
             new TermFacetResultItem("cc",  "id2", 1),

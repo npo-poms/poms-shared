@@ -19,7 +19,7 @@ import nl.vpro.util.FileCachingInputStream;
 import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
 
 @Log4j2
-class VideoSourcingServiceImplITest {
+final class VideoSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
 
@@ -55,7 +55,7 @@ class VideoSourcingServiceImplITest {
     }
 
     @Test
-    public void uploadVideo() throws IOException, ExecutionException, InterruptedException {
+    void uploadVideo() throws IOException, ExecutionException, InterruptedException {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "portrait.mp4");
 
@@ -75,7 +75,7 @@ class VideoSourcingServiceImplITest {
     }
 
     @Test
-    public void uploadHugeVideo() throws IOException, ExecutionException, InterruptedException {
+    void uploadHugeVideo() throws IOException, ExecutionException, InterruptedException {
         Instant start = Instant.now();
         //Path file = Paths.get(System.getProperty("user.home") , "samples", "AT21022008_Den_Uyl.mp4");
         Path file = Paths.get(System.getProperty("user.home") , "samples", "output1.mp4");
@@ -95,7 +95,7 @@ class VideoSourcingServiceImplITest {
 
 
     @Test
-    public void status() throws IOException, InterruptedException {
+    void status() throws IOException, InterruptedException {
 
         Object status = impl.status("WO_VPRO_20286719");
         log.info("Status {}", status);

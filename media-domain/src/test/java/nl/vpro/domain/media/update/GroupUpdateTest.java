@@ -20,10 +20,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GroupUpdateTest extends MediaUpdateTest {
+class GroupUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void create() {
+    void create() {
         GroupUpdate groupUpdate = (GroupUpdate) MediaUpdate.create(MediaBuilder
             .group()
             .mainTitle("foo bar")
@@ -34,7 +34,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testGetSetOnConsistency() {
+    void getSetOnConsistency() {
         GroupUpdate groupUpdate = GroupUpdate.create(new Group(GroupType.ALBUM));
 
         groupUpdate.setType(GroupType.PLAYLIST);
@@ -43,7 +43,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testFetchOnDefaultOwner() {
+    void fetchOnDefaultOwner() {
         GroupUpdate group = GroupUpdate.create();
         group.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
@@ -53,7 +53,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testUnMarshal() {
+    void unMarshal() {
         String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><images/></group>";
 
         GroupUpdate result = toUpdate(input);
@@ -62,7 +62,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetType() {
+    void getType() {
         GroupUpdate update = GroupUpdate.create();
         update.setVersion(null);
         update.setType(GroupType.SEASON);
@@ -80,7 +80,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPoSeriesID() {
+    void getPoSeriesID() {
         GroupUpdate update = GroupUpdate.create();
         update.setVersion(null);
         update.setPoSeriesID("VPWON_333");

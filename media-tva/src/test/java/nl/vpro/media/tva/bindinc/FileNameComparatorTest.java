@@ -14,7 +14,7 @@ class FileNameComparatorTest {
 
 
     @Test
-    public void sort() {
+    void sort() {
 
         List<String> list = new ArrayList<>(Arrays.asList(
             "20210104171109000dayBBC120210108.xml",

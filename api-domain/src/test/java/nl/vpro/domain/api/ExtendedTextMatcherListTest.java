@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author rico
  * @since 4.6
  */
-public class ExtendedTextMatcherListTest {
+class ExtendedTextMatcherListTest {
 
     @Test
-    public void marshal() {
+    void marshal() {
         final ExtendedTextMatcherList textMatcherList = new ExtendedTextMatcherList(
                 Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, StandardMatchType.TEXT, false),
                         new ExtendedTextMatcher("b", Match.SHOULD)),

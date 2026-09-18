@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
-public class TitleFacetListTest {
+class TitleFacetListTest {
     TitleFacetList list;
 
     {
@@ -51,7 +51,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testJsonBinding() {
+    void jsonBinding() {
 
 
         TitleFacetList rounded = Jackson2TestUtil.roundTripAndSimilar(list,
@@ -82,7 +82,7 @@ public class TitleFacetListTest {
 
 
     @Test
-    public void testJsonBindingInForm() throws IOException {
+    void jsonBindingInForm() throws IOException {
         PageForm form = Jackson2Mapper.getLenientInstance().readValue("""
             {
               "highlight" : true,
@@ -158,7 +158,7 @@ public class TitleFacetListTest {
 
 
     @Test
-    public void testJsonBindingBackwards() {
+    void jsonBindingBackwards() {
         TitleFacetList backwards = new TitleFacetList();
         backwards.setMax(11);
         backwards.setSort(FacetOrder.COUNT_DESC);
@@ -183,7 +183,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testXmlBinding() {
+    void xmlBinding() {
 
         TitleFacetList rounded = JAXBTestUtil.roundTripAndSimilar(list,
             """
@@ -204,7 +204,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testSubSearch() {
+    void subSearch() {
         String example = """
             {
               "value" : "a*"
@@ -214,7 +214,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testDeserializeJson() throws IOException {
+    void deserializeJson() throws IOException {
         String example = """
              [
                         {

@@ -12,39 +12,39 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.3
  */
-public class MatchersTest {
+class MatchersTest {
     @Test
-    public void testTokenizedPredicate() {
+    void tokenizedPredicate() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate2() {
+    void tokenizedPredicate2() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo bar")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate3() {
+    void tokenizedPredicate3() {
         TextMatcher matcher = new TextMatcher("foo bar");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate4() {
+    void tokenizedPredicate4() {
         TextMatcher matcher = new TextMatcher("foo bar");
         assertThat(Matchers.tokenizedPredicate(matcher).test("xxx")).isFalse();
     }
 
     @Test
-    public void testTokenizedPredicateNot() {
+    void tokenizedPredicateNot() {
         TextMatcher matcher = new TextMatcher("foo", Match.NOT);
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isFalse();
     }
 
     @Test
-    public void testTokenizedPredicates() {
+    void tokenizedPredicates() {
         TextMatcher matcher1 = TextMatcher.must("foo");
         TextMatcher matcher2 = TextMatcher.must("bar");
         assertThat(Matchers.tokenizedListPredicate(Arrays.asList(matcher1, matcher2)).test("foo")).isFalse();
@@ -57,27 +57,27 @@ public class MatchersTest {
     }
 
     @Test
-    public void testUntokenizedPredicate() {
+    void untokenizedPredicate() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isFalse();
     }
 
     @Test
-    public void testUntokenizedPredicateNot() {
+    void untokenizedPredicateNot() {
         TextMatcher matcher = new TextMatcher("foo", Match.NOT);
         assertThat(matcher.test("foo")).isFalse();
     }
 
     @Test
-    public void testUntokenizedLowercasePredicate() {
+    void untokenizedLowercasePredicate() {
         ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isTrue();
     }
 
     @Test
-    public void testUntokenizedPredicates() {
+    void untokenizedPredicates() {
         TextMatcher matcher1 = TextMatcher.should("foo");
         TextMatcher matcher2 = TextMatcher.should("bar");
         assertThat(matcher2.test("foo")).isFalse();
@@ -88,7 +88,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithShould() {
+    void listPredicateWithShould() {
         List<TextMatcher> textMatchers = Arrays.asList(
             TextMatcher.should("SEASON"),
             TextMatcher.should("SERIES")
@@ -99,7 +99,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithNots() {
+    void listPredicateWithNots() {
         List<TextMatcher> textMatchers = Arrays.asList(
             TextMatcher.not("SEASON"),
             TextMatcher.not("SERIES")
@@ -110,7 +110,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithMust() {
+    void listPredicateWithMust() {
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("AA.*", StandardMatchType.REGEX), new TextMatcher(".*BB", StandardMatchType.REGEX));
         assertThat(Matchers.listPredicate(textMatchers).test("AAxxxxBBB")).isTrue();
         assertThat(Matchers.listPredicate(textMatchers).test("foobar")).isFalse();
@@ -119,7 +119,7 @@ public class MatchersTest {
 
 
     @Test
-    public void testListPredicateWithShoulds() {
+    void listPredicateWithShoulds() {
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST,
             TextMatcher.should("BROADCAST", StandardMatchType.TEXT),
             TextMatcher.should("SEGMENT", StandardMatchType.TEXT)
@@ -129,7 +129,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithOneNot() {
+    void listPredicateWithOneNot() {
         Function<String, String> STRING = input -> input;
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB", Match.NOT));
         assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isFalse();
@@ -141,7 +141,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithOne() {
+    void listPredicateWithOne() {
         Function<String, String> STRING = input -> input;
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB"));
         assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isTrue();
@@ -153,7 +153,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithMore() {
+    void listPredicateWithMore() {
         Function<String, String> STRING = new Function<String, String>() {
             @Nullable
             @Override
@@ -173,7 +173,7 @@ public class MatchersTest {
     }
 
     @Test
-    public void testListPredicateWithMore2() {
+    void listPredicateWithMore2() {
         Function<String, String> STRING = new Function<String, String>() {
             @Nullable
             @Override

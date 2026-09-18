@@ -21,10 +21,10 @@ import org.junit.jupiter.api.Test;
  * @since 3.3
  */
 @Log4j2
-public class InstantRangeMatcherListJsonTest {
+final class InstantRangeMatcherListJsonTest {
 
     @Test
-    public void testGetValueJson() throws Exception {
+    void getValueJson() throws Exception {
         DateRangeMatcher in = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(3600000), false,  Match.NOT);
         DateRangeMatcherList list = new DateRangeMatcherList(in);
 
@@ -39,7 +39,7 @@ public class InstantRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJson() throws Exception {
+    void getValueFromJson() throws Exception {
         DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -49,7 +49,7 @@ public class InstantRangeMatcherListJsonTest {
 
 
     @Test
-    public void testGetValueFromJsonNatty() throws Exception {
+    void getValueFromJsonNatty() throws Exception {
         DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("[{\"begin\":0,\"end\":\"now\",\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -59,7 +59,7 @@ public class InstantRangeMatcherListJsonTest {
 
 
     @Test
-    public void testGetValueFromJsonSingular() throws Exception {
+    void getValueFromJsonSingular() throws Exception {
         DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -68,7 +68,7 @@ public class InstantRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueJsonInverse() throws Exception {
+    void getValueJsonInverse() throws Exception {
         DateRangeMatcher in = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(3600000), false, Match.NOT);
         DateRangeMatcherList list = new DateRangeMatcherList(Collections.singletonList(in), Match.NOT);
 
@@ -83,7 +83,7 @@ public class InstantRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJsonInverse() throws Exception {
+    void getValueFromJsonInverse() throws Exception {
         DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"value\":[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}],\"match\":\"not\"}", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -108,7 +108,7 @@ public class InstantRangeMatcherListJsonTest {
     }
     
     @Test
-    public void test() throws JsonProcessingException {
+    void test() throws JsonProcessingException {
         String example = """
                {
                    "a" : "a",

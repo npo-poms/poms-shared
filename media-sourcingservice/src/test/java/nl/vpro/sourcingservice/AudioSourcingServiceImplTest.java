@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Log4j2
 @WireMockTest
-class AudioSourcingServiceImplTest {
+final class AudioSourcingServiceImplTest {
 
     AudioSourcingServiceImpl impl;
     SimpleMeterRegistry meterRegistry;
@@ -51,7 +51,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadAudio() throws InterruptedException, ExecutionException {
+    void uploadAudio() throws InterruptedException, ExecutionException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -95,7 +95,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void uploadMalformedHtmlErrorResponse() {
+    void uploadMalformedHtmlErrorResponse() {
         stubFor(post(UrlPattern.ANY).willReturn(aResponse()
             .withStatus(500)
             .withHeader("Content-Type", "Text/HTML; charset=UTF-8")
@@ -117,7 +117,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void rejectsNonPositiveChunkSize() {
+    void rejectsNonPositiveChunkSize() {
         assertThatThrownBy(() -> new Configuration(
             "http://localhost/",
             null,
@@ -129,7 +129,7 @@ class AudioSourcingServiceImplTest {
     }
 
      @Test
-    public void delete() throws IOException, InterruptedException {
+    void delete() throws IOException, InterruptedException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
 
@@ -149,7 +149,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    public void delete404() throws IOException, InterruptedException {
+    void delete404() throws IOException, InterruptedException {
         stubFor(post(UrlPattern.ANY).willReturn(notFound()));
         final Instant start = Instant.now();
 

@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class TextMatcherListJsonTest {
+class TextMatcherListJsonTest {
 
     Jackson2Mapper INSTANCE = Jackson2Mapper.getInstance();
     @Test
-    public void testGetValueJson() throws Exception {
+    void getValueJson() throws Exception {
         TextMatcher in = new TextMatcher("title", Match.NOT);
         TextMatcherList list = new TextMatcherList(in);
 
@@ -34,7 +34,7 @@ public class TextMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJson() throws Exception {
+    void getValueFromJson() throws Exception {
         TextMatcherList matcher = INSTANCE.readValue("[{\"value\":\"title\",\"match\":\"not\"}]", TextMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -42,7 +42,7 @@ public class TextMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueJsonInverse() throws Exception {
+    void getValueJsonInverse() throws Exception {
         TextMatcher in = new TextMatcher("title", Match.NOT);
         TextMatcherList list = new TextMatcherList(Collections.singletonList(in), Match.NOT);
 
@@ -57,7 +57,7 @@ public class TextMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJsonInverse() throws Exception {
+    void getValueFromJsonInverse() throws Exception {
         TextMatcherList matcher = INSTANCE.readValue("{\"value\":[{\"value\":\"title\",\"match\":\"not\"}],\"match\":\"not\"}", TextMatcherList.class);
 
         assertThat(matcher.iterator()).toIterable().hasSize(1);

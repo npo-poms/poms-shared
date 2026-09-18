@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author rico
  */
-public class BroadcasterValidatorTest {
+class BroadcasterValidatorTest {
 
     BroadcasterService broadcasterService = Mockito.mock(BroadcasterService.class);
 
@@ -35,12 +35,12 @@ public class BroadcasterValidatorTest {
     }
 
     @Test
-    public void validBroadcaster() {
+    void validBroadcaster() {
         assertThat(validator.isValid(Collections.singletonList("VPRO"), null)).isTrue();
     }
 
     @Test
-    public void invalidBroadcaster() {
+    void invalidBroadcaster() {
         assertThat(validator.isValid(Collections.singletonList("NOTABLE"), null)).isFalse();
     }
 }

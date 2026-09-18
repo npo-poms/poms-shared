@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class DateRangeFacetsToJsonTest {
     
     @Test
-    public void json() {
+    void json() {
         DateRangeFacets<?> dateRangeFacets = new DateRangeFacets<>();
         dateRangeFacets.addRanges(
             DateRangePreset.BEFORE_LAST_YEAR, 

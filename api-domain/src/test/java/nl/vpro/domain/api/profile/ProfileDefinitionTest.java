@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class ProfileDefinitionTest {
+class ProfileDefinitionTest {
 
     @BeforeEach
     public void setup() {
@@ -33,13 +33,13 @@ public class ProfileDefinitionTest {
     }
 
     @Test
-    public void testGetNullValues() {
+    void getNullValues() {
         ProfileDefinition<?> in = new ProfileDefinition<MediaObject>();
         assertThat(in.getFilter()).isNull();
     }
 
     @Test
-    public void testGetFilter() {
+    void getFilter() {
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter());
         ProfileDefinition<MediaObject> out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -52,7 +52,7 @@ public class ProfileDefinitionTest {
 
 
     @Test
-    public void testApply() {
+    void apply() {
         Filter filter = new Filter();
         filter.setConstraint(MediaConstraints.alwaysFalse());
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(filter);
@@ -67,7 +67,7 @@ public class ProfileDefinitionTest {
     }
 
     @Test
-    void testPageProfileWithNot() {
+    void pageProfileWithNot() {
         nl.vpro.domain.constraint.page.Filter pageFilter = new nl.vpro.domain.constraint.page.Filter();
         pageFilter.setConstraint(PageConstraints.and(
             new PortalConstraint("VPRONL"),

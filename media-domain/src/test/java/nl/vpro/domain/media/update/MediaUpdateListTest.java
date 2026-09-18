@@ -30,12 +30,12 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
  * @author Michiel Meeuwissen
  */
 @Slf4j
-public class MediaUpdateListTest {
+class MediaUpdateListTest {
 
 
     @SuppressWarnings("unchecked")
     @Test
-    public void marshalStrings() {
+    void marshalStrings() {
         MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -57,7 +57,7 @@ public class MediaUpdateListTest {
 
 
     @Test
-    public void memberUpdateType() throws IOException, SAXException {
+    void memberUpdateType() throws IOException, SAXException {
         MemberUpdate memberUpdate = new MemberUpdate(1,
             ProgramUpdate.create(MediaBuilder.program(ProgramType.CLIP)
                 .avType(AVType.VIDEO)
@@ -73,7 +73,7 @@ public class MediaUpdateListTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void mediaUpdateList() throws IOException, SAXException {
+    void mediaUpdateList() throws IOException, SAXException {
         Program program = MediaBuilder
             .program(ProgramType.CLIP)
             .  urn("urn:vpro:media:program:123")
@@ -143,7 +143,7 @@ public class MediaUpdateListTest {
 
 
     @Test
-    public void marshalStringsJson() {
+    void marshalStringsJson() {
         MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
 
         Jackson2TestUtil.assertThatJson(xmlList).isSimilarTo("""
@@ -159,7 +159,7 @@ public class MediaUpdateListTest {
 
 
     @Test
-    public void mediaUpdateListJson() throws IOException, SAXException {
+    void mediaUpdateListJson() throws IOException, SAXException {
         Program program = MediaBuilder
             .program(ProgramType.CLIP)
             .  urn("urn:vpro:media:program:123")

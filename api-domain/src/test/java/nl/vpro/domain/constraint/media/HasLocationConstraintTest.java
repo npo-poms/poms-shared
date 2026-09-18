@@ -21,10 +21,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class HasLocationConstraintTest {
+class HasLocationConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         HasLocationConstraint in = new HasLocationConstraint();
         in.setPlatform(Platform.INTERNETVOD.name());
         JAXBTestUtil.roundTripAndSimilar(in,
@@ -32,7 +32,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() {
+    void applyTrue() {
         Program program = MediaTestDataBuilder.program().mid("mid_1234").withLocations().build();
         assertThat(new HasLocationConstraint().test(program)).isTrue();
         assertThat(new HasLocationConstraint().testWithReason(program).getDescription(Locales.DUTCH)).isEqualTo("mid_1234 heeft een bron");
@@ -40,7 +40,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testNoneFalse() {
+    void noneFalse() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform("NONE");
         Program program = MediaTestDataBuilder.program().mid("mid_123").authoritativeRecord(Platform.INTERNETVOD).locations(new Location("http://foo/bar", OwnerType.BROADCASTER, Platform.INTERNETVOD)).build();
@@ -50,7 +50,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testNoneTrue() {
+    void noneTrue() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform("NONE");
         Location location = new Location("http://foo/bar", OwnerType.BROADCASTER);
@@ -60,7 +60,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testPlatformTrue() {
+    void platformTrue() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform(Platform.INTERNETVOD.name());
         Program program = MediaTestDataBuilder.program().mid("mid_123").authoritativeRecord(Platform.INTERNETVOD).locations(new Location("http://foo/bar", OwnerType.BROADCASTER, Platform.INTERNETVOD)).build();
@@ -69,7 +69,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testPlatformFalse() {
+    void platformFalse() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform(Platform.INTERNETVOD.name());
         Location location = new Location("http://foo/bar", OwnerType.BROADCASTER);
@@ -82,7 +82,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testApplyTrueBackwards() {
+    void applyTrueBackwards() {
         Program program1 = MediaTestDataBuilder.program().withLocations().build();
 
         Program program2 = MediaTestDataBuilder.program().authoritativeRecord(Platform.INTERNETVOD).locations(new Location("http://foo/bar", OwnerType.BROADCASTER, Platform.INTERNETVOD)).build();
@@ -93,18 +93,18 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testApplyFalse() {
+    void applyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasLocationConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new HasLocationConstraint().getESPath()).isEqualTo("locations.urn");
     }
 
     @Test
-    public void testGetESPathPlatform() {
+    void getESPathPlatform() {
         HasLocationConstraint locationConstraint = new HasLocationConstraint();
         locationConstraint.setPlatform(Platform.INTERNETVOD.name());
         assertThat(locationConstraint.getESPath()).isEqualTo("locations.platform");

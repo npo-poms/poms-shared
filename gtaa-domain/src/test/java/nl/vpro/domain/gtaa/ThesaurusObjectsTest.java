@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class ThesaurusObjectsTest {
+class ThesaurusObjectsTest {
 
     public static Stream<Object[]> data() {
         return Arrays.stream(Scheme.values()).filter(s -> s != Scheme.person).map(s -> new Object[]{s});

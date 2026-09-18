@@ -14,7 +14,7 @@ import nl.vpro.nep.service.exception.NEPException;
  * @since 5.11
  */
 @Slf4j
-public class NEPSAMServiceImplITest extends  AbstractNEPTest {
+class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
 
 
@@ -39,7 +39,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
 
     @Test
-    public void streamUrlForMid() throws NEPException {
+    void streamUrlForMid() throws NEPException {
         String streamUrl = impl.streamAccessMid("VPWON_1271554", true, "145.58.169.92", null).orElseThrow();
         log.info("{}", streamUrl);
 
@@ -47,7 +47,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
 
     @Test
-    public void streamUrlForLive() throws NEPException {
+    void streamUrlForLive() throws NEPException {
         String streamUrl = impl.streamAccessLive("npo-1dvr", "145.58.169.92", Duration.ofHours(24)).orElseThrow();
         log.info("{}", streamUrl);
 

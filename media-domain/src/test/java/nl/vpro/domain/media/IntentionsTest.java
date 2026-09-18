@@ -18,11 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  *  TODO This class does not test GeoLocations but mainly {@link MediaObjectOwnableLists}
  */
 @Slf4j
-public class IntentionsTest {
+class IntentionsTest {
 
 
     @Test
-    public void testAddSetWitDuplicateOwnerIntention() {
+    void addSetWitDuplicateOwnerIntention() {
         //given a program
         Intentions intentions1 = Intentions.builder().owner(BROADCASTER)
                 .values(Arrays.asList(ENTERTAINMENT_INFORMATIVE)).build();
@@ -48,7 +48,7 @@ public class IntentionsTest {
     }
 
     @Test
-    public void testRemoveIntention() {
+    void removeIntention() {
         //given a program with Intentions
         Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(ENTERTAINMENT_INFORMATIVE)).build();
         Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(INFORM_INDEPTH)).build();

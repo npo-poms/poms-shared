@@ -20,7 +20,7 @@ import static java.time.LocalDateTime.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class ScheduleEventUpdateTest {
+final class ScheduleEventUpdateTest {
 
     /**
      * We explicitly annotated {@link Channel} with {@link nl.vpro.jackson2.BackwardsCompatibleJsonEnum}, causing that the XmlEnumValue is not used.
@@ -28,7 +28,7 @@ class ScheduleEventUpdateTest {
      * We could consider changing this, but for now it is like this.
      */
     @Test
-    public void testJsonChannelXmlValue() {
+    void jsonChannelXmlValue() {
         ScheduleEventUpdate e = ScheduleEventUpdate.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .guideDay(LocalDate.of(2017, 8, 28))
@@ -57,7 +57,7 @@ class ScheduleEventUpdateTest {
     }
 
     @Test
-    public void validate() {
+    void validate() {
         ScheduleEventUpdate noDuration = ScheduleEventUpdate.builder()
             .channel(Channel.RAD1)
             .start(Instant.now())
@@ -72,7 +72,7 @@ class ScheduleEventUpdateTest {
     /**
      */
     @Test
-    public void parseIso() throws JsonProcessingException {
+    void parseIso() throws JsonProcessingException {
         ScheduleEventUpdate scheduleEventUpdate = Jackson2Mapper.getStrictInstance().readValue("""
             {
                   "channel" : "_10TB",
@@ -94,7 +94,7 @@ class ScheduleEventUpdateTest {
     /**
      */
     @Test
-    public void parseMillis() throws JsonProcessingException {
+    void parseMillis() throws JsonProcessingException {
         ScheduleEventUpdate scheduleEventUpdate = Jackson2Mapper.getStrictInstance().readValue("""
            {
                     "channel" : "_10TB",

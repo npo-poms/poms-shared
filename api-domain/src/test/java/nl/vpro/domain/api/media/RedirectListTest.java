@@ -11,7 +11,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RedirectListTest {
+class RedirectListTest {
 
     private final RedirectList instance;
 
@@ -31,7 +31,7 @@ public class RedirectListTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance,
             """
                 {
@@ -55,7 +55,7 @@ public class RedirectListTest {
     }
 
     @Test
-    public void jaxb() {
+    void jaxb() {
         RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
             """
                 <?xml version="1.0" encoding="UTF-8"?><redirects xmlns="urn:vpro:api:2013" lastUpdate="1970-01-01T01:00:00+01:00" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">

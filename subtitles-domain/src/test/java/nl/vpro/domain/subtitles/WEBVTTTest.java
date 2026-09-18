@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.7
  */
 @Slf4j
-public class WEBVTTTest {
+class WEBVTTTest {
 
     @Test
-    public void toWEBVTTCue() throws IOException {
+    void toWEBVTTCue() throws IOException {
         assertThat(WEBVTTandSRT.formatCue(
             SubtitlesUtil.parse(getSubtitles(), false)
                 .getCues()
@@ -34,7 +34,7 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void toWEBVTT() throws IOException {
+    void toWEBVTT() throws IOException {
         StringWriter writer = new StringWriter();
         WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles(), false, false).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
@@ -60,7 +60,7 @@ public class WEBVTTTest {
 
 
     @Test
-    public void toWEBVTT2Ar() throws IOException {
+    void toWEBVTT2Ar() throws IOException {
         StringWriter writer = new StringWriter();
         Subtitles subtitlesAr = getSubtitlesAr();
         assertThat(subtitlesAr.getCueCount()).isEqualTo(430);
@@ -90,7 +90,7 @@ public class WEBVTTTest {
 
 
     @Test
-    public void parse() {
+    void parse() {
         String example = """
             WEBVTT
 
@@ -119,7 +119,7 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void parseNegative() {
+    void parseNegative() {
         String example = """
             WEBVTT
 
@@ -149,14 +149,14 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void parseEmpty() {
+    void parseEmpty() {
         String example = "WEBVTT\n\n";
         List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(0);
     }
 
     @Test
-    public void testRegexp() {
+    void regexp() {
         {
             String timeLine = "2:02.200 --> 2:04.150";
             assertThat(WEBVTTandSRT.CUETIMING.matcher(timeLine).matches()).isTrue();
@@ -169,7 +169,7 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void parseTimeLine() {
+    void parseTimeLine() {
         String timeLine = "2:02.200 --> 2:04.150";
 
         Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla", ".");
@@ -178,19 +178,19 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void parseDuration() {
+    void parseDuration() {
         Duration duration = WEBVTTandSRT.parseDuration("00:00:20.000", ".");
         assertThat(duration).isEqualTo(Duration.ofSeconds(20));
     }
 
     @Test
-    public void parseDurationWithComma() {
+    void parseDurationWithComma() {
         Duration duration = WEBVTTandSRT.parseDuration("00:00:20,000", ",");
         assertThat(duration).isEqualTo(Duration.ofSeconds(20));
     }
 
     @Test
-    public void parseWithoutCuesWithComments() {
+    void parseWithoutCuesWithComments() {
         InputStream example = getClass().getResourceAsStream("/POMS_VPRO_4981202.vtt");
         List<Cue> cues = SubtitlesUtil.fillCueNumber(
             WEBVTTandSRT.parseWEBVTT("bla", example).getCues()).collect(Collectors.toList());
@@ -204,7 +204,7 @@ public class WEBVTTTest {
 
 
     @Test
-    public void parseWithCommentsAndNewlines() {
+    void parseWithCommentsAndNewlines() {
         InputStream example = getClass().getResourceAsStream("/WO_NPO_14933889.vtt");
         List<Cue> cues = SubtitlesUtil.fillCueNumber(
             WEBVTTandSRT.parseWEBVTT("bla", example).getCues())
@@ -222,7 +222,7 @@ public class WEBVTTTest {
     }
 
     @Test
-    public void parseWithIntro() {
+    void parseWithIntro() {
         InputStream example = getClass().getResourceAsStream("/MSE-4726.vtt");
         ParseResult parseResult = WEBVTTandSRT.parseWEBVTT("bla", example);
         List<Cue> cues = SubtitlesUtil.fillCueNumber(parseResult.getCues()).collect(Collectors.toList());

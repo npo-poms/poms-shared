@@ -11,11 +11,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 4.7
  */
-public class CueTest {
+class CueTest {
 
 
     @Test
-    public void json() {
+    void json() {
         Cue cue = Cue.builder().mid("MID_1234")
             .sequence(10)
             .identifier("cue tien")
@@ -38,7 +38,7 @@ public class CueTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         Cue cue = Cue.forMid("MID_1234")
             .sequence(10)
             .identifier("cue 10")

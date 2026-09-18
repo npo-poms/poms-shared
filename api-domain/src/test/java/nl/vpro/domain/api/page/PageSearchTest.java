@@ -18,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.3
  */
-public class PageSearchTest {
+class PageSearchTest {
     @Test
-    public void testGetText() {
+    void getText() {
         PageSearch in = new PageSearch();
         in.setText(new SimpleTextMatcher("Title"));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -33,7 +33,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyText() {
+    void applyText() {
         PageSearch in = new PageSearch();
         in.setText(new SimpleTextMatcher("title"));
 
@@ -44,7 +44,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetBroadcasters() {
+    void getBroadcasters() {
         PageSearch in = new PageSearch();
         in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -59,7 +59,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyBroadcasters() {
+    void applyBroadcasters() {
         PageSearch in = new PageSearch();
         in.setBroadcasters(new TextMatcherList(TextMatcher.should("VPRO"), TextMatcher.should("TROS")));
 
@@ -70,7 +70,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetTypes() {
+    void getTypes() {
         PageSearch in = new PageSearch();
         in.setTypes(new TextMatcherList(new TextMatcher("ARTICLE"), new TextMatcher("PLAYER")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -86,7 +86,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyTypes() {
+    void applyTypes() {
         PageSearch in = new PageSearch();
         in.setTypes(new TextMatcherList(new TextMatcher(PageType.PLAYER.name())));
 
@@ -98,7 +98,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetPortals() {
+    void getPortals() {
         PageSearch in = new PageSearch();
         in.setPortals(new TextMatcherList(new TextMatcher("WETENSCHAP24")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -112,7 +112,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyPortals() {
+    void applyPortals() {
         PageSearch in = new PageSearch();
         in.setPortals(new TextMatcherList(new TextMatcher("http://www.wetenschap24.nl")));
 
@@ -124,7 +124,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplySections() {
+    void applySections() {
         PageSearch in = new PageSearch();
         in.setSections(new TextMatcherList(new TextMatcher("noorderlicht")));
 
@@ -139,7 +139,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetGenres() {
+    void getGenres() {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.1")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -153,7 +153,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyGenres() {
+    void applyGenres() {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.2")));
 
@@ -165,7 +165,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetTags() {
+    void getTags() {
         PageSearch in = new PageSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("tag1")));
 
@@ -181,7 +181,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyTags() {
+    void applyTags() {
         PageSearch in = new PageSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("tag1")));
 
@@ -193,7 +193,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyKeywords() {
+    void applyKeywords() {
         PageSearch in = new PageSearch();
         in.setKeywords(new ExtendedTextMatcherList(new ExtendedTextMatcher("apen")));
 
@@ -205,7 +205,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetSortDate() {
+    void getSortDate() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), true)));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -222,7 +222,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplySortDate() {
+    void applySortDate() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), false)));
 
@@ -242,7 +242,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplySortDateNot() {
+    void applySortDateNot() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), false, Match.NOT)));
 
@@ -262,7 +262,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testRelations() {
+    void relations() {
         PageSearch in = new PageSearch();
         RelationSearch rs1 = new RelationSearch();
         RelationSearch rs2 = new RelationSearch();
@@ -289,7 +289,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testReferrals() {
+    void referrals() {
         PageSearch in = new PageSearch();
         AssociationSearch as1 = new AssociationSearch();
         AssociationSearch as2 = new AssociationSearch();

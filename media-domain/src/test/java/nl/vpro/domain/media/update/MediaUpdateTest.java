@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.user.ServiceLocator;
 
-public abstract class MediaUpdateTest {
+abstract class MediaUpdateTest {
 
 
     @BeforeEach

@@ -19,14 +19,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRestriction> {
+class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRestriction> {
 
     public static TestRestriction withStartAndStop = new TestRestriction(null, Instant.EPOCH, Instant.ofEpochMilli(2));
     public static TestRestriction persistedWithStartAndStop = new TestRestriction(1L, Instant.EPOCH, Instant.ofEpochMilli(2));
     public static TestRestriction persistedWithStartUpdate = new TestRestriction(1L, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @Test
-    public void testEqualsWhenIncomingWithNullId() {
+    void equalsWhenIncomingWithNullId() {
         assertThat(withStartAndStop).isEqualTo(persistedWithStartAndStop);
     }
 

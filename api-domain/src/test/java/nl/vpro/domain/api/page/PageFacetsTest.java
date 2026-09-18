@@ -20,19 +20,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public class PageFacetsTest {
+class PageFacetsTest {
 
     Jackson2Mapper INSTANCE = Jackson2Mapper.getInstance();
 
     @Test
-    public void testDateRangeWithPresetWhenNoArray() throws Exception {
+    void dateRangeWithPresetWhenNoArray() throws Exception {
         Reader reader = new StringReader("{\"sortDates\" : \"LAST_YEAR\"}");
         PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         assertThat(facets.getSortDates().getRanges()).containsOnly(DateRangePreset.LAST_YEAR);
     }
 
     @Test
-    public void testDateRangeCustomWhenNoArray() throws Exception {
+    void dateRangeCustomWhenNoArray() throws Exception {
         Reader reader = new StringReader("{\"sortDates\" : {\"name\":\"My range\",\"begin\":100,\"end\":200}}");
         PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         assertThat(facets.getSortDates().getRanges()).containsOnly(new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
@@ -40,7 +40,7 @@ public class PageFacetsTest {
 
 
     @Test
-    public void testSectionFacets() throws Exception {
+    void sectionFacets() throws Exception {
         Reader reader = new StringReader("{\"sections\" : {}}");
         PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         System.out.println(facets.getSections());

@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class GTAANewPersonTest {
+class GTAANewPersonTest {
     JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
 
 
 
     @Test
-    public void json() {
+    void json() {
 
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
 
@@ -37,7 +37,7 @@ public class GTAANewPersonTest {
     }
 
     @Test
-    public void jsonWithoutType() throws IOException {
+    void jsonWithoutType() throws IOException {
         String json = """
             {
               "givenName" : "Pietje",
@@ -55,7 +55,7 @@ public class GTAANewPersonTest {
     }
 
     @Test
-    public void xml() {
+    void xml() {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
         JAXBTestUtil.roundTripAndSimilar(person, """
             <gtaa:newPerson   xmlns:gtaa="urn:vpro:gtaa:2017" >

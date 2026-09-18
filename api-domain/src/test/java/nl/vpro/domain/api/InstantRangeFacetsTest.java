@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class InstantRangeFacetsTest {
+class InstantRangeFacetsTest {
 
     @Test
-    public void testGetBeginWithPreset() {
+    void getBeginWithPreset() {
         DateRangeFacets<AbstractSearch<?>> in = new DateRangeFacets<>();
         in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK));
         DateRangeFacets<AbstractSearch<?>> out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -41,14 +41,14 @@ public class InstantRangeFacetsTest {
     }
 
     @Test
-    public void testMixedJsonArrayPreset() throws Exception {
+    void mixedJsonArrayPreset() throws Exception {
         Reader reader = new StringReader("[\"LAST_YEAR\",\"LAST_WEEK\",{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
         DateRangeFacets<AbstractSearch<?>> facet = (DateRangeFacets<AbstractSearch<?>>) Jackson2Mapper.getInstance().readValue(reader, DateRangeFacets.class);
         assertThat(facet.getRanges()).containsOnly(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
     }
 
     @Test
-    public void testJsonOutWithPreset() throws Exception {
+    void jsonOutWithPreset() throws Exception {
         DateRangeFacets<AbstractSearch<?>> in = new DateRangeFacets<>();
         in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200))));
         Writer writer = new StringWriter();

@@ -57,7 +57,7 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.cs;
 @Log4j2
 @Isolated("Because of the logger")
 @Execution(ExecutionMode.SAME_THREAD) // genreFunction is sometimes configuration for test
-public class TVATransformerTest {
+final class TVATransformerTest {
     static final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
 
@@ -79,7 +79,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void basicTransform() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+    void basicTransform() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         genreFunction.setNotFound(NotFound.ASIS);
         String xml = transform("pd/pd/NED320150805P.xml", Map.of());
         similar(xml,
@@ -189,7 +189,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void transform_MSE_4907() {
+    void transform_MSE_4907() {
         String xml = transform("pd/pd/NED320200220P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         Set<String> mids = table.getGroupTable().stream().map(g -> g.getType() + ":" + g.getMid() + ":" + g.getMainTitle())
@@ -323,7 +323,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void unmarshalAfterUnmarshal() {
+    void unmarshalAfterUnmarshal() {
         MediaTable table = JAXB.unmarshal(new StringReader(transform("pd/pd/NED320150805P.xml")), MediaTable.class);
         validate(table);
 
@@ -360,14 +360,14 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void regional() {
+    void regional() {
         String xml = transform("pd/pd/OZEE20150914P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         validate(table);
     }
 
     @Test
-    public void oddDate () {
+    void oddDate () {
         String xml = transform("pd/pd/NED220150915P.xml");
 
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -375,7 +375,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void moreSeasons() {
+    void moreSeasons() {
         String xml = transform("pd/pd/NED220150919P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -421,7 +421,7 @@ public class TVATransformerTest {
 
     }
     @Test
-    public void email() {
+    void email() {
         String xml = transform("pd/pd/NED220150919P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -443,7 +443,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void withHtml() {
+    void withHtml() {
         String xml = transform("pd/pd/OFRY20150921P.xml"); // This acually came in on dev and didn't work.
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -452,7 +452,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void oddLanguageJw() {
+    void oddLanguageJw() {
         String xml = transform("pd/pd/HOLL20151005P.xml"); // This actually came in on dev and didn't work.
         // the odd language
         //System.out.println(xml);
@@ -466,7 +466,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void oddLanguageSH() {
+    void oddLanguageSH() {
         String xml = transform("pd/pd/NED220231027P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -477,7 +477,7 @@ public class TVATransformerTest {
 
     @Test
     @Disabled("Some xml's simply do not validate")
-    public void MSE_3144() {
+    void MSE_3144() {
         String xml = transform("pd/pd/MSE-3144/NED220160223P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -487,7 +487,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3144_1() {
+    void MSE_3144_1() {
         String xml = transform("pd/pd/MSE-3144/NED320160221P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -497,7 +497,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3153() {
+    void MSE_3153() {
         // Het koepelprogramma KN_1676556 krijgt geen Seizoen
         String xml = transform("pd/pd/MSE-3153/NED320160104P.xml");
         //System.out.println(xml);
@@ -512,7 +512,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void schedule() throws ParserConfigurationException, SAXException, TransformerException {
+    void schedule() throws ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/OZEE20150914P.xml");
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -526,7 +526,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3202() {
+    void MSE_3202() {
         String xml = transform("pd/pd/BRAB20160317P.xml");
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -545,7 +545,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void MSE_3273() {
+    void MSE_3273() {
         String xml = transform("pd/pd/MSE-3273/NED320160704P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -563,7 +563,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_3454_And_LanguageCode_XX_ZZ() {
+    void MSE_3454_And_LanguageCode_XX_ZZ() {
         String xml = transform("pd/pd/MSE-3454/NED320160920P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (Program program: table.getProgramTable()) {
@@ -584,7 +584,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void missingCrids() {
+    void missingCrids() {
         String xml = transform("pd/pd/NED320160711P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (MediaObject mediaObject : table.getProgramTable()) {
@@ -593,7 +593,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_4581() {
+    void MSE_4581() {
         String xml = transform("pd/pd/NED320190715P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         MediaObject example = table.find("VPWON_1307584").orElseThrow(IllegalArgumentException::new);
@@ -607,7 +607,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         log.info("HOI");
         String xml = bindinc("bindinc/20201124021653000dayZDF_20201123.xml");
 
@@ -657,7 +657,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = bindinc("bindinc/20201208185718000dayTV0120201209.xml");
 
         //log.info(xml);
@@ -691,7 +691,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void bindincARTT() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    void bindincARTT() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = bindinc("bindinc/20210210220659000dayARTT20210220.xml");
 
         //log.info("{}", xml);
@@ -732,7 +732,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void API_535_missingMainTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+    void API_535_missingMainTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String xml = bindinc("bindinc/20210914010321000dayTV5M20210914.xml");
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -741,7 +741,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5159_htmlInTitle() {
+    void MSE_5159_htmlInTitle() {
         String xml = transform("pd/pd/CULT20211016P.xml");
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -750,7 +750,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void missingTitleType() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+    void missingTitleType() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String xml = bindinc("bindinc/20240313075603000dayARD_20240402.xml");
 //        log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -760,7 +760,7 @@ public class TVATransformerTest {
 
 
     @Test
-    public void MSE_5213() {
+    void MSE_5213() {
         String xml = transform("pd/pd/NORH20220204P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -771,7 +771,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5290_series_genres() {
+    void MSE_5290_series_genres() {
         String xml = transform("pd/pd/NED220211017P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -792,7 +792,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void MSE_5303_translatedTitle() {
+    void MSE_5303_translatedTitle() {
         String xml = transform("pd/pd/NED320220729P.xml");
         log.debug("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -809,7 +809,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void _101schedule() {
+    void _101schedule() {
         String xml = transform("pd/pd/101_20240714P.xml");
         log.debug("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -824,7 +824,7 @@ public class TVATransformerTest {
         }
     }
     @Test
-    public void emptyPerson() {
+    void emptyPerson() {
         String xml = transform("pd/pd/NED220260113P.xml");
         log.debug(xml);
     }

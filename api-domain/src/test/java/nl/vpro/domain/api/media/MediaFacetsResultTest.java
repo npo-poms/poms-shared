@@ -11,11 +11,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class MediaFacetsResultTest {
+class MediaFacetsResultTest {
 
 
     @Test
-    public void getTitles() {
+    void getTitles() {
 
         MediaFacetsResult result = new MediaFacetsResult();
         result.setTitles(new ArrayList<>());

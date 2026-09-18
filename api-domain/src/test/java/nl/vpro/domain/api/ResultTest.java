@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class ResultTest {
+class ResultTest {
     @Test
-    public void testGetList() {
+    void getList() {
         Result<String> result = new Result<>(Arrays.asList("a", "b"), 10L, 5, equalsTo(20L));
         assertEquals(Arrays.asList("a", "b"), result.getItems());
         assertEquals(Long.valueOf(10), result.getOffset());
@@ -25,7 +25,7 @@ public class ResultTest {
 
 
     @Test
-    public void testIterator() {
+    void iterator() {
         Result<String> result = new Result<>(Arrays.asList("a", "b"), 10L, 5, equalsTo(20L));
         StringBuilder build = new StringBuilder();
         for(String s : result) {

@@ -14,12 +14,12 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class GenreTest {
+class GenreTest {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Test
-    public void testJson() throws IOException {
+    void json() throws IOException {
         ClassificationService classificationService = new MediaClassificationService();
         Genre genre = new Genre(classificationService.getTerm("3.0.1.1.2"));
         String marshalled = Jackson2Mapper.getInstance().writeValueAsString(genre);
@@ -30,7 +30,7 @@ public class GenreTest {
     }
 
     @Test
-    public void validation() {
+    void validation() {
         assertThat(VALIDATOR.validate(Genre.of("3.0.1.2"))).isEmpty();
         assertThat(VALIDATOR.validate(Genre.of("3.0.1"))).hasSize(1);
     }

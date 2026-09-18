@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class TermTest {
+class TermTest {
     private ClassificationService classificationService;
 
 
@@ -24,7 +24,7 @@ public class TermTest {
     }
 
     @Test
-    public void testIsTopTerm() {
+    void isTopTerm() {
 
 
         assertThat(classificationService.getTerm("3.0.1").isTopTerm()).isTrue();

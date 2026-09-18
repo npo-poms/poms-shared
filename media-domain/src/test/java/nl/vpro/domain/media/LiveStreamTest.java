@@ -8,9 +8,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class LiveStreamTest {
+class LiveStreamTest {
     @Test
-    public void values() {
+    void values() {
         assertThat(LiveStream.values().length).isGreaterThanOrEqualTo(3);
     }
 

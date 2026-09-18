@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class TextFacetTest  {
+class TextFacetTest  {
     @Test
-    public void testGetThreshold() {
+    void getThreshold() {
         TextFacet<?, String> in = new TextFacet<TermSearch, String>();
         in.setThreshold(1111);
         TextFacet<?, ?> out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -32,7 +32,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetThreshold0Json() {
+    void getThreshold0Json() {
         TextFacet<?, String> in = new TextFacet<TermSearch, String>();
         in.setThreshold(0);
         TextFacet<?, ?> out = Jackson2TestUtil.roundTripAndSimilar(in,
@@ -46,7 +46,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetSort() {
+    void getSort() {
         TextFacet<?, String> in = new TextFacet<TermSearch, String>();
         in.setSort(FacetOrder.VALUE_DESC);
         TextFacet<?, String> out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -58,7 +58,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetIncludeXml() {
+    void getIncludeXml() {
         TextFacet<?, String> in = new TextFacet<TermSearch, String>();
         in.setInclude("3\\.0\\.1\\.[0-9]+");
         JAXBTestUtil.roundTripAndSimilar(in, """

@@ -12,7 +12,7 @@ import nl.vpro.util.Env;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class DeploymentTest {
+final class DeploymentTest {
 
     @ParameterizedTest
     @EnumSource(Deployment.class)

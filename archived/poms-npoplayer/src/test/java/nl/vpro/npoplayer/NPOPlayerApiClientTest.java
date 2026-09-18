@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Disabled("Tests running server")
 @Slf4j
 @Deprecated
-public class NPOPlayerApiClientTest {
+class NPOPlayerApiClientTest {
 
     NPOPlayerApiClient client;
 
@@ -27,7 +27,7 @@ public class NPOPlayerApiClientTest {
     }
 
     @Test
-    public void testGetRestService() {
+    void getRestService() {
         log.info("{}", client);
         NPOPlayerApiResponse response = client.getRestService().getVideo("KN_1688939", NPOPlayerApiRequest.builder()
             .id("eenid")
@@ -41,7 +41,7 @@ public class NPOPlayerApiClientTest {
     }
 
     @Test
-    public void testGetRestServiceWithTopSpin() {
+    void getRestServiceWithTopSpin() {
         NPOPlayerApiResponse response = client.getRestService().getVideoWithTopspin("KN_1688939", NPOPlayerApiRequest.builder()
             .id("eenid")
             .startAt(10)

@@ -10,11 +10,11 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Michiel Meeuwissen
  * @since 4.9
  */
-public class RelationSearchTest {
+class RelationSearchTest {
 
 
     @Test
-    public void json() {
+    void json() {
         RelationSearch search = new RelationSearch();
         search.setBroadcasters(TextMatcherList.must(TextMatcher.not("VPRO")));
         Jackson2TestUtil.roundTripAndSimilarAndEquals(search, """

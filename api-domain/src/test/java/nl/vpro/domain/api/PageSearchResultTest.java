@@ -17,10 +17,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 @Slf4j
-public class PageSearchResultTest {
+class PageSearchResultTest {
 
     @Test
-    public void testJson() {
+    void json() {
         List<SearchResultItem<? extends Page>> list = new ArrayList<>();
         Page page = PageBuilder
             .page(PageType.ARTICLE)
@@ -109,7 +109,7 @@ public class PageSearchResultTest {
     }
 
     @Test
-    public void testUnMarshal() throws IOException {
+    void unMarshal() throws IOException {
         PageSearchResult searchResultItems = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/pageSearchResult.json"), PageSearchResult.class);
         log.info("{}", searchResultItems);
 

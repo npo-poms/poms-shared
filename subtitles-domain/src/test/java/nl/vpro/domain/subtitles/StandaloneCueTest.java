@@ -10,10 +10,10 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-public class StandaloneCueTest {
+class StandaloneCueTest {
 
     @Test
-    public void json() {
+    void json() {
         StandaloneCue cue = new StandaloneCue(Cue.forMid("MID_123")
             .content("bla bla")
             .identifier("cue 1")

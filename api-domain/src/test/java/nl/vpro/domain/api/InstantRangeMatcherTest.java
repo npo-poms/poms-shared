@@ -25,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
+class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
 
     @Test
-    public void testGetInclusiveEnd() {
+    void getInclusiveEnd() {
         DateRangeMatcher in = new DateRangeMatcher(null, null, true);
         DateRangeMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -49,12 +49,12 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
 
     @Override
     @Test
-    public void testHashCode() {
+    void hashCodeConsistency() {
         assertEquals(796275456, getInstance().hashCode());
     }
 
     @Test
-    public void testGetBeginXml() {
+    void getBeginXml() {
         Instant begin = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(begin, null);
         DateRangeMatcher out = JAXBTestUtil.roundTripContains(in,
@@ -63,7 +63,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
     }
 
     @Test
-    public void testGetEndXml() {
+    void getEndXml() {
         Instant end = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(null, end);
         DateRangeMatcher out = JAXBTestUtil.roundTripContains(in,
@@ -73,7 +73,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
 
 
     @Test
-    public void json() {
+    void json() {
         DateRangeMatcher rangeMatcher = DateRangeMatcher.builder()
             .begin(LocalDateTime.of(2017, 6, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
             .end(LocalDateTime.of(2017, 7, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
@@ -87,7 +87,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
     }
 
     @Test
-    public void jsonNatty() throws Exception {
+    void jsonNatty() throws Exception {
         Instant now = Instant.now();
         DateRangeMatcher in = Jackson2Mapper.getInstance().readValue(new StringReader("""
             {
@@ -98,7 +98,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
     }
 
     @Test
-    public void testApply() {
+    void apply() {
         DateRangeMatcher instance = getInstance();
         assertTrue(instance.test(Instant.ofEpochMilli(100)));
         assertTrue(instance.test(Instant.ofEpochMilli(150)));

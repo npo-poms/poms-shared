@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.12
  */
-public class NoDuplicateOwnerValidatorTest {
+class NoDuplicateOwnerValidatorTest {
 
     public static class A implements Ownable {
         @Getter
@@ -28,7 +28,7 @@ public class NoDuplicateOwnerValidatorTest {
     }
 
     @Test
-    public void isValid() {
+    void isValid() {
         NoDuplicateOwnerValidator impl = new NoDuplicateOwnerValidator();
         assertThat(impl.isValid(null)).isTrue();
         List<Ownable> list = new ArrayList<>();

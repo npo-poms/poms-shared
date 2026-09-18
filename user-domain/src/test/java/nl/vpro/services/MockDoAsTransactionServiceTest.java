@@ -9,12 +9,12 @@ import nl.vpro.domain.user.Trusted;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class MockDoAsTransactionServiceTest {
+class MockDoAsTransactionServiceTest {
 
     MockDoAsTransactionService impl = new MockDoAsTransactionService();
 
     @Test
-    public void executeInNewTransaction() {
+    void executeInNewTransaction() {
         Assertions.assertThatThrownBy(() -> {
             impl.executeInNewTransaction(Trusted.of("bla"), () -> {
                 if (true) {

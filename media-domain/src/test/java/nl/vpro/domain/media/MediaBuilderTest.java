@@ -17,10 +17,10 @@ import static java.time.Duration.ofMillis;
 import static java.time.Instant.ofEpochMilli;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MediaBuilderTest {
+class MediaBuilderTest {
 
     @Test
-    public void testDescendantOf() {
+    void descendantOf() {
         Program program = MediaBuilder.program()
             .descendantOf(
                 new DescendantRef(null, "urn:vpro:media:program:1", MediaType.BROADCAST),
@@ -38,7 +38,7 @@ public class MediaBuilderTest {
 
 
     @Test
-    public void testScheduleEvent() {
+    void scheduleEvent() {
         Program program = MediaBuilder.program().scheduleEvents(
             new ScheduleEvent(Channel.NED3, ofEpochMilli(100), ofMillis(200)),
             new ScheduleEvent(Channel.NED3, new Net("ZAPP"), ofEpochMilli(300 + 3 * 24 * 3600 * 1000), ofMillis(50)),
@@ -81,7 +81,7 @@ public class MediaBuilderTest {
     }
 
     @Test
-    public void testClone() {
+    void cloning() {
         MediaBuilder.ProgramBuilder programBuilder = MediaBuilder.movie()
             .intentions(Intentions.builder().owner(OwnerType.BROADCASTER).value(IntentionType.INFORM).build())
             .mainTitle("base");
@@ -96,7 +96,7 @@ public class MediaBuilderTest {
     }
 
     @Test
-    public void testLocations() {
+    void locations() {
         Program program = MediaBuilder.program()
             .locations(
                 Location.builder()
@@ -121,7 +121,7 @@ public class MediaBuilderTest {
     }
 
     @Test
-    public void  testEpisodeOf() {
+    void episodeOf() {
         Program program = MediaBuilder.program()
             .episodeOf("bla_bla")
             .build();

@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author rico
  * @since 4.3
  */
-public class SectionConstraintTest {
+class SectionConstraintTest {
     @Test
-    public void testGetValue() {
+    void getValue() {
         SectionConstraint in = new SectionConstraint("cinema");
         SectionConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:sectionConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">cinema</local:sectionConstraint>\n");
@@ -24,12 +24,12 @@ public class SectionConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new SectionConstraint().getESPath()).isEqualTo("portal.section.path");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
         final Section section = new Section("cinema", "Cinema NL");
         portal.setSection(section);
@@ -38,7 +38,7 @@ public class SectionConstraintTest {
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
         final Section section = new Section("cinema", "Cinema NL");
         portal.setSection(section);

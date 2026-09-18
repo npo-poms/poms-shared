@@ -10,10 +10,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PageFacetTest {
+class PageFacetTest {
 
     @Test
-    public void testGetPageSearchFromFacetXml() {
+    void getPageSearchFromFacetXml() {
         PageSearch search = new PageSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
@@ -32,7 +32,7 @@ public class PageFacetTest {
     }
 
     @Test
-    public void testGetPageSearchFromFacetJson() {
+    void getPageSearchFromFacetJson() {
         PageSearch search = new PageSearch();
         search.setText(new SimpleTextMatcher("find me"));
 

@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.3
  */
-public class CachedURLClassificationServiceImplTest {
+class CachedURLClassificationServiceImplTest {
 
 
     @Test
-    public void test() throws URISyntaxException {
+    void test() throws URISyntaxException {
         URL url = getClass().getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         CachedURLClassificationServiceImpl cs = new CachedURLClassificationServiceImpl(url.toURI());
         cs.getTermsMap();

@@ -12,10 +12,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.4
  */
-public class SubtitlesFormTest {
+class SubtitlesFormTest {
 
     @Test
-    public void json() {
+    void json() {
         SubtitlesForm form = SubtitlesForm.builder()
             .searches(
                 SubtitlesSearch.builder().text(
@@ -34,7 +34,7 @@ public class SubtitlesFormTest {
     }
 
     @Test
-    public void xml() {
+    void xml() {
         SubtitlesForm form = SubtitlesForm.builder()
             .searches(
                 SubtitlesSearch.builder().text(

@@ -29,7 +29,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  */
 @Slf4j
 @Disabled("This actually does something")
-public class NEPSSHJDownloadServiceImplTest {
+class NEPSSHJDownloadServiceImplTest {
 
     private NEPSSHJDownloadServiceImpl impl;
 
@@ -46,7 +46,7 @@ public class NEPSSHJDownloadServiceImplTest {
     }
 
     @Test
-    public void client() throws IOException {
+    void client() throws IOException {
         log.info("{}", impl);
         try (SSHClient client = impl.createClient()) {
             log.info("Client {}", client);
@@ -61,7 +61,7 @@ public class NEPSSHJDownloadServiceImplTest {
     }
 
     @Test
-    public void createFile() throws Exception {
+    void createFile() throws Exception {
         Instant start = Instant.now();
 
         File dest = new File(testDest);
@@ -72,7 +72,7 @@ public class NEPSSHJDownloadServiceImplTest {
     }
  /*
     @Test
-    public void testJsch() throws IOException, JSchException, SftpException {
+    void jsch() throws IOException, JSchException, SftpException {
         JSch sshClient = new JSch();
         HostKey hostKey = new HostKey ( "sftp-itemizer.nepworldwide.nl",  Base64.getDecoder().decode ("AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj"));
 
@@ -92,7 +92,7 @@ public class NEPSSHJDownloadServiceImplTest {
 
     }*/
     @Test
-    public void testSshj() throws IOException {
+    void sshj() throws IOException {
 
         boolean simple = true;
         Instant start = Instant.now();
@@ -120,7 +120,7 @@ public class NEPSSHJDownloadServiceImplTest {
     }
 
     @Test
-    public void testSshjAvailability() throws IOException, InterruptedException {
+    void sshjAvailability() throws IOException, InterruptedException {
 
         impl.checkAvailabilityAndConsume("", fileName, Duration.ofSeconds(10),
             (fd) -> {
@@ -135,7 +135,7 @@ public class NEPSSHJDownloadServiceImplTest {
     @Test
     @Disabled("This actually does something")
     @SneakyThrows
-    public void async() {
+    void async() {
         List<ForkJoinTask<?>> tasks = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             tasks.add(ForkJoinPool.commonPool().submit(checkAvailability("bestaatniet." + i)));

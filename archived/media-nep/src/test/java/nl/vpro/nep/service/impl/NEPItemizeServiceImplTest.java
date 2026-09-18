@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.catchThrowableOfType;
  */
 @Slf4j
 @WireMockTest
-public class NEPItemizeServiceImplTest {
+class NEPItemizeServiceImplTest {
 
     @Test
-    public void getJobStatus404(WireMockRuntimeInfo wireMockRuntimeInfo) throws Exception {
+    void getJobStatus404(WireMockRuntimeInfo wireMockRuntimeInfo) throws Exception {
         Properties properties = new Properties();
         properties.setProperty("nep.itemizer-api.baseUrl", wireMockRuntimeInfo.getHttpBaseUrl());
         properties.getProperty("nep.itemizer-api.key", "bearer ");
@@ -51,7 +51,7 @@ public class NEPItemizeServiceImplTest {
     }
 
     @Test
-    public void getJobStatus(WireMockRuntimeInfo wireMockRuntimeInfo) throws Exception {
+    void getJobStatus(WireMockRuntimeInfo wireMockRuntimeInfo) throws Exception {
         Properties properties = new Properties();
         properties.setProperty("nep.itemizer-api.baseUrl", wireMockRuntimeInfo.getHttpBaseUrl());
         properties.getProperty("nep.itemizer-api.key", "bearer ");

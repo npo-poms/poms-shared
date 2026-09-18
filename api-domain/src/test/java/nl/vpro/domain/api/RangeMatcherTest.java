@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends RangeMatcher<S, S>> {
+abstract  class RangeMatcherTest<S extends Comparable<S>, T extends RangeMatcher<S, S>> {
 
     abstract T getInstance();
 
@@ -17,7 +17,7 @@ public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends Range
 
 
     @Test
-    public void testSetInclusiveEnd() {
+    void setInclusiveEnd() {
         T instance = getInstance();
         getInstance().setInclusiveEnd(false);
         assertFalse(instance.includeEnd());
@@ -26,24 +26,24 @@ public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends Range
     }
 
     @Test
-    public void testToString() {
+    void stringRepresentation() {
         T instance = getInstance();
         instance.toString();
     }
 
     @Test
-    public void testEquals() {
+    void equality() {
         T instance = getInstance();
         assertEquals(instance, instance);
         // todo
     }
 
     @Test
-    public abstract void testHashCode();
+    abstract void hashCodeConsistency();
 
 
     @Test
-    public void testGetBegin() {
+    void getBegin() {
         T instance = getInstance();
         S value = getValue();
         instance.setBegin(value);
@@ -51,7 +51,7 @@ public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends Range
     }
 
     @Test
-    public void testGetEnd() {
+    void getEnd() {
         T instance = getInstance();
         S value = getValue();
         instance.setEnd(value);
@@ -59,7 +59,7 @@ public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends Range
     }
 
     @Test
-    public void testSetEnd() {
+    void setEnd() {
 
     }
 }

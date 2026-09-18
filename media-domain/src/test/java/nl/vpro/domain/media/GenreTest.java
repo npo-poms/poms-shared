@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class GenreTest {
+class GenreTest {
 
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
@@ -32,20 +32,20 @@ public class GenreTest {
 
 
     @Test
-    public void matchLegacy() {
+    void matchLegacy() {
         assertThat(EpgGenreType.valueOfLegacy(asList(MisGenreType.YOUTH, MisGenreType.ENTERTAINMENT))).containsOnly(EpgGenreType._0106);
         assertThat(EpgGenreType.valueOfLegacy(asList(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH))).containsOnly(EpgGenreType._0106);
         assertThat(EpgGenreType.valueOfLegacy(singletonList(MisGenreType.RELIGIOUS))).containsOnly(EpgGenreType._0726);
     }
 
     @Test
-    public void legacy2() {
+    void legacy2() {
         assertThat(EpgGenreType.valueOf(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH)).containsOnly(EpgGenreType._0106);
         assertThat(EpgGenreType.valueOf(MisGenreType.ENTERTAINMENT, MisGenreType.INFORMATIVE, MisGenreType.YOUTH)).containsOnly(EpgGenreType._0106, EpgGenreType._07);
     }
 
     @Test
-    public void testGetEpgTerms() {
+    void getEpgTerms() {
         Genre genre = new Genre("3.0.1.2.10");
 
         JAXB.marshal(genre, System.out);
@@ -59,7 +59,7 @@ public class GenreTest {
 
 /*
     @Test
-    public void testGetEbuTerms() throws Exception {
+    void getEbuTerms() throws Exception {
         Genre genre = new Genre("3.1.1.1");
 
         JAXBTestUtil.roundTripAndSimilar(genre, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -73,28 +73,28 @@ public class GenreTest {
 
 
     @Test
-    public void testCompareToWhenSmaller() {
+    void compareToWhenSmaller() {
         assertThat(new Genre("3.0.1.7.27").compareTo(new Genre("3.0.100.7.27"))).isNegative();
     }
 
     @Test
-    public void testCompareToWhenGreater() {
+    void compareToWhenGreater() {
         assertThat(new Genre("3.0.100.7.27").compareTo(new Genre("3.0.1.7.27"))).isPositive();
     }
 
     @Test
-    public void testEquals() {
+    void equality() {
         assertThat(new Genre("3.0.1.7.27").equals(new Genre("3.0.1.7.27"))).isTrue();
     }
 
     @Test
-    public void testGetFirstVersionDate() {
+    void getFirstVersionDate() {
         assertThat(new Genre("3.0.1.1.25").getFirstVersionDate()).isEqualTo(LocalDate.of(2014,4,8));
         assertThat(new Genre("3.0.1.1.41").getFirstVersionDate()).isEqualTo(LocalDate.of(2021,4,1));
     }
 
     @Test
-    public void validation() {
+    void validation() {
         assertThat(VALIDATOR.validate(new Genre("3.0.1.2"))).isEmpty();
         assertThat(VALIDATOR.validate(new Genre("3.0.1"))).hasSize(1);
     }

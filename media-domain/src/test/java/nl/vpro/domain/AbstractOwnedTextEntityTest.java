@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class AbstractOwnedTextEntityTest {
+class AbstractOwnedTextEntityTest {
 
     static class OwnedTextEntity extends AbstractTitleEntity<OwnedTextEntity, Serializable> {
 
@@ -37,7 +37,7 @@ public class AbstractOwnedTextEntityTest {
         }
     }
     @Test
-    public void equals() {
+    void equality() {
         OwnedTextEntity a = new OwnedTextEntity("a", OwnerType.BROADCASTER, TextualType.MAIN);
         OwnedTextEntity b = new OwnedTextEntity("b", OwnerType.BROADCASTER, TextualType.MAIN);
 

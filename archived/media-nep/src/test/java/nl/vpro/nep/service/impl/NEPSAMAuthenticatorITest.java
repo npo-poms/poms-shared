@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.11
  */
 @Slf4j
-public class NEPSAMAuthenticatorITest {
+class NEPSAMAuthenticatorITest {
 
 
 
     @Test
-    public void authenticate() {
+    void authenticate() {
 
         NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
             "npo_poms",

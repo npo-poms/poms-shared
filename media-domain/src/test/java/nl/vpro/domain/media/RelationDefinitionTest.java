@@ -16,7 +16,7 @@ import org.meeuw.theories.BasicObjectTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinition> {
+class RelationDefinitionTest implements BasicObjectTheory<RelationDefinition> {
 
     private static Validator validator;
 
@@ -28,7 +28,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
     @Test
-    public void testValid() {
+    void valid() {
         RelationDefinition definition = new RelationDefinition("ABC1", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -38,7 +38,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
     @Test
-    public void testSetTypeToShort() {
+    void setTypeToShort() {
         RelationDefinition definition = new RelationDefinition("ABC", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -48,7 +48,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
     @Test
-    public void testSetTypeIllegalCharacter() {
+    void setTypeIllegalCharacter() {
         RelationDefinition definition = new RelationDefinition("ABC@D", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -58,7 +58,7 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     }
 
     @Test
-    public void testSetBroadcasterWithEmptyValue() {
+    void setBroadcasterWithEmptyValue() {
         RelationDefinition definition = new RelationDefinition("ABC1", "", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations = validator.validate(definition);

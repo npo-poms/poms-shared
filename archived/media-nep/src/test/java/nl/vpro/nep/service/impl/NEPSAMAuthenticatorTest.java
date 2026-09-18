@@ -28,11 +28,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 @WireMockTest
-public class NEPSAMAuthenticatorTest {
+class NEPSAMAuthenticatorTest {
 
 
     @Test
-    public void authenticate(
+    void authenticate(
         WireMockRuntimeInfo wireMockRuntimeInfo) {
 
         //The JWT signature algorithm we will be using to sign the token

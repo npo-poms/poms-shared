@@ -32,13 +32,13 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Timeout(value = 10, unit = TimeUnit.MINUTES)
-public class NEPItemizeServiceImplITest {
+class NEPItemizeServiceImplITest {
 
     final static String MID = "TELEA_1044063";
     //String MID = "AT_2073522";
     @Test
     @Order(1)
-    public void itemize() throws Exception {
+    void itemize() throws Exception {
         Instant start = Instant.now();
         try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
             NEPItemizeResponse response = itemizer.itemizeMid(
@@ -74,7 +74,7 @@ public class NEPItemizeServiceImplITest {
     @Test
     @Order(10)
     @Tag("dvr")
-    public void itemizeDvr() throws Exception {
+    void itemizeDvr() throws Exception {
         Instant start = Instant.now();
         try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
             response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
@@ -93,7 +93,7 @@ public class NEPItemizeServiceImplITest {
     @Test
     @Order(11)
     @Tag("dvr")
-    public void itemizeDvrDownload() throws IOException {
+    void itemizeDvrDownload() throws IOException {
         assumeThat(response).isNotNull();
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
@@ -139,7 +139,7 @@ public class NEPItemizeServiceImplITest {
 
 
     @Test
-    public void getJobsStatus404() {
+    void getJobsStatus404() {
         ItemizerStatusException foobar = catchThrowableOfType(ItemizerStatusException.class, () -> {
             try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
                 ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");

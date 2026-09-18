@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class NotTest {
+class NotTest {
 
     @Test
-    public void testGetConstraints() {
+    void getConstraints() {
         Not in = new Not(new PageTypeConstraint(PageType.ARTICLE));
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -31,13 +31,13 @@ public class NotTest {
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         assertThat(new Not(PageConstraints.alwaysFalse()).test(new Page(PageType.ARTICLE))).isTrue();
     }
 
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         assertThat(new Not(PageConstraints.alwaysTrue()).test(new Page(PageType.ARTICLE))).isFalse();
     }
 }

@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @author Roelof Jan Koekoek
  * @since 2.1
  */
-public class AssetLocationTest {
+class AssetLocationTest {
 
     @Test
-    public void testResolveNonFileScheme() throws Exception {
+    void resolveNonFileScheme() throws Exception {
         AssetLocation target = new AssetLocation("http://host/path/file.name");
 
         target.resolve("/base/path/");
@@ -25,7 +25,7 @@ public class AssetLocationTest {
     }
 
     @Test
-    public void testResolveRelative() throws Exception {
+    void resolveRelative() throws Exception {
         AssetLocation target = new AssetLocation("file.name");
 
         target.resolve("/base/path");
@@ -34,7 +34,7 @@ public class AssetLocationTest {
     }
 
     @Test
-    public void testResolveRelativeWithScheme() throws Exception {
+    void resolveRelativeWithScheme() throws Exception {
         AssetLocation target = new AssetLocation("file:file.name");
 
         target.resolve("/base/path/");
@@ -43,7 +43,7 @@ public class AssetLocationTest {
     }
 
     @Test
-    public void testResolveAbsolute() throws Exception {
+    void resolveAbsolute() throws Exception {
         assertThatThrownBy(() -> {
             AssetLocation target = new AssetLocation("/file.name");
 
@@ -52,7 +52,7 @@ public class AssetLocationTest {
     }
 
     @Test
-    public void testResolveAbsoluteWithScheme() throws Exception {
+    void resolveAbsoluteWithScheme() throws Exception {
         assertThatThrownBy(() -> {
             AssetLocation target = new AssetLocation("file:/file.name");
             target.resolve("/base/path/");
@@ -61,7 +61,7 @@ public class AssetLocationTest {
     }
 
     @Test
-    public void testResolveWhenNavigatingUpPath() throws Exception {
+    void resolveWhenNavigatingUpPath() throws Exception {
         assertThatThrownBy(() -> {
 
             AssetLocation target = new AssetLocation("../../file.name");

@@ -25,10 +25,10 @@ import static nl.vpro.i18n.Locales.NETHERLANDISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-public class SubtitlesTest {
+final class SubtitlesTest {
 
     @Test
-    public void testMarshalToXml()  {
+    void marshalToXml()  {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,  "WEBVTT\n\n1\n00:00:00.000 --> 00:01:04.000\nbla\n\n");
         subtitles.setCreationInstant(Instant.ofEpochMilli(0));
         subtitles.setLastModifiedInstant(Instant.ofEpochMilli(0));
@@ -43,7 +43,7 @@ public class SubtitlesTest {
     }
 
     @Test
-    public void testUnmarshallFromXml()  {
+    void unmarshallFromXml()  {
         String xml =
             """
             <subtitles mid="VPRO_1234" offset="P0DT0H2M0.000S"  type="CAPTION" xml:lang="nl-NL"  owner="BROADCASTER" workflow="FOR_PUBLICATION" xmlns="urn:vpro:media:subtitles:2009">
@@ -62,7 +62,7 @@ public class SubtitlesTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234",
             Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,
             """
@@ -97,7 +97,7 @@ public class SubtitlesTest {
     }
 
     @Test
-    public void from() {
+    void from() {
         Subtitles subtitles = Subtitles.from(List.of(
                 StandaloneCue.tt888(
                     Cue.forMid("mid")
@@ -126,7 +126,7 @@ public class SubtitlesTest {
     }
 
     @Test
-    public void guessFormat() {
+    void guessFormat() {
         Subtitles subtitles = Subtitles.builder()
             .value(getClass().getResourceAsStream("/WO_NPO_14933889.vtt"))
             .build();
@@ -136,7 +136,7 @@ public class SubtitlesTest {
 
     @Test
     @Disabled("fails")
-    public void guessFormat2() {
+    void guessFormat2() {
         Subtitles subtitles = Subtitles.builder()
             .value(getClass().getResourceAsStream("/KN_1729896.txt"))
             .build();

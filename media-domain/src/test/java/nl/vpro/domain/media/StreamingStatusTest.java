@@ -12,11 +12,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StreamingStatusTest {
+class StreamingStatusTest {
 
 
     @Test
-    public void unmarshal() {
+    void unmarshal() {
         String xml =
             "<streamingstatus withDrm=\"ONLINE\"/>";
 
@@ -30,7 +30,7 @@ public class StreamingStatusTest {
 
 
     @Test
-    public void testMarshalToXml() {
+    void marshalToXml() {
         StreamingStatusImpl status = new StreamingStatusImpl();
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 
@@ -40,7 +40,7 @@ public class StreamingStatusTest {
 
 
     @Test
-    public void testMarshalJson() {
+    void marshalJson() {
         StreamingStatusImpl status = new StreamingStatusImpl();
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 
@@ -59,7 +59,7 @@ public class StreamingStatusTest {
     /*  displayName
      *  The DRM status offline date is in the far future, the long display notation is expected
      */
-    public void displayName() {
+    void displayName() {
         StreamingStatus status = StreamingStatusImpl.builder()
             .withDrmOffline(LocalDate.of(2200, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
             .withDrm(StreamingStatus.Value.ONLINE)

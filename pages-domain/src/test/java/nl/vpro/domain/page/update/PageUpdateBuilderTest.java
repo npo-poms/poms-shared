@@ -27,17 +27,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.3
  */
-public class PageUpdateBuilderTest {
+class PageUpdateBuilderTest {
 
     @Test
-    public void testPage() {
+    void page() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page, "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>");
         assertThat(result.getType()).isEqualTo(PageType.ARTICLE);
     }
 
     @Test
-    public void testBroadcasters() {
+    void broadcasters() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").broadcasters("VPRO", "VARA").build();
         PageUpdate result = roundTripContains(page,
             "<pageUpdate:broadcaster xmlns:pageUpdate='urn:vpro:pages:update:2013'>VPRO</pageUpdate:broadcaster>",
@@ -47,7 +47,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testPortal() {
+    void portal() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").portal(new PortalUpdate("VproNL", "http://www.vpro.nl")).build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
             """
@@ -59,21 +59,21 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testTitle() {
+    void title() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").title("Page title").build();
         PageUpdate result = roundTripContains(page, "<pageUpdate:title xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">Page title</pageUpdate:title>");
         assertThat(result.getTitle()).isEqualTo("Page title");
     }
 
     @Test
-    public void testSubtitle() {
+    void subtitle() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").subtitle("Page subtitle").build();
         PageUpdate result = roundTripContains(page, "<pageUpdate:subtitle xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">Page subtitle</pageUpdate:subtitle>");
         assertThat(result.getSubtitle()).isEqualTo("Page subtitle");
     }
 
     @Test
-    public void testKeywords() {
+    void keywords() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").keywords("key", "word").build();
         PageUpdate result = roundTripContains(page, "<pageUpdate:keyword xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">key</pageUpdate:keyword>",
             "<pageUpdate:keyword  xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">word</pageUpdate:keyword>"
@@ -82,14 +82,14 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testSummary() {
+    void summary() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").summary("summary").build();
         PageUpdate result = roundTripContains(page, "<pageUpdate:summary  xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">summary</pageUpdate:summary>");
         assertThat(result.getSummary()).isEqualTo("summary");
     }
 
     @Test
-    public void testParagraphs() {
+    void paragraphs() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").paragraphs(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null)).build();
         PageUpdate result = roundTripContains(page, """
             <pageUpdate:paragraphs xmlns:pageUpdate="urn:vpro:pages:update:2013">
@@ -104,7 +104,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testTags() {
+    void tags() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").tags("tag1", "tag2").build();
         PageUpdate result = roundTripContains(page,
             "<pageUpdate:tag xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">tag1</pageUpdate:tag>",
@@ -113,7 +113,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testLinks() {
+    void links() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").links(new LinkUpdate("http://www.vpro.nl", "Link text")).build();
         PageUpdate result = roundTripContains(page, """
             <pageUpdate:link pageRef="http://www.vpro.nl" xmlns:pageUpdate="urn:vpro:pages:update:2013">
@@ -123,7 +123,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testEmbeds() {
+    void embeds() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").embeds(new EmbedUpdate("MID_1234", "Title", "Description")).build();
         PageUpdate result = roundTripContains(page, """
             <pageUpdate:embeds xmlns:pageUpdate="urn:vpro:pages:update:2013">
@@ -136,7 +136,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testImages() {
+    void images() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").images(new ImageUpdate(new Image("http://somewhere"))).build();
         PageUpdate result = roundTripContains(page, """
             <pageUpdate:image xmlns:pageUpdate="urn:vpro:pages:update:2013">
@@ -149,7 +149,7 @@ public class PageUpdateBuilderTest {
 
 
     @Test
-    public void testGenres() {
+    void genres() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").genres("3.0.1.1.11").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
             """
@@ -163,7 +163,7 @@ public class PageUpdateBuilderTest {
 
 
     @Test
-    public void testDates() {
+    void dates() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www/vpro.nl")
             .publishStart(TEST_INSTANT)
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
@@ -177,7 +177,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testDatesJson() {
+    void datesJson() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www/vpro.nl")
             .publishStart(TEST_INSTANT)
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
@@ -198,7 +198,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testExample() {
+    void example() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl/article").example()
             .build();
         Writer writer = new StringWriter();
@@ -207,7 +207,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testFromPage() {
+    void fromPage() {
         PageUpdate page = PageUpdateBuilder.page(PageBuilder.article().broadcasters(new Broadcaster("VPRO"), (Broadcaster) null).build()).build();
         Writer writer = new StringWriter();
         JAXB.marshal(page, writer);

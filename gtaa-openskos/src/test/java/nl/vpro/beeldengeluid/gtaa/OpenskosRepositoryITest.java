@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "HttpUrlsUsage"})
 @Slf4j
-public class OpenskosRepositoryITest {
+class OpenskosRepositoryITest {
 
     @BeforeEach
     public void setUp() {

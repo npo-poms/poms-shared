@@ -10,7 +10,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author r.jansen
  */
 @Deprecated
-public class PlayerDomainSerializeTest {
+class PlayerDomainSerializeTest {
 
     PlayerRequest playerRequest = PlayerRequest.builder()
             .mid("MID")
@@ -23,7 +23,7 @@ public class PlayerDomainSerializeTest {
             .atInternetSiteId("324242-jongstleden-222")
             .build();
     @Test
-    public void testRequestJson() {
+    void requestJson() {
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(playerRequest,
             """
@@ -40,7 +40,7 @@ public class PlayerDomainSerializeTest {
     }
 
     @Test
-    public void testResponse() {
+    void response() {
         PlayerResponse playerResponse = PlayerResponse.builder()
             .mid("eenmid")
             .token("b8a1458f-2ece-488f-8178-c0511dec39a8")

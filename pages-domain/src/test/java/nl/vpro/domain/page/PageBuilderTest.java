@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class PageBuilderTest {
+class PageBuilderTest {
 
     ClassificationService classificationService = MediaClassificationService.getInstance();
 
@@ -30,7 +30,7 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testSortDate() {
+    void sortDate() {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" type=\"ARTICLE\" publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
@@ -39,7 +39,7 @@ public class PageBuilderTest {
 
     }
     @Test
-    public void testSortDateJson() {
+    void sortDateJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1460973600000,\"publishStart\":1460973600000}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);
@@ -49,7 +49,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testCreationDateJson() {
+    void creationDateJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).creationDate(TEST_INSTANT).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1460973600000,\"creationDate\":1460973600000}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);
@@ -60,53 +60,53 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testTitle() {
+    void title() {
         assertEquals("title", PageBuilder.page(PageType.ARTICLE).title("title").build().getTitle());
     }
 
     @Test
-    public void testParagraph() {
+    void paragraph() {
         assertEquals(Arrays.asList(new Paragraph(null, "body", null)), PageBuilder.page(PageType.ARTICLE).paragraphs(new Paragraph(null, "body", null)).build().getParagraphs());
     }
 
     @Test
-    public void testUrl() {
+    void url() {
         assertThat(PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").build().getUrl()).isEqualTo("http://www.vpro.nl");
     }
 
     @Test
-    public void testPortal() {
+    void portal() {
         Portal portal = new Portal("VPRONL", "http://vpro.nl", "title");
         assertThat(PageBuilder.page(PageType.ARTICLE).portal(portal).build().getPortal()).isEqualTo(portal);
     }
 
     @Test
-    public void testMainImage() {
+    void mainImage() {
         assertThat(PageBuilder.page(PageType.ARTICLE).image("http://www.vpro.nl/eenofanderplaatje.png").build().getImages().get(0).getUrl()).isEqualTo("http://www.vpro.nl/eenofanderplaatje.png");
     }
 
     @Test
-    public void testSummary() {
+    void summary() {
         assertEquals("summary", PageBuilder.page(PageType.ARTICLE).summary("summary").build().getSummary());
     }
 
     @Test
-    public void getBroadcasters() {
+    void getBroadcasters() {
         assertThat(PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("VPRO"), new Broadcaster("KRO")).build().getBroadcasters()).containsExactly(new Broadcaster("VPRO"), new Broadcaster("KRO"));
     }
 
     @Test
-    public void testStatRefs() {
+    void statRefs() {
         assertEquals(PageBuilder.page(PageType.ARTICLE).statRefs("comscore1", "comscore2").build().getStatRefs(), Arrays.asList("comscore1", "comscore2"));
     }
 
     @Test
-    public void testAlternativeUrls() {
+    void alternativeUrls() {
         assertEquals(PageBuilder.page(PageType.ARTICLE).alternativeUrls("http://www.vpro.nl", "http://www.cinema.nl/").build().getAlternativeUrls(), Arrays.asList("http://www.vpro.nl", "http://www.cinema.nl/"));
     }
 
     @Test
-    public void testGenres() {
+    void genres() {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String test =
             """
@@ -122,7 +122,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testGenresJson() throws IOException {
+    void genresJson() throws IOException {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String result = Jackson2Mapper.getInstance().writer().writeValueAsString(page);
         Jackson2TestUtil.assertThatJson(result).isSimilarTo("{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"url\":\"http://www.vpro.nl\",\"genres\":[{\"id\":\"3.0.1.1.4\",\"terms\":[\"Jeugd\",\"Sport\"],\"displayName\":\"Jeugd - Sport\"}]}");
@@ -131,7 +131,7 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testLastPublished() {
+    void lastPublished() {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
         String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" type=\"ARTICLE\" lastPublished=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
@@ -139,7 +139,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testLastPublishedJson() {
+    void lastPublishedJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"lastPublished\":0}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);

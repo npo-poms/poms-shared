@@ -16,10 +16,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ProgramTest {
+class ProgramTest {
 
     @Test
-    public void testGetAncestors() throws CircularReferenceException {
+    void getAncestors() throws CircularReferenceException {
         Program program = new Program(1);
         program.setType(ProgramType.BROADCAST);
         Group group1 = new Group(2);
@@ -40,7 +40,7 @@ public class ProgramTest {
     }
 
     @Test
-    public void testCreateMemberOfWHenCircular() {
+    void createMemberOfWHenCircular() {
         assertThatThrownBy(() -> {
             Program program = new Program(1);
             program.setType(ProgramType.BROADCAST);
@@ -56,7 +56,7 @@ public class ProgramTest {
     }
 
     @Test
-    public void testCreateEpisodeOfWhenCircular() {
+    void createEpisodeOfWhenCircular() {
         assertThatThrownBy(() -> {
 
             Program program = new Program(1);
@@ -73,7 +73,7 @@ public class ProgramTest {
     }
 
     @Test
-    public void moveEvent() throws JsonProcessingException {
+    void moveEvent() throws JsonProcessingException {
         Program p = new Program();
         p.setMid("POW_05759681");
         ScheduleEvent s = Jackson2Mapper.getLenientInstance().readValue(

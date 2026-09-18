@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.8
  */
-public class TextMatcherListTest {
+class TextMatcherListTest {
 
     @Test
     void marshal() {

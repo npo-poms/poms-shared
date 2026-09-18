@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class GTAANewGenericConceptTest {
+class GTAANewGenericConceptTest {
 
     final JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
 
     @Test
-    public void json() {
+    void json() {
 
         GTAANewGenericConcept person =
             GTAANewGenericConcept.builder()
@@ -42,7 +42,7 @@ public class GTAANewGenericConceptTest {
     }
 
      @Test
-    public void jsonWithoutType() throws IOException {
+    void jsonWithoutType() throws IOException {
         String json = """
             {
               "name" : "new genre",
@@ -61,7 +61,7 @@ public class GTAANewGenericConceptTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         GTAANewGenericConcept person = GTAANewGenericConcept
             .builder()
             .scheme(Scheme.maker)

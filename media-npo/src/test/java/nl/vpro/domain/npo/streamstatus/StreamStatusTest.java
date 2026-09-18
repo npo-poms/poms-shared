@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class StreamStatusTest {
+final class StreamStatusTest {
 
 
     public static List<String> xmls() throws IOException {

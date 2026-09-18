@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class OrTest {
+class OrTest {
 
     @BeforeEach
     public void setup() {
@@ -26,7 +26,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAndBinding() {
+    void andBinding() {
         Or in = new Or(new And());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -38,7 +38,7 @@ public class OrTest {
     }
 
     @Test
-    public void testOrBinding() {
+    void orBinding() {
         Or in = new Or(new Or());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -50,7 +50,7 @@ public class OrTest {
     }
 
     @Test
-    public void testNotBinding() {
+    void notBinding() {
         Or in = new Or(new Not());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -62,7 +62,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvTypeBinding() {
+    void avTypeBinding() {
         Or in = new Or(new AvTypeConstraint());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -74,7 +74,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() {
+    void avFileFormatBinding() {
         Or in = new Or(new AvFileFormatConstraint("MP3"));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -86,7 +86,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() {
+    void avFileExtensionBinding() {
         Or in = new Or(new AVFileExtensionConstraint());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -98,7 +98,7 @@ public class OrTest {
     }
 
     @Test
-    public void testChannelBinding() {
+    void channelBinding() {
         Or in = new Or(new ChannelConstraint(Channel.NED1));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -112,7 +112,7 @@ public class OrTest {
 
 
     @Test
-    public void testApplyWhenEmpty() {
+    void applyWhenEmpty() {
         Or constraint = new Or();
         assertThat(constraint.test(null)).isFalse();
         assertThat(constraint.testWithReason(null).applies()).isFalse();
@@ -122,7 +122,7 @@ public class OrTest {
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Or constraint = new Or(
             MediaConstraints.alwaysFalse(),
             MediaConstraints.alwaysFalse()
@@ -136,7 +136,7 @@ public class OrTest {
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Or constraint = new Or(
             MediaConstraints.alwaysTrue(),
             MediaConstraints.alwaysFalse()

@@ -14,10 +14,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class RelationFacetListTest {
+class RelationFacetListTest {
 
     @Test
-    public void testJaxbBinding() {
+    void jaxbBinding() {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
         RelationFacet facet = new RelationFacet();
@@ -42,7 +42,7 @@ public class RelationFacetListTest {
     }
 
     @Test
-    public void testJsonBinding() {
+    void jsonBinding() {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
         RelationFacet facet = new RelationFacet();
@@ -58,7 +58,7 @@ public class RelationFacetListTest {
     }
 
     @Test
-    public void testJsonBindingList() throws Exception {
+    void jsonBindingList() throws Exception {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
 
@@ -84,7 +84,7 @@ public class RelationFacetListTest {
     }
 
     @Test
-    public void testJsonBindingListWithFilter() throws Exception {
+    void jsonBindingListWithFilter() throws Exception {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
 
@@ -115,7 +115,7 @@ public class RelationFacetListTest {
 
 
     @Test
-    public void testSubSearch() {
+    void subSearch() {
         String example = "{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}";
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("EO", Match.NOT)));
@@ -124,7 +124,7 @@ public class RelationFacetListTest {
 
 
     @Test
-    public void testRelationFacet() {
+    void relationFacet() {
         String example = "{\"threshold\":0,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}}";
         RelationFacet facet  = new RelationFacet();
         facet.setThreshold(0);
@@ -136,7 +136,7 @@ public class RelationFacetListTest {
     }
 
     @Test
-    public void testJsonBindingListWithSubSearch() throws Exception {
+    void jsonBindingListWithSubSearch() throws Exception {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("EO", Match.NOT)));
 

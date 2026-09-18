@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3.1
  */
-public class DateConstraintTest {
+class DateConstraintTest {
 
     DateConstraint constraint = new DateConstraint() {
         @Override
@@ -25,14 +25,14 @@ public class DateConstraintTest {
     Instant MILLENIUM_START = LocalDate.of(2000, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
 
     @Test
-    public void parser() {
+    void parser() {
 
         constraint.setDate(" 2000-01-01 midnight +1");
         assertThat(constraint.getDateAsInstant()).isEqualTo(MILLENIUM_START);
     }
 
     @Test
-    public void applyDateOperators() {
+    void applyDateOperators() {
 
         constraint.setDate("2000-01-01 midnight +1");
         constraint.setOperator(Operator.GT);

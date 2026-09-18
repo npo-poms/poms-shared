@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class DurationRangeMatcherListJsonTest {
+class DurationRangeMatcherListJsonTest {
 
     @Test
-    public void testGetValueJson() throws Exception {
+    void getValueJson() throws Exception {
         DurationRangeMatcher in = new DurationRangeMatcher(Duration.ZERO, Duration.ofHours(1), false, Match.NOT);
         DurationRangeMatcherList list = new DurationRangeMatcherList(in);
 
@@ -36,7 +36,7 @@ public class DurationRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJson() throws Exception {
+    void getValueFromJson() throws Exception {
         DurationRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}]", DurationRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -45,7 +45,7 @@ public class DurationRangeMatcherListJsonTest {
 
 
     @Test
-    public void testGetValueFromJsonSingular() throws Exception {
+    void getValueFromJsonSingular() throws Exception {
         DurationRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}", DurationRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
@@ -54,7 +54,7 @@ public class DurationRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueJsonInverse() throws Exception {
+    void getValueJsonInverse() throws Exception {
         DurationRangeMatcher in = new DurationRangeMatcher(Duration.ZERO, Duration.ofHours(1), false, Match.NOT);
         DurationRangeMatcherList list = new DurationRangeMatcherList(Collections.singletonList(in), Match.NOT);
 
@@ -69,7 +69,7 @@ public class DurationRangeMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueFromJsonInverse() throws Exception {
+    void getValueFromJsonInverse() throws Exception {
         DurationRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"value\":[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}],\"match\":\"not\"}", DurationRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);

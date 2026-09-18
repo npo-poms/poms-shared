@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GTAAGeographicNameProviderTest {
 
     @Test
-    public void stream(WireMockRuntimeInfo runtimeInfo) throws IOException {
+    void stream(WireMockRuntimeInfo runtimeInfo) throws IOException {
         create(runtimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(
@@ -40,7 +40,7 @@ class GTAAGeographicNameProviderTest {
     }
 
     @Test
-    public void getByCode(WireMockRuntimeInfo runtimeInfo) throws IOException {
+    void getByCode(WireMockRuntimeInfo runtimeInfo) throws IOException {
         create(runtimeInfo.getHttpBaseUrl());
 
         WireMock.stubFor(

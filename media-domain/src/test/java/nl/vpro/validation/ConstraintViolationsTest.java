@@ -14,10 +14,10 @@ import nl.vpro.domain.media.support.Title;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConstraintViolationsTest {
+class ConstraintViolationsTest {
 
     @Test
-    public void testHumanReadable() {
+    void humanReadable() {
         Title title = new Title("<h1>bla</h1", OwnerType.BROADCASTER, TextualType.MAIN);
         try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
             Collection<ConstraintViolation<Title>> violations = factory.getValidator().validate(title);

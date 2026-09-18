@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class MemberRefTest {
+class MemberRefTest {
 
     MemberRef ref = new MemberRef();
     {
@@ -41,7 +41,7 @@ public class MemberRefTest {
                 .build());
     }
     @Test
-    public void xml() {
+    void xml() {
 
         JAXBTestUtil.roundTripAndSimilar(ref,
             """
@@ -53,7 +53,7 @@ public class MemberRefTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(), ref,
             """
                 {
@@ -77,7 +77,7 @@ public class MemberRefTest {
     }
 
     @Test
-    public void withRecursive() throws JsonProcessingException {
+    void withRecursive() throws JsonProcessingException {
 
         String example  = """
             {

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-public class InstantRangeIntervalTest {
+class InstantRangeIntervalTest {
 
     private final String[][] exampleIntervals = {
         {"2 YEAR", "2016"},
@@ -30,14 +30,14 @@ public class InstantRangeIntervalTest {
     };
 
     @Test
-    public void testIllegal() {
+    void illegal() {
         assertThatThrownBy(() -> {
             new DateRangeInterval("foo");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void testParse() {
+    void parse() {
         Date date = Date.from(LocalDate.of(2016, 5, 6).atTime(14, 21).atZone(Schedule.ZONE_ID).toInstant());
         for (String[] i : exampleIntervals) {
             DateRangeInterval interval = new DateRangeInterval(i[0]);
@@ -49,7 +49,7 @@ public class InstantRangeIntervalTest {
     }
 
     @Test
-    public void testMatchesWeek() {
+    void matchesWeek() {
         DateRangeInterval interval = new DateRangeInterval("2WEEK");
 
         ZonedDateTime begin = ZonedDateTime.parse("2015-01-02T00:00:00Z")
@@ -66,7 +66,7 @@ public class InstantRangeIntervalTest {
 
     @Test
     @Disabled
-    public void testNoMatchesWeek() {
+    void noMatchesWeek() {
         DateRangeInterval interval = new DateRangeInterval("2WEEK");
 
 
@@ -84,7 +84,7 @@ public class InstantRangeIntervalTest {
 
 
     @Test
-    public void testMatchesYear() {
+    void matchesYear() {
         DateRangeInterval interval = new DateRangeInterval("YEAR");
 
         ZonedDateTime begin = ZonedDateTime.parse("2015-01-02T00:00:00Z")
@@ -96,7 +96,7 @@ public class InstantRangeIntervalTest {
     }
 
     @Test
-    public void testNoMatchesYear() {
+    void noMatchesYear() {
         DateRangeInterval interval = new DateRangeInterval("YEAR");
 
         ZonedDateTime begin = ZonedDateTime.parse("2015-01-02T00:00:00Z")

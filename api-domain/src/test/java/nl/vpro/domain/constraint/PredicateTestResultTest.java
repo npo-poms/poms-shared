@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.8
  */
 @Slf4j
-public class PredicateTestResultTest {
+class PredicateTestResultTest {
 
 
     @BeforeEach
@@ -29,7 +29,7 @@ public class PredicateTestResultTest {
     }
 
     @Test
-    public void and() {
+    void and() {
         AbstractAnd<String> constraint = new AbstractAnd<String>(Constraints.alwaysTrue(), Constraints.alwaysFalse(), Constraints.alwaysFalse()) {
         };
         AndPredicateTestResult result = constraint.testWithReason("foobar");
@@ -43,7 +43,7 @@ public class PredicateTestResultTest {
     }
 
     @Test
-    public void or() {
+    void or() {
         Constraint<String> constraint = new AbstractOr<String>(
             Constraints.alwaysFalse(),
             Constraints.alwaysFalse()
@@ -56,7 +56,7 @@ public class PredicateTestResultTest {
     }
 
     @Test
-    public void xml() {
+    void xml() {
         PredicateTestResult result =  Constraints.<String>alwaysFalse().testWithReason("bla");
 
         PredicateTestResult rounded = JAXBTestUtil.roundTripAndSimilar(result, """
@@ -69,7 +69,7 @@ public class PredicateTestResultTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         log.info("{}", Locale.getDefault());
 
         PredicateTestResult result = Constraints.<String>alwaysFalse()

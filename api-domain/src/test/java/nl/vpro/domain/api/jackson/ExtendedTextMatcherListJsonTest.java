@@ -15,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.6
  */
-public class ExtendedTextMatcherListJsonTest {
+class ExtendedTextMatcherListJsonTest {
 
     @Test
-    public void testGetValueJson() throws Exception {
+    void getValueJson() throws Exception {
         ExtendedTextMatcherList in = new ExtendedTextMatcherList(new ExtendedTextMatcher("title"));
 
         StringWriter writer = new StringWriter();
@@ -28,7 +28,7 @@ public class ExtendedTextMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueJsonIgnoreCase() {
+    void getValueJsonIgnoreCase() {
         ExtendedTextMatcherList in = new ExtendedTextMatcherList(new ExtendedTextMatcher("title", false));
 
         ExtendedTextMatcherList out = Jackson2TestUtil.roundTripAndSimilar(in, """

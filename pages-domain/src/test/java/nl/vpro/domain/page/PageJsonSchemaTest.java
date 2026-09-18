@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class PageJsonSchemaTest {
+class PageJsonSchemaTest {
 
     private PageBuilder builder;
 
@@ -32,7 +32,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testBroadcasters() throws Exception {
+    void broadcasters() throws Exception {
         Page news = builder.broadcasters(new Broadcaster("VPRO", "VPRO")).build();
 
         news = roundTripContains(news, "\"broadcasters\":[{\"id\":\"VPRO\",\"value\":\"VPRO\"}]}");
@@ -41,7 +41,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testCrids() throws Exception {
+    void crids() throws Exception {
         Page news = builder.crids("crid://vpro.nl/article/12345").build();
 
         news = roundTripContains(news, "\"crids\":[\"crid://vpro.nl/article/12345\"]}");
@@ -51,7 +51,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testPortalWithSection() {
+    void portalWithSection() {
         Portal portal = new Portal("VPRONL", "http://vpro.nl", "VPRO");
         Section section = new Section("/tegenlicht", "Tegenlicht");
         portal.setSection(section);
@@ -78,7 +78,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testParagraphs() throws Exception {
+    void paragraphs() throws Exception {
         Page news = builder.paragraphs(new Paragraph("Title", "Description", new Image("http://image.domain", "Subscript"))).build();
 
         news = roundTripContains(news, "\"paragraphs\":[{\"title\":\"Title\",\"body\":\"Description\",\"image\":{\"url\":\"http://image.domain\",\"title\":\"Subscript\"}}]");
@@ -88,7 +88,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testEmbeds() throws Exception {
+    void embeds() throws Exception {
         Page news = builder.embeds(new Embed(new Program(), "Title", "Description")).build();
 
         news = roundTripContains(news, "\"embeds\":[{\"title\":\"Title\",\"description\":\"Description\",\"media\":{\"objectType\":\"program\"");
@@ -98,7 +98,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testImages() throws Exception {
+    void images() throws Exception {
         Page news = builder.image("http://images.poms.omroep.nl/1234").build();
 
         news = roundTripContains(news, "\"images\":[{\"url\":\"http://images.poms.omroep.nl/1234\"}]");
@@ -109,7 +109,7 @@ public class PageJsonSchemaTest {
 
 
     @Test
-    public void testGenres() throws Exception {
+    void genres() throws Exception {
         ClassificationService classificationService = ClassificationServiceImpl.fromClassPath("nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         Page news = builder.genres(classificationService.getTerm("3.0.1.1.11")).build();
 
@@ -121,7 +121,7 @@ public class PageJsonSchemaTest {
 
 
     @Test
-    public void testRelations() {
+    void relations() {
         Page news = builder.relationText(RelationDefinition.of("CINEMA_DIRECTOR", "VPRO"), "Stanley Kubrick").build();
 
         news = Jackson2TestUtil.roundTripAndSimilar(news, "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"relations\":[{\"value\":\"Stanley Kubrick\",\"type\":\"CINEMA_DIRECTOR\",\"broadcaster\":\"VPRO\"}]}");
@@ -131,7 +131,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testDateFields() {
+    void dateFields() {
         Instant date = LocalDateTime.of(LocalDate.of(2016, 4, 25), LocalTime.NOON).atZone(Schedule.ZONE_ID).toInstant();
         Page news = builder.creationDate(date).lastModified(date.plus(5, ChronoUnit.MINUTES)).lastPublished(date.plus(10, ChronoUnit.MINUTES)).build();
         news = Jackson2TestUtil.roundTripAndSimilar(news, "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1461578400000,\"creationDate\":1461578400000,\"lastModified\":1461578700000,\"lastPublished\":1461579000000}");

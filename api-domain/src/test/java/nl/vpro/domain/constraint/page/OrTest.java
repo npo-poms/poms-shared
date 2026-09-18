@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class OrTest {
+class OrTest {
 
     @Test
-    public void testGetConstraints() {
+    void getConstraints() {
         Or in = new Or(new BroadcasterConstraint("VPRO"), new PortalConstraint("http://www.vpro.nl"));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -29,13 +29,13 @@ public class OrTest {
     }
 
     @Test
-    public void testApplyWhenEmpty() {
+    void applyWhenEmpty() {
         Or constraint = new Or();
         assertThat(constraint.test(null)).isFalse();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Or constraint = new Or(
             PageConstraints.alwaysFalse()
         );
@@ -43,7 +43,7 @@ public class OrTest {
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Or constraint = new Or(
             PageConstraints.alwaysFalse(),
             PageConstraints.alwaysTrue()

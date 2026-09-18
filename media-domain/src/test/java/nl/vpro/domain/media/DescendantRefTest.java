@@ -13,7 +13,7 @@ import org.meeuw.theories.BasicObjectTheory;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
-public class DescendantRefTest
+class DescendantRefTest
     // extends ComparableTest<DescendantRef> // TODO DescendantRef doesn't properly implement Comparable
     implements BasicObjectTheory<DescendantRef> {
 

@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Michiel Meeuwissen
  * @since 2.1
  */
-public class ChannelTest {
+class ChannelTest {
 
     @Test
-    public void testNoDuplicateStrings() {
+    void noDuplicateStrings() {
         Set<String> strings = new HashSet<>();
         for (Channel c: Channel.values()) {
             if (!strings.add(c.toString())) {
@@ -31,18 +31,18 @@ public class ChannelTest {
 
     @Test
     @Disabled("sadly fails, but we can't really fix it without huge republications.")
-    public void testJson() throws JsonProcessingException {
+    void json() throws JsonProcessingException {
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(Channel._101_)).isEqualTo("\"101_\"");
     }
 
 
     @Test
-    public void testJson2() throws JsonProcessingException {
+    void json2() throws JsonProcessingException {
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(Channel.NED1)).isEqualTo("\"NED1\"");
     }
 
     @Test
-    public void testGetValues() {
+    void getValues() {
         for (Channel c : Channel.values()) {
             assertThat(Channel.valuesOf(Collections.singletonList(c.name())).get(0)).isEqualTo(c);
         }
@@ -51,13 +51,13 @@ public class ChannelTest {
     }
 
     @Test
-    public void testByXmlValue() {
+    void byXmlValue() {
         assertThat(Channel.valueOfXml("101_")).isEqualTo(Channel._101_);
         assertThat(Channel.valueOfXml("10TB")).isEqualTo(Channel._10TB);
     }
 
     @Test
-    public void headRequests() {
+    void headRequests() {
         for(Channel c : Channel.values()) {
             String website = c.getWebsite();
 

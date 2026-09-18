@@ -22,11 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Rico Jansen
  * @since 3.0
  */
-public class ScheduleEventSearchTest {
+class ScheduleEventSearchTest {
 
 
     @Test
-    public void testGetBeginXml() {
+    void getBeginXml() {
         Instant begin = Instant.EPOCH;
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, begin, null);
@@ -41,7 +41,7 @@ public class ScheduleEventSearchTest {
     }
 
     @Test
-    public void testGetEndXml() {
+    void getEndXml() {
         Instant end = Instant.EPOCH;
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = ScheduleEventSearch.builder()
@@ -63,7 +63,7 @@ public class ScheduleEventSearchTest {
 
 
     @Test
-    public void testApply() {
+    void apply() {
         ScheduleEventSearch instance = getInstance();
         ScheduleEvent event = new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(100));
 

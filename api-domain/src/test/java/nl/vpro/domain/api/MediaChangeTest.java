@@ -16,10 +16,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MediaChangeTest {
+class MediaChangeTest {
 
     @Test
-    public void tailJson() throws IOException {
+    void tailJson() throws IOException {
         MediaChange tail = MediaChange.tail(100);
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(tail)).isEqualTo("{\"revision\":100,\"tail\":true}");
 
@@ -28,7 +28,7 @@ public class MediaChangeTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
@@ -58,7 +58,7 @@ public class MediaChangeTest {
     }
 
     @Test
-    public void xml() {
+    void xml() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
@@ -87,7 +87,7 @@ public class MediaChangeTest {
 
 
     @Test
-    public void jsonDelete() {
+    void jsonDelete() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
@@ -114,7 +114,7 @@ public class MediaChangeTest {
     }
 
     @Test
-    public void jsonDeleteTree() throws IOException {
+    void jsonDeleteTree() throws IOException {
         Instant publishDate = Instant.ofEpochMilli(1533041167873L);
         String json="{\"publishDate\":1533041167873,\"mid\":\"POW_00107979\",\"deleted\":true}";
         MediaChange change = Jackson2Mapper.getPrettyInstance().readValue(json, MediaChange.class);
@@ -125,7 +125,7 @@ public class MediaChangeTest {
 
 
     @Test
-    public void jsonRealPublishDate() {
+    void jsonRealPublishDate() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")

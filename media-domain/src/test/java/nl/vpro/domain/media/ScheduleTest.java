@@ -19,10 +19,10 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ScheduleTest {
+class ScheduleTest {
 
     @Test
-    public void testUnmarshalForMISDuplicatesOnClearScheduleEvents() {
+    void unmarshalForMISDuplicatesOnClearScheduleEvents() {
 
         MediaTable schedule = exampleTable();
         final StringWriter writer = new StringWriter();
@@ -39,7 +39,7 @@ public class ScheduleTest {
     }
 
     @Test
-     public void json() {
+     void json() {
         Schedule schedule = example();
 
         assertThatJson(schedule).isSimilarTo(
@@ -107,7 +107,7 @@ public class ScheduleTest {
 
 
     @Test
-    public void testGuideDay() {
+    void guideDay() {
 
         fixedClock(LocalDateTime.of(2022, 12, 12, 5, 58));
         assertThat(Schedule.guideDay()).isEqualTo("2022-12-12");

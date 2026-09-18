@@ -17,14 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  */
 @Slf4j
-public class AuthorityLocationsTest {
+class AuthorityLocationsTest {
 
     AuthorityLocations locations = new AuthorityLocations(null);
 
 
 
     @Test
-    public void createWebOnlyPredictionIfNeeded() {
+    void createWebOnlyPredictionIfNeeded() {
         Program program = new Program();
         program.setMid("mid_1234");
         Instant stop1 = LocalDateTime.of(2018, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
@@ -45,7 +45,7 @@ public class AuthorityLocationsTest {
 
     @Test
     @Disabled("Fails but no time yet to fix.")
-    public void createWebOnlyPredictionIfNeeded2() {
+    void createWebOnlyPredictionIfNeeded2() {
         Program program = new Program();
         program.setMid("mid_1234");
         Instant stop1 = LocalDateTime.of(2018, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
@@ -65,7 +65,7 @@ public class AuthorityLocationsTest {
 
 
     @Test
-    public void realizeStreamingPlatformIfNeededVideo() {
+    void realizeStreamingPlatformIfNeededVideo() {
         Program program = new Program();
         program.setMid("MID-123");
         program.setAVType(AVType.VIDEO);
@@ -92,7 +92,7 @@ public class AuthorityLocationsTest {
 
 
     @Test
-    public void realizeStreamingPlatformIfNeededAudio() {
+    void realizeStreamingPlatformIfNeededAudio() {
         Program program = new Program();
         program.setMid("MID-123");
         program.setAVType(AVType.AUDIO);

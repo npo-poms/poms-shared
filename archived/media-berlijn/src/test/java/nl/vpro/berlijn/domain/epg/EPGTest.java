@@ -14,7 +14,7 @@ import nl.vpro.berlijn.domain.Util;
 
 
 @Log4j2
-public class EPGTest {
+final class EPGTest {
 
 
     public static Stream<byte[]> epg() {

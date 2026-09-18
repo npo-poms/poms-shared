@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Michiel Meeuwissen
  */
-public class SinceToTimeStampServiceImplTest {
+class SinceToTimeStampServiceImplTest {
 
     private final SinceToTimeStampServiceImpl impl = new SinceToTimeStampServiceImpl();
 
@@ -21,7 +21,7 @@ public class SinceToTimeStampServiceImplTest {
     }
 
     @Test
-    public void getInstance() {
+    void getInstance() {
         assertThat(impl.getInstance(0L)).isEqualTo(Instant.EPOCH);
 
         long now = System.currentTimeMillis();
@@ -29,7 +29,7 @@ public class SinceToTimeStampServiceImplTest {
     }
 
     @Test
-    public void getInstance2() {
+    void getInstance2() {
         assertThat(impl.getInstance(17019615L).truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2015, 7 , 1, 15, 24, 0).atZone(Schedule.ZONE_ID).toInstant());
 
 
@@ -37,7 +37,7 @@ public class SinceToTimeStampServiceImplTest {
 
 
     @Test
-    public void getInstance3() {
+    void getInstance3() {
         assertThat(impl.getInstance(25387000L)
             .truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2016, 11, 1, 12, 0, 0).atZone(Schedule.ZONE_ID).toInstant());
 
@@ -46,12 +46,12 @@ public class SinceToTimeStampServiceImplTest {
 
 
     @Test
-    public void getInstance4() {
+    void getInstance4() {
 
     }
 
     @Test
-    public void getSince() {
+    void getSince() {
 
     }
 

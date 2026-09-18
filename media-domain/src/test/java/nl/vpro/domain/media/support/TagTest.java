@@ -11,10 +11,10 @@ import org.meeuw.theories.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TagTest implements ComparableTheory<Tag> {
+class TagTest implements ComparableTheory<Tag> {
 
     @Test
-    public void testCaseSensitivity() {
+    void caseSensitivity() {
         Tag t1 = new Tag("tag");
         Tag t2 = new Tag("Tag");
 

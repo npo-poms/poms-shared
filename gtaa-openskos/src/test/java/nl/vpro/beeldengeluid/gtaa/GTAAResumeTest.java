@@ -10,7 +10,7 @@ import nl.vpro.openarchives.oai.ResumptionToken;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GTAAResumeTest {
+class GTAAResumeTest {
 
     private OpenskosRepository gtaaRepository = new OpenskosRepository("", "", null) {
         @Override
@@ -24,7 +24,7 @@ public class GTAAResumeTest {
     };
 
     @Test
-    public void testResume() {
+    void resume() {
         ListRecord listRecord = gtaaRepository.getUpdates(new ResumptionToken());
         assertThat(listRecord).isNotNull();
         assertThat(listRecord.getRecords()).isNotNull();

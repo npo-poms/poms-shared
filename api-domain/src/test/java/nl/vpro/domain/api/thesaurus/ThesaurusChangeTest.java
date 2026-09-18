@@ -9,11 +9,11 @@ import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-public class ThesaurusChangeTest {
+class ThesaurusChangeTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         ThesaurusChange change =
             ThesaurusChange.builder()
                 .id("http://data.beeldengeluid.nl/gtaa/1672221")
@@ -36,7 +36,7 @@ public class ThesaurusChangeTest {
 
 
     @Test
-    public void json() {
+    void json() {
         ThesaurusChange change =
             ThesaurusChange.builder()
                 .id("http://data.beeldengeluid.nl/gtaa/1672221")

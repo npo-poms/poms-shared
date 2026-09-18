@@ -18,7 +18,7 @@ import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ErrorTest {
+class ErrorTest {
 
     @BeforeEach
     public void setup() {
@@ -26,12 +26,12 @@ public class ErrorTest {
     }
 
     @Test
-    public void json() throws IOException {
+    void json() throws IOException {
         assertEquals("{\"status\":404,\"message\":\"bla\"}", Jackson2Mapper.getInstance().writeValueAsString(new Error(404, "bla")));
     }
 
     @Test
-    public void jsonWithPredicate() {
+    void jsonWithPredicate() {
         Error error = new Error(Response.Status.NOT_FOUND, new RuntimeException("bla"), false, true);
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
         assertThatJson(error).isSimilarTo("""
@@ -69,7 +69,7 @@ public class ErrorTest {
     }
 
     @Test
-    public void xmlWithPredicate() {
+    void xmlWithPredicate() {
         Error error = new Error(404, "bla");
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
         assertThatXml(error).isSimilarTo("""

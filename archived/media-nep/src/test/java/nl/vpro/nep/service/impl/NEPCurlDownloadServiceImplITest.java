@@ -18,10 +18,10 @@ import nl.vpro.util.FileSizeFormatter;
  * @since 5.8
  */
 @Slf4j
-public class NEPCurlDownloadServiceImplITest {
+class NEPCurlDownloadServiceImplITest {
 
     @Test
-    public void test() throws IOException {
+    void test() throws IOException {
 
         Instant start = Instant.now();
 

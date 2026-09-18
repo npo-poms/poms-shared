@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Jeroen van Vianen
  * @since 4.9
  */
-public class AgeRatingConstraintTest {
+class AgeRatingConstraintTest {
 
     @BeforeEach
     public void setup() {
@@ -27,25 +27,25 @@ public class AgeRatingConstraintTest {
     }
 
     @Test
-    public void testGetStringValue() {
+    void getStringValue() {
         AgeRatingConstraint in = new AgeRatingConstraint(AgeRating._6);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:ageRatingConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:local=\"uri:local\">6</local:ageRatingConstraint>\n");
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new AgeRatingConstraint().getESPath()).isEqualTo("ageRating");
     }
 
     @Test
-    public void testAgeRating12() {
+    void ageRating12() {
         Program program = MediaTestDataBuilder.program().withAgeRating().build();
         assertThat(new AgeRatingConstraint(AgeRating._12).test(program)).isTrue();
     }
 
     @Test
-    public void testAgeRating6Fails()  {
+    void ageRating6Fails()  {
         Constraint<MediaObject> _6 = new AgeRatingConstraint(AgeRating._6);
         Program program = MediaTestDataBuilder.program().mid("mid_1235").withAgeRating().build();
         assertThat(_6.test(program)).isFalse();

@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.12
  */
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "deprecation"})
-public class KijkwijzerTest {
+class KijkwijzerTest {
 
     @Test
-    public void parse() {
+    void parse() {
         roundTrip("", new Kijkwijzer(null));
         roundTrip("2", new Kijkwijzer(AgeRating._6));
         roundTrip("3", new Kijkwijzer(AgeRating._9));
@@ -28,7 +28,7 @@ public class KijkwijzerTest {
     }
 
     @Test
-    public void donna() {
+    void donna() {
         roundTripDonna("1", new Kijkwijzer(AgeRating.ALL));
         roundTripDonna("2", new Kijkwijzer(AgeRating._6));
         roundTripDonna("3", new Kijkwijzer(AgeRating._12));
@@ -38,7 +38,7 @@ public class KijkwijzerTest {
     }
 
     @Test
-    public void padded() {
+    void padded() {
         roundTripPadded("-1", new Kijkwijzer(AgeRating.NOT_YET_RATED));
 
         roundTripPadded("00", new Kijkwijzer(AgeRating.ALL));
@@ -50,7 +50,7 @@ public class KijkwijzerTest {
     }
 
     @Test
-    public void paddedOrDonna() {
+    void paddedOrDonna() {
 
 
         parsePaddedOrDonna("1", new Kijkwijzer(AgeRating.ALL));

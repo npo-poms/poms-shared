@@ -32,7 +32,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
  * @since 3.4
  */
 @Log4j2
-public class SchemaTest extends AbstractSchemaTest {
+class SchemaTest extends AbstractSchemaTest {
 
     @Override
     protected  Class<?>[] getClasses() {
@@ -73,27 +73,27 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     @Test
-    public void testMedia() throws IOException {
+    void media() throws IOException {
         testNamespace(Xmlns.MEDIA_NAMESPACE);
     }
 
     @Test
-    public void testMediaSearch() throws IOException {
+    void mediaSearch() throws IOException {
         testNamespace(Xmlns.SEARCH_NAMESPACE);
     }
 
     @Test
-    public void testShared() throws IOException {
+    void shared() throws IOException {
         testNamespace(Xmlns.SHARED_NAMESPACE);
     }
 
     @Test
-    public void testUpdate() throws IOException {
+    void update() throws IOException {
         testNamespace(Xmlns.UPDATE_NAMESPACE);
     }
 
     @Test
-    public void testAbsent() throws IOException {
+    void absent() throws IOException {
         testNamespace("");
     }
 
@@ -101,111 +101,111 @@ public class SchemaTest extends AbstractSchemaTest {
      * Checks whether manual XSD contains the correct channels.
      */
     @Test
-    public void testChannels() {
+    void channels() {
         testMediaEnum( "channelEnum", Channel.class);
     }
 
     @Test
-    public void testTextualType() {
+    void textualType() {
         testMediaEnum( "textualTypeEnum", TextualType.class);
     }
 
     @Test
-    public void testProgramType() {
+    void programType() {
         testMediaEnum( "programTypeEnum", ProgramType.class);
     }
 
     @Test
-    public void testGroupType() {
+    void groupType() {
         testMediaEnum( "groupTypeEnum", GroupType.class);
     }
 
     @Test
-    public void testSegmentType() {
+    void segmentType() {
         testMediaEnum( "segmentTypeEnum", SegmentType.class);
     }
 
     @Test
-    public void testMediaType() {
+    void mediaType() {
         testMediaEnum("mediaTypeEnum", MediaType.class);
     }
 
     @Test
-    public void testAgeRatingType() {
+    void ageRatingType() {
         testMediaEnum("ageRatingType", AgeRating.class);
     }
 
     @Test
-    public void testContentRating() {
+    void contentRating() {
         testMediaEnum("contentRatingType", ContentRating.class);
     }
     @Test
-    public void testRoleType() {
+    void roleType() {
         testMediaEnum("roleType", RoleType.class);
     }
 
     @Test
-    public void testIntentionType() {
+    void intentionType() {
         testMediaEnum("intentionEnum", IntentionType.class);
     }
 
     @Test
-    public void testTargetGroup() {
+    void targetGroup() {
         testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
 
     @Test
-    public void testOwnerType() {
+    void ownerType() {
         testSharedEnum("ownerTypeEnum", OwnerType.class);
     }
 
 
     @Test
-    public void testRegion() {
+    void region() {
         testMediaEnum("geoRestrictionEnum", Region.class);
     }
 
 
     @Test
-    public void testAspectRatio() {
+    void aspectRatio() {
         testMediaEnum("aspectRatioEnum", AspectRatio.class);
     }
 
 
     @Test
-    public void testLicense() {
+    void license() {
         //testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
     @Test
-    public void testChapterType() {
+    void chapterType() {
         testMediaEnum("chapterType", ChapterType.class);
 
     }
 
     @Test
-    public void testWorkflow() {
+    void workflow() {
         testSharedEnum("workflowEnumType", Workflow.class);
     }
 
     @Test
-    public void testSubtitlesType() {
+    void subtitlesType() {
         testSharedEnum("subtitlesTypeEnum", SubtitlesType.class);
     }
 
     @Test
-    public void testSubtitlesWorkflow() {
+    void subtitlesWorkflow() {
         testSharedEnum("subtitlesWorkflowEnum", SubtitlesWorkflow.class);
     }
 
     @Test
-    public void testAVType() {
+    void aVType() {
         testMediaEnum("avTypeEnum", AVType.class);
     }
 
     @Test
-    public void testLicenseEnum() {
+    void licenseEnum() {
         testEnum("/nl/vpro/domain/media/vproShared.xsd", "licenseEnum",
             () -> Arrays.stream(License.values())
                 .filter(License::display)
@@ -214,7 +214,7 @@ public class SchemaTest extends AbstractSchemaTest {
 
 
     @Test
-    public void testPlatform() {
+    void platform() {
         testMediaEnum("platformTypeEnum", Platform.class);
     }
 

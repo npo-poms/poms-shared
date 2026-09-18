@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.34
  */
 @Slf4j
-public class DimensionTest implements ComparableTheory<Dimension> {
+class DimensionTest implements ComparableTheory<Dimension> {
 
     @Test
-    public void reduce() {
+    void reduce() {
         Dimension reduced = Dimension.of(640, 320).reduce();
         assertThat(reduced.getHeight()).isEqualTo(1);
         assertThat(reduced.getWidth()).isEqualTo(2);

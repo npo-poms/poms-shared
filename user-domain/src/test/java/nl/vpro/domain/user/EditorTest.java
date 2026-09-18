@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.5
  */
 @Slf4j
-public class EditorTest {
+class EditorTest {
 
     private Validator validator;
     {
@@ -32,7 +32,7 @@ public class EditorTest {
 
 
     @Test
-    public void testValidation() {
+    void validation() {
         User user = Editor.builder()
             .email("Vera.van.Slooten@ntr.nl")
             .build();

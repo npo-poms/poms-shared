@@ -16,28 +16,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class ChannelConstraintTest {
+class ChannelConstraintTest {
 
     @Test
-    public void testGetStringValue() {
+    void getStringValue() {
         ChannelConstraint in = new ChannelConstraint(Channel.NED1);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:channelConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">NED1</local:channelConstraint>\n\n");
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new ChannelConstraint().getESPath()).isEqualTo("scheduleEvents.channel");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withScheduleEvents().build();
         assertThat(new ChannelConstraint(Channel.NED3).test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Program program = MediaTestDataBuilder.program().withAuthorityRecord().build();
         assertThat(new ChannelConstraint(Channel.ASIA).test(program)).isFalse();
     }

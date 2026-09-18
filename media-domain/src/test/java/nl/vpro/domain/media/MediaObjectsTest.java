@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @SuppressWarnings({"deprecation", "OptionalGetWithoutIsPresent"})
 @Slf4j
-public class MediaObjectsTest {
+class MediaObjectsTest {
 
     /**
      * The current time in test cases, a fixed time in october 2021.
@@ -56,13 +56,13 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testIdFromUrn() {
+    void idFromUrn() {
         assertThat(MediaObjects.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
     }
 
 
     @Test
-    public void sortDate() {
+    void sortDate() {
         Program program = new Program();
         assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - clock().millis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
@@ -82,7 +82,7 @@ public class MediaObjectsTest {
      * MSE-3726 Sort date should be the most recent schedule event which is not a rerun
      */
     @Test
-    public void testSortDateWithScheduleEvents() {
+    void sortDateWithScheduleEvents() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -105,7 +105,7 @@ public class MediaObjectsTest {
      * MSE-4094
      */
     @Test
-    public void testSortDateWithPredictions() {
+    void sortDateWithPredictions() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -119,7 +119,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSortDateWithPublishStart() {
+    void sortDateWithPublishStart() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -129,7 +129,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSortDateWithCreationDate() {
+    void sortDateWithCreationDate() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .build();
@@ -138,7 +138,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSync() {
+    void sync() {
         Website a = new Website("a");
         a.setId(1L);
         Website b = new Website("b");
@@ -155,7 +155,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testFindScheduleEventHonoringOffset() {
+    void findScheduleEventHonoringOffset() {
         final Program program = MediaBuilder.program()
             .scheduleEvents(new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(100), Duration.ofMillis(100)))
             .build();
@@ -170,7 +170,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void filterOnWorkflow() {
+    void filterOnWorkflow() {
         Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
         Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
         location2.setWorkflow(Workflow.DELETED);
@@ -186,7 +186,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void filterPublishable() {
+    void filterPublishable() {
         Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
         Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
         location2.setWorkflow(Workflow.DELETED);
@@ -201,7 +201,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void hasSubtitles_NoSubs() {
+    void hasSubtitles_NoSubs() {
         final Program program = MediaBuilder.program()
             .mid("program_123")
             .build();
@@ -209,7 +209,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void hasSubtitles_Translation() {
+    void hasSubtitles_Translation() {
 
         final Program program = MediaBuilder.program()
             .mid("program_123")
@@ -219,7 +219,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void hasSubtitles_DutchCaption() {
+    void hasSubtitles_DutchCaption() {
         final Program program = MediaBuilder.program()
             .mid("program_123")
             .build();
@@ -229,7 +229,7 @@ public class MediaObjectsTest {
 
 
     @Test
-    public void getPathShallow() {
+    void getPathShallow() {
         Group g1 = MediaBuilder.group().mid("g1").build();
         Group g2 = MediaBuilder.group().mid("g2").memberOf(g1).build();
         Group g3 = MediaBuilder.group().mid("g3").build();
@@ -246,7 +246,7 @@ public class MediaObjectsTest {
 
 
     @Test
-    public void getPathDeeper() {
+    void getPathDeeper() {
         Group g1 = MediaBuilder.group().mid("g1").build();
         Group g2 = MediaBuilder.group().mid("g2").memberOf(g1).build();
         Group g3 = MediaBuilder.group().mid("g3").build();
@@ -263,7 +263,7 @@ public class MediaObjectsTest {
     }
 
       @Test
-    public void testUpdateLocationsForOwner() {
+    void updateLocationsForOwner() {
         Location e1 = new Location("aaa", OwnerType.NEBO);
         Location e2 = new Location("bbb", OwnerType.NEBO);
         Location e3 = new Location("ccc", OwnerType.BROADCASTER);
@@ -295,7 +295,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testUpdateLocationsForOwnerWithAvAttributes() {
+    void updateLocationsForOwnerWithAvAttributes() {
         Location e1 = new Location("aaa", OwnerType.NEBO);
         Location e2 = new Location("bbb", OwnerType.NEBO)
             .setAvAttributes(new AVAttributes(1111, AVFileFormat.FLV));
@@ -327,7 +327,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testGetPlatformNamesInLowerCase() {
+    void getPlatformNamesInLowerCase() {
         Prediction p1 = new Prediction(PLUSVOD);
         Prediction p2 = new Prediction(INTERNETVOD);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
@@ -341,7 +341,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testGetPlatformNamesInLowerCaseNotAvailable() {
+    void getPlatformNamesInLowerCaseNotAvailable() {
         Prediction p1 = new Prediction(PLUSVOD);
         p1.setPlannedAvailability(false);
         Prediction p2 = new Prediction(INTERNETVOD);
@@ -357,7 +357,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testGetPlatformNamesInLowerCaseEmptyList() {
+    void getPlatformNamesInLowerCaseEmptyList() {
         Collection<Prediction> predictions = new ArrayList<>();
         List<String> result = MediaObjects.getPlannedPlatformNamesInLowerCase(predictions);
         assertThat(result).isEmpty();
@@ -365,7 +365,7 @@ public class MediaObjectsTest {
 
 
     @Test
-    public void testUpdateLocationsForOwnerWithVidioAttributes() {
+    void updateLocationsForOwnerWithVidioAttributes() {
         Location e1 = new Location("aaa", OwnerType.NEBO)
             .setAvAttributes(new AVAttributes());
         Location e2 = new Location("bbb", OwnerType.NEBO)
@@ -423,7 +423,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void integrateShrink() {
+    void integrateShrink() {
         List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b"), new Impl(2, "c")));
 
         List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x")));
@@ -433,7 +433,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void integrateShrinkAndGrow() {
+    void integrateShrinkAndGrow() {
         List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b"), new Impl(2, "c"), new Impl(4, "z")));
 
         List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x"), new Impl(3, "y")));
@@ -443,7 +443,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void integrateGrow() {
+    void integrateGrow() {
         List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b")));
 
         List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x"), new Impl(3, "y")));

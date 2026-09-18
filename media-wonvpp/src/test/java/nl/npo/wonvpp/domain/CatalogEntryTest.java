@@ -17,7 +17,7 @@ import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-class CatalogEntryTest {
+final class CatalogEntryTest {
 
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 

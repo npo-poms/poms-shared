@@ -20,13 +20,13 @@ import nl.vpro.util.FileSizeFormatter;
  */
 @Slf4j
 @Disabled("Download huge files")
-public class NEPScpDownloadServiceImplTest {
+class NEPScpDownloadServiceImplTest {
 
     NEPDownloadService impl = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
 
 
     @Test
-    public void test() throws IOException {
+    void test() throws IOException {
 
         Instant start = Instant.now();
 
@@ -55,7 +55,7 @@ public class NEPScpDownloadServiceImplTest {
     }
 
     @Test
-    public void testTimeout() throws IOException {
+    void timeout() throws IOException {
 
         Instant start = Instant.now();
 

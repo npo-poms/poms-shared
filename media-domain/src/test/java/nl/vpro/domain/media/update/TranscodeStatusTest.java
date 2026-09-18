@@ -11,11 +11,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public class TranscodeStatusTest {
+class TranscodeStatusTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         TranscodeStatus status = TranscodeStatus
             .builder()
             .mid("mid_123")

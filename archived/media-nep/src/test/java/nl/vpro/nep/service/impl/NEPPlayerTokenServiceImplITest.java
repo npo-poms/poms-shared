@@ -14,7 +14,7 @@ import nl.vpro.nep.service.NEPPlayerTokenService;
  * @since 5.11
  */
 @Slf4j
-public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
+class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
 
 
 
@@ -33,21 +33,21 @@ public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
     }
 
     @Test
-    public void widevine() throws NEPException {
+    void widevine() throws NEPException {
         WideVineResponse wideVineResponse = impl.widevineToken("145.58.169.92");
         log.info("{}", wideVineResponse);
     }
 
 
     @Test
-    public void playready() throws NEPException {
+    void playready() throws NEPException {
         PlayreadyResponse playreadyToken = impl.playreadyToken("145.58.169.92");
         log.info("{}", playreadyToken);
     }
 
 
     @Test
-    public void fairplay() throws NEPException {
+    void fairplay() throws NEPException {
         FairplayResponse fairplayToken = impl.fairplayToken("145.58.169.92");
         log.info("{}", fairplayToken);
     }

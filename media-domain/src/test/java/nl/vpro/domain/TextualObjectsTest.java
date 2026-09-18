@@ -19,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "deprecation"})
 @Slf4j
-public class TextualObjectsTest {
+class TextualObjectsTest {
 
 
     @Test
-    public void testFindOwnersForTextFieldsOnOrdering() {
+    void findOwnersForTextFieldsOnOrdering() {
         final Program program = MediaBuilder.program()
             .titles(new Title("1", OwnerType.CERES, TextualType.MAIN))
             .descriptions(new Description("1", OwnerType.BROADCASTER, TextualType.EPISODE))
@@ -34,7 +34,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void testFindOwnersForTextFieldsOnDuplicates() {
+    void findOwnersForTextFieldsOnDuplicates() {
         final Program program = MediaBuilder.program().titles(
             new Title("1", OwnerType.CERES, TextualType.MAIN),
             new Title("1", OwnerType.CERES, TextualType.EPISODE)
@@ -44,7 +44,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void getMainTitle() {
+    void getMainTitle() {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
@@ -57,7 +57,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void getLexicoTitle() {
+    void getLexicoTitle() {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
@@ -70,7 +70,7 @@ public class TextualObjectsTest {
 
 
     @Test
-    public void getLongDescription() {
+    void getLongDescription() {
         BasicTextualObject object = new BasicTextualObject();
         object.addDescription("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addDescription("b", OwnerType.MIS, TextualType.MAIN);
@@ -83,7 +83,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void expand() {
+    void expand() {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
@@ -102,7 +102,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void expandMajor() {
+    void expandMajor() {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
@@ -119,7 +119,7 @@ public class TextualObjectsTest {
 
 
     @Test
-    public void testUpdateDescriptionsForOwner() {
+    void updateDescriptionsForOwner() {
         Description e1 = new Description("e1", OwnerType.BROADCASTER, TextualType.MAIN);
         Description e2 = new Description("e2", OwnerType.NEBO, TextualType.MAIN); // Should stay
         Description e3 = new Description("e3", OwnerType.BROADCASTER, TextualType.SHORT); // Has to be deleted
@@ -147,7 +147,7 @@ public class TextualObjectsTest {
 
 
     @Test
-    public void copyToUpdate1() {
+    void copyToUpdate1() {
         BasicTextualObject test = new BasicTextualObject();
         test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
         test.addTitle("bla bc", OwnerType.BROADCASTER, TextualType.MAIN);
@@ -160,7 +160,7 @@ public class TextualObjectsTest {
 
 
     @Test
-    public void copyToUpdate2() {
+    void copyToUpdate2() {
         BasicTextualObject test = new BasicTextualObject();
         test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
 
@@ -171,7 +171,7 @@ public class TextualObjectsTest {
     }
 
       @Test
-    public void copyToUpdate3() {
+    void copyToUpdate3() {
         BasicTextualObject test = new BasicTextualObject();
         test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
         test.addTitle("bla bc", OwnerType.BROADCASTER, TextualType.MAIN);

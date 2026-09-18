@@ -17,23 +17,23 @@ import static org.meeuw.i18n.countries.codes.CountryCode.NL;
  * @since 4.8
  */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class CountryWrapperTest {
+class CountryWrapperTest {
 
     @Test
-    public void getNameUKNL() {
+    void getNameUKNL() {
         CountryWrapper wrapper = new CountryWrapper(of(GB));
         assertThat(wrapper.getName()).isEqualTo("Verenigd Koninkrijk");
     }
 
     @Test
-    public void getNameGBNL() {
+    void getNameGBNL() {
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
     }
 
     @Test
     @Disabled("name is hard coded to be always dutch")
-    public void getNameGBUK() {
+    void getNameGBUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Great Britain");
@@ -41,7 +41,7 @@ public class CountryWrapperTest {
 
     @Test
     @Disabled
-    public void getNameUS() {
+    void getNameUS() {
         Locale.setDefault(Locale.US);
         CountryWrapper wrapper = new CountryWrapper(CurrentCountry.of(GB));
         assertThat(wrapper.getName()).isEqualTo("United Kingdom");
@@ -49,7 +49,7 @@ public class CountryWrapperTest {
 
 
     @Test
-    public void getNameENGNL() {
+    void getNameENGNL() {
         //Locale.setDefault(Locales.DUTCH);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("Engeland");
@@ -57,7 +57,7 @@ public class CountryWrapperTest {
 
     @Test
     @Disabled("name is hard coded to be always dutch")
-    public void getNameENGUK() {
+    void getNameENGUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("England");
@@ -65,7 +65,7 @@ public class CountryWrapperTest {
 
     @Test
     @Disabled("name is hard coded to be always dutch")
-    public void getNameUTUK() {
+    void getNameUTUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(NL, "UT").get());
         assertThat(wrapper.getName()).isEqualTo("Utrecht");

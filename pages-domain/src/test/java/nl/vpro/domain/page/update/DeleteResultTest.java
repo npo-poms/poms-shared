@@ -20,10 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  */
 @Slf4j
-public class DeleteResultTest {
+class DeleteResultTest {
 
     @Test
-    public void json() {
+    void json() {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)
@@ -41,7 +41,7 @@ public class DeleteResultTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)
@@ -53,7 +53,7 @@ public class DeleteResultTest {
     }
 
     @Test
-    public void xmlWithUnCompleteFuture() {
+    void xmlWithUnCompleteFuture() {
         DeleteResult result = DeleteResult.builder()
             .count(100)
             .duration(Duration.ofMillis(123))
@@ -64,7 +64,7 @@ public class DeleteResultTest {
     }
 
     @Test
-    public void and() throws ExecutionException, InterruptedException {
+    void and() throws ExecutionException, InterruptedException {
         StringBuilder sb = new StringBuilder();
         SimpleLogger logger = StringBuilderSimpleLogger.builder().stringBuilder(sb).build().chain(slf4j(log));
         DeleteResult r1 = DeleteResult

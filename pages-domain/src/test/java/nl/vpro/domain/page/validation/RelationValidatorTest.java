@@ -29,13 +29,13 @@ class RelationValidatorTest {
     }
 
     @Test
-    public void noInstance() {
+    void noInstance() {
         RelationValidator  v = new RelationValidator();
         assertThat(v.isValid(new RelationUpdate(), null)).isTrue();
     }
 
     @Test
-    public void emptyInstance() {
+    void emptyInstance() {
         RelationDefinitionService service = mock(RelationDefinitionService.class);
         RelationDefinitionServiceProvider.setInstance(service);
         RelationValidator  v = new RelationValidator();
@@ -43,7 +43,7 @@ class RelationValidatorTest {
     }
 
     @Test
-    public void filledInstance() {
+    void filledInstance() {
         RelationDefinitionService service = mock(RelationDefinitionService.class);
         RelationDefinitionServiceProvider.setInstance(service);
         when(service.get(eq("foo"), eq(new Broadcaster("VPRO")))).thenReturn(new RelationDefinition("foo", "VPRO"));

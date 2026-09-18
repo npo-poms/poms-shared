@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public class SectionTest {
+class SectionTest {
 
     private static Validator validator;
     private Section target;
@@ -37,13 +37,13 @@ public class SectionTest {
     }
 
     @Test
-    public void testGetPath() {
+    void getPath() {
         target.setPath("/tegenlicht");
         assertThat(target.getPath()).isEqualTo("/tegenlicht");
     }
 
     @Test
-    public void testId() {
+    void id() {
         Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VPRO");
         target.setPortal(portal);
         target.setPath("/tegenlicht");
@@ -51,7 +51,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testXmlBinding() {
+    void xmlBinding() {
         target.setPath("/tegenlicht");
         target.setDisplayName("Tegenlicht");
         Portal portal = new Portal();
@@ -68,7 +68,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testJsonBinding() {
+    void jsonBinding() {
         target.setPath("/tegenlicht");
         target.setDisplayName("Tegenlicht");
         Portal portal = new Portal();
@@ -90,7 +90,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testSectionPath() {
+    void sectionPath() {
         Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VPRO");
         target.setPortal(portal);
         target.setPath("/tegenlicht");
@@ -101,7 +101,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testInvalidSectionPath() {
+    void invalidSectionPath() {
         Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VPRO");
         target.setPortal(portal);
         target.setPath("http://tegenlicht.vpro.nl");

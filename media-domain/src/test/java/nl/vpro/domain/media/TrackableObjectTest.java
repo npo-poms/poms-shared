@@ -10,17 +10,17 @@ import static nl.vpro.domain.media.MediaBuilder.segment;
 import static nl.vpro.domain.media.support.Workflow.PARENT_REVOKED;
 import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 
-public class TrackableObjectTest {
+class TrackableObjectTest {
 
     @Test
-    public void workflowParentRevokedIsPublishableWhenParentIsNull() {
+    void workflowParentRevokedIsPublishableWhenParentIsNull() {
         final Segment parentNull = segment().workflow(PARENT_REVOKED).build();
 
         Assertions.assertThat(parentNull.isPublishable(Instant.now())).isTrue();
     }
 
     @Test
-    public void workflowParentRevokedIsPublishableWhenParentIsSo() {
+    void workflowParentRevokedIsPublishableWhenParentIsSo() {
         final Segment parentPublished = segment().workflow(PARENT_REVOKED).parent(
             program().workflow(PUBLISHED).build()
         ).build();
@@ -29,7 +29,7 @@ public class TrackableObjectTest {
     }
 
     @Test
-    public void workflowParentRevokedIsNotPublishableWhenParentIsNotPublishable() {
+    void workflowParentRevokedIsNotPublishableWhenParentIsNotPublishable() {
         final Instant now = Instant.now();
         final Segment parentToRevoke = segment().workflow(PARENT_REVOKED).parent(
             program().workflow(PUBLISHED).publishStop(now.minusSeconds(60)).build()

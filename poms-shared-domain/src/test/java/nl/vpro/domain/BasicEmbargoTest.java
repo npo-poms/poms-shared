@@ -12,7 +12,7 @@ import org.meeuw.theories.BasicObjectTheory;
 import com.google.common.collect.Range;
 
 @Log4j2
-class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
+final class BasicEmbargoTest implements BasicObjectTheory<BasicEmbargo> {
 
     @Override
     public Arbitrary<BasicEmbargo> datapoints() {

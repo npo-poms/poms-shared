@@ -13,10 +13,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since ...
  */
 @Slf4j
-public class NEPItemizeResponseTest {
+class NEPItemizeResponseTest {
 
     @Test
-    public void unbind() throws IOException {
+    void unbind() throws IOException {
 
 
 

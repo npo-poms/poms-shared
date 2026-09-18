@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.0
  */
-public class SegmentTest {
+class SegmentTest {
 
 
     @Test
-    public void xml() {
+    void xml() {
         String xml = """
             <?xml version="1.0" encoding="UTF-8"?><segment xmlns="urn:vpro:media:2009" midRef="RBX_NTR_2648108" type="SEGMENT" urnRef="urn:vpro:media:program:83538010" avType="AUDIO" embeddable="true" mid="RBX_NTR_4965178" sortDate="2013-11-01T04:36:35.076+01:00" workflow="PUBLISHED" creationDate="2016-11-01T04:36:35.076+01:00" lastModified="2016-11-01T04:36:35.105+01:00" publishDate="2016-11-01T04:42:23.506+01:00" urn="urn:vpro:media:segment:83538015" xmlns:shared="urn:vpro:shared:2009">
                 <crid>crid://item.radiobox2/372578</crid>
@@ -49,7 +49,7 @@ public class SegmentTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         Segment segment = MediaBuilder.segment()
             .start(Duration.ofMillis(100))
             .segmentOf("bla", MediaType.CLIP)
@@ -78,7 +78,7 @@ public class SegmentTest {
     }
 
     @Test
-    public void copy() {
+    void copy() {
         Program program = MediaBuilder.program().build();
         Segment segment = MediaBuilder.segment().mainTitle("bla").duration(Duration.ofSeconds(123)).parent(program).build();
 
@@ -89,7 +89,7 @@ public class SegmentTest {
     }
 
     @Test
-    public void sortDate() {
+    void sortDate() {
         Program program = MediaBuilder.program(ProgramType.BROADCAST)
             .mid("parentMid")
             .creationDate(LocalDateTime.of(2017, 10, 24, 0, 0))

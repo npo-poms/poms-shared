@@ -25,10 +25,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
+class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
-    public void json() throws IOException {
+    void json() throws IOException {
         Program program = MediaTestDataBuilder
             .program()
             .mid("VPROWON_12345")
@@ -139,7 +139,7 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
     //@Ignore("Fails for https://java.net/jira/browse/JAXB-1069")
-    public void xml() {
+    void xml() {
         Program program = MediaTestDataBuilder.program().mid("VPROWON_12345").withScheduleEvents().creationDate(Instant.ofEpochMilli(1409733642642L)).build();
         ApiScheduleEvent scheduleEvent = new ApiScheduleEvent(program.getScheduleEvents().first(), program);
         StringWriter writer = new StringWriter();
@@ -211,7 +211,7 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
 
     @Test
-    public void testListMedia() {
+    void listMedia() {
         ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 
@@ -247,7 +247,7 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
     }
 
     @Test
-    public void testGetMedia() {
+    void getMedia() {
         ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 

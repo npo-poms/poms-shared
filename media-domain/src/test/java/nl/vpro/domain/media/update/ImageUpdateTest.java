@@ -28,14 +28,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 @Isolated
-public class ImageUpdateTest {
+class ImageUpdateTest {
 
     static {
         Locales.setDefault(Locale.US);
     }
 
     @Test
-    public void xml() {
+    void xml() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
@@ -55,7 +55,7 @@ public class ImageUpdateTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
@@ -83,7 +83,7 @@ public class ImageUpdateTest {
     }
 
     @Test
-    public void jsonUrn() {
+    void jsonUrn() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null,  "urn:vpro:image:678454");
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
@@ -108,7 +108,7 @@ public class ImageUpdateTest {
     }
 
     @Test
-    public void wrappedValidate() {
+    void wrappedValidate() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null,  "urn:vpro:image:xxx");
 
         Collection<? extends ConstraintViolation<ImageUpdate>> actual = assertThat(Validation.getValidator().validate(update))
@@ -120,7 +120,7 @@ public class ImageUpdateTest {
 
 
     @Test
-    public void xmlBackwards() {
+    void xmlBackwards() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setCredits(getClass().getName());
@@ -139,7 +139,7 @@ public class ImageUpdateTest {
 
 
     @Test
-    public void xmlLicense() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    void xmlLicense() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
 
         // If you insist an invalid License can be created. It won't be valid though!

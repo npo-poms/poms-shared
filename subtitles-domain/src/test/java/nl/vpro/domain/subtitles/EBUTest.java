@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.3
  */
 @Slf4j
-public class EBUTest {
+class EBUTest {
 
 
     @Test
-    public void parse() {
+    void parse() {
         List<Cue> cuesFromStl = EBU.parse("bla", Duration.ZERO, (timeline) -> Duration.ZERO, getClass().getResourceAsStream("/VPWON_1272504.stl")).collect(Collectors.toList());
 
         List<Cue> cuesFromSrt = WEBVTTandSRT.parseSRT("bla", getClass().getResourceAsStream("/VPWON_1272504.srt")).collect(Collectors.toList());

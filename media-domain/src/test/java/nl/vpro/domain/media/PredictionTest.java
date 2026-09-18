@@ -18,23 +18,23 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.1
  */
-public class PredictionTest  implements ComparableTheory<Prediction> {
+class PredictionTest  implements ComparableTheory<Prediction> {
 
     @Test
-    public void testGetPublishStartStop() {
+    void getPublishStartStop() {
         Prediction target = new Prediction(null, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
         assertThat(target.getPublishStartInstant()).isBefore(target.getPublishStopInstant());
     }
 
     @Test
-    public void testGetPlatform() {
+    void getPlatform() {
         Prediction target = new Prediction(Platform.INTERNETVOD);
         assertThat(target.getPlatform()).isEqualTo(Platform.INTERNETVOD);
     }
 
 
     @Test
-    public void equals() {
+    void equality() {
         Prediction p1 = Prediction.announced().platform(Platform.INTERNETVOD).parent(null).build();
         Prediction p2 =  Prediction.announced().platform(Platform.INTERNETVOD).parent(new Program()).build();
         assertThat(p1).isNotEqualTo(p2);

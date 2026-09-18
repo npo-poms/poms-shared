@@ -13,7 +13,7 @@ class TokenFactoryTest {
         .withClock(TestClock.twentyTwenty());
 
     @Test
-    public void test() {
+    void test() {
         String token = npoPlayer9.token("mid_123");
         assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0IjoxNTgyMjI2NDAwLCJpc3MiOiJ2cHJvIn0.8tPo7XlEWpvtChBZgx8WOalprRHqypSoQsCyY2baB1w");
     }

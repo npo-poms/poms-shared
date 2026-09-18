@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
-class AgeRatingTest {
+final class AgeRatingTest {
 
     @Test
     void getIcon() {

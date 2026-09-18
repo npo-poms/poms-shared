@@ -20,23 +20,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @WireMockTest
-public class URLBroadcasterServiceImplTest {
+class URLBroadcasterServiceImplTest {
 
 
     BroadcasterService broadcasterService = new URLBroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
 
     @Test
-    public void testFind() {
+    void find() {
         assertThat(broadcasterService.find("VPRO").getDisplayName()).isEqualTo("VPRO");
     }
 
     @Test
-    public void testFindAll() {
+    void findAll() {
         assertThat(broadcasterService.findAll()).hasSize(63);
     }
 
     @Test
-    public void testMisId(
+    void misId(
         WireMockRuntimeInfo wireMockRuntimeInfo) throws IOException {
           stubFor(get(urlEqualTo("/broadcasters/"))
               .willReturn(
@@ -59,7 +59,7 @@ public class URLBroadcasterServiceImplTest {
     }
 
     @Test
-    public void update() {
+    void update() {
         Broadcaster vpro = broadcasterService.find("VPRO");
         assertThatThrownBy(() -> {
             broadcasterService.update(vpro);
@@ -70,7 +70,7 @@ public class URLBroadcasterServiceImplTest {
     }
 
     @Test
-    public void string() {
+    void string() {
         assertThat(broadcasterService.toString()).isEqualTo("URLBroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
 
     }

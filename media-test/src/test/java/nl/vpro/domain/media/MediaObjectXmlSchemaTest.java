@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 @SuppressWarnings({"UnnecessaryLocalVariable", "DataFlowIssue"})
 @Log4j2
-public class MediaObjectXmlSchemaTest {
+final class MediaObjectXmlSchemaTest {
 
     private static JAXBContext jaxbContext;
 
@@ -95,7 +95,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void mid() throws Exception {
+    void mid() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().mid("MID_000001").build();
@@ -106,7 +106,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void availableSubtitles() {
+    void availableSubtitles() {
         String expected = """
             <program embeddable="true" hasSubtitles="true" mid="MID_000001" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
                 <availableSubtitles language="nl" type="CAPTION" />
@@ -129,12 +129,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void midSchema() throws Exception {
+    void midSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withMid().build()));
     }
 
     @Test
-    public void hasSubtitles() {
+    void hasSubtitles() {
         String expected = """
             <program embeddable="true" hasSubtitles="true" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
                 <availableSubtitles language="nl" type="CAPTION" />
@@ -153,12 +153,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void hasSubtitlesSchema() throws Exception {
+    void hasSubtitlesSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withSubtitles().build()));
     }
 
     @Test
-    public void datesCreatedAndModified() throws Exception {
+    void datesCreatedAndModified() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" lastModified=\"1970-01-01T03:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().creationInstant(Instant.EPOCH).lastModified(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
@@ -168,7 +168,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void createdAndModifiedBy() throws Exception {
+    void createdAndModifiedBy() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><images /><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withCreatedBy().withLastModifiedBy().build();
@@ -179,12 +179,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void createdAndModifiedBySchema() throws Exception {
+    void createdAndModifiedBySchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withCreatedBy().withLastModifiedBy().build()));
     }
 
     @Test
-    public void publishStartStop() throws Exception {
+    void publishStartStop() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" publishStop=\"1970-01-01T03:00:00+01:00\" publishStart=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().publishStart(Instant.EPOCH).publishStop(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
@@ -195,12 +195,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void publishStartStopSchema() throws Exception {
+    void publishStartStopSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withPublishStart().withPublishStop().build()));
     }
 
     @Test
-    public void crids() throws Exception {
+    void crids() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><crid>crid://bds.tv/9876</crid><crid>crid://tmp.fragment.mmbase.vpro.nl/1234</crid><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withCrids().build();
@@ -211,12 +211,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void cridsSchema() throws Exception {
+    void cridsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withCrids().build()));
     }
 
     @Test
-    public void broadcasters() throws Exception {
+    void broadcasters() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><broadcaster id=\"BNN\">BNN</broadcaster><broadcaster id=\"AVRO\">AVRO</broadcaster><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withBroadcasters().build();
@@ -227,7 +227,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void exclusives() throws Exception {
+    void exclusives() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><exclusive portalId=\"STERREN24\"/><exclusive portalId=\"3VOOR12_GRONINGEN\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withPortalRestrictions().build();
@@ -238,12 +238,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void exclusivesSchema() throws Exception {
+    void exclusivesSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withPortalRestrictions().build()));
     }
 
     @Test
-    public void regions() {
+    void regions() {
 
         JAXBTestUtil.roundTripAndSimilar(program().lean().withGeoRestrictions().build(),
             """
@@ -262,12 +262,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void regionsSchema() throws Exception {
+    void regionsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withGeoRestrictions().build()));
     }
 
     @Test
-    public void duration() throws Exception {
+    void duration() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><duration>P0DT2H0M0.000S</duration><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withDuration().build();
@@ -278,12 +278,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void durationSchema() throws Exception {
+    void durationSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withDuration().build()));
     }
 
     @Test
-    public void predictions() throws Exception {
+    void predictions() throws Exception {
         String expected = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <program embeddable="true"  xmlns="urn:vpro:media:2009">
@@ -316,12 +316,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void predictionsSchema() throws Exception {
+    void predictionsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withPredictions().build()));
     }
 
     @Test
-    public void titles() throws Exception {
+    void titles() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><title type=\"MAIN\" owner=\"BROADCASTER\">Main title</title><title type=\"MAIN\" owner=\"MIS\">Main title MIS</title><title type=\"SHORT\" owner=\"BROADCASTER\">Short title</title><title type=\"SUB\" owner=\"MIS\">Episode title MIS</title><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withTitles().build();
@@ -332,7 +332,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void descriptions() throws Exception {
+    void descriptions() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><description type=\"MAIN\" owner=\"BROADCASTER\">Main description</description><description type=\"MAIN\" owner=\"MIS\">Main description MIS</description><description type=\"SHORT\" owner=\"BROADCASTER\">Short description</description><description type=\"EPISODE\" owner=\"MIS\">Episode description MIS</description><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withDescriptions().build();
@@ -343,12 +343,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void descriptionsSchema() throws Exception {
+    void descriptionsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withDescriptions().build()));
     }
 
     @Test
-    public void genres() {
+    void genres() {
         Program program = program().withGenres().withFixedDates().build();
 
         Program result = JAXBTestUtil.roundTripAndSimilar(program, """
@@ -372,12 +372,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void genresSchema() throws Exception {
+    void genresSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withGenres().build()));
     }
 
     @Test
-    public void ageRating() {
+    void ageRating() {
         Program program = program().withAgeRating().build();
 
         Program result = JAXBTestUtil.roundTripContains(program, "<ageRating xmlns='urn:vpro:media:2009'>12</ageRating>");
@@ -386,12 +386,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void ageRatingSchema() throws Exception {
+    void ageRatingSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withAgeRating().build()));
     }
 
     @Test
-    public void contentRating() {
+    void contentRating() {
         Program program = program().withContentRating().build();
 
         Program result = JAXBTestUtil.roundTripContains(program, "<contentRating>ANGST</contentRating>",
@@ -401,12 +401,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void contentRatingSchema() throws Exception {
+    void contentRatingSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withContentRating().build()));
     }
 
     @Test
-    public void tags() throws Exception {
+    void tags() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><tag>tag1</tag><tag>tag2</tag><tag>tag3</tag><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withTags().build();
@@ -417,12 +417,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void tagsSchema() throws Exception {
+    void tagsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withTags().build()));
     }
 
     @Test
-    public void portals() throws Exception {
+    void portals() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><portal id=\"3VOOR12_GRONINGEN\">3voor12 Groningen</portal><portal id=\"STERREN24\">Sterren24</portal><credits/><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withPortals().build();
@@ -433,12 +433,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void portalsSchema() throws Exception {
+    void portalsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withPortals().build()));
     }
 
     @Test
-    public void memberOfAndDescendantOfGraph() {
+    void memberOfAndDescendantOfGraph() {
         AtomicLong id = new AtomicLong(100L);
         String expected =
             """
@@ -490,7 +490,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void episodeOfAndDescendantOfGraph() {
+    void episodeOfAndDescendantOfGraph() {
 
         AtomicLong id = new AtomicLong(100);
         String expected = """
@@ -530,7 +530,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void relations() {
+    void relations() {
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <program embeddable="true" sortDate="1970-01-01T01:00:00+01:00" creationDate="1970-01-01T01:00:00+01:00" urn="urn:vpro:media:program:100" workflow="PUBLISHED" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
@@ -554,12 +554,12 @@ public class MediaObjectXmlSchemaTest {
 
 
     @Test
-    public void relationsSchema() throws Exception {
+    void relationsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withRelations().build()));
     }
 
     @Test
-    public void scheduleEvents() throws Exception {
+    void scheduleEvents() throws Exception {
 
         Program program = program().id(100L).lean().withScheduleEvents().build();
         String actual = toXml(program);
@@ -646,12 +646,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void scheduleEventsSchema() throws Exception {
+    void scheduleEventsSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withScheduleEvents().build()));
     }
 
     @Test
-    public void scheduleEventsWithNet() {
+    void scheduleEventsWithNet() {
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <program embeddable="true" sortDate="1970-01-01T01:00:00+01:00" urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
@@ -686,7 +686,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void scheduleEventsWithNetSchema() throws Exception {
+    void scheduleEventsWithNetSchema() throws Exception {
         ScheduleEvent event = new ScheduleEvent(Channel.NED1, Instant.EPOCH,
             java.time.Duration.ofSeconds(100));
         event.setGuideDate(LocalDate.of(1970, 1, 1));
@@ -700,7 +700,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     @Disabled("Used to generate an example XML document")
-    public void generateExample() throws Exception {
+    void generateExample() throws Exception {
         Segment segment = MediaTestDataBuilder
             .segment()
             .withPublishStart()
@@ -739,7 +739,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void schedule() throws Exception {
+    void schedule() throws Exception {
 
         Schedule schedule = new Schedule(Channel.NED1, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         Program program = program().id(100L).lean().withScheduleEvents().build();
@@ -789,7 +789,7 @@ public class MediaObjectXmlSchemaTest {
 
 
     @Test
-    public void scheduleWithFilter() throws Exception {
+    void scheduleWithFilter() throws Exception {
 
         Schedule schedule = new Schedule(Channel.NED3, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         schedule.setFiltered(true);
@@ -824,7 +824,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void scheduleWithNetFilter() throws Exception {
+    void scheduleWithNetFilter() throws Exception {
 
 
         Schedule schedule = Schedule.builder()
@@ -851,7 +851,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void countries() {
+    void countries() {
         Program program = program().withCountries().build();
 
         Program result = JAXBTestUtil.roundTripContains(program, "<country code=\"GB\">Verenigd Koninkrijk</country>");
@@ -861,12 +861,12 @@ public class MediaObjectXmlSchemaTest {
 
 
     @Test
-    public void countriesSchema() throws Exception {
+    void countriesSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withCountries().build()));
     }
 
     @Test
-    public void languages() {
+    void languages() {
         Program program = program().withLanguages().build();
 
         Program result = JAXBTestUtil.roundTripContains(program, "<language code=\"nl\" usage=\"DUBBED\">Nederlands</language>");
@@ -876,12 +876,12 @@ public class MediaObjectXmlSchemaTest {
 
 
     @Test
-    public void languagesSchema() throws Exception {
+    void languagesSchema() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, program().constrained().withLanguages().build()));
     }
 
     @Test
-    public void twitter() throws JAXBException, IOException, SAXException {
+    void twitter() throws JAXBException, IOException, SAXException {
         Program program = program().constrained().build();
         program.setSocialRefs(Arrays.asList(new SocialRef("@vpro"), new SocialRef("#vpro")));
         StringWriter writer = new StringWriter();
@@ -892,7 +892,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void withLocations() {
+    void withLocations() {
         String expected = """
             <?xml version="1.0" encoding="UTF-8"?>
             <program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true" urn="urn:vpro:media:program:100">
@@ -943,7 +943,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void withLocationWithUnknownOwner() {
+    void withLocationWithUnknownOwner() {
         String example = """
             <program embeddable="true" hasSubtitles="false" urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
                 <locations>
@@ -963,7 +963,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void withDescendantOf() {
+    void withDescendantOf() {
         Program program = program().lean().withDescendantOf().build();
         JAXBTestUtil.roundTripAndSimilar(program, """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -980,7 +980,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void withIntentions() throws IOException, JAXBException {
+    void withIntentions() throws IOException, JAXBException {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.xml"), segment, UTF_8);
         String expected = segment.toString();
@@ -1010,7 +1010,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void withGeoLocations() throws Exception {
+    void withGeoLocations() throws Exception {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, UTF_8);
         String expected = segment.toString();
@@ -1037,7 +1037,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void unmarshalWithNullIntentions() throws IOException {
+    void unmarshalWithNullIntentions() throws IOException {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, UTF_8);
         String xmlInput = segment.toString();
@@ -1048,7 +1048,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void unmarshalWithEmptyIntentions() throws IOException {
+    void unmarshalWithEmptyIntentions() throws IOException {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, UTF_8);
         String xmlInput = segment.toString();
@@ -1062,7 +1062,7 @@ public class MediaObjectXmlSchemaTest {
      * See MSE-4879
      */
     @Test
-    public void expectSAXParseException() {
+    void expectSAXParseException() {
         String example = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <segment xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" midRef="RBX_NTR_2647822" type="SEGMENT" urnRef="urn:vpro:media:program:80684549" avType="AUDIO" embeddable="true" mid="RBX_NTR_5074546" sortDate="2016-09-10T17:30:00+02:00" workflow="PUBLISHED" creationDate="2016-09-10T19:09:11.870+02:00" lastModified="2016-09-10T19:09:11.995+02:00" publishDate="2020-07-20T12:37:55.591+02:00" urn="urn:vpro:media:segment:81654017">
@@ -1096,7 +1096,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void roundTripWithPrediction() {
+    void roundTripWithPrediction() {
         String example =
             """
                 <program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1199058" sortDate="2013-04-09T15:25:00+02:00" workflow="FOR PUBLICATION" creationDate="2013-03-17T06:48:59.719+01:00" lastModified="2018-02-07T11:58:43.578+01:00" publishDate="2015-01-08T17:42:19.202+01:00" urn="urn:vpro:media:program:23197206">
@@ -1114,7 +1114,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void programWithEverything() throws IOException {
+    void programWithEverything() throws IOException {
         Program withEverything = MediaTestDataBuilder.program()
             .withEverything()
             .build();
@@ -1125,7 +1125,7 @@ public class MediaObjectXmlSchemaTest {
      * Tests wether 'withEveryting' is indeed valid according to manually maintained XSD
      */
     @Test
-    public void updateSchema() throws IOException, SAXException {
+    void updateSchema() throws IOException, SAXException {
         SchemaFactory factory = SchemaFactory.newInstance(
             XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema xsdSchema = factory.newSchema(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
@@ -1147,7 +1147,7 @@ public class MediaObjectXmlSchemaTest {
      * Tests whether 'withEverything' is indeed valid according to manually maintained XSD
      */
     @Test
-    public void schema() throws IOException, SAXException {
+    void schema() throws IOException, SAXException {
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema xsdSchema = factory.newSchema(getClass().getResource("/nl/vpro/domain/media/vproMedia.xsd"));
         Validator xsdValidator = xsdSchema.newValidator();
@@ -1166,7 +1166,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
 
-    public void MSE_5778() {
+    void MSE_5778() {
         String segmentXml = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <segment xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" midRef="RBX_NCRV_720421" type="SEGMENT" urnRef="urn:vpro:media:program:57740391" avType="AUDIO" embeddable="true" mid="RBX_NCRV_1467358" sortDate="2015-07-22T19:00:00+02:00" workflow="PUBLISHED" creationDate="2015-07-22T20:14:22.655+02:00" lastModified="2015-07-22T20:14:22.800+02:00" publishDate="2024-04-03T18:54:04.320+02:00" urn="urn:vpro:media:segment:59275771">

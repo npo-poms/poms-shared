@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class URLClassificationServiceImplTest {
+class URLClassificationServiceImplTest {
 
     public static URI publicURL = URI.create("https://publish.pages.omroep.nl/schema/classification");
     //URL url = new URL("http://localhost:8060/schema/classification");
 
     @Test
-    public void testResource() throws URISyntaxException {
+    void resource() throws URISyntaxException {
         URL url = getClass().getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
 
         CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(url.toURI());
@@ -33,7 +33,7 @@ public class URLClassificationServiceImplTest {
 
 
     @Test
-    public void testCachingURL() {
+    void cachingURL() {
         CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(publicURL);
         service.setCheckIntervalInSeconds(1);
 
@@ -48,7 +48,7 @@ public class URLClassificationServiceImplTest {
 
 
     @Test
-    public void testURL() {
+    void uRL() {
         URLClassificationServiceImpl service = new URLClassificationServiceImpl(publicURL);
         service.getResource().setMinAge(Duration.ZERO);
 

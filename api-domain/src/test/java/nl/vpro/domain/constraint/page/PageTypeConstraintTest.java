@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class PageTypeConstraintTest {
+class PageTypeConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         PageTypeConstraint in = new PageTypeConstraint(PageType.HOME);
         PageTypeConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:pageTypeConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">HOME</local:pageTypeConstraint>");
@@ -28,18 +28,18 @@ public class PageTypeConstraintTest {
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new PageTypeConstraint().getESPath()).isEqualTo("type");
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
         assertThat(new PageTypeConstraint(PageType.ARTICLE).test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
         assertThat(new PageTypeConstraint(PageType.SERIES).test(article)).isFalse();
     }

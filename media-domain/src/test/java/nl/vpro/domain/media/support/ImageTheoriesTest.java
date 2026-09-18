@@ -19,11 +19,11 @@ import nl.vpro.domain.image.ImageType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ImageTheoriesTest implements BasicObjectTheory<Image> {
+class ImageTheoriesTest implements BasicObjectTheory<Image> {
 
 
     @Test
-    public void testIsHighlightedOnXmlMarshaling() {
+    void isHighlightedOnXmlMarshaling() {
         Image image = new Image();
         Writer writer = new StringWriter();
         JAXB.marshal(image, writer);
@@ -33,7 +33,7 @@ public class ImageTheoriesTest implements BasicObjectTheory<Image> {
     }
 
     @Test
-    public void testGetHighlightedWithXmlMarshaling() {
+    void getHighlightedWithXmlMarshaling() {
         Image image = new Image();
         Writer writer = new StringWriter();
         image.setHighlighted(true);
@@ -45,7 +45,7 @@ public class ImageTheoriesTest implements BasicObjectTheory<Image> {
     }
 
     @Test
-    public void testCredits() {
+    void credits() {
         Image image = new Image();
         image.setCredits(" ");
         assertThat(image.getCredits()).isNull();
@@ -54,7 +54,7 @@ public class ImageTheoriesTest implements BasicObjectTheory<Image> {
     }
 
     @Test
-    public void testDate() {
+    void date() {
         Image image = new Image();
         image.setDate("");
         assertThat(image.getDate()).isNull();
@@ -63,14 +63,14 @@ public class ImageTheoriesTest implements BasicObjectTheory<Image> {
     }
 
     @Test
-    public void testSetHighlighted() {
+    void setHighlighted() {
         Image image = new Image();
         image.setHighlighted(true);
         assertThat(image.isHighlighted()).isTrue();
     }
 
     @Test
-    public void testSetHighlightedWithNull() {
+    void setHighlightedWithNull() {
         Image image = new Image();
         image.setHighlighted(null);
         assertThat(image.isHighlighted()).isFalse();

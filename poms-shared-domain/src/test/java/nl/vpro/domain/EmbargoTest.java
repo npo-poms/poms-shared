@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.6.1
  */
 @Slf4j
-public class EmbargoTest {
+class EmbargoTest {
 
     @Test
-    public void test() {
+    void test() {
         Instant start = LocalDateTime.of(2018, 3, 5, 11, 55).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant stop = LocalDateTime.of(2018, 10, 20, 11, 55).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant between = LocalDateTime.of(2018, 4, 6, 11, 55).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
@@ -38,7 +38,7 @@ public class EmbargoTest {
     }
 
     @Test
-    public void testRange() {
+    void range() {
         assertRange(null, null, Range.all());
 
         assertRange(null, Instant.ofEpochMilli(100), Range.lessThan(Instant.ofEpochMilli(100)));

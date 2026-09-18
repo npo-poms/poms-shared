@@ -50,12 +50,12 @@ class ImageMetadataTest {
 
     @Test
     @Disabled("no xml binding for now , probably nobody is interested, and without we can make the object better read-only. (could be fixed with jakarta/jaxb?")
-    public void xml() {
+    void xml() {
         JAXBTestUtil.roundTripAndSimilar(image, "<a />");
     }
 
     @Test
-    public void json() {
+    void json() {
         assertThatJson(image)
             .withoutRemarshalling()
             .isSimilarTo("""
@@ -85,7 +85,7 @@ class ImageMetadataTest {
 
     @Test
     @Beta
-    public void modelJson() {
+    void modelJson() {
         assertThatJson(Jackson2Mapper
             .getModelInstance(), image)
             .withoutRemarshalling()
@@ -138,7 +138,7 @@ class ImageMetadataTest {
 
     @Test
     @Beta
-    public void modelAndNormalJson() {
+    void modelAndNormalJson() {
         assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image)
             .withoutRemarshalling()
             .isSimilarTo("""
@@ -190,7 +190,7 @@ class ImageMetadataTest {
 
     @Test
     @Beta
-    public void modelAndNormalJsonPicture() {
+    void modelAndNormalJsonPicture() {
         assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image.getPicture())
             .withoutRemarshalling()
             .withoutUnmarshalling()
@@ -215,7 +215,7 @@ class ImageMetadataTest {
 
 
     @Test
-    public void schema() throws JsonProcessingException {
+    void schema() throws JsonProcessingException {
         JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(Jackson2Mapper.getModelAndNormalInstance());
         JsonSchema schema = schemaGen.generateSchema(ImageMetadataImpl.class);
 

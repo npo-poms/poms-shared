@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class MediaSearchTest {
+class MediaSearchTest {
 
     @Test
-    public void testGetText() {
+    void getText() {
         MediaSearch in = new MediaSearch();
         in.setText(new SimpleTextMatcher("Title"));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -39,7 +39,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testGetBroadcasters() {
+    void getBroadcasters() {
         MediaSearch in = new MediaSearch();
         in.setBroadcasters(new TextMatcherList(must("VPRO"), must("TROS")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -56,7 +56,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testGetLocations() {
+    void getLocations() {
         MediaSearch in = new MediaSearch();
         in.setLocations(new TextMatcherList(new TextMatcher("http://some.domain.com/path"), new TextMatcher(".extension")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -71,7 +71,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testGetTags() {
+    void getTags() {
         MediaSearch in = new MediaSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -87,7 +87,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testGetTypes() {
+    void getTypes() {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(Arrays.asList(new TextMatcher("A"), new TextMatcher("B", Match.SHOULD)), Match.SHOULD));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -110,7 +110,7 @@ public class MediaSearchTest {
             .build();
 
     @Test
-    public void testTitleSearchJson() {
+    void titleSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setTitles(Arrays.asList(TESTRESULT));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
@@ -127,7 +127,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testApplyText() {
+    void applyText() {
         MediaSearch in = new MediaSearch();
         in.setText(new SimpleTextMatcher("title"));
 
@@ -138,7 +138,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyTypes() {
+    void applyTypes() {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(should("SEASON"), should("SERIES")));
 
@@ -153,7 +153,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyTypesWithNots() {
+    void applyTypesWithNots() {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(
             not("SEASON"),
@@ -171,7 +171,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyIncludeSortDates() {
+    void applyIncludeSortDates() {
         DateRangeMatcher range = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(10));
 
         MediaSearch search = new MediaSearch();
@@ -189,7 +189,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyExcludeSortDates() {
+    void applyExcludeSortDates() {
         DateRangeMatcher range = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(10));
         range.setMatch(Match.NOT);
 
@@ -208,12 +208,12 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyBroadcasters() {
+    void applyBroadcasters() {
 
     }
 
     @Test
-    public void testApplyIncludeMediaIds() {
+    void applyIncludeMediaIds() {
         MediaSearch in = new MediaSearch();
         in.setMediaIds(new TextMatcherList(should("urn:vpro:media:program:1"), should("SOME_MID")));
 
@@ -236,7 +236,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyExcludeMediaIds() {
+    void applyExcludeMediaIds() {
         MediaSearch in = new MediaSearch();
         in.setMediaIds(new TextMatcherList(new TextMatcher("urn:vpro:media:program:1", Match.NOT), new TextMatcher("SOME_MID", Match.NOT)));
 
@@ -257,7 +257,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyTags() {
+    void applyTags() {
         MediaSearch in = new MediaSearch();
         in.setTags(new ExtendedTextMatcherList(
             ExtendedTextMatcher.should("cultuur"),
@@ -271,7 +271,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyIncludeDurations() {
+    void applyIncludeDurations() {
         DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
 
         MediaSearch search = new MediaSearch();
@@ -289,7 +289,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyExcludeDurations() {
+    void applyExcludeDurations() {
         DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
         range.setMatch(Match.NOT);
 
@@ -309,7 +309,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testApplyNotDescendantOfOnEmpty() {
+    void applyNotDescendantOfOnEmpty() {
         MediaSearch search = new MediaSearch();
         search.setDescendantOf(new TextMatcherList(not("MID")));
         MediaObject object = MediaTestDataBuilder.program().build();
@@ -317,7 +317,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyNotDescendantOf() {
+    void applyNotDescendantOf() {
         MediaSearch search = new MediaSearch();
         search.setDescendantOf(new TextMatcherList(not("MID")));
         MediaObject object = MediaTestDataBuilder.program()
@@ -331,7 +331,7 @@ public class MediaSearchTest {
     private static final ScheduleEventSearch FROM_EPOCH = ScheduleEventSearch.builder().begin(Instant.EPOCH).build();
 
     @Test
-    public void testScheduleEventSearchXml() {
+    void scheduleEventSearchXml() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -350,7 +350,7 @@ public class MediaSearchTest {
 
     }
    @Test
-    public void testScheduleEventSearchJson() {
+    void scheduleEventSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
@@ -364,7 +364,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testScheduleEventSearchJson2() {
+    void scheduleEventSearchJson2() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
@@ -381,7 +381,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testScheduleEventSearchJsonLenientChannel() throws Exception {
+    void scheduleEventSearchJsonLenientChannel() throws Exception {
 
 
         ScheduleEventSearch search = Jackson2Mapper.getLenientInstance().readerFor(ScheduleEventSearch.class).readValue(new StringReader("{'begin': 0, 'channel': 'x'}"));
@@ -420,26 +420,26 @@ public class MediaSearchTest {
 */
 
     @Test
-    public void hasNoSearches() {
+    void hasNoSearches() {
         assertThat(new MediaSearch().hasSearches()).isFalse();
     }
 
     @Test
-    public void hasSearchesText() {
+    void hasSearchesText() {
         MediaSearch search = new MediaSearch();
         search.setText(SimpleTextMatcher.should("bla"));
         assertThat(search.hasSearches()).isTrue();
     }
 
     @Test
-    public void hasSearchesIds() {
+    void hasSearchesIds() {
         MediaSearch search = new MediaSearch();
         search.setMediaIds(TextMatcherList.must(should("bla")));
         assertThat(search.hasSearches()).isTrue();
     }
 
     @Test
-    public void withDateRangeAsString() throws JsonProcessingException {
+    void withDateRangeAsString() throws JsonProcessingException {
         String json = """
             {
                 "sort":{
@@ -458,7 +458,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void videoBroadcasters() {
+    void videoBroadcasters() {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(must("BROADCAST")));
         in.setAvTypes(new TextMatcherList(must("VIDEO")));

@@ -20,7 +20,7 @@ class PomsImagesTest {
     }
 
     @Test
-    public void json() throws JsonProcessingException {
+    void json() throws JsonProcessingException {
         Image support = Jackson2Mapper.getLenientInstance().readValue("""
             {
                   "title": "2Doc:",

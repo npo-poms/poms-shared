@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.nep.service.NEPSourcingService;
 
 @Log4j2
-public class NEPSourcingServiceITest {
+final class NEPSourcingServiceITest {
 
     NEPSourcingServiceImpl nepSourceServiceIngestService = new NEPSourcingServiceImpl(
         "https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl/v1/",
@@ -24,7 +24,7 @@ public class NEPSourcingServiceITest {
 
 
     @Test
-    public void ingest() throws ExecutionException, InterruptedException {
+    void ingest() throws ExecutionException, InterruptedException {
         CompletableFuture<HttpResponse<NEPSourcingService.RequestResult>> ingest = nepSourceServiceIngestService.ingest(new NEPSourcingService.Payload(
             "WO_NPO_L20000010_2025-07-04T101905195_portrait.mp4",
             null,

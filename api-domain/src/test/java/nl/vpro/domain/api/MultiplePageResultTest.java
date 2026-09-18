@@ -10,10 +10,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-public class MultiplePageResultTest {
+class MultiplePageResultTest {
 
     @Test
-    public void testJson() throws Exception {
+    void json() throws Exception {
         MultiplePageResult list = new MultiplePageResult(
             Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"),
             Arrays.asList(new Page(PageType.PLAYER), null), null
@@ -22,7 +22,7 @@ public class MultiplePageResultTest {
 
     }
     @Test
-    public void testXml() {
+    void xml() {
         MultiplePageResult list = new MultiplePageResult(Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"), Arrays.asList(new Page(PageType.PLAYER), null), null);
         JAXBTestUtil.roundTripAndSimilar(list, """
             <api:multiplePageResult total="2" totalQualifier="EQUAL_TO" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">

@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class QueryTest {
+class QueryTest {
 
     @Test
-    public void testCleanup() {
+    void cleanup() {
         assertThat(new Query("Daan+Roosegaarde+bla").getText()).isEqualTo("daan roosegaarde bla");
         assertThat(new Query("123").getText()).isEqualTo("123");
         assertThat(new Query("eĥoŝanĝo ĉiuĵaŭde").getText()).isEqualTo("eĥoŝanĝo ĉiuĵaŭde");

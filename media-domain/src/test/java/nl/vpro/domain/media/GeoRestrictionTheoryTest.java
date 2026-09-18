@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class GeoRestrictionTheoryTest implements BasicObjectTheory<GeoRestriction> {
+class GeoRestrictionTheoryTest implements BasicObjectTheory<GeoRestriction> {
 
 
     public static GeoRestriction europeNoTime = new GeoRestriction(Region.EUROPE);
@@ -33,13 +33,13 @@ public class GeoRestrictionTheoryTest implements BasicObjectTheory<GeoRestrictio
     public static GeoRestriction nl = new GeoRestriction(Region.NL, Instant.ofEpochMilli(3), Instant.ofEpochMilli(3));
 
     @Test
-    public void testEquals() {
+    void equality() {
         assertThat(new GeoRestriction(Region.EUROPE)).isEqualTo(new GeoRestriction(Region.EUROPE));
         assertThat(GeoRestriction.builder().region(Region.EUROPE).platform(Platform.PLUSVOD).build()).isEqualTo(GeoRestriction.builder().region(Region.EUROPE).platform(Platform.PLUSVOD).build());
     }
 
     @Test
-    public void testEqualsOnTime() {
+    void equalsOnTime() {
         assertThat(new GeoRestriction(Region.EUROPE)).isNotEqualTo(new GeoRestriction(Region.EUROPE, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2)));
     }
 

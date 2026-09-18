@@ -15,29 +15,29 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Rico Jansen
  * @since 3.1
  */
-public class HasPredictionConstraintTest {
+class HasPredictionConstraintTest {
 
     @Test
-    public void testGetValue() {
+    void getValue() {
         HasPredictionConstraint in = new HasPredictionConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasPredictionConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");
     }
 
     @Test
-    public void testApplyTrue() {
+    void applyTrue() {
         Program program = MediaTestDataBuilder.program().withPredictions().build();
         assertThat(new HasPredictionConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() {
+    void applyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasPredictionConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() {
+    void getESPath() {
         assertThat(new HasPredictionConstraint().getESPath()).isEqualTo("predictions.platform");
     }
 }

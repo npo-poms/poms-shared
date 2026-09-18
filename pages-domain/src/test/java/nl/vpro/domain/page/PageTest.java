@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Michiel Meeuwissen
  */
-public class PageTest {
+class PageTest {
 
     @BeforeAll
     public static void staticInit() {
@@ -57,13 +57,13 @@ public class PageTest {
         .build();
 
     @Test
-    public void withEverythingJson() throws Exception {
+    void withEverythingJson() throws Exception {
         Page rounded = Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(), page, getClass().getResourceAsStream("/page-with-everything.json"));
         assertThat(rounded).isEqualTo(page);
     }
 
     @Test
-    public void withEverythingXml() throws Exception {
+    void withEverythingXml() throws Exception {
         String resource = "/page-with-everything.xml";
         Page rounded = JAXBTestUtil
             .roundTripAndSimilar(page, getClass().getResourceAsStream(resource))

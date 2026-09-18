@@ -21,7 +21,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
 
     @Test
-    public void marshall() {
+    void marshall() {
         PublicationReason reason = new PublicationReason("foobar", Instant.EPOCH);
         roundTripAndSimilar(reason, """
             {
@@ -31,7 +31,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
     }
 
     @Test
-    public void marshall2() {
+    void marshall2() {
         PublicationReason reason = new PublicationReason("foobar", Instant.EPOCH);
         ObjectNode node = Jackson2Mapper.getInstance().createObjectNode();
         node.putPOJO("test", reason);
@@ -54,7 +54,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
     );
 
     @Test
-    public void toRecordsWithMerge() {
+    void toRecordsWithMerge() {
         String records = PublicationReason.toRecords(
             Instant.EPOCH,
             reasons,
@@ -67,7 +67,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
 
     @Test
-    public void toRecords() {
+    void toRecords() {
         String records = PublicationReason.toRecords(
             Instant.EPOCH,
             reasons,
@@ -83,7 +83,7 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
 
     @Test
-    public void toRecordsWithMax() {
+    void toRecordsWithMax() {
         String records = PublicationReason.toRecords(
             Instant.EPOCH,
             reasons,

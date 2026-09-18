@@ -14,16 +14,16 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IdListTest {
+class IdListTest {
 
     @Test
-    public void toxml() {
+    void toxml() {
         IdList list = new IdList("a", "b");
         JAXB.marshal(list, System.out);
 
     }
     @Test
-    public void fromXml() {
+    void fromXml() {
         IdList list = JAXB.unmarshal(new StringReader("""
             <idList xmlns="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
                 <id>a</id>
@@ -33,14 +33,14 @@ public class IdListTest {
     }
 
     @Test
-    public void json() {
+    void json() {
         IdList list = new IdList("a", "b");
         Jackson2TestUtil.roundTripAndSimilar(list, "[\"a\",\"b\"]");
 
     }
 
     @Test
-    public void xml() {
+    void xml() {
         IdList list = new IdList("a", "b");
         JAXBTestUtil.roundTripAndSimilar(list, """
             <api:idList xmlns:api="urn:vpro:api:2013" >
@@ -51,7 +51,7 @@ public class IdListTest {
     }
 
     @Test
-    public void fromJson() throws IOException {
+    void fromJson() throws IOException {
         IdList list = Jackson2Mapper.getInstance().readValue(new StringReader("""
             ["a","b"]    <id>a</id>
                 <id>b</id>

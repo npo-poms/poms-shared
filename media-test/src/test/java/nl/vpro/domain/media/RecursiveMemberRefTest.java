@@ -55,7 +55,7 @@ class RecursiveMemberRefTest {
 
 
     @Test
-    public void circular() {
+    void circular() {
         SortedSet<MemberRef> memberOf = m3.getMemberOf();
         MemberRef first = memberOf.first();
         log.info("{}", first.getMemberOf());
@@ -64,7 +64,7 @@ class RecursiveMemberRefTest {
 
 
     @Test
-    public void circularViaSegment() {
+    void circularViaSegment() {
         SortedSet<MemberRef> episodeOf = m4.getEpisodeOf();
         MemberRef first = episodeOf.first();
         log.info("{}", first.getMemberOf());
@@ -72,7 +72,7 @@ class RecursiveMemberRefTest {
     }
 
     @Test
-    public void marshalm3() {
+    void marshalm3() {
 
         JAXBTestUtil.roundTripAndSimilar(m3,
             """
@@ -116,7 +116,7 @@ class RecursiveMemberRefTest {
                 </program>""");
     }
     @Test
-    public void marshalm2() {
+    void marshalm2() {
          JAXBTestUtil.roundTripAndSimilar(m2,
              """
                  <program xmlns="urn:vpro:media:2009" type="BROADCAST" embeddable="true" mid="m2" sortDate="2015-03-06T00:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" urn="urn:vpro:media:program:2" xmlns:shared="urn:vpro:shared:2009">
@@ -156,7 +156,7 @@ class RecursiveMemberRefTest {
 
 
     @Test
-    public void marshalm4() {
+    void marshalm4() {
 
         Program program = JAXBTestUtil.roundTripAndSimilar(m4,
             """
@@ -182,7 +182,7 @@ class RecursiveMemberRefTest {
     }
 
     @Test
-    public void marshalm4json() {
+    void marshalm4json() {
 
         Program program = Jackson2TestUtil.roundTripAndSimilar(m4,
             """

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BroadcasterTest {
 
     @Test
-    public void existingFirst() {
+    void existingFirst() {
         Broadcaster b1 = Broadcaster.builder().displayName("AVTR").build();
         Broadcaster b2 = Broadcaster.builder().displayName("VPRO").build();
         Broadcaster ob1 = Broadcaster.builder().displayName("AVRO").stop(LocalDate.of(2012, 1, 1)).build();

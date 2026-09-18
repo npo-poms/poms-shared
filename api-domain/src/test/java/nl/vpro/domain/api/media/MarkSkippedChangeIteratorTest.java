@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author Michiel Meeuwissen
  */
-public class MarkSkippedChangeIteratorTest {
+class MarkSkippedChangeIteratorTest {
 
     static Instant INSTANT = of(2021, 3, 1, 12, 0);
     @SuppressWarnings("unchecked")
@@ -65,7 +65,7 @@ public class MarkSkippedChangeIteratorTest {
 
 
     @Test
-    public void withoutProfile() throws Exception {
+    void withoutProfile() throws Exception {
 
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -95,7 +95,7 @@ public class MarkSkippedChangeIteratorTest {
 
 
     @Test
-    public void withCurrentProfile() throws Exception {
+    void withCurrentProfile() throws Exception {
 
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -113,7 +113,7 @@ public class MarkSkippedChangeIteratorTest {
     }
 
     @Test
-    public void sinceTooLate() throws Exception {
+    void sinceTooLate() throws Exception {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT.plus(Duration.ofHours(1)))
@@ -132,7 +132,7 @@ public class MarkSkippedChangeIteratorTest {
     }
 
     @Test
-    public void withCurrentAndPreviousProfile() throws Exception {
+    void withCurrentAndPreviousProfile() throws Exception {
 
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
@@ -149,7 +149,7 @@ public class MarkSkippedChangeIteratorTest {
     }
 
     @Test
-    public void keepAlive() throws Exception {
+    void keepAlive() throws Exception {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(asList(
                 change(1, 1) // not in profile

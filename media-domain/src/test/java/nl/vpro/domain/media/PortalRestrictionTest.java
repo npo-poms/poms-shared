@@ -9,10 +9,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PortalRestrictionTest {
+class PortalRestrictionTest {
 
     @Test
-    public void testTypeJsonRoundTrip() throws Exception {
+    void typeJsonRoundTrip() throws Exception {
         PortalRestriction input = new PortalRestriction(new Portal("PORTAL_ID", "DISPLAY_NAME"));
         Jackson2Mapper mapper = Jackson2Mapper.getInstance();
         String jsonString = mapper.writeValueAsString(input);
@@ -22,7 +22,7 @@ public class PortalRestrictionTest {
     }
 
     @Test
-    public void testBuilder() {
+    void builder() {
 
         PortalRestriction input = PortalRestriction
             .builder()

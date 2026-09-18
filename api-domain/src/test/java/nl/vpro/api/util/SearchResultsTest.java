@@ -19,7 +19,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class SearchResultsTest {
+class SearchResultsTest {
 
     @BeforeAll
     public static void init() {
@@ -27,7 +27,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedTermFacet() {
+    void setSelectedTermFacet() {
 
         TextMatcherList searches = new TextMatcherList();
         searches.asList().add(new TextMatcher("ID"));
@@ -53,7 +53,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedDateFacet() {
+    void setSelectedDateFacet() {
         DateRangeMatcherList searches = new DateRangeMatcherList();
         searches.asList().add(new DateRangeMatcher(Instant.ofEpochMilli(0), Instant.ofEpochMilli(100000)));
         searches.asList().add(new DateRangeMatcher(null, Instant.ofEpochMilli(1000000)));
@@ -79,7 +79,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedRelationFacet() {
+    void setSelectedRelationFacet() {
 
         RelationSearchList searches = new RelationSearchList();
         RelationSearch search1 = new RelationSearch();
@@ -146,14 +146,14 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void unmarshalJson() throws IOException {
+    void unmarshalJson() throws IOException {
         MediaSearchResult result = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/related.json"), MediaSearchResult.class);
         MediaObject o = result.asList().getFirst();
         assertThat(o.getDescendantOf().getFirst().getMidRef()).isEqualTo("VPRO_1154287");
     }
 
     @Test
-    public void unmarshalXml() {
+    void unmarshalXml() {
         MediaSearchResult result = JAXB.unmarshal(Objects.requireNonNull(getClass().getResource("/related.xml")), MediaSearchResult.class);
         MediaObject o = result.asList().getFirst();
         assertThat(o.getDescendantOf().getFirst().getMidRef()).isEqualTo("VPRO_1154287");

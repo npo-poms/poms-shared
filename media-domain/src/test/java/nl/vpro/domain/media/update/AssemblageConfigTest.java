@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AssemblageConfigTest {
 
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         AssemblageConfig.Builder builder = AssemblageConfig.withAllTrue();
         AssemblageConfig a = builder.build();
         AssemblageConfig b = a.copy();
@@ -21,7 +21,7 @@ class AssemblageConfigTest {
 
 
     @Test
-    public void backwards() {
+    void backwards() {
         AssemblageConfig build = AssemblageConfig.builder()
             .build();
 
@@ -32,7 +32,7 @@ class AssemblageConfigTest {
 
     }
     @Test
-    public void backwards2() {
+    void backwards2() {
         AssemblageConfig build = AssemblageConfig.builder()
             .copyPredictions(false)
             .build();

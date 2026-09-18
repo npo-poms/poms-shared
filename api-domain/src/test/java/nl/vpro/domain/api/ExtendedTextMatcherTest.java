@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author rico
  * @since 4.6
  */
-public class ExtendedTextMatcherTest {
+class ExtendedTextMatcherTest {
     @Test
-    public void testGetValue() {
+    void getValue() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("title");
         ExtendedTextMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:extendedTextMatcher xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:media:2009\">title</local:extendedTextMatcher>");
@@ -26,7 +26,7 @@ public class ExtendedTextMatcherTest {
     }
 
     @Test
-    public void testApplyText() {
+    void applyText() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("aaa");
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isFalse();
@@ -35,7 +35,7 @@ public class ExtendedTextMatcherTest {
     }
 
     @Test
-    public void testApplyRegexp() {
+    void applyRegexp() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", REGEX);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isFalse();
@@ -44,7 +44,7 @@ public class ExtendedTextMatcherTest {
     }
 
     @Test
-    public void testApplyRegexpIgnoreCase() {
+    void applyRegexpIgnoreCase() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", REGEX, false);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isTrue();
@@ -53,7 +53,7 @@ public class ExtendedTextMatcherTest {
     }
 
     @Test
-    public void testApplyWildcard() {
+    void applyWildcard() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", WILDCARD);
         assertThat(in.test("aaxxxbb")).isTrue();
         assertThat(in.test("AAxxxBB")).isFalse();
@@ -63,7 +63,7 @@ public class ExtendedTextMatcherTest {
 
 
     @Test
-    public void testApplyWildcardIgnoreCase() {
+    void applyWildcardIgnoreCase() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", WILDCARD, false);
         assertThat(in.test("aaxxxbb")).isTrue();
         assertThat(in.test("AAxxxBB")).isTrue();
@@ -72,14 +72,14 @@ public class ExtendedTextMatcherTest {
     }
 
     @Test
-    public void testApplyNot() {
+    void applyNot() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("BB", Match.NOT);
         assertThat(in.test("BB")).isFalse();
         assertThat(in.test("AA")).isTrue();
     }
 
     @Test
-    public void testApplyIgnoreCase() {
+    void applyIgnoreCase() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("aaa", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isTrue();

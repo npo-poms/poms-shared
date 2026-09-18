@@ -20,11 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-public class PersonTest implements BasicObjectTheory<Person> {
+class PersonTest implements BasicObjectTheory<Person> {
 
 
     @Test
-    public void json() {
+    void json() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         assertThatJson(person).isSimilarTo(
@@ -40,7 +40,7 @@ public class PersonTest implements BasicObjectTheory<Person> {
 
     }
     @Test
-    public void jsonWithoutType() throws JsonProcessingException {
+    void jsonWithoutType() throws JsonProcessingException {
 
         Person person = (Person) Jackson2Mapper.getInstance().readValue(
             """
@@ -58,7 +58,7 @@ public class PersonTest implements BasicObjectTheory<Person> {
 
 
     @Test
-    public void xml() {
+    void xml() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(

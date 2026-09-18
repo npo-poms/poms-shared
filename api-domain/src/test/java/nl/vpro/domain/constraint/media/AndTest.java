@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class AndTest {
+class AndTest {
 
     @Test
-    public void testAndBinding() {
+    void andBinding() {
         And in = new And(new And());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -32,7 +32,7 @@ public class AndTest {
     }
 
     @Test
-    public void testOrBinding() {
+    void orBinding() {
         And in = new And(new Or());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -44,7 +44,7 @@ public class AndTest {
     }
 
     @Test
-    public void testNotBinding() {
+    void notBinding() {
         And in = new And(new Not());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -56,7 +56,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvTypeBinding() {
+    void avTypeBinding() {
         And in = new And(new AvTypeConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -68,7 +68,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() {
+    void avFileFormatBinding() {
         And in = new And(new AvFileFormatConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -80,7 +80,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() {
+    void avFileExtensionBinding() {
         And in = new And(new AVFileExtensionConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             """
@@ -92,13 +92,13 @@ public class AndTest {
     }
 
     @Test
-    public void testApplyWhenEmpty() {
+    void applyWhenEmpty() {
         And constraint = new And();
         assertThat(constraint.test(null)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() {
+    void applyWhenFalse() {
         And constraint = new And(
             MediaConstraints.alwaysFalse(),
             MediaConstraints.alwaysTrue(),
@@ -114,7 +114,7 @@ public class AndTest {
     }
 
     @Test
-    public void testApplyWhenTrue() {
+    void applyWhenTrue() {
         And constraint = new And(
             MediaConstraints.alwaysTrue()
         );

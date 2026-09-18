@@ -21,13 +21,13 @@ import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class MediaObjectOwnableListsTest {
+class MediaObjectOwnableListsTest {
 
     /**
      * The values for the Owner with higher rank should be used for expansion
      */
     @Test
-    public void expandOwnedLists() {
+    void expandOwnedLists() {
 
         List<GeoLocation> geoLocation1 = Collections.singletonList(
             GeoLocation.builder().name("Amsterdam").scopeNote("City").uri("test/123").role(GeoRoleType.RECORDED_IN).build()
@@ -53,7 +53,7 @@ public class MediaObjectOwnableListsTest {
     }
 
     @Test
-    public void removeGeoLocations() {
+    void removeGeoLocations() {
         Program program = MediaBuilder.program().mid("VPRO-1").titles(Title.main("Test 1")).build();
         List<GeoLocation> geoLocation1 = Collections.singletonList(
             GeoLocation.builder().id(1L).name("Amsterdam").scopeNote("City").uri("test/123").role(GeoRoleType.RECORDED_IN).build()
@@ -75,7 +75,7 @@ public class MediaObjectOwnableListsTest {
     }
 
     @Test
-    public void addOrUpdateOwnableList() {
+    void addOrUpdateOwnableList() {
         Program program = MediaBuilder.program().build();
 
 

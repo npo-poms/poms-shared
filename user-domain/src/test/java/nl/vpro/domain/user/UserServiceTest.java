@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since ...
  */
 @Log4j2
-class UserServiceTest {
+final class UserServiceTest {
 
     private final UserService<User> userService = new UserService<>() {
         @Override
@@ -112,7 +112,7 @@ class UserServiceTest {
     };
 
     @Test
-    public void async() throws Exception {
+    void async() throws Exception {
         MDC.put(USER_NAME, "user");
         Locale def = Locales.getDefault();
 

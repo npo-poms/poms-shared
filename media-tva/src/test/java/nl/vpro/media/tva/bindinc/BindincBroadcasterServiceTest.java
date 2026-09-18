@@ -36,7 +36,7 @@ class BindincBroadcasterServiceTest {
 
 
     @Test
-    public void find() {
+    void find() {
         assertThat(bs.find("BNNVARA")).isNotNull();
 
         assertThat(bs.find("VER")).isEqualTo(new Broadcaster(""));
@@ -45,7 +45,7 @@ class BindincBroadcasterServiceTest {
     }
 
     @Test
-    public void testToString(WireMockRuntimeInfo wiremock) {
+    void toString(WireMockRuntimeInfo wiremock) {
         assertThat(bs.toString()).isEqualTo(
             """
                 BindincBroadcasterService[http://localhost:%s/broadcasters/(/mis,whatson)]  67 broadcasters (overriding: [AVROTROS, BNNVARA, KRO-NCRV, NET5, OMROP FRYSLAN, SBS6, SBS9, VER, VIAPLAY TV])""".formatted(wiremock.getHttpPort()));

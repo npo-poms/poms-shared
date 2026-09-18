@@ -20,16 +20,16 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-public class LicenseTest {
+final class LicenseTest {
 
     @Test
-    public void getIdShouldReturnLicenseId() {
+    void getIdShouldReturnLicenseId() {
         License testLicence = License.CC_BY;
         assertThat(testLicence.getId()).isEqualTo("CC_BY");
     }
 
     @Test
-    public void allsShouldReturnLicenseId() {
+    void allsShouldReturnLicenseId() {
         assertThat(License.values()[0].getId()).isEqualTo("COPYRIGHTED");
 
         for (License l : License.values()) {
@@ -48,13 +48,13 @@ public class LicenseTest {
     }
 
     @Test
-    public void getLicenseById() {
+    void getLicenseById() {
         assertThat(License.valueOf("COPYRIGHTED")).isEqualTo(License.COPYRIGHTED);
     }
 
 
     @Test
-    public void json() {
+    void json() {
         Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), """
             {
               "license" : "CC_BY"
@@ -62,7 +62,7 @@ public class LicenseTest {
     }
 
     @Test
-    public void xml() {
+    void xml() {
         JAXBTestUtil.roundTripAndSimilar(new A(License.CC_BY), """
             <a>
                 <license>CC_BY</license>
@@ -74,13 +74,13 @@ public class LicenseTest {
     Validator validator = config.getValidator();
 
     @Test
-    public void validator() {
+    void validator() {
         assertThat(validator.validate(License.PUBLIC_DOMAIN)).isEmpty();
     }
 
 
     @Test
-    public void futureIdsCanBeUnmarshalledXml() {
+    void futureIdsCanBeUnmarshalledXml() {
         A a = JAXB.unmarshal(new StringReader("""
             <a>
                 <license>FUTURE_LICENSE</license>
@@ -94,7 +94,7 @@ public class LicenseTest {
 
 
     @Test
-    public void futureIdsCanBeUnmarshalledJson() throws Exception {
+    void futureIdsCanBeUnmarshalledJson() throws Exception {
         A a = Jackson2Mapper.getInstance().readValue(new StringReader("""
             {
               "license" : "FUTURE_LICENSE"
@@ -105,7 +105,7 @@ public class LicenseTest {
 
 
     @Test
-    public void futureIdsAreInvalidThough() throws Exception {
+    void futureIdsAreInvalidThough() throws Exception {
         A a = Jackson2Mapper.getInstance().readValue(new StringReader("""
             {
               "license" : "FUTURE_LICENSE"

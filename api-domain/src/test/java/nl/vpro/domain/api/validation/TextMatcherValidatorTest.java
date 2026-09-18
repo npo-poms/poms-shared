@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
  * @author rico
  * @since 3.1
  */
-public class TextMatcherValidatorTest {
+class TextMatcherValidatorTest {
 
     private final TextMatcherValidator validator = new TextMatcherValidator();
 
@@ -31,37 +31,37 @@ public class TextMatcherValidatorTest {
     }
 
     @Test
-    public void EmptyTextMatcher() {
+    void EmptyTextMatcher() {
         TextMatcher textMatcher = new TextMatcher("");
         assertThat(validator.isValid(textMatcher, context)).isTrue();
     }
 
     @Test
-    public void TextTextMatcher() {
+    void TextTextMatcher() {
         TextMatcher textMatcher = new TextMatcher("value");
         assertThat(validator.isValid(textMatcher, context)).isTrue();
     }
 
     @Test
-    public void RegexTextMatcher() {
+    void RegexTextMatcher() {
         TextMatcher textMatcher = new TextMatcher("achter.*", null, StandardMatchType.REGEX);
         assertThat(validator.isValid(textMatcher, context)).isTrue();
     }
 
     @Test
-    public void InvalidRegexTextMatcher() {
+    void InvalidRegexTextMatcher() {
         TextMatcher textMatcher = new TextMatcher("achter*[", null, StandardMatchType.REGEX);
         assertThat(validator.isValid(textMatcher, context)).isFalse();
     }
 
     @Test
-    public void UnsupportedRegexTextMatcher() {
+    void UnsupportedRegexTextMatcher() {
         TextMatcher textMatcher = new TextMatcher(".*aap", null, StandardMatchType.REGEX);
         assertThat(validator.isValid(textMatcher, context)).isFalse();
     }
 
     @Test
-    public void UnsupportedWildcardTextMatcher() {
+    void UnsupportedWildcardTextMatcher() {
         TextMatcher textMatcher = new TextMatcher("*boe", null, StandardMatchType.WILDCARD);
         assertThat(validator.isValid(textMatcher, context)).isFalse();
     }

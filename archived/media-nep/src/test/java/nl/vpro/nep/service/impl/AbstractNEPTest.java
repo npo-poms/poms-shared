@@ -8,7 +8,7 @@ import java.util.Properties;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class AbstractNEPTest {
+class AbstractNEPTest {
 
     private final String prefix;
 
