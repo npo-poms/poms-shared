@@ -4,9 +4,12 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
@@ -20,21 +23,19 @@ import nl.vpro.domain.ToString;
  * @author rico
  * @since 4.6
  */
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
 public abstract class AbstractTextMatcher<MT extends MatchType> extends AbstractMatcher<String> {
     public static final Match DEFAULT_MATCH = Match.MUST;
 
     @XmlValue
+    @NotEmpty
     @XmlDocumentation("The value to match on. This is a string, but the interpretation of this string depends on the matchType.")
     protected String value;
 
     public AbstractTextMatcher(String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return value;
     }
 
     public abstract MT getMatchType();

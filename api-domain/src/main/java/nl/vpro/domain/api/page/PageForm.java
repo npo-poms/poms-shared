@@ -1,5 +1,8 @@
 package nl.vpro.domain.api.page;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -40,19 +43,26 @@ public class PageForm implements SortableForm, Predicate<Page> {
     @XmlAttribute(name = "highlight")
     private Boolean highlighted = null;
 
+    @Setter
+    @Getter
     @XmlElement
     @Valid
     private PageSearch searches;
 
+    @Setter
     @XmlElement
     @XmlJavaTypeAdapter(PageSortTypeAdapter.class)
     @JsonIgnore
     private LinkedHashMap<PageSortField, Order> sortFields;
 
+    @Setter
+    @Getter
     @XmlElement
     @Valid
     private PageFacets facets;
 
+    @Setter
+    @Getter
     @XmlElement
     @Valid
     private MediaForm mediaForm;
@@ -71,22 +81,6 @@ public class PageForm implements SortableForm, Predicate<Page> {
 
     }
 
-    public PageFacets getFacets() {
-        return facets;
-    }
-
-    public void setFacets(PageFacets facets) {
-        this.facets = facets;
-    }
-
-    public MediaForm getMediaForm() {
-        return mediaForm;
-    }
-
-    public void setMediaForm(MediaForm mediaForm) {
-        this.mediaForm = mediaForm;
-    }
-
     @Override
     public boolean isSorted() {
         return sortFields != null && !sortFields.isEmpty();
@@ -95,10 +89,6 @@ public class PageForm implements SortableForm, Predicate<Page> {
     @JsonProperty("sort")
     public Map<PageSortField, Order> getSortFields() {
         return sortFields;
-    }
-
-    public void setSortFields(LinkedHashMap<PageSortField, Order> sortFields) {
-        this.sortFields = sortFields;
     }
 
     public void addSortField(PageSortField field) {
@@ -121,14 +111,6 @@ public class PageForm implements SortableForm, Predicate<Page> {
 
     public void setHighlight(boolean highlight) {
         this.highlighted = highlight ? true : null;
-    }
-
-    public PageSearch getSearches() {
-        return searches;
-    }
-
-    public void setSearches(PageSearch searches) {
-        this.searches = searches;
     }
 
     @Override

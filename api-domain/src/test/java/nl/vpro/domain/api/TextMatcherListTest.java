@@ -1,9 +1,12 @@
 package nl.vpro.domain.api;
 
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import java.util.Arrays;
+
+import jakarta.validation.*;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TextMatcherListTest {
 
     @Test
-    public void marshal() {
+    void marshal() {
         final TextMatcherList textMatcherList = new TextMatcherList(
                 Arrays.asList(new TextMatcher("a", Match.SHOULD), new TextMatcher("b", Match.SHOULD)), Match.MUST);
         TextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,
@@ -25,7 +28,27 @@ public class TextMatcherListTest {
                     <api:matcher match="SHOULD">b</api:matcher>
                 </local:textMatcherList>""");
 
-        assertThat(result.asList().get(0).getMatch()).isEqualTo(Match.SHOULD);
+        assertThat(result.asList().getFirst().getMatch()).isEqualTo(Match.SHOULD);
+    }
+
+    @Test
+    void validate() {
+
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            Validator validator = factory.getValidator();
+
+            {
+                final TextMatcherList validList = new TextMatcherList(
+                    Arrays.asList(new TextMatcher("a", Match.SHOULD), new TextMatcher("b", Match.SHOULD)), Match.MUST);
+                assertThat(validator.validate(validList)).isEmpty();
+            }
+            {
+                final TextMatcherList invalidList = new TextMatcherList(
+                    Arrays.asList(new TextMatcher("", Match.SHOULD), new TextMatcher("b", Match.SHOULD)), Match.MUST);
+                var errors = assertThat(validator.validate(invalidList)).hasSize(1).actual();
+                assertThat(errors.iterator().next().getMessage()).contains("must not be empty");
+            }
+        }
     }
 
 }

@@ -47,50 +47,58 @@ import nl.vpro.domain.user.Broadcaster;
 @NoArgsConstructor
 public class PageSearch extends AbstractTextSearch<Page> {
 
-    @Valid
     private TextMatcherList broadcasters;
 
-    @Valid
     private TextMatcherList types;
 
-    @Valid
     private TextMatcherList portals;
 
-    @Valid
     private TextMatcherList sections;
 
-    @Valid
     private TextMatcherList genres;
 
-    @Valid
+
     private ExtendedTextMatcherList tags;
 
-    @Valid
+
     private ExtendedTextMatcherList keywords;
 
-    @Valid
+
     private DateRangeMatcherList sortDates;
 
-    @Valid
+
     private DateRangeMatcherList creationDates;
 
-    @Valid
+
     private DateRangeMatcherList lastModifiedDates;
 
-    @Valid
+
     private DateRangeMatcherList publishDates;
 
-    @Valid
     private RelationSearchList relations;
 
-    @Valid
+
     private AssociationSearchList links;
 
-    @Valid
+
     private AssociationSearchList referrals;
 
     @lombok.Builder
-    private  PageSearch(@Valid SimpleTextMatcher text, @Valid TextMatcherList broadcasters, @Valid TextMatcherList types, @Valid TextMatcherList portals, @Valid TextMatcherList sections, @Valid TextMatcherList genres, @Valid ExtendedTextMatcherList tags, @Valid ExtendedTextMatcherList keywords, @Valid DateRangeMatcherList sortDates, @Valid DateRangeMatcherList creationDates, @Valid DateRangeMatcherList lastModifiedDates, @Valid DateRangeMatcherList publishDates, @Valid RelationSearchList relations, @Valid AssociationSearchList links, @Valid AssociationSearchList referrals) {
+    private  PageSearch(
+        @Valid SimpleTextMatcher text,
+        TextMatcherList broadcasters,
+        TextMatcherList types,
+        TextMatcherList portals,
+        TextMatcherList sections,
+        TextMatcherList genres,
+        ExtendedTextMatcherList tags,
+        ExtendedTextMatcherList keywords,
+        DateRangeMatcherList sortDates,
+        DateRangeMatcherList creationDates,
+        DateRangeMatcherList lastModifiedDates,
+        DateRangeMatcherList publishDates,
+        RelationSearchList relations, AssociationSearchList links,
+        AssociationSearchList referrals) {
         super(text);
         this.broadcasters = broadcasters;
         this.types = types;

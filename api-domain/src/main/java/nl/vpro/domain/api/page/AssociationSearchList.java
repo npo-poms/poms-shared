@@ -23,7 +23,7 @@ import nl.vpro.jackson2.IterableJson;
 @XmlType(name = "pageAssociationSearchListType")
 @JsonSerialize(using = IterableJson.Serializer.class)
 @JsonDeserialize(using = AssociationSearchList.Deserializer.class)
-public class AssociationSearchList implements Predicate<Association>, Iterable<AssociationSearch> {
+public class AssociationSearchList implements Predicate<@Valid Association>, Iterable<@Valid AssociationSearch> {
 
 
     @XmlElement(name = "search")

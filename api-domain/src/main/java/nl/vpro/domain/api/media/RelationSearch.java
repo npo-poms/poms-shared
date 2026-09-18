@@ -6,7 +6,6 @@ package nl.vpro.domain.api.media;
 
 import lombok.NoArgsConstructor;
 
-import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.*;
@@ -29,10 +28,10 @@ public class RelationSearch extends AbstractRelationSearch {
 
     @lombok.Builder
     protected RelationSearch(
-        @Valid TextMatcherList types,
-        @Valid TextMatcherList broadcasters,
-        @Valid ExtendedTextMatcherList values,
-        @Valid TextMatcherList uriRefs) {
+        TextMatcherList types,
+        TextMatcherList broadcasters,
+        ExtendedTextMatcherList values,
+        TextMatcherList uriRefs) {
         super(types, broadcasters, values, uriRefs);
     }
 }

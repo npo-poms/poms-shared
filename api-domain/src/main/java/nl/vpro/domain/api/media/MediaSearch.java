@@ -49,117 +49,98 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         super();
     }
 
-    @Valid
     @Getter
     @Setter
     @XmlDocumentation("The MID must match one of the mediaIds")
     private TextMatcherList mediaIds;
 
-    @Valid
     @Getter
     @Setter
     @XmlDocumentation("The media type must match one of these.")
     private TextMatcherList types;
 
-    @Valid
     @Getter
     @Setter
     @XmlDocumentation("To filter on av type (AUDIO/VIDEO)")
     private TextMatcherList avTypes;
 
-    @Valid
+
     @Getter
     @Setter
     private DateRangeMatcherList sortDates;
 
-    @Valid
+
     @Getter
     @Setter
     private DateRangeMatcherList publishDates;
 
-    @Valid
     @Getter
     @Setter
     private DateRangeMatcherList creationDates;
 
-    @Valid
     @Getter
     @Setter
     private DateRangeMatcherList lastModifiedDates;
 
-
-    @Valid
     @Getter
     @Setter
     private TextMatcherList broadcasters;
 
-    @Valid
+
     @Getter
     @Setter
     private TextMatcherList locations;
 
-    @Valid
     @Getter
     @Setter
     private ExtendedTextMatcherList tags;
 
-    @Valid
+
     @Getter
     @Setter
     private TextMatcherList genres;
 
-    @Valid
     @Getter
     @Setter
     private DurationRangeMatcherList durations;
 
-    @Valid
     @Getter
     @Setter
     private TextMatcherList descendantOf;
 
-    @Valid
     @Getter
     @Setter
     private TextMatcherList episodeOf;
 
-    @Valid
     @Getter
     @Setter
     private TextMatcherList memberOf;
 
-    @Valid
+
     @Getter
     @Setter
     private RelationSearchList relations;
 
-    @Valid
     @Getter
     @Setter
     @JsonSerialize(using = ScheduleEventSearchListJson.Serializer.class)
     @JsonDeserialize(using = ScheduleEventSearchListJson.Deserializer.class)
-    private List<ScheduleEventSearch> scheduleEvents;
+    private List<@Valid ScheduleEventSearch> scheduleEvents;
 
-
-    @Valid
     @Getter
     @Setter
     private TextMatcherList ageRatings;
 
-    @Valid
     @Getter
     @Setter
     private TextMatcherList contentRatings;
 
-    @Valid
     @Getter
     @Setter
-    private List<TitleSearch> titles;
-
-    @Valid
+    private List<@Valid TitleSearch> titles;
     @Getter
     @Setter
-    private List<GeoLocationSearch> geoLocations;
+    private List<@Valid GeoLocationSearch> geoLocations;
 
     /**
      * @deprecated For json backwards compatibility

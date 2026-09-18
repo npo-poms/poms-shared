@@ -21,7 +21,7 @@ import nl.vpro.domain.api.media.DurationRangeMatcher;
 @XmlType(name = "durationRangeMatcherListType")
 @JsonSerialize(using = DurationRangeMatcherListJson.Serializer.class)
 @JsonDeserialize(using = DurationRangeMatcherListJson.Deserializer.class)
-public class DurationRangeMatcherList extends MatcherList<Duration, DurationRangeMatcher> implements Predicate<Duration> {
+public class DurationRangeMatcherList extends MatcherList<Duration, @Valid DurationRangeMatcher> implements Predicate<Duration> {
 
     @XmlElement(name = "matcher")
     protected List<@Valid DurationRangeMatcher> matchers = new ArrayList<>();

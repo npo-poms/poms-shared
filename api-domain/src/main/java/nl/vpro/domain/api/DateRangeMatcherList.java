@@ -22,7 +22,7 @@ import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
 @XmlType(name = "dateRangeMatcherListType")
 @JsonSerialize(using = DateRangeMatcherListJson.Serializer.class)
 @JsonDeserialize(using = DateRangeMatcherListJson.Deserializer.class)
-public class DateRangeMatcherList extends MatcherList<Instant, DateRangeMatcher> implements Predicate<Instant> {
+public class DateRangeMatcherList extends MatcherList<Instant, @Valid DateRangeMatcher> implements Predicate<Instant> {
 
     @XmlElement(name = "matcher")
     protected List<@Valid DateRangeMatcher> matchers = new ArrayList<>();
