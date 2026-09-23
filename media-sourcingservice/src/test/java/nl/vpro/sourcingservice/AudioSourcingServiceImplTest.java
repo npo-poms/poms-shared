@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +19,7 @@ import com.github.tomakehurst.wiremock.matching.UrlPattern;
 import com.github.tomakehurst.wiremock.stubbing.ServeEvent;
 
 import nl.vpro.domain.media.update.UploadResponse;
+import nl.vpro.logging.log4j2.CaptureStringFromLogger;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
@@ -95,24 +95,26 @@ final class AudioSourcingServiceImplTest {
     }
 
     @Test
-    void uploadMalformedHtmlErrorResponse() {
+    void uploadMalformedHtmlErrorResponse() throws ExecutionException, InterruptedException {
         stubFor(post(UrlPattern.ANY).willReturn(aResponse()
             .withStatus(500)
             .withHeader("Content-Type", "Text/HTML; charset=UTF-8")
             .withBody("<h1>Upload failed</h1>")));
 
-        assertThatThrownBy(() -> impl.upload(
-            Log4j2SimpleLogger.simple(log),
-            "mid",
-            6,
-            "audio/mpeg",
-            new ByteArrayInputStream("foobar".getBytes()),
-            null,
-            null
-        ).join())
-            .isInstanceOf(CompletionException.class)
-            .hasCauseInstanceOf(SourcingServiceException.class)
-            .hasMessageNotContaining("<h1>");
+        try (CaptureStringFromLogger capture = CaptureStringFromLogger.info()) {
+            var response = impl.upload(
+                Log4j2SimpleLogger.simple(log),
+                "mid",
+                6,
+                "audio/mpeg",
+                new ByteArrayInputStream("foobar".getBytes()),
+                null,
+                null
+            );
+            assertThat(response.get().getStatusCode()).isEqualTo(500);
+            assertThat(response.get().getResponse()).isEqualTo("<h1>Upload failed</h1>");
+            assertThat(capture.get().contains("ERROR"));
+        }
 
     }
 
