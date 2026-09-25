@@ -65,7 +65,6 @@ final class VideoSourcingServiceImplITest {
             Files.size(file),
             "video/mp4",
             FileCachingInputStream.builder()
-                .simpleLogger(simple(log))
                 .input(Files.newInputStream(file)).build(),
             "portrait",
             "michiel.meeuwissen@gmail.com"
@@ -78,7 +77,7 @@ final class VideoSourcingServiceImplITest {
     void uploadHugeVideo() throws IOException, ExecutionException, InterruptedException {
         Instant start = Instant.now();
         //Path file = Paths.get(System.getProperty("user.home") , "samples", "AT21022008_Den_Uyl.mp4");
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "output1.mp4");
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "2000Mb.mp4");
 
         CompletableFuture<UploadResponse> upload = impl.upload(
             simple(log),

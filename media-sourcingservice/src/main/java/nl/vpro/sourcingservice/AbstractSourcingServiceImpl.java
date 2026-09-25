@@ -133,19 +133,25 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .batchSize((long) configuration.chunkSize())
                 .consumer(l -> {
                     String progress = formatter.get().format(l);
-                    while(prev.get().equals(progress)) {
+                    while (prev.get().equals(progress)) {
                         formatter.set(formatter.get().withExtraDigit());
                         progress = formatter.get().format(l);
                     }
                     prev.set(progress);
                     logger.info(
-
                         en("Uploaded %s/%s to %s")
                             .nl("Geüpload %s/%s naar %s")
                             .formatted(
                                 progress,
                                 FileSizeFormatter.DEFAULT.format(fileSize),
                                 configuration.cleanBaseUrl()));
+
+                    if (l == fileSize) {
+                        logger.info(
+                            en("Ready. Waiting for for response")
+                                .nl("Klaar. Wach op antwoord")
+                        );
+                    }
                     }
                 )
                 .build(),
