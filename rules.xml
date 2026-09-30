@@ -21,5 +21,35 @@
         <ignoreVersion type="regex">^(?:4\.(?:2\d|[3-9]\d)|[5-9]\d*)(?:\..*)?$</ignoreVersion>
       </ignoreVersions>
     </rule>
+    <rule groupId="org.apache.cxf">
+      <!-- Stay on the supported CXF 4.1 release line. -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!4\.1(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.springframework.security">
+      <!-- Stay on the Spring Security 6 release line. -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!6(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.springframework">
+      <!-- Stay on the Spring Framework 6 release line. -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!6(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.springframework.data">
+      <!-- Stay on the Spring Data 3 release line. -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!3(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.hibernate.orm">
+      <!-- Stay on the Hibernate ORM 6 release line. -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!6(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
   </rules>
 </ruleset>
