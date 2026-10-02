@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.apache.logging.log4j.CloseableThreadContext;
+import org.apache.logging.log4j.ThreadContext;
 import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jsoup.Jsoup;
@@ -126,32 +128,35 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final String fileName = getFileName(mid, contentType);
         AtomicReference<FileSizeFormatter> formatter = new AtomicReference<>(FileSizeFormatter.DEFAULT.withPattern("#"));
         AtomicReference<String> prev = new AtomicReference<>("");
+        final var mdc = ThreadContext.getImmutableContext();
         body.addChannel(FILE, fileName,
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
                 .batchSize((long) configuration.chunkSize())
                 .consumer(l -> {
-                    String progress = formatter.get().format(l);
-                    while (prev.get().equals(progress)) {
-                        formatter.set(formatter.get().withExtraDigit());
-                        progress = formatter.get().format(l);
-                    }
-                    prev.set(progress);
-                    logger.info(
-                        en("Uploaded %s/%s to %s")
-                            .nl("Geüpload %s/%s naar %s")
-                            .formatted(
-                                progress,
-                                FileSizeFormatter.DEFAULT.format(fileSize),
-                                configuration.cleanBaseUrl()));
+                        try (var ignored = CloseableThreadContext.putAll(mdc)) {
+                            String progress = formatter.get().format(l);
+                            while (prev.get().equals(progress)) {
+                                formatter.set(formatter.get().withExtraDigit());
+                                progress = formatter.get().format(l);
+                            }
+                            prev.set(progress);
+                            logger.info(
+                                en("Uploaded %s/%s to %s")
+                                    .nl("Geüpload %s/%s naar %s")
+                                    .formatted(
+                                        progress,
+                                        FileSizeFormatter.DEFAULT.format(fileSize),
+                                        configuration.cleanBaseUrl()));
 
-                    if (l == fileSize) {
-                        logger.info(
-                            en("Ready. Waiting for for response")
-                                .nl("Klaar. Wach op antwoord")
-                        );
-                    }
+                            if (l == fileSize) {
+                                logger.info(
+                                    en("Ready. Waiting for for response")
+                                        .nl("Klaar. Wach op antwoord")
+                                );
+                            }
+                        }
                     }
                 )
                 .build(),
