@@ -61,6 +61,7 @@ jobs:
              echo "gpg_skip=true" >> $GITHUB_OUTPUT
           fi
       - name: Build  with Maven
+        id: maven
         shell: bash
         run:  |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
@@ -72,10 +73,11 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
-      - uses: MMProgrami/after-maven-action@v2
+      - uses: MMProgrami/after-maven-action@v2.8
         with:
           determine_version: 'false'
           coverage: 'true'
+          maven_outcome: ${{ steps.maven.outcome }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v7
         with:
