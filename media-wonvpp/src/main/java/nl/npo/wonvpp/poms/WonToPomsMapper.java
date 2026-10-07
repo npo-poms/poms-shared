@@ -109,6 +109,7 @@ public class WonToPomsMapper {
             case serie, series   -> mapToSeries(entry);
         };
     }
+
     protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry) {
         assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, broadcast())
@@ -120,8 +121,8 @@ public class WonToPomsMapper {
             .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null,
                 entry.episodeNumber())
             .build();
-
     }
+
     protected Group mapToSeason(CatalogEntry entry) {
         Integer seasonNumber = null;
         if (entry.seasonNumber() != null) {
@@ -197,6 +198,7 @@ public class WonToPomsMapper {
         }
         return StringUtils.isNotEmpty(synopsis.longValue()) ? synopsis.longValue() : null;
     }
+
     protected  @Nullable String shortDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
@@ -228,10 +230,10 @@ public class WonToPomsMapper {
             });
             c.setExternalId("whatson:" + person.id());
             credits.add(c);
-
         }
         return credits;
     }
+
     protected @PolyNull AgeRating mapToRating(@PolyNull RatingType rating) {
         if (rating == null) {
             return null;
@@ -263,7 +265,6 @@ public class WonToPomsMapper {
         return entry.rating().advisories().stream().flatMap(m -> m.entrySet().stream())
             .map(e -> mapToRating(e.getKey())).toArray(ContentRating[]::new);
     }
-
 
     protected  @NonNull AvailableSubtitles mapToAvailableSubtitles(@NonNull CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
