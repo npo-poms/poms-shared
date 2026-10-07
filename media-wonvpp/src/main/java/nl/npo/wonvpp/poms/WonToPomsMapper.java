@@ -217,7 +217,7 @@ public class WonToPomsMapper {
         List<Credits> credits = new ArrayList<>();
         for (CreditsType creditsType : castAndCrew) {
             PersonType person = creditsType.person();
-            Person c  = new Person(person.givenName(), person.givenName(), switch (creditsType.function()) {
+            Person c  = new Person(person.givenName(), person.familyName(), switch (creditsType.function()) {
                 case Presenter -> RoleType.PRESENTER;
                 case Director -> RoleType.DIRECTOR;
                 case Actor ->  RoleType.ACTOR;
