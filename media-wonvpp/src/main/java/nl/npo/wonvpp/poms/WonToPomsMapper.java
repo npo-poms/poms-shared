@@ -171,7 +171,6 @@ public class WonToPomsMapper {
             .originalTitle(entry.originalTitle(), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
-
             .languages(entry.languages() == null ?
                 new UsedLanguage[0] :
                 entry.languages().stream()
@@ -218,15 +217,15 @@ public class WonToPomsMapper {
         List<Credits> credits = new ArrayList<>();
         for (CreditsType creditsType : castAndCrew) {
             PersonType person = creditsType.person();
-            Person c  = switch (creditsType.function()) {
-                case Presenter -> new Person(person.givenName(), person.familyName(), RoleType.PRESENTER);
-                case Director -> new Person(person.givenName(), person.familyName(), RoleType.DIRECTOR);
-                case Actor -> new Person(person.givenName(), person.familyName(), RoleType.ACTOR);
-                case Scriptwriter -> new Person(person.givenName(), person.familyName(), RoleType.SCRIPTWRITER);
-                case Commentator -> new Person(person.givenName(), person.familyName(), RoleType.COMMENTATOR);
-                case Guest -> new Person(person.givenName(), person.familyName(), RoleType.GUEST);
-                case Host -> new Person(person.givenName(), person.familyName(), RoleType.HOST);
-            };
+            Person c  = new Person(person.givenName(), person.givenName(), switch (creditsType.function()) {
+                case Presenter -> RoleType.PRESENTER;
+                case Director -> RoleType.DIRECTOR;
+                case Actor ->  RoleType.ACTOR;
+                case Scriptwriter ->RoleType.SCRIPTWRITER;
+                case Commentator -> RoleType.COMMENTATOR;
+                case Guest -> RoleType.GUEST;
+                case Host -> RoleType.HOST;
+            });
             c.setExternalId("whatson:" + person.id());
             credits.add(c);
 
