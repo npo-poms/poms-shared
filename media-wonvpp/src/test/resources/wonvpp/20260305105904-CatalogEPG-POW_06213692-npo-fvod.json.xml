@@ -4,6 +4,7 @@
       <crid>crid://WONVPP/POW_06213692</crid>
       <broadcaster id="EO">EO</broadcaster>
       <title owner="AUTHORITY" type="MAIN">BusinessTime</title>
+      <title owner="AUTHORITY" type="SUB">BusinessTime</title>
       <title owner="AUTHORITY" type="ORIGINAL">BusinessTime</title>
       <country code="NL">Nederland</country>
       <isDubbed>false</isDubbed>
@@ -27,8 +28,8 @@
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_06207575" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_06207575</crid>
-      <title owner="AUTHORITY" type="MAIN">Seizoen 26</title>
-      <title owner="AUTHORITY" type="SUB"> Seizoen 26</title>
+      <title owner="AUTHORITY" type="MAIN"> Seizoen 26</title>
+      <title owner="AUTHORITY" type="SUB">Seizoen 26</title>
       <credits/>
       <locations/>
       <images/>

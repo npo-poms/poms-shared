@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean id="won.to.poms.owner" class="nl.vpro.domain.media.support.OwnerType" factory-method="valueOf">
-    <constructor-arg value="${pd.wonvpp.owner:AUTHORITY}" />
+    <constructor-arg value="${pd.wonvpp.owner:MIS}" />
   </bean>
 
 

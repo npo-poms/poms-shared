@@ -57,8 +57,8 @@
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="BV_101414089" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/BV_101414089</crid>
-      <title owner="AUTHORITY" type="MAIN">Sluipschutters</title>
-      <title owner="AUTHORITY" type="SUB">Sluipschutters Seizoen 5</title>
+      <title owner="AUTHORITY" type="MAIN">Sluipschutters Seizoen 5</title>
+      <title owner="AUTHORITY" type="SUB">Sluipschutters</title>
       <description owner="AUTHORITY" type="MAIN">Een humoristisch sketchprogramma waarin de Sluipschutters zich in moordend tempo verplaatsen. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen.</description>
       <credits/>
       <descendantOf midRef="BNN_101378789"/>

@@ -166,11 +166,12 @@ public class WonToPomsMapper {
             .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
-            .mainTitle(entry.title(), owner)
+            .subTitle(entry.title(), owner)
+            .mainTitle(StringUtils.isBlank(entry.displayTitle())? entry.title() : entry.displayTitle(), owner)
             .originalTitle(entry.originalTitle(), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
-            .subTitle(entry.displayTitle(), owner)
+
             .languages(entry.languages() == null ?
                 new UsedLanguage[0] :
                 entry.languages().stream()
