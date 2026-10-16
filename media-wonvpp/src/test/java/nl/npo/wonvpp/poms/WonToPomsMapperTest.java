@@ -11,6 +11,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.xml.bind.JAXB;
 
+import org.apache.logging.log4j.Level;
 import org.assertj.core.api.Assumptions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,6 +28,7 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.media.MediaTable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.logging.log4j2.CaptureListFromLogger;
 import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -105,12 +107,17 @@ final class WonToPomsMapperTest {
     public void testAlls(KafkaDumpReader.Record records) {
         List<CatalogEntry> entries = entry(records);
         Assumptions.assumeThat(entries).isNotNull();
-        log.info(entries);
-        mapper.mapToPoms(entries)
-            .forEach(table -> {
-                JAXB.marshal(table, System.out);
-                assertThat(validator.validate(table)).isEmpty();
-            });
+        try (var capture = CaptureListFromLogger.builder().level(Level.WARN).build()) {
+            log.info(entries);
+            mapper.mapToPoms(entries)
+                .forEach(table -> {
+                    JAXB.marshal(table, System.out);
+                    assertThat(validator.validate(table)).isEmpty();
+                });
+
+            assertThat(capture.getEvents()).isEmpty();
+        }
+
     }
 
 }

@@ -242,7 +242,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
-    default B crids(Collection<String> crids) {
+    default B crids(Collection<@Nullable String> crids) {
         for(String crid : crids) {
             if (crid != null) {
                 mediaObject().addCrid(crid);
@@ -251,7 +251,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B crids(String... crids) {
+    default B crids(@Nullable String... crids) {
         return crids(Arrays.asList(crids));
     }
 
@@ -1125,11 +1125,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
          * @param titles
          */
         public T vodEvent(String midRef, java.time.Instant start, ScheduleEventTitle... titles) {
+
             ScheduleEvent event = ScheduleEvent.builder()
                 .channel(Channel.NVOD)
                 .start(start)
                 .type(ScheduleEventType.ON_DEMAND)
-                .midRef(midRef == null ? mid : midRef)
+                .midRef(StringUtils.isNotBlank(mid)  ? mid : StringUtils.isNotBlank(midRef) ? midRef :null)
                 .build();
             event.setParent(mediaObject());
             for (ScheduleEventTitle title : titles) {

@@ -137,11 +137,15 @@ public class WonToPomsMapper {
 
     protected Group mapToSeason(CatalogEntry entry) {
         Integer seasonNumber = null;
-        if (entry.seasonNumber() != null) {
+        if (StringUtils.isNotBlank(entry.seasonNumber())) {
+            String s =  entry.seasonNumber();
+            if (s.startsWith("S")) {
+                s = s.substring(1);
+            }
             try {
-                seasonNumber = Integer.parseInt(entry.seasonNumber());
+                seasonNumber = Integer.parseInt(s);
             } catch (NumberFormatException e) {
-                log.warn("Could not parse season number {} for entry {}, skipping season number", entry.seasonNumber(), entry.prid());
+                log.warn("Could not parse season number '{}' for entry {}, skipping season number", entry.seasonNumber(), entry.prid());
             }
         }
         return map(entry, Suppliers.always(empty()), season())
