@@ -101,10 +101,10 @@ public class WonToPomsMapper {
                 .map(RelationType::season)
                 .map(PridReference::prid)
                 .orElse(null);
-                ;
+            ;
             table.add(mapToPoms(entry,
                 ()  -> entries.stream().filter(e -> e.prid().equals(season))
-                .map(CatalogEntry::displayTitle).findFirst()));
+                    .map(CatalogEntry::displayTitle).findFirst()));
         }
         table.setScheduleIfNeeded();
         LocalDate localDate = Schedule.guideDay(table.getSchedule().getStart());
@@ -120,7 +120,6 @@ public class WonToPomsMapper {
             case serie, series   -> mapToSeries(entry);
         };
     }
-
     protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry, Supplier<Optional<String>> seasonTitle) {
         assert StringUtils.isEmpty(entry.seasonNumber());
         return map(entry, seasonTitle, broadcast())
@@ -128,13 +127,13 @@ public class WonToPomsMapper {
                 entry.prid(),
                 ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
                     .plusSeconds(60).truncatedTo(ChronoUnit.MINUTES) // round to next minute
-                )
+            )
             .plannedAvailability(Authority.SYSTEM, entry.publicationTimestamp())
             .episodeOf(entry.relations() != null && entry.relations().season() != null ? toMid(entry.relations().season()) : null,
                 entry.episodeNumber())
             .build();
-    }
 
+    }
     protected Group mapToSeason(CatalogEntry entry) {
         Integer seasonNumber = null;
         if (StringUtils.isNotBlank(entry.seasonNumber())) {
@@ -180,24 +179,25 @@ public class WonToPomsMapper {
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
             .broadcasters(entry.broadcasters() == null ? Collections.emptyList() :
                 entry.broadcasters().stream()
-                .map(this::mapToBroadcaster)
-                .toList()
+                    .map(this::mapToBroadcaster)
+                    .toList()
             )
             .crids(prid == null ? null : "crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
             .subTitle(entry.title(), owner)
-            .mainTitle(StringUtils.isBlank(entry.displayTitle())? entry.title() :
-                parentTitle.get().orElse(entry.displayTitle()), owner)
+            .mainTitle(StringUtils.isBlank(entry.displayTitle()) ?
+
+                parentTitle.get().orElse(entry.title()) : entry.displayTitle(), owner)
             .originalTitle(entry.originalTitle(), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
             .languages(entry.languages() == null ?
                 new UsedLanguage[0] :
                 entry.languages().stream()
-                .map(this::mapToLanguageCode)
-                .filter(Objects::nonNull) // sloppyness
-                .toArray(UsedLanguage[]::new)
+                    .map(this::mapToLanguageCode)
+                    .filter(Objects::nonNull) // sloppyness
+                    .toArray(UsedLanguage[]::new)
             )
             .countries(entry.productionCountry())
             .releaseYear(entry.productionYear())
@@ -206,8 +206,8 @@ public class WonToPomsMapper {
             .dubbed(entry.isDubbed())
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()
-                .map(this::mapToAvailableSubtitles)
-                .toArray(AvailableSubtitles[]::new)
+                    .map(this::mapToAvailableSubtitles)
+                    .toArray(AvailableSubtitles[]::new)
             )
             ;
     }
@@ -219,7 +219,6 @@ public class WonToPomsMapper {
         }
         return StringUtils.isNotEmpty(synopsis.longValue()) ? synopsis.longValue() : null;
     }
-
     protected  @Nullable String shortDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
@@ -251,10 +250,10 @@ public class WonToPomsMapper {
             });
             c.setExternalId("whatson:" + person.id());
             credits.add(c);
+
         }
         return credits;
     }
-
     protected @PolyNull AgeRating mapToRating(@PolyNull RatingType rating) {
         if (rating == null) {
             return null;
@@ -286,6 +285,7 @@ public class WonToPomsMapper {
         return entry.rating().advisories().stream().flatMap(m -> m.entrySet().stream())
             .map(e -> mapToRating(e.getKey())).toArray(ContentRating[]::new);
     }
+
 
     protected  @NonNull AvailableSubtitles mapToAvailableSubtitles(@NonNull CaptionType captionType) {
         if (captionType.supplemental() != null && captionType.supplemental()) {
