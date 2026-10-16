@@ -186,8 +186,9 @@ public class WonToPomsMapper {
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
             .subTitle(entry.title(), owner)
-            .mainTitle(StringUtils.isBlank(entry.displayTitle())? entry.title() :
-                parentTitle.get().orElse(entry.displayTitle()), owner)
+            .mainTitle(StringUtils.isBlank(entry.displayTitle()) ?
+
+                parentTitle.get().orElse(entry.title()) : entry.displayTitle(), owner)
             .originalTitle(entry.originalTitle(), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
