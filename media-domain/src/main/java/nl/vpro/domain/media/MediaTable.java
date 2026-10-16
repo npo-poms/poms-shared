@@ -109,6 +109,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         }
 
         programTable.addAll(List.of(program));
+        fillRefs();
         return this;
     }
 
@@ -269,6 +270,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         }
 
         groupTable.addAll(Arrays.asList(group));
+        fillRefs();
         return this;
     }
 
@@ -291,6 +293,25 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
             getProgramTable().listIterator(),
             getGroupTable().listIterator()
         );
+    }
+
+    private void fillRefs() {
+        for (MediaObject mo : this) {
+            for (MemberRef r : mo.getMemberOf()) {
+                fillRef(r);
+            }
+            if (mo instanceof Program p) {
+                for (MemberRef r : p.getEpisodeOf()) {
+                    fillRef(r);
+                }
+            }
+        }
+    }
+
+    private void fillRef(MemberRef r) {
+        if (r.getGroup() == null){
+            getGroup(r.getMediaRef()).ifPresent(g -> r.setGroup(g));
+        }
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
