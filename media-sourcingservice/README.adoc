@@ -9,6 +9,31 @@ See https://sourcing-service.acc.metadata.bijnpo.nl/docs#endpoints-POSTapi-inges
 And also https://publiekeomroep.atlassian.net/wiki/spaces/TTA/pages/2911207501/Sourcing+Service+documentatie
 
 
+To run `upload_mp4.py` from a temporary pod in the current OpenShift project (after
+authenticating with `oc`), run this from the `media-sourcingservice` directory:
+
+[source, shell]
+----
+./run_upload_mp4_on_openshift.sh WO_VPRO_20363164 /path/to/video.mp4
+----
+
+The helper copies the MP4 and `~/conf/sourcingservice.properties` to a temporary
+Python pod, runs the upload, then deletes the pod. Set `UPLOAD_IMAGE` to use a
+cluster-approved Python image instead of the default Docker Hub Python 3.12 slim image.
+
+To run the existing `uploadHugeVideo` Maven integration test in a temporary pod:
+
+[source, shell]
+----
+./run_video_sourcing_itest_on_openshift.sh /path/to/2000Mb.mp4
+----
+
+It stages the repository, the MP4, and `~/conf/sourcingservice.properties` in the
+locations expected by the test, then runs only `uploadHugeVideo`. It also copies
+`~/.m2/settings.xml` when present. The default image is Docker Hub's
+`maven:3.9.9-eclipse-temurin-21`; override it with `MAVEN_IMAGE` when needed.
+
+
 == Issues when using openapi generator
 
 - operationId are ids  UUID
@@ -84,10 +109,5 @@ Portal restrictions  hard to enforce. Perhaps the redirect service could do some
 
 === Age restrictions
 Age restrictions could have influence on the time of the day that something is playable. E.g. if content is not suitable for children, it could only be viewed or listened after 19:00. This is not implemented yet, at least not in the redirect service or sourcing service (which are responsible for audio)
-
-
-
-
-
 
 
