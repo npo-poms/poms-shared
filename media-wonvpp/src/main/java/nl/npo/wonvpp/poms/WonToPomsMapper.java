@@ -185,11 +185,10 @@ public class WonToPomsMapper {
             .crids(prid == null ? null : "crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
-            .subTitle(entry.title(), owner)
-            .mainTitle(StringUtils.isBlank(entry.displayTitle()) ?
-
-                parentTitle.get().orElse(entry.title()) : entry.displayTitle(), owner)
-            .originalTitle(entry.originalTitle(), owner)
+            .subTitle(trim(entry.title()), owner)
+            .mainTitle(trim(StringUtils.isBlank(entry.displayTitle()) ?
+                parentTitle.get().orElse(entry.title()) : entry.displayTitle()), owner)
+            .originalTitle(trim(entry.originalTitle()), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
             .languages(entry.languages() == null ?
@@ -212,18 +211,26 @@ public class WonToPomsMapper {
             ;
     }
 
+    protected static String trim(String t) {
+        if (StringUtils.isBlank(t)) {
+            return null;
+        }
+        return t.trim();
+    }
+
 
     protected @Nullable String mainDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
         }
-        return StringUtils.isNotEmpty(synopsis.longValue()) ? synopsis.longValue() : null;
+        return trim(synopsis.longValue());
     }
+
     protected  @Nullable String shortDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
             return null;
         }
-        return StringUtils.isNotEmpty(synopsis.shortValue()) ? synopsis.shortValue() : null;
+        return trim(synopsis.shortValue());
     }
 
     protected Broadcaster mapToBroadcaster(String broadcaster) {

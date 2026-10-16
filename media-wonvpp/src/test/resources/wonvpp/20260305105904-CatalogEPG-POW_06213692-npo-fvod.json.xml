@@ -3,14 +3,14 @@
     <program type="BROADCAST" avType="VIDEO" embeddable="true" mid="POW_06213692" sortDate="2026-03-05T11:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_06213692</crid>
       <broadcaster id="EO">EO</broadcaster>
-      <title owner="AUTHORITY" type="MAIN">BusinessTime</title>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 26</title>
       <title owner="AUTHORITY" type="SUB">BusinessTime</title>
       <title owner="AUTHORITY" type="ORIGINAL">BusinessTime</title>
       <country code="NL">Nederland</country>
       <isDubbed>false</isDubbed>
       <releaseYear>2026</releaseYear>
       <credits/>
-      <descendantOf midRef="POW_06207575"/>
+      <descendantOf midRef="POW_06207575" type="SEASON"/>
       <prediction state="ANNOUNCED" publishStart="2026-03-05T10:59:04.696+01:00">INTERNETVOD</prediction>
       <locations/>
       <images/>
@@ -21,14 +21,14 @@
           <poProgID>POW_06213692</poProgID>
         </scheduleEvent>
       </scheduleEvents>
-      <episodeOf highlighted="false" midRef="POW_06207575" index="48"/>
+      <episodeOf cridRef="crid://WONVPP/POW_06207575" highlighted="false" midRef="POW_06207575" index="48" type="SEASON"/>
       <segments/>
     </program>
   </programTable>
   <groupTable>
     <group isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="POW_06207575" workflow="FOR PUBLICATION" creationDate="2020-02-20T20:20:00+01:00">
       <crid>crid://WONVPP/POW_06207575</crid>
-      <title owner="AUTHORITY" type="MAIN"> Seizoen 26</title>
+      <title owner="AUTHORITY" type="MAIN">Seizoen 26</title>
       <title owner="AUTHORITY" type="SUB">Seizoen 26</title>
       <credits/>
       <locations/>

@@ -36,7 +36,8 @@
           <familyName>Otten</familyName>
         </person>
       </credits>
-      <descendantOf midRef="BV_101414089"/>
+      <descendantOf midRef="BNN_101378789" type="SERIES"/>
+      <descendantOf midRef="BV_101414089" type="SEASON"/>
       <ageRating>9</ageRating>
       <contentRating>ANGST</contentRating>
       <contentRating>GROF_TAALGEBRUIK</contentRating>
@@ -50,7 +51,9 @@
           <poProgID>BV_101414096</poProgID>
         </scheduleEvent>
       </scheduleEvents>
-      <episodeOf highlighted="false" midRef="BV_101414089" index="7"/>
+      <episodeOf cridRef="crid://WONVPP/BV_101414089" highlighted="false" midRef="BV_101414089" index="7" type="SEASON">
+        <memberOf midRef="BNN_101378789" type="SERIES" index="5"/>
+      </episodeOf>
       <segments/>
     </program>
   </programTable>
@@ -61,8 +64,8 @@
       <title owner="AUTHORITY" type="SUB">Sluipschutters</title>
       <description owner="AUTHORITY" type="MAIN">Een humoristisch sketchprogramma waarin de Sluipschutters zich in moordend tempo verplaatsen. Als poppendokter, lijkschouwer, lifeguard, vechtsportleraar, graafmachinist of naaktloper. Hoe goed je ook oplet, je ziet ze never nooit aankomen.</description>
       <credits/>
-      <descendantOf midRef="BNN_101378789"/>
-      <memberOf highlighted="false" midRef="BNN_101378789" index="5"/>
+      <descendantOf midRef="BNN_101378789" type="SERIES"/>
+      <memberOf cridRef="crid://WONVPP/BNN_101378789" highlighted="false" midRef="BNN_101378789" index="5" type="SERIES"/>
       <locations/>
       <images/>
     </group>
