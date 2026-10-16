@@ -869,8 +869,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     /**
-     * This adds descendantOf's explicitely. The use cases for this are limited, a mediaobject basicly has {@link #memberOf} or {@link ProgramBuilder#episodeOf(String)}
-     * If your mediaobject is not going to be serialized to the database (e.g. in test cases) you might want to fill descendantof explicitely.
+     * This adds descendantOf's explicitly. The use cases for this are limited, a mediaobject basically has {@link #memberOf} or {@link ProgramBuilder#episodeOf(String)}
+     * If your mediaobject is not going to be serialized to the database (e.g. in test cases) you might want to fill descendantof explicitly.
      *
      */
     @SuppressWarnings("unchecked")
@@ -886,7 +886,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      */
     @VisibleForTesting
     default B descendantOf(String... mids) {
-        return descendantOf(Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build())
+        return descendantOf(
+            Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build())
             .toArray(DescendantRef[]::new));
 
     }

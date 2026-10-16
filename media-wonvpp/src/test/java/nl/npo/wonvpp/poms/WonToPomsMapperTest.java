@@ -1,10 +1,12 @@
 package nl.npo.wonvpp.poms;
 
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
@@ -13,6 +15,7 @@ import jakarta.xml.bind.JAXB;
 
 import org.apache.logging.log4j.Level;
 import org.assertj.core.api.Assumptions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -25,8 +28,7 @@ import com.google.common.collect.Streams;
 import nl.npo.wonvpp.domain.CatalogEntry;
 import nl.npo.wonvpp.domain.Utils;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.MediaClassificationService;
-import nl.vpro.domain.media.MediaTable;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.logging.log4j2.CaptureListFromLogger;
 import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
@@ -74,7 +76,7 @@ final class WonToPomsMapperTest {
     }
 
 
-    public static Stream<Record> alloutput() throws IOException {
+    public static Stream<KafkaDumpReader.Record> alloutput() throws IOException {
         return Streams.concat(
             alloutput("output.tsv"),
             alloutput("output2.tsv")
@@ -86,38 +88,46 @@ final class WonToPomsMapperTest {
     public static Stream<KafkaDumpReader.Record> alloutput(String output) throws IOException {
         InputStream in = WonToPomsMapperTest.class.getResourceAsStream("/wonvpp/%s".formatted(output));
         return KafkaDumpReader.readTSV(in)
-            .peek(r -> log.info("{}", r));
+            .peek(r -> log.debug("{}", r));
 
     }
 
+    @SneakyThrows
     List<CatalogEntry> entry(KafkaDumpReader.Record record) {
         byte[] bytes = record.value().getBytes(StandardCharsets.UTF_8);
-        try {
-            return Utils.unmarshalEnvelop(new ByteArrayInputStream(bytes), (b) -> {
-                log.info("{}", new String(b, StandardCharsets.UTF_8));
-            });
-        } catch (Exception e) {
-            log.error(":{} {}", new String(bytes), e.getMessage(), e);
-            return null;
-        }
+        return Utils.unmarshalEnvelop(new ByteArrayInputStream(bytes), (b) -> {
+            log.debug("{}", new String(b, StandardCharsets.UTF_8));
+        });
     }
 
     @ParameterizedTest
     @MethodSource("alloutput")
-    public void testAlls(KafkaDumpReader.Record records) {
-        List<CatalogEntry> entries = entry(records);
+    public void testAlls(KafkaDumpReader.Record record) {
+        MediaTable total =  new MediaTable();
+        List<CatalogEntry> entries = entry(record);
         Assumptions.assumeThat(entries).isNotNull();
         try (var capture = CaptureListFromLogger.builder().level(Level.WARN).build()) {
             log.info(entries);
-            mapper.mapToPoms(entries)
-                .forEach(table -> {
-                    JAXB.marshal(table, System.out);
-                    assertThat(validator.validate(table)).isEmpty();
-                });
-
+            MediaTable t = mapper.mapToPoms(entries);
+            t.forEach(table -> {
+                JAXB.marshal(table, System.out);
+                assertThat(validator.validate(table)).isEmpty();
+            });
             assertThat(capture.getEvents()).isEmpty();
         }
+    }
 
+    @Test
+    void P0MS_346() throws IOException {
+        MediaTable table = alloutput().map(r -> mapper.mapToPoms(entry(r))).filter(t -> t.getGroup("BV_101415096").isPresent()).findFirst().orElseThrow();
+        assertThat(table.getGroup("BV_101415095")).isPresent();
+        Program program = table.getProgram("BV_101415100").orElseThrow();
+        Optional<DescendantRef> seriesRef = program
+            .getDescendantOf()
+            .stream()
+            .filter(descendantRef -> descendantRef.getType() == MediaType.SERIES)
+            .findFirst();
+        assertThat(seriesRef).isPresent();
     }
 
 }
