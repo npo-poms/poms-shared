@@ -54,6 +54,18 @@ public class BroadcasterServiceLocator {
         return singleton;
     }
 
+    public static BroadcasterService getOfflineInstance(boolean sync, boolean needsOtherIds) {
+        if (singleton == null) {
+            synchronized(BroadcasterService.class) {
+                singleton = new CSVBroadcasterService();
+                log.warn("No broadcaster service configured, taking {} implicitly", singleton);
+            }
+        }
+        return singleton;
+    }
+
+
+
     public static List<String> getIds() {
         return getInstance()
             .findAll()
