@@ -48,7 +48,7 @@ public class BroadcasterServiceLocator {
         if (singleton == null) {
             synchronized(BroadcasterService.class) {
                 singleton = new URLBroadcasterServiceImpl("https://poms.omroep.nl/broadcasters/", sync, needsOtherIds);
-                log.warn("No broadcaster service configured, taking {} implicitely", singleton);
+                log.warn("No broadcaster service configured, taking {} implicitly", singleton);
             }
         }
         return singleton;
