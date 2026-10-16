@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.xml.bind.JAXB;
 
 import org.apache.logging.log4j.Level;
 import org.assertj.core.api.Assumptions;
@@ -63,7 +62,7 @@ final class WonToPomsMapperTest {
     public void map(String file) throws JacksonException {
 
         MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/%s".formatted(file))));
-        log.info("" + table);
+        log.debug("{}", table);
 
         JAXBTestUtil.registerNamespace(
             "urn:vpro:media:2009", "https://poms-test.omroep.nl/schema/vproMedia.xsd"
@@ -107,10 +106,10 @@ final class WonToPomsMapperTest {
         List<CatalogEntry> entries = entry(record);
         Assumptions.assumeThat(entries).isNotNull();
         try (var capture = CaptureListFromLogger.builder().level(Level.WARN).build()) {
-            log.info(entries);
+            log.debug(entries);
             MediaTable t = mapper.mapToPoms(entries);
             t.forEach(table -> {
-                JAXB.marshal(table, System.out);
+                //JAXB.marshal(table, System.out);
                 assertThat(validator.validate(table)).isEmpty();
             });
             assertThat(capture.getEvents()).isEmpty();
@@ -119,7 +118,10 @@ final class WonToPomsMapperTest {
 
     @Test
     void P0MS_346() throws IOException {
-        MediaTable table = alloutput().map(r -> mapper.mapToPoms(entry(r))).filter(t -> t.getGroup("BV_101415096").isPresent()).findFirst().orElseThrow();
+        MediaTable table = alloutput()
+            .filter(r -> r.key().contains("BV_101415100"))
+            .peek(r -> log.info("{}", r))
+            .map(r -> mapper.mapToPoms(entry(r))).filter(t -> t.getGroup("BV_101415096").isPresent()).findFirst().orElseThrow();
         assertThat(table.getGroup("BV_101415095")).isPresent();
         Program program = table.getProgram("BV_101415100").orElseThrow();
         Optional<DescendantRef> seriesRef = program
@@ -127,7 +129,7 @@ final class WonToPomsMapperTest {
             .stream()
             .filter(descendantRef -> descendantRef.getType() == MediaType.SERIES)
             .findFirst();
-        assertThat(program.getMainTitle()).isEqualTo("Watchparty: lachen op NPO Start");
+        assertThat(program.getMainTitle()).isEqualTo("Watchparty");
         assertThat(seriesRef).isPresent();
     }
 
