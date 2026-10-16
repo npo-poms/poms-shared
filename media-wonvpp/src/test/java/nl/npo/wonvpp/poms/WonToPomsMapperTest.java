@@ -74,7 +74,8 @@ final class WonToPomsMapperTest {
 
     public static Stream<Record> alloutput() throws IOException {
         return Streams.concat(
-            alloutput("output.tsv")
+            alloutput("output.tsv"),
+            alloutput("output2.tsv")
             //alloutput("output2.tsv"),
             //alloutput("output3.tsv")
         );
