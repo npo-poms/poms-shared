@@ -7,12 +7,14 @@ import java.io.InputStream;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Supplier;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.functional.Suppliers;
 
 import com.google.common.cache.*;
 
@@ -26,6 +28,8 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
 import static nl.vpro.domain.media.MediaBuilder.*;
 
 /**
@@ -93,7 +97,14 @@ public class WonToPomsMapper {
         MediaTable table = new MediaTable();
         table.setSource("WONVPP");
         for (CatalogEntry entry : entries) {
-            table.add(mapToPoms(entry));
+            String season = Optional.ofNullable(entry.relations())
+                .map(RelationType::season)
+                .map(PridReference::prid)
+                .orElse(null);
+                ;
+            table.add(mapToPoms(entry,
+                ()  -> entries.stream().filter(e -> e.prid().equals(season))
+                .map(CatalogEntry::displayTitle).findFirst()));
         }
         table.setScheduleIfNeeded();
         LocalDate localDate = Schedule.guideDay(table.getSchedule().getStart());
@@ -102,19 +113,20 @@ public class WonToPomsMapper {
     }
 
     @SuppressWarnings("deprecation")
-    public @NonNull MediaObject mapToPoms(@NonNull CatalogEntry entry) {
+    public @NonNull MediaObject mapToPoms(@NonNull CatalogEntry entry, Supplier<Optional<String>> parentTitle) {
         return switch (entry.contentType()) {
-            case programme, episode -> mapToBroadcast(entry);
+            case programme, episode -> mapToBroadcast(entry, parentTitle);
             case season  -> mapToSeason(entry);
             case serie, series   -> mapToSeries(entry);
         };
     }
 
-    protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry) {
+    protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry, Supplier<Optional<String>> seasonTitle) {
         assert StringUtils.isEmpty(entry.seasonNumber());
-        return map(entry, broadcast())
-            .vodEvent(entry.prid(),
-                Optional.ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
+        return map(entry, seasonTitle, broadcast())
+            .vodEvent(
+                entry.prid(),
+                ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
                     .plusSeconds(60).truncatedTo(ChronoUnit.MINUTES) // round to next minute
                 )
             .plannedAvailability(Authority.SYSTEM, entry.publicationTimestamp())
@@ -132,15 +144,14 @@ public class WonToPomsMapper {
                 log.warn("Could not parse season number {} for entry {}, skipping season number", entry.seasonNumber(), entry.prid());
             }
         }
-        return map(entry, season())
-
+        return map(entry, Suppliers.always(empty()), season())
             .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null, seasonNumber)
             .build();
     }
 
     protected @NonNull Group mapToSeries(@NonNull CatalogEntry entry) {
         assert StringUtils.isEmpty(entry.seasonNumber());
-        return map(entry, series())
+        return map(entry, Suppliers.always(empty()), series())
             .build();
     }
 
@@ -148,15 +159,19 @@ public class WonToPomsMapper {
         if (pridReference == null) {
             return null;
         }
-        if (StringUtils.isEmpty(pridReference.prid())) {
+        if (StringUtils.isBlank(pridReference.prid())) {
             return null;
         }
         return pridReference.prid();
     }
 
-    protected <B extends MediaBuilder<B, T>, T extends MediaObject> @NonNull B map(@NonNull CatalogEntry entry, @NonNull B builder) {
+    protected <B extends MediaBuilder<B, T>, T extends MediaObject> @NonNull B map(
+        @NonNull CatalogEntry entry,
+        @NonNull Supplier<Optional<String>> parentTitle,
+        @NonNull B builder) {
+        String prid = StringUtils.isBlank(entry.prid())? null : entry.prid();
         return builder
-            .mid(entry.prid())
+            .mid(prid)
             .creationDate(clock.instant())
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
             .broadcasters(entry.broadcasters() == null ? Collections.emptyList() :
@@ -164,11 +179,12 @@ public class WonToPomsMapper {
                 .map(this::mapToBroadcaster)
                 .toList()
             )
-            .crids("crid://" + entry.metadataSource() + "/" +  entry.prid())
+            .crids(prid == null ? null : "crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
             .subTitle(entry.title(), owner)
-            .mainTitle(StringUtils.isBlank(entry.displayTitle())? entry.title() : entry.displayTitle(), owner)
+            .mainTitle(StringUtils.isBlank(entry.displayTitle())? entry.title() :
+                parentTitle.get().orElse(entry.displayTitle()), owner)
             .originalTitle(entry.originalTitle(), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
@@ -182,7 +198,7 @@ public class WonToPomsMapper {
             .countries(entry.productionCountry())
             .releaseYear(entry.productionYear())
             .credits(mapToCredits(entry.castAndCrew()).toArray(new Credits[0]))
-            .genres(entry.genre() == null ? new Genre[0] : new Genre[] {mapToGenre(entry.genre())})
+            .genres(entry.genre() == null || entry.genre().empty() ? new Genre[0] : new Genre[] {mapToGenre(entry.genre())})
             .dubbed(entry.isDubbed())
             .availableSubtitles(entry.captions() == null ? new AvailableSubtitles[0] :
                 entry.captions().stream()
@@ -191,6 +207,7 @@ public class WonToPomsMapper {
             )
             ;
     }
+
 
     protected @Nullable String mainDescription(@Nullable SynopsisType synopsis) {
         if (synopsis == null) {
