@@ -127,6 +127,7 @@ final class WonToPomsMapperTest {
             .stream()
             .filter(descendantRef -> descendantRef.getType() == MediaType.SERIES)
             .findFirst();
+        assertThat(program.getMainTitle()).isEqualTo("Watchparty: lachen op NPO Start");
         assertThat(seriesRef).isPresent();
     }
 
