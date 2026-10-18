@@ -190,7 +190,7 @@ public final class Program extends MediaObject {
     @JsonProperty("scheduleEvents")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
-    public SortedSet<ScheduleEvent> getScheduleEvents() {
+    public @NonNull SortedSet<@NonNull ScheduleEvent> getScheduleEvents() {
         if (scheduleEvents == null) {
             scheduleEvents = new TreeSet<>();
         }
