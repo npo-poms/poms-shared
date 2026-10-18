@@ -4,8 +4,6 @@
  */
 package nl.vpro.media.broadcaster;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -29,9 +27,7 @@ import nl.vpro.util.URLResource;
  * @author michiel
  * @since 8.17
  */
-@Slf4j
 public class CSVBroadcasterService implements BroadcasterService {
-
 
     private final URLResource<Map<String, Broadcaster>> broadcasterResource;
 
@@ -42,7 +38,6 @@ public class CSVBroadcasterService implements BroadcasterService {
 
 
     @Inject
-
     public CSVBroadcasterService(
         @Named("broadcasters.repository.location.csv") String configFile) {
         URI uri = URI.create(configFile);
