@@ -133,4 +133,20 @@ final class WonToPomsMapperTest {
         assertThat(seriesRef).isPresent();
     }
 
+    @SuppressWarnings("DataFlowIssue")
+    @Test
+    void P0MS_346_2() throws IOException {
+        MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/20261019113132-CatalogEPG-POW_06032141-npo-fvod.20261019113246067.json")));
+
+
+        Program program = table.getProgram("POW_06032141").orElseThrow();
+        Group season = table.getGroup("POW_06032140").orElseThrow();
+        Group series = table.getGroup("POW_05801271").orElseThrow();
+
+        assertThat(program.getSubTitle()).isEqualTo("Van polonaise tot knokpartij");
+        assertThat(season.getMainTitle()).isEqualTo("Van polonaise tot knokpartij");
+        assertThat(series.getMainTitle()).isEqualTo("De Uitsmijters");
+
+    }
+
 }

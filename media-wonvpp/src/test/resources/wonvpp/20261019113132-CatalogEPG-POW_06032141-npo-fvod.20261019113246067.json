@@ -1,0 +1,68 @@
+[
+  {
+    "genre": {
+      "primary": {
+        "name": "Human Interest",
+        "code": "urn:tva:metadata:cs:2004:40" },
+      "secondary": {
+        "name": "Reality TV",
+        "code": "urn:tva:metadata:cs:2004:4043" }
+    },
+    "episodeNumber": 1,
+    "broadcasters": [
+      "PowNed" ],
+    "metadataSource": "WONVPP",
+    "publicationTimestamp": "2026-10-19T11:31:32.545+02:00",
+    "captions": [
+      {
+        "supplemental": true,
+        "closed": true,
+        "language": "NL" } ],
+    "contentType": "episode",
+    "synopsis": {
+      "short": "Tijdens carnaval houden uitsmijters toezicht in Kielegat, Krullendonk en Oeteldonk. Te jonge en dronken feestvierder moeten voortijdig de aftocht blazen en op meerdere plekken breken gevechten uit.",
+      "long": "Breda heet voor even Kielegat, Hees Krullendonk en Den Bosch Oeteldonk. Jaarlijks vieren zo'n half miljoen mensen carnaval, en dat levert voor de uitsmijters het nodige werk op. Zoveel, dat er zelfs versterking uit Groningen komt. Waar sommigen hun carnavalsviering voortijdig moeten staken omdat ze te jong zijn, vliegen er in Kielegat twee jongens uit omdat ze te diep in het glaasje hebben gekeken. In de andere Brabantse steden zoeken jongeren de grens op en worden er rake klappen uitgedeeld."
+    },
+    "productionYear": 2026,
+    "displayTitle": "Van polonaise tot knokpartij",
+    "relations": {
+      "season": {
+        "prid": "POW_06032140" },
+      "series": {
+        "prid": "POW_05801271" }
+    },
+    "title": "Van polonaise tot knokpartij",
+    "languages": [
+      {
+        "language": "NL" } ],
+    "productionCountry": "NL",
+    "prid": "POW_06032141",
+    "mediaType": "video"
+  },
+  {
+    "metadataSource": "WONVPP",
+    "publicationTimestamp": "2026-10-19T11:31:32.545+02:00",
+    "seasonNumber": "3",
+    "contentType": "season",
+    "synopsis": {
+      "long": "Breda heet voor even Kielegat, Hees Krullendonk en Den Bosch Oeteldonk. Jaarlijks vieren zo'n half miljoen mensen carnaval, en dat levert voor de uitsmijters het nodige werk op. Zoveel, dat er zelfs versterking uit Groningen komt. Waar sommigen hun carnavalsviering voortijdig moeten staken omdat ze te jong zijn, vliegen er in Kielegat twee jongens uit omdat ze te diep in het glaasje hebben gekeken. In de andere Brabantse steden zoeken jongeren de grens op en worden er rake klappen uitgedeeld." },
+    "displayTitle": "De Uitsmijters Seizoen 3",
+    "relations": {
+      "series": {
+        "prid": "POW_05801271" } },
+    "title": "Van polonaise tot knokpartij",
+    "prid": "POW_06032140",
+    "mediaType": "video"
+  },
+  {
+    "metadataSource": "WONVPP",
+    "publicationTimestamp": "2026-10-19T11:31:32.545+02:00",
+    "contentType": "series",
+    "synopsis": {
+      "long": "Een unieke inkijk in de wereld van de uitsmijters. Ieder weekend, als jongeren op stap gaan, handhaven de uitsmijters de orde aan de deur van kroegen en in de clubs. Zij krijgen te maken met heftige incidenten." },
+    "displayTitle": "De Uitsmijters",
+    "title": "De Uitsmijters",
+    "prid": "POW_05801271",
+    "mediaType": "video"
+  }
+]
