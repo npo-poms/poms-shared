@@ -70,10 +70,7 @@ public class WonToPomsMapper {
 
                 final Optional<Term> secondaryTerm = classificationService.getTermsByReference(secondary.code()).stream().findFirst();
 
-                if (secondaryTerm.isPresent()) {
-                    return Genre.of(secondaryTerm.get());
-                }
-                return Genre.of(primaryTerm);
+                return secondaryTerm.map(Genre::of).orElseGet(() -> Genre.of(primaryTerm));
             }
         });
 
