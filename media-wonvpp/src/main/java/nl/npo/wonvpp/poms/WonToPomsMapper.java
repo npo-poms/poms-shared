@@ -94,14 +94,19 @@ public class WonToPomsMapper {
         MediaTable table = new MediaTable();
         table.setSource("WONVPP");
         for (CatalogEntry entry : entries) {
+            String series = Optional.ofNullable(entry.relations())
+                .map(RelationType::series)
+                .map(PridReference::prid)
+                .orElse(null);
             String season = Optional.ofNullable(entry.relations())
                 .map(RelationType::season)
                 .map(PridReference::prid)
                 .orElse(null);
+            String parent = series == null ? season : series;
             ;
             table.add(mapToPoms(entry,
-                ()  -> entries.stream().filter(e -> e.prid().equals(season))
-                    .map(CatalogEntry::displayTitle).findFirst()));
+                ()  -> entries.stream().filter(e -> e.prid().equals(parent))
+                    .map(CatalogEntry::displayTitle).map(WonToPomsMapper::trim).findFirst()));
         }
         table.setScheduleIfNeeded();
         LocalDate localDate = Schedule.guideDay(table.getSchedule().getStart());
@@ -119,7 +124,7 @@ public class WonToPomsMapper {
     }
     protected @NonNull Program mapToBroadcast(@NonNull CatalogEntry entry, Supplier<Optional<String>> seasonTitle) {
         assert StringUtils.isEmpty(entry.seasonNumber());
-        return map(entry, seasonTitle, broadcast())
+        return map(entry, seasonTitle, true, broadcast())
             .vodEvent(
                 entry.prid(),
                 ofNullable(entry.publicationTimestamp()).orElse(Instant.now())
@@ -144,14 +149,14 @@ public class WonToPomsMapper {
                 log.warn("Could not parse season number '{}' for entry {}, skipping season number", entry.seasonNumber(), entry.prid());
             }
         }
-        return map(entry, Suppliers.always(empty()), season())
+        return map(entry, Suppliers.always(empty()), false, season())
             .memberOf(entry.relations() != null && entry.relations().series() != null ? toMid(entry.relations().series()) : null, seasonNumber)
             .build();
     }
 
     protected @NonNull Group mapToSeries(@NonNull CatalogEntry entry) {
         assert StringUtils.isEmpty(entry.seasonNumber());
-        return map(entry, Suppliers.always(empty()), series())
+        return map(entry, Suppliers.always(empty()), false, series())
             .build();
     }
 
@@ -168,8 +173,10 @@ public class WonToPomsMapper {
     protected <B extends MediaBuilder<B, T>, T extends MediaObject> @NonNull B map(
         @NonNull CatalogEntry entry,
         @NonNull Supplier<Optional<String>> parentTitle,
+        boolean mapToSub,
         @NonNull B builder) {
         String prid = StringUtils.isBlank(entry.prid())? null : entry.prid();
+        String title = trim(entry.title());
         return builder
             .mid(prid)
             .creationDate(clock.instant())
@@ -182,9 +189,9 @@ public class WonToPomsMapper {
             .crids(prid == null ? null : "crid://" + entry.metadataSource() + "/" +  entry.prid())
             .ageRating(mapToRating(entry.rating()))
             .contentRatings(mapToRatings(entry))
-            .subTitle(trim(entry.title()), owner)
-            .mainTitle(trim(StringUtils.isBlank(entry.displayTitle()) ?
-                parentTitle.get().orElse(entry.title()) : entry.displayTitle()), owner)
+            .subTitle(mapToSub ? title : null, owner)
+            .mainTitle(mapToSub ?
+                parentTitle.get().orElse(title) : title, owner)
             .originalTitle(trim(entry.originalTitle()), owner)
             .mainDescription(mainDescription(entry.synopsis()), owner)
             .description(shortDescription(entry.synopsis()), TextualType.SHORT, owner)
