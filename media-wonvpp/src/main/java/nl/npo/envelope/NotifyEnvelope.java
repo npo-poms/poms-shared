@@ -3,6 +3,14 @@ package nl.npo.envelope;
 import java.time.Instant;
 import java.util.*;
 
+/**
+ * Kafka value envelop, where the content is just a string.
+ * @param version
+ * @param timestamp
+ * @param metadata
+ * @param type
+ * @param contents
+ */
 public record NotifyEnvelope(String version, Instant timestamp, Map<String, Object> metadata, String type, String contents) {
 
 
