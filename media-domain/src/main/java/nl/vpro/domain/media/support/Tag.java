@@ -8,15 +8,16 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
 
+import javax.xml.XMLConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import javax.xml.XMLConstants;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -81,7 +82,7 @@ public class Tag implements Serializable, Comparable<Tag>, Identifiable<Long> {
     }
 
     @Override
-    public int compareTo(@NotNull Tag tag) {
+    public int compareTo(@NonNull Tag tag) {
         if (text == null) {
             if (tag.text == null) {
                 return 0;
