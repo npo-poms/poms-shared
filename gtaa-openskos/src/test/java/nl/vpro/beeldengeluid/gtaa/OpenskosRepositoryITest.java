@@ -250,10 +250,10 @@ class OpenskosRepositoryITest {
             if (!record.isDeleted())
                 assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), GTAAPerson.create(record.getMetaData().getFirstDescription()));
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), GTAAPerson.create(record.getMetaData().getFirstDescription()));
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
         assertThat(count).isGreaterThan(0);
     }
 
@@ -272,10 +272,10 @@ class OpenskosRepositoryITest {
             if (!record.isDeleted())
                 assertThat(record.getMetaData().getFirstDescription().isGeoLocation()).isTrue();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
         assertThat(count).isGreaterThan(0);
     }
 
@@ -295,9 +295,9 @@ class OpenskosRepositoryITest {
                 assertThat(record.getHeader().getStatus()).isEqualTo("deleted");
             }
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
     }
 
     @ParameterizedTest
@@ -325,10 +325,10 @@ class OpenskosRepositoryITest {
         while (updates.hasNext()) {
             Record record = updates.next();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
     }
 
 
@@ -345,11 +345,11 @@ class OpenskosRepositoryITest {
         while (updates.hasNext()) {
             Record record = updates.next();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
     }
 
 
@@ -367,10 +367,10 @@ class OpenskosRepositoryITest {
         while (updates.hasNext()) {
             Record record = updates.next();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
     }
 
     @ParameterizedTest
