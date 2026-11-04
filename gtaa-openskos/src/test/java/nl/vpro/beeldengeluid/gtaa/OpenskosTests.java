@@ -106,10 +106,10 @@ class OpenskosTests {
             if (!record.isDeleted())
                 assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
         assertThat(count).isGreaterThan(0);
     }
 
@@ -128,7 +128,7 @@ class OpenskosTests {
                 assertThat(record.getHeader().getStatus()).isEqualTo("deleted");
             }
             count++;
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
         // TODO check out why count doesn't match
@@ -159,10 +159,10 @@ class OpenskosTests {
             Record record = updates.next();
             count++;
             System.out.println(record);
-            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().getAsLong(), record);
 
         }
-        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isEqualTo(updates.getSize().getAsLong());
     }
 
     @Test
