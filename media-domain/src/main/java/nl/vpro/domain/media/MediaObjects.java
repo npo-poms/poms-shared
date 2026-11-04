@@ -1419,7 +1419,7 @@ public class MediaObjects {
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
                         .toList();
-                    log.atLevel(withoutFilter.isEmpty() ? org.slf4j.event.Level.INFO : org.slf4j.event.Level.WARN).log("Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
+                    log.atLevel(withoutFilter.isEmpty() ? org.slf4j.event.Level.INFO : org.slf4j.event.Level.WARN).log("Set state of {} from {} to REVOKED of object {} (no matching locations found {})", prediction, prevState, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                     prediction.setState(Prediction.State.REVOKED);
                     onChange.accept(prevState, prediction);
                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(Optional.ofNullable(prediction.getPlatform()).map(Platform::name).orElse("<NULL>"));
