@@ -12,12 +12,13 @@ import java.time.LocalDateTime;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.time.TimeUtils;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)

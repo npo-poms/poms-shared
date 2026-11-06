@@ -2,7 +2,6 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,8 +13,8 @@ import jakarta.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.time.TimeUtils;
 
-import nl.vpro.util.TimeUtils;
 
 /**
  * @author Michiel Meeuwissen

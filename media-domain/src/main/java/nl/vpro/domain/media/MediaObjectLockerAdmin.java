@@ -8,8 +8,9 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import org.meeuw.time.TimeUtils;
+
 import nl.vpro.jmx.MBeans;
-import nl.vpro.util.TimeUtils;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLockerAdmin;
 
