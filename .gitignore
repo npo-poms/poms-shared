@@ -11,3 +11,5 @@ dep
 /media-domain/node/
 /media-domain/node_modules/
 .flattened-pom.xml
+pom.xml.versionsBackup
+/pom.xml.versionsBackup
