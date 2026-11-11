@@ -10,7 +10,8 @@ public record Configuration(
     @Nullable String callbackAuthentication,
     String token,
     int chunkSize,
-    String defaultEmail) {
+    String defaultEmail,
+    boolean useParameterAuthentication) {
 
     public Configuration {
         if (chunkSize <= 0) {

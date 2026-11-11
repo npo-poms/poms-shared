@@ -170,7 +170,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (callbackUrl != null) {
             String authentication = configuration.callbackAuthentication();
             if (authentication != null) {
-                callbackUrl = URLUtils.addAuthentication(callbackUrl, authentication);
+                if (configuration.useParameterAuthentication()) {
+                    callbackUrl = URLUtils.addQueryParameter(callbackUrl, "authentication", authentication);
+                } else {
+                    callbackUrl = URLUtils.addAuthentication(callbackUrl, authentication);
+                }
             }
             logger.info("Callback URL for {}: {}", mid, URLUtils.hidePassword(callbackUrl));
             body.add("callback_url", callbackUrl);
