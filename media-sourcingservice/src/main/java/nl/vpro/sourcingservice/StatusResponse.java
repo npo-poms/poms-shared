@@ -44,15 +44,14 @@ public class StatusResponse {
             if (status == null) {
                 return null;
             }
-            switch (status.toLowerCase()) {
-                case "pending":
-                    return TranscodeStatus.Status.RUNNING;
-                case "online":
-                    return TranscodeStatus.Status.COMPLETED;
-                default:
+            return switch (status.toLowerCase()) {
+                case "pending" -> TranscodeStatus.Status.RUNNING;
+                case "online" -> TranscodeStatus.Status.COMPLETED;
+                default -> {
                     log.warn("Unknown srcs status: " + status);
-                    return null;
-            }
+                    yield null;
+                }
+            };
         }
     }
 
