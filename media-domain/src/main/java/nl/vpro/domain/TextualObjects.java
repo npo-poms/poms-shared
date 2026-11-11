@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.collections.ResortedSortedSet;
 import org.meeuw.functional.TriFunction;
 
 import nl.vpro.domain.media.support.*;
-import nl.vpro.util.ResortedSortedSet;
 
 
 /**
