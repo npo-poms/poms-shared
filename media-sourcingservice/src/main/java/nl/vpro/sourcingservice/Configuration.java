@@ -1,6 +1,8 @@
 package nl.vpro.sourcingservice;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public record Configuration(
     String baseUrl,
@@ -20,7 +22,7 @@ public record Configuration(
         return  baseUrl.replaceAll("([^/])$","$1/");
     }
 
-    public String callBackUrl(String mid) {
+    public @Nullable String callBackUrl(@NonNull String mid) {
         if (callbackBaseUrl == null) {
             return null;
         } else {
