@@ -47,7 +47,8 @@ final class VideoSourcingServiceImplITest {
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
-            false
+            false,
+            0
         );
         impl = new VideoSourcingServiceImpl(
             configuration,

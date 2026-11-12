@@ -11,8 +11,17 @@ public record Configuration(
     String token,
     int chunkSize,
     String defaultEmail,
-    boolean useParameterAuthentication) {
+    boolean useParameterAuthentication,
+    double statusRateLimit) {
 
+    /**
+     * Maximal time to wait for a permit for a status call, before giving up with a {@link RateLimitedException}.
+     */
+    public static final java.time.Duration STATUS_MAX_WAIT = java.time.Duration.ofSeconds(1);
+
+    /**
+     * @param statusRateLimit the maximal number of status calls per second. Zero or negative means 'unlimited'.
+     */
     public Configuration {
         if (chunkSize <= 0) {
             throw new IllegalArgumentException("chunkSize must be positive");

@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.*;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.CloseableThreadContext;
@@ -20,6 +21,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
+
+import com.google.common.util.concurrent.RateLimiter;
 
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.*;
@@ -71,12 +74,19 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
+    /**
+     * Limits the number of status calls, to protect the sourcing service. {@code null} if unlimited.
+     */
+    @Nullable
+    private volatile RateLimiter statusRateLimiter;
+
     AbstractSourcingServiceImpl(
         Configuration configuration,
         MeterRegistry meterRegistry) {
 
         this.configuration = configuration;
         this.meterRegistry = meterRegistry;
+        setStatusRateLimit(configuration.statusRateLimit());
 
         log.info("Initializing {} with configuration {}", this.getClass().getSimpleName(), configuration);
     }
@@ -264,6 +274,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Override
     public Optional<StatusResponse> status(String mid) throws IOException, InterruptedException {
+        acquireStatusPermit(mid);
         final HttpRequest statusRequest = statusRequest(mid);
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status", statusResponse);
@@ -295,6 +306,41 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+
+    /**
+     * Waits at most {@link Configuration#STATUS_MAX_WAIT} for a permit to do a status call.
+     * @throws RateLimitedException if no permit could be acquired in time
+     */
+    protected void acquireStatusPermit(String mid) throws RateLimitedException {
+        final RateLimiter limiter = statusRateLimiter;
+        if (limiter != null && !limiter.tryAcquire(Configuration.STATUS_MAX_WAIT.toMillis(), TimeUnit.MILLISECONDS)) {
+            meterRegistry.counter("sourcing." + implName() + ".status.ratelimited").increment();
+            throw new RateLimitedException("Status call for " + mid + " to " + name() + " was rate limited (max " + limiter.getRate() + "/s)");
+        }
+    }
+
+    /**
+     * @return The maximal number of status calls per second. Zero means 'unlimited'.
+     */
+    @ManagedAttribute(description = "Maximal number of status calls per second. Zero or negative means unlimited")
+    public double getStatusRateLimit() {
+        final RateLimiter limiter = statusRateLimiter;
+        return limiter == null ? 0 : limiter.getRate();
+    }
+
+    @ManagedAttribute
+    public void setStatusRateLimit(double permitsPerSecond) {
+        if (permitsPerSecond <= 0) {
+            statusRateLimiter = null;
+        } else {
+            final RateLimiter limiter = statusRateLimiter;
+            if (limiter == null) {
+                statusRateLimiter = RateLimiter.create(permitsPerSecond);
+            } else {
+                limiter.setRate(permitsPerSecond);
+            }
+        }
+    }
 
     protected abstract String implName();
 

@@ -45,7 +45,8 @@ final class AudioSourcingServiceImplTest {
             "token",
             1000,
             null,
-            false
+            false,
+            0
         );
         meterRegistry = new SimpleMeterRegistry();
         impl = new AudioSourcingServiceImpl(configuration, meterRegistry);
@@ -120,6 +121,25 @@ final class AudioSourcingServiceImplTest {
     }
 
     @Test
+    void statusIsRateLimited() throws IOException, InterruptedException {
+        stubFor(get(UrlPattern.ANY).willReturn(notFound()));
+        assertThat(impl.getStatusRateLimit()).isEqualTo(0);
+
+        // first permit is immediately available, the next one only after 2 seconds, which is longer than the max wait
+        impl.setStatusRateLimit(0.5);
+        assertThat(impl.status("WO_VPRO_123")).isEmpty();
+        assertThatThrownBy(() -> impl.status("WO_VPRO_123"))
+            .isInstanceOf(RateLimitedException.class);
+        assertThat(meterRegistry.get("sourcing.audio.status.ratelimited").counter().count()).isEqualTo(1);
+        assertThat(meterRegistry.get("sourcing.audio.status").tag("status", "404").counter().count()).isEqualTo(1);
+
+        impl.setStatusRateLimit(0);
+        assertThat(impl.getStatusRateLimit()).isEqualTo(0);
+        assertThat(impl.status("WO_VPRO_123")).isEmpty();
+        assertThat(impl.status("WO_VPRO_123")).isEmpty();
+    }
+
+    @Test
     void rejectsNonPositiveChunkSize() {
         assertThatThrownBy(() -> new Configuration(
             "http://localhost/",
@@ -128,7 +148,8 @@ final class AudioSourcingServiceImplTest {
             "token",
             0,
             null,
-            false
+            false,
+            0
         )).isInstanceOf(IllegalArgumentException.class);
     }
 

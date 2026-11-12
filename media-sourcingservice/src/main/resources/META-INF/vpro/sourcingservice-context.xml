@@ -14,6 +14,7 @@
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
+    <constructor-arg name="statusRateLimit" value="${sourcingservice.statusRateLimit:5}"/>
   </bean>
 
   <bean id="srcsVideoConfiguration" class="nl.vpro.sourcingservice.Configuration">
@@ -24,6 +25,7 @@
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
+    <constructor-arg name="statusRateLimit" value="${sourcingservice.statusRateLimit:5}"/>
   </bean>
 
 

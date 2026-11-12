@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import jakarta.inject.Named;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.domain.media.AVFileFormat;
 
@@ -15,6 +16,7 @@ import nl.vpro.domain.media.AVFileFormat;
  * @implNote See {@link AbstractSourcingServiceImpl}
  */
 @Log4j2
+@ManagedResource
 public class VideoSourcingServiceImpl extends AbstractSourcingServiceImpl implements VideoSourcingService {
 
     public VideoSourcingServiceImpl(

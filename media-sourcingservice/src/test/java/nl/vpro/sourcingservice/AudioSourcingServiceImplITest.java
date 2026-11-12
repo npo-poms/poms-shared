@@ -52,7 +52,9 @@ final class AudioSourcingServiceImplITest {
             PROPERTIES.getProperty("sourcingservice.callbackAuthentication"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
-            "m.meeuwissen.vpro@gmail.com"
+            "m.meeuwissen.vpro@gmail.com",
+            false,
+            0
         );
         impl = new AudioSourcingServiceImpl(
             configuration,
