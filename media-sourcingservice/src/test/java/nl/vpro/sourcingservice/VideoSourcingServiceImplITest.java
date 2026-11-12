@@ -46,7 +46,8 @@ final class VideoSourcingServiceImplITest {
             PROPERTIES.getProperty("sourcingservice.callbackAuthentication"),
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
-            "m.meeuwissen.vpro@gmail.com"
+            "m.meeuwissen.vpro@gmail.com",
+            false
         );
         impl = new VideoSourcingServiceImpl(
             configuration,

@@ -44,7 +44,8 @@ final class AudioSourcingServiceImplTest {
             null,
             "token",
             1000,
-            null
+            null,
+            false
         );
         meterRegistry = new SimpleMeterRegistry();
         impl = new AudioSourcingServiceImpl(configuration, meterRegistry);
@@ -66,7 +67,7 @@ final class AudioSourcingServiceImplTest {
             .batchConsumer(loggingConsumer(logger, "audio"))
             .build();
         final UploadResponse upload = impl.upload(logger, "mid",
-            (long) bytes.length,
+            bytes.length,
             "audio/mpeg",
             cachingInputStream,
             null,
@@ -75,7 +76,7 @@ final class AudioSourcingServiceImplTest {
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
 
         List<ServeEvent> allServeEvents = getAllServeEvents();
-        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() - 1);
+        ServeEvent serveEvent = allServeEvents.getLast();
         assertThat(serveEvent.getRequest().isMultipart()).isTrue();
         log.info(serveEvent.getRequest().getHeaders());
         String boundary = serveEvent.getRequest().getHeader("Content-Type").split("boundary=")[1];
@@ -126,7 +127,8 @@ final class AudioSourcingServiceImplTest {
             null,
             "token",
             0,
-            null
+            null,
+            false
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -144,7 +146,7 @@ final class AudioSourcingServiceImplTest {
         }
 
         List<ServeEvent> allServeEvents = getAllServeEvents();
-        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() - 1);
+        ServeEvent serveEvent = allServeEvents.getLast();
         assertThat(serveEvent.getRequest().getBodyAsString()).isEqualTo(
             """
                 {"days_before_hard_delete":1}""");

@@ -51,5 +51,11 @@
         <ignoreVersion type="regex">^(?!6(?:\..*)?$).*$</ignoreVersion>
       </ignoreVersions>
     </rule>
+    <rule groupId="io.swagger.core.v3">
+      <!-- Swagger 3.0 is jackson 3 -->
+      <ignoreVersions>
+        <ignoreVersion type="regex">^(?!3(?:\..*)?$).*$</ignoreVersion>
+      </ignoreVersions>
+    </rule>
   </rules>
 </ruleset>
