@@ -8,13 +8,21 @@ import jakarta.inject.Provider;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
+ * Static access to some services, for places where injection is not possible (e.g. in validators and in domain objects).
+ * <p>
+ * This is the one place where the {@link BroadcasterService} is registered. ({@code nl.vpro.media.broadcaster.BroadcasterServiceLocator} delegates to this)
  * @author Michiel Meeuwissen
  * @since 3.2
  */
 public class ServiceLocator  {
 
+    /**
+     * Used if no broadcaster service is configured: a service without any broadcasters.
+     */
+    private static final Provider<BroadcasterService> DEFAULT_BROADCASTER_SERVICE = () -> new BroadcasterServiceImpl(new Broadcaster[0]);
+
     @Inject
-    Provider<BroadcasterService> broadcasterService = () -> new BroadcasterServiceImpl(new Broadcaster[0]);
+    Provider<BroadcasterService> broadcasterService = DEFAULT_BROADCASTER_SERVICE;
 
     @Inject
     Provider<PortalService> portalService = PortalServiceImpl::new;
@@ -31,9 +39,25 @@ public class ServiceLocator  {
         serviceLocator = this;
     }
 
+    /**
+     * @return The configured broadcaster service, or a service without any broadcasters if none is configured.
+     * @see #findBroadcasterService()
+     */
     @NonNull
     public static BroadcasterService getBroadcasterService() {
-        return serviceLocator == null ? new BroadcasterServiceImpl(new Broadcaster[0]) : serviceLocator.broadcasterService.get();
+        return findBroadcasterService().orElseGet(DEFAULT_BROADCASTER_SERVICE::get);
+    }
+
+    /**
+     * @return The broadcaster service, if one is configured (by injection, or via {@link #setBroadcasterService(BroadcasterService)})
+     * @since 8.18
+     */
+    public static Optional<BroadcasterService> findBroadcasterService() {
+        final ServiceLocator locator = serviceLocator;
+        if (locator == null || locator.broadcasterService == DEFAULT_BROADCASTER_SERVICE) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(locator.broadcasterService.get());
     }
 
     @NonNull
@@ -62,11 +86,14 @@ public class ServiceLocator  {
     }
 
 
+    /**
+     * @param broadcasterService The broadcaster service to use. {@code null} resets to the default (a service without any broadcasters).
+     */
     public static void setBroadcasterService(final BroadcasterService broadcasterService) {
         if (serviceLocator == null) {
             serviceLocator = new ServiceLocator();
         }
-        serviceLocator.broadcasterService = () -> broadcasterService;
+        serviceLocator.broadcasterService = broadcasterService == null ? DEFAULT_BROADCASTER_SERVICE : () -> broadcasterService;
     }
 
     /**

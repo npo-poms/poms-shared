@@ -30,7 +30,7 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.logging.log4j2.CaptureListFromLogger;
-import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
+import nl.vpro.media.broadcaster.CSVBroadcasterService;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +43,7 @@ final class WonToPomsMapperTest {
     static WonToPomsMapper  mapper;
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
-        mapper = new WonToPomsMapper(BroadcasterServiceLocator.getInstance(false, true), MediaClassificationService.getInstance(), OwnerType.AUTHORITY);
+        mapper = new WonToPomsMapper(CSVBroadcasterService.CLASSPATH, MediaClassificationService.getInstance(), OwnerType.AUTHORITY);
         mapper.clock = TestClock.twentyTwenty();
     }
 

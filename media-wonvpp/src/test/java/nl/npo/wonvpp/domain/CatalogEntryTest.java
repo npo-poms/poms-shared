@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.domain.user.ServiceLocator;
-import nl.vpro.media.broadcaster.BroadcasterServiceLocator;
+import nl.vpro.media.broadcaster.CSVBroadcasterService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +22,7 @@ final class CatalogEntryTest {
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     static {
-        ServiceLocator.setBroadcasterService(BroadcasterServiceLocator.getInstance(false, true));
+        ServiceLocator.setBroadcasterService(CSVBroadcasterService.CLASSPATH);
     }
 
     @ParameterizedTest

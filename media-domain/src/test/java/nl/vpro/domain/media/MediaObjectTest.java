@@ -562,7 +562,8 @@ class MediaObjectTest {
 
 
         // Since i18n-regions 3.3 the validator resolves the message itself, so the message template is not the key '{org.meeuw.i18n.regions.validation.region.message}' anymore
-        assertThat(constraintViolations.getFirst().getConstraintDescriptor().getAnnotation()).isInstanceOf(PomsValidCountry.class);
+        // (the violation is of the @ValidRegion of which @PomsValidCountry is composed)
+        assertThat(constraintViolations.getFirst().getConstraintDescriptor().getAnnotation()).isInstanceOf(org.meeuw.i18n.regions.validation.ValidRegion.class);
         assertThat(constraintViolations.getFirst().getMessage()).isEqualTo("nl_XX is geen geldig gebied");
         assertThat(constraintViolations).hasSize(1);
     }

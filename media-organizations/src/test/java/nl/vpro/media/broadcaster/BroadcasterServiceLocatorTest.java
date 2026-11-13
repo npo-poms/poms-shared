@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.domain.user.ServiceLocator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"removal"})
 class BroadcasterServiceLocatorTest {
     private final BroadcasterService broadcasterService = new URLBroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
 
@@ -21,6 +23,9 @@ class BroadcasterServiceLocatorTest {
         locator.setSingleton();
 
         assertThat(BroadcasterServiceLocator.getInstance().find("VPRO")).isEqualTo(new Broadcaster("VPRO"));
+        // there is only one broadcaster service
+        assertThat(ServiceLocator.getBroadcasterService()).isSameAs(broadcasterService);
+        assertThat(BroadcasterServiceLocator.getInstance()).isSameAs(broadcasterService);
         assertThat(BroadcasterServiceLocator.getIds()).containsExactlyInAnyOrder("PP",
     "MTNL",
     "RVD",
@@ -153,8 +158,24 @@ class BroadcasterServiceLocatorTest {
 
     @Test
     void setInstance() {
+        BroadcasterServiceLocator.setInstance(broadcasterService);
+        assertThat(ServiceLocator.findBroadcasterService()).containsSame(broadcasterService);
+
         BroadcasterServiceLocator.setInstance(null);
-     //   assertThat(BroadcasterServiceLocator.getInstance().find("VPRO")).isEqualTo(new Broadcaster("VPRO"));
+        assertThat(ServiceLocator.findBroadcasterService()).isEmpty();
+        assertThat(ServiceLocator.getBroadcasterService().findAll()).isEmpty();
+    }
+
+    @Test
+    void offlineInstanceIsRegistered() {
+        ServiceLocator.setBroadcasterService((BroadcasterService) null);
+        assertThat(BroadcasterServiceLocator.getOfflineInstance(false, true)).isSameAs(CSVBroadcasterService.CLASSPATH);
+        assertThat(ServiceLocator.getBroadcasterService()).isSameAs(CSVBroadcasterService.CLASSPATH);
+
+        // a configured service takes precedence
+        ServiceLocator.setBroadcasterService(broadcasterService);
+        assertThat(BroadcasterServiceLocator.getOfflineInstance(false, true)).isSameAs(broadcasterService);
+        ServiceLocator.setBroadcasterService((BroadcasterService) null);
     }
 
 }

@@ -12,7 +12,7 @@ import nl.vpro.domain.user.BroadcasterService;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CSVBroadcasterServiceTest {
-    private final BroadcasterService broadcasterService = new CSVBroadcasterService();
+    private final BroadcasterService broadcasterService = CSVBroadcasterService.CLASSPATH;
 
 
     @Test

@@ -12,6 +12,8 @@ import nl.vpro.domain.NotFoundException;
 
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
 
+
+
     enum IdType {
         POMS,
         WON

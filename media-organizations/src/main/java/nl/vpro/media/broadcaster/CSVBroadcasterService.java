@@ -29,10 +29,13 @@ import nl.vpro.util.URLResource;
  */
 public class CSVBroadcasterService implements BroadcasterService {
 
+    public static CSVBroadcasterService CLASSPATH = new CSVBroadcasterService();
+
+
     private final URLResource<Map<String, Broadcaster>> broadcasterResource;
 
 
-    public CSVBroadcasterService() {
+    private CSVBroadcasterService() {
         this("classpath:/broadcasters.csv");
     }
 

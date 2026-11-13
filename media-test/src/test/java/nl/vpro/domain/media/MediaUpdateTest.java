@@ -19,7 +19,9 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.domain.user.ServiceLocator;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.media.broadcaster.CSVBroadcasterService;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
@@ -43,6 +45,7 @@ class MediaUpdateTest {
 
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+        ServiceLocator.setBroadcasterService(CSVBroadcasterService.CLASSPATH);
     }
 
     @Test
