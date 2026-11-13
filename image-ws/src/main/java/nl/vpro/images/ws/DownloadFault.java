@@ -29,12 +29,12 @@ public class DownloadFault extends RuntimeException {
         this(message, new ImageNotFound(message), cause);
     }
 
-    private DownloadFault(String message, ImageNotFound faultInfo) {
+    public DownloadFault(String message, ImageNotFound faultInfo) { // public for CXF
         super(message);
         this.faultInfo = faultInfo;
     }
 
-    private DownloadFault(String message, ImageNotFound faultInfo, Throwable cause) {
+    public DownloadFault(String message, ImageNotFound faultInfo, Throwable cause) { // public for CXF
         super(message, cause);
         this.faultInfo = faultInfo;
     }
