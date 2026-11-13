@@ -46,6 +46,8 @@ final class AudioSourcingServiceImplTest {
             1000,
             null,
             false,
+            0,
+            null,
             0
         );
         meterRegistry = new SimpleMeterRegistry();
@@ -123,18 +125,40 @@ final class AudioSourcingServiceImplTest {
     @Test
     void statusIsRateLimited() throws IOException, InterruptedException {
         stubFor(get(UrlPattern.ANY).willReturn(notFound()));
-        assertThat(impl.getStatusRateLimit()).isEqualTo(0);
+        assertThat(impl.getStatusAllowedPerWindow()).isEqualTo(0);
+        assertThat(impl.getStatusWindow()).isEqualTo("PT10S");
 
-        // first permit is immediately available, the next one only after 2 seconds, which is longer than the max wait
-        impl.setStatusRateLimit(0.5);
+        // one call per minute: the second one would need to wait much longer than the max wait, so fails immediately
+        impl.setStatusWindow("1m");
+        impl.setStatusAllowedPerWindow(1);
         assertThat(impl.status("WO_VPRO_123")).isEmpty();
+        final Instant start = Instant.now();
         assertThatThrownBy(() -> impl.status("WO_VPRO_123"))
-            .isInstanceOf(RateLimitedException.class);
+            .isInstanceOf(RateLimitedException.class)
+            .hasMessageContaining("1/1 per PT1M");
+        assertThat(Duration.between(start, Instant.now())).isLessThan(Configuration.STATUS_MAX_WAIT);
+        assertThat(impl.getStatusCount()).isEqualTo(1);
         assertThat(meterRegistry.get("sourcing.audio.status.ratelimited").counter().count()).isEqualTo(1);
         assertThat(meterRegistry.get("sourcing.audio.status").tag("status", "404").counter().count()).isEqualTo(1);
 
-        impl.setStatusRateLimit(0);
-        assertThat(impl.getStatusRateLimit()).isEqualTo(0);
+        // raising the limit keeps the count, but allows one more
+        impl.setStatusAllowedPerWindow(2);
+        assertThat(impl.status("WO_VPRO_123")).isEmpty();
+        assertThat(impl.getStatusCount()).isEqualTo(2);
+
+        // a burst is avoided by the maximum per bucket, even if the window would allow it
+        // (a long window, so buckets of 3 minutes, so the test doesn't depend on timing. The 2 calls until now are moved to the current bucket)
+        impl.setStatusWindow("1h");
+        impl.setStatusAllowedPerWindow(10);
+        impl.setStatusMaxPerBucket(3);
+        assertThat(impl.status("WO_VPRO_123")).isEmpty();
+        assertThatThrownBy(() -> impl.status("WO_VPRO_123"))
+            .isInstanceOf(RateLimitedException.class)
+            .hasMessageContaining("3/10 per PT1H (max 3 per PT3M)");
+        impl.setStatusMaxPerBucket(0);
+
+        impl.setStatusAllowedPerWindow(0);
+        assertThat(impl.getStatusAllowedPerWindow()).isEqualTo(0);
         assertThat(impl.status("WO_VPRO_123")).isEmpty();
         assertThat(impl.status("WO_VPRO_123")).isEmpty();
     }
@@ -149,6 +173,8 @@ final class AudioSourcingServiceImplTest {
             0,
             null,
             false,
+            0,
+            null,
             0
         )).isInstanceOf(IllegalArgumentException.class);
     }

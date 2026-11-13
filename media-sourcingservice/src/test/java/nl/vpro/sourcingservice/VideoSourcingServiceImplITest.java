@@ -48,6 +48,8 @@ final class VideoSourcingServiceImplITest {
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
             false,
+            0,
+            null,
             0
         );
         impl = new VideoSourcingServiceImpl(

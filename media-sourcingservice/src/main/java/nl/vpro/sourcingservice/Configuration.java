@@ -1,6 +1,8 @@
 package nl.vpro.sourcingservice;
 
 
+import java.time.Duration;
+
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -12,19 +14,31 @@ public record Configuration(
     int chunkSize,
     String defaultEmail,
     boolean useParameterAuthentication,
-    double statusRateLimit) {
+    long statusAllowedPerWindow,
+    @Nullable Duration statusWindow,
+    long statusMaxPerBucket) {
 
     /**
      * Maximal time to wait for a permit for a status call, before giving up with a {@link RateLimitedException}.
      */
-    public static final java.time.Duration STATUS_MAX_WAIT = java.time.Duration.ofSeconds(1);
+    public static final Duration STATUS_MAX_WAIT = Duration.ofSeconds(1);
 
     /**
-     * @param statusRateLimit the maximal number of status calls per second. Zero or negative means 'unlimited'.
+     * Default for {@link #statusWindow()}
+     */
+    public static final Duration DEFAULT_STATUS_WINDOW = Duration.ofSeconds(10);
+
+    /**
+     * @param statusAllowedPerWindow the maximal number of status calls per {@code statusWindow}. Zero or negative means 'unlimited'.
+     * @param statusWindow the (sliding) window for {@code statusAllowedPerWindow}. Defaults to {@link #DEFAULT_STATUS_WINDOW}
+     * @param statusMaxPerBucket the maximal number of status calls per bucket (the window is divided in 20 buckets), to avoid bursts. Zero or negative means 'unlimited'.
      */
     public Configuration {
         if (chunkSize <= 0) {
             throw new IllegalArgumentException("chunkSize must be positive");
+        }
+        if (statusWindow == null) {
+            statusWindow = DEFAULT_STATUS_WINDOW;
         }
     }
 

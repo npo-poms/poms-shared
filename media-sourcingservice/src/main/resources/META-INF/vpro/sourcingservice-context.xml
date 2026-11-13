@@ -14,7 +14,13 @@
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
-    <constructor-arg name="statusRateLimit" value="${sourcingservice.statusRateLimit:5}"/>
+    <constructor-arg name="statusAllowedPerWindow" value="${sourcingservice.status.allowedPerWindow:50}"/>
+    <constructor-arg name="statusWindow">
+      <bean class="org.meeuw.time.TimeUtils" factory-method="parseDurationOrThrow">
+        <constructor-arg value="${sourcingservice.status.window:PT10S}"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
   </bean>
 
   <bean id="srcsVideoConfiguration" class="nl.vpro.sourcingservice.Configuration">
@@ -25,7 +31,13 @@
     <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
-    <constructor-arg name="statusRateLimit" value="${sourcingservice.statusRateLimit:5}"/>
+    <constructor-arg name="statusAllowedPerWindow" value="${sourcingservice.status.allowedPerWindow:50}"/>
+    <constructor-arg name="statusWindow">
+      <bean class="org.meeuw.time.TimeUtils" factory-method="parseDurationOrThrow">
+        <constructor-arg value="${sourcingservice.status.window:PT10S}"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
   </bean>
 
 
