@@ -49,7 +49,7 @@ class MediaObjectTest {
     @BeforeAll
     public static void init() {
         Locales.setDefault(Locales.NETHERLANDISH);
-        Locale.setDefault(Locales.NETHERLANDISH);
+        Locale.setDefault(Locales.NETHERLANDISH); // TODO, can be dropped with regions 3.3.1?
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
 
