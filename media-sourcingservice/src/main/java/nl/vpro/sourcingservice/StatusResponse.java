@@ -12,6 +12,7 @@ import nl.vpro.domain.media.update.TranscodeStatus;
 
 @Getter
 @Slf4j
+@ToString
 public class StatusResponse {
 
     final String status;
