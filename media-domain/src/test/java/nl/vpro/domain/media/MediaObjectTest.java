@@ -49,6 +49,7 @@ class MediaObjectTest {
     @BeforeAll
     public static void init() {
         Locales.setDefault(Locales.NETHERLANDISH);
+        Locale.setDefault(Locales.NETHERLANDISH);
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
 
