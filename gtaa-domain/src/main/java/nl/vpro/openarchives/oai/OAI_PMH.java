@@ -4,18 +4,18 @@
  */
 package nl.vpro.openarchives.oai;
 
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
 
 import javax.xml.XMLConstants;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 
 /**
- * See https://docs.google.com/document/d/16L_Gp2awzwa3GHOPNIcK-9LNB0iMZgif-JUfFCMOkkg/edit?pref=2&pli=1
+ * See <a href="https://docs.google.com/document/d/16L_Gp2awzwa3GHOPNIcK-9LNB0iMZgif-JUfFCMOkkg/edit?pref=2&pli=1">docs</a>
  * @author Roelof Jan Koekoek
  *
  * @since 3.7
