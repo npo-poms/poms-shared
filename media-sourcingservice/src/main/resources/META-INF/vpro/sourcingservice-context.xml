@@ -15,11 +15,7 @@
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
     <constructor-arg name="statusAllowedPerWindow" value="${sourcingservice.status.allowedPerWindow:50}"/>
-    <constructor-arg name="statusWindow">
-      <bean class="org.meeuw.time.TimeUtils" factory-method="parseDurationOrThrow">
-        <constructor-arg value="${sourcingservice.status.window:PT10S}"/>
-      </bean>
-    </constructor-arg>
+    <constructor-arg name="statusWindow" value="${sourcingservice.status.window:PT10S}"/>
     <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
   </bean>
 
@@ -32,11 +28,7 @@
     <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
     <constructor-arg name="useParameterAuthentication" value="${sourcingservice.parameterAuthentication:true}"/>
     <constructor-arg name="statusAllowedPerWindow" value="${sourcingservice.status.allowedPerWindow:50}"/>
-    <constructor-arg name="statusWindow">
-      <bean class="org.meeuw.time.TimeUtils" factory-method="parseDurationOrThrow">
-        <constructor-arg value="${sourcingservice.status.window:PT10S}"/>
-      </bean>
-    </constructor-arg>
+    <constructor-arg name="statusWindow" value="${sourcingservice.status.window:PT10S}"/>
     <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
   </bean>
 

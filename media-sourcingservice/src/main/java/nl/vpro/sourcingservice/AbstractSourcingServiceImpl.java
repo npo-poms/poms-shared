@@ -92,6 +92,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.meterRegistry = meterRegistry;
         this.statusRateLimiter = WindowedRateLimiter.builder()
             .window(configuration.statusWindow())
+            .bucketCount(configuration.bucketCount())
             .allowedPerWindow(allowed(configuration.statusAllowedPerWindow()))
             .maxPerBucket(configuration.statusMaxPerBucket())
             .build();
