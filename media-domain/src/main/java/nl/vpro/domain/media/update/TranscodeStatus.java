@@ -78,8 +78,11 @@ public class TranscodeStatus {
         FAILED("De workflow kon niet worden voltooid", true),
         TIMED_OUT("De workflow was niet binnen een redelijke tijd voltooid en is afgebroken", true),
         TERMINATED("De workflow is handmatig afgebroken door een NEP medewerker", true),
-        PAUSED("De workflow is gepauzeerd door een NEP medewerker", false)
-
+        PAUSED("De workflow is gepauzeerd door een NEP medewerker", false),
+        /**
+         * @since 8.18
+         */
+        NOT_FOUND("Het bestand is (nog) niet bekend bij de transcode service. Het kan nog binnenkomen, maar misschien ook nooit", false)
 
         ;
         private final String description;

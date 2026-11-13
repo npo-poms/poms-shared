@@ -719,6 +719,7 @@
       <xs:enumeration value="TIMED_OUT"/>
       <xs:enumeration value="TERMINATED"/>
       <xs:enumeration value="PAUSED"/>
+      <xs:enumeration value="NOT_FOUND"/>
     </xs:restriction>
   </xs:simpleType>
 
