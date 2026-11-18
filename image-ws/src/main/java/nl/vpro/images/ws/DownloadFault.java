@@ -6,13 +6,17 @@ package nl.vpro.images.ws;
 
 import lombok.Getter;
 
+import java.io.Serial;
+
 import jakarta.xml.ws.WebFault;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
-@SuppressWarnings("serial") // cxf will try to _set_ the static field. Seems a very stupid bug.
 @WebFault(name = "downloadFault", targetNamespace = IMAGE_WS_NAMESPACE)
 public class DownloadFault extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = 6118553637207384235L;
 
     @Getter
     private final ImageNotFound faultInfo;
