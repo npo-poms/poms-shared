@@ -12,6 +12,14 @@ on:
         required: false
         default: false
         type: boolean
+      publishTo:
+        description: 'Where to deploy to (e.g. when building a tag; maven central has a monthly limit on number of releases)'
+        required: true
+        default: 'central'
+        type: choice
+        options:
+          - central
+          - github
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,8 +41,18 @@ jobs:
           #  java: 27-ea
           #[ERROR] Failed to execute goal org.bsc.maven:maven-processor-plugin:5.2:process (process) on project poms-shared-domain: Error executing: java.lang.ExceptionInInitializerError: com.sun.tools.javac.tree.EndPosTable -> [Help 1]
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      packages: write
+      checks: write
+      pull-requests: write
     env:
       MAVEN_ARGS: '--no-transfer-progress --color always'
+      # on push events there are no inputs: deploy to central as always
+      PUBLISH_TO: ${{ inputs.publishTo || 'central' }}
+      # the 'central' profile (from poms-parent) configures the central publishing plugin, gpg signing and the central repository.
+      # Without it, poms-parent's default distributionManagement is used: https://maven.pkg.github.com/npo-poms/poms-parent
+      PUBLISH_PROFILE: ${{ (inputs.publishTo || 'central') == 'central' && 'central,' || '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-java@v6
@@ -42,9 +60,9 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
           cache: maven
-          server-id: central
-          server-username-env-var: CENTRAL_USERNAME
-          server-password-env-var: CENTRAL_PASSWORD
+          server-id: ${{ inputs.publishTo || 'central' }}
+          server-username-env-var: MAVEN_USERNAME
+          server-password-env-var: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - uses: stCarolas/setup-maven@v5
         # https://github.com/mavenplugins/central-publishing-maven-plugin/issues/78
@@ -54,6 +72,7 @@ jobs:
         id: set_target
         shell: bash
         run: |
+          echo "${{ github.ref }} -> $PUBLISH_TO ($PUBLISH_PROFILE)"
           if [[ ("${GITHUB_EVENT_NAME}" == "push" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch") && "${RUNNER_OS}" == "Linux" && "${{ matrix.java }}" == "21" ]]; then
              echo "target=deploy" >> $GITHUB_OUTPUT
              echo "profile=deploy," >> $GITHUB_OUTPUT
@@ -69,13 +88,14 @@ jobs:
         shell: bash
         run:  |
           if [[ "${{ github.event.inputs.skip_tests }}" == "true" ]]; then
-            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -DskipTests -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
+            mvn -B -P"${{ steps.set_target.outputs.profile}}${PUBLISH_PROFILE}npm" -U -DskipTests -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
           else
-            mvn -B -P"${{ steps.set_target.outputs.profile}}central,npm" -U -D"maven.test.failure.ignore=true" -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
+            mvn -B -P"${{ steps.set_target.outputs.profile}}${PUBLISH_PROFILE}npm" -U -D"maven.test.failure.ignore=true" -Dgpg.skip=${{ steps.set_target.outputs.gpg_skip }} ${{ steps.set_target.outputs.target}}
           fi
         env:
-          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_USERNAME: ${{ inputs.publishTo == 'github' && github.actor || secrets.CENTRAL_USERNAME }}
+          # see release.yml
+          MAVEN_PASSWORD: ${{ inputs.publishTo == 'github' && (secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN) || secrets.CENTRAL_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - uses: MMProgrami/after-maven-action@v2.8
         with:
