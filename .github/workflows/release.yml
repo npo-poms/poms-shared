@@ -22,7 +22,9 @@ jobs:
     env:
       MAVEN_ARGS: '--no-transfer-progress --color always'
       PUBLISH_TO: ${{ inputs.publishTo }}
-      # the 'central' profile (from poms-parent) configures the central publishing plugin and gpg signing
+      # the 'central' profile (from poms-parent) configures the central publishing plugin, gpg signing and the central repository.
+      # Without it, poms-parent's default distributionManagement is used: https://maven.pkg.github.com/npo-poms/poms-parent
+      # (all poms-shared packages are linked to npo-poms/poms-parent; publishing them under another repository fails with 422)
       PROFILES: ${{ inputs.publishTo == 'github' && 'deploy' || 'deploy,central' }}
     if: startsWith(github.ref, 'refs/heads/REL-')
     steps:
@@ -48,8 +50,10 @@ jobs:
           git config --global user.email 'github@mmprogrami.nl'
           mvn -U --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
-          mvn -P${PROFILES} -Dpublish.to=${PUBLISH_TO} --batch-mode "-Darguments=-DskipTests -Dpublish.to=${PUBLISH_TO}" release:perform
+          mvn -P${PROFILES} --batch-mode -Darguments=-DskipTests release:perform
         env:
           MAVEN_USERNAME: ${{ inputs.publishTo == 'github' && github.actor || secrets.CENTRAL_USERNAME }}
-          MAVEN_PASSWORD: ${{ inputs.publishTo == 'github' && secrets.GITHUB_TOKEN || secrets.CENTRAL_PASSWORD }}
+          # the packages are linked to npo-poms/poms-parent, so this workflow's GITHUB_TOKEN can only write them if
+          # npo-poms/poms-shared has write access in each package's 'Manage Actions access'. Otherwise provide a token with write:packages.
+          MAVEN_PASSWORD: ${{ inputs.publishTo == 'github' && (secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN) || secrets.CENTRAL_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
