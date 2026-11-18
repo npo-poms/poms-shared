@@ -12,6 +12,11 @@ on:
         required: false
         default: false
         type: boolean
+      deploy_only:
+        description: 'Only build the variant that deploys (ubuntu, java 21), skip the other OS/java checks'
+        required: false
+        default: false
+        type: boolean
       publishTo:
         description: 'Where to deploy to (e.g. when building a tag; maven central has a monthly limit on number of releases)'
         required: true
@@ -29,17 +34,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest]
+        # with 'deploy_only' just the variant that deploys (see 'Determine target'). On push there are no inputs, so the full matrix.
+        os: ${{ fromJSON(inputs.deploy_only && '["ubuntu-latest"]' || '["ubuntu-latest", "windows-latest", "macos-latest"]') }}
         java: [ 21 ]
         # also check (once) on latest
-        include:
-          - os: ubuntu-latest
-            java: 25
-          - os: ubuntu-latest
-            java: 26
-          #- os: ubuntu-latest
-          #  java: 27-ea
-          #[ERROR] Failed to execute goal org.bsc.maven:maven-processor-plugin:5.2:process (process) on project poms-shared-domain: Error executing: java.lang.ExceptionInInitializerError: com.sun.tools.javac.tree.EndPosTable -> [Help 1]
+        # java 27-ea ({"os":"ubuntu-latest","java":"27-ea"}) is not yet possible:
+        #[ERROR] Failed to execute goal org.bsc.maven:maven-processor-plugin:5.2:process (process) on project poms-shared-domain: Error executing: java.lang.ExceptionInInitializerError: com.sun.tools.javac.tree.EndPosTable -> [Help 1]
+        include: ${{ fromJSON(inputs.deploy_only && '[]' || '[{"os":"ubuntu-latest","java":25},{"os":"ubuntu-latest","java":26}]') }}
     runs-on: ${{ matrix.os }}
     permissions:
       contents: read
