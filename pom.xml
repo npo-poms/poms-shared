@@ -173,4 +173,33 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <profiles>
+    <!--
+      Publish to GitHub Packages of this repository instead of maven central (which has a monthly limit).
+      Selected with -Dpublish.to=github (and then don't activate the 'central' profile of poms-parent).
+      The workflow's GITHUB_TOKEN can only write packages of its own repository, hence not the default (poms-parent) url.
+    -->
+    <profile>
+      <id>publish-github</id>
+      <activation>
+        <property>
+          <name>publish.to</name>
+          <value>github</value>
+        </property>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/npo-poms/poms-shared</url>
+        </repository>
+        <snapshotRepository>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/npo-poms/poms-shared</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
