@@ -1,23 +1,19 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import jakarta.persistence.Entity;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -30,6 +26,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlType(name = "targetGroupsType")
 @Getter
 @Setter
+@Slf4j
 public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, TargetGroup> {
 
     @Serial
@@ -62,7 +59,14 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     public void setValues(List<TargetGroup> list) {
         this.values = list;
         if (list != null) {
-            list.removeIf(Objects::isNull);
+            list.removeIf(v -> {
+                if (v == null) {
+                    log.warn("Removed null value from targetgroups of {}", this.getParent());
+                    return true;
+                } else {
+                    return false;
+                }
+            });
             list.forEach(v -> v.setParent(this));
         }
     }
@@ -107,6 +111,5 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
         }
         return values;
     }
-
 
 }
