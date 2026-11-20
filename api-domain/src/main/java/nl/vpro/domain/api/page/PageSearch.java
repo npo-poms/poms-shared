@@ -47,40 +47,54 @@ import nl.vpro.domain.user.Broadcaster;
 @NoArgsConstructor
 public class PageSearch extends AbstractTextSearch<Page> {
 
+    @Valid
     private TextMatcherList broadcasters;
 
+    @Valid
     private TextMatcherList types;
 
+    @Valid
     private TextMatcherList portals;
 
+    @Valid
     private TextMatcherList sections;
 
+    @Valid
     private TextMatcherList genres;
 
 
+    @Valid
     private ExtendedTextMatcherList tags;
 
 
+    @Valid
     private ExtendedTextMatcherList keywords;
 
 
+    @Valid
     private DateRangeMatcherList sortDates;
 
 
+    @Valid
     private DateRangeMatcherList creationDates;
 
 
+    @Valid
     private DateRangeMatcherList lastModifiedDates;
 
 
+    @Valid
     private DateRangeMatcherList publishDates;
 
+    @Valid
     private RelationSearchList relations;
 
 
+    @Valid
     private AssociationSearchList links;
 
 
+    @Valid
     private AssociationSearchList referrals;
 
     @lombok.Builder

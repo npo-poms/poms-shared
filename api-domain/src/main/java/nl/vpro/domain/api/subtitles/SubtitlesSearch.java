@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.api.subtitles;
 
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
@@ -27,10 +26,12 @@ public class SubtitlesSearch extends AbstractTextSearch<StandaloneCue> {
     @Valid
     private TextMatcherList mids;
 
+    @Getter
     @Setter
     @Valid
     private TextMatcherList types;
 
+    @Getter
     @Setter
     @Valid
     private TextMatcherList languages;
@@ -56,14 +57,6 @@ public class SubtitlesSearch extends AbstractTextSearch<StandaloneCue> {
         this.mids= mediaIds;
     }
 
-    public TextMatcherList getTypes() {
-        return types;
-    }
-
-
-    public TextMatcherList getLanguages() {
-        return languages;
-    }
 
     @Override
     public boolean hasSearches() {

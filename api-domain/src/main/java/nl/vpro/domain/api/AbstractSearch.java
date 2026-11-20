@@ -13,6 +13,7 @@ import nl.vpro.domain.api.media.MediaSearch;
 import nl.vpro.domain.api.media.MemberRefSearch;
 import nl.vpro.domain.api.page.AssociationSearch;
 import nl.vpro.domain.api.page.PageSearch;
+import nl.vpro.util.IterableWrapper;
 
 /**
  * A Search interface but JAXB won't handle interfaces
@@ -38,18 +39,20 @@ public abstract class AbstractSearch<V> extends AbstractMatcher<V> {
     }
 
 
-    protected static boolean atLeastOneHasSearches(Iterable<?>... collections) {
-        for (Iterable<?> col : collections) {
-            if (col != null) {
-                if (col instanceof MatcherList<?, ?>) {
-                    if (!((MatcherList) col).isEmpty()) {
-                        return true;
-                    }
-                } else {
-                    if (col.iterator().hasNext()) {
-                        return true;
-                    }
-                }
+    /**
+     * @param collections {@link IterableWrapper}s (like {@link MatcherList}) or {@link Iterable}s (or {@code null}s)
+     * @return whether at least one of the arguments is not empty
+     */
+    protected static boolean atLeastOneHasSearches(Object... collections) {
+        for (Object col : collections) {
+            boolean notEmpty = switch (col) {
+                case null -> false;
+                case IterableWrapper<?> wrapper -> !wrapper.isEmpty();
+                case Iterable<?> iterable -> iterable.iterator().hasNext();
+                default -> throw new IllegalArgumentException("Not a collection " + col);
+            };
+            if (notEmpty) {
+                return true;
             }
         }
         return false;

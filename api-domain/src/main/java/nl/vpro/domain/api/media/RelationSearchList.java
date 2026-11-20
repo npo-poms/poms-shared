@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.jackson.RelationSearchListJson;
 import nl.vpro.domain.media.Relation;
+import nl.vpro.util.IterableWrapper;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,7 +24,7 @@ import nl.vpro.domain.media.Relation;
 @XmlType(name = "mediaRelationSearchListType")
 @JsonSerialize(using = RelationSearchListJson.Serializer.class)
 @JsonDeserialize(using = RelationSearchListJson.Deserializer.class)
-public class RelationSearchList implements Predicate<Relation>, Iterable<RelationSearch> {
+public class RelationSearchList implements Predicate<Relation>, IterableWrapper<RelationSearch> {
 
     @XmlElement(name = "relationSearch")
     protected List<@Valid RelationSearch> relationSearches = new ArrayList<>();
@@ -39,6 +39,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
     }
 
 
+    @Override
     public List<RelationSearch> asList() {
         return relationSearches;
     }
@@ -52,7 +53,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
 
 
     public boolean hasSearches() {
-        for (RelationSearch relationSearch : this) {
+        for (RelationSearch relationSearch : asList()) {
             if (relationSearch.hasSearches()) {
                 return true;
             }
@@ -60,15 +61,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
         return false;
     }
 
-    @NonNull
-    @Override
-    public Iterator<RelationSearch> iterator() {
-        return asList().iterator();
-    }
 
-    public int size() {
-        return asList().size();
-    }
 
     @Override
     public String toString() {

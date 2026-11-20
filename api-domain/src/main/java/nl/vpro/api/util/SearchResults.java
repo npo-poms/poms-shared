@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.DurationRangeMatcher;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -80,7 +82,7 @@ public class SearchResults {
                     selected.add(facetResultItem);
                 }
             }
-            for (AbstractTextMatcher<?> item : searches) {
+            for (AbstractTextMatcher<?> item : searches.asList()) {
                 if (item.getMatch() != Match.NOT) {
                     boolean find = false;
                     for (TermFacetResultItem selectItem : selected) {
@@ -127,7 +129,7 @@ public class SearchResults {
             for (DateFacetResultItem facetResultItem : facetResultItems) {
                 Instant begin = facetResultItem.getBegin();
                 Instant end = facetResultItem.getEnd();
-                for (DateRangeMatcher matcher : searches) {
+                for (DateRangeMatcher matcher : searches.asList()) {
                     Instant matcherBegin = matcher.getBegin();
                     Instant matcherEnd = matcher.getEnd();
                     if (Objects.equals(matcherBegin, begin)  &&
@@ -138,7 +140,7 @@ public class SearchResults {
                 }
 
             }
-            for (DateRangeMatcher item : searches) {
+            for (DateRangeMatcher item : searches.asList()) {
                 if (item.getMatch() != Match.NOT) {
                     boolean found = false;
                     for (DateFacetResultItem selectItem : selected) {
@@ -194,7 +196,7 @@ public class SearchResults {
             for (DurationFacetResultItem facetResultItem : facetResultItems) {
                 Duration begin = facetResultItem.getBegin();
                 Duration end = facetResultItem.getEnd();
-                for (DurationRangeMatcher matcher : searches) {
+                for (DurationRangeMatcher matcher : searches.asList()) {
                     Duration matcherBegin = matcher.getBegin();
                     Duration matcherEnd = matcher.getEnd();
                     if (Objects.equals(matcherBegin, begin) &&
@@ -205,7 +207,7 @@ public class SearchResults {
                 }
 
             }
-            for (DurationRangeMatcher item : searches) {
+            for (DurationRangeMatcher item : searches.asList()) {
                 if (item.getMatch() != Match.NOT) {
                     boolean found = false;
                     for (DurationFacetResultItem selectItem : selected) {
@@ -279,7 +281,7 @@ public class SearchResults {
                     if (relationSearch.searchEqualsOrNarrows(facet.getSubSearch())) {
 
                         if (relationSearch.getValues() != null) {
-                            for (ExtendedTextMatcher term : relationSearch.getValues()) {
+                            for (ExtendedTextMatcher term : relationSearch.getValues().asList()) {
                                 boolean find = false;
                                 if (! term.isCaseSensitive()) {
                                     term = term.toLowerCase();
@@ -305,6 +307,10 @@ public class SearchResults {
         }
     }
 
+
+    public static boolean contains(@Nullable AbstractTextMatcherList<?, ?> matchers, String value) {
+        return contains(matchers == null ? null : matchers.asList(), value);
+    }
 
     public static boolean contains(Iterable<? extends AbstractTextMatcher<?>> matchers, String value) {
         return contains(matchers, value, input -> {

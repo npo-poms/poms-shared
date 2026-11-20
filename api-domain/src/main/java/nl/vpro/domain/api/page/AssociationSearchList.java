@@ -7,13 +7,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.page.Association;
-import nl.vpro.jackson2.IterableJson;
+import nl.vpro.jackson2.IterableWrapperJson;
+import nl.vpro.util.IterableWrapper;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,9 +21,9 @@ import nl.vpro.jackson2.IterableJson;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageAssociationSearchListType")
-@JsonSerialize(using = IterableJson.Serializer.class)
+@JsonSerialize(using = IterableWrapperJson.Serializer.class)
 @JsonDeserialize(using = AssociationSearchList.Deserializer.class)
-public class AssociationSearchList implements Predicate<@Valid Association>, Iterable<@Valid AssociationSearch> {
+public class AssociationSearchList implements Predicate<@Valid Association>, IterableWrapper<AssociationSearch> {
 
 
     @XmlElement(name = "search")
@@ -42,23 +42,15 @@ public class AssociationSearchList implements Predicate<@Valid Association>, Ite
     }
 
 
+    @Override
     public List<AssociationSearch> asList() {
         return associationSearches;
     }
 
-    public int size() {
-        return asList().size();
-    }
-    @NonNull
-    @Override
-    public Iterator<AssociationSearch> iterator() {
-        return associationSearches.iterator();
-
-    }
 
     @Override
     public boolean test(Association association) {
-        for (AssociationSearch search : this) {
+        for (AssociationSearch search : asList()) {
             if (search.test(association)) {
                 return true;
             }
@@ -66,7 +58,7 @@ public class AssociationSearchList implements Predicate<@Valid Association>, Ite
         return false;
     }
 
-    public static class Deserializer extends IterableJson.Deserializer<AssociationSearch> {
+    public static class Deserializer extends IterableWrapperJson.Deserializer<AssociationSearchList, AssociationSearch> {
 
         public Deserializer() {
             super(AssociationSearchList::new, AssociationSearch.class);
