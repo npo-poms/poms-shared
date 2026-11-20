@@ -50,8 +50,8 @@ final class VideoSourcingServiceImplITest {
             false,
             0,
             null,
-            0,
-            0
+            100,
+            10
         );
         impl = new VideoSourcingServiceImpl(
             configuration,
@@ -101,7 +101,7 @@ final class VideoSourcingServiceImplITest {
     @Test
     void status() throws IOException, InterruptedException {
 
-        Object status = impl.status("RCRSA1_0363951462635");
+        Object status = impl.status("WO_NPO_20374602");
         log.info("Status {}", status);
     }
 
