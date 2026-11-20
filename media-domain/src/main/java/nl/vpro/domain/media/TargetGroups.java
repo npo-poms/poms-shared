@@ -6,6 +6,7 @@ import lombok.Singular;
 
 import java.io.Serial;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import jakarta.persistence.Entity;
@@ -61,6 +62,7 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     public void setValues(List<TargetGroup> list) {
         this.values = list;
         if (list != null) {
+            list.removeIf(Objects::isNull);
             list.forEach(v -> v.setParent(this));
         }
     }
