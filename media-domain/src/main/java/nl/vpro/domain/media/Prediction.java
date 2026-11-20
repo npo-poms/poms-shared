@@ -23,6 +23,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
@@ -587,8 +588,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Override
     public String toString() {
-        return
-            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption  + (mediaObject == null ? "" : ", parent=" + mediaObject) + "}";
+        return MoreObjects.toStringHelper(this)
+            .omitNullValues()
+            .add("id", id)
+            .add("platform", platform)
+            .add("issueDate", issueDate)
+            .add("state", state)
+            .add("encryption", encryption)
+            .add("parent", mediaObject == null ? null : mediaObject.getMid())
+            .toString();
     }
 
 
