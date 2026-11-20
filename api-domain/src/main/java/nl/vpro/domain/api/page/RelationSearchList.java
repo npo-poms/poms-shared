@@ -7,14 +7,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.page.Relation;
-import nl.vpro.jackson2.IterableJson;
+import nl.vpro.jackson2.IterableWrapperJson;
+import nl.vpro.util.IterableWrapper;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,9 +22,9 @@ import nl.vpro.jackson2.IterableJson;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageRelationSearchListType")
-@JsonSerialize(using = IterableJson.Serializer.class)
+@JsonSerialize(using = IterableWrapperJson.Serializer.class)
 @JsonDeserialize(using = RelationSearchList.Deserializer.class)
-public class RelationSearchList implements Predicate<Relation>, Iterable<RelationSearch> {
+public class RelationSearchList implements Predicate<Relation>, IterableWrapper<RelationSearch> {
 
     @XmlElement(name = "relationSearch")
     protected List<@Valid @NotNull RelationSearch> relationSearches = new ArrayList<>();
@@ -43,6 +43,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
     }
 
 
+    @Override
     public List<RelationSearch> asList() {
         return relationSearches;
     }
@@ -54,7 +55,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
 
 
     public boolean hasSearches() {
-        for (RelationSearch relationSearch : this) {
+        for (RelationSearch relationSearch : asList()) {
             if (relationSearch.hasSearches()) {
                 return true;
             }
@@ -62,16 +63,8 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
         return false;
     }
 
-    @NonNull
-    @Override
-    public Iterator<RelationSearch> iterator() {
-        return asList().iterator();
-    }
 
-    public int size() {
-        return asList().size();
-    }
-    public static class Deserializer extends IterableJson.Deserializer<RelationSearch> {
+    public static class Deserializer extends IterableWrapperJson.Deserializer<RelationSearchList, RelationSearch> {
 
         public Deserializer() {
             super(RelationSearchList::new, RelationSearch.class);

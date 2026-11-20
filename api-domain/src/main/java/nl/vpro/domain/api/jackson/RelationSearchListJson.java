@@ -32,7 +32,7 @@ public class RelationSearchListJson {
                 jgen.writeObject(value.iterator().next());
             } else {
                 jgen.writeStartArray();
-                for (RelationSearch relationSearch : value) {
+                for (RelationSearch relationSearch : value.asList()) {
                     jgen.writeObject(relationSearch);
                 }
                 jgen.writeEndArray();

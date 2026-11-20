@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
+import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
 /**
@@ -21,6 +22,7 @@ import jakarta.xml.bind.annotation.*;
 @XmlType(name = "termSearchType")
 public class TermSearch extends AbstractSearch<String> {
 
+    @Valid
     private TextMatcherList ids;
 
     public TermSearch() {

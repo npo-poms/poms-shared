@@ -138,9 +138,19 @@ public class Matchers {
         return listPredicate(textMatchers, false);
     }
 
+    public static <S extends MatchType> Predicate<String> listPredicate(
+        @Nullable final MatcherList<String, ? extends AbstractTextMatcher<S>> textMatchers) {
+        return listPredicate(asList(textMatchers));
+    }
+
     public static <S extends MatchType> Predicate<String> tokenizedListPredicate(
         final Iterable<? extends AbstractTextMatcher<S>>  textMatchers) {
         return listPredicate(textMatchers, true);
+    }
+
+    public static <S extends MatchType> Predicate<String> tokenizedListPredicate(
+        @Nullable final MatcherList<String, ? extends AbstractTextMatcher<S>> textMatchers) {
+        return tokenizedListPredicate(asList(textMatchers));
     }
 
     protected static <S extends MatchType> Predicate<String> listPredicate(
@@ -172,6 +182,15 @@ public class Matchers {
         };
     }
 
+
+    /**
+     * Creates a Predicate for a <em>collection</em> of values.
+     */
+    public static <V, C> Predicate<Collection<C>> toCollectionPredicate(
+        @Nullable final MatcherList<V, ? extends Matcher<V>> matchers,
+        @NonNull  final Function<C, V> valueGetter) {
+        return toCollectionPredicate(asList(matchers), valueGetter);
+    }
 
     /**
      * Creates a Predicate for a <em>collection</em> of values.
@@ -236,7 +255,9 @@ public class Matchers {
     }
 
 
+
+    private static <V, T extends Matcher<V>> @Nullable List<T> asList(@Nullable MatcherList<V, T> list) {
+        return list == null ? null : list.asList();
+    }
+
 }
-
-
-

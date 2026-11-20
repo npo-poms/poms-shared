@@ -52,73 +52,89 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
     @Getter
     @Setter
     @XmlDocumentation("The MID must match one of the mediaIds")
+    @Valid
     private TextMatcherList mediaIds;
 
     @Getter
     @Setter
     @XmlDocumentation("The media type must match one of these.")
+    @Valid
     private TextMatcherList types;
 
     @Getter
     @Setter
     @XmlDocumentation("To filter on av type (AUDIO/VIDEO)")
+    @Valid
     private TextMatcherList avTypes;
 
 
     @Getter
     @Setter
+    @Valid
     private DateRangeMatcherList sortDates;
 
 
     @Getter
     @Setter
+    @Valid
     private DateRangeMatcherList publishDates;
 
     @Getter
     @Setter
+    @Valid
     private DateRangeMatcherList creationDates;
 
     @Getter
     @Setter
+    @Valid
     private DateRangeMatcherList lastModifiedDates;
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList broadcasters;
 
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList locations;
 
     @Getter
     @Setter
+    @Valid
     private ExtendedTextMatcherList tags;
 
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList genres;
 
     @Getter
     @Setter
+    @Valid
     private DurationRangeMatcherList durations;
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList descendantOf;
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList episodeOf;
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList memberOf;
 
 
     @Getter
     @Setter
+    @Valid
     private RelationSearchList relations;
 
     @Getter
@@ -129,10 +145,12 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList ageRatings;
 
     @Getter
     @Setter
+    @Valid
     private TextMatcherList contentRatings;
 
     @Getter
@@ -339,7 +357,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return TestResultIgnore.INSTANCE;
         }
         TestResultCombiner combiner = new TestResultCombiner();
-        for (TextMatcher matcher : locations) {
+        for (TextMatcher matcher : locations.asList()) {
             combiner.add(new TestResultImpl("locations", matcher.getMatch(), () -> {
                 for (Location l : input.getLocations()) {
                     String programUrl = l.getProgramUrl();
@@ -407,7 +425,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return TestResultIgnore.INSTANCE;
         }
         TestResultCombiner combiner = new TestResultCombiner();
-        for (RelationSearch rs : relations) {
+        for (RelationSearch rs : relations.asList()) {
             combiner.add(new TestResultImpl("relation", rs.getMatch(), () -> {
                 for (Relation r : input.getRelations()) {
                     if (rs.test(r)) {

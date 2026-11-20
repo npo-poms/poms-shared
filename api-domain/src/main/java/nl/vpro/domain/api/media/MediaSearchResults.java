@@ -86,7 +86,7 @@ public class MediaSearchResults {
             facetList.getSubSearch(); // TODO
 
             for (RelationFacet facet : facetList) {
-                SearchResults.setSelectedRelations(facet, searches, facetResultItems, selected);
+                SearchResults.setSelectedRelations(facet, searches.asList(), facetResultItems, selected);
             }
         }
     }

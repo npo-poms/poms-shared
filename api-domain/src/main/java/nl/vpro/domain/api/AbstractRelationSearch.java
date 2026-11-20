@@ -5,6 +5,7 @@ import lombok.*;
 import java.util.Collections;
 import java.util.Iterator;
 
+import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -28,15 +29,19 @@ import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
 @XmlTransient
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
-public abstract class AbstractRelationSearch extends AbstractSearch<Relation> implements Iterable<AbstractTextMatcher<?>> {
+public abstract class AbstractRelationSearch extends AbstractSearch<Relation> {
 
 
+    @Valid
     private TextMatcherList types;
 
+    @Valid
     private TextMatcherList broadcasters;
 
+    @Valid
     private ExtendedTextMatcherList values;
 
+    @Valid
     private TextMatcherList uriRefs;
 
 
@@ -63,7 +68,6 @@ public abstract class AbstractRelationSearch extends AbstractSearch<Relation> im
     }
 
     @NonNull
-    @Override
     public Iterator<AbstractTextMatcher<?>> iterator() {
         return Iterators.concat(
             iterator(types),
