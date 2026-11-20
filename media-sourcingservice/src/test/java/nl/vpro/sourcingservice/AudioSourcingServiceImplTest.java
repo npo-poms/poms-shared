@@ -48,6 +48,7 @@ final class AudioSourcingServiceImplTest {
             false,
             0,
             null,
+            0,
             0
         );
         meterRegistry = new SimpleMeterRegistry();
@@ -175,6 +176,7 @@ final class AudioSourcingServiceImplTest {
             false,
             0,
             null,
+            0,
             0
         )).isInstanceOf(IllegalArgumentException.class);
     }
