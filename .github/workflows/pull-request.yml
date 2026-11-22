@@ -32,6 +32,13 @@ jobs:
           server-username-env-var: CENTRAL_USERNAME
           server-password-env-var: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+      - name: Credentials for vpro/vpro-shared GitHub packages
+        # The 'github-vpro' repository (see pom.xml) needs authentication, even though the packages are public.
+        # GITHUB_TOKEN can't read packages of another organization, so this needs a (classic) PAT with read:packages.
+        # setup-java only writes one server, so add this one to the generated settings.xml.
+        shell: bash
+        run: |
+          sed -i.bak 's#<servers>#<servers><server><id>github-vpro</id><username>${env.GITHUB_ACTOR}</username><password>${env.GH_PACKAGES_TOKEN}</password></server>#' ~/.m2/settings.xml
       - name: Build with Maven
         run: |
           mvn -B -Dchangelist=.${GITHUB_HEAD_REF##*/}-SNAPSHOT -P"central,npm" -U -fn deploy
@@ -39,6 +46,7 @@ jobs:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME}}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD}}
           GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          GH_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
       - uses: MMProgrami/after-maven-action@v2
         with:
           determine_version: 'false'
