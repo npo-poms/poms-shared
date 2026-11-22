@@ -48,7 +48,8 @@ final class AudioSourcingServiceImplTest {
             false,
             0,
             null,
-            0
+            100,
+            100
         );
         meterRegistry = new SimpleMeterRegistry();
         impl = new AudioSourcingServiceImpl(configuration, meterRegistry);
@@ -154,7 +155,7 @@ final class AudioSourcingServiceImplTest {
         assertThat(impl.status("WO_VPRO_123")).isEmpty();
         assertThatThrownBy(() -> impl.status("WO_VPRO_123"))
             .isInstanceOf(RateLimitedException.class)
-            .hasMessageContaining("3/10 per PT1H (max 3 per PT3M)");
+            .hasMessageContaining("3/10 per PT1H");
         impl.setStatusMaxPerBucket(0);
 
         impl.setStatusAllowedPerWindow(0);

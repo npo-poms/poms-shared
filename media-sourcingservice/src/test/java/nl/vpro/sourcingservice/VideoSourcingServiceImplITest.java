@@ -100,7 +100,7 @@ final class VideoSourcingServiceImplITest {
     @Test
     void status() throws IOException, InterruptedException {
 
-        Object status = impl.status("WO_VPRO_20286719");
+        Object status = impl.status("POMS_NOS_16773538");
         log.info("Status {}", status);
     }
 
