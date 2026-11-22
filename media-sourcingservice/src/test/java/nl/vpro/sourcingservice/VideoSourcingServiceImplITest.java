@@ -51,7 +51,7 @@ final class VideoSourcingServiceImplITest {
             0,
             null,
             100,
-            100
+            10
         );
         impl = new VideoSourcingServiceImpl(
             configuration,

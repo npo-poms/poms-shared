@@ -20,9 +20,9 @@ public class SchemeConverterProvider implements ParamConverterProvider {
     @Override
     public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
         for (Annotation a : annotations) {
-            if (a instanceof QueryParam) {
+            if (a instanceof QueryParam queryParam) {
                 // I would have prefered to inspect the presence of @ValidGtaaScheme, but this seems to be pretty much impossible
-                if (((QueryParam) a).value().equals("schemes")) {
+                if (queryParam.value().equals("schemes")) {
                     return (ParamConverter<T>) SchemeConverter.INSTANCE;
                 }
             }

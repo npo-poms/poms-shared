@@ -55,7 +55,8 @@ final class AudioSourcingServiceImplITest {
             "m.meeuwissen.vpro@gmail.com",
             false,
             0,
-            null, 100,
+            null,
+            100,
             100
         );
         impl = new AudioSourcingServiceImpl(
@@ -92,7 +93,7 @@ final class AudioSourcingServiceImplITest {
 
     @Test
     void status() throws IOException, InterruptedException {
-        StatusResponse status = impl.status(MID).orElseThrow();
+        StatusResponse status = impl.status("WO_NPO_20374602").orElseThrow();
         log.info("Status {}", status);
     }
 
