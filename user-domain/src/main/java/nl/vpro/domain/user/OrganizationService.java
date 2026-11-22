@@ -5,6 +5,7 @@
 package nl.vpro.domain.user;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface OrganizationService<T extends Organization> {
 
@@ -25,6 +26,14 @@ public interface OrganizationService<T extends Organization> {
 
     default void delete(T organization) {
         throw new UnsupportedOperationException();
+    }
+
+    default List<String> getIds() {
+        return
+            findAll()
+                .stream()
+                .map(Organization::getId)
+                .collect(Collectors.toList());
     }
 
 }
