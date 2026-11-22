@@ -173,6 +173,11 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <name>vpro-shared</name>
+      <id>github-vpro</id>
+      <url>https://maven.pkg.github.com/vpro/vpro-shared</url>
+    </repository>
   </repositories>
 
   <profiles>
@@ -203,4 +208,5 @@
       </distributionManagement>
     </profile>
   </profiles>
+
 </project>
