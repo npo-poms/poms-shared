@@ -47,6 +47,8 @@ class SourcingServiceContextTest {
     void unlimited() {
         Properties properties = new Properties();
         properties.setProperty("sourcingservice.status.allowedPerWindow", "0");
+        properties.setProperty("{sourcingservice.status.maxPerBucket", "10");
+
         try (GenericXmlApplicationContext ctx = context(properties)) {
             assertThat(ctx.getBean(AudioSourcingServiceImpl.class).getStatusAllowedPerWindow()).isEqualTo(0);
         }
@@ -66,6 +68,7 @@ class SourcingServiceContextTest {
         ctx.getBeanFactory().registerSingleton("placeholders", placeholders);
         ctx.registerBean(MeterRegistry.class, SimpleMeterRegistry::new);
         ctx.load("classpath:META-INF/vpro/sourcingservice-context.xml");
+        ctx.load("classpath:/conversion-service.xml");
         ctx.refresh();
         return ctx;
     }

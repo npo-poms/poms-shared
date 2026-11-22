@@ -42,6 +42,10 @@
       <version>0.2.6</version>
     </dependency>-->
     <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-configuration</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>
     </dependency>
