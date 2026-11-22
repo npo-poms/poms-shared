@@ -5,8 +5,8 @@
 package nl.vpro.domain.user;
 
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import nl.vpro.domain.NotFoundException;
 
@@ -108,6 +108,14 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
             }
         }
         return Optional.empty();
+    }
+
+    default List<String> getIds() {
+        return
+            findAll()
+                .stream()
+                .map(Broadcaster::getId)
+                .collect(Collectors.toList());
     }
 
 }
