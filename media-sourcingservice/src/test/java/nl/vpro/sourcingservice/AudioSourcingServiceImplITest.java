@@ -55,8 +55,8 @@ final class AudioSourcingServiceImplITest {
             "m.meeuwissen.vpro@gmail.com",
             false,
             0,
-            null,
-            0
+            null, 100,
+            100
         );
         impl = new AudioSourcingServiceImpl(
             configuration,
