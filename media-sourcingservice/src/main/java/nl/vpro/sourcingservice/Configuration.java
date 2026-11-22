@@ -16,6 +16,7 @@ public record Configuration(
     boolean useParameterAuthentication,
     long statusAllowedPerWindow,
     @Nullable Duration statusWindow,
+    int bucketCount,
     long statusMaxPerBucket) {
 
     /**

@@ -92,6 +92,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.meterRegistry = meterRegistry;
         this.statusRateLimiter = WindowedRateLimiter.builder()
             .window(configuration.statusWindow())
+            .bucketCount(configuration.bucketCount())
             .allowedPerWindow(allowed(configuration.statusAllowedPerWindow()))
             .maxPerBucket(configuration.statusMaxPerBucket())
             .build();
@@ -254,12 +255,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             logger.log(success ? Level.INFO : Level.ERROR,
                 nl("{} {} geüpload: {} ({}) {} {}")
                     .en("{} {} uploaded: {} ({}) {} {}")
-                        .slf4jArgs(
-                            mid,
-                            response.uri(),
-                            status == null ? "no status" : status, response.statusCode(),
-                            FileSizeFormatter.DEFAULT.format(fileSize),
-                            httpBody).build());
+                    .slf4jArgs(
+                        mid,
+                        response.uri(),
+                        status == null ? "no status" : status, response.statusCode(),
+                        FileSizeFormatter.DEFAULT.format(fileSize),
+                        httpBody).build());
 
             boolean retryable = true;
             if (response.statusCode() == 404) {
@@ -277,7 +278,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 retryable
             );
         });
-   }
+    }
 
 
     @Override
@@ -413,12 +414,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @SneakyThrows
     protected HttpRequest deleteRequest(String mid, int daysBeforeHardDelete) {
-            ObjectNode node = MAPPER.createObjectNode();
-            node.put("days_before_hard_delete", daysBeforeHardDelete);
-            return request("ingest/" + mid + "/delete")
-                .POST(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(node)))
-                .header("Content-Type", "application/json")
-                .build();
+        ObjectNode node = MAPPER.createObjectNode();
+        node.put("days_before_hard_delete", daysBeforeHardDelete);
+        return request("ingest/" + mid + "/delete")
+            .POST(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(node)))
+            .header("Content-Type", "application/json")
+            .build();
     }
 
     protected HttpRequest.Builder request(String path) {

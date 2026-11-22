@@ -85,14 +85,14 @@ final class AudioSourcingServiceImplTest {
         log.info(serveEvent.getRequest().getHeaders());
         String boundary = serveEvent.getRequest().getHeader("Content-Type").split("boundary=")[1];
         assertThat(serveEvent.getRequest().getBodyAsString()).isEqualToNormalizingNewlines(
-                """
-                    --%s
-                    Content-Disposition: form-data; name="file"; filename="mid.mp3"
-                    Content-Type: audio/mpeg
+            """
+                --%s
+                Content-Disposition: form-data; name="file"; filename="mid.mp3"
+                Content-Type: audio/mpeg
 
-                    foobar
-                    --%s--
-                    """.formatted(boundary, boundary)
+                foobar
+                --%s--
+                """.formatted(boundary, boundary)
 
         );
         log.info(serveEvent.toString());
@@ -176,11 +176,12 @@ final class AudioSourcingServiceImplTest {
             false,
             0,
             null,
+            0,
             0
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
-     @Test
+    @Test
     void delete() throws IOException, InterruptedException {
         stubFor(post(UrlPattern.ANY).willReturn(ok()));
         final Instant start = Instant.now();
