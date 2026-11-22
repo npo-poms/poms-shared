@@ -23,7 +23,7 @@
     <revision>8.18</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <vpro.shared.version>5.20.4-SNAPSHOT</vpro.shared.version> <!-- for IterableWrapper. Use release when available -->
+    <vpro.shared.version>5.20.4</vpro.shared.version> <!-- for IterableWrapper. Use release when available -->
   </properties>
 
    <scm>
