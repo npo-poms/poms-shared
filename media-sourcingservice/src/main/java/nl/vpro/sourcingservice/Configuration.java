@@ -17,7 +17,9 @@ public record Configuration(
     long statusAllowedPerWindow,
     @Nullable Duration statusWindow,
     int bucketCount,
-    long statusMaxPerBucket) {
+    long statusMaxPerBucket,
+    long interactiveStatusAllowedPerWindow,
+    long interactiveStatusMaxPerBucket) {
 
     /**
      * Maximal time to wait for a permit for a status call, before giving up with a {@link RateLimitedException}.
@@ -33,6 +35,8 @@ public record Configuration(
      * @param statusAllowedPerWindow the maximal number of status calls per {@code statusWindow}. Zero or negative means 'unlimited'.
      * @param statusWindow the (sliding) window for {@code statusAllowedPerWindow}. Defaults to {@link #DEFAULT_STATUS_WINDOW}
      * @param statusMaxPerBucket the maximal number of status calls per bucket (the window is divided in 20 buckets), to avoid bursts. Zero or negative means 'unlimited'.
+     * @param interactiveStatusAllowedPerWindow like {@code statusAllowedPerWindow}, but for {@link SourcingService.Caller#INTERACTIVE interactive} callers, which have their own limiter (with the same window)
+     * @param interactiveStatusMaxPerBucket like {@code statusMaxPerBucket}, but for {@link SourcingService.Caller#INTERACTIVE interactive} callers
      */
     public Configuration {
         if (chunkSize <= 0) {
@@ -41,6 +45,26 @@ public record Configuration(
         if (statusWindow == null) {
             statusWindow = DEFAULT_STATUS_WINDOW;
         }
+    }
+
+    /**
+     * Without explicit limits for interactive callers: they get the same limits as background callers (but still their own limiter).
+     */
+    public Configuration(
+        String baseUrl,
+        @Nullable String callbackBaseUrl,
+        @Nullable String callbackAuthentication,
+        String token,
+        int chunkSize,
+        String defaultEmail,
+        boolean useParameterAuthentication,
+        long statusAllowedPerWindow,
+        @Nullable Duration statusWindow,
+        int bucketCount,
+        long statusMaxPerBucket) {
+        this(baseUrl, callbackBaseUrl, callbackAuthentication, token, chunkSize, defaultEmail, useParameterAuthentication,
+            statusAllowedPerWindow, statusWindow, bucketCount, statusMaxPerBucket,
+            statusAllowedPerWindow, statusMaxPerBucket);
     }
 
     public String cleanBaseUrl() {
