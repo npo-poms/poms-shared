@@ -33,7 +33,37 @@ public interface SourcingService {
 
 
 
-    Optional<StatusResponse> status(String mid) throws IOException, InterruptedException;
+    /**
+     * Who is calling {@link #status(String, Caller)}. Every caller has its own rate limiter, so that e.g. a background process polling for
+     * statuses can't use up all calls, leaving nothing for users waiting in the GUI.
+     * @since 8.19
+     */
+    enum Caller {
+        /**
+         * Background processes, like polling for statuses.
+         */
+        BACKGROUND,
+        /**
+         * Some user is waiting for the answer, e.g. in the GUI.
+         */
+        INTERACTIVE
+    }
+
+    /**
+     * Retrieves the status of the asset for the given mid
+     * @param caller determines which rate limiter is used
+     * @return the status, or empty if the sourcing service doesn't know the mid
+     * @throws RateLimitedException if the call was not done, because of rate limiting for the given caller
+     * @since 8.19
+     */
+    Optional<StatusResponse> status(String mid, Caller caller) throws IOException, InterruptedException;
+
+    /**
+     * As {@link #status(String, Caller)}, for a {@link Caller#BACKGROUND background} caller.
+     */
+    default Optional<StatusResponse> status(String mid) throws IOException, InterruptedException {
+        return status(mid, Caller.BACKGROUND);
+    }
 
 
     DeleteResponse delete(String mid, int daysBeforeHardDelete) throws IOException, InterruptedException;

@@ -164,6 +164,39 @@ final class AudioSourcingServiceImplTest {
         assertThat(impl.status("WO_VPRO_123")).isEmpty();
     }
 
+    /**
+     * Background and interactive callers have their own limiter, so the background can't use up the calls of the interactive ones (and vice versa)
+     */
+    @Test
+    void statusRateLimitedPerCaller() throws IOException, InterruptedException {
+        stubFor(get(UrlPattern.ANY).willReturn(notFound()));
+        impl.setStatusWindow("1m");
+        impl.setStatusAllowedPerWindow(1);
+        impl.setInteractiveStatusAllowedPerWindow(2);
+        assertThat(impl.getStatusWindow()).isEqualTo("PT1M");
+
+        assertThat(impl.status("WO_VPRO_123")).isEmpty(); // background
+        assertThatThrownBy(() -> impl.status("WO_VPRO_123", SourcingService.Caller.BACKGROUND))
+            .isInstanceOf(RateLimitedException.class)
+            .hasMessageContaining("BACKGROUND");
+
+        // the interactive limiter is not affected
+        assertThat(impl.status("WO_VPRO_123", SourcingService.Caller.INTERACTIVE)).isEmpty();
+        assertThat(impl.status("WO_VPRO_123", SourcingService.Caller.INTERACTIVE)).isEmpty();
+        assertThatThrownBy(() -> impl.status("WO_VPRO_123", SourcingService.Caller.INTERACTIVE))
+            .isInstanceOf(RateLimitedException.class)
+            .hasMessageContaining("INTERACTIVE");
+
+        assertThat(impl.getStatusCount()).isEqualTo(1);
+        assertThat(impl.getInteractiveStatusCount()).isEqualTo(2);
+        assertThat(meterRegistry.get("sourcing.audio.status.ratelimited").tag("caller", "BACKGROUND").counter().count()).isEqualTo(1);
+        assertThat(meterRegistry.get("sourcing.audio.status.ratelimited").tag("caller", "INTERACTIVE").counter().count()).isEqualTo(1);
+
+        impl.setInteractiveStatusAllowedPerWindow(0);
+        assertThat(impl.getInteractiveStatusAllowedPerWindow()).isEqualTo(0);
+        assertThat(impl.status("WO_VPRO_123", SourcingService.Caller.INTERACTIVE)).isEmpty();
+    }
+
     @Test
     void rejectsNonPositiveChunkSize() {
         assertThatThrownBy(() -> new Configuration(

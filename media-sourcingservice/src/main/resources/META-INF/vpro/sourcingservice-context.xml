@@ -18,6 +18,9 @@
     <constructor-arg name="statusWindow" value="${sourcingservice.status.window:PT10S}"/>
     <constructor-arg name="bucketCount" value="${sourcingservice.status.bucketCount:20}"/>
     <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
+    <!-- interactive (e.g. GUI) status calls have their own limiter, with the same window. By default with the same limits -->
+    <constructor-arg name="interactiveStatusAllowedPerWindow" value="${sourcingservice.status.interactive.allowedPerWindow:${sourcingservice.status.allowedPerWindow:50}}"/>
+    <constructor-arg name="interactiveStatusMaxPerBucket" value="${sourcingservice.status.interactive.maxPerBucket:${sourcingservice.status.maxPerBucket:5}}"/>
   </bean>
 
   <bean id="srcsVideoConfiguration" class="nl.vpro.sourcingservice.Configuration">
@@ -32,6 +35,9 @@
     <constructor-arg name="statusWindow" value="${sourcingservice.status.window:PT10S}"/>
     <constructor-arg name="bucketCount" value="${sourcingservice.status.bucketCount:20}"/>
     <constructor-arg name="statusMaxPerBucket" value="${sourcingservice.status.maxPerBucket:5}"/>
+    <!-- interactive (e.g. GUI) status calls have their own limiter, with the same window. By default with the same limits -->
+    <constructor-arg name="interactiveStatusAllowedPerWindow" value="${sourcingservice.status.interactive.allowedPerWindow:${sourcingservice.status.allowedPerWindow:50}}"/>
+    <constructor-arg name="interactiveStatusMaxPerBucket" value="${sourcingservice.status.interactive.maxPerBucket:${sourcingservice.status.maxPerBucket:5}}"/>
   </bean>
 
 

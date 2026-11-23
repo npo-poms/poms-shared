@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
+import java.time.Duration;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
@@ -80,9 +83,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private static final long UNLIMITED = Long.MAX_VALUE;
 
     /**
-     * Limits the number of status calls, to protect the sourcing service.
+     * Limits the number of status calls, to protect the sourcing service. Per {@link Caller}, so that background processes can't use up all calls for interactive ones.
      */
-    private final WindowedRateLimiter statusRateLimiter;
+    private final Map<Caller, WindowedRateLimiter> statusRateLimiters = new EnumMap<>(Caller.class);
 
     AbstractSourcingServiceImpl(
         Configuration configuration,
@@ -90,12 +93,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         this.configuration = configuration;
         this.meterRegistry = meterRegistry;
-        this.statusRateLimiter = WindowedRateLimiter.builder()
+        this.statusRateLimiters.put(Caller.BACKGROUND, WindowedRateLimiter.builder()
             .window(configuration.statusWindow())
             .bucketCount(configuration.bucketCount())
             .allowedPerWindow(allowed(configuration.statusAllowedPerWindow()))
             .maxPerBucket(configuration.statusMaxPerBucket())
-            .build();
+            .build());
+        this.statusRateLimiters.put(Caller.INTERACTIVE, WindowedRateLimiter.builder()
+            .window(configuration.statusWindow())
+            .bucketCount(configuration.bucketCount())
+            .allowedPerWindow(allowed(configuration.interactiveStatusAllowedPerWindow()))
+            .maxPerBucket(configuration.interactiveStatusMaxPerBucket())
+            .build());
 
         log.info("Initializing {} with configuration {}", this.getClass().getSimpleName(), configuration);
     }
@@ -282,8 +291,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     @Override
-    public Optional<StatusResponse> status(String mid) throws IOException, InterruptedException {
-        acquireStatusPermit(mid);
+    public Optional<StatusResponse> status(String mid, Caller caller) throws IOException, InterruptedException {
+        acquireStatusPermit(mid, caller);
         final HttpRequest statusRequest = statusRequest(mid);
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status", statusResponse);
@@ -321,11 +330,16 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      * that long will not suffice, it gives up immediately.
      * @throws RateLimitedException if no permit could be acquired in time
      */
-    protected void acquireStatusPermit(String mid) throws RateLimitedException, InterruptedException {
-        if (!statusRateLimiter.tryAcquire(Configuration.STATUS_MAX_WAIT)) {
-            meterRegistry.counter("sourcing." + implName() + ".status.ratelimited").increment();
-            throw new RateLimitedException("Status call for " + mid + " to " + name() + " was rate limited (" + statusRateLimiter + ", retry after " + statusRateLimiter.retryAfter() + ")");
+    protected void acquireStatusPermit(String mid, Caller caller) throws RateLimitedException, InterruptedException {
+        final WindowedRateLimiter limiter = limiter(caller);
+        if (!limiter.tryAcquire(Configuration.STATUS_MAX_WAIT)) {
+            meterRegistry.counter("sourcing." + implName() + ".status.ratelimited", "caller", caller.name()).increment();
+            throw new RateLimitedException("Status call (" + caller + ") for " + mid + " to " + name() + " was rate limited (" + limiter + ", retry after " + limiter.retryAfter() + ")");
         }
+    }
+
+    private WindowedRateLimiter limiter(Caller caller) {
+        return statusRateLimiters.get(caller);
     }
 
     private static long allowed(long allowedPerWindow) {
@@ -337,8 +351,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute(description = "Maximal number of status calls per window. Zero or negative means unlimited")
     public long getStatusAllowedPerWindow() {
-        final long allowed = statusRateLimiter.getAllowedPerWindow();
-        return allowed == UNLIMITED ? 0 : allowed;
+        return getAllowedPerWindow(Caller.BACKGROUND);
     }
 
     /**
@@ -346,7 +359,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute
     public void setStatusAllowedPerWindow(long allowedPerWindow) {
-        statusRateLimiter.setAllowedPerWindow(allowed(allowedPerWindow));
+        limiter(Caller.BACKGROUND).setAllowedPerWindow(allowed(allowedPerWindow));
     }
 
     /**
@@ -354,12 +367,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute(description = "Sliding window for the maximal number of status calls (e.g. PT10S)")
     public String getStatusWindow() {
-        return statusRateLimiter.getWindow().toString();
+        return limiter(Caller.BACKGROUND).getWindow().toString();
     }
 
     @ManagedAttribute
     public void setStatusWindow(String window) {
-        statusRateLimiter.setWindow(TimeUtils.parseDurationOrThrow(window));
+        final Duration duration = TimeUtils.parseDurationOrThrow(window);
+        statusRateLimiters.values().forEach(l -> l.setWindow(duration));
     }
 
     /**
@@ -367,12 +381,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute(description = "Maximal number of status calls per bucket, to avoid bursts. Zero or negative means unlimited")
     public long getStatusMaxPerBucket() {
-        return statusRateLimiter.getMaxPerBucket();
+        return limiter(Caller.BACKGROUND).getMaxPerBucket();
     }
 
     @ManagedAttribute
     public void setStatusMaxPerBucket(long maxPerBucket) {
-        statusRateLimiter.setMaxPerBucket(maxPerBucket);
+        limiter(Caller.BACKGROUND).setMaxPerBucket(maxPerBucket);
     }
 
     /**
@@ -380,7 +394,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute(description = "Duration of one bucket of the window (the window is divided in 20 buckets)")
     public String getStatusBucketDuration() {
-        return statusRateLimiter.getBucketDuration().toString();
+        return limiter(Caller.BACKGROUND).getBucketDuration().toString();
     }
 
     /**
@@ -388,7 +402,41 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
      */
     @ManagedAttribute(description = "Number of status calls in the current window")
     public long getStatusCount() {
-        return statusRateLimiter.getCount();
+        return limiter(Caller.BACKGROUND).getCount();
+    }
+
+    /**
+     * Like {@link #getStatusAllowedPerWindow()}, but for {@link Caller#INTERACTIVE interactive} callers (e.g. the GUI), which have their own limiter, with the same window.
+     * @since 8.19
+     */
+    @ManagedAttribute(description = "Maximal number of interactive (e.g. GUI) status calls per window. Zero or negative means unlimited")
+    public long getInteractiveStatusAllowedPerWindow() {
+        return getAllowedPerWindow(Caller.INTERACTIVE);
+    }
+
+    @ManagedAttribute
+    public void setInteractiveStatusAllowedPerWindow(long allowedPerWindow) {
+        limiter(Caller.INTERACTIVE).setAllowedPerWindow(allowed(allowedPerWindow));
+    }
+
+    @ManagedAttribute(description = "Maximal number of interactive (e.g. GUI) status calls per bucket, to avoid bursts. Zero or negative means unlimited")
+    public long getInteractiveStatusMaxPerBucket() {
+        return limiter(Caller.INTERACTIVE).getMaxPerBucket();
+    }
+
+    @ManagedAttribute
+    public void setInteractiveStatusMaxPerBucket(long maxPerBucket) {
+        limiter(Caller.INTERACTIVE).setMaxPerBucket(maxPerBucket);
+    }
+
+    @ManagedAttribute(description = "Number of interactive (e.g. GUI) status calls in the current window")
+    public long getInteractiveStatusCount() {
+        return limiter(Caller.INTERACTIVE).getCount();
+    }
+
+    private long getAllowedPerWindow(Caller caller) {
+        final long allowed = limiter(caller).getAllowedPerWindow();
+        return allowed == UNLIMITED ? 0 : allowed;
     }
 
     protected abstract String implName();

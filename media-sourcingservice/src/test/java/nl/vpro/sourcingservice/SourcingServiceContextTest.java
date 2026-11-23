@@ -44,6 +44,33 @@ class SourcingServiceContextTest {
     }
 
     @Test
+    void interactiveDefaultsToBackground() {
+        Properties properties = new Properties();
+        properties.setProperty("sourcingservice.status.allowedPerWindow", "300");
+        properties.setProperty("sourcingservice.status.maxPerBucket", "20");
+        try (GenericXmlApplicationContext ctx = context(properties)) {
+            AudioSourcingServiceImpl audio = ctx.getBean(AudioSourcingServiceImpl.class);
+            assertThat(audio.getInteractiveStatusAllowedPerWindow()).isEqualTo(300);
+            assertThat(audio.getInteractiveStatusMaxPerBucket()).isEqualTo(20);
+        }
+    }
+
+    @Test
+    void interactiveConfigured() {
+        Properties properties = new Properties();
+        properties.setProperty("sourcingservice.status.allowedPerWindow", "300");
+        properties.setProperty("sourcingservice.status.interactive.allowedPerWindow", "100");
+        properties.setProperty("sourcingservice.status.interactive.maxPerBucket", "0");
+        try (GenericXmlApplicationContext ctx = context(properties)) {
+            AudioSourcingServiceImpl audio = ctx.getBean(AudioSourcingServiceImpl.class);
+            assertThat(audio.getStatusAllowedPerWindow()).isEqualTo(300);
+            assertThat(audio.getInteractiveStatusAllowedPerWindow()).isEqualTo(100);
+            assertThat(audio.getInteractiveStatusMaxPerBucket()).isEqualTo(0);
+            assertThat(ctx.getBean(VideoSourcingServiceImpl.class).getInteractiveStatusAllowedPerWindow()).isEqualTo(100);
+        }
+    }
+
+    @Test
     void unlimited() {
         Properties properties = new Properties();
         properties.setProperty("sourcingservice.status.allowedPerWindow", "0");
