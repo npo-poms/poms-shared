@@ -1,5 +1,7 @@
 package nl.vpro.domain.user;
 
+import lombok.ToString;
+
 import java.util.*;
 
 import jakarta.inject.Inject;
@@ -132,6 +134,7 @@ public class ServiceLocator  {
     }
 
 
+    @ToString
     protected static abstract  class AbstractOrganizationService<T extends Organization> implements OrganizationService<T> {
 
         private final List<T> repository = new ArrayList<>();
@@ -158,13 +161,14 @@ public class ServiceLocator  {
             repository.remove(find(organization.getId()));
             repository.add(organization);
             return organization;
-
         }
 
         @Override
         public void delete(T organization) {
             repository.remove(find(organization.getId()));
         }
+
+
     }
     public static class BroadcasterServiceImpl extends AbstractOrganizationService<Broadcaster> implements BroadcasterService  {
 

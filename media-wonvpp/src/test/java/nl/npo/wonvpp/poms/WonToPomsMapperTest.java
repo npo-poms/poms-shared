@@ -101,7 +101,7 @@ final class WonToPomsMapperTest {
 
     @ParameterizedTest
     @MethodSource("alloutput")
-    public void testAlls(KafkaDumpReader.Record record) {
+    void testAlls(KafkaDumpReader.Record record) {
         MediaTable total =  new MediaTable();
         List<CatalogEntry> entries = entry(record);
         Assumptions.assumeThat(entries).isNotNull();
@@ -146,6 +146,18 @@ final class WonToPomsMapperTest {
         assertThat(program.getSubTitle()).isEqualTo("Van polonaise tot knokpartij");
         assertThat(season.getMainTitle()).isEqualTo("Van polonaise tot knokpartij");
         assertThat(series.getMainTitle()).isEqualTo("De Uitsmijters");
+
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    @Test
+    void P0MS_353() throws IOException {
+        MediaTable table = mapper.mapToPoms(Utils.unmarshal(getClass().getResourceAsStream("/wonvpp/20260520145415-CatalogEPG-BV_101414096-empty-broadcaster.json")));
+
+
+        Program program = table.getProgram("BV_101414096").orElseThrow();
+        assertThat(program.getBroadcasters()).isEmpty();
+        log.info("{}", program);
 
     }
 
