@@ -93,7 +93,7 @@ final class AudioSourcingServiceImplITest {
 
     @Test
     void status() throws IOException, InterruptedException {
-        StatusResponse status = impl.status("WO_NPO_20374602").orElseThrow();
+        StatusResponse status = impl.status("WO_NTR_13082867").orElseThrow();
         log.info("Status {}", status);
     }
 

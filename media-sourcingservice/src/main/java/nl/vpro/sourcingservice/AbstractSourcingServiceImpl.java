@@ -297,6 +297,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status", statusResponse);
         if (statusResponse.statusCode() >= 400 && statusResponse.statusCode() < 500) {
+            log.info("{} {}: {}", caller, mid, statusResponse.statusCode());
             return Optional.empty();
         }
         if (statusResponse.statusCode() > 299) {
