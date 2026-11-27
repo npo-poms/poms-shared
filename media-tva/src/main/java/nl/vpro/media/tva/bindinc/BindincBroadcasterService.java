@@ -28,9 +28,7 @@ public class BindincBroadcasterService extends URLBroadcasterServiceImpl {
         try {
             Properties properties = new Properties();
             properties.load(BindincBroadcasterService.class.getResourceAsStream("/bindinc.broadcasters.properties"));
-            properties.entrySet().forEach(e -> {
-                bindincOverride.put((String) e.getKey(), (String) e.getValue());
-            });
+            properties.forEach((key, value) -> bindincOverride.put((String) key, (String) value));
         } catch (IOException ioException) {
             throw new RuntimeException(ioException);
         }

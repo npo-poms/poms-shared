@@ -183,6 +183,7 @@ public class WonToPomsMapper {
             .avType(AVType.valueOf(entry.mediaType().name().toUpperCase()))
             .broadcasters(entry.broadcasters() == null ? Collections.emptyList() :
                 entry.broadcasters().stream()
+                    .filter(s -> s != null && ! s.isBlank())
                     .map(this::mapToBroadcaster)
                     .toList()
             )
@@ -240,7 +241,7 @@ public class WonToPomsMapper {
     protected Broadcaster mapToBroadcaster(String broadcaster) {
         return broadcasterService
             .findForIds( broadcaster)
-            .orElseThrow(() -> new IllegalArgumentException("Broadcaster: " + broadcaster + " not found for WON in " + broadcasterService));
+            .orElseThrow(() -> new IllegalArgumentException("Broadcaster: '" + broadcaster + "' not found for WON in " + broadcasterService));
     }
 
     protected @NonNull List<Credits> mapToCredits( @Nullable List<@NonNull CreditsType> castAndCrew) {
